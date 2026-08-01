@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Local Claude Code settings
+.claude/settings.local.json
+
+# Phase 2: PocketBase binary + its SQLite data / uploaded files
+pocketbase
+pb_data/
+pb_migrations/
+
+# Node (tests only — there is no build step)
+node_modules/

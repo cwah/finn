@@ -1,0 +1,103 @@
+:root {
+  --bg: #1b1720;
+  --surface: #261f2c;
+  --surface-2: #2f2737;
+  --text: #f3eef6;
+  --text-dim: #b6a9c0;
+  --accent: #e8a0bf;
+  --gold: #e6c478;
+  --radius: 18px;
+  --gap: 16px;
+  --tray-h: 76px;
+  --maxw: 560px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.4;
+  /* Leave room for the sticky tray + iOS home indicator */
+  padding-bottom: calc(var(--tray-h) + env(safe-area-inset-bottom));
+  overscroll-behavior-y: none;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: calc(env(safe-area-inset-top) + 14px) 20px 12px;
+  background: linear-gradient(var(--bg) 70%, transparent);
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: 0.2px;
+}
+
+.app-subtitle {
+  margin: 2px 0 0;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.timeline {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 8px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sentinel { height: 1px; }
+
+/* Sticky bottom navigation tray — thumb-reachable primary surface */
+.bottom-tray {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  height: calc(var(--tray-h) + env(safe-area-inset-bottom));
+  padding-bottom: env(safe-area-inset-bottom);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(27, 23, 32, 0.82);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tray-capture {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  color: #2a1f25;
+  box-shadow: 0 6px 20px rgba(232, 160, 191, 0.35);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tray-capture:active { transform: scale(0.94); }
+
+.tray-capture-icon {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

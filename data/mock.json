@@ -1,0 +1,88 @@
+{
+  "config": {
+    "babyName": "Baby Wah",
+    "birthDate": "2026-01-15"
+  },
+  "posts": [
+    {
+      "id": "p7",
+      "memoryDate": "2026-05-12",
+      "createdAt": "2026-05-12T18:20:00Z",
+      "author": { "id": "u1", "name": "Mom" },
+      "caption": "First steps across the living room!",
+      "milestone": { "isMilestone": true, "title": "First steps" },
+      "photos": [
+        { "id": "p7a", "url": "https://picsum.photos/seed/steps/900/1200", "width": 900, "height": 1200, "alt": "Baby standing" }
+      ]
+    },
+    {
+      "id": "p6",
+      "memoryDate": "2026-05-04",
+      "createdAt": "2026-05-04T09:10:00Z",
+      "author": { "id": "u2", "name": "Dad" },
+      "caption": "Sunday morning at the park.",
+      "milestone": null,
+      "photos": [
+        { "id": "p6a", "url": "https://picsum.photos/seed/park1/800/800", "width": 800, "height": 800, "alt": "Park" },
+        { "id": "p6b", "url": "https://picsum.photos/seed/park2/800/800", "width": 800, "height": 800, "alt": "Stroller" },
+        { "id": "p6c", "url": "https://picsum.photos/seed/park3/800/800", "width": 800, "height": 800, "alt": "Grass" },
+        { "id": "p6d", "url": "https://picsum.photos/seed/park4/800/800", "width": 800, "height": 800, "alt": "Trees" }
+      ]
+    },
+    {
+      "id": "p5",
+      "memoryDate": "2026-04-28",
+      "createdAt": "2026-04-28T20:00:00Z",
+      "author": { "id": "u1", "name": "Mom" },
+      "caption": "\"Every little thing you do is magic.\"",
+      "milestone": null,
+      "photos": []
+    },
+    {
+      "id": "p4",
+      "memoryDate": "2026-04-15",
+      "createdAt": "2026-04-15T12:00:00Z",
+      "author": { "id": "u2", "name": "Dad" },
+      "caption": "Three months old today.",
+      "milestone": null,
+      "photos": [
+        { "id": "p4a", "url": "https://picsum.photos/seed/wide1/1200/800", "width": 1200, "height": 800, "alt": "Lying on a blanket" }
+      ]
+    },
+    {
+      "id": "p3",
+      "memoryDate": "2026-03-30",
+      "createdAt": "2026-03-30T15:45:00Z",
+      "author": { "id": "u1", "name": "Mom" },
+      "caption": "That first real giggle. We melted.",
+      "milestone": { "isMilestone": true, "title": "First laugh" },
+      "photos": [
+        { "id": "p3a", "url": "https://picsum.photos/seed/laugh1/800/800", "width": 800, "height": 800, "alt": "Smiling" },
+        { "id": "p3b", "url": "https://picsum.photos/seed/laugh2/800/800", "width": 800, "height": 800, "alt": "Laughing" },
+        { "id": "p3c", "url": "https://picsum.photos/seed/laugh3/800/800", "width": 800, "height": 800, "alt": "Grinning" }
+      ]
+    },
+    {
+      "id": "p2",
+      "memoryDate": "2026-02-20",
+      "createdAt": "2026-02-20T08:30:00Z",
+      "author": { "id": "u2", "name": "Dad" },
+      "caption": "Tiny yawns.",
+      "milestone": null,
+      "photos": [
+        { "id": "p2a", "url": "https://picsum.photos/seed/yawn/900/1200", "width": 900, "height": 1200, "alt": "Yawning" }
+      ]
+    },
+    {
+      "id": "p1",
+      "memoryDate": "2026-01-15",
+      "createdAt": "2026-01-15T23:59:00Z",
+      "author": { "id": "u1", "name": "Mom" },
+      "caption": "Welcome to the world, little one.",
+      "milestone": { "isMilestone": true, "title": "Day one" },
+      "photos": [
+        { "id": "p1a", "url": "https://picsum.photos/seed/welcome/1000/1250", "width": 1000, "height": 1250, "alt": "Newborn" }
+      ]
+    }
+  ]
+}
