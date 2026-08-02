@@ -70,6 +70,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 26px;
   background: rgba(27, 23, 32, 0.82);
   backdrop-filter: saturate(140%) blur(14px);
   -webkit-backdrop-filter: saturate(140%) blur(14px);
@@ -96,6 +97,28 @@ body {
   font-weight: 600;
   line-height: 1;
   margin-top: -2px;
+}
+
+/* Secondary action: a text-only memory, which the engine renders as a quote card */
+.tray-note {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text-dim);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tray-note:active { transform: scale(0.94); }
+
+.tray-note-icon {
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

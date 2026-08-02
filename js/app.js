@@ -67,7 +67,11 @@ async function loadMore() {
   if (loading || !hasMore) return;
   loading = true;
   const { items, hasMore: more } = await getPosts({ page });
-  items.forEach((post) => mountCard(renderPost(post, birthDate)));
+  // renderPost returns null for posts with nothing to show — skip those.
+  items
+    .map((post) => renderPost(post, birthDate))
+    .filter(Boolean)
+    .forEach(mountCard);
   hasMore = more;
   page += 1;
   loading = false;
@@ -79,9 +83,18 @@ const pageObserver = new IntersectionObserver(
   { rootMargin: '600px 0px' },
 );
 
-function prependPost(post) {
+// A freshly captured memory can be backdated, so it does not necessarily belong at
+// the top — drop it into place by memoryDate among the cards already on screen.
+function insertPost(post) {
   const card = renderPost(post, birthDate);
-  timeline.prepend(card);
+  if (!card) return;
+
+  const older = Array.from(timeline.children).find(
+    (c) => c.dataset.memoryDate && c.dataset.memoryDate < post.memoryDate,
+  );
+  if (older) timeline.insertBefore(card, older);
+  else timeline.append(card);
+
   card.classList.add('is-visible'); // skip the reveal animation for fresh captures
   card.querySelectorAll('[data-parallax]').forEach((img) => parallaxObserver.observe(img));
   card.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -96,7 +109,8 @@ async function init() {
   await loadMore();
   pageObserver.observe(sentinel);
   window.addEventListener('scroll', onScroll, { passive: true });
-  initCapture(document.getElementById('capture'), prependPost);
+  // Phase 2 replaces config.currentAuthor with the signed-in PocketBase account.
+  initCapture({ author: config.currentAuthor }, insertPost);
 }
 
 init();

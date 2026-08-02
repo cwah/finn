@@ -7,6 +7,7 @@
   <title>Scrapbook</title>
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/compose.css" />
 </head>
 <body>
   <header class="app-header">
@@ -20,11 +21,44 @@
   <div id="sentinel" class="sentinel" aria-hidden="true"></div>
 
   <nav class="bottom-tray" aria-label="Primary">
+    <button id="noteBtn" type="button" class="tray-note" aria-label="Write a memory">
+      <span class="tray-note-icon" aria-hidden="true">&#9998;</span>
+    </button>
     <label class="tray-capture" aria-label="Capture a memory">
       <input id="capture" type="file" accept="image/*" capture="environment" multiple hidden />
       <span class="tray-capture-icon" aria-hidden="true">+</span>
     </label>
   </nav>
+
+  <!-- Compose sheet: the only place a post is authored. Note there is no layout
+       control here — the engine infers layout from whatever is attached. -->
+  <dialog id="compose" class="compose" aria-label="New memory">
+    <form id="composeForm" class="compose-form">
+      <div id="composePhotos" class="compose-photos" hidden></div>
+
+      <label class="compose-field">
+        <span class="compose-label">Caption</span>
+        <textarea id="composeCaption" rows="3" placeholder="What happened?"></textarea>
+      </label>
+
+      <label class="compose-field">
+        <span class="compose-label">When did this happen?</span>
+        <input id="composeDate" type="date" />
+      </label>
+
+      <label class="compose-toggle">
+        <input id="composeMilestone" type="checkbox" />
+        <span>Mark as a milestone</span>
+      </label>
+      <input id="composeMilestoneTitle" class="compose-milestone-title" type="text"
+             placeholder="Milestone name, e.g. First steps" hidden />
+
+      <div class="compose-actions">
+        <button id="composeCancel" type="button" class="btn btn--ghost">Cancel</button>
+        <button id="composeSave" type="submit" class="btn btn--primary">Save</button>
+      </div>
+    </form>
+  </dialog>
 
   <script type="module" src="js/app.js"></script>
 </body>

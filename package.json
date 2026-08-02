@@ -1,0 +1,9 @@
+{
+  "name": "scrapbook",
+  "private": true,
+  "type": "module",
+  "description": "Baby scrapbook. No build step and no dependencies — package.json exists only so node runs the test suite as ES modules.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

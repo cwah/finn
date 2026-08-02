@@ -1,7 +1,8 @@
 {
   "config": {
     "babyName": "Baby Wah",
-    "birthDate": "2026-01-15"
+    "birthDate": "2026-01-15",
+    "currentAuthor": { "id": "u1", "name": "Mom" }
   },
   "posts": [
     {

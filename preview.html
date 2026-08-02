@@ -4,364 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#1b1720" />
-  <title>Scrapbook — Static preview</title>
+  <title>Scrapbook — layout preview</title>
 
-  <!-- Static preview: every CSS rule from base.css + cards.css is inlined so this
-       page renders identically when opened as file://. No fetch, no modules. -->
+  <!-- Visual test bench: every layout and treatment on one page, rendered through the
+       real engine and the real stylesheets. It used to inline a copy of the CSS and
+       hand-write the card markup, which drifted the moment either changed. Serve it
+       the same way as the app (e.g. python3 -m http.server) — ES modules need HTTP. -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/cards.css" />
   <style>
-    :root {
-      --bg: #1b1720;
-      --surface: #261f2c;
-      --surface-2: #2f2737;
-      --text: #f3eef6;
-      --text-dim: #b6a9c0;
-      --accent: #e8a0bf;
-      --gold: #e6c478;
-      --radius: 18px;
-      --gap: 16px;
-      --tray-h: 76px;
-      --maxw: 560px;
-    }
-    * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: ui-rounded, "SF Pro Rounded", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      line-height: 1.4;
-      padding-bottom: calc(var(--tray-h) + env(safe-area-inset-bottom));
-      overscroll-behavior-y: none;
-    }
-    .app-header {
-      position: sticky; top: 0; z-index: 5;
-      padding: calc(env(safe-area-inset-top) + 14px) 20px 12px;
-      background: linear-gradient(var(--bg) 70%, transparent);
-    }
-    .app-title { margin: 0; font-size: 1.5rem; letter-spacing: 0.2px; }
-    .app-subtitle { margin: 2px 0 0; color: var(--text-dim); font-size: 0.85rem; }
     .preview-banner {
       max-width: var(--maxw);
-      margin: 4px auto 0;
-      padding: 8px 16px;
-      color: var(--text-dim);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .timeline {
-      max-width: var(--maxw);
       margin: 0 auto;
-      padding: 8px 16px 0;
-      display: flex; flex-direction: column;
-      gap: 28px;
-    }
-    .bottom-tray {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-      height: calc(var(--tray-h) + env(safe-area-inset-bottom));
-      padding-bottom: env(safe-area-inset-bottom);
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(27, 23, 32, 0.82);
-      backdrop-filter: saturate(140%) blur(14px);
-      -webkit-backdrop-filter: saturate(140%) blur(14px);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .tray-capture {
-      display: grid; place-items: center;
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--gold));
-      color: #2a1f25;
-      box-shadow: 0 6px 20px rgba(232, 160, 191, 0.35);
-    }
-    .tray-capture-icon { font-size: 2rem; font-weight: 600; line-height: 1; margin-top: -2px; }
-
-    /* Card shell — in the preview every card is immediately visible (no scroll reveal). */
-    .card {
-      background: var(--surface);
-      border-radius: var(--radius);
-      overflow: hidden;
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-    .card-meta {
-      display: flex; align-items: baseline; justify-content: space-between;
-      gap: 10px; padding: 12px 16px 0;
-    }
-    .card-age { font-weight: 600; font-size: 0.95rem; }
-    .card-author { color: var(--text-dim); font-size: 0.78rem; padding: 0 16px 14px; margin: 0; }
-    .card-date { color: var(--text-dim); font-size: 0.78rem; }
-    .card-caption { margin: 0; padding: 10px 16px 16px; color: var(--text); font-size: 0.95rem; }
-    .card-photo { display: block; width: 100%; height: auto; background: var(--surface-2); }
-
-    .photo-frame { position: relative; width: 100%; overflow: hidden; }
-    .photo-frame .card-photo {
-      position: absolute; inset: -8% 0;
-      width: 100%; height: 116%;
-      object-fit: cover;
-    }
-    .card--portrait .photo-frame { aspect-ratio: var(--ar, 3 / 4); }
-    .card--landscape .photo-frame { aspect-ratio: var(--ar, 3 / 2); }
-
-    .card--grid .grid-photos {
-      display: grid; gap: 3px;
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .card--grid.count-3 .grid-cell:first-child { grid-column: 1 / -1; }
-    .grid-cell { aspect-ratio: 1 / 1; overflow: hidden; }
-    .grid-cell .card-photo { width: 100%; height: 100%; object-fit: cover; position: static; inset: auto; }
-
-    .card--quote {
-      background: linear-gradient(150deg, var(--surface-2), var(--surface));
-      padding: 28px 24px;
+      padding: 0 16px 8px;
+      color: var(--text-dim);
+      font-size: 0.78rem;
       text-align: center;
     }
-    .card--quote .quote-text { margin: 0; font-size: 1.35rem; line-height: 1.5; font-style: italic; }
-    .card--quote .quote-mark { display: block; font-size: 2.4rem; color: var(--accent); line-height: 0.6; margin-bottom: 6px; }
-    .card--quote .card-author { text-align: center; margin-top: 14px; padding: 0; }
-
-    .card--highlight {
-      position: relative;
-      box-shadow: 0 0 0 2px var(--gold), 0 10px 30px rgba(0, 0, 0, 0.4);
+    .preview-label {
+      max-width: var(--maxw);
+      margin: 18px auto -14px;
+      padding: 0 16px;
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .milestone-badge {
-      position: absolute; top: 12px; left: 12px; z-index: 2;
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--gold);
-      color: #2a1f10;
-      font-size: 0.8rem; font-weight: 700;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    .milestone-badge::before { content: "★"; }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
-    }
+    /* Nothing scrolls into view here — show every card immediately. */
+    .card { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
   <header class="app-header">
     <h1 class="app-title">Baby Wah</h1>
-    <p class="app-subtitle">4 months, 7 days</p>
+    <p class="app-subtitle">Layout preview</p>
   </header>
-  <p class="preview-banner">Static preview — every layout, every treatment · scroll to see parallax</p>
 
-  <main class="timeline" aria-label="Memories">
+  <p class="preview-banner">Every layout rule and treatment, rendered by the live engine.</p>
 
-    <!-- ── 1. Today · Quote (text-only) ─────────────────────────────── -->
-    <article class="card card--quote">
-      <div class="card-meta">
-        <span class="card-age">4 months, 7 days</span>
-        <span class="card-date">May 22</span>
-      </div>
-      <blockquote>
-        <span class="quote-mark">“</span>
-        <p class="quote-text" data-parallax="14">Every yawn, every coo — pure magic.</p>
-      </blockquote>
-      <p class="card-author">— Mom</p>
-    </article>
+  <main id="timeline" class="timeline" aria-label="Layout samples"></main>
 
-    <!-- ── 2. May 18 · Milestone + Portrait ─────────────────────────── -->
-    <article class="card card--portrait card--highlight">
-      <span class="milestone-badge">First steps</span>
-      <div class="photo-frame" style="--ar: 900 / 1200;">
-        <img class="card-photo" data-parallax="-22" src="https://picsum.photos/seed/steps/900/1200" width="900" height="1200" alt="Baby standing" loading="lazy" decoding="async" />
-      </div>
-      <div class="card-meta">
-        <span class="card-age">4 months, 3 days</span>
-        <span class="card-date">May 18</span>
-      </div>
-      <p class="card-caption" data-parallax="14">She did it — three wobbly steps to the couch.</p>
-      <p class="card-author">— Dad</p>
-    </article>
+  <script type="module">
+    import { renderPost } from './js/render.js';
+    import { inferLayout } from './js/layout-engine.js';
 
-    <!-- ── 3. May 10 · Landscape (single photo, wider than tall) ────── -->
-    <article class="card card--landscape">
-      <div class="photo-frame" style="--ar: 1200 / 800;">
-        <img class="card-photo" data-parallax="-22" src="https://picsum.photos/seed/parkday/1200/800" width="1200" height="800" alt="Sunny park" loading="lazy" decoding="async" />
-      </div>
-      <div class="card-meta">
-        <span class="card-age">3 months, 25 days</span>
-        <span class="card-date">May 10</span>
-      </div>
-      <p class="card-caption" data-parallax="14">Sunny afternoon at the park.</p>
-      <p class="card-author">— Mom</p>
-    </article>
+    const BIRTH = '2026-01-15';
+    const timeline = document.getElementById('timeline');
 
-    <!-- ── 4. May 4 · Grid of 4 ─────────────────────────────────────── -->
-    <article class="card card--grid count-4">
-      <div class="grid-photos">
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/sun1/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/sun2/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/sun3/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/sun4/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-      </div>
-      <div class="card-meta">
-        <span class="card-age">3 months, 19 days</span>
-        <span class="card-date">May 4</span>
-      </div>
-      <p class="card-caption" data-parallax="14">A whole Sunday outside.</p>
-      <p class="card-author">— Dad</p>
-    </article>
+    const photo = (seed, width, height) => ({
+      id: seed,
+      url: `https://picsum.photos/seed/${seed}/${width}/${height}`,
+      width,
+      height,
+      alt: '',
+    });
 
-    <!-- ── 5. Apr 22 · Milestone + Grid of 3 (hero + two below) ─────── -->
-    <article class="card card--grid count-3 card--highlight">
-      <span class="milestone-badge">First laugh</span>
-      <div class="grid-photos">
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/laugh1/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/laugh2/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/laugh3/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-      </div>
-      <div class="card-meta">
-        <span class="card-age">3 months, 7 days</span>
-        <span class="card-date">Apr 22</span>
-      </div>
-      <p class="card-caption" data-parallax="14">That belly laugh broke us.</p>
-      <p class="card-author">— Mom</p>
-    </article>
+    const post = (fields) => ({
+      id: Math.random().toString(36).slice(2),
+      createdAt: '2026-05-22T12:00:00Z',
+      author: { id: 'u1', name: 'Mom' },
+      caption: null,
+      milestone: null,
+      photos: [],
+      ...fields,
+    });
 
-    <!-- ── 6. Apr 10 · Portrait (single photo, taller than wide) ────── -->
-    <article class="card card--portrait">
-      <div class="photo-frame" style="--ar: 900 / 1200;">
-        <img class="card-photo" data-parallax="-22" src="https://picsum.photos/seed/tummy/900/1200" width="900" height="1200" alt="Tummy time" loading="lazy" decoding="async" />
-      </div>
-      <div class="card-meta">
-        <span class="card-age">2 months, 26 days</span>
-        <span class="card-date">Apr 10</span>
-      </div>
-      <p class="card-caption" data-parallax="14">Tummy time champion.</p>
-      <p class="card-author">— Dad</p>
-    </article>
+    // One sample per rule in the engine, plus the milestone treatment on top of each.
+    const samples = [
+      ['Rule 1 · quote', post({
+        memoryDate: '2026-05-22',
+        caption: 'Every yawn, every coo — pure magic.',
+      })],
+      ['Rule 2 · portrait', post({
+        memoryDate: '2026-05-18',
+        caption: 'Tiny yawns.',
+        photos: [photo('yawn', 900, 1200)],
+        author: { id: 'u2', name: 'Dad' },
+      })],
+      ['Rule 3 · landscape', post({
+        memoryDate: '2026-05-10',
+        caption: 'Sunny afternoon at the park.',
+        photos: [photo('parkday', 1200, 800)],
+      })],
+      ['Rule 3 · landscape (square photo)', post({
+        memoryDate: '2026-05-08',
+        caption: 'A square photo is landscape — the rule is width >= height.',
+        photos: [photo('square', 800, 800)],
+        author: { id: 'u2', name: 'Dad' },
+      })],
+      ['Rule 4 · grid of 2', post({
+        memoryDate: '2026-05-06',
+        photos: [photo('two1', 800, 800), photo('two2', 800, 800)],
+      })],
+      ['Rule 4 · grid of 3', post({
+        memoryDate: '2026-05-05',
+        caption: 'Three at a time — the first spans the full width.',
+        photos: [photo('three1', 800, 800), photo('three2', 800, 800), photo('three3', 800, 800)],
+        author: { id: 'u2', name: 'Dad' },
+      })],
+      ['Rule 4 · grid of 4', post({
+        memoryDate: '2026-05-04',
+        caption: 'Sunday morning at the park.',
+        photos: [1, 2, 3, 4].map((n) => photo(`sun${n}`, 800, 800)),
+      })],
+      ['Rule 5 · milestone + portrait', post({
+        memoryDate: '2026-04-28',
+        caption: 'She did it — three wobbly steps to the couch.',
+        milestone: { isMilestone: true, title: 'First steps' },
+        photos: [photo('steps', 900, 1200)],
+        author: { id: 'u2', name: 'Dad' },
+      })],
+      ['Rule 5 · milestone + grid', post({
+        memoryDate: '2026-03-30',
+        caption: 'That first real giggle. We melted.',
+        milestone: { isMilestone: true, title: 'First laugh' },
+        photos: [1, 2, 3].map((n) => photo(`laugh${n}`, 800, 800)),
+      })],
+      ['Rule 5 · milestone + quote', post({
+        memoryDate: '2026-01-15',
+        caption: 'Welcome to the world, little one.',
+        milestone: { isMilestone: true, title: 'Day one' },
+      })],
+      ['No photos, no caption · renders nothing', post({ memoryDate: '2026-01-20' })],
+    ];
 
-    <!-- ── 7. Mar 28 · Grid of 2 ────────────────────────────────────── -->
-    <article class="card card--grid count-2">
-      <div class="grid-photos">
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/twin1/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-        <div class="grid-cell"><img class="card-photo" src="https://picsum.photos/seed/twin2/800/800" width="800" height="800" alt="" loading="lazy" decoding="async" /></div>
-      </div>
-      <div class="card-meta">
-        <span class="card-age">2 months, 13 days</span>
-        <span class="card-date">Mar 28</span>
-      </div>
-      <p class="card-caption" data-parallax="14">Twin smiles.</p>
-      <p class="card-author">— Mom</p>
-    </article>
+    for (const [label, sample] of samples) {
+      const heading = document.createElement('p');
+      heading.className = 'preview-label';
+      heading.textContent = `${label} → ${inferLayout(sample) ?? 'null'}`;
+      timeline.append(heading);
 
-    <!-- ── 8. Mar 2 · Quote ─────────────────────────────────────────── -->
-    <article class="card card--quote">
-      <div class="card-meta">
-        <span class="card-age">1 month, 15 days</span>
-        <span class="card-date">Mar 2</span>
-      </div>
-      <blockquote>
-        <span class="quote-mark">“</span>
-        <p class="quote-text" data-parallax="14">She slept four hours straight. We didn't.</p>
-      </blockquote>
-      <p class="card-author">— Dad</p>
-    </article>
-
-    <!-- ── 9. Feb 2 · Landscape ─────────────────────────────────────── -->
-    <article class="card card--landscape">
-      <div class="photo-frame" style="--ar: 1200 / 800;">
-        <img class="card-photo" data-parallax="-22" src="https://picsum.photos/seed/bath/1200/800" width="1200" height="800" alt="Bath time" loading="lazy" decoding="async" />
-      </div>
-      <div class="card-meta">
-        <span class="card-age">18 days</span>
-        <span class="card-date">Feb 2</span>
-      </div>
-      <p class="card-caption" data-parallax="14">First proper bath.</p>
-      <p class="card-author">— Mom</p>
-    </article>
-
-    <!-- ── 10. Jan 15 · Day-one milestone + Portrait ────────────────── -->
-    <article class="card card--portrait card--highlight">
-      <span class="milestone-badge">Day one</span>
-      <div class="photo-frame" style="--ar: 1000 / 1250;">
-        <img class="card-photo" data-parallax="-22" src="https://picsum.photos/seed/welcome/1000/1250" width="1000" height="1250" alt="Newborn" loading="lazy" decoding="async" />
-      </div>
-      <div class="card-meta">
-        <span class="card-age">Newborn</span>
-        <span class="card-date">Jan 15</span>
-      </div>
-      <p class="card-caption" data-parallax="14">Welcome to the world, little one.</p>
-      <p class="card-author">— Mom</p>
-    </article>
-
-  </main>
-
-  <nav class="bottom-tray" aria-label="Primary">
-    <div class="tray-capture" role="button" aria-label="Capture a memory">
-      <span class="tray-capture-icon" aria-hidden="true">+</span>
-    </div>
-  </nav>
-
-  <!-- Parallax controller — every [data-parallax] element drifts on the Y-axis as
-       its enclosing card moves through the viewport. The attribute value is a signed
-       speed (px): negative drifts AGAINST the scroll (classic "far" / background feel,
-       used here for the photo); positive drifts WITH the scroll ("near" / foreground
-       feel, used here for caption + quote text). All elements inside a card share one
-       progress reading from that card's rect — so the photo and text are layered on
-       the SAME timeline and only their speeds differ. Milestone badge, card-meta, and
-       the author byline are intentionally left without the attribute so they stay
-       anchored to the card. Updates are gated by IntersectionObserver (off-screen
-       cards do zero work) and batched into one rAF per frame so we never lay out on
-       scroll. -->
-  <script>
-    (() => {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduceMotion) return;
-
-      // Group every parallax element by its enclosing card so each card computes
-      // its progress once per frame and applies it to all of its parallax layers.
-      const itemsByCard = new Map();
-      document.querySelectorAll('[data-parallax]').forEach((el) => {
-        const card = el.closest('.card');
-        if (!card) return;
-        const speed = parseFloat(el.dataset.parallax) || 0;
-        if (!itemsByCard.has(card)) itemsByCard.set(card, []);
-        itemsByCard.get(card).push({ el, speed });
-      });
-
-      const activeCards = new Set();
-      const visibility = new IntersectionObserver(
-        (entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting) activeCards.add(e.target);
-            else activeCards.delete(e.target);
-          }
-          schedule();
-        },
-        { threshold: 0 },
-      );
-      itemsByCard.forEach((_, card) => visibility.observe(card));
-
-      let pending = false;
-      function schedule() {
-        if (pending) return;
-        pending = true;
-        requestAnimationFrame(() => {
-          const vh = window.innerHeight;
-          activeCards.forEach((card) => {
-            const rect = card.getBoundingClientRect();
-            // progress: -1 entering from below, 0 centered, +1 leaving the top
-            const progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
-            const p = Math.max(-1, Math.min(1, progress));
-            itemsByCard.get(card).forEach(({ el, speed }) => {
-              el.style.transform = `translate3d(0, ${(p * speed).toFixed(2)}px, 0)`;
-            });
-          });
-          pending = false;
-        });
-      }
-
-      window.addEventListener('scroll', schedule, { passive: true });
-      window.addEventListener('resize', schedule);
-      window.addEventListener('load', schedule);
-      schedule(); // initial paint
-    })();
+      const card = renderPost(sample, BIRTH);
+      if (card) timeline.append(card);
+    }
   </script>
 </body>
 </html>

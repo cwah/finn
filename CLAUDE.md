@@ -73,6 +73,16 @@ The frontend reads an array of **posts**, newest memory first. Each post:
 }
 ```
 
+Alongside the posts the data source supplies a `config`:
+
+```jsonc
+{
+  "babyName": "string",
+  "birthDate": "2026-01-15",
+  "currentAuthor": { "id": "string", "name": "string" }  // Phase 2: the signed-in parent
+}
+```
+
 Baby **age stamp** (e.g. "4 months, 2 days") is *computed client-side* from a single
 configured `birthDate` and the post's `memoryDate` — it is not stored per post.
 
@@ -82,6 +92,8 @@ configured `birthDate` and the post's `memoryDate` — it is not stored per post
 with **no user input and no override**. Rules, in order:
 
 1. **No photos + has caption** → `quote` card (typographic treatment).
+   No photos *and* no caption → `null`; there is nothing to show, so `render.js` returns
+   no card and the timeline skips the post rather than emitting an empty one.
 2. **1 photo, height > width** → `portrait` (tall) card.
 3. **1 photo, width >= height** → `landscape` (wide) card.
 4. **2–4 photos** → `grid` (CSS Grid, count-aware).
@@ -90,25 +102,52 @@ with **no user input and no override**. Rules, in order:
 Orientation is decided from stored `width`/`height`, never by loading the image. Keep this
 function pure and unit-testable — it's the heart of the product.
 
+`preview.html` is the visual bench: it renders one sample per rule through the real
+engine and the real stylesheets. Add a sample there whenever you add a layout type.
+
 ## Suggested structure
 
 ```
-/index.html              # app shell + sticky bottom nav tray
+/index.html              # app shell + sticky bottom nav tray + compose sheet
+/preview.html            # visual bench: every layout rendered by the live engine
 /css/                    # CSS Grid layouts, one concern per file
+  base.css               # shell, header, bottom tray
+  cards.css              # the four card layouts + milestone treatment
+  compose.css            # the compose sheet
 /js/
   app.js                 # bootstrap, routing, infinite-scroll controller
   data.js                # data source (Phase 1: fetch mock.json; Phase 2: PocketBase)
   layout-engine.js       # pure post -> layoutType (the core engine)
   render.js              # build DOM for each layout type
   age.js                 # birthDate + memoryDate -> age stamp
-  capture.js             # bottom-nav capture flow
+  capture.js             # bottom-nav capture + compose flow
 /data/mock.json          # Phase 1 sample data (matches contract above)
+/test/                   # node:test specs for the two pure modules
 ```
+
+## Running it
+
+Both pages need to be served over HTTP — ES modules and `fetch` don't work from
+`file://`. There is still no build step:
+
+```
+python3 -m http.server 8765     # then open /index.html or /preview.html
+npm test                        # node:test specs for layout-engine.js and age.js
+```
+
+`package.json` exists only so node treats the `.js` files as ES modules when running
+tests. It has no dependencies and nothing bundles.
 
 ## Mobile / UX conventions
 
-- **Sticky bottom navigation tray** is the primary nav surface (thumb-reachable).
+- **Sticky bottom navigation tray** is the primary nav surface (thumb-reachable). It
+  carries two actions: capture a photo, and write a text-only memory (which the engine
+  turns into a quote card).
 - Capture uses native camera hardware: `<input type="file" accept="image/*" capture="environment">`.
+- Both actions land in the same **compose sheet** — caption, the date the moment actually
+  happened, and an optional milestone. It holds no layout controls, by design.
+- `memoryDate` is authored, not inferred from upload time, so a new memory can be
+  backdated — the timeline inserts it in date order rather than always at the top.
 - Target single-handed operation; keep tap targets large and actions reachable from the bottom.
 
 ## Performance rules

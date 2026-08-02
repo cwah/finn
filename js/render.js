@@ -23,12 +23,20 @@ function photoEl(photo) {
   });
 }
 
-function metaEl(post, birthDate) {
+/**
+ * Age + date + which parent posted it. Quote cards opt out of the author here
+ * because they carry their own em-dash attribution as part of the typography.
+ */
+function metaEl(post, birthDate, { withAuthor = true } = {}) {
   const meta = el('div', 'card-meta');
-  meta.append(
-    el('span', 'card-age', { textContent: ageStamp(birthDate, post.memoryDate) }),
-    el('span', 'card-date', { textContent: dateLabel(post.memoryDate) }),
-  );
+  meta.append(el('span', 'card-age', { textContent: ageStamp(birthDate, post.memoryDate) }));
+
+  const right = el('div', 'card-meta-right');
+  right.append(el('span', 'card-date', { textContent: dateLabel(post.memoryDate) }));
+  if (withAuthor && post.author && post.author.name) {
+    right.append(el('span', 'card-author', { textContent: post.author.name }));
+  }
+  meta.append(right);
   return meta;
 }
 
@@ -56,11 +64,14 @@ function gridPhotos(photos) {
  * Build a fully-rendered post card.
  * @param {object} post
  * @param {string} birthDate ISO birthdate for age computation
- * @returns {HTMLElement}
+ * @returns {HTMLElement|null} null when the post has nothing renderable
  */
 export function renderPost(post, birthDate) {
   const type = inferLayout(post);
+  if (type === null) return null;
+
   const card = el('article', `card card--${type}`);
+  card.dataset.memoryDate = post.memoryDate; // lets the timeline place late arrivals in order
 
   if (isMilestone(post)) {
     card.classList.add('card--highlight');
@@ -69,7 +80,7 @@ export function renderPost(post, birthDate) {
   }
 
   if (type === 'quote') {
-    card.append(metaEl(post, birthDate));
+    card.append(metaEl(post, birthDate, { withAuthor: false }));
     const q = el('blockquote', null);
     q.append(el('span', 'quote-mark', { textContent: '“' }));
     q.append(el('p', 'quote-text', { textContent: post.caption || '' }));

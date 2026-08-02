@@ -1,0 +1,139 @@
+/* Compose sheet — slides up from the bottom so its controls stay thumb-reachable. */
+
+.compose {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: auto auto 0; /* pinned to the bottom edge */
+  padding: 0;
+  border: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.compose::backdrop {
+  background: rgba(12, 9, 15, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.compose[open] {
+  animation: sheet-up 0.24s ease;
+}
+
+@keyframes sheet-up {
+  from { transform: translate3d(0, 12px, 0); opacity: 0; }
+  to   { transform: translate3d(0, 0, 0);   opacity: 1; }
+}
+
+.compose-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+}
+
+/* Thumbnails of what's being attached — a preview, not an editor. */
+.compose-photos {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.compose-photos::-webkit-scrollbar { display: none; }
+
+.compose-thumb {
+  flex: 0 0 auto;
+  width: 76px;
+  height: 76px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+
+.compose-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.compose-label {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.compose-form textarea,
+.compose-form input[type="text"],
+.compose-form input[type="date"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem; /* 16px minimum, or iOS Safari zooms on focus */
+  resize: none;
+}
+
+.compose-form textarea:focus,
+.compose-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.compose-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  /* Generous target so the whole row is tappable, not just the box */
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.compose-toggle input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--gold);
+}
+
+.compose-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn {
+  flex: 1;
+  min-height: 50px;
+  border: none;
+  border-radius: 14px;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn--ghost {
+  background: var(--surface-2);
+  color: var(--text-dim);
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  color: #2a1f25;
+}
+
+.btn--primary:disabled {
+  background: var(--surface-2);
+  color: var(--text-dim);
+  cursor: not-allowed;
+  transform: none;
+}

@@ -21,6 +21,19 @@
   padding: 12px 16px 0;
 }
 
+.card-meta-right {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Separator between date and author, only when the author is actually present */
+.card-meta-right .card-author::before {
+  content: "·";
+  margin-right: 8px;
+}
+
 .card-age { font-weight: 600; font-size: 0.95rem; }
 .card-author { color: var(--text-dim); font-size: 0.78rem; }
 .card-date { color: var(--text-dim); font-size: 0.78rem; }
@@ -102,6 +115,10 @@
   position: relative;
   box-shadow: 0 0 0 2px var(--gold), 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
+/* A quote card has no photo for the badge to float over, so it would land on top of
+   the meta row — open up the space it needs. */
+.card--quote.card--highlight { padding-top: 58px; }
 
 .milestone-badge {
   position: absolute;
