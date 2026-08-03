@@ -1,0 +1,89 @@
+/* Sign-in gate. Covers everything until a parent is in — this is a private scrapbook,
+   so there is no signed-out reading state to design for. */
+
+.signin {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  padding-top: calc(env(safe-area-inset-top) + 24px);
+  background: var(--bg);
+}
+
+.signin[hidden] { display: none; }
+
+.signin-card {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px 24px calc(28px + env(safe-area-inset-bottom));
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.signin-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.signin-hint {
+  margin: -8px 0 0;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* Reuses .compose-field / .compose-label / input styling from compose.css */
+.signin-card input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem; /* 16px minimum, or iOS Safari zooms on focus */
+}
+
+.signin-card input:focus {
+  outline: none;
+  border-color: var(--accent-ink);
+}
+
+.signin-error {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(178, 74, 74, 0.1);
+  color: #8f3a3a;
+  font-size: 0.85rem;
+}
+
+.signin-error[hidden] { display: none; }
+
+/* Header sign-out — deliberately quiet, it is not something you reach for often */
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app-signout {
+  flex: none;
+  padding: 6px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-signout[hidden] { display: none; }

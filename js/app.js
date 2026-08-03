@@ -6,6 +6,7 @@ import { renderPost } from './render.js';
 import { ageStamp } from './age.js';
 import { initCapture } from './capture.js';
 import { initScrubber } from './scrubber.js';
+import { ensureSignedIn, initSignOut } from './auth.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -132,6 +133,10 @@ function insertPost(post) {
 }
 
 async function init() {
+  // Nothing is fetched until a parent is in — this scrapbook has no public view.
+  await ensureSignedIn();
+  initSignOut();
+
   const config = await getConfig();
   birthDate = config.birthDate;
   document.getElementById('babyName').textContent = config.babyName;
@@ -140,8 +145,10 @@ async function init() {
   await loadMore();
   pageObserver.observe(sentinel);
   window.addEventListener('scroll', onScroll, { passive: true });
-  // Phase 2 replaces config.currentAuthor with the signed-in PocketBase account.
   initCapture({ author: config.currentAuthor }, insertPost);
 }
 
-init();
+init().catch((err) => {
+  console.error(err);
+  document.getElementById('babyAge').textContent = 'Could not load memories.';
+});

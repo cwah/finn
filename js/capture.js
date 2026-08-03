@@ -9,11 +9,11 @@
 // The sheet is the ONLY place a post is authored, and it holds no layout choices,
 // because the engine decides layout from the content alone.
 //
-// Phase 1 has no backend, so saving builds an in-memory post and hands it back via a
-// callback for the timeline to prepend. Photos preview through object URLs.
-//
-// Phase 2: in the save handler, POST the files to PocketBase and prepend the saved
-// record instead of the optimistic one. Nothing else in this module needs to change.
+// Saving goes through data.js — this module never knows whether that lands in
+// PocketBase or only in memory. Photos preview through object URLs while composing;
+// the File itself rides along so the data layer can upload it.
+
+import { createPost } from './data.js';
 
 /** Today as a LOCAL calendar day — toISOString() would hand back UTC and can skew a day. */
 function todayISO() {
@@ -42,9 +42,9 @@ function measure(file) {
 }
 
 /**
- * Wire the bottom-tray capture flow.
- * @param {{author: {id: string, name: string}}} options current parent, for attribution
- * @param {(post: object) => void} onCapture called with the new in-memory post
+ * Wire the capture flow.
+ * @param {{author: {id: string, name: string}}} options signed-in parent, for attribution
+ * @param {(post: object) => void} onCapture called with the SAVED post
  */
 export function initCapture({ author }, onCapture) {
   const input = document.getElementById('capture');
@@ -59,6 +59,7 @@ export function initCapture({ author }, onCapture) {
   const milestoneTitle = document.getElementById('composeMilestoneTitle');
   const saveBtn = document.getElementById('composeSave');
   const cancelBtn = document.getElementById('composeCancel');
+  const saveError = document.getElementById('composeError');
 
   let pending = []; // photos measured for the post being composed
 
@@ -89,6 +90,7 @@ export function initCapture({ author }, onCapture) {
   function open() {
     releasePending();
     renderThumbs();
+    saveError.hidden = true;
     caption.value = '';
     date.value = todayISO();
     date.max = todayISO(); // a memory can't have happened tomorrow
@@ -116,9 +118,11 @@ export function initCapture({ author }, onCapture) {
     if (!files.length) return;
     try {
       const added = await Promise.all(
-        files.map(async (f, i) => {
+        files.map(async (f) => {
+          // Keep the File alongside its measurements: the preview needs the object URL,
+          // and the upload needs the File itself.
           const { url, width, height } = await measure(f);
-          return { id: `local-${Date.now()}-${i}`, url, width, height, alt: null };
+          return { file: f, url, width, height };
         }),
       );
       pending = pending.concat(added);
@@ -141,25 +145,35 @@ export function initCapture({ author }, onCapture) {
   // ESC dismisses a native <dialog> without firing our handlers — clean up regardless.
   sheet.addEventListener('close', releasePending);
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const text = caption.value.trim();
-    const milestoneOn = isMilestone.checked;
     const title = milestoneTitle.value.trim();
-    const photos = pending;
-    pending = []; // hand ownership of the object URLs to the rendered post
-
-    onCapture({
-      id: `local-${Date.now()}`,
+    const draft = {
       memoryDate: date.value || todayISO(),
-      createdAt: new Date().toISOString(),
-      author,
-      caption: text || null,
-      milestone: milestoneOn ? { isMilestone: true, title: title || 'Milestone' } : null,
-      photos,
-    });
+      caption: caption.value.trim() || null,
+      milestone: isMilestone.checked
+        ? { isMilestone: true, title: title || 'Milestone' }
+        : null,
+      photos: pending,
+    };
 
-    sheet.close();
+    // Uploading takes a moment on a phone; say so rather than letting the sheet sit
+    // there looking ignored, and block a second submit.
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+    try {
+      const post = await createPost(draft, author);
+      pending = []; // the saved post owns the previews now
+      sheet.close();
+      onCapture(post);
+    } catch (err) {
+      console.error(err);
+      saveError.textContent = 'Could not save that memory. It is still here — try again.';
+      saveError.hidden = false;
+    } finally {
+      saveBtn.textContent = 'Save';
+      syncSaveState();
+    }
   });
 }

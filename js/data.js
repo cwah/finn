@@ -1,36 +1,19 @@
-// Data source. Phase 1: read a static local JSON file. Phase 2: swap the body of
-// these functions for PocketBase REST calls — the SHAPE the rest of the app sees
-// must not change. Everything else in the app is backend-agnostic.
+// The switchboard. Everything above this line speaks the JSON contract in CLAUDE.md and
+// nothing else, so swapping the backend is swapping this one constant.
+//
+//   'pocketbase' — Phase 2 onwards. Needs ./pocketbase serve running (see README).
+//   'mock'       — Phase 1. Static data/mock.json, no backend, no accounts.
+//
+// Both modules export the same five functions; keep them in step when either changes.
 
-const SOURCE = 'data/mock.json';
+import * as mock from './data-mock.js';
+import * as pocketbase from './data-pb.js';
 
-let _cache = null; // { config, posts } loaded once
+export const SOURCE = 'pocketbase';
 
-async function load() {
-  if (_cache) return _cache;
-  const res = await fetch(SOURCE);
-  if (!res.ok) throw new Error(`Failed to load ${SOURCE}: ${res.status}`);
-  const json = await res.json();
-  // Newest memory first.
-  json.posts.sort((a, b) => new Date(b.memoryDate) - new Date(a.memoryDate));
-  _cache = json;
-  return _cache;
-}
+const impl = SOURCE === 'mock' ? mock : pocketbase;
 
-/** App config (baby name, birthDate). */
-export async function getConfig() {
-  const { config } = await load();
-  return config;
-}
+export const { requireSession, signIn, signOut, getConfig, getPosts, createPost } = impl;
 
-/**
- * A page of posts, newest first.
- * @param {{page?: number, pageSize?: number}} opts
- * @returns {Promise<{items: object[], hasMore: boolean}>}
- */
-export async function getPosts({ page = 0, pageSize = 5 } = {}) {
-  const { posts } = await load();
-  const start = page * pageSize;
-  const items = posts.slice(start, start + pageSize);
-  return { items, hasMore: start + pageSize < posts.length };
-}
+/** True when the backend has real accounts, so the UI knows to offer signing in/out. */
+export const HAS_ACCOUNTS = SOURCE !== 'mock';
