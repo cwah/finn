@@ -4,7 +4,7 @@
 
 import { inferLayout, isMilestone } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
-import { milestoneArt } from './milestone-art.js';
+import { artPreset, milestoneArtSvg } from './milestone-art.js';
 
 function el(tag, className, props = {}) {
   const node = document.createElement(tag);
@@ -99,9 +99,10 @@ function buildCard(post, birthDate, type) {
  * Build a timeline item for a post.
  *
  * Ordinary posts are just the card. A milestone is the card inside a "scene", because
- * its sketch is drawn on the page background AROUND the card — the card clips its own
+ * its sketch sits out on the page background beside the card — the card clips its own
  * contents (`overflow: hidden` keeps photos inside the corners), so the drawing cannot
- * live inside it and still spill past its edges.
+ * live inside it and still appear outside its edges. Which side it takes is decided by
+ * app.js, which is the only place that knows a milestone's position in the timeline.
  *
  * Whatever comes back is the element the timeline mounts, so it carries memoryDate and
  * the reveal class.
@@ -125,12 +126,13 @@ export function renderPost(post, birthDate) {
   const scene = el('div', 'milestone-scene timeline-item');
   scene.dataset.memoryDate = post.memoryDate;
 
-  // milestoneArt strips its input to [A-Z] before it reaches any <text>, so the
-  // generated markup carries no user-controlled characters.
+  // The drawing is one of a fixed set — the title only picks which, never what it says,
+  // so no parent-typed text reaches the generated markup.
+  const preset = artPreset(post.milestone.title || 'Milestone');
   const art = el('div', 'milestone-art-wrap');
   art.setAttribute('aria-hidden', 'true');
-  art.innerHTML = milestoneArt(post.milestone.title || 'Milestone');
-  art.firstElementChild.dataset.parallax = 'x'; // drifts sideways as it scrolls
+  art.dataset.art = preset; // swap point for the real PNGs later
+  art.innerHTML = milestoneArtSvg(preset);
 
   scene.append(art, card);
   return scene;

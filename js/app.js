@@ -47,20 +47,36 @@ function onScroll() {
   rafPending = true;
   requestAnimationFrame(() => {
     const vh = window.innerHeight;
-    parallaxActive.forEach((el) => {
-      const frame = el.parentElement;
+    parallaxActive.forEach((img) => {
+      const frame = img.parentElement;
       const rect = frame.getBoundingClientRect();
       // -1 (entering bottom) .. 1 (leaving top)
       const progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
-      const t = Math.max(-1, Math.min(1, progress));
-      // Photos drift vertically inside their frame; the milestone sketch drifts
-      // sideways, which reads better in a band only 78px tall.
-      el.style.transform = el.dataset.parallax === 'x'
-        ? `translate3d(${t * 20}px, 0, 0)`
-        : `translate3d(0, ${t * -16}px, 0)`;
+      const shift = Math.max(-1, Math.min(1, progress)) * -16; // px drift
+      img.style.transform = `translate3d(0, ${shift}px, 0)`;
     });
     scrubber.update();
     rafPending = false;
+  });
+}
+
+// ── Milestone sketches: fade in and out, never move ────────────────
+// Lit while the scene sits in the middle band of the viewport, so a sketch fades up as
+// its card arrives and fades away as it leaves. Opacity only — no scroll-driven
+// positioning, so this costs nothing per frame.
+const artObserver = new IntersectionObserver(
+  (entries) => {
+    for (const e of entries) e.target.classList.toggle('is-lit', e.isIntersecting);
+  },
+  { rootMargin: '-12% 0px -12% 0px' },
+);
+
+// Sides alternate down the timeline. Milestones are interleaved with ordinary cards, so
+// no CSS selector can count them — assign after mounting, when the order is known.
+function restripeMilestones() {
+  timeline.querySelectorAll('.milestone-scene').forEach((scene, i) => {
+    scene.classList.toggle('side-right', i % 2 === 0);
+    scene.classList.toggle('side-left', i % 2 === 1);
   });
 }
 
@@ -68,6 +84,7 @@ function mountCard(card) {
   timeline.append(card);
   revealObserver.observe(card);
   card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
+  if (card.classList.contains('milestone-scene')) artObserver.observe(card);
 }
 
 async function loadMore() {
@@ -82,6 +99,7 @@ async function loadMore() {
   hasMore = more;
   page += 1;
   loading = false;
+  restripeMilestones();
   // New cards changed the document height and added months — re-measure once, here,
   // rather than from the scroll path.
   scrubber.refresh();
@@ -107,7 +125,9 @@ function insertPost(post) {
 
   card.classList.add('is-visible'); // skip the reveal animation for fresh captures
   card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
+  if (card.classList.contains('milestone-scene')) artObserver.observe(card);
   card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  restripeMilestones(); // a milestone inserted mid-timeline flips every side below it
   scrubber.refresh();
 }
 

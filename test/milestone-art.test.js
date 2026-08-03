@@ -1,78 +1,90 @@
-// The milestone sketch is generated, not authored, so the things worth pinning are:
-// which subject a title picks, that the output is deterministic, and that nothing a
-// parent types can escape into the markup.
+// The milestone sketch is picked, not authored. What matters is that the choice is
+// stable, that it always lands on a real preset, and that nothing a parent types can
+// reach the drawing — the title decides WHICH stock sketch appears, never what it says.
 //
 //   npm test
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { milestoneArt, artSubject } from '../js/milestone-art.js';
+import { ART_PRESETS, artPreset, milestoneArtSvg } from '../js/milestone-art.js';
 
-test('a short title spells itself out in blocks', () => {
-  assert.equal(artSubject('Day one'), 'blocks'); // DAYONE — six letters
-  assert.equal(artSubject('Crawl'), 'blocks');
+const TITLES = ['First steps', 'Day one', 'First laugh', 'Crawling', 'First tooth', ''];
+
+test('the preset list is the agreed set', () => {
+  assert.deepEqual([...ART_PRESETS], [
+    'balloons', 'cake', 'blocks', 'donuts', 'dinosaur', 'lemons',
+  ]);
 });
 
-test('a long title falls back to balloons', () => {
-  assert.equal(artSubject('First steps'), 'balloons'); // FIRSTSTEPS — ten letters
-  assert.equal(artSubject('First laugh'), 'balloons');
-});
-
-test('an empty or letterless title still draws something', () => {
-  assert.equal(artSubject(''), 'balloons');
-  assert.equal(artSubject(null), 'balloons');
-  assert.equal(artSubject('123 !!'), 'balloons');
-});
-
-test('blocks draw one lettered cube per letter, punctuation ignored', () => {
-  const svg = milestoneArt("Day one!");
-  const glyphs = [...svg.matchAll(/>([A-Z])<\/text>/g)].map((m) => m[1]);
-  assert.deepEqual(glyphs, ['D', 'A', 'Y', 'O', 'N', 'E']);
-});
-
-test('the sketch is deterministic — same title, identical markup', () => {
-  assert.equal(milestoneArt('Day one'), milestoneArt('Day one'));
-  assert.equal(milestoneArt('First steps'), milestoneArt('First steps'));
-});
-
-test('different titles draw different block sketches', () => {
-  assert.notEqual(milestoneArt('Crawl'), milestoneArt('Day one'));
-});
-
-test('output is a single svg carrying the band viewBox', () => {
-  const svg = milestoneArt('Day one');
-  assert.match(svg, /^<svg class="milestone-art" viewBox="0 0 560 78"/);
-  assert.match(svg, /<\/svg>$/);
-  assert.equal(svg.split('<svg').length - 1, 1);
-});
-
-test('it is monochrome — every stroke defers to currentColor', () => {
-  for (const title of ['Day one', 'First steps']) {
-    const svg = milestoneArt(title);
-    assert.match(svg, /stroke="currentColor"/);
-    // No literal colour anywhere, so the band's CSS is the only source of hue.
-    assert.doesNotMatch(svg, /#[0-9a-f]{3,6}/i);
-    assert.doesNotMatch(svg, /rgb\(/i);
+test('every title lands on a real preset', () => {
+  for (const title of [...TITLES, null, undefined, '!!!', 'a'.repeat(200)]) {
+    assert.ok(ART_PRESETS.includes(artPreset(title)), `${title} -> ${artPreset(title)}`);
   }
 });
 
-test('a title cannot inject markup — only [A-Z] reaches the text nodes', () => {
-  const svg = milestoneArt('<img src=x onerror=alert(1)>');
+test('the choice is deterministic — the same title always draws the same sketch', () => {
+  for (const title of TITLES) {
+    assert.equal(artPreset(title), artPreset(title));
+    assert.equal(milestoneArtSvg(artPreset(title)), milestoneArtSvg(artPreset(title)));
+  }
+});
+
+test('different titles spread across the presets rather than piling on one', () => {
+  const titles = [
+    'First steps', 'Day one', 'First laugh', 'Crawling', 'First tooth',
+    'First word', 'Rolled over', 'First haircut', 'Sat up', 'First swim',
+    'Waved hello', 'Blew a kiss',
+  ];
+  const used = new Set(titles.map(artPreset));
+  assert.ok(used.size >= 4, `only used ${used.size} presets: ${[...used].join(', ')}`);
+});
+
+test('every preset renders a single square svg', () => {
+  for (const preset of ART_PRESETS) {
+    const svg = milestoneArtSvg(preset);
+    assert.match(svg, /^<svg class="milestone-art" viewBox="0 0 120 120"/, preset);
+    assert.match(svg, /<\/svg>$/, preset);
+    assert.equal(svg.split('<svg').length - 1, 1, preset);
+    // Something is actually drawn.
+    assert.ok(/<(path|circle|g)\b/.test(svg), `${preset} draws nothing`);
+  }
+});
+
+test('an unknown preset falls back rather than rendering an empty frame', () => {
+  const svg = milestoneArtSvg('unicorns');
+  assert.equal(svg, milestoneArtSvg('balloons'));
+});
+
+test('the drawings are monochrome — every stroke defers to currentColor', () => {
+  for (const preset of ART_PRESETS) {
+    const svg = milestoneArtSvg(preset);
+    assert.match(svg, /stroke="currentColor"/, preset);
+    assert.doesNotMatch(svg, /#[0-9a-f]{3,6}/i, preset);
+    assert.doesNotMatch(svg, /rgb\(/i, preset);
+  }
+});
+
+test('no title text reaches the drawing', () => {
+  // The blocks preset is the only one with glyphs, and they are the fixed letters A B C.
+  const glyphs = (svg) => [...svg.matchAll(/>([^<>]*)<\/text>/g)].map((m) => m[1]);
+  assert.deepEqual(glyphs(milestoneArtSvg('blocks')), ['A', 'B', 'C']);
+  for (const preset of ART_PRESETS.filter((p) => p !== 'blocks')) {
+    assert.deepEqual(glyphs(milestoneArtSvg(preset)), [], preset);
+  }
+});
+
+test('a title cannot inject markup, because it never reaches the svg at all', () => {
+  const svg = milestoneArtSvg(artPreset('<img src=x onerror=alert(1)>'));
   assert.doesNotMatch(svg, /<img/);
   assert.doesNotMatch(svg, /onerror/);
   assert.ok(!svg.includes('alert'));
-});
-
-test('a quote-laden title cannot break out of an attribute', () => {
-  const svg = milestoneArt('a" onload="evil()');
-  assert.doesNotMatch(svg, /onload/);
-  // Every quote in the output belongs to an attribute we wrote ourselves.
-  assert.equal(svg.split('"').length % 2, 1);
+  // Whatever it picked is still one of the stock drawings, untouched.
+  assert.ok(ART_PRESETS.some((p) => milestoneArtSvg(p) === svg));
 });
 
 test('generating art is pure — no shared state between calls', () => {
-  const first = milestoneArt('Crawl');
-  milestoneArt('Something else entirely');
-  assert.equal(milestoneArt('Crawl'), first);
+  const first = milestoneArtSvg('cake');
+  milestoneArtSvg('dinosaur');
+  assert.equal(milestoneArtSvg('cake'), first);
 });

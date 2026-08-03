@@ -1,129 +1,138 @@
-// Hand-drawn sketch that backs every milestone card's header band.
+// Decorative sketch that sits beside a milestone card, out on the page background.
 //
-//   milestoneArt(title) -> SVG markup string
+//   artPreset(title)      -> one of ART_PRESETS, chosen deterministically
+//   milestoneArtSvg(name) -> SVG markup for that preset
 //
-// Two subjects, chosen from the title alone — the same "no decisions for the user"
-// rule the layout engine follows:
+// The drawing never contains anything a parent typed. It is picked from a fixed set,
+// so the title only decides WHICH stock drawing appears, never what it says.
 //
-//   • a short title  -> baby blocks, one letter per block, spelling it out
-//   • anything else  -> balloons
+// PLACEHOLDERS. These vector sketches stand in until real PNGs land. When they do, the
+// only thing that has to change is how render.js turns a preset name into a node — the
+// preset name is the contract, and it is already stamped on the wrapper as `data-art`,
+// so swapping in `<img src="art/${preset}.png">` needs no change here or in the CSS.
 //
-// Monochrome by design: every stroke is `currentColor`, so the band's CSS decides the
-// hue and the sketch can never drift from the palette.
-//
-// PURE — no DOM, no fetch, no randomness. The wobble that gives the lines their
-// hand-drawn feel is seeded from position, so a given milestone always draws the
-// identical sketch instead of shimmering on every re-render.
+// PURE — no DOM, no fetch, no randomness. Every drawing is fixed geometry, and the
+// preset choice is a hash of the title, so a milestone always shows the same sketch.
 
-/** Band the art is drawn into. The viewBox scales; these are just drawing units. */
-const W = 560;
-const H = 78;
+/** The complete set. Adding one here is all it takes for titles to start picking it. */
+export const ART_PRESETS = Object.freeze([
+  'balloons',
+  'cake',
+  'blocks',
+  'donuts',
+  'dinosaur',
+  'lemons',
+]);
 
-/** Longest title, in letters, that still reads as blocks rather than a wall of cubes. */
-const MAX_BLOCKS = 6;
+/** Everything is drawn in this square, sized by CSS. */
+const BOX = 120;
 
-/** Deterministic jitter in roughly [-1, 1] from an integer seed. */
-function wobble(seed) {
-  const x = Math.sin(seed * 12.9898) * 43758.5453;
-  return (x - Math.floor(x)) * 2 - 1;
-}
-
-/** Letters only, uppercased — also what makes the `<text>` below injection-proof. */
-function letters(title) {
-  return String(title || '').replace(/[^a-z]/gi, '').toUpperCase();
-}
-
-/** A square with all four corners nudged off true, so it reads as drawn by hand. */
-function blockPath(x, y, size, seed) {
-  const j = (i) => wobble(seed * 7 + i) * 1.9;
-  const pts = [
-    [x + j(1), y + j(2)],
-    [x + size + j(3), y + j(4)],
-    [x + size + j(5), y + size + j(6)],
-    [x + j(7), y + size + j(8)],
-  ];
-  return `M${pts.map(([px, py]) => `${px.toFixed(1)} ${py.toFixed(1)}`).join('L')}Z`;
-}
-
-function blocksSvg(chars) {
-  const size = 40;
-  const gap = 12;
-  const total = chars.length * size + (chars.length - 1) * gap;
-  const startX = W - total - 26; // right-aligned, clear of the chip on the left
-  const y = (H - size) / 2;
-
-  const parts = chars.map((ch, i) => {
-    const x = startX + i * (size + gap);
-    const tilt = (wobble(i + 1) * 4).toFixed(1);
-    const cx = (x + size / 2).toFixed(1);
-    const cy = (y + size / 2).toFixed(1);
-    return (
-      `<g transform="rotate(${tilt} ${cx} ${cy})">` +
-      `<path d="${blockPath(x, y, size, i + 1)}"/>` +
-      `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" ` +
-      `font-size="21" font-weight="700" stroke="none" fill="currentColor">${ch}</text>` +
-      `</g>`
-    );
-  });
-
-  return parts.join('');
-}
-
-function balloonsSvg(count = 4) {
-  const spacing = 46;
-  const startX = W - 26 - (count - 1) * spacing - 15;
-
-  const parts = [];
-  for (let i = 0; i < count; i += 1) {
-    const cx = startX + i * spacing;
-    const r = 13 + wobble(i * 3 + 1) * 1.6;
-    const ry = r * 1.2;
-    const cy = 20 + wobble(i * 5 + 2) * 3;
-
-    // Body: two mirrored curves meeting at top and bottom, pinched slightly at the base.
-    const body =
-      `M${cx.toFixed(1)} ${(cy - ry).toFixed(1)}` +
-      `C${(cx + r * 1.3).toFixed(1)} ${(cy - ry * 0.6).toFixed(1)} ` +
-      `${(cx + r * 1.05).toFixed(1)} ${(cy + ry * 0.7).toFixed(1)} ` +
-      `${cx.toFixed(1)} ${(cy + ry).toFixed(1)}` +
-      `C${(cx - r * 1.05).toFixed(1)} ${(cy + ry * 0.7).toFixed(1)} ` +
-      `${(cx - r * 1.3).toFixed(1)} ${(cy - ry * 0.6).toFixed(1)} ` +
-      `${cx.toFixed(1)} ${(cy - ry).toFixed(1)}Z`;
-
-    const knotY = cy + ry;
-    const knot = `M${(cx - 3).toFixed(1)} ${knotY.toFixed(1)}L${cx.toFixed(1)} ${(knotY + 5).toFixed(1)}L${(cx + 3).toFixed(1)} ${knotY.toFixed(1)}`;
-
-    const sway = 5 + wobble(i * 11 + 3) * 3;
-    const string =
-      `M${cx.toFixed(1)} ${(knotY + 5).toFixed(1)}` +
-      `q${sway.toFixed(1)} 9 ${(-2).toFixed(1)} 16` +
-      `q${(-sway).toFixed(1)} 7 ${(1).toFixed(1)} 13`;
-
-    parts.push(`<path d="${body}"/><path d="${knot}"/><path d="${string}"/>`);
+/** Small stable string hash (FNV-1a), so a title always lands on the same preset. */
+function hash(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i += 1) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
   }
-  return parts.join('');
+  return h >>> 0;
 }
 
 /**
- * Build the sketch for a milestone.
- * @param {string} title milestone title, e.g. "First steps"
- * @returns {string} SVG markup, sized to the header band
+ * Which stock drawing a milestone gets.
+ * @param {string} title
+ * @returns {string} a member of ART_PRESETS
  */
-export function milestoneArt(title) {
-  const chars = letters(title);
-  const body = chars.length > 0 && chars.length <= MAX_BLOCKS
-    ? blocksSvg(chars.split(''))
-    : balloonsSvg();
+export function artPreset(title) {
+  return ART_PRESETS[hash(String(title || '')) % ART_PRESETS.length];
+}
 
+// ── The drawings ───────────────────────────────────────────────────
+// Stroke-only and unfilled so they read as sketches, and every stroke inherits
+// currentColor so the palette is decided entirely in CSS.
+
+/** One balloon: body, knot, and a curling string down to a common point. */
+function balloon(cx, cy, r, tailX, tailY) {
+  const ry = r * 1.18;
   return (
-    `<svg class="milestone-art" viewBox="0 0 ${W} ${H}" fill="none" ` +
-    `stroke="currentColor" stroke-width="2" stroke-linecap="round" ` +
-    `stroke-linejoin="round" aria-hidden="true" focusable="false">${body}</svg>`
+    `<path d="M${cx} ${cy - ry}` +
+    `C${cx + r * 1.3} ${cy - ry * 0.6} ${cx + r * 1.05} ${cy + ry * 0.7} ${cx} ${cy + ry}` +
+    `C${cx - r * 1.05} ${cy + ry * 0.7} ${cx - r * 1.3} ${cy - ry * 0.6} ${cx} ${cy - ry}Z"/>` +
+    `<path d="M${cx - 3} ${cy + ry}L${cx} ${cy + ry + 5}L${cx + 3} ${cy + ry}"/>` +
+    `<path d="M${cx} ${cy + ry + 5}Q${cx + 8} ${(cy + tailY) / 2} ${tailX} ${tailY}"/>`
   );
 }
 
-/** Which subject a title will draw. Exported so the choice stays testable. */
-export function artSubject(title) {
-  const n = letters(title).length;
-  return n > 0 && n <= MAX_BLOCKS ? 'blocks' : 'balloons';
+/** A block with a single stock letter, drawn slightly off-square by hand. */
+function block(x, y, size, letter, tilt) {
+  const cx = x + size / 2;
+  const cy = y + size / 2;
+  return (
+    `<g transform="rotate(${tilt} ${cx} ${cy})">` +
+    `<path d="M${x + 1} ${y}L${x + size} ${y + 1.5}L${x + size - 1.5} ${y + size}L${x} ${y + size - 1}Z"/>` +
+    `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" ` +
+    `font-size="15" font-weight="700" stroke="none" fill="currentColor">${letter}</text>` +
+    `</g>`
+  );
+}
+
+const DRAWINGS = {
+  balloons: () =>
+    balloon(40, 40, 15, 60, 106) +
+    balloon(70, 30, 13, 62, 106) +
+    balloon(90, 52, 12, 64, 106),
+
+  cake: () =>
+    // plate, two tiers with a piped edge, and a lit candle
+    '<path d="M18 102H102"/>' +
+    '<path d="M30 102V80H90V102"/>' +
+    '<path d="M30 80q7-6 15 0t15 0t15 0t15 0"/>' +
+    '<path d="M44 80V60H76V80"/>' +
+    '<path d="M44 60q8-6 16 0t16 0"/>' +
+    '<path d="M60 60V44"/>' +
+    '<path d="M60 44c-5-4-1-9 0-11c1 2 5 7 0 11Z"/>',
+
+  // Named "ABC" blocks: the letters are part of the stock drawing, not the title.
+  blocks: () =>
+    block(30, 66, 28, 'A', -3) +
+    block(62, 66, 28, 'B', 2) +
+    block(46, 36, 28, 'C', -1.5),
+
+  donuts: () =>
+    '<circle cx="46" cy="50" r="24"/><circle cx="46" cy="50" r="9"/>' +
+    '<path d="M38 34l3-5M56 40l5-3M34 56l-5 2M52 64l2 5"/>' +
+    '<circle cx="80" cy="82" r="18"/><circle cx="80" cy="82" r="7"/>' +
+    '<path d="M74 70l2-4M90 78l4-2M70 90l-4 2"/>',
+
+  dinosaur: () =>
+    // long-neck: rounded body, neck sweeping up to a head that meets it, tail and legs
+    '<path d="M30 62C20 66 14 76 16 84c2 10 16 14 30 12c14-2 22-10 21-19"/>' +
+    '<path d="M67 77c-1-6-6-11-14-13c-8-2-17-3-23-2"/>' +
+    '<path d="M67 70c2-14 4-24 10-32"/>' +
+    '<circle cx="83" cy="30" r="9"/>' +
+    '<circle cx="86" cy="27" r="1.6" stroke="none" fill="currentColor"/>' +
+    '<path d="M16 82c-6 0-11-5-13-13"/>' +
+    '<path d="M30 96v10M44 98v9M58 96v10"/>',
+
+  lemons: () =>
+    // two rounded lemons with the nub at each end, plus a leaf on a short stem
+    '<path d="M28 68c0-12 10-21 22-21s22 9 22 21s-10 21-22 21s-22-9-22-21Z"/>' +
+    '<path d="M28 68h-6M72 68h6"/>' +
+    '<path d="M78 92c0-8 7-14 15-14s15 6 15 14s-7 14-15 14s-15-6-15-14Z"/>' +
+    '<path d="M78 92h-4M108 92h4"/>' +
+    '<path d="M52 46c-1-6 0-11 2-15"/>' +
+    '<path d="M54 34c8-8 18-9 22-6c-2 9-10 14-19 12Z"/>',
+};
+
+/**
+ * Markup for one stock drawing.
+ * @param {string} preset a member of ART_PRESETS; anything else falls back to balloons
+ * @returns {string} SVG markup
+ */
+export function milestoneArtSvg(preset) {
+  const draw = DRAWINGS[preset] || DRAWINGS.balloons;
+  return (
+    `<svg class="milestone-art" viewBox="0 0 ${BOX} ${BOX}" fill="none" ` +
+    `stroke="currentColor" stroke-width="2.5" stroke-linecap="round" ` +
+    `stroke-linejoin="round" aria-hidden="true" focusable="false">${draw()}</svg>`
+  );
 }

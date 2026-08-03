@@ -107,29 +107,41 @@ engine and the real stylesheets. Add a sample there whenever you add a layout ty
 
 ### Milestone sketch
 
-A milestone is rendered as a **scene**: the card, plus a hand-drawn sketch on the page
-background *around* it. The card clips its own contents (`overflow: hidden` keeps photos
-inside the rounded corners), so the drawing cannot live inside the card and still spill
-past its edges — hence the wrapper. The art breaks out of the timeline's `max-width` to
-bleed either side, and the card paints over its lower half so balloon strings and block
-edges tuck behind it.
+A milestone is rendered as a **scene**: the card, plus a decorative sketch out on the
+page background *beside* it. The card clips its own contents (`overflow: hidden` keeps
+photos inside the rounded corners), so the drawing cannot live inside the card and still
+appear outside its edges — hence the wrapper.
 
 `renderPost` therefore returns *the element the timeline mounts*, which is the card for
 an ordinary post and the scene for a milestone. That element carries `memoryDate` and
 the `.timeline-item` reveal class — keep those on the returned element, not on `.card`,
 or the scrubber and the reveal animation will miss milestones.
 
-The sketch comes from `milestone-art.js` — another pure function, `title -> SVG markup`,
-chosen from the title alone with no user input:
+**Placement.** Sketches sit to one side of the card, **alternating** down the timeline.
+Milestones are interleaved with ordinary cards, so no CSS selector can count them —
+`app.js` assigns `side-left` / `side-right` after mounting, when the order is known, and
+re-runs it when a backdated milestone lands mid-timeline and flips every side below it.
+Below 880px there is no room beside the card, so the sketch is hidden outright; it is a
+wide-screen grace note, not something the phone layout depends on.
 
-- **≤ 6 letters** → baby blocks, one letter per block, spelling the title out.
-- **anything else** → balloons.
+**Motion.** Sketches never move. They fade in as their card reaches the middle of the
+viewport and fade out as it leaves, driven by an `IntersectionObserver` toggling a class
+— opacity only, nothing per frame, no scroll-driven positioning.
 
-The sketch is monochrome: every stroke is `currentColor`, so `.milestone-art` in CSS is
-the only thing that decides its hue and it can never drift from the palette. The wobble
-that makes the lines look hand-drawn is seeded from position, never random, so a given
-milestone always draws the identical sketch. The title is stripped to `[A-Z]` before it
-reaches any `<text>`, which is what makes generating the markup as a string safe.
+**The drawings** come from `milestone-art.js`:
+
+- `ART_PRESETS` is a fixed set: balloons, cake, blocks (stock A/B/C in a triangle),
+  donuts, dinosaur, lemons.
+- `artPreset(title)` hashes the title to pick one. The title decides *which* stock
+  drawing appears, never *what it says* — no parent-typed text ever reaches a drawing.
+- `milestoneArtSvg(preset)` returns the markup. Both are pure and unit-tested.
+
+Every stroke is `currentColor`, so `.milestone-art` in CSS is the only thing deciding
+hue and the sketches can never drift from the palette.
+
+> **These SVGs are placeholders for PNGs.** The preset name is the contract and is
+> already stamped on the wrapper as `data-art`, so swapping in `<img src="art/${preset}.png">`
+> touches only how `render.js` builds that node — not the CSS, the sides, or the fade.
 
 The chip keeps the one 12px offset it has on every card, so nothing about the sketch
 moves it.

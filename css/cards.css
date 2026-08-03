@@ -125,46 +125,43 @@
   box-shadow: 0 0 0 2px var(--accent), var(--shadow-lift);
 }
 
-/* The milestone sketch is drawn on the page background AROUND the card, not inside it.
-   The scene reserves room above the card for the drawing; the card then sits on top,
-   so balloon strings and block edges tuck behind it. */
-.milestone-scene {
-  position: relative;
-  padding-top: clamp(34px, 9vw, 66px);
-}
+/* The milestone sketch sits out on the page background beside the card, alternating
+   sides down the timeline (app.js assigns side-left / side-right). It never moves —
+   it only fades up as its card comes into view and fades away as it leaves. */
+.milestone-scene { position: relative; }
 
-/* Breaks out of the timeline's max-width to bleed past the card on both sides */
 .milestone-art-wrap {
   position: absolute;
-  top: 0;
-  left: 50%;
-  width: min(100vw, 760px);
-  aspect-ratio: 560 / 78;   /* matches milestone-art.js's viewBox */
-  transform: translateX(-50%);
+  top: 50%;
+  width: 132px;
+  aspect-ratio: 1;          /* matches milestone-art.js's square viewBox */
+  transform: translateY(-50%);
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.55s ease;
 }
+
+.milestone-scene.side-right .milestone-art-wrap { left: 100%; margin-left: 26px; }
+.milestone-scene.side-left .milestone-art-wrap { right: 100%; margin-right: 26px; }
+
+.milestone-scene.is-lit .milestone-art-wrap { opacity: 0.45; }
 
 .milestone-art {
   width: 100%;
   height: 100%;
   /* Sage, so the milestone treatment reads green; the chip supplies the blue */
   color: var(--accent-ink);
-  opacity: 0.5;
-  will-change: transform;
 }
 
-/* The card paints over the lower part of the sketch */
-.milestone-scene .card {
-  position: relative;
-  z-index: 1;
+/* A phone has no room beside the card — the sketch is a wide-screen grace note, and
+   hiding it beats letting it collide with the timeline. Needs the card's 560px plus a
+   132px drawing and its margin on one side. */
+@media (max-width: 879px) {
+  .milestone-art-wrap { display: none; }
 }
 
-/* Without a band above it, the chip on a quote card would land on the meta row again */
+/* No band above it now, so the chip on a quote card would land on the meta row again */
 .card--quote.card--highlight { padding-top: 50px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .milestone-art { transform: none !important; }
-}
 
 .milestone-badge {
   position: absolute;

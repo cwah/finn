@@ -33,6 +33,26 @@
     }
     /* Nothing scrolls into view here — show every item immediately. */
     .timeline-item { opacity: 1; transform: none; }
+    .preview-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      padding: 20px 8px;
+    }
+    .preview-art {
+      margin: 0;
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+      color: var(--accent-ink);
+    }
+    .preview-art svg { width: 100%; height: auto; }
+    .preview-art figcaption {
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
@@ -48,6 +68,7 @@
   <script type="module">
     import { renderPost } from './js/render.js';
     import { inferLayout } from './js/layout-engine.js';
+    import { ART_PRESETS, milestoneArtSvg } from './js/milestone-art.js';
 
     const BIRTH = '2026-01-15';
     const timeline = document.getElementById('timeline');
@@ -138,6 +159,27 @@
       const card = renderPost(sample, BIRTH);
       if (card) timeline.append(card);
     }
+
+    // app.js normally assigns the alternating sides and lights the sketches on scroll;
+    // this bench shows everything at once, so do both up front.
+    timeline.querySelectorAll('.milestone-scene').forEach((scene, i) => {
+      scene.classList.add(i % 2 === 0 ? 'side-right' : 'side-left', 'is-lit');
+    });
+
+    // Every stock drawing, so a new preset can be eyeballed without hunting for a
+    // title that happens to hash onto it.
+    const gallery = document.createElement('div');
+    gallery.className = 'preview-gallery';
+    for (const preset of ART_PRESETS) {
+      const cell = document.createElement('figure');
+      cell.className = 'preview-art';
+      cell.innerHTML = `${milestoneArtSvg(preset)}<figcaption>${preset}</figcaption>`;
+      gallery.append(cell);
+    }
+    const galleryLabel = document.createElement('p');
+    galleryLabel.className = 'preview-label';
+    galleryLabel.textContent = 'Milestone sketches · all presets';
+    timeline.append(galleryLabel, gallery);
   </script>
 </body>
 </html>
