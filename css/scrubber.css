@@ -47,7 +47,13 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
-  opacity: 0.75;
+  /* At phone width the rail rides over the cards, so a label can land on any photo.
+     Carry a scrap of the page background so it stays legible whatever is behind it. */
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: rgba(var(--bg-rgb), 0.85);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 /* Every tick also gets a dash on the rail itself */

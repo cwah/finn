@@ -1,3 +1,17 @@
+/* ── Timeline item ─────────────────────────────────────────────── */
+/* Whatever the timeline mounts reveals as one piece — for a milestone that is the
+   card AND the sketch drawn around it, so the reveal lives here rather than on .card */
+.timeline-item {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.timeline-item.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 /* ── Shared card shell ─────────────────────────────────────────── */
 .card {
   background: var(--surface);
@@ -6,14 +20,6 @@
   /* On a light ground the card is barely lighter than the page, so the separation
      has to come from lift rather than from contrast between the two surfaces. */
   box-shadow: var(--shadow-card);
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.card.is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
 }
 
 .card-meta {
@@ -116,44 +122,45 @@
 /* ── Treatment: milestone highlight ────────────────────────────── */
 .card--highlight {
   position: relative;
-  box-shadow: 0 0 0 2px var(--blue), var(--shadow-lift);
+  box-shadow: 0 0 0 2px var(--accent), var(--shadow-lift);
 }
 
-/* Every milestone card opens with a header band: a hand-drawn sketch washed in the
-   milestone blue, which dissolves into the card below it. Reserving the space with
-   padding rather than overlaying means the band works the same whether what follows
-   is a photo, a grid or a quote — the badge never has to move to accommodate it. */
-.card--highlight { padding-top: var(--band-h); }
+/* The milestone sketch is drawn on the page background AROUND the card, not inside it.
+   The scene reserves room above the card for the drawing; the card then sits on top,
+   so balloon strings and block edges tuck behind it. */
+.milestone-scene {
+  position: relative;
+  padding-top: clamp(34px, 9vw, 66px);
+}
 
-.milestone-band {
+/* Breaks out of the timeline's max-width to bleed past the card on both sides */
+.milestone-art-wrap {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: var(--band-h);
-  overflow: hidden;
+  left: 50%;
+  width: min(100vw, 760px);
+  aspect-ratio: 560 / 78;   /* matches milestone-art.js's viewBox */
+  transform: translateX(-50%);
   pointer-events: none;
-  z-index: 1;
-  /* Both stops name the same blue, so the fade stays in the palette rather than
-     greying out through transparent black. */
-  background: linear-gradient(
-    to bottom,
-    rgba(var(--blue-rgb), 0.34),
-    rgba(var(--blue-rgb), 0)
-  );
 }
 
 .milestone-art {
-  position: absolute;
-  top: 0;
-  /* Oversized and inset on both sides so the parallax drift never exposes an edge */
-  left: -9%;
-  width: 118%;
+  width: 100%;
   height: 100%;
-  color: var(--blue-ink);
-  opacity: 0.42;
+  /* Sage, so the milestone treatment reads green; the chip supplies the blue */
+  color: var(--accent-ink);
+  opacity: 0.5;
   will-change: transform;
 }
+
+/* The card paints over the lower part of the sketch */
+.milestone-scene .card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Without a band above it, the chip on a quote card would land on the meta row again */
+.card--quote.card--highlight { padding-top: 50px; }
 
 @media (prefers-reduced-motion: reduce) {
   .milestone-art { transform: none !important; }

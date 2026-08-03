@@ -61,33 +61,15 @@ function gridPhotos(photos) {
   return wrap;
 }
 
-/**
- * Build a fully-rendered post card.
- * @param {object} post
- * @param {string} birthDate ISO birthdate for age computation
- * @returns {HTMLElement|null} null when the post has nothing renderable
- */
-export function renderPost(post, birthDate) {
-  const type = inferLayout(post);
-  if (type === null) return null;
-
+/** The card itself, for whichever layout the engine picked. */
+function buildCard(post, birthDate, type) {
   const card = el('article', `card card--${type}`);
-  card.dataset.memoryDate = post.memoryDate; // lets the timeline place late arrivals in order
 
   if (isMilestone(post)) {
     card.classList.add('card--highlight');
-    const title = post.milestone.title || 'Milestone';
-
-    // Header band: a hand-drawn sketch behind the chip, on every milestone layout.
-    // milestoneArt strips its input to [A-Z] before it reaches any <text>, so the
-    // generated markup carries no user-controlled characters.
-    const band = el('div', 'milestone-band');
-    band.setAttribute('aria-hidden', 'true');
-    band.innerHTML = milestoneArt(title);
-    band.firstElementChild.dataset.parallax = 'x'; // drifts sideways as it scrolls
-    card.append(band);
-
-    card.append(el('span', 'milestone-badge', { textContent: title }));
+    card.append(el('span', 'milestone-badge', {
+      textContent: post.milestone.title || 'Milestone',
+    }));
   }
 
   if (type === 'quote') {
@@ -111,4 +93,45 @@ export function renderPost(post, birthDate) {
   card.append(metaEl(post, birthDate));
   if (post.caption) card.append(el('p', 'card-caption', { textContent: post.caption }));
   return card;
+}
+
+/**
+ * Build a timeline item for a post.
+ *
+ * Ordinary posts are just the card. A milestone is the card inside a "scene", because
+ * its sketch is drawn on the page background AROUND the card — the card clips its own
+ * contents (`overflow: hidden` keeps photos inside the corners), so the drawing cannot
+ * live inside it and still spill past its edges.
+ *
+ * Whatever comes back is the element the timeline mounts, so it carries memoryDate and
+ * the reveal class.
+ *
+ * @param {object} post
+ * @param {string} birthDate ISO birthdate for age computation
+ * @returns {HTMLElement|null} null when the post has nothing renderable
+ */
+export function renderPost(post, birthDate) {
+  const type = inferLayout(post);
+  if (type === null) return null;
+
+  const card = buildCard(post, birthDate, type);
+
+  if (!isMilestone(post)) {
+    card.classList.add('timeline-item');
+    card.dataset.memoryDate = post.memoryDate; // lets the timeline order late arrivals
+    return card;
+  }
+
+  const scene = el('div', 'milestone-scene timeline-item');
+  scene.dataset.memoryDate = post.memoryDate;
+
+  // milestoneArt strips its input to [A-Z] before it reaches any <text>, so the
+  // generated markup carries no user-controlled characters.
+  const art = el('div', 'milestone-art-wrap');
+  art.setAttribute('aria-hidden', 'true');
+  art.innerHTML = milestoneArt(post.milestone.title || 'Milestone');
+  art.firstElementChild.dataset.parallax = 'x'; // drifts sideways as it scrolls
+
+  scene.append(art, card);
+  return scene;
 }

@@ -105,11 +105,22 @@ function pure and unit-testable — it's the heart of the product.
 `preview.html` is the visual bench: it renders one sample per rule through the real
 engine and the real stylesheets. Add a sample there whenever you add a layout type.
 
-### Milestone header band
+### Milestone sketch
 
-Every milestone card opens with a header band carrying a hand-drawn sketch, generated
-by `milestone-art.js` — another pure function, `title -> SVG markup`, chosen from the
-title alone with no user input:
+A milestone is rendered as a **scene**: the card, plus a hand-drawn sketch on the page
+background *around* it. The card clips its own contents (`overflow: hidden` keeps photos
+inside the rounded corners), so the drawing cannot live inside the card and still spill
+past its edges — hence the wrapper. The art breaks out of the timeline's `max-width` to
+bleed either side, and the card paints over its lower half so balloon strings and block
+edges tuck behind it.
+
+`renderPost` therefore returns *the element the timeline mounts*, which is the card for
+an ordinary post and the scene for a milestone. That element carries `memoryDate` and
+the `.timeline-item` reveal class — keep those on the returned element, not on `.card`,
+or the scrubber and the reveal animation will miss milestones.
+
+The sketch comes from `milestone-art.js` — another pure function, `title -> SVG markup`,
+chosen from the title alone with no user input:
 
 - **≤ 6 letters** → baby blocks, one letter per block, spelling the title out.
 - **anything else** → balloons.
@@ -120,9 +131,8 @@ that makes the lines look hand-drawn is seeded from position, never random, so a
 milestone always draws the identical sketch. The title is stripped to `[A-Z]` before it
 reaches any `<text>`, which is what makes generating the markup as a string safe.
 
-The band is reserved with `padding-top` rather than overlaid, so it behaves the same
-whether the card below it is a photo, a grid or a quote — and the chip keeps the one
-12px offset it has on every card.
+The chip keeps the one 12px offset it has on every card, so nothing about the sketch
+moves it.
 
 ## Suggested structure
 
@@ -178,8 +188,10 @@ tests. It has no dependencies and nothing bundles.
 ## Colour
 
 The palette is **sage green and baby blue**, light and pastel, defined once as tokens in
-`base.css`. Sage carries the app; baby blue carries the milestone treatment (ring, chip,
-band wash, sketch, scrubber thumb).
+`base.css`. **Sage leads** — page, surfaces, milestone ring, milestone sketch, quote
+glyph, focus rings, scrubber ticks. Baby blue is the deliberate secondary, kept to small
+pops: the milestone chip, the scrubber thumb and bubble, and the second stop of the
+capture/save gradients. Keep that balance when adding colour.
 
 - Cards are near-white on a pale sage page, so they separate by **shadow, not contrast** —
   `--shadow-card`. Shadows are tinted with the text sage rather than black.

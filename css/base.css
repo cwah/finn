@@ -8,7 +8,8 @@
   --surface-2: #e6ece2;       /* pale sage */
   --text: #2e3a30;            /* deep sage charcoal */
   --text-dim: #5c6a60;        /* muted sage grey — 4.8:1 on the palest surface */
-  --accent: #9cb289;          /* pastel sage, for fills and gradients */
+  --accent-rgb: 156, 178, 137;
+  --accent: rgb(var(--accent-rgb));   /* pastel sage, for fills and gradients */
   /* The pastel sage only reaches 2.2:1 on a light card, so anything that has to be
      READ — the quote glyph, focus rings — uses this deeper sage instead. */
   --accent-ink: #6f8a5c;
@@ -30,7 +31,6 @@
   --gap: 16px;
   --tray-h: 76px;
   --maxw: 560px;
-  --band-h: 78px;   /* milestone header band; matches milestone-art.js's viewBox */
 }
 
 * { box-sizing: border-box; }
@@ -106,7 +106,7 @@ body {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--blue));
   color: #23301f;
-  box-shadow: 0 6px 20px rgba(var(--blue-rgb), 0.35);
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.4);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
