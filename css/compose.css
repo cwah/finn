@@ -11,8 +11,12 @@
   color: var(--text);
 }
 
+.compose {
+  box-shadow: 0 -8px 32px rgba(46, 58, 48, 0.16);
+}
+
 .compose::backdrop {
-  background: rgba(12, 9, 15, 0.6);
+  background: rgba(46, 58, 48, 0.38);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }
@@ -70,7 +74,7 @@
 .compose-form input[type="date"] {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid var(--hairline);
   border-radius: 12px;
   background: var(--surface-2);
   color: var(--text);
@@ -82,7 +86,7 @@
 .compose-form textarea:focus,
 .compose-form input:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--accent-ink);
 }
 
 .compose-toggle {
@@ -128,7 +132,7 @@
 
 .btn--primary {
   background: linear-gradient(135deg, var(--accent), var(--gold));
-  color: #2a1f25;
+  color: #23301f;
 }
 
 .btn--primary:disabled {

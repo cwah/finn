@@ -3,6 +3,9 @@
   background: var(--surface);
   border-radius: var(--radius);
   overflow: hidden;
+  /* On a light ground the card is barely lighter than the page, so the separation
+     has to come from lift rather than from contrast between the two surfaces. */
+  box-shadow: var(--shadow-card);
   opacity: 0;
   transform: translate3d(0, 18px, 0);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -105,7 +108,7 @@
 .card--quote .quote-mark {
   display: block;
   font-size: 2.4rem;
-  color: var(--accent);
+  color: var(--accent-ink);
   line-height: 0.6;
   margin-bottom: 6px;
 }
@@ -113,7 +116,7 @@
 /* ── Treatment: milestone highlight ────────────────────────────── */
 .card--highlight {
   position: relative;
-  box-shadow: 0 0 0 2px var(--gold), 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 2px var(--gold), var(--shadow-lift);
 }
 
 /* The badge sits at the same 12px offset on every card, so it is never repositioned
@@ -143,10 +146,10 @@
   padding: 6px 12px;
   border-radius: 999px;
   background: var(--gold);
-  color: #2a1f10;
+  color: #33280e;
   font-size: 0.8rem;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(46, 58, 48, 0.18);
 }
 
 .milestone-badge::before { content: "★"; }
