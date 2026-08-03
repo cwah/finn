@@ -46,6 +46,9 @@ Deploy.
 > **Keep the frontend backend-agnostic.** It consumes the JSON contract below and nothing
 > else. Phase 1 and Phase 2 differ only in the data-fetch layer.
 
+Feature requests and ideas live in `BACKLOG.md` — candidates, not commitments. The phases
+above are the plan; check the backlog when picking up something new.
+
 ## Data model / JSON contract
 
 The frontend reads an array of **posts**, newest memory first. Each post:
