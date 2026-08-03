@@ -105,24 +105,46 @@ function pure and unit-testable — it's the heart of the product.
 `preview.html` is the visual bench: it renders one sample per rule through the real
 engine and the real stylesheets. Add a sample there whenever you add a layout type.
 
+### Milestone header band
+
+Every milestone card opens with a header band carrying a hand-drawn sketch, generated
+by `milestone-art.js` — another pure function, `title -> SVG markup`, chosen from the
+title alone with no user input:
+
+- **≤ 6 letters** → baby blocks, one letter per block, spelling the title out.
+- **anything else** → balloons.
+
+The sketch is monochrome: every stroke is `currentColor`, so `.milestone-art` in CSS is
+the only thing that decides its hue and it can never drift from the palette. The wobble
+that makes the lines look hand-drawn is seeded from position, never random, so a given
+milestone always draws the identical sketch. The title is stripped to `[A-Z]` before it
+reaches any `<text>`, which is what makes generating the markup as a string safe.
+
+The band is reserved with `padding-top` rather than overlaid, so it behaves the same
+whether the card below it is a photo, a grid or a quote — and the chip keeps the one
+12px offset it has on every card.
+
 ## Suggested structure
 
 ```
 /index.html              # app shell + sticky bottom nav tray + compose sheet
 /preview.html            # visual bench: every layout rendered by the live engine
 /css/                    # CSS Grid layouts, one concern per file
-  base.css               # shell, header, bottom tray
+  base.css               # palette tokens, shell, header, bottom tray
   cards.css              # the four card layouts + milestone treatment
   compose.css            # the compose sheet
+  scrubber.css           # right-edge date scrubber
 /js/
   app.js                 # bootstrap, routing, infinite-scroll controller
   data.js                # data source (Phase 1: fetch mock.json; Phase 2: PocketBase)
   layout-engine.js       # pure post -> layoutType (the core engine)
   render.js              # build DOM for each layout type
   age.js                 # birthDate + memoryDate -> age stamp
+  milestone-art.js       # pure title -> hand-drawn SVG sketch
   capture.js             # bottom-nav capture + compose flow
+  scrubber.js            # right-edge date scrubber
 /data/mock.json          # Phase 1 sample data (matches contract above)
-/test/                   # node:test specs for the two pure modules
+/test/                   # node:test specs for the pure modules
 ```
 
 ## Running it
@@ -148,6 +170,28 @@ tests. It has no dependencies and nothing bundles.
   happened, and an optional milestone. It holds no layout controls, by design.
 - `memoryDate` is authored, not inferred from upload time, so a new memory can be
   backdated — the timeline inserts it in date order rather than always at the top.
+- A **date scrubber** rides the right edge (Google Photos style): month ticks you can
+  drag to fly through the timeline, with a bubble showing where you are. It fades in
+  while scrolling and idles out of sight so it never covers a memory. It is
+  `aria-hidden` — a shortcut for scrolling, not a second copy of the timeline.
+
+## Colour
+
+The palette is **sage green and baby blue**, light and pastel, defined once as tokens in
+`base.css`. Sage carries the app; baby blue carries the milestone treatment (ring, chip,
+band wash, sketch, scrubber thumb).
+
+- Cards are near-white on a pale sage page, so they separate by **shadow, not contrast** —
+  `--shadow-card`. Shadows are tinted with the text sage rather than black.
+- `--accent` is pastel and only for fills. Anything that must be **read** — the quote
+  glyph, focus rings — uses `--accent-ink`; the pastel sage is only 2.2:1 on a light card.
+  `--blue` / `--blue-ink` split the same way.
+- `--bg-rgb` and `--blue-rgb` exist as channels so translucent fills and gradient washes
+  tint with the same colour at any alpha. Gradients that fade out should name the same
+  colour at alpha 0 rather than `transparent`, which interpolates through transparent
+  black and greys the middle of the fade.
+- Check contrast when changing these: body text and the small date/author text both need
+  to clear WCAG AA (4.5:1) on `--surface`, `--surface-2` and `--bg`.
 - Target single-handed operation; keep tap targets large and actions reachable from the bottom.
 
 ## Performance rules

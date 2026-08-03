@@ -1,11 +1,11 @@
 :root {
-  /* Light pastel: sage green and gold. Cards are near-white and lift off a pale
-     sage-cream page, so separation comes from soft shadow rather than from the
-     card being lighter than its background. */
-  --bg-rgb: 242, 244, 236;
-  --bg: rgb(var(--bg-rgb));   /* pale sage cream */
-  --surface: #fbfcf8;         /* near-white card */
-  --surface-2: #e7ede0;       /* pale sage */
+  /* Light pastel: sage green and baby blue. Cards are near-white and lift off a pale
+     sage page, so separation comes from soft shadow rather than from the card being
+     lighter than its background. */
+  --bg-rgb: 240, 244, 238;
+  --bg: rgb(var(--bg-rgb));   /* pale sage */
+  --surface: #fbfcf9;         /* near-white card */
+  --surface-2: #e6ece2;       /* pale sage */
   --text: #2e3a30;            /* deep sage charcoal */
   --text-dim: #5c6a60;        /* muted sage grey — 4.8:1 on the palest surface */
   --accent: #9cb289;          /* pastel sage, for fills and gradients */
@@ -13,9 +13,11 @@
      READ — the quote glyph, focus rings — uses this deeper sage instead. */
   --accent-ink: #6f8a5c;
 
-  /* Kept as channels too, so treatments can tint with the same gold at any alpha */
-  --gold-rgb: 201, 164, 76;
-  --gold: rgb(var(--gold-rgb));   /* antique gold, deep enough to read on light */
+  /* Baby blue carries the milestone treatment. Kept as channels too, so the veil,
+     the sketch and the chip can all tint with the same blue at any alpha. */
+  --blue-rgb: 140, 192, 220;
+  --blue: rgb(var(--blue-rgb));   /* baby blue */
+  --blue-ink: #2f6b8c;            /* deep enough to read as a line on light */
 
   /* Separators and lift, tinted with the text colour so they stay in the sage family
      instead of going grey. On a light ground these do the work the old dark theme got
@@ -28,6 +30,7 @@
   --gap: 16px;
   --tray-h: 76px;
   --maxw: 560px;
+  --band-h: 78px;   /* milestone header band; matches milestone-art.js's viewBox */
 }
 
 * { box-sizing: border-box; }
@@ -101,9 +104,9 @@ body {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--gold));
+  background: linear-gradient(135deg, var(--accent), var(--blue));
   color: #23301f;
-  box-shadow: 0 6px 20px rgba(var(--gold-rgb), 0.35);
+  box-shadow: 0 6px 20px rgba(var(--blue-rgb), 0.35);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }

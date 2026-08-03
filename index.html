@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/cards.css" />
   <link rel="stylesheet" href="css/compose.css" />
+  <link rel="stylesheet" href="css/scrubber.css" />
 </head>
 <body>
   <header class="app-header">
@@ -19,6 +20,14 @@
 
   <!-- Infinite-scroll sentinel observed by IntersectionObserver -->
   <div id="sentinel" class="sentinel" aria-hidden="true"></div>
+
+  <!-- Right-edge date scrubber. Hidden from assistive tech: it is a shortcut for
+       scrolling, and the timeline it duplicates is already in the reading order. -->
+  <div id="scrubber" class="scrubber" aria-hidden="true">
+    <div class="scrubber-ticks"></div>
+    <div class="scrubber-thumb"></div>
+    <div class="scrubber-bubble"></div>
+  </div>
 
   <nav class="bottom-tray" aria-label="Primary">
     <button id="noteBtn" type="button" class="tray-note" aria-label="Write a memory">

@@ -1,0 +1,105 @@
+/* Right-edge date scrubber. Idles invisible and fades in while scrolling, so it never
+   competes with the memory on screen. */
+
+.scrubber {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 72px);
+  right: 0;
+  bottom: calc(var(--tray-h) + env(safe-area-inset-bottom) + 16px);
+  width: 60px;
+  z-index: 8;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  /* Vertical drags belong to the scrubber, not the page, once one starts here */
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scrubber.is-active { opacity: 1; }
+
+.scrubber[hidden] { display: none; }
+
+/* The hairline the ticks hang off */
+.scrubber::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 13px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--hairline);
+}
+
+.scrubber-ticks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.scrubber-tick {
+  position: absolute;
+  right: 22px;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0.75;
+}
+
+/* Every tick also gets a dash on the rail itself */
+.scrubber-tick::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -13px;
+  width: 8px;
+  height: 2px;
+  border-radius: 1px;
+  transform: translateY(-50%);
+  background: var(--accent);
+}
+
+.scrubber-thumb {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--blue-ink);
+  box-shadow: 0 1px 4px rgba(46, 58, 48, 0.28);
+  /* The transform positions it; this keeps it centred on its own fraction */
+  margin-top: -6px;
+  will-change: transform;
+}
+
+.scrubber-bubble {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: var(--blue-ink);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  margin-top: -14px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* The bubble is only worth the space while you are actually dragging */
+.scrubber.is-dragging .scrubber-bubble { opacity: 1; }
+
+.scrubber.is-dragging .scrubber-thumb { transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scrubber { transition: none; }
+}

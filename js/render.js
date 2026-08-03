@@ -4,6 +4,7 @@
 
 import { inferLayout, isMilestone } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
+import { milestoneArt } from './milestone-art.js';
 
 function el(tag, className, props = {}) {
   const node = document.createElement(tag);
@@ -45,7 +46,7 @@ function singlePhotoFrame(photo) {
   // Drive aspect-ratio from intrinsic dimensions to reserve space (no reflow on load).
   frame.style.setProperty('--ar', `${photo.width} / ${photo.height}`);
   const img = photoEl(photo);
-  img.dataset.parallax = '';
+  img.dataset.parallax = 'y';
   frame.append(img);
   return frame;
 }
@@ -76,6 +77,16 @@ export function renderPost(post, birthDate) {
   if (isMilestone(post)) {
     card.classList.add('card--highlight');
     const title = post.milestone.title || 'Milestone';
+
+    // Header band: a hand-drawn sketch behind the chip, on every milestone layout.
+    // milestoneArt strips its input to [A-Z] before it reaches any <text>, so the
+    // generated markup carries no user-controlled characters.
+    const band = el('div', 'milestone-band');
+    band.setAttribute('aria-hidden', 'true');
+    band.innerHTML = milestoneArt(title);
+    band.firstElementChild.dataset.parallax = 'x'; // drifts sideways as it scrolls
+    card.append(band);
+
     card.append(el('span', 'milestone-badge', { textContent: title }));
   }
 

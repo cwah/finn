@@ -116,23 +116,47 @@
 /* ── Treatment: milestone highlight ────────────────────────────── */
 .card--highlight {
   position: relative;
-  box-shadow: 0 0 0 2px var(--gold), var(--shadow-lift);
+  box-shadow: 0 0 0 2px var(--blue), var(--shadow-lift);
 }
 
-/* The badge sits at the same 12px offset on every card, so it is never repositioned
-   for a quote card. A quote card just has no photo for it to float over, so the card
-   opens up its own top padding to give the meta row room to clear it — and washes that
-   top band in the milestone gold, which dissolves into the card's own gradient.
-   Both stops name the same gold so the fade stays warm instead of greying out. */
-.card--quote.card--highlight {
-  padding-top: 50px;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(var(--gold-rgb), 0.22),
-      rgba(var(--gold-rgb), 0) 104px
-    ),
-    linear-gradient(150deg, var(--surface-2), var(--surface));
+/* Every milestone card opens with a header band: a hand-drawn sketch washed in the
+   milestone blue, which dissolves into the card below it. Reserving the space with
+   padding rather than overlaying means the band works the same whether what follows
+   is a photo, a grid or a quote — the badge never has to move to accommodate it. */
+.card--highlight { padding-top: var(--band-h); }
+
+.milestone-band {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--band-h);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  /* Both stops name the same blue, so the fade stays in the palette rather than
+     greying out through transparent black. */
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--blue-rgb), 0.34),
+    rgba(var(--blue-rgb), 0)
+  );
+}
+
+.milestone-art {
+  position: absolute;
+  top: 0;
+  /* Oversized and inset on both sides so the parallax drift never exposes an edge */
+  left: -9%;
+  width: 118%;
+  height: 100%;
+  color: var(--blue-ink);
+  opacity: 0.42;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .milestone-art { transform: none !important; }
 }
 
 .milestone-badge {
@@ -145,8 +169,8 @@
   gap: 6px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: var(--gold);
-  color: #33280e;
+  background: var(--blue);
+  color: #12303f;
   font-size: 0.8rem;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(46, 58, 48, 0.18);

@@ -102,7 +102,7 @@
 .compose-toggle input[type="checkbox"] {
   width: 22px;
   height: 22px;
-  accent-color: var(--gold);
+  accent-color: var(--blue);
 }
 
 .compose-actions {
@@ -131,7 +131,7 @@
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--accent), var(--gold));
+  background: linear-gradient(135deg, var(--accent), var(--blue));
   color: #23301f;
 }
 
