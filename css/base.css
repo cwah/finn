@@ -5,7 +5,9 @@
   --text: #f3eef6;
   --text-dim: #b6a9c0;
   --accent: #e8a0bf;
-  --gold: #e6c478;
+  /* Kept as channels too, so treatments can tint with the same gold at any alpha */
+  --gold-rgb: 230, 196, 120;
+  --gold: rgb(var(--gold-rgb));
   --radius: 18px;
   --gap: 16px;
   --tray-h: 76px;

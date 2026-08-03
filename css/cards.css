@@ -118,8 +118,19 @@
 
 /* The badge sits at the same 12px offset on every card, so it is never repositioned
    for a quote card. A quote card just has no photo for it to float over, so the card
-   opens up its own top padding to give the meta row room to clear it. */
-.card--quote.card--highlight { padding-top: 50px; }
+   opens up its own top padding to give the meta row room to clear it — and washes that
+   top band in the milestone gold, which dissolves into the card's own gradient.
+   Both stops name the same gold so the fade stays warm instead of greying out. */
+.card--quote.card--highlight {
+  padding-top: 50px;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(var(--gold-rgb), 0.22),
+      rgba(var(--gold-rgb), 0) 104px
+    ),
+    linear-gradient(150deg, var(--surface-2), var(--surface));
+}
 
 .milestone-badge {
   position: absolute;
