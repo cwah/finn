@@ -116,9 +116,13 @@
   box-shadow: 0 0 0 2px var(--gold), 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* A quote card has no photo for the badge to float over, so it would land on top of
-   the meta row — open up the space it needs. */
-.card--quote.card--highlight { padding-top: 58px; }
+/* A quote card has no photo for the badge to float over: hovering it would crowd the
+   meta row and hang left of the inset text. The card's treatment is centred typography,
+   so the badge joins the flow and centres with everything else. */
+.card--quote.card--highlight .milestone-badge {
+  position: static;
+  margin-bottom: 20px;
+}
 
 .milestone-badge {
   position: absolute;
