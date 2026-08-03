@@ -17,6 +17,8 @@ Shipped when it lands. No ceremony beyond that.
 - [ ] **Parallax fade in//out of milestone art.**
 - [ ] **Suggested weekly prompts.** Generate suggestions and message user on a weekly basis to add to scrapbook; can be pregenerated with LLM
 - [ ] **Support video upload.**
+- [ ] **Support photo carousels.** If more than 4 images are uploaded, show them in a carousel instead of a grid.
+- [ ] **Image handling.** Support smart cropping or manual cropping of thumbnail images. Consider allowing the user to select which image is the main image for the post. Expand image to full aspect ratio when clicked on.
 
 ## Shipped
 

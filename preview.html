@@ -70,7 +70,7 @@
     import { inferLayout } from './js/layout-engine.js';
     import { ART_PRESETS, milestoneArtSvg } from './js/milestone-art.js';
 
-    const BIRTH = '2026-01-15';
+    const BIRTH = '2026-03-17';
     const timeline = document.getElementById('timeline');
 
     const photo = (seed, width, height) => ({
@@ -83,7 +83,7 @@
 
     const post = (fields) => ({
       id: Math.random().toString(36).slice(2),
-      createdAt: '2026-05-22T12:00:00Z',
+      createdAt: '2026-07-24T12:00:00Z',
       author: { id: 'u1', name: 'Mom' },
       caption: null,
       milestone: null,
@@ -94,60 +94,60 @@
     // One sample per rule in the engine, plus the milestone treatment on top of each.
     const samples = [
       ['Rule 1 · quote', post({
-        memoryDate: '2026-05-22',
+        memoryDate: '2026-07-24',
         caption: 'Every yawn, every coo — pure magic.',
       })],
       ['Rule 2 · portrait', post({
-        memoryDate: '2026-05-18',
+        memoryDate: '2026-07-20',
         caption: 'Tiny yawns.',
         photos: [photo('yawn', 900, 1200)],
         author: { id: 'u2', name: 'Dad' },
       })],
       ['Rule 3 · landscape', post({
-        memoryDate: '2026-05-10',
+        memoryDate: '2026-07-12',
         caption: 'Sunny afternoon at the park.',
         photos: [photo('parkday', 1200, 800)],
       })],
       ['Rule 3 · landscape (square photo)', post({
-        memoryDate: '2026-05-08',
+        memoryDate: '2026-07-10',
         caption: 'A square photo is landscape — the rule is width >= height.',
         photos: [photo('square', 800, 800)],
         author: { id: 'u2', name: 'Dad' },
       })],
       ['Rule 4 · grid of 2', post({
-        memoryDate: '2026-05-06',
+        memoryDate: '2026-07-08',
         photos: [photo('two1', 800, 800), photo('two2', 800, 800)],
       })],
       ['Rule 4 · grid of 3', post({
-        memoryDate: '2026-05-05',
+        memoryDate: '2026-07-07',
         caption: 'Three at a time — the first spans the full width.',
         photos: [photo('three1', 800, 800), photo('three2', 800, 800), photo('three3', 800, 800)],
         author: { id: 'u2', name: 'Dad' },
       })],
       ['Rule 4 · grid of 4', post({
-        memoryDate: '2026-05-04',
+        memoryDate: '2026-07-06',
         caption: 'Sunday morning at the park.',
         photos: [1, 2, 3, 4].map((n) => photo(`sun${n}`, 800, 800)),
       })],
       ['Rule 5 · milestone + portrait', post({
-        memoryDate: '2026-04-28',
+        memoryDate: '2026-06-30',
         caption: 'She did it — three wobbly steps to the couch.',
         milestone: { isMilestone: true, title: 'First steps' },
         photos: [photo('steps', 900, 1200)],
         author: { id: 'u2', name: 'Dad' },
       })],
       ['Rule 5 · milestone + grid', post({
-        memoryDate: '2026-03-30',
+        memoryDate: '2026-06-01',
         caption: 'That first real giggle. We melted.',
         milestone: { isMilestone: true, title: 'First laugh' },
         photos: [1, 2, 3].map((n) => photo(`laugh${n}`, 800, 800)),
       })],
       ['Rule 5 · milestone + quote', post({
-        memoryDate: '2026-01-15',
+        memoryDate: '2026-03-17',
         caption: 'Welcome to the world, little one.',
         milestone: { isMilestone: true, title: 'Day one' },
       })],
-      ['No photos, no caption · renders nothing', post({ memoryDate: '2026-01-20' })],
+      ['No photos, no caption · renders nothing', post({ memoryDate: '2026-03-22' })],
     ];
 
     for (const [label, sample] of samples) {

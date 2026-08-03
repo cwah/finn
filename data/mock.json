@@ -1,14 +1,14 @@
 {
   "config": {
     "babyName": "Baby Wah",
-    "birthDate": "2026-01-15",
+    "birthDate": "2026-03-17",
     "currentAuthor": { "id": "u1", "name": "Mom" }
   },
   "posts": [
     {
       "id": "p7",
-      "memoryDate": "2026-05-12",
-      "createdAt": "2026-05-12T18:20:00Z",
+      "memoryDate": "2026-07-14",
+      "createdAt": "2026-07-14T18:20:00Z",
       "author": { "id": "u1", "name": "Mom" },
       "caption": "First steps across the living room!",
       "milestone": { "isMilestone": true, "title": "First steps" },
@@ -18,8 +18,8 @@
     },
     {
       "id": "p6",
-      "memoryDate": "2026-05-04",
-      "createdAt": "2026-05-04T09:10:00Z",
+      "memoryDate": "2026-07-06",
+      "createdAt": "2026-07-06T09:10:00Z",
       "author": { "id": "u2", "name": "Dad" },
       "caption": "Sunday morning at the park.",
       "milestone": null,
@@ -32,8 +32,8 @@
     },
     {
       "id": "p5",
-      "memoryDate": "2026-04-28",
-      "createdAt": "2026-04-28T20:00:00Z",
+      "memoryDate": "2026-06-30",
+      "createdAt": "2026-06-30T20:00:00Z",
       "author": { "id": "u1", "name": "Mom" },
       "caption": "\"Every little thing you do is magic.\"",
       "milestone": null,
@@ -41,8 +41,8 @@
     },
     {
       "id": "p4",
-      "memoryDate": "2026-04-15",
-      "createdAt": "2026-04-15T12:00:00Z",
+      "memoryDate": "2026-06-17",
+      "createdAt": "2026-06-17T12:00:00Z",
       "author": { "id": "u2", "name": "Dad" },
       "caption": "Three months old today.",
       "milestone": null,
@@ -52,8 +52,8 @@
     },
     {
       "id": "p3",
-      "memoryDate": "2026-03-30",
-      "createdAt": "2026-03-30T15:45:00Z",
+      "memoryDate": "2026-06-01",
+      "createdAt": "2026-06-01T15:45:00Z",
       "author": { "id": "u1", "name": "Mom" },
       "caption": "That first real giggle. We melted.",
       "milestone": { "isMilestone": true, "title": "First laugh" },
@@ -65,8 +65,8 @@
     },
     {
       "id": "p2",
-      "memoryDate": "2026-02-20",
-      "createdAt": "2026-02-20T08:30:00Z",
+      "memoryDate": "2026-04-22",
+      "createdAt": "2026-04-22T08:30:00Z",
       "author": { "id": "u2", "name": "Dad" },
       "caption": "Tiny yawns.",
       "milestone": null,
@@ -76,8 +76,8 @@
     },
     {
       "id": "p1",
-      "memoryDate": "2026-01-15",
-      "createdAt": "2026-01-15T23:59:00Z",
+      "memoryDate": "2026-03-17",
+      "createdAt": "2026-03-17T23:59:00Z",
       "author": { "id": "u1", "name": "Mom" },
       "caption": "Welcome to the world, little one.",
       "milestone": { "isMilestone": true, "title": "Day one" },
