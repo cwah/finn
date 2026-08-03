@@ -117,11 +117,14 @@
 }
 
 /* A quote card has no photo for the badge to float over: hovering it would crowd the
-   meta row and hang left of the inset text. The card's treatment is centred typography,
-   so the badge joins the flow and centres with everything else. */
+   meta row below. The badge joins the flow on its own row instead, clear of the date.
+   Block-level so the card's `text-align: center` doesn't pull it in, and inset by the
+   same 16px the meta row uses so it lines up with the age stamp underneath it. */
 .card--quote.card--highlight .milestone-badge {
   position: static;
-  margin-bottom: 20px;
+  display: flex;
+  width: fit-content;
+  margin: 0 0 20px 16px;
 }
 
 .milestone-badge {
