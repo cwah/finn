@@ -187,12 +187,16 @@ tests. It has no dependencies and nothing bundles.
 
 ## Mobile / UX conventions
 
-- **Sticky bottom navigation tray** is the primary nav surface (thumb-reachable). It
-  carries two actions: capture a photo, and write a text-only memory (which the engine
-  turns into a quote card).
-- Capture uses native camera hardware: `<input type="file" accept="image/*" capture="environment">`.
-- Both actions land in the same **compose sheet** — caption, the date the moment actually
-  happened, and an optional milestone. It holds no layout controls, by design.
+- **A single floating `+`** at the bottom is the only way in (thumb-reachable). It has no
+  bar behind it — the tray is just a positioning strip with `pointer-events: none`, so it
+  cannot swallow taps meant for the timeline.
+- `+` opens the **compose sheet**: caption, the date the moment actually happened, an
+  optional milestone, and an *Add photos* control. It holds no layout controls, by design.
+- Photos are optional content inside that one flow, not a second door. Attach some and
+  the engine makes a photo card; attach none and a caption becomes a quote card. Adding
+  photos uses native camera hardware:
+  `<input type="file" accept="image/*" capture="environment">`, and appends to what is
+  already pending rather than starting over.
 - `memoryDate` is authored, not inferred from upload time, so a new memory can be
   backdated — the timeline inserts it in date order rather than always at the top.
 - A **date scrubber** rides the right edge (Google Photos style): month ticks you can

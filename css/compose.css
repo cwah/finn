@@ -56,6 +56,31 @@
   background: var(--surface-2);
 }
 
+/* Attaching photos is a step inside the sheet, not a separate way in */
+.compose-add-photos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  border: 1px dashed var(--hairline);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.compose-add-photos:active { transform: scale(0.99); }
+
+.compose-add-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  margin-top: -2px;
+}
+
 .compose-field {
   display: flex;
   flex-direction: column;

@@ -79,34 +79,33 @@ body {
 
 .sentinel { height: 1px; }
 
-/* Sticky bottom navigation tray — thumb-reachable primary surface */
+/* One floating action, thumb-reachable. No bar behind it: the tray is just a
+   full-width positioning strip, so it must not swallow taps meant for the timeline —
+   only the button itself takes pointer events. */
 .bottom-tray {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 18px);
   z-index: 10;
-  height: calc(var(--tray-h) + env(safe-area-inset-bottom));
-  padding-bottom: env(safe-area-inset-bottom);
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 26px;
-  background: rgba(var(--bg-rgb), 0.82);
-  backdrop-filter: saturate(140%) blur(14px);
-  -webkit-backdrop-filter: saturate(140%) blur(14px);
-  border-top: 1px solid var(--hairline);
+  pointer-events: none;
 }
 
 .tray-capture {
+  pointer-events: auto;
   display: grid;
   place-items: center;
-  width: 60px;
-  height: 60px;
+  width: 62px;
+  height: 62px;
+  padding: 0;
+  border: none;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent), var(--blue));
   color: #23301f;
-  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.4);
+  /* Carries its own lift now that no bar separates it from the timeline */
+  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.45), 0 2px 6px rgba(46, 58, 48, 0.16);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -118,28 +117,6 @@ body {
   font-weight: 600;
   line-height: 1;
   margin-top: -2px;
-}
-
-/* Secondary action: a text-only memory, which the engine renders as a quote card */
-.tray-note {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: 1px solid var(--hairline);
-  border-radius: 50%;
-  background: var(--surface-2);
-  color: var(--text-dim);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.tray-note:active { transform: scale(0.94); }
-
-.tray-note-icon {
-  font-size: 1.25rem;
-  line-height: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {

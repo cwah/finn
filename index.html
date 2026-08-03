@@ -30,13 +30,9 @@
   </div>
 
   <nav class="bottom-tray" aria-label="Primary">
-    <button id="noteBtn" type="button" class="tray-note" aria-label="Write a memory">
-      <span class="tray-note-icon" aria-hidden="true">&#9998;</span>
-    </button>
-    <label class="tray-capture" aria-label="Capture a memory">
-      <input id="capture" type="file" accept="image/*" capture="environment" multiple hidden />
+    <button id="composeBtn" type="button" class="tray-capture" aria-label="Add a memory">
       <span class="tray-capture-icon" aria-hidden="true">+</span>
-    </label>
+    </button>
   </nav>
 
   <!-- Compose sheet: the only place a post is authored. Note there is no layout
@@ -44,6 +40,14 @@
   <dialog id="compose" class="compose" aria-label="New memory">
     <form id="composeForm" class="compose-form">
       <div id="composePhotos" class="compose-photos" hidden></div>
+
+      <!-- Photos are optional content inside the one flow, not a separate entry point.
+           The label wraps the input so the native camera/picker opens on tap. -->
+      <label class="compose-add-photos">
+        <input id="capture" type="file" accept="image/*" capture="environment" multiple hidden />
+        <span class="compose-add-icon" aria-hidden="true">+</span>
+        <span id="composeAddLabel">Add photos</span>
+      </label>
 
       <label class="compose-field">
         <span class="compose-label">Caption</span>

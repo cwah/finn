@@ -13,9 +13,15 @@ Shipped when it lands. No ceremony beyond that.
       per preset (balloons, cake, blocks, donuts, dinosaur, lemons). The preset name is
       already the contract — see the milestone sketch section in `CLAUDE.md` for the
       one-line swap point.
+- [ ] **Telegram bot access.** Allow users to upload and add new posts via Telegram bot.
+- [ ] **Parallax fade in//out of milestone art.**
+- [ ] **Suggested weekly prompts.** Generate suggestions and message user on a weekly basis to add to scrapbook; can be pregenerated with LLM
+- [ ] **Support video upload.**
 
 ## Shipped
 
+- [x] Single entrypoint — one floating `+` opens the compose sheet; photos are attached
+      from inside it. Replaced the two-button tray, and the bottom bar is gone with it.
 - [x] Compose sheet — caption, memory date, and an optional milestone on capture.
 - [x] Milestone sketches beside the card, alternating sides, fading on scroll.
 - [x] Right-edge date scrubber, Google Photos style.

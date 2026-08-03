@@ -1,11 +1,12 @@
-// Capture flow. Two entry points from the bottom tray:
-//   • the camera button — native hardware capture
-//     (<input type="file" accept="image/*" capture="environment">)
-//   • the note button — a text-only memory, which the engine turns into a quote card
+// Capture flow. ONE entry point: the floating + opens the compose sheet, and photos are
+// attached from inside it via the native camera/picker
+// (<input type="file" accept="image/*" capture="environment">).
 //
-// Either way the chosen content lands in the same compose sheet, where a parent adds
-// the caption, the date the moment actually happened, and an optional milestone. The
-// sheet is the ONLY place a post is authored — there are no layout choices in it,
+// That keeps a single door for every kind of memory — attach photos or don't, and the
+// engine decides what the post becomes. A sheet saved with no photos and a caption
+// lands as a quote card; there is no separate "write a note" button to choose first.
+//
+// The sheet is the ONLY place a post is authored, and it holds no layout choices,
 // because the engine decides layout from the content alone.
 //
 // Phase 1 has no backend, so saving builds an in-memory post and hands it back via a
@@ -47,7 +48,8 @@ function measure(file) {
  */
 export function initCapture({ author }, onCapture) {
   const input = document.getElementById('capture');
-  const noteBtn = document.getElementById('noteBtn');
+  const composeBtn = document.getElementById('composeBtn');
+  const addLabel = document.getElementById('composeAddLabel');
   const sheet = document.getElementById('compose');
   const form = document.getElementById('composeForm');
   const thumbs = document.getElementById('composePhotos');
@@ -70,10 +72,9 @@ export function initCapture({ author }, onCapture) {
     saveBtn.disabled = pending.length === 0 && caption.value.trim() === '';
   }
 
-  function open(photos) {
-    pending = photos;
+  function renderThumbs() {
     thumbs.replaceChildren(
-      ...photos.map((p) => {
+      ...pending.map((p) => {
         const img = new Image();
         img.className = 'compose-thumb';
         img.src = p.url;
@@ -81,7 +82,13 @@ export function initCapture({ author }, onCapture) {
         return img;
       }),
     );
-    thumbs.hidden = photos.length === 0;
+    thumbs.hidden = pending.length === 0;
+    addLabel.textContent = pending.length ? 'Add more photos' : 'Add photos';
+  }
+
+  function open() {
+    releasePending();
+    renderThumbs();
     caption.value = '';
     date.value = todayISO();
     date.max = todayISO(); // a memory can't have happened tomorrow
@@ -90,7 +97,7 @@ export function initCapture({ author }, onCapture) {
     milestoneTitle.hidden = true;
     syncSaveState();
     sheet.showModal();
-    if (photos.length === 0) caption.focus();
+    caption.focus();
   }
 
   function close() {
@@ -98,25 +105,29 @@ export function initCapture({ author }, onCapture) {
     if (sheet.open) sheet.close();
   }
 
-  // ── Entry points ─────────────────────────────────────────────────
+  // ── The single entry point ───────────────────────────────────────
+  composeBtn.addEventListener('click', () => open());
+
+  // Photos arrive from inside the open sheet, so they ADD to what is already pending
+  // rather than starting a new post.
   input.addEventListener('change', async () => {
     const files = Array.from(input.files || []);
-    input.value = ''; // allow re-capturing the same file
+    input.value = ''; // allow re-picking the same file
     if (!files.length) return;
     try {
-      const photos = await Promise.all(
+      const added = await Promise.all(
         files.map(async (f, i) => {
           const { url, width, height } = await measure(f);
           return { id: `local-${Date.now()}-${i}`, url, width, height, alt: null };
         }),
       );
-      open(photos);
+      pending = pending.concat(added);
+      renderThumbs();
+      syncSaveState();
     } catch (err) {
       console.error(err);
     }
   });
-
-  noteBtn.addEventListener('click', () => open([]));
 
   // ── Sheet interactions ───────────────────────────────────────────
   caption.addEventListener('input', syncSaveState);
