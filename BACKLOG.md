@@ -22,6 +22,8 @@ Shipped when it lands. No ceremony beyond that.
 
 ## Shipped
 
+- [x] Phase 2 — PocketBase: schema in `pb_migrations/`, one account per parent, photo
+      upload to local disk, and a data layer that still swaps back to mock with one line.
 - [x] Single entrypoint — one floating `+` opens the compose sheet; photos are attached
       from inside it. Replaced the two-button tray, and the bottom bar is gone with it.
 - [x] Compose sheet — caption, memory date, and an optional milestone on capture.

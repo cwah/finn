@@ -32,16 +32,31 @@ use and battery-friendly performance over feature breadth.
 
 ## Build phases
 
-**Phase 1 — Frontend-first (current).** Build the full UI against a static local
-`data/mock.json` file matching the contract below. No backend yet. This is the fastest
-path to a working app on a phone.
+**Phase 1 — Frontend-first (done).** Full UI against a static local `data/mock.json`.
+Still selectable: `SOURCE = 'mock'` in `js/data.js` runs the whole app with no backend.
 
-**Phase 2 — PocketBase.** Stand up PocketBase, define collections mirroring the JSON
-contract, wire auth (two accounts) and photo upload (local filesystem). Frontend swaps
-its data source from `mock.json` to the PocketBase REST API — the JSON shape stays the same.
+**Phase 2 — PocketBase (current).** Collections mirroring the JSON contract, auth (one
+account per parent) and photo upload to the local filesystem. Schema lives in
+`pb_migrations/` and is applied on startup, so it is version-controlled rather than
+clicked together in the admin UI. See `README.md` to run it.
 
 **Phase 3 — Production.** Photo optimization/compression pipeline + cloud bucket storage.
 Deploy.
+
+### The data layer
+
+`js/data.js` is a switchboard between two interchangeable modules, both exporting the
+same five functions — `requireSession`, `signIn`, `signOut`, `getConfig`, `getPosts`,
+`createPost`:
+
+- `data-mock.js` — static JSON, no accounts.
+- `data-pb.js` — PocketBase. **The only module that knows what a PocketBase record looks
+  like.** It translates records into the JSON contract below; nothing backend-specific
+  escapes it. `pb.js` underneath is a hand-rolled REST client (no SDK — no bundler, no
+  dependencies).
+
+Keep the two in step. Everything above them — engine, renderer, timeline, capture, auth
+UI — consumes the contract and must stay backend-agnostic.
 
 > **Keep the frontend backend-agnostic.** It consumes the JSON contract below and nothing
 > else. Phase 1 and Phase 2 differ only in the data-fetch layer.
@@ -159,9 +174,14 @@ moves it.
   cards.css              # the four card layouts + milestone treatment
   compose.css            # the compose sheet
   scrubber.css           # right-edge date scrubber
+  auth.css               # sign-in gate
 /js/
   app.js                 # bootstrap, routing, infinite-scroll controller
-  data.js                # data source (Phase 1: fetch mock.json; Phase 2: PocketBase)
+  data.js                # switchboard: picks the data source
+  data-mock.js           # Phase 1 source — static mock.json
+  data-pb.js             # Phase 2 source — PocketBase records -> the contract
+  pb.js                  # minimal PocketBase REST client (auth, list, create)
+  auth.js                # sign-in gate
   layout-engine.js       # pure post -> layoutType (the core engine)
   render.js              # build DOM for each layout type
   age.js                 # birthDate + memoryDate -> age stamp
