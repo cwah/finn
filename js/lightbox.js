@@ -34,12 +34,32 @@ function ensureBox() {
 let group = [];  // the photos of the post that was opened
 let index = 0;
 
+/** Back to fit-the-screen. Called on open, on paging, and on zooming out. */
+function resetZoom(box) {
+  const stage = box.querySelector('.lightbox-stage');
+  stage.classList.remove('is-zoomed');
+  stage.scrollTo(0, 0);
+}
+
+/**
+ * Zoom only earns its cursor when the photo is actually being shown smaller than it is.
+ * A snapshot that already fits at 1:1 has nothing to zoom to.
+ */
+function syncZoomAffordance(box) {
+  const img = box.querySelector('.lightbox-img');
+  const shown = img.getBoundingClientRect();
+  const downscaled = img.naturalWidth > Math.ceil(shown.width) + 1;
+  img.classList.toggle('can-zoom', downscaled);
+}
+
 function render() {
   const box = document.getElementById('lightbox');
   const photo = group[index];
   if (!photo) return;
 
   const img = box.querySelector('.lightbox-img');
+  resetZoom(box);
+  img.classList.remove('can-zoom');
   img.src = photo.url;
   img.width = photo.width;
   img.height = photo.height;
@@ -92,6 +112,35 @@ export function initLightbox(timeline) {
   box.querySelector('.lightbox-next').addEventListener('click', () => step(1));
   box.querySelector('.lightbox-close').addEventListener('click', () => box.close());
 
+  const stage = box.querySelector('.lightbox-stage');
+  const img = box.querySelector('.lightbox-img');
+
+  // Once it loads we know its natural size, so we know whether zoom is worth offering.
+  img.addEventListener('load', () => syncZoomAffordance(box));
+  window.addEventListener('resize', () => { if (box.open) syncZoomAffordance(box); }, { passive: true });
+
+  // Tap the photo to swap between fit-to-screen and true size.
+  img.addEventListener('click', (e) => {
+    e.stopPropagation(); // a tap on the photo must not reach the close-on-backdrop handler
+    const zoomed = stage.classList.contains('is-zoomed');
+    if (zoomed) {
+      resetZoom(box);
+      return;
+    }
+    if (!img.classList.contains('can-zoom')) return;
+
+    // Zoom toward the point that was tapped, so the detail you aimed at stays put
+    // instead of the view jumping to the middle of the photo.
+    const before = img.getBoundingClientRect();
+    const fx = (e.clientX - before.left) / before.width;
+    const fy = (e.clientY - before.top) / before.height;
+    stage.classList.add('is-zoomed');
+    stage.scrollTo({
+      left: fx * img.naturalWidth - stage.clientWidth / 2,
+      top: fy * img.naturalHeight - stage.clientHeight / 2,
+    });
+  });
+
   // Clicking the backdrop — anywhere that is not the image or a control — closes it.
   box.addEventListener('click', (e) => {
     if (e.target === box || e.target.classList.contains('lightbox-stage')) box.close();
@@ -103,9 +152,12 @@ export function initLightbox(timeline) {
     // ESC is handled natively by <dialog>.
   });
 
-  // Swipe between photos on a touch screen.
+  // Swipe between photos on a touch screen — but not while zoomed, where a horizontal
+  // drag is panning the photo rather than asking for the next one.
   let startX = null;
-  box.addEventListener('pointerdown', (e) => { startX = e.clientX; });
+  box.addEventListener('pointerdown', (e) => {
+    startX = stage.classList.contains('is-zoomed') ? null : e.clientX;
+  });
   box.addEventListener('pointerup', (e) => {
     if (startX === null) return;
     const dx = e.clientX - startX;
@@ -115,6 +167,7 @@ export function initLightbox(timeline) {
 
   // Drop the big image on close so it is not held in memory behind the scenes.
   box.addEventListener('close', () => {
+    resetZoom(box);
     box.querySelector('.lightbox-img').removeAttribute('src');
     group = [];
   });

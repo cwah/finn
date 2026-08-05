@@ -143,9 +143,17 @@ were cropped before the feature existed, so old records need no migration.
 - The **first photo leads** a post. "Make main photo" in the editor is a reorder, so the
   choice travels as plain photo order — the renderer, the contract and the backend all
   already treat position 0 as the lead.
-- `lightbox.js` opens any photo full-size at its true aspect ratio — `contain`, never
-  `cover`. It builds its own markup so there is no second copy in `index.html` to drift,
-  and the preview bench gets it for free.
+- `lightbox.js` opens any photo at its true aspect ratio, **fitted to the screen** by
+  default; tapping it zooms to natural pixels and the stage becomes a pannable window.
+  Zoom is only offered when the photo is actually being shown smaller than it is. It
+  builds its own markup so there is no second copy in `index.html` to drift, and the
+  preview bench gets it for free.
+  - The stage is **flex, not grid**. A percentage `max-height` on a grid item resolves
+    against its grid *area*, which is auto-sized by the item — circular, so the cap is
+    silently ignored and tall photos overflow the screen. Flex with a definite height
+    gives the image something real to measure against.
+  - Only the stage scrolls; the controls and counter are `position: fixed` so nothing
+    shifts with the photo's shape or while panning.
 - Carousels scroll with native CSS scroll-snap; `carousel.js` only lights the right dot,
   via an observer rooted on the track rather than a scroll listener.
 - **Slide shape comes from the photos**, via `carouselAspect()` in the engine. Every slide
