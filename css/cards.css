@@ -54,6 +54,12 @@
   font-size: 0.95rem;
 }
 
+/* The caption normally supplies the card's bottom padding. Without one the meta row is
+   the last thing in the card and would sit flush against the edge, so it takes over. */
+.card:not(.card--quote):not(:has(.card-caption)) .card-meta {
+  padding-bottom: 16px;
+}
+
 /* Reserve space from intrinsic dimensions to prevent reflow on load */
 .card-photo {
   display: block;
@@ -116,7 +122,8 @@
 
 .carousel-slide {
   flex: 0 0 100%;
-  aspect-ratio: 4 / 3;
+  /* Set per carousel from the photos it holds — see carouselAspect in layout-engine.js */
+  aspect-ratio: var(--slide-ar, 4 / 3);
   scroll-snap-align: center;
   overflow: hidden;
 }

@@ -148,6 +148,13 @@ were cropped before the feature existed, so old records need no migration.
   and the preview bench gets it for free.
 - Carousels scroll with native CSS scroll-snap; `carousel.js` only lights the right dot,
   via an observer rooted on the track rather than a scroll listener.
+- **Slide shape comes from the photos**, via `carouselAspect()` in the engine. Every slide
+  must share a shape or the card's height jumps mid-swipe, but a *fixed* shape throws away
+  46% of a tall portrait. The set takes the median aspect instead — matching exactly when
+  the orientations agree, landing between them when they don't — clamped to 3:4–3:2 so one
+  panorama can't drag the strip.
+- A card's bottom padding comes from its caption. Cards without one give it to the meta
+  row instead; watch for that if you add another trailing element.
 
 ### Milestone sketch
 

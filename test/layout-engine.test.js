@@ -6,7 +6,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { inferLayout, isMilestone, GRID_MAX } from '../js/layout-engine.js';
+import { inferLayout, isMilestone, GRID_MAX, carouselAspect } from '../js/layout-engine.js';
 
 /** A photo is only ever consulted for its stored dimensions. */
 const photo = (width, height) => ({ id: 'x', url: 'x.jpg', width, height, alt: null });
@@ -72,6 +72,57 @@ test('milestone is false for ordinary posts', () => {
 test('a missing photos array is treated as no photos', () => {
   assert.equal(inferLayout({ caption: 'hi' }), 'quote');
   assert.equal(inferLayout({}), null);
+});
+
+test('a carousel of one orientation takes exactly that shape', () => {
+  assert.equal(carouselAspect([photo(1200, 900), photo(1200, 900)]), 1.33);
+  assert.equal(carouselAspect([photo(900, 1200), photo(900, 1200)]), 0.75);
+  assert.equal(carouselAspect([photo(800, 800), photo(800, 800)]), 1);
+});
+
+test('a mixed carousel lands between the orientations, not on one of them', () => {
+  const ar = carouselAspect([
+    photo(1200, 800),  // 1.5
+    photo(900, 1200),  // 0.75
+    photo(800, 800),   // 1.0
+    photo(1200, 900),  // 1.33
+    photo(1000, 1400), // 0.71
+  ]);
+  assert.equal(ar, 1, 'median of the five aspects');
+  // The point of the exercise: no photo loses more than a third of itself.
+  for (const [w, h] of [[1200, 800], [900, 1200], [800, 800], [1200, 900], [1000, 1400]]) {
+    const a = w / h;
+    const kept = a > ar ? ar / a : a / ar;
+    assert.ok(kept >= 0.66, `${w}x${h} kept only ${kept.toFixed(2)}`);
+  }
+});
+
+test('one extreme photo cannot drag the whole strip to its shape', () => {
+  const withPanorama = carouselAspect([
+    photo(4000, 800), photo(1200, 900), photo(1200, 900), photo(1200, 900),
+  ]);
+  assert.ok(withPanorama <= 1.5, `panorama pulled the strip to ${withPanorama}`);
+  const withTower = carouselAspect([
+    photo(600, 2400), photo(1200, 900), photo(1200, 900), photo(1200, 900),
+  ]);
+  assert.ok(withTower >= 0.75, `tall photo pulled the strip to ${withTower}`);
+});
+
+test('carousel aspect stays inside 3:4 and 3:2 whatever it is fed', () => {
+  const cases = [
+    [photo(5000, 500)], [photo(500, 5000)], [photo(1, 1)],
+    [photo(1200, 800), photo(500, 5000)],
+  ];
+  for (const photos of cases) {
+    const ar = carouselAspect(photos);
+    assert.ok(ar >= 0.75 && ar <= 1.5, `${JSON.stringify(photos)} -> ${ar}`);
+  }
+});
+
+test('carousel aspect degrades to 4:3 on unusable input', () => {
+  assert.equal(carouselAspect([]), 4 / 3);
+  assert.equal(carouselAspect(null), 4 / 3);
+  assert.equal(carouselAspect([{ width: 0, height: 0 }]), 4 / 3);
 });
 
 test('the engine is pure — it does not mutate the post it is given', () => {

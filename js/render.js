@@ -2,7 +2,7 @@
 // the matching markup. When adding a layout type, update layout-engine.js, this file,
 // and css/cards.css together.
 
-import { inferLayout, isMilestone, GRID_MAX } from './layout-engine.js';
+import { inferLayout, isMilestone, GRID_MAX, carouselAspect } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { artPreset, milestoneArtSvg } from './milestone-art.js';
 
@@ -83,6 +83,9 @@ function gridPhotos(photos, group) {
  */
 function carouselPhotos(photos, group) {
   const wrap = el('div', 'carousel');
+  // One shape for every slide, chosen from the set — see carouselAspect. A fixed shape
+  // would cut nearly half off any portrait in a mixed post.
+  wrap.style.setProperty('--slide-ar', carouselAspect(photos));
 
   const track = el('div', 'carousel-track');
   photos.forEach((p) => {
