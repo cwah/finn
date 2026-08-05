@@ -97,6 +97,62 @@
 .grid-cell { aspect-ratio: 1 / 1; overflow: hidden; }
 .grid-cell .card-photo { width: 100%; height: 100%; object-fit: cover; }
 
+/* ── Layout: carousel (5+ photos) ──────────────────────────────── */
+/* Native CSS scroll-snap does the scrolling — no JS per frame, and momentum feels
+   right on a phone in a way a scripted carousel never quite does. */
+.card--carousel .carousel { position: relative; }
+
+.carousel-track {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain; /* swiping the strip must not drag the page sideways */
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-slide {
+  flex: 0 0 100%;
+  aspect-ratio: 4 / 3;
+  scroll-snap-align: center;
+  overflow: hidden;
+}
+
+.carousel-slide .card-photo { width: 100%; height: 100%; object-fit: cover; }
+
+.carousel-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(251, 252, 249, 0.55);
+  box-shadow: 0 1px 2px rgba(46, 58, 48, 0.35);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.carousel-dot.is-active {
+  background: #fbfcf9;
+  transform: scale(1.45);
+}
+
+/* Photos open full-size on tap; say so with the cursor on a pointer device */
+@media (hover: hover) {
+  .card-photo[data-full] { cursor: zoom-in; }
+}
+
 /* ── Layout: quote (text-only) ─────────────────────────────────── */
 .card--quote {
   background: linear-gradient(150deg, var(--surface-2), var(--surface));

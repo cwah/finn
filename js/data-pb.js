@@ -68,6 +68,10 @@ function toPhoto(rec) {
     width: rec.width,
     height: rec.height,
     alt: rec.alt || null,
+    // Photos saved before focal points existed have none; the renderer treats a missing
+    // focal point as dead centre, which is exactly how they used to be cropped.
+    focalX: rec.focalX ?? null,
+    focalY: rec.focalY ?? null,
   };
 }
 
@@ -145,7 +149,11 @@ export async function createPost(draft, author) {
     form.append('image', photo.file);
     form.append('width', String(photo.width));
     form.append('height', String(photo.height));
+    // Position in the draft IS the order: index 0 leads the post, which is what the
+    // compose sheet's "make main" reorders into place.
     form.append('sort', String(i));
+    if (photo.focalX != null) form.append('focalX', String(photo.focalX));
+    if (photo.focalY != null) form.append('focalY', String(photo.focalY));
     try {
       saved.push(toPhoto(await pb.create('photos', form)));
     } catch (err) {

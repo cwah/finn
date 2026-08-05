@@ -114,14 +114,40 @@ with **no user input and no override**. Rules, in order:
    no card and the timeline skips the post rather than emitting an empty one.
 2. **1 photo, height > width** → `portrait` (tall) card.
 3. **1 photo, width >= height** → `landscape` (wide) card.
-4. **2–4 photos** → `grid` (CSS Grid, count-aware).
-5. **Any post with `milestone.isMilestone`** → wrap the above in the `highlight` treatment.
+4. **2–4 photos** (`GRID_MAX`) → `grid` (CSS Grid, count-aware). The first photo leads:
+   it fills the wide cell in a three-photo grid.
+5. **More than 4 photos** → `carousel`. A five-cell grid has no arrangement that reads
+   well, and shrinking each photo further defeats the point of taking them.
+6. **Any post with `milestone.isMilestone`** → wrap the above in the `highlight` treatment.
 
 Orientation is decided from stored `width`/`height`, never by loading the image. Keep this
 function pure and unit-testable — it's the heart of the product.
 
 `preview.html` is the visual bench: it renders one sample per rule through the real
 engine and the real stylesheets. Add a sample there whenever you add a layout type.
+
+### Photos
+
+**Cropping is framing, never destruction.** Cards crop to keep the timeline calm, but
+the stored file is always the untouched original. Each photo carries a focal point
+(`focalX`/`focalY`, 0–1) that the renderer feeds to `object-position`, so a cover crop
+keeps the subject. A missing focal point means dead centre — which is exactly how photos
+were cropped before the feature existed, so old records need no migration.
+
+- `smart-crop.js` picks the focal point at capture from the image's own content: local
+  contrast, energy-weighted centroid, with a pull toward the middle and a clamp away from
+  the edges so noise cannot yank the framing. `focalFromLuma()` is pure and tested; the
+  canvas wrapper around it is not. Any failure degrades to dead centre, never an error.
+- `photo-editor.js` is the correction when the guess is wrong — drag the focal point,
+  previewed in a **square**, because the square grid cell is the crop that actually bites.
+- The **first photo leads** a post. "Make main photo" in the editor is a reorder, so the
+  choice travels as plain photo order — the renderer, the contract and the backend all
+  already treat position 0 as the lead.
+- `lightbox.js` opens any photo full-size at its true aspect ratio — `contain`, never
+  `cover`. It builds its own markup so there is no second copy in `index.html` to drift,
+  and the preview bench gets it for free.
+- Carousels scroll with native CSS scroll-snap; `carousel.js` only lights the right dot,
+  via an observer rooted on the track rather than a scroll listener.
 
 ### Milestone sketch
 
@@ -186,7 +212,11 @@ moves it.
   render.js              # build DOM for each layout type
   age.js                 # birthDate + memoryDate -> age stamp
   milestone-art.js       # pure title -> hand-drawn SVG sketch
-  capture.js             # bottom-nav capture + compose flow
+  smart-crop.js          # pure luma -> focal point, + canvas wrapper
+  photo-editor.js        # drag the focal point / promote a photo to lead
+  lightbox.js            # full-size viewer (owns its own markup)
+  carousel.js            # active-dot tracking for 5+ photo posts
+  capture.js             # capture + compose flow
   scrubber.js            # right-edge date scrubber
 /data/mock.json          # Phase 1 sample data (matches contract above)
 /test/                   # node:test specs for the pure modules

@@ -68,6 +68,8 @@ export async function createPost(draft, author) {
       width: p.width,
       height: p.height,
       alt: null,
+      focalX: p.focalX ?? null,
+      focalY: p.focalY ?? null,
     })),
   };
 }

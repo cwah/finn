@@ -2,7 +2,7 @@
 // the matching markup. When adding a layout type, update layout-engine.js, this file,
 // and css/cards.css together.
 
-import { inferLayout, isMilestone } from './layout-engine.js';
+import { inferLayout, isMilestone, GRID_MAX } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { artPreset, milestoneArtSvg } from './milestone-art.js';
 
@@ -14,7 +14,7 @@ function el(tag, className, props = {}) {
 }
 
 function photoEl(photo) {
-  return el('img', 'card-photo', {
+  const img = el('img', 'card-photo', {
     src: photo.url,
     alt: photo.alt || '',
     loading: 'lazy',
@@ -22,6 +22,21 @@ function photoEl(photo) {
     width: photo.width,
     height: photo.height,
   });
+  // Where a cover crop should be centred. Absent focal point means dead centre, which
+  // is what the browser does anyway.
+  if (photo.focalX != null && photo.focalY != null) {
+    img.style.objectPosition = `${photo.focalX * 100}% ${photo.focalY * 100}%`;
+  }
+  return img;
+}
+
+/** Make a photo openable full-size. The lightbox reads these off the clicked element. */
+function makeViewable(img, photo, group) {
+  img.dataset.full = photo.url;
+  img.dataset.fullW = photo.width;
+  img.dataset.fullH = photo.height;
+  img.dataset.group = group;
+  return img;
 }
 
 /**
@@ -41,23 +56,46 @@ function metaEl(post, birthDate, { withAuthor = true } = {}) {
   return meta;
 }
 
-function singlePhotoFrame(photo) {
+function singlePhotoFrame(photo, group) {
   const frame = el('div', 'photo-frame');
   // Drive aspect-ratio from intrinsic dimensions to reserve space (no reflow on load).
   frame.style.setProperty('--ar', `${photo.width} / ${photo.height}`);
   const img = photoEl(photo);
   img.dataset.parallax = 'y';
-  frame.append(img);
+  frame.append(makeViewable(img, photo, group));
   return frame;
 }
 
-function gridPhotos(photos) {
+function gridPhotos(photos, group) {
   const wrap = el('div', 'grid-photos');
-  photos.slice(0, 4).forEach((p) => {
+  photos.slice(0, GRID_MAX).forEach((p) => {
     const cell = el('div', 'grid-cell');
-    cell.append(photoEl(p));
+    cell.append(makeViewable(photoEl(p), p, group));
     wrap.append(cell);
   });
+  return wrap;
+}
+
+/**
+ * Horizontal, scroll-snapped strip for posts with more photos than a grid can hold.
+ * The scrolling is native CSS scroll-snap — no JS drives it, so it costs nothing per
+ * frame and keeps momentum feeling right on a phone.
+ */
+function carouselPhotos(photos, group) {
+  const wrap = el('div', 'carousel');
+
+  const track = el('div', 'carousel-track');
+  photos.forEach((p) => {
+    const slide = el('div', 'carousel-slide');
+    slide.append(makeViewable(photoEl(p), p, group));
+    track.append(slide);
+  });
+
+  const dots = el('div', 'carousel-dots');
+  dots.setAttribute('aria-hidden', 'true');
+  photos.forEach(() => dots.append(el('span', 'carousel-dot')));
+
+  wrap.append(track, dots);
   return wrap;
 }
 
@@ -82,12 +120,17 @@ function buildCard(post, birthDate, type) {
     return card;
   }
 
+  // Every photo on one post shares a group id, so opening one lets you page the rest.
+  const group = post.id;
+
   if (type === 'grid') {
-    card.classList.add(`count-${Math.min(post.photos.length, 4)}`);
-    card.append(gridPhotos(post.photos));
+    card.classList.add(`count-${Math.min(post.photos.length, GRID_MAX)}`);
+    card.append(gridPhotos(post.photos, group));
+  } else if (type === 'carousel') {
+    card.append(carouselPhotos(post.photos, group));
   } else {
     // portrait | landscape
-    card.append(singlePhotoFrame(post.photos[0]));
+    card.append(singlePhotoFrame(post.photos[0], group));
   }
 
   card.append(metaEl(post, birthDate));

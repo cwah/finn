@@ -7,6 +7,8 @@ import { ageStamp } from './age.js';
 import { initCapture } from './capture.js';
 import { initScrubber } from './scrubber.js';
 import { ensureSignedIn, initSignOut } from './auth.js';
+import { initLightbox } from './lightbox.js';
+import { initCarousels } from './carousel.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -86,6 +88,7 @@ function mountCard(card) {
   revealObserver.observe(card);
   card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
   if (card.classList.contains('milestone-scene')) artObserver.observe(card);
+  initCarousels(card);
 }
 
 async function loadMore() {
@@ -127,6 +130,7 @@ function insertPost(post) {
   card.classList.add('is-visible'); // skip the reveal animation for fresh captures
   card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
   if (card.classList.contains('milestone-scene')) artObserver.observe(card);
+  initCarousels(card);
   card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   restripeMilestones(); // a milestone inserted mid-timeline flips every side below it
   scrubber.refresh();
@@ -141,6 +145,8 @@ async function init() {
   birthDate = config.birthDate;
   document.getElementById('babyName').textContent = config.babyName;
   document.getElementById('babyAge').textContent = ageStamp(birthDate, new Date().toISOString());
+
+  initLightbox(timeline);
 
   await loadMore();
   pageObserver.observe(sentinel);

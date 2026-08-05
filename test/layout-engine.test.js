@@ -6,7 +6,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { inferLayout, isMilestone } from '../js/layout-engine.js';
+import { inferLayout, isMilestone, GRID_MAX } from '../js/layout-engine.js';
 
 /** A photo is only ever consulted for its stored dimensions. */
 const photo = (width, height) => ({ id: 'x', url: 'x.jpg', width, height, alt: null });
@@ -40,8 +40,17 @@ test('rule 4 — two to four photos is a grid', () => {
   }
 });
 
-test('rule 4 — more than four photos is still a grid (the renderer caps at four)', () => {
-  assert.equal(inferLayout({ photos: Array.from({ length: 7 }, () => photo(800, 800)) }), 'grid');
+test('rule 5 — more than four photos becomes a carousel, not a cramped grid', () => {
+  for (const count of [5, 7, 20]) {
+    const photos = Array.from({ length: count }, () => photo(800, 800));
+    assert.equal(inferLayout({ photos }), 'carousel', `${count} photos`);
+  }
+});
+
+test('the grid/carousel boundary sits exactly at GRID_MAX', () => {
+  const make = (n) => ({ photos: Array.from({ length: n }, () => photo(800, 800)) });
+  assert.equal(inferLayout(make(GRID_MAX)), 'grid');
+  assert.equal(inferLayout(make(GRID_MAX + 1)), 'carousel');
 });
 
 test('a caption never overrides a photo layout', () => {

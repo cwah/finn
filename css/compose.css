@@ -47,13 +47,116 @@
 
 .compose-photos::-webkit-scrollbar { display: none; }
 
+/* A thumbnail is a button: tapping it opens the framing editor */
 .compose-thumb {
+  position: relative;
   flex: 0 0 auto;
   width: 76px;
   height: 76px;
-  object-fit: cover;
+  padding: 0;
+  border: none;
   border-radius: 12px;
+  overflow: hidden;
   background: var(--surface-2);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.compose-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.compose-thumb:active { transform: scale(0.97); }
+
+/* The lead photo fills the wide cell on a three-photo grid and opens a carousel */
+.compose-thumb.is-main { box-shadow: 0 0 0 2px var(--accent-ink); }
+
+.compose-thumb-tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2px 0 3px;
+  background: rgba(46, 58, 48, 0.72);
+  color: #fff;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ── Framing editor ────────────────────────────────────────────── */
+.editor {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: auto auto 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.editor::backdrop { background: rgba(46, 58, 48, 0.45); }
+
+.editor-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+}
+
+.editor-hint {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Square, because the square grid cell is the crop that actually bites */
+.editor-stage {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-2);
+  touch-action: none; /* the drag belongs to the focal point, not the page */
+  cursor: grab;
+}
+
+.editor-stage:active { cursor: grabbing; }
+
+.editor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.editor-dot {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(46, 58, 48, 0.4), 0 2px 8px rgba(46, 58, 48, 0.45);
+  pointer-events: none;
+}
+
+.editor-main[hidden] { display: none; }
+
+.editor-main.is-chosen {
+  background: var(--accent);
+  color: #23301f;
 }
 
 /* Attaching photos is a step inside the sheet, not a separate way in */

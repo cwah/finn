@@ -12,6 +12,7 @@
        the same way as the app (e.g. python3 -m http.server) — ES modules need HTTP. -->
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/lightbox.css" />
   <style>
     .preview-banner {
       max-width: var(--maxw);
@@ -69,6 +70,8 @@
     import { renderPost } from './js/render.js';
     import { inferLayout } from './js/layout-engine.js';
     import { ART_PRESETS, milestoneArtSvg } from './js/milestone-art.js';
+    import { initCarousels } from './js/carousel.js';
+    import { initLightbox } from './js/lightbox.js';
 
     const BIRTH = '2026-03-17';
     const timeline = document.getElementById('timeline');
@@ -129,6 +132,21 @@
         caption: 'Sunday morning at the park.',
         photos: [1, 2, 3, 4].map((n) => photo(`sun${n}`, 800, 800)),
       })],
+      ['Rule 5 · carousel (more than four)', post({
+        memoryDate: '2026-07-05',
+        caption: 'Six from one afternoon — swipe through.',
+        photos: [1, 2, 3, 4, 5, 6].map((n) => photo(`carousel${n}`, 1200, 900)),
+      })],
+      ['Focal point · same photo, framed three ways', post({
+        memoryDate: '2026-07-04',
+        caption: 'Smart crop keeps the subject in the square cell.',
+        photos: [
+          { ...photo('focal', 1200, 900), focalX: 0.15, focalY: 0.5 },
+          { ...photo('focal', 1200, 900), focalX: 0.5, focalY: 0.5 },
+          { ...photo('focal', 1200, 900), focalX: 0.85, focalY: 0.5 },
+        ],
+        author: { id: 'u2', name: 'Dad' },
+      })],
       ['Rule 5 · milestone + portrait', post({
         memoryDate: '2026-06-30',
         caption: 'She did it — three wobbly steps to the couch.',
@@ -159,6 +177,9 @@
       const card = renderPost(sample, BIRTH);
       if (card) timeline.append(card);
     }
+
+    initCarousels(timeline);
+    initLightbox(timeline);
 
     // app.js normally assigns the alternating sides and lights the sketches on scroll;
     // this bench shows everything at once, so do both up front.

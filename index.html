@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/compose.css" />
   <link rel="stylesheet" href="css/scrubber.css" />
   <link rel="stylesheet" href="css/auth.css" />
+  <link rel="stylesheet" href="css/lightbox.css" />
 </head>
 <body>
   <header class="app-header">
@@ -78,6 +79,22 @@
       </div>
     </form>
   </dialog>
+
+  <!-- Reframe one photo. Opened by tapping a thumbnail in the compose sheet.
+       The preview is square because the square grid cell is what actually crops. -->
+  <dialog id="photoEditor" class="editor" aria-label="Photo framing">
+    <div class="editor-body">
+      <p class="editor-hint">Drag to choose what stays in the crop.</p>
+      <div class="editor-stage">
+        <img class="editor-img" alt="" />
+        <span class="editor-dot" aria-hidden="true"></span>
+      </div>
+      <button type="button" class="btn btn--ghost editor-main">Make main photo</button>
+      <button type="button" class="btn btn--primary editor-done">Done</button>
+    </div>
+  </dialog>
+
+  <!-- The full-size photo viewer builds its own markup — see js/lightbox.js -->
 
   <!-- Sign-in gate. Hidden entirely when the data source has no accounts (mock). -->
   <div id="signin" class="signin" hidden>

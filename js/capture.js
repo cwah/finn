@@ -14,6 +14,8 @@
 // the File itself rides along so the data layer can upload it.
 
 import { createPost } from './data.js';
+import { detectFocalPoint } from './smart-crop.js';
+import { openPhotoEditor } from './photo-editor.js';
 
 /** Today as a LOCAL calendar day — toISOString() would hand back UTC and can skew a day. */
 function todayISO() {
@@ -75,16 +77,49 @@ export function initCapture({ author }, onCapture) {
 
   function renderThumbs() {
     thumbs.replaceChildren(
-      ...pending.map((p) => {
+      ...pending.map((p, i) => {
+        const cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'compose-thumb';
+        // First photo leads the post: it fills the wide cell on a three-photo grid and
+        // opens the carousel. Worth labelling, since it is not obvious otherwise.
+        if (i === 0) cell.classList.add('is-main');
+        cell.setAttribute('aria-label', `Photo ${i + 1} of ${pending.length}. Edit framing.`);
+
         const img = new Image();
-        img.className = 'compose-thumb';
         img.src = p.url;
         img.alt = '';
-        return img;
+        img.style.objectPosition = `${p.focalX * 100}% ${p.focalY * 100}%`;
+        cell.append(img);
+
+        if (i === 0) {
+          cell.append(Object.assign(document.createElement('span'), {
+            className: 'compose-thumb-tag',
+            textContent: 'Main',
+          }));
+        }
+
+        cell.addEventListener('click', () => editPhoto(i));
+        return cell;
       }),
     );
     thumbs.hidden = pending.length === 0;
     addLabel.textContent = pending.length ? 'Add more photos' : 'Add photos';
+  }
+
+  /** Reframe a photo, or promote it to lead the post. */
+  async function editPhoto(i) {
+    const result = await openPhotoEditor(pending[i], { isMain: i === 0 });
+    if (!result) return;
+
+    pending[i] = { ...pending[i], focalX: result.focalX, focalY: result.focalY };
+    if (result.makeMain && i !== 0) {
+      // Promotion is a reorder, so it survives straight through as photo order — the
+      // renderer and the backend both already treat position 0 as the lead.
+      const [chosen] = pending.splice(i, 1);
+      pending.unshift(chosen);
+    }
+    renderThumbs();
   }
 
   function open() {
@@ -120,9 +155,13 @@ export function initCapture({ author }, onCapture) {
       const added = await Promise.all(
         files.map(async (f) => {
           // Keep the File alongside its measurements: the preview needs the object URL,
-          // and the upload needs the File itself.
-          const { url, width, height } = await measure(f);
-          return { file: f, url, width, height };
+          // and the upload needs the File itself. The focal point is picked from the
+          // image's own content here, once, rather than on every render.
+          const [{ url, width, height }, focal] = await Promise.all([
+            measure(f),
+            detectFocalPoint(f),
+          ]);
+          return { file: f, url, width, height, focalX: focal.x, focalY: focal.y };
         }),
       );
       pending = pending.concat(added);
