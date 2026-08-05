@@ -3,9 +3,12 @@
 // Where a cover-cropped thumbnail should be centred, 0–1 on each axis.
 //
 // Picked automatically from image content at capture (js/smart-crop.js) and adjustable
-// in the compose sheet. Nullable rather than defaulted to 0.5: an absent focal point and
-// a deliberate dead-centre one look the same to the renderer, but only one of them means
-// "this predates the feature".
+// in the compose sheet.
+//
+// NOTE: these were left optional on the assumption that existing rows would read back as
+// null. They do not — PocketBase backfills a new number field with 0, which the renderer
+// reads as "crop to the top-left corner". 1754600000_backfill_focal_centre.js repairs
+// that. Adding a numeric field to a populated collection needs an explicit backfill.
 
 migrate(
   (app) => {
