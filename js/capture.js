@@ -13,7 +13,7 @@
 // PocketBase or only in memory. Photos preview through object URLs while composing;
 // the File itself rides along so the data layer can upload it.
 
-import { createPost } from './data.js';
+import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
 import { openPhotoEditor } from './photo-editor.js';
 
@@ -43,12 +43,20 @@ function measure(file) {
   });
 }
 
+/** Opens the sheet on an existing post. Set by initCapture; used by app.js. */
+export let openForEdit = () => {};
+
 /**
- * Wire the capture flow.
+ * Wire the compose sheet, which both creates and edits.
+ *
+ * One sheet for both on purpose: a separate edit form would be a second authoring
+ * surface to keep in step, and every field means the same thing in both directions.
+ *
  * @param {{author: {id: string, name: string}}} options signed-in parent, for attribution
- * @param {(post: object) => void} onCapture called with the SAVED post
+ * @param {{onCreate: (post) => void, onUpdate: (post) => void, onDelete: (id) => void}} handlers
  */
-export function initCapture({ author }, onCapture) {
+export function initCapture({ author }, handlers) {
+  const { onCreate, onUpdate, onDelete } = handlers;
   const input = document.getElementById('capture');
   const composeBtn = document.getElementById('composeBtn');
   const addLabel = document.getElementById('composeAddLabel');
@@ -62,11 +70,18 @@ export function initCapture({ author }, onCapture) {
   const saveBtn = document.getElementById('composeSave');
   const cancelBtn = document.getElementById('composeCancel');
   const saveError = document.getElementById('composeError');
+  const title = document.getElementById('composeTitle');
+  const deleteBtn = document.getElementById('composeDelete');
 
-  let pending = []; // photos measured for the post being composed
+  let pending = []; // photos on the post being composed
+  let editing = null; // the post being edited, or null when composing a new one
 
+  /**
+   * Only object URLs belong to us — those are previews of files picked in this session.
+   * A photo already stored on the server has an https URL and must not be revoked.
+   */
   function releasePending() {
-    pending.forEach((p) => URL.revokeObjectURL(p.url));
+    pending.forEach((p) => { if (p.file) URL.revokeObjectURL(p.url); });
     pending = [];
   }
 
@@ -89,7 +104,7 @@ export function initCapture({ author }, onCapture) {
         const img = new Image();
         img.src = p.url;
         img.alt = '';
-        img.style.objectPosition = `${p.focalX * 100}% ${p.focalY * 100}%`;
+        if (p.focalX != null) img.style.objectPosition = `${p.focalX * 100}% ${p.focalY * 100}%`;
         cell.append(img);
 
         if (i === 0) {
@@ -100,7 +115,25 @@ export function initCapture({ author }, onCapture) {
         }
 
         cell.addEventListener('click', () => editPhoto(i));
-        return cell;
+
+        // Remove sits outside the framing button so a mis-tap cannot delete a photo.
+        const drop = document.createElement('button');
+        drop.type = 'button';
+        drop.className = 'compose-thumb-drop';
+        drop.innerHTML = '&times;';
+        drop.setAttribute('aria-label', `Remove photo ${i + 1}`);
+        drop.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const [gone] = pending.splice(i, 1);
+          if (gone.file) URL.revokeObjectURL(gone.url); // only ours to revoke
+          renderThumbs();
+          syncSaveState();
+        });
+
+        const wrap = document.createElement('div');
+        wrap.className = 'compose-thumb-wrap';
+        wrap.append(cell, drop);
+        return wrap;
       }),
     );
     thumbs.hidden = pending.length === 0;
@@ -122,20 +155,44 @@ export function initCapture({ author }, onCapture) {
     renderThumbs();
   }
 
-  function open() {
+  /**
+   * Open the sheet. With a post, it edits that post; without, it composes a new one.
+   * @param {object|null} post
+   */
+  function open(post = null) {
     releasePending();
-    renderThumbs();
+    editing = post;
+
+    if (post) {
+      // Existing photos carry an id and a server URL, so the data layer knows to patch
+      // them in place rather than re-uploading a file it already has.
+      pending = post.photos.map((p) => ({
+        id: p.id,
+        url: p.url,
+        width: p.width,
+        height: p.height,
+        focalX: p.focalX,
+        focalY: p.focalY,
+      }));
+    }
+
+    title.textContent = post ? 'Edit memory' : 'New memory';
+    deleteBtn.hidden = !post;
     saveError.hidden = true;
-    caption.value = '';
-    date.value = todayISO();
+    caption.value = post?.caption || '';
+    date.value = post?.memoryDate || todayISO();
     date.max = todayISO(); // a memory can't have happened tomorrow
-    isMilestone.checked = false;
-    milestoneTitle.value = '';
-    milestoneTitle.hidden = true;
+    isMilestone.checked = Boolean(post?.milestone);
+    milestoneTitle.value = post?.milestone?.title || '';
+    milestoneTitle.hidden = !isMilestone.checked;
+
+    renderThumbs();
     syncSaveState();
     sheet.showModal();
     caption.focus();
   }
+
+  openForEdit = open;
 
   function close() {
     releasePending();
@@ -199,13 +256,16 @@ export function initCapture({ author }, onCapture) {
 
     // Uploading takes a moment on a phone; say so rather than letting the sheet sit
     // there looking ignored, and block a second submit.
+    const target = editing;
     saveBtn.disabled = true;
     saveBtn.textContent = 'Saving…';
     try {
-      const post = await createPost(draft, author);
+      const post = target
+        ? await updatePost(target.id, draft, target.author || author)
+        : await createPost(draft, author);
       pending = []; // the saved post owns the previews now
       sheet.close();
-      onCapture(post);
+      (target ? onUpdate : onCreate)(post);
     } catch (err) {
       console.error(err);
       saveError.textContent = 'Could not save that memory. It is still here — try again.';
@@ -213,6 +273,29 @@ export function initCapture({ author }, onCapture) {
     } finally {
       saveBtn.textContent = 'Save';
       syncSaveState();
+    }
+  });
+
+  deleteBtn.addEventListener('click', async () => {
+    if (!editing) return;
+    // Photos cascade with the post and there is no trash to fish them back out of.
+    if (!confirm('Delete this memory? Its photos go with it, and this cannot be undone.')) {
+      return;
+    }
+    const target = editing;
+    deleteBtn.disabled = true;
+    deleteBtn.textContent = 'Deleting…';
+    try {
+      await deletePost(target.id);
+      sheet.close();
+      onDelete(target.id);
+    } catch (err) {
+      console.error(err);
+      saveError.textContent = 'Could not delete that memory — try again.';
+      saveError.hidden = false;
+    } finally {
+      deleteBtn.disabled = false;
+      deleteBtn.textContent = 'Delete this memory';
     }
   });
 }

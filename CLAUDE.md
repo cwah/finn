@@ -58,6 +58,10 @@ same five functions — `requireSession`, `signIn`, `signOut`, `getConfig`, `get
 Keep the two in step. Everything above them — engine, renderer, timeline, capture, auth
 UI — consumes the contract and must stay backend-agnostic.
 
+`updatePost` **diffs** photos rather than replacing them: a draft photo carrying an `id`
+was already stored, so only its order and framing are patched. Re-uploading everything
+would re-send files that never changed and churn stored images for nothing.
+
 > **Keep the frontend backend-agnostic.** It consumes the JSON contract below and nothing
 > else. Phase 1 and Phase 2 differ only in the data-fetch layer.
 
@@ -257,6 +261,14 @@ tests. It has no dependencies and nothing bundles.
   cannot swallow taps meant for the timeline.
 - `+` opens the **compose sheet**: caption, the date the moment actually happened, an
   optional milestone, and an *Add photos* control. It holds no layout controls, by design.
+- **The same sheet edits.** A pencil on a card reopens it prefilled; a separate edit form
+  would be a second authoring surface to keep in step, and every field means the same
+  thing either way. Deleting a memory lives at the bottom of that sheet, behind a
+  confirm — photos cascade with the post and there is no trash.
+- **Only the author of a memory can change it.** The pencil is rendered only on your own
+  posts, and PocketBase enforces the same rule (`author = @request.auth.id` on posts,
+  `post.author = @request.auth.id` on photos) so the UI is a convenience, not the
+  boundary. Creation stays open to either parent.
 - Photos are optional content inside that one flow, not a second door. Attach some and
   the engine makes a photo card; attach none and a caption becomes a quote card. Adding
   photos uses native camera hardware:

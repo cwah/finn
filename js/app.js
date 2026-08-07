@@ -4,7 +4,7 @@
 import { getConfig, getPosts } from './data.js';
 import { renderPost } from './render.js';
 import { ageStamp } from './age.js';
-import { initCapture } from './capture.js';
+import { initCapture, openForEdit } from './capture.js';
 import { initScrubber } from './scrubber.js';
 import { ensureSignedIn, initSignOut } from './auth.js';
 import { initLightbox } from './lightbox.js';
@@ -15,6 +15,8 @@ const sentinel = document.getElementById('sentinel');
 const scrubber = initScrubber(timeline);
 
 let birthDate = null;
+let currentAuthorId = null; // decides which cards offer an edit button
+let loadedPosts = new Map(); // id -> post, so an edit can reopen what is on screen
 let page = 0;
 let loading = false;
 let hasMore = true;
@@ -96,8 +98,9 @@ async function loadMore() {
   loading = true;
   const { items, hasMore: more } = await getPosts({ page });
   // renderPost returns null for posts with nothing to show — skip those.
+  items.forEach((post) => loadedPosts.set(post.id, post));
   items
-    .map((post) => renderPost(post, birthDate))
+    .map((post) => renderPost(post, birthDate, { currentAuthorId }))
     .filter(Boolean)
     .forEach(mountCard);
   hasMore = more;
@@ -115,10 +118,19 @@ const pageObserver = new IntersectionObserver(
   { rootMargin: '600px 0px' },
 );
 
+/** Attach the observers a freshly built card needs, and skip the reveal animation. */
+function activate(card) {
+  card.classList.add('is-visible');
+  card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
+  if (card.classList.contains('milestone-scene')) artObserver.observe(card);
+  initCarousels(card);
+}
+
 // A freshly captured memory can be backdated, so it does not necessarily belong at
 // the top — drop it into place by memoryDate among the cards already on screen.
 function insertPost(post) {
-  const card = renderPost(post, birthDate);
+  loadedPosts.set(post.id, post);
+  const card = renderPost(post, birthDate, { currentAuthorId });
   if (!card) return;
 
   const older = Array.from(timeline.children).find(
@@ -127,12 +139,30 @@ function insertPost(post) {
   if (older) timeline.insertBefore(card, older);
   else timeline.append(card);
 
-  card.classList.add('is-visible'); // skip the reveal animation for fresh captures
-  card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
-  if (card.classList.contains('milestone-scene')) artObserver.observe(card);
-  initCarousels(card);
+  activate(card);
   card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   restripeMilestones(); // a milestone inserted mid-timeline flips every side below it
+  scrubber.refresh();
+}
+
+/** Swap an edited post's card for a freshly rendered one. */
+function replacePost(post) {
+  const old = [...timeline.children].find((c) => c.dataset.postId === post.id);
+  const card = renderPost(post, birthDate, { currentAuthorId });
+
+  // The date may have changed, which moves the card — so drop the old one and re-insert
+  // rather than swapping in place, and let insertPost put it where it now belongs.
+  if (old) old.remove();
+  if (!card) { restripeMilestones(); scrubber.refresh(); return; }
+  insertPost(post);
+}
+
+/** Drop a deleted post's card. */
+function removePost(id) {
+  loadedPosts.delete(id);
+  const card = [...timeline.children].find((c) => c.dataset.postId === id);
+  if (card) card.remove();
+  restripeMilestones();
   scrubber.refresh();
 }
 
@@ -143,6 +173,7 @@ async function init() {
 
   const config = await getConfig();
   birthDate = config.birthDate;
+  currentAuthorId = config.currentAuthor?.id || null;
   document.getElementById('babyName').textContent = config.babyName;
   document.getElementById('babyAge').textContent = ageStamp(birthDate, new Date().toISOString());
 
@@ -151,7 +182,19 @@ async function init() {
   await loadMore();
   pageObserver.observe(sentinel);
   window.addEventListener('scroll', onScroll, { passive: true });
-  initCapture({ author: config.currentAuthor }, insertPost);
+  initCapture({ author: config.currentAuthor }, {
+    onCreate: insertPost,
+    onUpdate: replacePost,
+    onDelete: removePost,
+  });
+
+  // Delegated, because cards stream in as you scroll — one listener beats re-binding.
+  timeline.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-edit-post]');
+    if (!btn) return;
+    const post = loadedPosts.get(btn.dataset.editPost);
+    if (post) openForEdit(post);
+  });
 }
 
 init().catch((err) => {

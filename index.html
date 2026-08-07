@@ -44,6 +44,8 @@
        control here — the engine infers layout from whatever is attached. -->
   <dialog id="compose" class="compose" aria-label="New memory">
     <form id="composeForm" class="compose-form">
+      <h2 id="composeTitle" class="compose-title">New memory</h2>
+
       <div id="composePhotos" class="compose-photos" hidden></div>
 
       <!-- Photos are optional content inside the one flow, not a separate entry point.
@@ -77,6 +79,11 @@
         <button id="composeCancel" type="button" class="btn btn--ghost">Cancel</button>
         <button id="composeSave" type="submit" class="btn btn--primary">Save</button>
       </div>
+
+      <!-- Only shown when editing. Deliberately quiet and last. -->
+      <button id="composeDelete" type="button" class="compose-delete" hidden>
+        Delete this memory
+      </button>
     </form>
   </dialog>
 

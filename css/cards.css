@@ -155,6 +155,38 @@
   transform: scale(1.45);
 }
 
+/* ── Edit affordance ───────────────────────────────────────────── */
+/* Only rendered on posts you wrote. Top-right, opposite the milestone chip. */
+.card-edit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  /* Sits over photos as often as over card background, so it carries its own contrast */
+  background: rgba(251, 252, 249, 0.86);
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 1px 4px rgba(46, 58, 48, 0.22);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card-edit:active { transform: scale(0.94); }
+
+/* The card needs to be a containing block for the button to pin to its corner —
+   .card--highlight already sets this, ordinary cards do not. */
+.card { position: relative; }
+
 /* Photos open full-size on tap; say so with the cursor on a pointer device */
 @media (hover: hover) {
   .card-photo[data-full] { cursor: zoom-in; }

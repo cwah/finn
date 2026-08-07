@@ -163,3 +163,81 @@ export async function createPost(draft, author) {
 
   return toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);
 }
+
+/** The post fields a parent can change. Author and creation time are not among them. */
+function postBody(draft) {
+  return {
+    memoryDate: draft.memoryDate,
+    caption: draft.caption || '',
+    isMilestone: Boolean(draft.milestone),
+    milestoneTitle: draft.milestone?.title || '',
+  };
+}
+
+/** Upload one new photo for a post. */
+async function uploadPhoto(postId, photo, sort) {
+  const form = new FormData();
+  form.append('post', postId);
+  form.append('image', photo.file);
+  form.append('width', String(photo.width));
+  form.append('height', String(photo.height));
+  form.append('sort', String(sort));
+  if (photo.focalX != null) form.append('focalX', String(photo.focalX));
+  if (photo.focalY != null) form.append('focalY', String(photo.focalY));
+  return toPhoto(await pb.create('photos', form));
+}
+
+/**
+ * Save changes to an existing post.
+ *
+ * Photos are diffed rather than replaced: a draft photo that already carries an `id` is
+ * one that was already on the post, so it is patched in place. Re-uploading everything
+ * would burn the parent's data allowance re-sending photos that never changed, and would
+ * churn the stored files for no reason.
+ *
+ * Removals happen first. If a later upload fails, the post is left short a photo rather
+ * than holding one the parent explicitly took off it.
+ *
+ * @param {string} id
+ * @param {object} draft same shape as createPost's, but photos may carry an `id`
+ * @param {{id: string, name: string}} author
+ */
+export async function updatePost(id, draft, author) {
+  const rec = await pb.update('posts', id, postBody(draft));
+
+  const existing = await pb.list('photos', { filter: `post=${pb.quote(id)}`, perPage: 200 });
+  const kept = new Set(draft.photos.filter((p) => p.id).map((p) => p.id));
+  for (const old of existing.items) {
+    if (!kept.has(old.id)) await pb.remove('photos', old.id);
+  }
+
+  const saved = [];
+  for (const [i, photo] of draft.photos.entries()) {
+    try {
+      saved.push(
+        photo.id
+          // Position and framing are the only things editing can change about a photo
+          // that is already stored; the file itself is never re-sent.
+          ? toPhoto(await pb.update('photos', photo.id, {
+            sort: i,
+            focalX: photo.focalX ?? null,
+            focalY: photo.focalY ?? null,
+          }))
+          : await uploadPhoto(id, photo, i),
+      );
+    } catch (err) {
+      console.error(`Photo ${i + 1} failed to save`, err);
+    }
+  }
+
+  return toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);
+}
+
+/**
+ * Remove a post. Its photos go with it — the relation is cascadeDelete — and there is no
+ * trash to recover them from, so callers must confirm before calling this.
+ * @param {string} id
+ */
+export async function deletePost(id) {
+  await pb.remove('posts', id);
+}

@@ -53,6 +53,29 @@ export async function getPosts({ page = 0, pageSize = 5 } = {}) {
  *          photos: Array<{file: File, url: string, width: number, height: number}>}} draft
  * @param {{id: string, name: string}} author
  */
+/** With no backend the edit lives only in memory, same as the original post did. */
+export async function updatePost(id, draft, author) {
+  return {
+    id,
+    memoryDate: draft.memoryDate,
+    createdAt: new Date().toISOString(),
+    author,
+    caption: draft.caption,
+    milestone: draft.milestone,
+    photos: draft.photos.map((p, i) => ({
+      id: p.id || `local-${Date.now()}-${i}`,
+      url: p.url,
+      width: p.width,
+      height: p.height,
+      alt: null,
+      focalX: p.focalX ?? null,
+      focalY: p.focalY ?? null,
+    })),
+  };
+}
+
+export async function deletePost() {}
+
 export async function createPost(draft, author) {
   const stamp = Date.now();
   return {

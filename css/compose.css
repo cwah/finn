@@ -47,10 +47,41 @@
 
 .compose-photos::-webkit-scrollbar { display: none; }
 
-/* A thumbnail is a button: tapping it opens the framing editor */
-.compose-thumb {
+.compose-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Wraps the thumbnail and its remove control, so remove sits outside the tap target
+   that opens the framing editor — a mis-tap must never drop a photo. */
+.compose-thumb-wrap {
   position: relative;
   flex: 0 0 auto;
+  padding-top: 6px;
+  padding-right: 6px;
+}
+
+.compose-thumb-drop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(46, 58, 48, 0.82);
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* A thumbnail is a button: tapping it opens the framing editor */
+.compose-thumb {
+  display: block;
+  position: relative;
   width: 76px;
   height: 76px;
   padding: 0;
@@ -262,6 +293,25 @@
   background: linear-gradient(135deg, var(--accent), var(--blue));
   color: #23301f;
 }
+
+/* Destructive, so it is quiet, last, and nowhere near Save */
+.compose-delete {
+  margin-top: 4px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: none;
+  color: #8f3a3a;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.compose-delete:active { background: rgba(178, 74, 74, 0.1); }
+
+.compose-delete[hidden] { display: none; }
 
 .btn--primary:disabled {
   background: var(--surface-2);

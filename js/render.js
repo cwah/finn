@@ -103,8 +103,18 @@ function carouselPhotos(photos, group) {
 }
 
 /** The card itself, for whichever layout the engine picked. */
-function buildCard(post, birthDate, type) {
+function buildCard(post, birthDate, type, { canEdit = false } = {}) {
   const card = el('article', `card card--${type}`);
+
+  // Only the parent who wrote a memory gets the affordance to change it. The backend
+  // enforces the same rule — this just keeps the button off cards it would fail on.
+  if (canEdit) {
+    const edit = el('button', 'card-edit', { type: 'button' });
+    edit.setAttribute('aria-label', 'Edit this memory');
+    edit.dataset.editPost = post.id;
+    edit.innerHTML = '&#9998;';
+    card.append(edit);
+  }
 
   if (isMilestone(post)) {
     card.classList.add('card--highlight');
@@ -155,22 +165,27 @@ function buildCard(post, birthDate, type) {
  *
  * @param {object} post
  * @param {string} birthDate ISO birthdate for age computation
+ * @param {{currentAuthorId?: string}} [opts] who is signed in, so the card knows whether
+ *        to offer editing
  * @returns {HTMLElement|null} null when the post has nothing renderable
  */
-export function renderPost(post, birthDate) {
+export function renderPost(post, birthDate, opts = {}) {
   const type = inferLayout(post);
   if (type === null) return null;
 
-  const card = buildCard(post, birthDate, type);
+  const canEdit = Boolean(opts.currentAuthorId && post.author?.id === opts.currentAuthorId);
+  const card = buildCard(post, birthDate, type, { canEdit });
 
   if (!isMilestone(post)) {
     card.classList.add('timeline-item');
     card.dataset.memoryDate = post.memoryDate; // lets the timeline order late arrivals
+    card.dataset.postId = post.id; // lets an edit find its card again
     return card;
   }
 
   const scene = el('div', 'milestone-scene timeline-item');
   scene.dataset.memoryDate = post.memoryDate;
+  scene.dataset.postId = post.id;
 
   // The drawing is one of a fixed set — the title only picks which, never what it says,
   // so no parent-typed text reaches the generated markup.

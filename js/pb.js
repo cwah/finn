@@ -124,6 +124,16 @@ export async function create(collection, body) {
   return request(`/api/collections/${collection}/records`, { method: 'POST', body });
 }
 
+/** Patch a record. Only the fields you pass are touched. */
+export async function update(collection, id, body) {
+  return request(`/api/collections/${collection}/records/${id}`, { method: 'PATCH', body });
+}
+
+/** Delete a record. Relations marked cascadeDelete go with it. */
+export async function remove(collection, id) {
+  return request(`/api/collections/${collection}/records/${id}`, { method: 'DELETE' });
+}
+
 /** Public URL for a file stored on a record. */
 export function fileUrl(collectionIdOrName, recordId, filename) {
   return `${PB_URL}/api/files/${collectionIdOrName}/${recordId}/${filename}`;
