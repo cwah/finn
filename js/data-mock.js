@@ -70,6 +70,7 @@ export async function updatePost(id, draft, author) {
       alt: null,
       focalX: p.focalX ?? null,
       focalY: p.focalY ?? null,
+      crop: p.crop ?? null,
     })),
   };
 }
@@ -93,6 +94,7 @@ export async function createPost(draft, author) {
       alt: null,
       focalX: p.focalX ?? null,
       focalY: p.focalY ?? null,
+      crop: p.crop ?? null,
     })),
   };
 }

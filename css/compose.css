@@ -148,7 +148,119 @@
   text-align: center;
 }
 
-/* Square, because the square grid cell is the crop that actually bites */
+/* Crop and focus are different jobs, so they get different surfaces */
+.editor-modes {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.editor-modes button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.editor-modes button.is-on {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 3px rgba(46, 58, 48, 0.14);
+}
+
+/* ── Crop mode ─────────────────────────────────────────────────── */
+/* The stage takes the photo's own shape, so crop coordinates map straight onto it —
+   no object-fit letterboxing to compensate for. */
+.editor-crop {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  aspect-ratio: var(--img-ar, 1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-2);
+  touch-action: none;
+}
+
+.editor-crop[hidden] { display: none; }
+
+.editor-crop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* the stage already matches the photo's aspect */
+  display: block;
+  pointer-events: none;
+}
+
+/* Everything outside the rectangle is dimmed by the rectangle's own giant shadow —
+   one element instead of four masking strips. */
+.editor-rect {
+  position: absolute;
+  box-shadow: 0 0 0 9999px rgba(20, 26, 21, 0.55);
+  outline: 1px solid rgba(251, 252, 249, 0.9);
+  cursor: move;
+}
+
+.editor-handle {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: none;
+}
+
+.editor-handle::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  background: #fbfcf9;
+  box-shadow: 0 1px 3px rgba(20, 26, 21, 0.5);
+}
+
+.editor-handle[data-handle="nw"] { top: -14px; left: -14px; cursor: nwse-resize; }
+.editor-handle[data-handle="ne"] { top: -14px; right: -14px; cursor: nesw-resize; }
+.editor-handle[data-handle="sw"] { bottom: -14px; left: -14px; cursor: nesw-resize; }
+.editor-handle[data-handle="se"] { bottom: -14px; right: -14px; cursor: nwse-resize; }
+
+.editor-presets {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.editor-preset {
+  padding: 6px 14px;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  background: none;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.editor-preset.is-on {
+  background: var(--accent);
+  border-color: transparent;
+  color: #23301f;
+}
+
+/* ── Focus mode ────────────────────────────────────────────────── */
+.editor-focus[hidden] { display: none; }
+
+/* Square, because the square grid cell is the crop that bites on top of the crop */
 .editor-stage {
   position: relative;
   width: 100%;
@@ -164,10 +276,11 @@
 
 .editor-stage:active { cursor: grabbing; }
 
+/* Previews the cropped result using the same maths the card uses */
 .editor-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  position: absolute;
+  height: auto;
+  max-width: none;
   display: block;
   pointer-events: none;
 }

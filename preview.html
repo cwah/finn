@@ -148,6 +148,21 @@
         ],
         author: { id: 'u2', name: 'Dad' },
       })],
+      ['Crop · wide photo cropped tall becomes a PORTRAIT card', post({
+        memoryDate: '2026-07-03',
+        caption: 'Cropping changes what the engine sees.',
+        photos: [{ ...photo('cropme', 1600, 900), crop: { x: 0.35, y: 0, w: 0.25, h: 1 } }],
+      })],
+      ['Crop · same photo, four crops in a grid', post({
+        memoryDate: '2026-07-02',
+        photos: [
+          { ...photo('cropme', 1600, 900), crop: { x: 0, y: 0, w: 0.25, h: 1 } },
+          { ...photo('cropme', 1600, 900), crop: { x: 0.375, y: 0.25, w: 0.25, h: 0.5 } },
+          { ...photo('cropme', 1600, 900), crop: { x: 0.75, y: 0, w: 0.25, h: 1 } },
+          { ...photo('cropme', 1600, 900) },
+        ],
+        author: { id: 'u2', name: 'Dad' },
+      })],
       ['Focal point · same photo, framed three ways', post({
         memoryDate: '2026-07-04',
         caption: 'Smart crop keeps the subject in the square cell.',

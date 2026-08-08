@@ -91,11 +91,33 @@
        The preview is square because the square grid cell is what actually crops. -->
   <dialog id="photoEditor" class="editor" aria-label="Photo framing">
     <div class="editor-body">
-      <p class="editor-hint">Drag to choose what stays in the crop.</p>
-      <div class="editor-stage">
-        <img class="editor-img" alt="" />
-        <span class="editor-dot" aria-hidden="true"></span>
+      <div class="editor-modes" role="tablist">
+        <button type="button" data-mode="crop">Crop</button>
+        <button type="button" data-mode="focus">Focus</button>
       </div>
+
+      <p class="editor-hint"></p>
+
+      <!-- Crop: the whole photo, with a rectangle over it -->
+      <div class="editor-crop">
+        <img class="editor-crop-img" alt="" />
+        <div class="editor-rect">
+          <span class="editor-handle" data-handle="nw"></span>
+          <span class="editor-handle" data-handle="ne"></span>
+          <span class="editor-handle" data-handle="sw"></span>
+          <span class="editor-handle" data-handle="se"></span>
+        </div>
+      </div>
+      <div class="editor-presets"></div>
+
+      <!-- Focus: only the cropped result, in the square a grid cell would impose -->
+      <div class="editor-focus" hidden>
+        <div class="editor-stage">
+          <img class="editor-img" alt="" />
+          <span class="editor-dot" aria-hidden="true"></span>
+        </div>
+      </div>
+
       <button type="button" class="btn btn--ghost editor-main">Make main photo</button>
       <button type="button" class="btn btn--primary editor-done">Done</button>
     </div>

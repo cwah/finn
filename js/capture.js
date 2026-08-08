@@ -145,7 +145,12 @@ export function initCapture({ author }, handlers) {
     const result = await openPhotoEditor(pending[i], { isMain: i === 0 });
     if (!result) return;
 
-    pending[i] = { ...pending[i], focalX: result.focalX, focalY: result.focalY };
+    pending[i] = {
+      ...pending[i],
+      focalX: result.focalX,
+      focalY: result.focalY,
+      crop: result.crop,
+    };
     if (result.makeMain && i !== 0) {
       // Promotion is a reorder, so it survives straight through as photo order — the
       // renderer and the backend both already treat position 0 as the lead.
@@ -173,6 +178,7 @@ export function initCapture({ author }, handlers) {
         height: p.height,
         focalX: p.focalX,
         focalY: p.focalY,
+        crop: p.crop,
       }));
     }
 

@@ -12,6 +12,36 @@
 /** Above this many photos a grid stops working and the set becomes a carousel. */
 export const GRID_MAX = 4;
 
+/** A photo with no crop is cropped to all of itself. */
+export const FULL_CROP = Object.freeze({ x: 0, y: 0, w: 1, h: 1 });
+
+/**
+ * The crop rectangle actually in force, normalised 0–1 against the original.
+ * Absent, partial or nonsensical values fall back to the whole photo.
+ * @returns {{x: number, y: number, w: number, h: number}}
+ */
+export function cropRect(photo) {
+  const c = photo?.crop;
+  if (!c) return FULL_CROP;
+  const w = Number(c.w);
+  const h = Number(c.h);
+  if (!(w > 0 && h > 0)) return FULL_CROP;
+  const x = Math.min(Math.max(Number(c.x) || 0, 0), 1);
+  const y = Math.min(Math.max(Number(c.y) || 0, 0), 1);
+  return { x, y, w: Math.min(w, 1 - x), h: Math.min(h, 1 - y) };
+}
+
+/**
+ * What the photo measures AFTER its crop — the only size the layout should ever reason
+ * about. Cropping a wide photo into a tall frame really does make it a portrait, and the
+ * engine has to see that or the card would contradict what the parent framed.
+ * @returns {{width: number, height: number}}
+ */
+export function croppedSize(photo) {
+  const c = cropRect(photo);
+  return { width: photo.width * c.w, height: photo.height * c.h };
+}
+
 /**
  * Decide the base layout for a post from its content alone.
  * Orientation is read from stored width/height — we never load an image to decide.
@@ -25,9 +55,9 @@ export function inferLayout(post) {
   // 1. No photos + has caption -> quote card. With neither, there is nothing to show.
   if (count === 0) return hasCaption(post) ? 'quote' : null;
 
-  // 2 & 3. Single photo -> orientation from intrinsic dimensions.
+  // 2 & 3. Single photo -> orientation from its dimensions AFTER cropping.
   if (count === 1) {
-    const { width, height } = photos[0];
+    const { width, height } = croppedSize(photos[0]);
     return height > width ? 'portrait' : 'landscape';
   }
 
@@ -55,7 +85,7 @@ export function inferLayout(post) {
  */
 export function carouselAspect(photos) {
   const ratios = (photos || [])
-    .map((p) => p.width / p.height)
+    .map((p) => { const s = croppedSize(p); return s.width / s.height; })
     .filter((r) => Number.isFinite(r) && r > 0)
     .sort((a, b) => a - b);
 

@@ -6,7 +6,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { inferLayout, isMilestone, GRID_MAX, carouselAspect } from '../js/layout-engine.js';
+import {
+  inferLayout, isMilestone, GRID_MAX, carouselAspect, cropRect, croppedSize, FULL_CROP,
+} from '../js/layout-engine.js';
 
 /** A photo is only ever consulted for its stored dimensions. */
 const photo = (width, height) => ({ id: 'x', url: 'x.jpg', width, height, alt: null });
@@ -123,6 +125,71 @@ test('carousel aspect degrades to 4:3 on unusable input', () => {
   assert.equal(carouselAspect([]), 4 / 3);
   assert.equal(carouselAspect(null), 4 / 3);
   assert.equal(carouselAspect([{ width: 0, height: 0 }]), 4 / 3);
+});
+
+// ── Cropping ──────────────────────────────────────────────────────
+const cropped = (w, h, crop) => ({ ...photo(w, h), crop });
+
+test('a photo with no crop is cropped to all of itself', () => {
+  assert.deepEqual(cropRect(photo(1600, 900)), { x: 0, y: 0, w: 1, h: 1 });
+  assert.deepEqual(croppedSize(photo(1600, 900)), { width: 1600, height: 900 });
+});
+
+test('cropped size is the rectangle, not the original', () => {
+  const p = cropped(1600, 900, { x: 0.35, y: 0, w: 0.25, h: 1 });
+  assert.deepEqual(croppedSize(p), { width: 400, height: 900 });
+});
+
+test('cropping a wide photo tall makes it a PORTRAIT card', () => {
+  // The whole point: the engine must judge the picture the parent framed, not the file.
+  const wide = photo(1600, 900);
+  assert.equal(inferLayout({ photos: [wide] }), 'landscape');
+  assert.equal(
+    inferLayout({ photos: [cropped(1600, 900, { x: 0.35, y: 0, w: 0.25, h: 1 })] }),
+    'portrait',
+  );
+});
+
+test('cropping a tall photo wide makes it a LANDSCAPE card', () => {
+  assert.equal(inferLayout({ photos: [photo(900, 1600)] }), 'portrait');
+  assert.equal(
+    inferLayout({ photos: [cropped(900, 1600, { x: 0, y: 0.4, w: 1, h: 0.2 })] }),
+    'landscape',
+  );
+});
+
+test('a carousel takes its shape from the cropped photos, not the originals', () => {
+  // All wide files, all cropped square — the strip should be square, not 16:9.
+  const photos = [1, 2, 3, 4, 5].map(() =>
+    cropped(1600, 900, { x: 0.2, y: 0, w: 0.5625, h: 1 }));
+  assert.equal(carouselAspect(photos), 1);
+});
+
+test('a crop cannot escape the photo it belongs to', () => {
+  const over = cropRect({ width: 100, height: 100, crop: { x: 0.8, y: 0.9, w: 0.5, h: 0.5 } });
+  assert.ok(over.x + over.w <= 1.0001, `${over.x} + ${over.w} runs past the edge`);
+  assert.ok(over.y + over.h <= 1.0001, `${over.y} + ${over.h} runs past the edge`);
+
+  const negative = cropRect({ width: 100, height: 100, crop: { x: -0.5, y: -1, w: 0.5, h: 0.5 } });
+  assert.ok(negative.x >= 0 && negative.y >= 0);
+});
+
+test('a nonsensical crop falls back to the whole photo rather than vanishing', () => {
+  for (const bad of [{ w: 0, h: 0 }, { w: -1, h: 1 }, { w: null, h: null }, {}, 'nope']) {
+    assert.deepEqual(cropRect({ width: 10, height: 10, crop: bad }), FULL_CROP, JSON.stringify(bad));
+  }
+  // And a zero-area crop must never produce a zero-sized card.
+  assert.deepEqual(croppedSize({ width: 800, height: 600, crop: { x: 0, y: 0, w: 0, h: 0 } }),
+    { width: 800, height: 600 });
+});
+
+test('cropping is pure — reading a crop does not rewrite the photo', () => {
+  const p = cropped(1600, 900, { x: 0.35, y: 0, w: 0.25, h: 1 });
+  const before = JSON.stringify(p);
+  cropRect(p);
+  croppedSize(p);
+  inferLayout({ photos: [p] });
+  assert.equal(JSON.stringify(p), before);
 });
 
 test('the engine is pure — it does not mutate the post it is given', () => {

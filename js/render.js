@@ -2,7 +2,9 @@
 // the matching markup. When adding a layout type, update layout-engine.js, this file,
 // and css/cards.css together.
 
-import { inferLayout, isMilestone, GRID_MAX, carouselAspect } from './layout-engine.js';
+import {
+  inferLayout, isMilestone, GRID_MAX, carouselAspect, cropRect, croppedSize,
+} from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { artPreset, milestoneArtSvg } from './milestone-art.js';
 
@@ -22,12 +24,36 @@ function photoEl(photo) {
     width: photo.width,
     height: photo.height,
   });
-  // Where a cover crop should be centred. Absent focal point means dead centre, which
-  // is what the browser does anyway.
-  if (photo.focalX != null && photo.focalY != null) {
-    img.style.objectPosition = `${photo.focalX * 100}% ${photo.focalY * 100}%`;
-  }
   return img;
+}
+
+/**
+ * Wrap a photo so only its crop rectangle shows.
+ *
+ * `object-fit` cannot express an arbitrary rectangle, so the image is oversized inside an
+ * overflow box and offset until the chosen region fills it. Every photo gets the wrapper,
+ * cropped or not — an uncropped photo is simply cropped to all of itself, which keeps one
+ * code path and one set of CSS rules instead of two that could disagree.
+ */
+function cropped(photo, group) {
+  const c = cropRect(photo);
+  const size = croppedSize(photo);
+
+  const box = el('div', 'crop-box');
+  box.style.setProperty('--cx', c.x);
+  box.style.setProperty('--cy', c.y);
+  box.style.setProperty('--cw', c.w);
+  box.style.setProperty('--ch', c.h);
+  // The shape the crop presents, which is what surrounding layout has to reason about.
+  box.style.setProperty('--crop-ar', `${size.width} / ${size.height}`);
+  // Where to centre the crop when a cell still has to cover-crop it further. This used
+  // to ride on the image's object-position, which no longer applies now that the image
+  // is positioned by the crop maths instead.
+  box.style.setProperty('--fx', photo.focalX ?? 0.5);
+  box.style.setProperty('--fy', photo.focalY ?? 0.5);
+
+  box.append(makeViewable(photoEl(photo), photo, group));
+  return box;
 }
 
 /** Make a photo openable full-size. The lightbox reads these off the clicked element. */
@@ -58,11 +84,14 @@ function metaEl(post, birthDate, { withAuthor = true } = {}) {
 
 function singlePhotoFrame(photo, group) {
   const frame = el('div', 'photo-frame');
-  // Drive aspect-ratio from intrinsic dimensions to reserve space (no reflow on load).
-  frame.style.setProperty('--ar', `${photo.width} / ${photo.height}`);
-  const img = photoEl(photo);
-  img.dataset.parallax = 'y';
-  frame.append(makeViewable(img, photo, group));
+  const size = croppedSize(photo);
+  // Reserve space from the CROPPED dimensions, so nothing reflows once the file loads.
+  frame.style.setProperty('--ar', `${size.width} / ${size.height}`);
+
+  const box = cropped(photo, group);
+  box.classList.add('crop-box--exact'); // the frame already matches the crop's shape
+  box.dataset.parallax = 'y';
+  frame.append(box);
   return frame;
 }
 
@@ -70,7 +99,7 @@ function gridPhotos(photos, group) {
   const wrap = el('div', 'grid-photos');
   photos.slice(0, GRID_MAX).forEach((p) => {
     const cell = el('div', 'grid-cell');
-    cell.append(makeViewable(photoEl(p), p, group));
+    cell.append(cropped(p, group));
     wrap.append(cell);
   });
   return wrap;
@@ -90,7 +119,7 @@ function carouselPhotos(photos, group) {
   const track = el('div', 'carousel-track');
   photos.forEach((p) => {
     const slide = el('div', 'carousel-slide');
-    slide.append(makeViewable(photoEl(p), p, group));
+    slide.append(cropped(p, group));
     track.append(slide);
   });
 

@@ -72,6 +72,8 @@ function toPhoto(rec) {
     // focal point as dead centre, which is exactly how they used to be cropped.
     focalX: rec.focalX ?? null,
     focalY: rec.focalY ?? null,
+    // Absent, empty or malformed all mean "the whole photo" — cropRect() decides.
+    crop: rec.crop && typeof rec.crop === 'object' && rec.crop.w ? rec.crop : null,
   };
 }
 
@@ -184,6 +186,7 @@ async function uploadPhoto(postId, photo, sort) {
   form.append('sort', String(sort));
   if (photo.focalX != null) form.append('focalX', String(photo.focalX));
   if (photo.focalY != null) form.append('focalY', String(photo.focalY));
+  if (photo.crop) form.append('crop', JSON.stringify(photo.crop));
   return toPhoto(await pb.create('photos', form));
 }
 
@@ -222,6 +225,7 @@ export async function updatePost(id, draft, author) {
             sort: i,
             focalX: photo.focalX ?? null,
             focalY: photo.focalY ?? null,
+            crop: photo.crop ?? null,
           }))
           : await uploadPhoto(id, photo, i),
       );

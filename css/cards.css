@@ -60,13 +60,38 @@
   padding-bottom: 16px;
 }
 
+/* ── Crop box ──────────────────────────────────────────────────── */
+/* Shows only a photo's crop rectangle, by oversizing the image inside an overflow box
+   and offsetting it until the chosen region fills the box. object-fit cannot express an
+   arbitrary rectangle, and every photo gets this treatment — an uncropped one is simply
+   cropped to all of itself, so there is one code path rather than two.
+
+   --cx/--cy/--cw/--ch are the crop rect, 0–1. Scaling by 1/--cw makes the crop's width
+   fill the box; the offsets are divided by the same factor because they are percentages
+   of the BOX, not of the image. */
+.crop-box {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.crop-box > .card-photo {
+  position: absolute;
+  width: calc(100% / var(--cw, 1));
+  height: auto;
+  max-width: none;
+  left: calc(var(--cx, 0) / var(--cw, 1) * -100%);
+  top: calc(var(--cy, 0) / var(--ch, 1) * -100%);
+  display: block;
+  background: none;
+}
+
 /* Reserve space from intrinsic dimensions to prevent reflow on load */
 .card-photo {
   display: block;
   width: 100%;
   height: auto;
   background: var(--surface-2);
-  will-change: transform;
 }
 
 /* ── Layout: portrait (tall single photo) ──────────────────────── */
@@ -80,12 +105,15 @@
   width: 100%;
 }
 
-/* Parallax inner image is slightly oversized so it can drift */
-.photo-frame .card-photo {
+/* The frame's aspect already matches the crop exactly, so the box just fills it. Scaled
+   up a touch so the parallax has somewhere to drift without exposing an edge — `scale`
+   rather than a stretched box, which would distort the crop. The separate `scale`
+   property leaves `transform` free for the per-frame parallax write. */
+.photo-frame .crop-box--exact {
   position: absolute;
-  inset: -8% 0;
-  height: 116%;
-  object-fit: cover;
+  inset: 0;
+  scale: 1.1;
+  will-change: transform;
 }
 
 /* ── Layout: grid (2–4 photos) ─────────────────────────────────── */
@@ -100,8 +128,21 @@
 .card--grid.count-3 .grid-cell:first-child { grid-column: 1 / -1; }
 .card--grid.count-4 .grid-photos { grid-template-columns: repeat(2, 1fr); }
 
-.grid-cell { aspect-ratio: 1 / 1; overflow: hidden; }
-.grid-cell .card-photo { width: 100%; height: 100%; object-fit: cover; }
+.grid-cell { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
+
+/* A cell's shape rarely matches the crop's, so the crop still has to cover it. Sized by
+   aspect-ratio against both minimums — the box grows until it covers on both axes — and
+   anchored on the focal point rather than the middle. */
+.grid-cell > .crop-box,
+.carousel-slide > .crop-box {
+  position: absolute;
+  top: calc(var(--fy, 0.5) * 100%);
+  left: calc(var(--fx, 0.5) * 100%);
+  translate: calc(var(--fx, 0.5) * -100%) calc(var(--fy, 0.5) * -100%);
+  aspect-ratio: var(--crop-ar, 1);
+  min-width: 100%;
+  min-height: 100%;
+}
 
 /* ── Layout: carousel (5+ photos) ──────────────────────────────── */
 /* Native CSS scroll-snap does the scrolling — no JS per frame, and momentum feels
@@ -128,7 +169,7 @@
   overflow: hidden;
 }
 
-.carousel-slide .card-photo { width: 100%; height: 100%; object-fit: cover; }
+.carousel-slide { position: relative; }
 
 .carousel-dots {
   position: absolute;
