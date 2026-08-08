@@ -227,10 +227,13 @@
   box-shadow: 0 1px 3px rgba(20, 26, 21, 0.5);
 }
 
-.editor-handle[data-handle="nw"] { top: -14px; left: -14px; cursor: nwse-resize; }
-.editor-handle[data-handle="ne"] { top: -14px; right: -14px; cursor: nesw-resize; }
-.editor-handle[data-handle="sw"] { bottom: -14px; left: -14px; cursor: nesw-resize; }
-.editor-handle[data-handle="se"] { bottom: -14px; right: -14px; cursor: nwse-resize; }
+/* Inside the rectangle, not straddling it: the stage clips its overflow, so handles hung
+   outside get sliced in half exactly when the crop is at the photo's edge — which is the
+   state every photo starts in. */
+.editor-handle[data-handle="nw"] { top: 0; left: 0; cursor: nwse-resize; }
+.editor-handle[data-handle="ne"] { top: 0; right: 0; cursor: nesw-resize; }
+.editor-handle[data-handle="sw"] { bottom: 0; left: 0; cursor: nesw-resize; }
+.editor-handle[data-handle="se"] { bottom: 0; right: 0; cursor: nwse-resize; }
 
 .editor-presets {
   display: flex;

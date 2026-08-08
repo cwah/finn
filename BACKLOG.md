@@ -21,6 +21,9 @@ Shipped when it lands. No ceremony beyond that.
 
 ## Shipped
 
+- [x] Photo cropping — non-destructive crop rectangle stored per photo and applied at
+      render; cropped dimensions drive the layout, so cropping wide-to-tall really does
+      turn a card portrait. Original file never altered.
 - [x] Editing — the pencil on your own posts reopens the compose sheet prefilled;
       caption, date, milestone and photos are all editable, plus delete. Author-only,
       enforced in PocketBase rules rather than just hidden in the UI.

@@ -132,11 +132,27 @@ engine and the real stylesheets. Add a sample there whenever you add a layout ty
 
 ### Photos
 
-**Cropping is framing, never destruction.** Cards crop to keep the timeline calm, but
-the stored file is always the untouched original. Each photo carries a focal point
-(`focalX`/`focalY`, 0–1) that the renderer feeds to `object-position`, so a cover crop
-keeps the subject. A missing focal point means dead centre — which is exactly how photos
-were cropped before the feature existed, so old records need no migration.
+**Cropping is framing, never destruction.** The stored file is always the untouched
+original. Two settings shape how a photo appears, and both are stored, never baked in:
+
+- **`crop`** — the rectangle the parent chose, `{x, y, w, h}` normalised 0–1. Applied at
+  render, so it can be widened, moved or removed forever.
+- **`focalX`/`focalY`** — where to centre the *cropped* result when a card's cell is a
+  different shape again. The crop picks the picture; the focal point survives the second
+  crop a square grid cell imposes on top of it. Both earn their place.
+
+`croppedSize()` is what the layout may reason about — **never the raw width/height**.
+Cropping a wide photo into a tall frame really does make it a portrait card, and a
+carousel takes its shape from what photos were cropped to. A card contradicting the
+picture a parent framed would be worse than no cropping at all.
+
+Rendering uses a **crop box**: `object-fit` cannot express an arbitrary rectangle, so the
+image is oversized inside an overflow box and offset until the chosen region fills it.
+Every photo gets the wrapper — an uncropped one is cropped to all of itself — so there is
+one code path rather than two that could disagree.
+
+A missing focal point or crop means dead centre / the whole photo, which is exactly how
+photos behaved before either existed.
 
 - `smart-crop.js` picks the focal point at capture from the image's own content: local
   contrast, energy-weighted centroid, with a pull toward the middle and a clamp away from
@@ -300,6 +316,19 @@ capture/save gradients. Keep that balance when adding colour.
   black and greys the middle of the fade.
 - Check contrast when changing these: body text and the small date/author text both need
   to clear WCAG AA (4.5:1) on `--surface`, `--surface-2` and `--bg`.
+
+## Migrations
+
+Adding a field to a populated collection needs thought about what existing rows get:
+
+- A new **`number`** field backfills with `0`, not null. That silently cropped the oldest
+  photos to their top-left corner until `1754600000_backfill_focal_centre.js` repaired it.
+  Write the backfill in the same change.
+- A new **`json`** field reads as empty, which a well-chosen default (`cropRect()` treats
+  anything falsy as the whole photo) absorbs with no backfill at all.
+- PocketBase ships the `users` collection locked to `id = @request.auth.id`. That broke
+  attribution invisibly — `expand=author` returned nothing for the other parent's posts.
+  Test cross-account behaviour, not just your own.
 - Target single-handed operation; keep tap targets large and actions reachable from the bottom.
 
 ## Performance rules
