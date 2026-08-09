@@ -69,9 +69,11 @@
   <main id="timeline" class="timeline" aria-label="Layout samples"></main>
 
   <script type="module">
-    import { renderPost } from './js/render.js';
+    import { renderPost, setMilestoneArt } from './js/render.js';
     import { inferLayout } from './js/layout-engine.js';
-    import { ART_PRESETS, milestoneArtSvg, assignSides } from './js/milestone-art.js';
+    import {
+      ART_PRESETS, milestoneArtSvg, assignSides, assignPresets,
+    } from './js/milestone-art.js';
     import { initCarousels } from './js/carousel.js';
     import { initLightbox } from './js/lightbox.js';
 
@@ -227,8 +229,10 @@
     // app.js normally assigns the alternating sides and fades the artwork with scroll;
     // this bench shows everything at once, so pin both up front.
     const scenes = [...timeline.querySelectorAll('.milestone-scene')];
-    const sides = assignSides(scenes.map((s) => s.querySelector('.milestone-art-wrap')?.dataset.art));
+    const presets = assignPresets(scenes.map((s) => s.dataset.milestoneTitle));
+    const sides = assignSides(presets);
     scenes.forEach((scene, i) => {
+      setMilestoneArt(scene.querySelector('.milestone-art-wrap'), presets[i]);
       scene.classList.add(sides[i] === 'right' ? 'side-right' : 'side-left');
       scene.style.setProperty('--art-progress', 1);
     });

@@ -90,12 +90,75 @@ function hash(str) {
 }
 
 /**
- * Which stock drawing a milestone gets.
+ * Titles that are about a birthday. Kept deliberately tight: "three months old" is a
+ * milestone but not a birthday, and matching it would spend the cake on the wrong thing.
+ */
+const BIRTHDAY = /\b(birthdays?|bday|b-day)\b|\bturn(?:s|ed|ing)?\s+(?:one|two|three|1|2|3)\b|\b(?:one|first|1st)\s+year\s+old\b/i;
+
+/** The two drawings that mean "birthday". Nothing else should be chosen for one. */
+const BIRTHDAY_PRESETS = Object.freeze(['cake', 'balloons']);
+
+export function isBirthday(title) {
+  return BIRTHDAY.test(String(title || ''));
+}
+
+/**
+ * Drawings a title could take, best first.
+ *
+ * A birthday gets cake or balloons and nothing else — some milestones mean something
+ * specific, and a birthday drawn as a dinosaur is just wrong. Everything else falls back
+ * to the hash, expressed as the full list rotated to start at the hashed choice, so the
+ * sequencer has somewhere to go when its first pick would repeat.
+ *
+ * @param {string} title
+ * @returns {string[]} non-empty, every entry a member of ART_PRESETS
+ */
+export function presetCandidates(title) {
+  const h = hash(String(title || ''));
+
+  if (isBirthday(title)) {
+    // Which of the two leads is still the title's choice, so the same birthday always
+    // prefers the same drawing.
+    return h % 2 ? [...BIRTHDAY_PRESETS].reverse() : [...BIRTHDAY_PRESETS];
+  }
+
+  const start = h % ART_PRESETS.length;
+  return [...ART_PRESETS.slice(start), ...ART_PRESETS.slice(0, start)];
+}
+
+/**
+ * Which stock drawing a milestone gets, ignoring its neighbours. Use assignPresets when
+ * the timeline order is known — this is for looking at one title on its own.
  * @param {string} title
  * @returns {string} a member of ART_PRESETS
  */
 export function artPreset(title) {
-  return ART_PRESETS[hash(String(title || '')) % ART_PRESETS.length];
+  return presetCandidates(title)[0];
+}
+
+/**
+ * Drawings for a run of milestones, in timeline order.
+ *
+ * No drawing repeats on adjacent milestones. That matters most for artwork pinned to a
+ * side — two pinned neighbours would place their artwork in the same fixed spot and sit
+ * on top of each other — but back-to-back repeats look like a bug regardless, so the rule
+ * applies to all of them.
+ *
+ * A consequence worth knowing: a milestone's drawing depends on its neighbours, so
+ * inserting one between two others can change what they show. That is the trade for never
+ * repeating, and the drawings are decorative.
+ *
+ * @param {string[]} titles in timeline order
+ * @returns {string[]}
+ */
+export function assignPresets(titles) {
+  let previous = null;
+  return (titles || []).map((title) => {
+    const candidates = presetCandidates(title);
+    const choice = candidates.find((c) => c !== previous) ?? candidates[0];
+    previous = choice;
+    return choice;
+  });
 }
 
 // ── The drawings ───────────────────────────────────────────────────

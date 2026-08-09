@@ -9,6 +9,7 @@ import assert from 'node:assert/strict';
 
 import {
   ART_PRESETS, artPreset, milestoneArtSvg, artSide, assignSides,
+  isBirthday, presetCandidates, assignPresets,
 } from '../js/milestone-art.js';
 
 const TITLES = ['First steps', 'Day one', 'First laugh', 'Crawling', 'First tooth', ''];
@@ -83,6 +84,82 @@ test('a title cannot inject markup, because it never reaches the svg at all', ()
   assert.ok(!svg.includes('alert'));
   // Whatever it picked is still one of the stock drawings, untouched.
   assert.ok(ART_PRESETS.some((p) => milestoneArtSvg(p) === svg));
+});
+
+// ── Birthdays ─────────────────────────────────────────────────────
+test('a birthday is recognised however it is written', () => {
+  for (const title of [
+    'Birthday!', 'First birthday', 'Happy birthday Finn', "Finn's 1st birthday",
+    'bday', 'B-day party', 'She turns one', 'Turned 2 today', 'One year old',
+  ]) {
+    assert.ok(isBirthday(title), `${title} should read as a birthday`);
+  }
+});
+
+test('milestones that merely mention time are not birthdays', () => {
+  // "Three months old" is a milestone, but spending the cake on it would leave nothing
+  // for the real thing.
+  for (const title of [
+    'Three months old', 'First steps', 'Rolled over', 'First tooth',
+    'Day one', 'Sat up', 'First swim',
+  ]) {
+    assert.equal(isBirthday(title), false, `${title} should not read as a birthday`);
+  }
+});
+
+test('a birthday only ever gets cake or balloons', () => {
+  for (const title of ['Birthday!', 'First birthday', 'bday', 'One year old', 'Turns two']) {
+    const candidates = presetCandidates(title);
+    assert.deepEqual([...candidates].sort(), ['balloons', 'cake'], title);
+    assert.ok(['cake', 'balloons'].includes(artPreset(title)), title);
+  }
+});
+
+test('the same birthday always prefers the same one of the two', () => {
+  assert.equal(artPreset('First birthday'), artPreset('First birthday'));
+});
+
+test('adjacent birthdays take different drawings rather than repeating', () => {
+  const [a, b] = assignPresets(['First birthday', 'First birthday']);
+  assert.notEqual(a, b);
+  assert.ok(['cake', 'balloons'].includes(a));
+  assert.ok(['cake', 'balloons'].includes(b));
+});
+
+// ── Never twice in a row ──────────────────────────────────────────
+test('a drawing never repeats on adjacent milestones', () => {
+  // Titles that all prefer the same drawing on their own.
+  const sameChoice = ART_PRESETS.map(() => 'Hello world!'); // all hash to dinosaur
+  const presets = assignPresets(sameChoice);
+  for (let i = 1; i < presets.length; i += 1) {
+    assert.notEqual(presets[i], presets[i - 1], `repeat at ${i}: ${presets}`);
+  }
+});
+
+test('dinosaurs specifically never appear twice in a row', () => {
+  assert.equal(artPreset('Hello world!'), 'dinosaur', 'fixture should prefer dinosaur');
+  const presets = assignPresets(['Hello world!', 'Hello world!', 'Hello world!']);
+  assert.equal(presets[0], 'dinosaur');
+  assert.notEqual(presets[1], 'dinosaur');
+  assert.equal(presets.filter((p, i) => p === 'dinosaur' && presets[i - 1] === 'dinosaur').length, 0);
+});
+
+test('a milestone keeps its own preference when it does not clash', () => {
+  const titles = ['Hello world!', 'First steps', 'First laugh'];
+  assert.deepEqual(assignPresets(titles), titles.map(artPreset));
+});
+
+test('inserting a milestone may change its neighbours — the documented trade', () => {
+  const before = assignPresets(['Hello world!', 'Hello world!']);
+  const after = assignPresets(['Hello world!', 'First steps', 'Hello world!']);
+  assert.notEqual(before[1], after[2], 'the later one is free to prefer dinosaur again');
+  assert.equal(after[2], 'dinosaur');
+});
+
+test('assigning presets copes with empty and malformed input', () => {
+  assert.deepEqual(assignPresets([]), []);
+  assert.deepEqual(assignPresets(null), []);
+  assert.ok(ART_PRESETS.includes(assignPresets([undefined])[0]));
 });
 
 // ── Which side the artwork takes ──────────────────────────────────

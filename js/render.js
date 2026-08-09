@@ -6,7 +6,7 @@ import {
   inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, coverAlign,
 } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
-import { artPreset, milestoneArtSvg, artImage } from './milestone-art.js';
+import { milestoneArtSvg, artImage } from './milestone-art.js';
 
 function el(tag, className, props = {}) {
   const node = document.createElement(tag);
@@ -238,28 +238,41 @@ export function renderPost(post, birthDate, opts = {}) {
   scene.dataset.memoryDate = post.memoryDate;
   scene.dataset.postId = post.id;
 
-  // The drawing is one of a fixed set — the title only picks which, never what it says,
-  // so no parent-typed text reaches the generated markup.
-  const preset = artPreset(post.milestone.title || 'Milestone');
+  // The drawing depends on this milestone's NEIGHBOURS, not just its own title — nothing
+  // repeats back to back — so it is filled in by app.js once the timeline order is known.
+  // The title rides along so the choice can be recomputed when the order changes.
+  scene.dataset.milestoneTitle = post.milestone.title || 'Milestone';
   const art = el('div', 'milestone-art-wrap');
   art.setAttribute('aria-hidden', 'true');
-  art.dataset.art = preset;
+
+  scene.append(art, card);
+  return scene;
+}
+
+/**
+ * Fill a milestone's artwork holder with a given drawing. Separate from building the
+ * scene because the choice is a property of the whole timeline, and re-runs when it
+ * changes.
+ *
+ * @param {HTMLElement} wrap the `.milestone-art-wrap`
+ * @param {string} preset
+ */
+export function setMilestoneArt(wrap, preset) {
+  if (wrap.dataset.art === preset) return; // already showing this one
+  wrap.dataset.art = preset;
 
   const image = artImage(preset);
   if (image) {
     // Real artwork, applied as a mask so it takes the palette colour rather than
     // arriving as whatever black the file happens to contain.
-    art.style.setProperty('--art-ar', `${image.width} / ${image.height}`);
+    wrap.style.setProperty('--art-ar', `${image.width} / ${image.height}`);
     const layer = el('div', 'milestone-art milestone-art--image');
     // Absolute, because a relative URL inside a custom property resolves against the
     // STYLESHEET that uses it — cards.css — and would look for it under css/.
     layer.style.setProperty('--art-src', `url("${new URL(image.src, document.baseURI).href}")`);
-    art.append(layer);
+    wrap.replaceChildren(layer);
   } else {
-    art.style.setProperty('--art-ar', '1'); // the placeholders are drawn square
-    art.innerHTML = milestoneArtSvg(preset);
+    wrap.style.setProperty('--art-ar', '1'); // the placeholders are drawn square
+    wrap.innerHTML = milestoneArtSvg(preset);
   }
-
-  scene.append(art, card);
-  return scene;
 }

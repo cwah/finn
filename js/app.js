@@ -2,7 +2,7 @@
 // reveal-on-scroll, battery-friendly parallax (rAF + translate3d), and capture.
 
 import { getConfig, getPosts } from './data.js';
-import { renderPost } from './render.js';
+import { renderPost, setMilestoneArt } from './render.js';
 import { ageStamp } from './age.js';
 import { initCapture, openForEdit } from './capture.js';
 import { initScrubber } from './scrubber.js';
@@ -10,7 +10,7 @@ import { ensureSignedIn, initSignOut } from './auth.js';
 import { initLightbox } from './lightbox.js';
 import { initCarousels } from './carousel.js';
 import { centreProgress } from './fade.js';
-import { assignSides } from './milestone-art.js';
+import { assignSides, assignPresets } from './milestone-art.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -100,16 +100,21 @@ function paintArt(vh = window.innerHeight) {
   });
 }
 
-// Which side each milestone's artwork takes. Milestones are interleaved with ordinary
-// cards, so no CSS selector can count them — assign after mounting, when the order is
-// known. The rule itself lives in assignSides: pinned artwork keeps its side, the rest
-// alternates around it.
+// Which drawing each milestone shows, and which side it takes. Both depend on the run of
+// milestones rather than on one post — nothing repeats back to back, and pinned artwork
+// keeps its side while the rest alternates around it — so both are decided here, once the
+// timeline order is known, and re-decided whenever that order changes.
+//
+// Milestones are interleaved with ordinary cards, so no CSS selector could do either.
 function restripeMilestones() {
   const scenes = [...timeline.querySelectorAll('.milestone-scene')];
-  const presets = scenes.map((s) => s.querySelector('.milestone-art-wrap')?.dataset.art);
-  assignSides(presets).forEach((side, i) => {
-    scenes[i].classList.toggle('side-right', side === 'right');
-    scenes[i].classList.toggle('side-left', side === 'left');
+  const presets = assignPresets(scenes.map((s) => s.dataset.milestoneTitle));
+  const sides = assignSides(presets);
+
+  scenes.forEach((scene, i) => {
+    setMilestoneArt(scene.querySelector('.milestone-art-wrap'), presets[i]);
+    scene.classList.toggle('side-right', sides[i] === 'right');
+    scene.classList.toggle('side-left', sides[i] === 'left');
   });
 }
 

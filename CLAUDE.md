@@ -257,9 +257,21 @@ below 1 — it is a background, not a subject.
 
 - `ART_PRESETS` is a fixed set: balloons, cake, blocks (stock A/B/C in a triangle),
   donuts, dinosaur, lemons.
-- `artPreset(title)` hashes the title to pick one. The title decides *which* stock
-  drawing appears, never *what it says* — no parent-typed text ever reaches a drawing.
-- `milestoneArtSvg(preset)` returns the markup. Both are pure and unit-tested.
+- **A birthday gets cake or balloons and nothing else.** Some milestones mean something
+  specific, and a birthday drawn as a dinosaur is just wrong. `isBirthday()` is kept
+  deliberately tight — "three months old" is a milestone but not a birthday.
+- Everything else falls to a hash of the title. The title decides *which* stock drawing
+  appears, never *what it says* — no parent-typed text ever reaches a drawing.
+- **Nothing repeats on adjacent milestones.** `assignPresets()` takes the whole run in
+  timeline order and moves a milestone to its next choice when its first would repeat
+  its neighbour's. It matters most for artwork pinned to a side, where two neighbours
+  would place their artwork in the same fixed spot and overlap.
+- `milestoneArtSvg(preset)` returns the markup. All of these are pure and unit-tested.
+
+> Because the choice depends on neighbours, **inserting a milestone can change what the
+> ones around it show**, and `renderPost` cannot bake the drawing in. `app.js` fills it via
+> `setMilestoneArt()` in the same pass that assigns sides, and re-runs on every insert,
+> edit and delete.
 
 Every stroke is `currentColor`, so `.milestone-art` in CSS is the only thing deciding
 hue and the sketches can never drift from the palette.
