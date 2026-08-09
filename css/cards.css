@@ -1,14 +1,24 @@
 /* ── Timeline item ─────────────────────────────────────────────── */
-/* Whatever the timeline mounts reveals as one piece — for a milestone that is the
-   card AND the sketch drawn around it, so the reveal lives here rather than on .card */
+/* Whatever the timeline mounts fades in as one piece. Only OPACITY lives here: the lift
+   is applied to the card below, because a transform on a milestone scene would become
+   the containing block for its artwork and trap it, and the artwork has to be fixed to
+   the viewport. Opacity creates a stacking context but not a containing block, so it is
+   safe here. */
 .timeline-item {
   opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 
-.timeline-item.is-visible {
-  opacity: 1;
+.timeline-item.is-visible { opacity: 1; }
+
+/* The lift, on the card rather than the item that holds it */
+.card {
+  transform: translate3d(0, 18px, 0);
+  transition: transform 0.5s ease;
+}
+
+.timeline-item.is-visible .card,
+.card.timeline-item.is-visible {
   transform: translate3d(0, 0, 0);
 }
 
@@ -277,21 +287,33 @@
    it only fades up as its card comes into view and fades away as it leaves. */
 .milestone-scene { position: relative; }
 
+/* FIXED to the viewport, not to the card. The card scrolls past it; the artwork never
+   moves, it only fades. Anchored beside where the timeline sits — half the viewport plus
+   half the card's width — and pulled back a little so the card overlaps its inner edge. */
 .milestone-art-wrap {
-  position: absolute;
+  position: fixed;
   top: 50%;
-  width: 200px;
+  width: 400px;
   aspect-ratio: var(--art-ar, 1);
   transform: translateY(-50%);
   pointer-events: none;
+  z-index: 0; /* the card sits above it */
   /* --art-progress is written per frame by app.js: 0 at the edges of the viewport, 1
      when the card is the thing you are looking at. No transition — the scroll position
      IS the animation, and easing it would only make it lag behind the card. */
   opacity: calc(var(--art-progress, 0) * var(--art-peak, 0.5));
 }
 
-.milestone-scene.side-right .milestone-art-wrap { left: 100%; margin-left: 26px; }
-.milestone-scene.side-left .milestone-art-wrap { right: 100%; margin-right: 26px; }
+.milestone-scene.side-right .milestone-art-wrap {
+  left: calc(50% + var(--maxw) / 2 - 70px);
+}
+
+.milestone-scene.side-left .milestone-art-wrap {
+  right: calc(50% + var(--maxw) / 2 - 70px);
+}
+
+/* The card paints over the artwork's inner edge */
+.milestone-scene .card { position: relative; z-index: 1; }
 
 .milestone-art {
   width: 100%;
@@ -320,10 +342,11 @@
   .milestone-art-wrap { opacity: var(--art-peak, 0.5); }
 }
 
-/* A phone has no room beside the card — the sketch is a wide-screen grace note, and
-   hiding it beats letting it collide with the timeline. Needs the card's 560px plus a
-   132px drawing and its margin on one side. */
-@media (max-width: 879px) {
+/* A phone has no room beside the card — the artwork is a wide-screen grace note, and
+   hiding it beats letting it collide with the timeline. At 400px it needs more room than
+   the old 200px did: below this the outer edge would be cut off by the viewport, which
+   reads as broken rather than as bleeding. */
+@media (max-width: 1023px) {
   .milestone-art-wrap { display: none; }
 }
 

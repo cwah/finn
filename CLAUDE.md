@@ -221,12 +221,23 @@ an ordinary post and the scene for a milestone. That element carries `memoryDate
 the `.timeline-item` reveal class — keep those on the returned element, not on `.card`,
 or the scrubber and the reveal animation will miss milestones.
 
-**Placement.** Sketches sit to one side of the card, **alternating** down the timeline.
+**Placement.** Artwork is **fixed to the viewport**, not to the card: it holds one spot on
+screen while the card scrolls past it, and only its opacity changes. Sides **alternate**
+down the timeline, which also keeps two simultaneously-visible milestones from stacking
+on top of each other.
+
+> A transformed ancestor becomes the containing block for a `fixed` descendant, which
+> would trap the artwork inside the scene and make it scroll after all. That is why the
+> reveal animation's `transform` lives on `.card` rather than on `.timeline-item`. Keep it
+> there. Opacity is fine — it makes a stacking context, not a containing block.
+
 Milestones are interleaved with ordinary cards, so no CSS selector can count them —
 `app.js` assigns `side-left` / `side-right` after mounting, when the order is known, and
 re-runs it when a backdated milestone lands mid-timeline and flips every side below it.
-Below 880px there is no room beside the card, so the sketch is hidden outright; it is a
-wide-screen grace note, not something the phone layout depends on.
+Below 1024px there is no room beside the card, so the artwork is hidden outright; it is a
+wide-screen grace note, not something the phone layout depends on. At 400px wide it needs
+more room than the earlier 200px did — below that breakpoint its outer edge would be cut
+off by the viewport, which reads as broken rather than as bleeding.
 
 **Motion.** Artwork never moves — the fade *is* the animation. `centreProgress()` in
 `fade.js` (pure, tested) maps a card's position to 0–1: fading up as it comes into view,

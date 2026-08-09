@@ -32,8 +32,10 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    /* Nothing scrolls into view here — show every item immediately. */
-    .timeline-item { opacity: 1; transform: none; }
+    /* Nothing scrolls into view here — show every item immediately. The lift lives on
+       the card now, so it has to be neutralised there too. */
+    .timeline-item { opacity: 1; }
+    .timeline-item .card, .card.timeline-item { transform: none; }
     .preview-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
