@@ -182,6 +182,12 @@
         ],
         author: { id: 'u2', name: 'Dad' },
       })],
+      ['Milestone · real artwork (dino.png, masked to the palette)', post({
+        memoryDate: '2026-06-28',
+        caption: 'Titles hashing to the dinosaur preset use the real PNG.',
+        milestone: { isMilestone: true, title: 'Hello world!' },
+        photos: [photo('dinocard', 1200, 900)],
+      })],
       ['Rule 5 · milestone + portrait', post({
         memoryDate: '2026-06-30',
         caption: 'She did it — three wobbly steps to the couch.',
@@ -216,10 +222,11 @@
     initCarousels(timeline);
     initLightbox(timeline);
 
-    // app.js normally assigns the alternating sides and lights the sketches on scroll;
-    // this bench shows everything at once, so do both up front.
+    // app.js normally assigns the alternating sides and fades the artwork with scroll;
+    // this bench shows everything at once, so pin both up front.
     timeline.querySelectorAll('.milestone-scene').forEach((scene, i) => {
-      scene.classList.add(i % 2 === 0 ? 'side-right' : 'side-left', 'is-lit');
+      scene.classList.add(i % 2 === 0 ? 'side-right' : 'side-left');
+      scene.style.setProperty('--art-progress', 1);
     });
 
     // Every stock drawing, so a new preset can be eyeballed without hunting for a

@@ -14,6 +14,25 @@
 // PURE — no DOM, no fetch, no randomness. Every drawing is fixed geometry, and the
 // preset choice is a hash of the title, so a milestone always shows the same sketch.
 
+/**
+ * Real artwork, keyed by preset. A preset listed here uses its file; anything missing
+ * falls back to the SVG placeholder below, so the set can be replaced one drawing at a
+ * time rather than all at once.
+ *
+ * The files are drawn in black on transparency and are applied as a MASK, not as an
+ * image — that way they take `--accent-ink` like the placeholders do, and a future
+ * palette change cannot leave the artwork behind. Dimensions live here so the wrapper
+ * can take the artwork's shape without waiting for the file to load.
+ */
+export const ART_IMAGES = Object.freeze({
+  dinosaur: { src: 'assets/dino.png', width: 1734, height: 1382 },
+});
+
+/** @returns {{src: string, width: number, height: number}|null} */
+export function artImage(preset) {
+  return ART_IMAGES[preset] || null;
+}
+
 /** The complete set. Adding one here is all it takes for titles to start picking it. */
 export const ART_PRESETS = Object.freeze([
   'balloons',

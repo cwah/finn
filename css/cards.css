@@ -280,24 +280,44 @@
 .milestone-art-wrap {
   position: absolute;
   top: 50%;
-  width: 132px;
-  aspect-ratio: 1;          /* matches milestone-art.js's square viewBox */
+  width: 200px;
+  aspect-ratio: var(--art-ar, 1);
   transform: translateY(-50%);
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.55s ease;
+  /* --art-progress is written per frame by app.js: 0 at the edges of the viewport, 1
+     when the card is the thing you are looking at. No transition — the scroll position
+     IS the animation, and easing it would only make it lag behind the card. */
+  opacity: calc(var(--art-progress, 0) * var(--art-peak, 0.5));
 }
 
 .milestone-scene.side-right .milestone-art-wrap { left: 100%; margin-left: 26px; }
 .milestone-scene.side-left .milestone-art-wrap { right: 100%; margin-right: 26px; }
-
-.milestone-scene.is-lit .milestone-art-wrap { opacity: 0.45; }
 
 .milestone-art {
   width: 100%;
   height: 100%;
   /* Sage, so the milestone treatment reads green; the chip supplies the blue */
   color: var(--accent-ink);
+}
+
+/* Real artwork is applied as a mask rather than painted: the files are black line art,
+   and masking makes them take --accent-ink exactly as the SVG placeholders do. Drop a
+   PNG in and it joins the palette instead of fighting it. */
+.milestone-art--image {
+  background-color: var(--accent-ink);
+  -webkit-mask-image: var(--art-src);
+  mask-image: var(--art-src);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Without scroll-driven fading there is no reason to hide it — settle at the peak. */
+@media (prefers-reduced-motion: reduce) {
+  .milestone-art-wrap { opacity: var(--art-peak, 0.5); }
 }
 
 /* A phone has no room beside the card — the sketch is a wide-screen grace note, and

@@ -6,7 +6,7 @@ import {
   inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, coverAlign,
 } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
-import { artPreset, milestoneArtSvg } from './milestone-art.js';
+import { artPreset, milestoneArtSvg, artImage } from './milestone-art.js';
 
 function el(tag, className, props = {}) {
   const node = document.createElement(tag);
@@ -243,8 +243,22 @@ export function renderPost(post, birthDate, opts = {}) {
   const preset = artPreset(post.milestone.title || 'Milestone');
   const art = el('div', 'milestone-art-wrap');
   art.setAttribute('aria-hidden', 'true');
-  art.dataset.art = preset; // swap point for the real PNGs later
-  art.innerHTML = milestoneArtSvg(preset);
+  art.dataset.art = preset;
+
+  const image = artImage(preset);
+  if (image) {
+    // Real artwork, applied as a mask so it takes the palette colour rather than
+    // arriving as whatever black the file happens to contain.
+    art.style.setProperty('--art-ar', `${image.width} / ${image.height}`);
+    const layer = el('div', 'milestone-art milestone-art--image');
+    // Absolute, because a relative URL inside a custom property resolves against the
+    // STYLESHEET that uses it — cards.css — and would look for it under css/.
+    layer.style.setProperty('--art-src', `url("${new URL(image.src, document.baseURI).href}")`);
+    art.append(layer);
+  } else {
+    art.style.setProperty('--art-ar', '1'); // the placeholders are drawn square
+    art.innerHTML = milestoneArtSvg(preset);
+  }
 
   scene.append(art, card);
   return scene;

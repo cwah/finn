@@ -9,6 +9,7 @@ import { initScrubber } from './scrubber.js';
 import { ensureSignedIn, initSignOut } from './auth.js';
 import { initLightbox } from './lightbox.js';
 import { initCarousels } from './carousel.js';
+import { centreProgress } from './fade.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -60,21 +61,43 @@ function onScroll() {
       const shift = Math.max(-1, Math.min(1, progress)) * -16; // px drift
       img.style.transform = `translate3d(0, ${shift}px, 0)`;
     });
+    paintArt(vh);
     scrubber.update();
     rafPending = false;
   });
 }
 
-// ── Milestone sketches: fade in and out, never move ────────────────
-// Lit while the scene sits in the middle band of the viewport, so a sketch fades up as
-// its card arrives and fades away as it leaves. Opacity only — no scroll-driven
-// positioning, so this costs nothing per frame.
+// ── Milestone artwork: stationary, fading with scroll ──────────────
+// The artwork never moves. It fades up as its card comes into view, is clearest when the
+// card is the thing you are looking at, and fades away as the card leaves.
+//
+// Opacity only — nothing is repositioned — and only for scenes actually on screen, which
+// the observer tracks so the per-frame work stays proportional to what is visible.
+const artActive = new Set();
 const artObserver = new IntersectionObserver(
   (entries) => {
-    for (const e of entries) e.target.classList.toggle('is-lit', e.isIntersecting);
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        artActive.add(e.target);
+      } else {
+        artActive.delete(e.target);
+        e.target.style.setProperty('--art-progress', 0); // fully out once off screen
+      }
+    }
+    // Paint immediately: a card already on screen at load never gets a scroll event.
+    paintArt();
   },
-  { rootMargin: '-12% 0px -12% 0px' },
+  { rootMargin: '15% 0px' }, // start fading before the card's edge reaches the viewport
 );
+
+/** Opacity only — nothing here is repositioned. See centreProgress for the curve. */
+function paintArt(vh = window.innerHeight) {
+  artActive.forEach((scene) => {
+    const rect = scene.getBoundingClientRect();
+    const p = centreProgress(rect.top, rect.height, vh);
+    scene.style.setProperty('--art-progress', p.toFixed(3));
+  });
+}
 
 // Sides alternate down the timeline. Milestones are interleaved with ordinary cards, so
 // no CSS selector can count them — assign after mounting, when the order is known.

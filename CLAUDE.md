@@ -228,9 +228,12 @@ re-runs it when a backdated milestone lands mid-timeline and flips every side be
 Below 880px there is no room beside the card, so the sketch is hidden outright; it is a
 wide-screen grace note, not something the phone layout depends on.
 
-**Motion.** Sketches never move. They fade in as their card reaches the middle of the
-viewport and fade out as it leaves, driven by an `IntersectionObserver` toggling a class
-— opacity only, nothing per frame, no scroll-driven positioning.
+**Motion.** Artwork never moves — the fade *is* the animation. `centreProgress()` in
+`fade.js` (pure, tested) maps a card's position to 0–1: fading up as it comes into view,
+clearest when the card owns the screen, fading away as it leaves. `app.js` writes that to
+`--art-progress` once per scroll frame, for the handful of cards an observer says are on
+screen. Opacity only; nothing is repositioned. The peak is `--art-peak`, deliberately
+below 1 — it is a background, not a subject.
 
 **The drawings** come from `milestone-art.js`:
 
@@ -243,9 +246,18 @@ viewport and fade out as it leaves, driven by an `IntersectionObserver` toggling
 Every stroke is `currentColor`, so `.milestone-art` in CSS is the only thing deciding
 hue and the sketches can never drift from the palette.
 
-> **These SVGs are placeholders for PNGs.** The preset name is the contract and is
-> already stamped on the wrapper as `data-art`, so swapping in `<img src="art/${preset}.png">`
-> touches only how `render.js` builds that node — not the CSS, the sides, or the fade.
+**Replacing a placeholder with real artwork:** drop the file in `assets/` and add one
+line to `ART_IMAGES` in `milestone-art.js` with its dimensions. Presets without a file
+keep their SVG, so the set can be replaced one drawing at a time. Only `dinosaur` has
+real art so far (`assets/dino.png`).
+
+- Files are applied as a **mask**, not an image, so black line art takes `--accent-ink`
+  exactly as the SVGs do and cannot fall out of the palette.
+- The URL must be made absolute in JS. A relative URL inside a custom property resolves
+  against the *stylesheet* that uses it — `css/cards.css` — so `assets/…` would be looked
+  for under `css/assets/…`.
+- Dimensions live in the manifest so the wrapper can take the artwork's shape without
+  waiting for the file to load.
 
 The chip keeps the one 12px offset it has on every card, so nothing about the sketch
 moves it.
