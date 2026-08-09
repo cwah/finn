@@ -32,25 +32,35 @@
   overscroll-behavior: contain;
 }
 
-/* Fitted to the screen by default. `margin: auto` rather than justify/align-content:
-   centred while it fits, and — unlike centring on the container — the overflow stays
-   reachable once zoomed. */
-.lightbox-img {
+/* Shows only the crop rectangle — the picture that was framed, never the file it came
+   from. Sized in px by lightbox.js, which knows the crop's pixel size and the room
+   available; CSS cannot fit a box whose contents are positioned by crop maths.
+   `margin: auto` rather than centring on the container, so the overflow stays reachable
+   once zoomed. */
+.lightbox-crop {
+  position: relative;
   margin: auto;
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  flex: none;
+  overflow: hidden;
   border-radius: 6px;
 }
 
-/* Only offer zoom when the photo is actually being shown smaller than it really is */
-.lightbox-img.can-zoom { cursor: zoom-in; }
-
-/* Zoomed: natural pixels, and the stage becomes a pannable window onto it */
-.lightbox-stage.is-zoomed .lightbox-img {
+/* Same offsets the cards use */
+.lightbox-img {
+  position: absolute;
+  width: calc(100% / var(--cw, 1));
+  height: auto;
   max-width: none;
-  max-height: none;
+  left: calc(var(--cx, 0) / var(--cw, 1) * -100%);
+  top: calc(var(--cy, 0) / var(--ch, 1) * -100%);
+  display: block;
+}
+
+/* Only offer zoom when the crop is actually being shown smaller than it really is */
+.lightbox-crop.can-zoom { cursor: zoom-in; }
+
+/* Zoomed: the crop at its own natural pixels, and the stage becomes a pannable window */
+.lightbox-stage.is-zoomed .lightbox-crop {
   border-radius: 0;
   cursor: zoom-out;
 }

@@ -175,11 +175,17 @@ photos behaved before either existed.
 - The **first photo leads** a post. "Make main photo" in the editor is a reorder, so the
   choice travels as plain photo order — the renderer, the contract and the backend all
   already treat position 0 as the lead.
-- `lightbox.js` opens any photo at its true aspect ratio, **fitted to the screen** by
-  default; tapping it zooms to natural pixels and the stage becomes a pannable window.
-  Zoom is only offered when the photo is actually being shown smaller than it is. It
-  builds its own markup so there is no second copy in `index.html` to drift, and the
-  preview bench gets it for free.
+- `lightbox.js` opens **the cropped picture**, never the file it was cropped from —
+  expanding a photo must not reveal what a parent deliberately cut away. It is fitted to
+  the screen by default; tapping zooms to the **crop's** natural pixels (a 400×900 crop
+  of a 1600×900 file zooms to 400×900) and the stage becomes a pannable window. Zoom is
+  only offered when the crop is genuinely being shown smaller than it is.
+  - Its sizes are computed in JS, not CSS: `max-width`/`max-height` cannot fit a box
+    whose contents are positioned by crop maths, and both numbers needed — the crop's
+    pixel size and the room available — are known there. It runs on open, page, zoom and
+    resize; never per frame.
+  - It builds its own markup, so there is no second copy in `index.html` to drift, and
+    the preview bench gets it for free.
   - The stage is **flex, not grid**. A percentage `max-height` on a grid item resolves
     against its grid *area*, which is auto-sized by the item — circular, so the cap is
     silently ignored and tall photos overflow the screen. Flex with a definite height

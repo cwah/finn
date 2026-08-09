@@ -66,9 +66,13 @@ function cropped(photo, group, cellAspect = null) {
 
 /** Make a photo openable full-size. The lightbox reads these off the clicked element. */
 function makeViewable(img, photo, group) {
+  const c = cropRect(photo);
   img.dataset.full = photo.url;
   img.dataset.fullW = photo.width;
   img.dataset.fullH = photo.height;
+  // The crop travels with it: opening a photo should show the picture that was framed,
+  // not the file it was framed from.
+  img.dataset.crop = `${c.x} ${c.y} ${c.w} ${c.h}`;
   img.dataset.group = group;
   return img;
 }
