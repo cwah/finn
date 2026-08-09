@@ -158,8 +158,12 @@ photos behaved before either existed.
   contrast, energy-weighted centroid, with a pull toward the middle and a clamp away from
   the edges so noise cannot yank the framing. `focalFromLuma()` is pure and tested; the
   canvas wrapper around it is not. Any failure degrades to dead centre, never an error.
-- `photo-editor.js` is the correction when the guess is wrong — drag the focal point,
-  previewed in a **square**, because the square grid cell is the crop that actually bites.
+- `photo-editor.js` is where both are set, on **one surface** showing the whole photo:
+  drag a corner to resize the crop, drag elsewhere to move it, and **tap to set the focal
+  point**. A tap is told from a drag by whether the pointer travelled, which lets the two
+  gestures share the surface without asking the parent to choose a mode first.
+  The focal point is held in *photo* space while editing, so it stays on the subject as
+  the crop moves around it, and is converted to crop space on save.
 - The **first photo leads** a post. "Make main photo" in the editor is a reorder, so the
   choice travels as plain photo order — the renderer, the contract and the backend all
   already treat position 0 as the lead.

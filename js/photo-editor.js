@@ -4,20 +4,27 @@
 // render, so it can be widened, moved or removed later — the original is kept whole,
 // forever.
 //
-// Crop and focus are separate modes rather than two drags competing on one surface:
+// Both settings live on ONE surface, the whole photo:
 //
-//   Crop  — the WHOLE photo, with a rectangle over it. What to keep.
-//   Focus — only the cropped result, in a square. Where to centre it when a card's cell
-//           is a different shape again, which is the one thing a crop cannot settle.
+//   drag a corner  — resize the crop
+//   drag elsewhere — move the crop
+//   tap            — set the focal point
 //
-// Both are needed: cropping picks the picture, the focal point survives the second crop
-// that a square grid cell imposes on top of it.
+// A tap is distinguished from a drag by whether the pointer travelled, which keeps the
+// two gestures from competing without asking the parent to pick a mode first.
+//
+// The focal point still earns its place alongside the crop: cropping picks the picture,
+// but a square grid cell crops again on top of that, and the focal point is what decides
+// where THAT crop centres.
 
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
 const round = (v) => Math.round(v * 1000) / 1000;
 
 /** Smallest crop we allow, as a fraction — below this the result is unusably soft. */
 const MIN_CROP = 0.1;
+
+/** Pointer travel, in px, above which a gesture is a drag rather than a tap. */
+const TAP_SLOP = 6;
 
 const PRESETS = [
   { label: 'Free', ratio: null },
@@ -27,61 +34,51 @@ const PRESETS = [
 ];
 
 /**
- * @param {{url: string, width: number, height: number, focalX?: number, focalY?: number,
- *          crop?: {x,y,w,h}|null}} photo
+ * @param {{url, width, height, focalX?, focalY?, crop?}} photo
  * @param {{isMain: boolean}} opts
  * @returns {Promise<{focalX, focalY, crop, makeMain}|null>} null when dismissed
  */
 export function openPhotoEditor(photo, { isMain }) {
   const sheet = document.getElementById('photoEditor');
-  const modes = sheet.querySelector('.editor-modes');
-  const cropPane = sheet.querySelector('.editor-crop');
+  const pane = sheet.querySelector('.editor-crop');
   const cropImg = sheet.querySelector('.editor-crop-img');
   const rect = sheet.querySelector('.editor-rect');
-  const presetBar = sheet.querySelector('.editor-presets');
-  const focusPane = sheet.querySelector('.editor-focus');
-  const stage = sheet.querySelector('.editor-stage');
-  const img = sheet.querySelector('.editor-img');
   const dot = sheet.querySelector('.editor-dot');
-  const hint = sheet.querySelector('.editor-hint');
+  const presetBar = sheet.querySelector('.editor-presets');
   const mainBtn = sheet.querySelector('.editor-main');
   const doneBtn = sheet.querySelector('.editor-done');
 
   // Working copy — nothing is committed until Done.
   let crop = { ...(photo.crop || { x: 0, y: 0, w: 1, h: 1 }) };
-  let fx = photo.focalX ?? 0.5;
-  let fy = photo.focalY ?? 0.5;
+
+  // The focal point is held in PHOTO space here, not crop space, so the dot stays on the
+  // subject while the crop is dragged around it. It is converted back on save.
+  let fpx = crop.x + (photo.focalX ?? 0.5) * crop.w;
+  let fpy = crop.y + (photo.focalY ?? 0.5) * crop.h;
+
   let ratio = null;
   let makeMain = false;
-  let mode = 'crop';
 
   // ── Painting ─────────────────────────────────────────────────────
-  function paintCrop() {
+  function paint() {
     rect.style.left = `${crop.x * 100}%`;
     rect.style.top = `${crop.y * 100}%`;
     rect.style.width = `${crop.w * 100}%`;
     rect.style.height = `${crop.h * 100}%`;
+    dot.style.left = `${fpx * 100}%`;
+    dot.style.top = `${fpy * 100}%`;
   }
 
-  function paintFocus() {
-    // The focus pane previews the cropped result, so it uses the same maths the card does.
-    img.style.width = `${100 / crop.w}%`;
-    img.style.left = `${(crop.x / crop.w) * -100}%`;
-    img.style.top = `${(crop.y / crop.h) * -100}%`;
-    stage.style.setProperty('--crop-ar', `${photo.width * crop.w} / ${photo.height * crop.h}`);
-    dot.style.left = `${fx * 100}%`;
-    dot.style.top = `${fy * 100}%`;
+  /** A focal point outside the crop describes nothing, so keep it within. */
+  function confineFocus() {
+    fpx = Math.min(Math.max(fpx, crop.x), crop.x + crop.w);
+    fpy = Math.min(Math.max(fpy, crop.y), crop.y + crop.h);
   }
 
-  function setMode(next) {
-    mode = next;
-    cropPane.hidden = next !== 'crop';
-    focusPane.hidden = next !== 'focus';
-    hint.textContent = next === 'crop'
-      ? 'Drag the corners to choose what to keep.'
-      : 'Drag to choose what stays centred in square cards.';
-    [...modes.children].forEach((b) => b.classList.toggle('is-on', b.dataset.mode === next));
-    if (next === 'focus') paintFocus();
+  /** Pointer position as a fraction of the photo. */
+  function at(e) {
+    const r = cropImg.getBoundingClientRect();
+    return { px: clamp01((e.clientX - r.left) / r.width), py: clamp01((e.clientY - r.top) / r.height) };
   }
 
   // ── Crop dragging ────────────────────────────────────────────────
@@ -105,46 +102,72 @@ export function openPhotoEditor(photo, { isMain }) {
       if (corner.includes('n')) y = bottom - h;
     }
 
-    // Never let a drag push the rectangle off the photo.
     w = Math.min(w, 1 - x);
     h = Math.min(h, 1 - y);
     crop = { x: clamp01(x), y: clamp01(y), w, h };
-    paintCrop();
+    confineFocus();
+    paint();
   }
 
   let drag = null;
-  cropPane.addEventListener('pointerdown', (e) => {
-    const r = cropImg.getBoundingClientRect();
-    const px = clamp01((e.clientX - r.left) / r.width);
-    const py = clamp01((e.clientY - r.top) / r.height);
+
+  const onDown = (e) => {
+    const { px, py } = at(e);
     const handle = e.target.dataset?.handle;
-    drag = handle ? { kind: 'resize', corner: handle } : { kind: 'move', px, py, from: { ...crop } };
-    cropPane.setPointerCapture(e.pointerId);
+    drag = {
+      kind: handle ? 'resize' : 'move',
+      corner: handle,
+      px,
+      py,
+      from: { ...crop },
+      startX: e.clientX,
+      startY: e.clientY,
+      moved: false,
+    };
+    pane.setPointerCapture(e.pointerId);
     e.preventDefault();
-  });
+  };
 
-  cropPane.addEventListener('pointermove', (e) => {
+  const onMove = (e) => {
     if (!drag) return;
-    const r = cropImg.getBoundingClientRect();
-    const px = clamp01((e.clientX - r.left) / r.width);
-    const py = clamp01((e.clientY - r.top) / r.height);
+    if (!drag.moved) {
+      // Until the pointer has actually travelled, this could still be a tap.
+      const far = Math.abs(e.clientX - drag.startX) > TAP_SLOP
+        || Math.abs(e.clientY - drag.startY) > TAP_SLOP;
+      if (!far) return;
+      drag.moved = true;
+    }
 
+    const { px, py } = at(e);
     if (drag.kind === 'resize') {
       resizeFrom(drag.corner, px, py);
     } else {
-      // Move keeps the size and slides within the photo's bounds.
       crop.x = Math.min(Math.max(drag.from.x + (px - drag.px), 0), 1 - crop.w);
       crop.y = Math.min(Math.max(drag.from.y + (py - drag.py), 0), 1 - crop.h);
-      paintCrop();
+      confineFocus();
+      paint();
     }
-  });
-
-  const endCropDrag = (e) => {
-    drag = null;
-    if (cropPane.hasPointerCapture?.(e.pointerId)) cropPane.releasePointerCapture(e.pointerId);
   };
-  cropPane.addEventListener('pointerup', endCropDrag);
-  cropPane.addEventListener('pointercancel', endCropDrag);
+
+  const onUp = (e) => {
+    if (!drag) return;
+    // A tap — the pointer never travelled — means "focus here" rather than a crop edit.
+    // Handles are excluded: a tap on one is a mis-hit, not a request to move the focus.
+    if (!drag.moved && drag.kind !== 'resize') {
+      const { px, py } = at(e);
+      fpx = px;
+      fpy = py;
+      confineFocus(); // a tap outside the crop lands on its nearest edge
+      paint();
+    }
+    drag = null;
+    if (pane.hasPointerCapture?.(e.pointerId)) pane.releasePointerCapture(e.pointerId);
+  };
+
+  pane.addEventListener('pointerdown', onDown);
+  pane.addEventListener('pointermove', onMove);
+  pane.addEventListener('pointerup', onUp);
+  pane.addEventListener('pointercancel', onUp);
 
   // ── Presets ──────────────────────────────────────────────────────
   presetBar.replaceChildren(...PRESETS.map((p) => {
@@ -168,48 +191,18 @@ export function openPhotoEditor(photo, { isMain }) {
           x: clamp01(Math.min(Math.max(cx - w / 2, 0), 1 - w)),
           y: clamp01(Math.min(Math.max(cy - h / 2, 0), 1 - h)),
         };
-        paintCrop();
+        confineFocus();
+        paint();
       }
     });
     return b;
   }));
   presetBar.firstElementChild.classList.add('is-on');
 
-  // ── Focus dragging ───────────────────────────────────────────────
-  function moveFocus(clientX, clientY) {
-    const r = stage.getBoundingClientRect();
-    fx = clamp01((clientX - r.left) / r.width);
-    fy = clamp01((clientY - r.top) / r.height);
-    paintFocus();
-  }
-
-  let focusing = false;
-  const onFocusDown = (e) => {
-    focusing = true;
-    stage.setPointerCapture(e.pointerId);
-    moveFocus(e.clientX, e.clientY);
-    e.preventDefault();
-  };
-  const onFocusMove = (e) => { if (focusing) moveFocus(e.clientX, e.clientY); };
-  const onFocusUp = (e) => {
-    focusing = false;
-    if (stage.hasPointerCapture?.(e.pointerId)) stage.releasePointerCapture(e.pointerId);
-  };
-  stage.addEventListener('pointerdown', onFocusDown);
-  stage.addEventListener('pointermove', onFocusMove);
-  stage.addEventListener('pointerup', onFocusUp);
-  stage.addEventListener('pointercancel', onFocusUp);
-
   // ── Open ─────────────────────────────────────────────────────────
   cropImg.src = photo.url;
-  img.src = photo.url;
-  cropPane.style.setProperty('--img-ar', `${photo.width} / ${photo.height}`);
-  paintCrop();
-
-  [...modes.children].forEach((b) => {
-    b.onclick = () => setMode(b.dataset.mode);
-  });
-  setMode('crop');
+  pane.style.setProperty('--img-ar', `${photo.width} / ${photo.height}`);
+  paint();
 
   mainBtn.hidden = isMain;
   mainBtn.classList.remove('is-chosen');
@@ -226,19 +219,19 @@ export function openPhotoEditor(photo, { isMain }) {
   return new Promise((resolve) => {
     let saved = false;
     const finish = () => {
-      stage.removeEventListener('pointerdown', onFocusDown);
-      stage.removeEventListener('pointermove', onFocusMove);
-      stage.removeEventListener('pointerup', onFocusUp);
-      stage.removeEventListener('pointercancel', onFocusUp);
+      pane.removeEventListener('pointerdown', onDown);
+      pane.removeEventListener('pointermove', onMove);
+      pane.removeEventListener('pointerup', onUp);
+      pane.removeEventListener('pointercancel', onUp);
       mainBtn.removeEventListener('click', onMain);
       sheet.removeEventListener('close', finish);
       cropImg.removeAttribute('src');
-      img.removeAttribute('src');
 
       const whole = crop.w >= 0.999 && crop.h >= 0.999;
       resolve(saved ? {
-        focalX: round(fx),
-        focalY: round(fy),
+        // Back to crop space, which is what the renderer positions against.
+        focalX: round(clamp01((fpx - crop.x) / crop.w)),
+        focalY: round(clamp01((fpy - crop.y) / crop.h)),
         // A crop covering the whole photo is no crop at all — store nothing.
         crop: whole ? null : {
           x: round(crop.x), y: round(crop.y), w: round(crop.w), h: round(crop.h),

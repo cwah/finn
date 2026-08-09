@@ -148,38 +148,10 @@
   text-align: center;
 }
 
-/* Crop and focus are different jobs, so they get different surfaces */
-.editor-modes {
-  display: flex;
-  gap: 4px;
-  padding: 3px;
-  border-radius: 999px;
-  background: var(--surface-2);
-}
-
-.editor-modes button {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  border-radius: 999px;
-  background: none;
-  color: var(--text-dim);
-  font: inherit;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.editor-modes button.is-on {
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: 0 1px 3px rgba(46, 58, 48, 0.14);
-}
-
-/* ── Crop mode ─────────────────────────────────────────────────── */
+/* ── Framing surface ───────────────────────────────────────────── */
 /* The stage takes the photo's own shape, so crop coordinates map straight onto it —
-   no object-fit letterboxing to compensate for. */
+   no object-fit letterboxing to compensate for. Crop rectangle and focal point share
+   this one surface: drag adjusts the crop, a tap sets the focus. */
 .editor-crop {
   position: relative;
   width: 100%;
@@ -260,33 +232,31 @@
   color: #23301f;
 }
 
-/* ── Focus mode ────────────────────────────────────────────────── */
-.editor-focus[hidden] { display: none; }
-
-/* Square, because the square grid cell is the crop that bites on top of the crop */
-.editor-stage {
-  position: relative;
-  width: 100%;
-  max-width: 300px;
-  margin: 0 auto;
-  aspect-ratio: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--surface-2);
-  touch-action: none; /* the drag belongs to the focal point, not the page */
-  cursor: grab;
-}
-
-.editor-stage:active { cursor: grabbing; }
-
-/* Previews the cropped result using the same maths the card uses */
-.editor-img {
+/* The focal point rides on the same surface. Above the rectangle's dimming shadow, and
+   never a pointer target itself — a tap anywhere is what moves it. */
+.editor-dot {
   position: absolute;
-  height: auto;
-  max-width: none;
-  display: block;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(46, 58, 48, 0.4), 0 2px 8px rgba(46, 58, 48, 0.45);
   pointer-events: none;
 }
+
+/* A crosshair, so it reads as "centre of attention" rather than a draggable handle */
+.editor-dot::before,
+.editor-dot::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 0 2px rgba(46, 58, 48, 0.6);
+}
+
+.editor-dot::before { top: 50%; left: 4px; right: 4px; height: 1px; margin-top: -0.5px; }
+.editor-dot::after { left: 50%; top: 4px; bottom: 4px; width: 1px; margin-left: -0.5px; }
 
 .editor-dot {
   position: absolute;
