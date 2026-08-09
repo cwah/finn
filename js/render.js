@@ -3,7 +3,7 @@
 // and css/cards.css together.
 
 import {
-  inferLayout, isMilestone, GRID_MAX, carouselAspect, cropRect, croppedSize, coverAlign,
+  inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, coverAlign,
 } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { artPreset, milestoneArtSvg } from './milestone-art.js';
@@ -109,9 +109,18 @@ function singlePhotoFrame(photo, group) {
 
 function gridPhotos(photos, group) {
   const wrap = el('div', 'grid-photos');
-  photos.slice(0, GRID_MAX).forEach((p) => {
+  const shown = photos.slice(0, GRID_MAX);
+
+  // In a three-photo grid the first cell spans the full width, and it is the one place
+  // in a grid where a single photo sets the shape — so it follows the lead photo's crop
+  // instead of being square like the rest.
+  const heroAspect = shown.length === 3 ? leadAspect(shown) : null;
+  if (heroAspect) wrap.style.setProperty('--hero-ar', heroAspect);
+
+  shown.forEach((p, i) => {
     const cell = el('div', 'grid-cell');
-    cell.append(cropped(p, group, 1)); // grid cells are square
+    const isHero = heroAspect !== null && i === 0;
+    cell.append(cropped(p, group, isHero ? heroAspect : 1)); // other cells are square
     wrap.append(cell);
   });
   return wrap;
@@ -124,9 +133,9 @@ function gridPhotos(photos, group) {
  */
 function carouselPhotos(photos, group) {
   const wrap = el('div', 'carousel');
-  // One shape for every slide, chosen from the set — see carouselAspect. A fixed shape
-  // would cut nearly half off any portrait in a mixed post.
-  const slideAspect = carouselAspect(photos);
+  // One shape for every slide — the card's height cannot jump as you swipe — taken from
+  // the lead photo, so cropping it reshapes the strip. See leadAspect.
+  const slideAspect = leadAspect(photos);
   wrap.style.setProperty('--slide-ar', slideAspect);
 
   const track = el('div', 'carousel-track');

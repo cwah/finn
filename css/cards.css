@@ -125,8 +125,15 @@
 
 .card--grid.count-2 .grid-photos { grid-template-columns: repeat(2, 1fr); }
 .card--grid.count-3 .grid-photos { grid-template-columns: repeat(2, 1fr); }
-.card--grid.count-3 .grid-cell:first-child { grid-column: 1 / -1; }
 .card--grid.count-4 .grid-photos { grid-template-columns: repeat(2, 1fr); }
+
+/* The three-photo hero spans the full width, and is the one grid cell whose shape comes
+   from a photo rather than from the grid — so cropping the lead photo reshapes it.
+   See leadAspect in layout-engine.js. */
+.card--grid.count-3 .grid-cell:first-child {
+  grid-column: 1 / -1;
+  aspect-ratio: var(--hero-ar, 1);
+}
 
 .grid-cell { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
 

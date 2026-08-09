@@ -70,32 +70,41 @@ export function inferLayout(post) {
 }
 
 /**
- * Slide shape for a carousel, inferred from the photos it holds.
+ * The shape a post takes from its LEAD photo — the first one, which "Make main photo"
+ * chooses.
  *
- * Every slide has to be the same shape or the card's height jumps as you swipe. A fixed
- * shape is the obvious answer and the wrong one: a 4:3 slide throws away 46% of a tall
- * portrait. So the set picks its own shape — the median aspect, which lands between the
- * orientations in a mixed post and matches exactly when they all agree.
+ * Used wherever one photo sets the card's shape: the full-width hero cell of a
+ * three-photo grid, and every slide of a carousel. (Two- and four-photo grids are square
+ * by design and ignore this.)
  *
- * Clamped to 3:4–3:2. Beyond that a single panorama or a very tall photo would drag
- * every other slide into an extreme shape.
+ * This deliberately follows the lead photo rather than, say, the median of the set. The
+ * lead photo is something the parent chose, and cropping it is an explicit statement
+ * about shape — a card that ignored that would be contradicting them. Carousels do pay
+ * for it: the other slides are cropped to the lead's shape rather than to a compromise.
+ * That is the trade for making crop and "make main" mean what they say, and both are
+ * within the parent's control.
  *
- * @param {Array<{width: number, height: number}>} photos
+ * Clamped only against the absurd — 1:3 to 3:1. A single-photo card applies no clamp at
+ * all, so anything tighter here would refuse a crop the same photo could have alone,
+ * which is the very complaint this function exists to answer. The guard is for a stray
+ * panorama forcing every slide of a carousel into a letterbox, not for shapes a parent
+ * might plausibly choose.
+ *
+ * @param {Array<{width: number, height: number, crop?: object}>} photos
  * @returns {number} width / height
  */
-export function carouselAspect(photos) {
-  const ratios = (photos || [])
-    .map((p) => { const s = croppedSize(p); return s.width / s.height; })
-    .filter((r) => Number.isFinite(r) && r > 0)
-    .sort((a, b) => a - b);
+export const LEAD_ASPECT_MIN = 1 / 3;
+export const LEAD_ASPECT_MAX = 3;
 
-  if (!ratios.length) return 4 / 3;
+export function leadAspect(photos) {
+  const lead = (photos || [])[0];
+  if (!lead) return 4 / 3;
 
-  const mid = Math.floor(ratios.length / 2);
-  // Even counts average the middle pair, so one photo cannot swing the whole strip.
-  const median = ratios.length % 2 ? ratios[mid] : (ratios[mid - 1] + ratios[mid]) / 2;
+  const { width, height } = croppedSize(lead);
+  const ar = width / height;
+  if (!Number.isFinite(ar) || ar <= 0) return 4 / 3;
 
-  return Math.min(1.5, Math.max(0.75, Math.round(median * 100) / 100));
+  return Math.min(LEAD_ASPECT_MAX, Math.max(LEAD_ASPECT_MIN, Math.round(ar * 100) / 100));
 }
 
 /**

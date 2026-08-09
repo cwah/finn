@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  inferLayout, isMilestone, GRID_MAX, carouselAspect, cropRect, croppedSize, FULL_CROP,
+  inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, FULL_CROP,
   coverAlign,
 } from '../js/layout-engine.js';
 
@@ -77,55 +77,48 @@ test('a missing photos array is treated as no photos', () => {
   assert.equal(inferLayout({}), null);
 });
 
-test('a carousel of one orientation takes exactly that shape', () => {
-  assert.equal(carouselAspect([photo(1200, 900), photo(1200, 900)]), 1.33);
-  assert.equal(carouselAspect([photo(900, 1200), photo(900, 1200)]), 0.75);
-  assert.equal(carouselAspect([photo(800, 800), photo(800, 800)]), 1);
+test('the lead photo sets the shape, whatever the rest of the set looks like', () => {
+  assert.equal(leadAspect([photo(1200, 900), photo(900, 1200)]), 1.33);
+  assert.equal(leadAspect([photo(900, 1200), photo(1200, 900)]), 0.75);
+  assert.equal(leadAspect([photo(800, 800)]), 1);
 });
 
-test('a mixed carousel lands between the orientations, not on one of them', () => {
-  const ar = carouselAspect([
-    photo(1200, 800),  // 1.5
-    photo(900, 1200),  // 0.75
-    photo(800, 800),   // 1.0
-    photo(1200, 900),  // 1.33
-    photo(1000, 1400), // 0.71
-  ]);
-  assert.equal(ar, 1, 'median of the five aspects');
-  // The point of the exercise: no photo loses more than a third of itself.
-  for (const [w, h] of [[1200, 800], [900, 1200], [800, 800], [1200, 900], [1000, 1400]]) {
-    const a = w / h;
-    const kept = a > ar ? ar / a : a / ar;
-    assert.ok(kept >= 0.66, `${w}x${h} kept only ${kept.toFixed(2)}`);
+test('cropping the lead photo reshapes the card', () => {
+  // The bug this fixes: the shape ignored the crop, so cropping changed nothing.
+  const wide = photo(1600, 900);
+  assert.equal(leadAspect([wide]), 1.78);
+  assert.equal(leadAspect([cropped(1600, 900, { x: 0.35, y: 0, w: 0.25, h: 1 })]), 0.44);
+});
+
+test('reordering changes the shape, since "make main photo" moves a photo to the front', () => {
+  const wide = photo(1600, 900);
+  const tall = photo(900, 1600);
+  assert.notEqual(leadAspect([wide, tall]), leadAspect([tall, wide]));
+});
+
+test('the clamp catches the absurd without refusing a plausible crop', () => {
+  // A stray panorama must not letterbox every slide of a carousel.
+  assert.ok(leadAspect([photo(6000, 800)]) <= 3, 'panorama not clamped');
+  assert.ok(leadAspect([photo(800, 6000)]) >= 1 / 3, 'tall photo not clamped');
+
+  // But every shape a parent might deliberately crop to has to survive intact —
+  // anything narrower than a single-photo card would allow is the bug, not the fix.
+  for (const [w, h, expected] of [
+    [400, 900, 0.44],   // a narrow slice
+    [900, 1600, 0.56],  // 9:16
+    [2, 3, 0.67],       // 2:3
+    [3, 4, 0.75],       // 3:4
+    [16, 9, 1.78],      // 16:9
+    [2, 1, 2],          // 2:1
+  ]) {
+    assert.equal(leadAspect([photo(w, h)]), expected, `${w}:${h} was altered`);
   }
 });
 
-test('one extreme photo cannot drag the whole strip to its shape', () => {
-  const withPanorama = carouselAspect([
-    photo(4000, 800), photo(1200, 900), photo(1200, 900), photo(1200, 900),
-  ]);
-  assert.ok(withPanorama <= 1.5, `panorama pulled the strip to ${withPanorama}`);
-  const withTower = carouselAspect([
-    photo(600, 2400), photo(1200, 900), photo(1200, 900), photo(1200, 900),
-  ]);
-  assert.ok(withTower >= 0.75, `tall photo pulled the strip to ${withTower}`);
-});
-
-test('carousel aspect stays inside 3:4 and 3:2 whatever it is fed', () => {
-  const cases = [
-    [photo(5000, 500)], [photo(500, 5000)], [photo(1, 1)],
-    [photo(1200, 800), photo(500, 5000)],
-  ];
-  for (const photos of cases) {
-    const ar = carouselAspect(photos);
-    assert.ok(ar >= 0.75 && ar <= 1.5, `${JSON.stringify(photos)} -> ${ar}`);
-  }
-});
-
-test('carousel aspect degrades to 4:3 on unusable input', () => {
-  assert.equal(carouselAspect([]), 4 / 3);
-  assert.equal(carouselAspect(null), 4 / 3);
-  assert.equal(carouselAspect([{ width: 0, height: 0 }]), 4 / 3);
+test('lead aspect degrades to 4:3 on unusable input', () => {
+  assert.equal(leadAspect([]), 4 / 3);
+  assert.equal(leadAspect(null), 4 / 3);
+  assert.equal(leadAspect([{ width: 0, height: 0 }]), 4 / 3);
 });
 
 // ── Cropping ──────────────────────────────────────────────────────
@@ -159,11 +152,10 @@ test('cropping a tall photo wide makes it a LANDSCAPE card', () => {
   );
 });
 
-test('a carousel takes its shape from the cropped photos, not the originals', () => {
-  // All wide files, all cropped square — the strip should be square, not 16:9.
+test('a carousel takes its shape from the cropped lead photo, not the original file', () => {
   const photos = [1, 2, 3, 4, 5].map(() =>
     cropped(1600, 900, { x: 0.2, y: 0, w: 0.5625, h: 1 }));
-  assert.equal(carouselAspect(photos), 1);
+  assert.equal(leadAspect(photos), 1);
 });
 
 test('a crop cannot escape the photo it belongs to', () => {

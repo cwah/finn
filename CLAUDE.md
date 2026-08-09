@@ -194,11 +194,18 @@ photos behaved before either existed.
     shifts with the photo's shape or while panning.
 - Carousels scroll with native CSS scroll-snap; `carousel.js` only lights the right dot,
   via an observer rooted on the track rather than a scroll listener.
-- **Slide shape comes from the photos**, via `carouselAspect()` in the engine. Every slide
-  must share a shape or the card's height jumps mid-swipe, but a *fixed* shape throws away
-  46% of a tall portrait. The set takes the median aspect instead — matching exactly when
-  the orientations agree, landing between them when they don't — clamped to 3:4–3:2 so one
-  panorama can't drag the strip.
+- **The lead photo sets the card's shape**, via `leadAspect()` in the engine. It governs
+  the two places where one photo decides a shape: the full-width hero cell of a
+  three-photo grid, and every slide of a carousel. (Two- and four-photo grids are square
+  by design and ignore it, as does a single-photo card, which takes its photo's shape
+  directly.)
+  - Every carousel slide must share a shape or the card's height jumps mid-swipe, so the
+    others are cropped to the lead's. That is the cost of making **cropping and "make
+    main photo" mean what they say** — both are the parent's to control, and a card that
+    ignored a crop would be contradicting them.
+  - Clamped only against the absurd, 1:3 to 3:1. Anything tighter would refuse a crop the
+    same photo could have as a single-photo card, which is the complaint `leadAspect`
+    exists to answer.
 - A card's bottom padding comes from its caption. Cards without one give it to the meta
   row instead; watch for that if you add another trailing element.
 

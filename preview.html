@@ -153,6 +153,15 @@
         caption: 'Cropping changes what the engine sees.',
         photos: [{ ...photo('cropme', 1600, 900), crop: { x: 0.35, y: 0, w: 0.25, h: 1 } }],
       })],
+      ['Crop · lead photo cropped tall reshapes the 3-grid hero', post({
+        memoryDate: '2026-07-01',
+        caption: 'The hero follows the lead photo, not a fixed square.',
+        photos: [
+          { ...photo('hero', 1600, 900), crop: { x: 0.3, y: 0, w: 0.4, h: 1 } },
+          photo('heroB', 800, 800),
+          photo('heroC', 800, 800),
+        ],
+      })],
       ['Crop · same photo, four crops in a grid', post({
         memoryDate: '2026-07-02',
         photos: [
