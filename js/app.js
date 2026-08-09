@@ -10,6 +10,7 @@ import { ensureSignedIn, initSignOut } from './auth.js';
 import { initLightbox } from './lightbox.js';
 import { initCarousels } from './carousel.js';
 import { centreProgress } from './fade.js';
+import { assignSides } from './milestone-art.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -99,12 +100,16 @@ function paintArt(vh = window.innerHeight) {
   });
 }
 
-// Sides alternate down the timeline. Milestones are interleaved with ordinary cards, so
-// no CSS selector can count them — assign after mounting, when the order is known.
+// Which side each milestone's artwork takes. Milestones are interleaved with ordinary
+// cards, so no CSS selector can count them — assign after mounting, when the order is
+// known. The rule itself lives in assignSides: pinned artwork keeps its side, the rest
+// alternates around it.
 function restripeMilestones() {
-  timeline.querySelectorAll('.milestone-scene').forEach((scene, i) => {
-    scene.classList.toggle('side-right', i % 2 === 0);
-    scene.classList.toggle('side-left', i % 2 === 1);
+  const scenes = [...timeline.querySelectorAll('.milestone-scene')];
+  const presets = scenes.map((s) => s.querySelector('.milestone-art-wrap')?.dataset.art);
+  assignSides(presets).forEach((side, i) => {
+    scenes[i].classList.toggle('side-right', side === 'right');
+    scenes[i].classList.toggle('side-left', side === 'left');
   });
 }
 

@@ -23,14 +23,47 @@
  * image — that way they take `--accent-ink` like the placeholders do, and a future
  * palette change cannot leave the artwork behind. Dimensions live here so the wrapper
  * can take the artwork's shape without waiting for the file to load.
+ *
+ * An entry may pin itself to one `side`. Artwork is not symmetric — a drawing that faces
+ * or leans one way looks wrong flipped to the other edge — so a piece that only works on
+ * one side says so, and the alternation works around it.
  */
 export const ART_IMAGES = Object.freeze({
-  dinosaur: { src: 'assets/dino.png', width: 1734, height: 1382 },
+  dinosaur: { src: 'assets/dino.png', width: 1734, height: 1382, side: 'right' },
 });
 
-/** @returns {{src: string, width: number, height: number}|null} */
+/** @returns {{src: string, width: number, height: number, side?: string}|null} */
 export function artImage(preset) {
   return ART_IMAGES[preset] || null;
+}
+
+/** @returns {'left'|'right'|null} null when the artwork is happy on either side. */
+export function artSide(preset) {
+  const side = ART_IMAGES[preset]?.side;
+  return side === 'left' || side === 'right' ? side : null;
+}
+
+/**
+ * Which side each milestone's artwork takes, in timeline order.
+ *
+ * Pinned artwork always gets the side it asked for. Everything else alternates away from
+ * whatever came before it — which matters more than it looks, because the artwork is
+ * fixed to the viewport: two milestones visible at once on the SAME side would sit on top
+ * of each other. Alternating around the pinned ones keeps that rare.
+ *
+ * It cannot be avoided entirely: two pinned-right milestones in a row will both be on the
+ * right, and if both are on screen they will overlap. Pin sparingly.
+ *
+ * @param {string[]} presets in timeline order
+ * @returns {Array<'left'|'right'>}
+ */
+export function assignSides(presets) {
+  let previous = null;
+  return (presets || []).map((preset) => {
+    const side = artSide(preset) || (previous === 'right' ? 'left' : 'right');
+    previous = side;
+    return side;
+  });
 }
 
 /** The complete set. Adding one here is all it takes for titles to start picking it. */

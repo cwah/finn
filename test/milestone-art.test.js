@@ -7,7 +7,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { ART_PRESETS, artPreset, milestoneArtSvg } from '../js/milestone-art.js';
+import {
+  ART_PRESETS, artPreset, milestoneArtSvg, artSide, assignSides,
+} from '../js/milestone-art.js';
 
 const TITLES = ['First steps', 'Day one', 'First laugh', 'Crawling', 'First tooth', ''];
 
@@ -81,6 +83,54 @@ test('a title cannot inject markup, because it never reaches the svg at all', ()
   assert.ok(!svg.includes('alert'));
   // Whatever it picked is still one of the stock drawings, untouched.
   assert.ok(ART_PRESETS.some((p) => milestoneArtSvg(p) === svg));
+});
+
+// ── Which side the artwork takes ──────────────────────────────────
+test('pinned artwork always gets the side it asked for', () => {
+  assert.equal(artSide('dinosaur'), 'right');
+  for (const sides of [
+    assignSides(['dinosaur']),
+    assignSides(['balloons', 'dinosaur']),
+    assignSides(['balloons', 'cake', 'dinosaur']),
+    assignSides(['dinosaur', 'dinosaur']),
+  ]) {
+    assert.ok(sides.every((s) => s === 'left' || s === 'right'), 'every side is valid');
+  }
+  assert.deepEqual(assignSides(['dinosaur']), ['right']);
+  assert.equal(assignSides(['balloons', 'cake', 'dinosaur'])[2], 'right');
+  assert.equal(assignSides(['cake', 'dinosaur'])[1], 'right');
+});
+
+test('unpinned artwork has no side of its own', () => {
+  for (const preset of ART_PRESETS.filter((p) => p !== 'dinosaur')) {
+    assert.equal(artSide(preset), null, preset);
+  }
+});
+
+test('unpinned artwork alternates', () => {
+  assert.deepEqual(
+    assignSides(['balloons', 'cake', 'blocks', 'donuts']),
+    ['right', 'left', 'right', 'left'],
+  );
+});
+
+test('alternation resumes from whichever side a pinned piece took', () => {
+  // dinosaur pins right, so the next unpinned one must go left rather than blindly
+  // continuing an index-based stripe.
+  assert.deepEqual(assignSides(['dinosaur', 'cake']), ['right', 'left']);
+  assert.deepEqual(assignSides(['cake', 'dinosaur', 'cake']), ['right', 'right', 'left']);
+});
+
+test('two pinned neighbours share a side — the documented limit', () => {
+  // Fixed artwork on the same side can overlap when both are visible. Nothing here can
+  // prevent that; the point is that it is a consequence of pinning, not a bug.
+  assert.deepEqual(assignSides(['dinosaur', 'dinosaur']), ['right', 'right']);
+});
+
+test('assigning sides copes with unknown or missing presets', () => {
+  assert.deepEqual(assignSides([]), []);
+  assert.deepEqual(assignSides(null), []);
+  assert.deepEqual(assignSides([undefined, 'nope']), ['right', 'left']);
 });
 
 test('generating art is pure — no shared state between calls', () => {

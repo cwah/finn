@@ -231,9 +231,16 @@ on top of each other.
 > reveal animation's `transform` lives on `.card` rather than on `.timeline-item`. Keep it
 > there. Opacity is fine — it makes a stacking context, not a containing block.
 
+**A piece of artwork may pin itself to one side** with `side` in its `ART_IMAGES` entry —
+`dinosaur` is pinned right. Art is not symmetric, and a drawing that leans one way looks
+wrong flipped to the other edge. `assignSides()` gives pinned pieces the side they asked
+for and alternates everything else *around* them, resuming from whichever side the pinned
+piece took rather than following a fixed stripe. Pin sparingly: two pinned neighbours will
+share a side, and fixed artwork on the same side overlaps when both are on screen.
+
 Milestones are interleaved with ordinary cards, so no CSS selector can count them —
-`app.js` assigns `side-left` / `side-right` after mounting, when the order is known, and
-re-runs it when a backdated milestone lands mid-timeline and flips every side below it.
+`app.js` applies the result after mounting, when the order is known, and re-runs it when a
+backdated milestone lands mid-timeline and shifts every side below it.
 Below 1024px there is no room beside the card, so the artwork is hidden outright; it is a
 wide-screen grace note, not something the phone layout depends on. At 400px wide it needs
 more room than the earlier 200px did — below that breakpoint its outer edge would be cut
