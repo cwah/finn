@@ -8,6 +8,7 @@ import assert from 'node:assert/strict';
 
 import {
   inferLayout, isMilestone, GRID_MAX, carouselAspect, cropRect, croppedSize, FULL_CROP,
+  coverAlign,
 } from '../js/layout-engine.js';
 
 /** A photo is only ever consulted for its stored dimensions. */
@@ -190,6 +191,67 @@ test('cropping is pure — reading a crop does not rewrite the photo', () => {
   croppedSize(p);
   inferLayout({ photos: [p] });
   assert.equal(JSON.stringify(p), before);
+});
+
+// ── Focal point vs cover crop ─────────────────────────────────────
+/** Where the focal point ends up inside the cell, given the anchor coverAlign picks. */
+const lands = (f, boxAspect, cellAspect, axis = 'x') => {
+  const p = coverAlign({ focalX: f, focalY: f }, boxAspect, cellAspect)[axis];
+  const k = axis === 'x'
+    ? Math.max(1, boxAspect / cellAspect)
+    : Math.max(1, cellAspect / boxAspect);
+  return p * (1 - k) + f * k; // fraction across the cell
+};
+
+test('a centred focal point stays centred', () => {
+  assert.equal(+lands(0.5, 2, 1).toFixed(3), 0.5);
+  assert.equal(+lands(0.5, 0.5, 1).toFixed(3), 0.5);
+});
+
+test('an off-centre focal point is CENTRED, not merely aligned', () => {
+  // The bug this replaced: anchoring at the focal fraction put 0.3 at 30% across the
+  // cell. With room to move, it should land dead centre instead.
+  assert.equal(+lands(0.3, 2, 1).toFixed(3), 0.5);
+  assert.equal(+lands(0.7, 2, 1).toFixed(3), 0.5);
+});
+
+test('near an edge it gets as close to centre as covering allows, without a gap', () => {
+  // k = 1.33: the photo is only a third wider than the cell, so 0.15 cannot reach the
+  // middle. It should move toward it and stop at the edge of what covering permits.
+  const at = lands(0.15, 4 / 3, 1);
+  assert.ok(at > 0.15, `should move toward centre, stayed at ${at.toFixed(3)}`);
+  assert.ok(at <= 0.5, `should not overshoot centre, got ${at.toFixed(3)}`);
+
+  // The anchor itself must stay in 0–1, which is what keeps the cell covered.
+  for (const f of [0, 0.15, 0.5, 0.85, 1]) {
+    const p = coverAlign({ focalX: f, focalY: f }, 4 / 3, 1);
+    assert.ok(p.x >= 0 && p.x <= 1, `anchor ${p.x} would expose a gap`);
+    assert.ok(p.y >= 0 && p.y <= 1, `anchor ${p.y} would expose a gap`);
+  }
+});
+
+test('an axis with no slack has nothing to choose', () => {
+  // Square photo in a square cell: it fits exactly, so neither axis can move.
+  const p = coverAlign({ focalX: 0.2, focalY: 0.8 }, 1, 1);
+  assert.deepEqual(p, { x: 0.5, y: 0.5 });
+});
+
+test('the tall axis is anchored independently of the wide one', () => {
+  // A wide photo in a square cell overflows horizontally only.
+  const p = coverAlign({ focalX: 0.2, focalY: 0.9 }, 2, 1);
+  assert.ok(p.x !== 0.5, 'the overflowing axis should be anchored');
+  assert.equal(p.y, 0.5, 'the exact-fitting axis has no slack');
+});
+
+test('a missing focal point behaves as dead centre', () => {
+  assert.deepEqual(coverAlign({}, 2, 1), coverAlign({ focalX: 0.5, focalY: 0.5 }, 2, 1));
+  assert.deepEqual(coverAlign(null, 2, 1), coverAlign({ focalX: 0.5, focalY: 0.5 }, 2, 1));
+});
+
+test('degenerate aspects degrade to centre rather than NaN', () => {
+  for (const [b, c] of [[0, 1], [1, 0], [NaN, 1], [1, NaN]]) {
+    assert.deepEqual(coverAlign({ focalX: 0.2 }, b, c), { x: 0.5, y: 0.5 }, `${b}/${c}`);
+  }
 });
 
 test('the engine is pure — it does not mutate the post it is given', () => {

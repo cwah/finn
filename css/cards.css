@@ -131,14 +131,18 @@
 .grid-cell { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
 
 /* A cell's shape rarely matches the crop's, so the crop still has to cover it. Sized by
-   aspect-ratio against both minimums — the box grows until it covers on both axes — and
-   anchored on the focal point rather than the middle. */
+   aspect-ratio against both minimums — the box grows until it covers on both axes.
+
+   --px/--py are NOT the focal point: they are the anchor that puts the focal point as
+   near the cell's centre as covering allows, computed by coverAlign() in the engine.
+   Anchoring on the focal fraction directly would merely align it, so a focal point of
+   0.15 would sit 15% across the cell instead of in the middle of it. */
 .grid-cell > .crop-box,
 .carousel-slide > .crop-box {
   position: absolute;
-  top: calc(var(--fy, 0.5) * 100%);
-  left: calc(var(--fx, 0.5) * 100%);
-  translate: calc(var(--fx, 0.5) * -100%) calc(var(--fy, 0.5) * -100%);
+  top: calc(var(--py, 0.5) * 100%);
+  left: calc(var(--px, 0.5) * 100%);
+  translate: calc(var(--px, 0.5) * -100%) calc(var(--py, 0.5) * -100%);
   aspect-ratio: var(--crop-ar, 1);
   min-width: 100%;
   min-height: 100%;

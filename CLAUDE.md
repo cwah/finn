@@ -137,9 +137,17 @@ original. Two settings shape how a photo appears, and both are stored, never bak
 
 - **`crop`** — the rectangle the parent chose, `{x, y, w, h}` normalised 0–1. Applied at
   render, so it can be widened, moved or removed forever.
-- **`focalX`/`focalY`** — where to centre the *cropped* result when a card's cell is a
-  different shape again. The crop picks the picture; the focal point survives the second
-  crop a square grid cell imposes on top of it. Both earn their place.
+- **`focalX`/`focalY`** — what to keep centred in the *cropped* result when a card's cell
+  is a different shape again. The crop picks the picture; the focal point survives the
+  second crop a square grid cell imposes on top of it. Both earn their place.
+
+`coverAlign()` turns a focal point into the anchor a cell is positioned by, and the
+distinction matters. Anchoring at the focal fraction directly — what `object-position`
+does — merely *aligns*: a focal point of 0.15 sits 15% across the cell, not in the middle
+of it. `coverAlign` instead solves for the anchor that puts the focal point at the cell's
+centre, `p = (0.5 - fk) / (1 - k)` where `k` is how many times bigger the photo is than
+the cell on that axis, clamped to 0–1. That clamp *is* the no-empty-space rule, so a
+focal point near an edge settles as close to centre as covering permits and no closer.
 
 `croppedSize()` is what the layout may reason about — **never the raw width/height**.
 Cropping a wide photo into a tall frame really does make it a portrait card, and a

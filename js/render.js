@@ -3,7 +3,7 @@
 // and css/cards.css together.
 
 import {
-  inferLayout, isMilestone, GRID_MAX, carouselAspect, cropRect, croppedSize,
+  inferLayout, isMilestone, GRID_MAX, carouselAspect, cropRect, croppedSize, coverAlign,
 } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { artPreset, milestoneArtSvg } from './milestone-art.js';
@@ -34,8 +34,13 @@ function photoEl(photo) {
  * overflow box and offset until the chosen region fills it. Every photo gets the wrapper,
  * cropped or not — an uncropped photo is simply cropped to all of itself, which keeps one
  * code path and one set of CSS rules instead of two that could disagree.
+ *
+ * @param {object} photo
+ * @param {string} group
+ * @param {number|null} cellAspect shape of the cell this must cover, or null when the
+ *        surrounding frame already matches the crop exactly and no further crop happens
  */
-function cropped(photo, group) {
+function cropped(photo, group, cellAspect = null) {
   const c = cropRect(photo);
   const size = croppedSize(photo);
 
@@ -46,11 +51,14 @@ function cropped(photo, group) {
   box.style.setProperty('--ch', c.h);
   // The shape the crop presents, which is what surrounding layout has to reason about.
   box.style.setProperty('--crop-ar', `${size.width} / ${size.height}`);
-  // Where to centre the crop when a cell still has to cover-crop it further. This used
-  // to ride on the image's object-position, which no longer applies now that the image
-  // is positioned by the crop maths instead.
-  box.style.setProperty('--fx', photo.focalX ?? 0.5);
-  box.style.setProperty('--fy', photo.focalY ?? 0.5);
+  // When a cell crops this further, anchor it so the focal point lands as near the
+  // cell's centre as covering allows — see coverAlign. Anchoring at the focal fraction
+  // itself would merely align it, which is not what choosing a focal point means.
+  if (cellAspect) {
+    const p = coverAlign(photo, size.width / size.height, cellAspect);
+    box.style.setProperty('--px', p.x);
+    box.style.setProperty('--py', p.y);
+  }
 
   box.append(makeViewable(photoEl(photo), photo, group));
   return box;
@@ -99,7 +107,7 @@ function gridPhotos(photos, group) {
   const wrap = el('div', 'grid-photos');
   photos.slice(0, GRID_MAX).forEach((p) => {
     const cell = el('div', 'grid-cell');
-    cell.append(cropped(p, group));
+    cell.append(cropped(p, group, 1)); // grid cells are square
     wrap.append(cell);
   });
   return wrap;
@@ -114,12 +122,13 @@ function carouselPhotos(photos, group) {
   const wrap = el('div', 'carousel');
   // One shape for every slide, chosen from the set — see carouselAspect. A fixed shape
   // would cut nearly half off any portrait in a mixed post.
-  wrap.style.setProperty('--slide-ar', carouselAspect(photos));
+  const slideAspect = carouselAspect(photos);
+  wrap.style.setProperty('--slide-ar', slideAspect);
 
   const track = el('div', 'carousel-track');
   photos.forEach((p) => {
     const slide = el('div', 'carousel-slide');
-    slide.append(cropped(p, group));
+    slide.append(cropped(p, group, slideAspect));
     track.append(slide);
   });
 

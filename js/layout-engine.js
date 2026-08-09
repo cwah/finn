@@ -98,6 +98,47 @@ export function carouselAspect(photos) {
   return Math.min(1.5, Math.max(0.75, Math.round(median * 100) / 100));
 }
 
+/**
+ * Where to anchor a photo inside a cell that crops it further, so the focal point ends
+ * up as close to the CENTRE of that cell as it can get.
+ *
+ * The naive approach — anchoring at the focal fraction itself, which is what
+ * `object-position` does — puts a focal point of 0.15 at 15% across the cell rather than
+ * in the middle of it. That is an alignment, not a centring, and it is not what "the
+ * subject stays centred" means to anyone choosing the point.
+ *
+ * Solving for the anchor `p` that centres the focal point `f`, where `k` is how many
+ * times bigger the photo is than the cell on that axis:
+ *
+ *     p(1 - k) + fk = 0.5   ->   p = (0.5 - fk) / (1 - k)
+ *
+ * Clamping p to 0–1 is exactly the constraint that the photo keeps covering the cell, so
+ * a focal point near an edge settles as close to centre as it can without exposing a gap.
+ *
+ * @param {{focalX?: number, focalY?: number}} focal 0–1, defaulting to the middle
+ * @param {number} boxAspect  width/height of the photo as cropped
+ * @param {number} cellAspect width/height of the cell it must cover
+ * @returns {{x: number, y: number}} anchor fractions for both axes
+ */
+export function coverAlign(focal, boxAspect, cellAspect) {
+  const fx = Number.isFinite(focal?.focalX) ? focal.focalX : 0.5;
+  const fy = Number.isFinite(focal?.focalY) ? focal.focalY : 0.5;
+  if (!(boxAspect > 0) || !(cellAspect > 0)) return { x: 0.5, y: 0.5 };
+
+  // Covering means one axis matches exactly and the other overflows; k is the overflow.
+  return {
+    x: anchor(fx, Math.max(1, boxAspect / cellAspect)),
+    y: anchor(fy, Math.max(1, cellAspect / boxAspect)),
+  };
+}
+
+function anchor(f, k) {
+  // k === 1 means this axis fits exactly: there is no slack, so nothing to choose.
+  if (!(k > 1)) return 0.5;
+  const p = (0.5 - f * k) / (1 - k);
+  return Math.min(1, Math.max(0, Math.round(p * 1000) / 1000));
+}
+
 /** A caption counts only if it holds something other than whitespace. */
 function hasCaption(post) {
   return typeof post.caption === 'string' && post.caption.trim() !== '';
