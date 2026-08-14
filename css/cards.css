@@ -245,9 +245,12 @@
 
 .card-edit:active { transform: scale(0.94); }
 
-/* The card needs to be a containing block for the button to pin to its corner —
-   .card--highlight already sets this, ordinary cards do not. */
-.card { position: relative; }
+/* Positioned so the edit button can pin to its corner, and lifted above the milestone
+   artwork. EVERY card needs the z-index, not just a milestone's own: the artwork is fixed
+   to the viewport, so it stays on screen while other cards scroll past it, and a card
+   earlier in the DOM than the milestone would otherwise be painted over — the artwork
+   showing through its lower half. */
+.card { position: relative; z-index: 1; }
 
 /* Photos open full-size on tap; say so with the cursor on a pointer device */
 @media (hover: hover) {
@@ -312,8 +315,8 @@
   right: calc(50% + var(--maxw) / 2 - 70px);
 }
 
-/* The card paints over the artwork's inner edge */
-.milestone-scene .card { position: relative; z-index: 1; }
+/* Cards paint over the artwork — see the z-index on .card. Milestone artwork is fixed to
+   the viewport, so it can end up behind ANY card on screen, not only its own. */
 
 .milestone-art {
   width: 100%;
