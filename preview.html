@@ -50,6 +50,9 @@
       color: var(--accent-ink);
     }
     .preview-art svg { width: 100%; height: auto; }
+    /* Shows whatever the app would actually use — real artwork where there is one,
+       the SVG fallback where there is not. */
+    .preview-art-box { width: 100%; aspect-ratio: var(--art-ar, 1); }
     .preview-art figcaption {
       color: var(--text-dim);
       font-size: 0.65rem;
@@ -72,7 +75,7 @@
     import { renderPost, setMilestoneArt } from './js/render.js';
     import { inferLayout } from './js/layout-engine.js';
     import {
-      ART_PRESETS, milestoneArtSvg, assignSides, assignPresets,
+      ART_PRESETS, assignSides, assignPresets,
     } from './js/milestone-art.js';
     import { initCarousels } from './js/carousel.js';
     import { initLightbox } from './js/lightbox.js';
@@ -262,12 +265,17 @@
     for (const preset of ART_PRESETS) {
       const cell = document.createElement('figure');
       cell.className = 'preview-art';
-      cell.innerHTML = `${milestoneArtSvg(preset)}<figcaption>${preset}</figcaption>`;
+      const box = document.createElement('div');
+      box.className = 'preview-art-box';
+      setMilestoneArt(box, preset);
+      const caption = document.createElement('figcaption');
+      caption.textContent = preset;
+      cell.append(box, caption);
       gallery.append(cell);
     }
     const galleryLabel = document.createElement('p');
     galleryLabel.className = 'preview-label';
-    galleryLabel.textContent = 'Milestone sketches · all presets';
+    galleryLabel.textContent = 'Milestone artwork · all presets';
     timeline.append(galleryLabel, gallery);
   </script>
 </body>

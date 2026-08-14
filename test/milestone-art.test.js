@@ -14,9 +14,14 @@ import {
 
 const TITLES = ['First steps', 'Day one', 'First laugh', 'Crawling', 'First tooth', ''];
 
+/** A title that prefers the dinosaur, so the pinned-artwork rules can be exercised.
+ *  Not a fixed string in each test: which title hashes where moves whenever the preset
+ *  set changes, and chasing that through a dozen assertions is noise. */
+const DINO_TITLE = 'First word';
+
 test('the preset list is the agreed set', () => {
   assert.deepEqual([...ART_PRESETS], [
-    'balloons', 'cake', 'blocks', 'donuts', 'dinosaur', 'lemons',
+    'balloons', 'cake', 'blocks', 'donuts', 'dinosaur',
   ]);
 });
 
@@ -129,7 +134,7 @@ test('adjacent birthdays take different drawings rather than repeating', () => {
 // ── Never twice in a row ──────────────────────────────────────────
 test('a drawing never repeats on adjacent milestones', () => {
   // Titles that all prefer the same drawing on their own.
-  const sameChoice = ART_PRESETS.map(() => 'Hello world!'); // all hash to dinosaur
+  const sameChoice = ART_PRESETS.map(() => DINO_TITLE); // all prefer the same drawing
   const presets = assignPresets(sameChoice);
   for (let i = 1; i < presets.length; i += 1) {
     assert.notEqual(presets[i], presets[i - 1], `repeat at ${i}: ${presets}`);
@@ -137,21 +142,21 @@ test('a drawing never repeats on adjacent milestones', () => {
 });
 
 test('dinosaurs specifically never appear twice in a row', () => {
-  assert.equal(artPreset('Hello world!'), 'dinosaur', 'fixture should prefer dinosaur');
-  const presets = assignPresets(['Hello world!', 'Hello world!', 'Hello world!']);
+  assert.equal(artPreset(DINO_TITLE), 'dinosaur', 'fixture should prefer dinosaur');
+  const presets = assignPresets([DINO_TITLE, DINO_TITLE, DINO_TITLE]);
   assert.equal(presets[0], 'dinosaur');
   assert.notEqual(presets[1], 'dinosaur');
   assert.equal(presets.filter((p, i) => p === 'dinosaur' && presets[i - 1] === 'dinosaur').length, 0);
 });
 
 test('a milestone keeps its own preference when it does not clash', () => {
-  const titles = ['Hello world!', 'First steps', 'First laugh'];
+  const titles = [DINO_TITLE, 'First steps', 'First laugh'];
   assert.deepEqual(assignPresets(titles), titles.map(artPreset));
 });
 
 test('inserting a milestone may change its neighbours — the documented trade', () => {
-  const before = assignPresets(['Hello world!', 'Hello world!']);
-  const after = assignPresets(['Hello world!', 'First steps', 'Hello world!']);
+  const before = assignPresets([DINO_TITLE, DINO_TITLE]);
+  const after = assignPresets([DINO_TITLE, 'First steps', DINO_TITLE]);
   assert.notEqual(before[1], after[2], 'the later one is free to prefer dinosaur again');
   assert.equal(after[2], 'dinosaur');
 });

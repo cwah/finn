@@ -6,33 +6,35 @@
 // The drawing never contains anything a parent typed. It is picked from a fixed set,
 // so the title only decides WHICH stock drawing appears, never what it says.
 //
-// PLACEHOLDERS. These vector sketches stand in until real PNGs land. When they do, the
-// only thing that has to change is how render.js turns a preset name into a node — the
-// preset name is the contract, and it is already stamped on the wrapper as `data-art`,
-// so swapping in `<img src="art/${preset}.png">` needs no change here or in the CSS.
+// Every preset now has real artwork in assets/. The SVG drawings below remain as the
+// fallback for a preset added without a file — milestoneArtSvg is what render.js uses
+// when ART_IMAGES has no entry — so a new preset is never blank while its art is drawn.
 //
 // PURE — no DOM, no fetch, no randomness. Every drawing is fixed geometry, and the
 // preset choice is a hash of the title, so a milestone always shows the same sketch.
 
 /**
  * Real artwork, keyed by preset. A preset listed here uses its file; anything missing
- * falls back to the SVG placeholder below, so the set can be replaced one drawing at a
- * time rather than all at once.
+ * falls back to the SVG below, so a preset can be added before its drawing exists.
  *
- * The files are drawn in black on transparency and are applied as a MASK, not as an
- * image — that way they take `--accent-ink` like the placeholders do, and a future
- * palette change cannot leave the artwork behind. Dimensions live here so the wrapper
- * can take the artwork's shape without waiting for the file to load.
+ * The files are ALPHA MASKS, not pictures: greyscale-plus-alpha PNGs whose alpha carries
+ * the drawing. CSS applies them with `mask-image`, so they take `--accent-ink` and a
+ * palette change cannot leave the artwork behind as a black shape. Storing only the alpha
+ * also cuts the payload to a fraction — the colour channels were never read.
+ *
+ * Dimensions live here so the wrapper can take the artwork's shape without waiting for
+ * the file to load. Keep them in step with the files.
  *
  * An entry may pin itself to one `side`. Artwork is not symmetric — a drawing that faces
  * or leans one way looks wrong flipped to the other edge — so a piece that only works on
  * one side says so, and the alternation works around it.
  */
 export const ART_IMAGES = Object.freeze({
-  balloons: { src: 'assets/balloon.png', width: 1131, height: 1442 },
-  cake: { src: 'assets/cake.png', width: 1493, height: 1292 },
-  donuts: { src: 'assets/donut.png', width: 2765, height: 1152 },
-  dinosaur: { src: 'assets/dino.png', width: 1004, height: 800, side: 'right' },
+  balloons: { src: 'assets/balloon.png', width: 900, height: 1147 },
+  cake: { src: 'assets/cake.png', width: 900, height: 779 },
+  blocks: { src: 'assets/blocks.png', width: 900, height: 555 },
+  donuts: { src: 'assets/donut.png', width: 900, height: 375 },
+  dinosaur: { src: 'assets/dino.png', width: 900, height: 717, side: 'right' },
 });
 
 /** @returns {{src: string, width: number, height: number, side?: string}|null} */
@@ -76,7 +78,6 @@ export const ART_PRESETS = Object.freeze([
   'blocks',
   'donuts',
   'dinosaur',
-  'lemons',
 ]);
 
 /** Everything is drawn in this square, sized by CSS. */
@@ -231,14 +232,6 @@ const DRAWINGS = {
     '<path d="M16 82c-6 0-11-5-13-13"/>' +
     '<path d="M30 96v10M44 98v9M58 96v10"/>',
 
-  lemons: () =>
-    // two rounded lemons with the nub at each end, plus a leaf on a short stem
-    '<path d="M28 68c0-12 10-21 22-21s22 9 22 21s-10 21-22 21s-22-9-22-21Z"/>' +
-    '<path d="M28 68h-6M72 68h6"/>' +
-    '<path d="M78 92c0-8 7-14 15-14s15 6 15 14s-7 14-15 14s-15-6-15-14Z"/>' +
-    '<path d="M78 92h-4M108 92h4"/>' +
-    '<path d="M52 46c-1-6 0-11 2-15"/>' +
-    '<path d="M54 34c8-8 18-9 22-6c-2 9-10 14-19 12Z"/>',
 };
 
 /**

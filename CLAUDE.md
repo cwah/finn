@@ -255,8 +255,8 @@ below 1 — it is a background, not a subject.
 
 **The drawings** come from `milestone-art.js`:
 
-- `ART_PRESETS` is a fixed set: balloons, cake, blocks (stock A/B/C in a triangle),
-  donuts, dinosaur, lemons.
+- `ART_PRESETS` is a fixed set: balloons, cake, blocks, donuts, dinosaur — all five with
+  real artwork in `assets/`.
 - **A birthday gets cake or balloons and nothing else.** Some milestones mean something
   specific, and a birthday drawn as a dinosaur is just wrong. `isBirthday()` is kept
   deliberately tight — "three months old" is a milestone but not a birthday.
@@ -276,13 +276,14 @@ below 1 — it is a background, not a subject.
 Every stroke is `currentColor`, so `.milestone-art` in CSS is the only thing deciding
 hue and the sketches can never drift from the palette.
 
-**Replacing a placeholder with real artwork:** drop the file in `assets/` and add one
-line to `ART_IMAGES` in `milestone-art.js` with its dimensions. Presets without a file
-keep their SVG, so the set can be replaced one drawing at a time. Only `dinosaur` has
-real art so far (`assets/dino.png`).
+**Adding artwork:** drop the file in `assets/` and add one line to `ART_IMAGES` in
+`milestone-art.js` with its dimensions. A preset without a file falls back to its SVG, so
+one can be added before its drawing exists.
 
-- Files are applied as a **mask**, not an image, so black line art takes `--accent-ink`
-  exactly as the SVGs do and cannot fall out of the palette.
+- Files are **alpha masks**, not pictures: greyscale-plus-alpha PNGs whose alpha carries
+  the drawing, applied with `mask-image` so they take `--accent-ink` and cannot fall out
+  of the palette. Convert on the way in — the colour channels are never read, and
+  dropping them took the set from 5.95 MB to 0.76 MB.
 - The URL must be made absolute in JS. A relative URL inside a custom property resolves
   against the *stylesheet* that uses it — `css/cards.css` — so `assets/…` would be looked
   for under `css/assets/…`.
