@@ -9,12 +9,15 @@ Shipped when it lands. No ceremony beyond that.
 
 ## Ideas
 
-- [ ] **Real milestone art — 5 of 6 remaining.** `dinosaur` now uses `assets/dino.png`;
-      balloons, cake, blocks, donuts and lemons still use SVG placeholders. Drop a file
-      in `assets/` and add a line to `ART_IMAGES` in `milestone-art.js`. Art should be
-      black line work on transparency — it is applied as a mask so it takes the palette.
-      Worth downscaling on the way in: dino.png is 1734px wide and 926 KB for something
-      displayed at 200px.
+- [ ] **Real milestone art — 2 of 6 remaining.** `blocks` and `lemons` still use SVG
+      placeholders. Drop a file in `assets/` and add a line to `ART_IMAGES` in
+      `milestone-art.js`. Art should be black line work on transparency — it is applied
+      as a mask so it takes the palette.
+- [ ] **Shrink the artwork files.** The four PNGs total ~4.6 MB (donut 2.3 MB, cake
+      1.2 MB, balloon 727 KB, dino 427 KB) for drawings displayed at 400px wide on
+      wide screens only. They are masks, so only the alpha channel matters — a greyscale
+      or 8-bit PNG at ~800px would look identical and cost a fraction. Phase 3's
+      optimisation pipeline could do it, or a one-off pass now.
 - [ ] **Telegram bot access.** Allow users to upload and add new posts via Telegram bot.
 - [ ] **Parallax fade in//out of milestone art.**
 - [ ] **Suggested weekly prompts.** Proactively message user via Telegram bot on a weekly 

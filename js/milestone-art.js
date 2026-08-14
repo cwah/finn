@@ -29,7 +29,10 @@
  * one side says so, and the alternation works around it.
  */
 export const ART_IMAGES = Object.freeze({
-  dinosaur: { src: 'assets/dino.png', width: 1734, height: 1382, side: 'right' },
+  balloons: { src: 'assets/balloon.png', width: 1131, height: 1442 },
+  cake: { src: 'assets/cake.png', width: 1493, height: 1292 },
+  donuts: { src: 'assets/donut.png', width: 2765, height: 1152 },
+  dinosaur: { src: 'assets/dino.png', width: 1004, height: 800, side: 'right' },
 });
 
 /** @returns {{src: string, width: number, height: number, side?: string}|null} */

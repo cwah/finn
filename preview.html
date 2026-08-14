@@ -76,6 +76,7 @@
     } from './js/milestone-art.js';
     import { initCarousels } from './js/carousel.js';
     import { initLightbox } from './js/lightbox.js';
+    import { centreProgress } from './js/fade.js';
 
     const BIRTH = '2026-03-17';
     const timeline = document.getElementById('timeline');
@@ -234,8 +235,25 @@
     scenes.forEach((scene, i) => {
       setMilestoneArt(scene.querySelector('.milestone-art-wrap'), presets[i]);
       scene.classList.add(sides[i] === 'right' ? 'side-right' : 'side-left');
-      scene.style.setProperty('--art-progress', 1);
     });
+
+    // Artwork is fixed to the viewport, so pinning every piece to full opacity would
+    // stack four drawings on top of each other and show something the app never does.
+    // Run the real fade instead — the bench should look like the app.
+    let pending = false;
+    const paintArt = () => {
+      const vh = window.innerHeight;
+      for (const scene of scenes) {
+        const r = scene.getBoundingClientRect();
+        scene.style.setProperty('--art-progress', centreProgress(r.top, r.height, vh).toFixed(3));
+      }
+    };
+    addEventListener('scroll', () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => { paintArt(); pending = false; });
+    }, { passive: true });
+    paintArt();
 
     // Every stock drawing, so a new preset can be eyeballed without hunting for a
     // title that happens to hash onto it.
