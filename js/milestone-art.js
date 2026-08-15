@@ -48,27 +48,65 @@ export function artSide(preset) {
   return side === 'left' || side === 'right' ? side : null;
 }
 
+const other = (side) => (side === 'right' ? 'left' : 'right');
+
 /**
  * Which side each milestone's artwork takes, in timeline order.
  *
- * Pinned artwork always gets the side it asked for. Everything else alternates away from
- * whatever came before it — which matters more than it looks, because the artwork is
- * fixed to the viewport: two milestones visible at once on the SAME side would sit on top
- * of each other. Alternating around the pinned ones keeps that rare.
+ * Pinned artwork always gets the side it asked for; everything else alternates around it.
+ * That matters more than it looks, because the artwork is fixed to the viewport: two
+ * milestones visible at once on the SAME side sit on top of each other.
  *
- * It cannot be avoided entirely: two pinned-right milestones in a row will both be on the
- * right, and if both are on screen they will overlap. Pin sparingly.
+ * Free artwork therefore looks BOTH ways — at what came before it and at the next pinned
+ * piece. Looking only backwards is not enough: an opening `cake` would take the default
+ * right, and a `dinosaur` after it is pinned right and cannot move, so the pair clashed.
+ * Since alternation fixes a whole run of free pieces from its first one, there are only
+ * two possible runs, and picking between them is enough to dodge a pin ahead.
+ *
+ * It cannot always be avoided: two PINNED neighbours both take their own side, and a free
+ * run of the wrong length between two pins has no arrangement that clears both ends. Then
+ * the clash is placed at the trailing end, so the run still reads as alternating from
+ * where it started. Pin sparingly.
  *
  * @param {string[]} presets in timeline order
  * @returns {Array<'left'|'right'>}
  */
 export function assignSides(presets) {
+  const list = presets || [];
+  const pinned = list.map(artSide);
+  const sides = [];
   let previous = null;
-  return (presets || []).map((preset) => {
-    const side = artSide(preset) || (previous === 'right' ? 'left' : 'right');
-    previous = side;
-    return side;
-  });
+
+  for (let i = 0; i < list.length;) {
+    if (pinned[i]) {
+      sides.push(pinned[i]);
+      previous = pinned[i];
+      i += 1;
+      continue;
+    }
+
+    // The stretch of free artwork up to the next pinned piece, which it has to clear.
+    let end = i;
+    while (end < list.length && !pinned[end]) end += 1;
+    const run = end - i;
+    const next = pinned[end] || null;
+
+    // Only the first side is a real choice — the rest follow from it. Prefer to alternate
+    // away from what came before, so that constraint wins if both cannot be met.
+    const candidates = previous ? [other(previous), previous] : ['right', 'left'];
+    let best = candidates[0];
+    let fewest = Infinity;
+    for (const first of candidates) {
+      const last = run % 2 ? first : other(first);
+      const clashes = (first === previous ? 1 : 0) + (last === next ? 1 : 0);
+      if (clashes < fewest) [fewest, best] = [clashes, first];
+    }
+
+    for (let k = 0; k < run; k += 1) sides.push(k % 2 ? other(best) : best);
+    previous = sides[sides.length - 1];
+    i = end;
+  }
+  return sides;
 }
 
 /** The complete set. Adding one here is all it takes for titles to start picking it. */

@@ -200,7 +200,49 @@ test('alternation resumes from whichever side a pinned piece took', () => {
   // dinosaur pins right, so the next unpinned one must go left rather than blindly
   // continuing an index-based stripe.
   assert.deepEqual(assignSides(['dinosaur', 'cake']), ['right', 'left']);
-  assert.deepEqual(assignSides(['cake', 'dinosaur', 'cake']), ['right', 'right', 'left']);
+});
+
+test('free artwork steps aside for a pin AHEAD of it, not just behind', () => {
+  // The pinned piece cannot move, so the free one must. Looking only backwards gave the
+  // opening cake the default right and left the dinosaur stacked on top of it.
+  assert.deepEqual(assignSides(['cake', 'dinosaur']), ['left', 'right']);
+  assert.deepEqual(assignSides(['cake', 'dinosaur', 'cake']), ['left', 'right', 'left']);
+});
+
+test('a free run picks the parity that clears the pin at its far end', () => {
+  // A whole run of free artwork is decided by its first side, so that first side is the
+  // only real choice — and it is made by looking at the pin the run has to reach.
+  assert.deepEqual(assignSides(['cake', 'blocks', 'dinosaur']), ['right', 'left', 'right']);
+  assert.deepEqual(assignSides(['cake', 'blocks', 'donuts', 'dinosaur']),
+    ['left', 'right', 'left', 'right']);
+});
+
+test('no arrangement of the same milestones would clash less often', () => {
+  // The property that actually matters: adjacent artwork on the same side overlaps, since
+  // both are fixed to the viewport. Some clashes are forced — two pinned neighbours, or a
+  // free run of the wrong length between two pins — so brute-force the best any
+  // arrangement could do and hold assignSides to it.
+  const free = ART_PRESETS.filter((p) => artSide(p) === null);
+  const pool = [free[0], free[1], 'dinosaur'];
+
+  const clashes = (sides) => sides.filter((s, i) => i && s === sides[i - 1]).length;
+
+  /** The fewest clashes achievable with the pinned pieces held where they are. */
+  const floor = (presets) => {
+    let fewest = Infinity;
+    for (let bits = 0; bits < 2 ** presets.length; bits += 1) {
+      const sides = presets.map((p, i) => artSide(p) || ((bits >> i) & 1 ? 'right' : 'left'));
+      fewest = Math.min(fewest, clashes(sides));
+    }
+    return fewest;
+  };
+
+  for (let n = 0; n < 3 ** 5; n += 1) {
+    const presets = [0, 1, 2, 3, 4].map((k) => pool[Math.floor(n / 3 ** k) % 3]);
+    const sides = assignSides(presets);
+    assert.equal(clashes(sides), floor(presets),
+      `${presets.join()} -> ${sides.join()} is not the best available`);
+  }
 });
 
 test('two pinned neighbours share a side — the documented limit', () => {
