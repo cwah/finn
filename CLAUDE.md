@@ -68,6 +68,10 @@ would re-send files that never changed and churn stored images for nothing.
 Feature requests and ideas live in `BACKLOG.md` — candidates, not commitments. The phases
 above are the plan; check the backlog when picking up something new.
 
+`KNOWN-BUGS.md` is the other list: things that already look built and do not work, with
+what is known and — as importantly — what has not been confirmed. Check it before assuming
+a report is new, and write down the boundary of what was actually tested.
+
 ## Data model / JSON contract
 
 The frontend reads an array of **posts**, newest memory first. Each post:
@@ -86,14 +90,28 @@ The frontend reads an array of **posts**, newest memory first. Each post:
   "photos": [
     {
       "id": "string",
-      "url": "string",
+      "url": "string",                // the still — a photo, or a video's poster frame
       "width": 1200,                  // intrinsic dimensions — engine uses these to pick layout WITHOUT loading the image
       "height": 1600,
-      "alt": "string | null"
+      "alt": "string | null",
+      "rotation": 0,                  // 0|90|180|270 clockwise, applied at render
+      "video": {                      // null for a plain photo
+        "url": "string",
+        "duration": 184.2,            // of the SOURCE file, seconds
+        "trimStart": 12.5,            // the stretch that plays; the file keeps every frame
+        "trimEnd": 48.0,
+        "motion": true                // a motion photo loops on screen; a video waits
+      }
     }
   ]
 }
 ```
+
+An item in `photos` is **a picture, which may also move**. A video's poster IS a photo —
+literally so for a motion photo, and by construction for a video, whose poster is grabbed
+from its own frames at upload. That is why video did not need a second collection or a
+second array: the engine, the crop box and every layout rule go on reasoning about
+`width`/`height` and never learn that motion exists.
 
 Alongside the posts the data source supplies a `config`:
 
@@ -124,7 +142,8 @@ with **no user input and no override**. Rules, in order:
    well, and shrinking each photo further defeats the point of taking them.
 6. **Any post with `milestone.isMilestone`** → wrap the above in the `highlight` treatment.
 
-Orientation is decided from stored `width`/`height`, never by loading the image. Keep this
+Orientation is decided from stored `width`/`height` **after rotation and cropping** —
+`croppedSize()`, never the raw dimensions — and never by loading the image. Keep this
 function pure and unit-testable — it's the heart of the product.
 
 `preview.html` is the visual bench: it renders one sample per rule through the real
@@ -209,6 +228,85 @@ photos behaved before either existed.
 - A card's bottom padding comes from its caption. Cards without one give it to the meta
   row instead; watch for that if you add another trailing element.
 
+### Video and motion photos
+
+Video is not a second kind of post. **A video's poster frame IS its photo**, so a clip
+travels through the same `photos` array, the same crop box and the same layout rules as a
+still. `photoEl()` in `render.js` is the only place that knows the difference.
+
+- **Trimming is framing, never destruction** — the same rule as cropping. The stored file
+  keeps every frame; `trimStart`/`trimEnd` say which stretch the memory is, so a trim can
+  be widened, moved or removed forever. `trimRange()` is pure and tested, and always
+  returns a valid window: a missing or nonsensical trim degrades to the opening minute
+  rather than to an error.
+- **Nothing plays for longer than `MAX_CLIP_SECONDS` (60).** The cap is applied in
+  `trimRange`, not in the UI, so no stored value can out-argue it. A longer source is
+  *accepted* — the editor opens on its first minute and the parent picks which minute
+  matters, rather than being sent back to their phone to cut it first.
+- **A motion photo can be stopped.** It loops by itself, so its badge is a *pause* rather
+  than a play — hidden until the photo is pointed at, because a control parked permanently
+  on a photo is its own kind of noise. Once it is holding the loop still it **stays
+  visible**: a paused motion photo with no visible control does not read as paused, it
+  reads as broken. On touch, where there is no hover, it simply lives there at low opacity
+  — that is the only way to reach it at all.
+- A manual pause is held in `heldStill` and deliberately **outlasts scrolling**. The
+  observer would otherwise restart the loop the moment the card came back into view, and
+  the button would look like it had failed. `playing` is only about what is on screen;
+  the two are separate on purpose.
+- **Motion photos loop; videos wait.** A motion photo IS its motion, and one that never
+  moved would just be a photo. A longer clip waits for a tap, because several decoders at
+  once is exactly the battery cost this app avoids everywhere else. `motion-play.js`
+  drives it from an `IntersectionObserver`, gives up playback entirely while the tab is
+  hidden, and never autoplays for someone who asked for `prefers-reduced-motion`.
+- `isMotion` is **stored, not derived from duration**: it says what the file IS, and
+  trimming a video down to two seconds must not silently turn it into wallpaper.
+- **The badge is the play button.** A video still never starts by itself, but expanding it
+  to watch four seconds was too much ceremony, so tapping the badge plays the clip in
+  place; tapping the picture around it still expands. Both gestures stay available, and
+  nothing autoplays. The badge is a sibling of the crop box, never a child: the box is
+  deliberately oversized and offset to show its crop, so anything inside it would be
+  positioned against the picture rather than against the cell.
+- `holdToTrim()` lives in `motion-play.js` and is shared with the lightbox, so a trim means
+  the same thing whether a clip is played in place or expanded.
+- The lightbox never offers zoom on a video. Its taps belong to its own controls.
+
+**Motion photos arrive in two shapes and neither announces itself** — `motion.js` is pure
+over file descriptors and bytes, so both are testable without a phone:
+
+- **Apple** shares a Live Photo as *two* files, `IMG_1234.HEIC` and `IMG_1234.MOV`.
+  Nothing but the matching name ties them together, so the name is the relationship.
+  `pairLivePhotos()` matches them in picker order; a still with no movie, or a movie with
+  no still, passes through alone.
+- **Google** appends the mp4 *inside* the jpeg. `findEmbeddedVideo()` scans for the `ftyp`
+  box signature rather than parsing XMP, because the metadata is written differently by
+  different Android versions and is missing on some files that still carry a video. A box
+  whose length runs past the end of the file is rejected, so the same four letters
+  occurring inside image data cannot split a photo in half.
+
+### Rotation
+
+Rotation is framing too, so it is stored and applied at render — the file is never
+re-encoded, and turning a photo the wrong way costs nothing to undo.
+
+- **It changes the card.** `orientedSize()` swaps the axes on a quarter turn and
+  `croppedSize()` is built on it, so a sideways landscape really does become a portrait
+  card. Anything reasoning about shape gets this for free.
+- **Rotation is applied FIRST, then the crop.** The crop rectangle is expressed against
+  the *upright* photo — the one the parent was looking at when they dragged it — so
+  turning a photo later cannot re-frame the picture they chose.
+- Because of that order, the editor has to **carry the crop and focal point round with
+  the photo** when it turns. `turnFraming()` does it, is pure, and is tested: four
+  quarter turns must land exactly where they started, which is why it rounds. `1 - y - h`
+  drifts a little every turn, and these values are stored and turned again later.
+- **The rotor** is how it renders. A CSS transform never changes a layout box, so
+  rotating the media alone would leave the crop maths measuring the shape it used to be.
+  The rotor is the layout box instead: it takes the oriented aspect ratio — exactly what
+  the media's intrinsic ratio used to supply — and the media is turned inside it. Cards,
+  the lightbox and the editor all build the same rotor, so a photo is framed on exactly
+  what a card will show.
+- Every photo gets a rotor, turned or not — one code path rather than two that could
+  disagree, the same reason every photo gets a crop box.
+
 ### Milestone sketch
 
 A milestone is rendered as a **scene**: the card, plus a decorative sketch out on the
@@ -234,9 +332,18 @@ on top of each other.
 **A piece of artwork may pin itself to one side** with `side` in its `ART_IMAGES` entry —
 `dinosaur` is pinned right. Art is not symmetric, and a drawing that leans one way looks
 wrong flipped to the other edge. `assignSides()` gives pinned pieces the side they asked
-for and alternates everything else *around* them, resuming from whichever side the pinned
-piece took rather than following a fixed stripe. Pin sparingly: two pinned neighbours will
-share a side, and fixed artwork on the same side overlaps when both are on screen.
+for and alternates everything else *around* them, rather than following a fixed stripe.
+
+Free artwork looks **both ways** — at what came before it and at the next pinned piece.
+Backwards alone is not enough: a pin cannot move, so the free piece before it has to.
+Alternation fixes a whole run of free artwork from its first side, so that first side is
+the only real choice, and it is made by looking at the pin the run has to reach.
+
+Pin sparingly. Two pinned neighbours share a side, and so does a free run of the wrong
+length between two pins — with only one side pinned in the set, an *even* number of free
+pieces between two dinosaurs cannot clear both ends. The test brute-forces the best any
+arrangement could do and holds `assignSides` to it, so a clash that remains is forced
+rather than sloppy. Fixed artwork on the same side overlaps when both are on screen.
 
 Milestones are interleaved with ordinary cards, so no CSS selector can count them —
 `app.js` applies the result after mounting, when the order is known, and re-runs it when a
@@ -316,14 +423,80 @@ moves it.
   age.js                 # birthDate + memoryDate -> age stamp
   milestone-art.js       # pure title -> hand-drawn SVG sketch
   smart-crop.js          # pure luma -> focal point, + canvas wrapper
-  photo-editor.js        # drag the focal point / promote a photo to lead
+  motion.js              # PURE: Live Photo pairing + Google embedded-mp4 scan
+  motion-play.js         # motion photos loop on screen; videos wait for a tap
+  photo-editor.js        # crop, focal point, rotate, trim, promote to lead
   lightbox.js            # full-size viewer (owns its own markup)
   carousel.js            # active-dot tracking for 5+ photo posts
   capture.js             # capture + compose flow
   scrubber.js            # right-edge date scrubber
+/bot/                    # Telegram bot — a separate node process, never served
+  index.js               # polling loop, album debounce, sender auth
+  message.js             # PURE: telegram messages -> post draft
+  image-size.js          # PURE: jpeg/png header -> dimensions (node has no canvas)
+  telegram.js            # Bot API client (long polling)
+  pocketbase.js          # PocketBase client for node (no localStorage)
 /data/mock.json          # Phase 1 sample data (matches contract above)
 /test/                   # node:test specs for the pure modules
 ```
+
+## Telegram bot
+
+A second door into the same scrapbook. It creates ordinary posts and nothing else — no
+new fields, no layout hints. Rules that must hold:
+
+- **Long polling, never webhooks.** A webhook needs a public HTTPS URL; this stack lives
+  on localhost. The bot dials out.
+- **Attribution survives the bot.** It authenticates as its own PocketBase account but
+  sets `author` to the parent mapped by `users.telegramId`. A post made from a phone is
+  credited to the person, not the robot.
+- **The reply names what was saved** — "a motion photo", "2 photos and a video". It is the
+  only signal that a clip arrived as a clip rather than as a still, which is exactly what
+  Telegram breaks, so `summarise()` never flattens everything to "photo".
+- **Unknown senders are refused**, and told their Telegram id so it can be added by hand.
+  Anyone can find a bot by name; this is the only thing standing in front of the data, so
+  the mapping IS the allowlist — an account with no `telegramId` cannot post, full stop.
+  Refusals are logged with whatever the sender's name and id were, so an attempt to write
+  to the scrapbook is visible rather than silent.
+- **The bot's own account is refused as an author**, even if a `telegramId` is put on it by
+  mistake. Posts would be credited to "Telegram bot" rather than to a parent, and
+  attribution surviving the bot is the whole point of mapping senders to people.
+- `photos.createRule` is `@request.auth.id != ""` (not author-scoped) precisely because
+  the bot writes photos onto another user's post. Update and delete stay author-scoped.
+- **No focal point from the bot** — smart-crop measures pixels on a canvas. Absent focal
+  means centre, which is what an un-framed photo has always meant.
+- **A clip's duration must be READ, never left at 0.** `hasVideo()` gates on
+  `trimRange().duration > 0`, so a stored 0 makes a perfectly good clip render as a plain
+  still — the split works, the file is stored, and the card shows a photo anyway. node
+  cannot decode video, but it does not need to: `mp4Duration()` reads the `mvhd` box,
+  which states a timescale and a duration outright. Pure and tested, and cross-checked
+  against the browser's own measurement of the same files.
+  If the length genuinely cannot be read, the clip is dropped and the still saved on its
+  own — an honest photo beats a video that silently cannot play.
+- **Video comes through, with Telegram's own thumbnail as the poster.** Node cannot decode
+  a frame, and Telegram states a clip's width, height and duration on the message, so
+  nothing has to be inferred. A clip sent as a *file* is refused instead: it carries no
+  thumbnail, and there is nothing to pose for it.
+- **`live_photo` must be read BEFORE `photo`.** The Bot API delivers a live/motion photo's
+  clip in `Message.live_photo` and *also* fills in `Message.photo` for backward
+  compatibility. Checking `photo` first finds it and silently discards the motion — which
+  is a bug this codebase actually shipped. Order is the fix; the tests pin it.
+- Sending as a FILE also works, and preserves full resolution besides. Sent the normal way,
+  Telegram re-encodes it to a plain still and the motion is gone before the bot ever sees
+  it — no amount of parsing at this end can recover it. Sent as a file, the original bytes
+  arrive intact and `findEmbeddedVideo()` splits out the mp4, exactly as in the browser.
+  The help text says so, because the failure is otherwise silent and looks like a bug.
+- Which is why **image documents are accepted**, though they carry no dimensions.
+  `bot/image-size.js` reads width and height out of the JPEG or PNG header — pure, tested,
+  and the only way to measure an image with no canvas. An unreadable format is reported,
+  never guessed at, because every layout is chosen from stored dimensions.
+- **Telegram will not hand a bot a file over 20 MB**, whoever sent it. A minute of phone
+  video is often more than that, so the size is checked before downloading and the sender
+  is told plainly rather than left with a failed post.
+- `bot/message.js` stays pure, like the engine and the age maths: albums, captions,
+  milestone tags and size selection are all testable without a token.
+- The polling offset lives in `bot/.offset` (gitignored). Telegram redelivers anything
+  unacknowledged, so losing it replays messages.
 
 ## Running it
 
@@ -331,7 +504,8 @@ Both pages need to be served over HTTP — ES modules and `fetch` don't work fro
 `file://`. There is still no build step:
 
 ```
-python3 -m http.server 8765     # then open /index.html or /preview.html
+python3 serve.py                # then open /index.html or /preview.html
+                                # (http.server + no-store; ES modules cache otherwise)
 npm test                        # node:test specs for layout-engine.js and age.js
 ```
 
@@ -353,6 +527,12 @@ tests. It has no dependencies and nothing bundles.
   posts, and PocketBase enforces the same rule (`author = @request.auth.id` on posts,
   `post.author = @request.auth.id` on photos) so the UI is a convenience, not the
   boundary. Creation stays open to either parent.
+- **Video and motion photos ride the same door.** The picker takes `image/*,video/*`; a
+  Live Photo's two files are paired into one memory, and a Google motion photo is split
+  into its still and its clip. The editor gains a rotate control for everything and a trim
+  bar for clips — start and end handles, capped at a minute, over the clip's own frames so
+  what is being chosen can be seen. No `capture` attribute on the input: it forces the
+  camera and hides the library, and most memories are already on the phone.
 - Photos are optional content inside that one flow, not a second door. Attach some and
   the engine makes a photo card; attach none and a caption becomes a quote card. Adding
   photos uses native camera hardware:
@@ -394,10 +574,30 @@ Adding a field to a populated collection needs thought about what existing rows 
   Write the backfill in the same change.
 - A new **`json`** field reads as empty, which a well-chosen default (`cropRect()` treats
   anything falsy as the whole photo) absorbs with no backfill at all.
+- The same `number`-backfills-0 rule made `rotation`, `trimStart` and `trimEnd` safe to
+  add with **no** backfill: 0 degrees means upright, and a 0/0 trim on a row with no video
+  is never read, because `trimRange()` returns nothing playable without a duration. The
+  focal point needed repairing because 0 there meant "the top-left corner"; here 0 means
+  exactly what absent means. Check what zero MEANS before deciding.
 - PocketBase ships the `users` collection locked to `id = @request.auth.id`. That broke
   attribution invisibly — `expand=author` returned nothing for the other parent's posts.
   Test cross-account behaviour, not just your own.
 - Target single-handed operation; keep tap targets large and actions reachable from the bottom.
+
+## Diagnosing
+
+- **An instrument must not be able to filter out the unexpected.** The bot's arrival log
+  once matched message fields against a whitelist written from memory; `live_photo` was
+  not in it, so the log showed `photo` alone and that was taken as proof Telegram sent
+  nothing else. It was proof of nothing. A whitelist cannot demonstrate absence — log
+  everything and exclude only what is provably boring.
+- **Check the spec before concluding a platform is at fault.** The same issue was written
+  up as a settled Telegram limitation on that false evidence. The answer was in the Bot API
+  reference the whole time.
+- **Say what was measured and what was not.** Three consecutive reports of "motion photos
+  do not work" had three unrelated causes — a dropped connection, client-side compression,
+  and the `live_photo` field. Each was only separable because the failures were reported
+  precisely rather than lumped together.
 
 ## Performance rules
 
