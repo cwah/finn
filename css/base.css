@@ -6,7 +6,8 @@
   --bg: rgb(var(--bg-rgb));   /* pale sage */
   --surface: #fbfcf9;         /* near-white card */
   --surface-2: #e6ece2;       /* pale sage */
-  --text: #2e3a30;            /* deep sage charcoal */
+  --text-rgb: 46, 58, 48;
+  --text: rgb(var(--text-rgb));   /* deep sage charcoal */
   --text-dim: #5c6a60;        /* muted sage grey — 4.8:1 on the palest surface */
   --accent-rgb: 156, 178, 137;
   --accent: rgb(var(--accent-rgb));   /* pastel sage, for fills and gradients */

@@ -13,12 +13,16 @@
 // Delegated from the timeline rather than bound per image: posts stream in as you
 // scroll, and one listener on the container beats re-binding on every page.
 
+// The trim is enforced by the same helper the cards use, so a trimmed clip means the
+// same thing whether it is played in place or expanded.
+import { holdToTrim } from './motion-play.js';
+
 // The module owns its markup. Keeping it out of index.html means the preview bench gets
 // the lightbox for free, and there is no second copy to drift out of step.
 const TEMPLATE = `
   <div class="lightbox-stage">
     <div class="lightbox-crop">
-      <img class="lightbox-img" alt="" decoding="async" />
+      <div class="rotor"></div>
     </div>
   </div>
   <button type="button" class="lightbox-prev" aria-label="Previous photo">&#8249;</button>
@@ -71,8 +75,10 @@ function layout(box) {
   frame.style.width = `${cropW * scale}px`;
   frame.style.height = `${cropH * scale}px`;
 
-  // Zoom is only worth offering when the crop is actually being shown smaller than it is.
-  frame.classList.toggle('can-zoom', fit < 1 && !stage.classList.contains('is-zoomed'));
+  // Zoom is only worth offering when the crop is actually being shown smaller than it is,
+  // and never for a video, whose taps belong to its own controls.
+  const zoomable = fit < 1 && !photo.video && !stage.classList.contains('is-zoomed');
+  frame.classList.toggle('can-zoom', zoomable);
 }
 
 function resetZoom(box) {
@@ -81,13 +87,57 @@ function resetZoom(box) {
   stage.scrollTo(0, 0);
 }
 
+/**
+ * Build the media for the photo on show, into the rotor that turns it.
+ *
+ * Rebuilt per photo rather than reused, because a still is an <img> and a video is a
+ * <video> — and because leaving the previous element in place would keep a video
+ * decoding after it had been paged away from.
+ */
+function fillRotor(rotor, photo) {
+  const quarter = photo.rotation % 180 !== 0;
+  // Stop whatever was playing before its element is dropped, so nothing decodes on
+  // after it has been paged away from.
+  rotor.querySelector('video')?.pause();
+  rotor.replaceChildren();
+  rotor.classList.toggle('is-quarter', quarter);
+  rotor.style.setProperty('--rot', photo.rotation);
+  // The stored size is what the file measures; the rotor is laid out in the shape the
+  // picture presents, which for a quarter turn is the other way round.
+  const w = quarter ? photo.height : photo.width;
+  const h = quarter ? photo.width : photo.height;
+  rotor.style.setProperty('--oar', w / h);
+  rotor.style.aspectRatio = `${w} / ${h}`;
+
+  if (!photo.video) {
+    const img = document.createElement('img');
+    img.className = 'lightbox-img rotor-media';
+    img.decoding = 'async';
+    img.src = photo.url;
+    img.alt = photo.alt;
+    rotor.append(img);
+    return null;
+  }
+
+  // Expanding a video plays it: the lightbox is the player, which is why the card is not.
+  const video = document.createElement('video');
+  video.className = 'lightbox-img rotor-media';
+  video.controls = true;
+  video.playsInline = true;
+  video.autoplay = true;
+  video.poster = photo.url;
+  video.src = `${photo.video}#t=${photo.trim.start.toFixed(2)},${photo.trim.end.toFixed(2)}`;
+  rotor.append(video);
+  return video;
+}
+
 function render() {
   const box = document.getElementById('lightbox');
   const photo = group[index];
   if (!photo) return;
 
   const frame = box.querySelector('.lightbox-crop');
-  const img = box.querySelector('.lightbox-img');
+  const rotor = box.querySelector('.rotor');
 
   resetZoom(box);
 
@@ -98,8 +148,8 @@ function render() {
   frame.style.setProperty('--cw', photo.crop.w);
   frame.style.setProperty('--ch', photo.crop.h);
 
-  img.src = photo.url;
-  img.alt = photo.alt;
+  const video = fillRotor(rotor, photo);
+  if (video) holdToTrim(video, photo.trim);
   layout(box);
 
   // Paging controls earn their space only when there is somewhere to page to.
@@ -123,11 +173,17 @@ function collect(img) {
   return [...scope.querySelectorAll(`[data-full][data-group="${CSS.escape(img.dataset.group)}"]`)]
     .map((n) => {
       const [x, y, w, h] = (n.dataset.crop || '0 0 1 1').split(' ').map(Number);
+      const [start, end] = (n.dataset.trim || '0 0').split(' ').map(Number);
       return {
         url: n.dataset.full,
+        // The size the picture PRESENTS: already turned, so the fit maths needs no
+        // special case for a rotated photo.
         width: Number(n.dataset.fullW),
         height: Number(n.dataset.fullH),
         crop: { x, y, w, h },
+        rotation: Number(n.dataset.rotation) || 0,
+        video: n.dataset.video || null,
+        trim: { start, end },
         alt: n.alt || '',
       };
     });
@@ -141,7 +197,6 @@ export function initLightbox(timeline) {
   const box = ensureBox();
   const stage = box.querySelector('.lightbox-stage');
   const frame = box.querySelector('.lightbox-crop');
-  const img = box.querySelector('.lightbox-img');
 
   timeline.addEventListener('click', (e) => {
     const clicked = e.target.closest('.card-photo[data-full]');
@@ -157,12 +212,22 @@ export function initLightbox(timeline) {
   box.querySelector('.lightbox-next').addEventListener('click', () => step(1));
   box.querySelector('.lightbox-close').addEventListener('click', () => box.close());
 
-  img.addEventListener('load', () => layout(box));
+  // The media is rebuilt per photo, so the listener goes on the container. `load` does
+  // not bubble, hence the capture phase; a video reports `loadedmetadata` instead, which
+  // is the moment its real dimensions are known.
+  frame.addEventListener('load', () => layout(box), true);
+  frame.addEventListener('loadedmetadata', () => layout(box), true);
   window.addEventListener('resize', () => { if (box.open) layout(box); }, { passive: true });
+
+  // Closing must stop playback — a dialog that is not on screen is not a player.
+  box.addEventListener('close', () => frame.querySelector('video')?.pause());
 
   // Tap the photo to swap between fit-to-screen and the crop's true size.
   frame.addEventListener('click', (e) => {
     e.stopPropagation(); // a tap on the photo must not reach the close-on-backdrop handler
+    // A video owns its own taps: play, pause, scrub. Zooming out from under the controls
+    // would make them unusable, so a video is shown fitted and stays that way.
+    if (frame.querySelector('video')) return;
     if (stage.classList.contains('is-zoomed')) {
       resetZoom(box);
       layout(box);

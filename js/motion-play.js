@@ -1,0 +1,189 @@
+// Playback on cards: motion photos loop while they are on screen, and a video plays in
+// place when its badge is tapped.
+//
+// A motion photo IS its motion — one that never moved would just be a photo. A video is
+// different: several decoders running at once is exactly the battery cost this app avoids
+// everywhere else, so a video shows its poster and its length until someone asks for it.
+//
+// Driven by IntersectionObserver, never by a scroll listener, for the same reason paging
+// and the milestone artwork are. Playback is also given up entirely while the tab is
+// hidden: a looping video in a background tab decodes frames nobody is watching.
+
+/** Enough of the card on screen to be worth spending a decoder on. */
+const VISIBLE = 0.35;
+
+/** Someone who asked for less movement gets the poster frame, which is the same picture
+ *  holding still. Read live rather than cached — the setting can change mid-session. */
+const wantsStillness = () =>
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
+let observer = null;
+const playing = new Set();
+
+/**
+ * Motion photos someone has deliberately stopped.
+ *
+ * A manual pause has to outlast scrolling away and back, or the observer would restart
+ * the loop the moment the card returned and the button would look broken. Held apart from
+ * `playing`, which is only about what is on screen.
+ */
+const heldStill = new WeakSet();
+
+function play(video) {
+  playing.add(video);
+  if (document.hidden || wantsStillness() || heldStill.has(video)) return;
+  // Autoplay can still be refused (a data-saver setting, a battery-saver mode). The
+  // poster stays, which is exactly what a still would have shown, so there is nothing
+  // to report and nothing to fix.
+  video.play().catch(() => {});
+}
+
+function stop(video) {
+  playing.delete(video);
+  video.pause();
+}
+
+function ensureObserver() {
+  if (observer) return observer;
+  observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) play(entry.target);
+      else stop(entry.target);
+    }
+  }, { threshold: VISIBLE });
+
+  // Leaving the tab should cost nothing; coming back should pick up where it was.
+  document.addEventListener('visibilitychange', () => {
+    for (const video of playing) {
+      if (document.hidden || wantsStillness() || heldStill.has(video)) video.pause();
+      else video.play().catch(() => {});
+    }
+  });
+  return observer;
+}
+
+/**
+ * Keep playback inside the trimmed range.
+ *
+ * The `#t=start,end` media fragment asks for exactly this, and browsers honour the start
+ * reliably but the end only sometimes — so the end is enforced here too. Trimming is
+ * framing, not destruction: the file still holds every frame, and this is what makes the
+ * memory the stretch the parent chose rather than the whole take.
+ *
+ * Shared by the cards and the lightbox, because a trim has to mean the same thing in both.
+ */
+export function holdToTrim(video, { start, end }, onEnd) {
+  if (!(end > start)) return;
+  video.addEventListener('timeupdate', () => {
+    if (video.currentTime < end) return;
+    video.pause();
+    video.currentTime = start; // ready to play again from the top of the trim
+    if (onEnd) onEnd();
+  });
+  // Scrubbing behind the start, or replaying, lands back inside the range.
+  video.addEventListener('seeking', () => {
+    if (video.currentTime < start) video.currentTime = start;
+  });
+}
+
+/**
+ * Play a video in place on its card.
+ *
+ * A video still does not play by ITSELF — several decoders running unasked is the battery
+ * cost this app avoids everywhere else — but expanding it to watch four seconds was a lot
+ * of ceremony. The badge is the small, explicit ask; tapping the picture still expands.
+ */
+function wireBadge(badge) {
+  if (badge.dataset.wired) return;
+  badge.dataset.wired = 'true';
+
+  const box = badge.parentElement.querySelector('.crop-box');
+  const video = box?.querySelector('video');
+  if (!video) return;
+
+  const trim = {
+    start: Number(video.dataset.trimStart) || 0,
+    end: Number(video.dataset.trimEnd) || 0,
+  };
+  const reset = () => {
+    badge.classList.remove('is-playing');
+    badge.setAttribute('aria-label', `Play, ${badge.dataset.length}`);
+  };
+  holdToTrim(video, trim, reset);
+  video.addEventListener('pause', reset);
+
+  badge.addEventListener('click', (e) => {
+    // The badge sits over the picture, whose own tap opens the lightbox.
+    e.stopPropagation();
+    if (!video.paused) {
+      video.pause();
+      return;
+    }
+    if (video.currentTime < trim.start || video.currentTime >= trim.end) {
+      video.currentTime = trim.start;
+    }
+    badge.classList.add('is-playing');
+    badge.setAttribute('aria-label', 'Pause');
+    playing.add(video);
+    video.play().catch(reset); // refused playback must not leave a pause icon showing
+  });
+}
+
+/**
+ * Stop or restart a looping motion photo.
+ *
+ * Without this the only thing a motion photo offered on hover was "expand", and a loop
+ * you cannot stop is the kind of small thing that makes a page tiring to sit with. The
+ * button hides itself again unless it is holding the photo still — a paused loop with no
+ * visible control would just look stuck.
+ */
+function wireMotionBadge(badge) {
+  if (badge.dataset.wired) return;
+  badge.dataset.wired = 'true';
+
+  const video = badge.parentElement.querySelector('.crop-box video');
+  if (!video) return;
+
+  const paint = () => {
+    const held = heldStill.has(video);
+    badge.classList.toggle('is-playing', !held);
+    badge.parentElement.classList.toggle('is-held', held);
+    badge.setAttribute('aria-label', held ? 'Play this motion photo' : 'Pause this motion photo');
+  };
+
+  badge.addEventListener('click', (e) => {
+    e.stopPropagation(); // the picture underneath expands; the button does not
+    if (heldStill.has(video)) {
+      heldStill.delete(video);
+      play(video);
+    } else {
+      heldStill.add(video);
+      video.pause();
+    }
+    paint();
+  });
+  paint();
+}
+
+/**
+ * Wire up playback for a freshly built card: loop its motion photos, and let its videos
+ * play in place. Safe to call again on the same card.
+ */
+export function initMotion(root) {
+  root.querySelectorAll('.video-badge--motion').forEach(wireMotionBadge);
+  root.querySelectorAll('.video-badge:not(.video-badge--motion)').forEach(wireBadge);
+
+  const videos = root.querySelectorAll('video[data-motion="true"]');
+  if (!videos.length) return;
+  const io = ensureObserver();
+  videos.forEach((video) => io.observe(video));
+}
+
+/** Release a card's videos when it leaves the timeline, so nothing decodes off-screen. */
+export function releaseMotion(root) {
+  if (!observer) return;
+  root.querySelectorAll('video[data-motion="true"]').forEach((video) => {
+    observer.unobserve(video);
+    playing.delete(video);
+  });
+}

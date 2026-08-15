@@ -1,9 +1,9 @@
-// Capture flow. ONE entry point: the floating + opens the compose sheet, and photos are
-// attached from inside it via the native camera/picker
-// (<input type="file" accept="image/*" capture="environment">).
+// Capture flow. ONE entry point: the floating + opens the compose sheet, and media is
+// attached from inside it via the native picker
+// (<input type="file" accept="image/*,video/*" multiple>).
 //
-// That keeps a single door for every kind of memory — attach photos or don't, and the
-// engine decides what the post becomes. A sheet saved with no photos and a caption
+// That keeps a single door for every kind of memory — attach photos, videos, motion
+// photos, or nothing at all, and the engine decides what the post becomes. A sheet saved with no photos and a caption
 // lands as a quote card; there is no separate "write a note" button to choose first.
 //
 // The sheet is the ONLY place a post is authored, and it holds no layout choices,
@@ -15,6 +15,8 @@
 
 import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
+import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
+import { MAX_CLIP_SECONDS } from './layout-engine.js';
 import { openPhotoEditor } from './photo-editor.js';
 
 /** Today as a LOCAL calendar day — toISOString() would hand back UTC and can skew a day. */
@@ -41,6 +43,124 @@ function measure(file) {
     };
     img.src = url;
   });
+}
+
+/**
+ * Read a video's dimensions and length, and grab a still from it to stand in as its
+ * poster. That poster IS the photo everything else reasons about — the layout engine,
+ * the crop box and the grid never learn that motion is involved.
+ *
+ * @param {File|Blob} file
+ * @returns {Promise<{url, width, height, duration, poster: Blob}>}
+ */
+function measureVideo(file) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    video.muted = true;
+    video.playsInline = true;
+
+    const fail = (why) => {
+      URL.revokeObjectURL(url);
+      reject(new Error(`Could not read video: ${file.name || 'clip'} (${why})`));
+    };
+
+    video.onerror = () => fail('unsupported format');
+    video.onloadedmetadata = () => {
+      // Seek a little way in: the very first frame of a phone clip is often the
+      // half-exposed one from the moment recording started.
+      video.currentTime = Math.min(0.1, video.duration / 10);
+    };
+    video.onseeked = () => {
+      const width = video.videoWidth;
+      const height = video.videoHeight;
+      if (!width || !height) return fail('no dimensions');
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      return canvas.toBlob((poster) => {
+        if (!poster) return fail('could not grab a still');
+        return resolve({ url, width, height, duration: video.duration || 0, poster });
+      }, 'image/jpeg', 0.85);
+    };
+    video.src = url;
+  });
+}
+
+/**
+ * One picked file (or a paired still + movie) -> one pending item.
+ *
+ * The three ways motion arrives all end up in the same shape, so nothing above here has
+ * to know which kind it was:
+ *   a plain image                  -> a still
+ *   a still paired with a movie    -> a motion photo (Apple)
+ *   a jpeg with an mp4 inside it   -> a motion photo (Google)
+ *   a movie on its own             -> a video, poster grabbed from its own frames
+ */
+async function readItem(entry) {
+  // A movie with no still of its own: its poster is a frame of itself.
+  if (!entry.still) {
+    const { url: videoUrl, width, height, duration, poster } = await measureVideo(entry.video);
+    return {
+      file: new File([poster], 'poster.jpg', { type: 'image/jpeg' }),
+      // The thumbnail and the crop surface show the POSTER; the clip is previewed from
+      // its own url in the editor. Two urls because they are two different files.
+      url: URL.createObjectURL(poster),
+      videoUrl,
+      width,
+      height,
+      videoFile: entry.video,
+      duration,
+      trimStart: 0,
+      // Longer than a minute is accepted and opened at the first minute, so the parent
+      // picks which minute matters rather than being sent back to their phone.
+      trimEnd: Math.min(duration, MAX_CLIP_SECONDS),
+      motion: looksLikeMotion(duration),
+      // A frame grabbed from a video has no focal point of its own worth detecting;
+      // dead centre is what an unframed photo has always meant.
+      focalX: null,
+      focalY: null,
+    };
+  }
+
+  // A still, possibly with a movie beside it or hidden inside it.
+  let still = entry.still;
+  let video = entry.video || null;
+  if (!video) {
+    const split = await splitMotionPhoto(still);
+    still = split.still;
+    video = split.video;
+  }
+
+  const [{ url, width, height }, focal] = await Promise.all([
+    measure(still),
+    detectFocalPoint(still),
+  ]);
+  const item = {
+    file: still, url, width, height, focalX: focal.x, focalY: focal.y,
+  };
+  if (!video) return item;
+
+  // The still is the poster; the clip only has to supply its length.
+  let duration = 0;
+  let videoUrl = null;
+  try {
+    ({ duration, url: videoUrl } = await measureVideo(video));
+  } catch {
+    return item; // an unreadable clip leaves a perfectly good photo behind
+  }
+  return {
+    ...item,
+    videoFile: video,
+    videoUrl,
+    duration,
+    trimStart: 0,
+    trimEnd: Math.min(duration, MAX_CLIP_SECONDS),
+    motion: looksLikeMotion(duration),
+  };
 }
 
 /** Opens the sheet on an existing post. Set by initCapture; used by app.js. */
@@ -81,7 +201,11 @@ export function initCapture({ author }, handlers) {
    * A photo already stored on the server has an https URL and must not be revoked.
    */
   function releasePending() {
-    pending.forEach((p) => { if (p.file) URL.revokeObjectURL(p.url); });
+    pending.forEach((p) => {
+      if (!p.file) return; // an existing photo's url belongs to the server, not to us
+      URL.revokeObjectURL(p.url);
+      if (p.videoUrl) URL.revokeObjectURL(p.videoUrl); // a clip has a second one
+    });
     pending = [];
   }
 
@@ -137,7 +261,9 @@ export function initCapture({ author }, handlers) {
       }),
     );
     thumbs.hidden = pending.length === 0;
-    addLabel.textContent = pending.length ? 'Add more photos' : 'Add photos';
+    // The picker takes video too, and a label that only mentions photos reads as a
+    // restriction. "Add more" once something is attached — by then the kind is obvious.
+    addLabel.textContent = pending.length ? 'Add more' : 'Add photos or videos';
   }
 
   /** Reframe a photo, or promote it to lead the post. */
@@ -150,6 +276,10 @@ export function initCapture({ author }, handlers) {
       focalX: result.focalX,
       focalY: result.focalY,
       crop: result.crop,
+      rotation: result.rotation,
+      // Only a video carries a trim; the editor leaves these undefined for a still.
+      ...(result.trimStart != null ? { trimStart: result.trimStart } : {}),
+      ...(result.trimEnd != null ? { trimEnd: result.trimEnd } : {}),
     };
     if (result.makeMain && i !== 0) {
       // Promotion is a reorder, so it survives straight through as photo order — the
@@ -179,6 +309,14 @@ export function initCapture({ author }, handlers) {
         focalX: p.focalX,
         focalY: p.focalY,
         crop: p.crop,
+        rotation: p.rotation || 0,
+        // The video comes back as a URL, not a File — it is already stored, and editing
+        // only ever changes where the trim sits, never the file behind it.
+        videoUrl: p.video?.url || null,
+        duration: p.video?.duration || 0,
+        trimStart: p.video?.trimStart || 0,
+        trimEnd: p.video?.trimEnd || 0,
+        motion: Boolean(p.video?.motion),
       }));
     }
 
@@ -215,18 +353,9 @@ export function initCapture({ author }, handlers) {
     input.value = ''; // allow re-picking the same file
     if (!files.length) return;
     try {
-      const added = await Promise.all(
-        files.map(async (f) => {
-          // Keep the File alongside its measurements: the preview needs the object URL,
-          // and the upload needs the File itself. The focal point is picked from the
-          // image's own content here, once, rather than on every render.
-          const [{ url, width, height }, focal] = await Promise.all([
-            measure(f),
-            detectFocalPoint(f),
-          ]);
-          return { file: f, url, width, height, focalX: focal.x, focalY: focal.y };
-        }),
-      );
+      // A Live Photo arrives as two files that only a matching name ties together, so
+      // pairing happens before anything is measured — two files, one memory.
+      const added = await Promise.all(pairLivePhotos(files).map(readItem));
       pending = pending.concat(added);
       renderThumbs();
       syncSaveState();

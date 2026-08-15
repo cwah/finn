@@ -51,9 +51,11 @@
       <!-- Photos are optional content inside the one flow, not a separate entry point.
            The label wraps the input so the native camera/picker opens on tap. -->
       <label class="compose-add-photos">
-        <input id="capture" type="file" accept="image/*" capture="environment" multiple hidden />
+        <!-- Video as well as stills. No `capture` attribute: it forces the camera and
+             hides the library, and most memories are already on the phone. -->
+        <input id="capture" type="file" accept="image/*,video/*" multiple hidden />
         <span class="compose-add-icon" aria-hidden="true">+</span>
-        <span id="composeAddLabel">Add photos</span>
+        <span id="composeAddLabel">Add photos or videos</span>
       </label>
 
       <label class="compose-field">
@@ -98,7 +100,11 @@
       <!-- One surface: the whole photo, with the crop rectangle and the focal point
            on it together. Drag adjusts the crop; a tap without a drag sets the focus. -->
       <div class="editor-crop">
-        <img class="editor-crop-img" alt="" />
+        <!-- The rotor turns the media without changing the layout box the crop maths
+             measures — the same wrapper the cards and the lightbox use. -->
+        <div class="rotor editor-rotor">
+          <img class="editor-crop-img rotor-media" alt="" />
+        </div>
         <div class="editor-rect">
           <span class="editor-handle" data-handle="nw"></span>
           <span class="editor-handle" data-handle="ne"></span>
@@ -107,7 +113,25 @@
         </div>
         <span class="editor-dot" aria-hidden="true"></span>
       </div>
+
+      <!-- Trimming is framing, like cropping: the file keeps every frame and these two
+           handles say which stretch the memory is. Hidden unless there is a clip. -->
+      <div class="editor-trim" hidden>
+        <div class="editor-trim-bar">
+          <div class="editor-trim-range"></div>
+          <span class="editor-trim-handle" data-trim="start"></span>
+          <span class="editor-trim-handle" data-trim="end"></span>
+        </div>
+        <p class="editor-trim-read"></p>
+      </div>
+
       <div class="editor-presets"></div>
+      <div class="editor-rotate-bar">
+        <button type="button" class="btn btn--ghost editor-rotate" data-turn="-90"
+                aria-label="Rotate left">&#8634;</button>
+        <button type="button" class="btn btn--ghost editor-rotate" data-turn="90"
+                aria-label="Rotate right">&#8635;</button>
+      </div>
 
       <button type="button" class="btn btn--ghost editor-main">Make main photo</button>
       <button type="button" class="btn btn--primary editor-done">Done</button>

@@ -17,6 +17,8 @@
 // but a square grid cell crops again on top of that, and the focal point is what decides
 // where THAT crop centres.
 
+import { MAX_CLIP_SECONDS, rotationOf, turnFraming } from './layout-engine.js';
+
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
 const round = (v) => Math.round(v * 1000) / 1000;
 
@@ -34,19 +36,27 @@ const PRESETS = [
 ];
 
 /**
- * @param {{url, width, height, focalX?, focalY?, crop?}} photo
+ * @param {{url, width, height, focalX?, focalY?, crop?, rotation?,
+ *          videoUrl?, duration?, trimStart?, trimEnd?}} photo
  * @param {{isMain: boolean}} opts
- * @returns {Promise<{focalX, focalY, crop, makeMain}|null>} null when dismissed
+ * @returns {Promise<{focalX, focalY, crop, rotation, trimStart, trimEnd, makeMain}|null>}
+ *          null when dismissed
  */
 export function openPhotoEditor(photo, { isMain }) {
   const sheet = document.getElementById('photoEditor');
   const pane = sheet.querySelector('.editor-crop');
-  const cropImg = sheet.querySelector('.editor-crop-img');
+  let cropImg = sheet.querySelector('.editor-crop-img');
   const rect = sheet.querySelector('.editor-rect');
   const dot = sheet.querySelector('.editor-dot');
   const presetBar = sheet.querySelector('.editor-presets');
   const mainBtn = sheet.querySelector('.editor-main');
   const doneBtn = sheet.querySelector('.editor-done');
+  const rotor = sheet.querySelector('.editor-rotor');
+  const rotateBtns = [...sheet.querySelectorAll('.editor-rotate')];
+  const trimPane = sheet.querySelector('.editor-trim');
+  const trimBar = sheet.querySelector('.editor-trim-bar');
+  const trimRangeEl = sheet.querySelector('.editor-trim-range');
+  const trimRead = sheet.querySelector('.editor-trim-read');
 
   // Working copy — nothing is committed until Done.
   let crop = { ...(photo.crop || { x: 0, y: 0, w: 1, h: 1 }) };
@@ -59,7 +69,34 @@ export function openPhotoEditor(photo, { isMain }) {
   let ratio = null;
   let makeMain = false;
 
+  // Rotation is framing too: stored as degrees and applied at render, so the file is
+  // never re-encoded and turning a photo the wrong way costs nothing to undo.
+  let rotation = rotationOf(photo);
+
+  // Trimming, for a clip. Seconds into the SOURCE file, which keeps every frame.
+  const duration = Number(photo.duration) || 0;
+  const isClip = Boolean(photo.videoUrl) && duration > 0;
+  let trimStart = Math.min(Math.max(Number(photo.trimStart) || 0, 0), duration);
+  let trimEnd = Number(photo.trimEnd) > trimStart
+    ? Math.min(Number(photo.trimEnd), duration)
+    : Math.min(duration, trimStart + MAX_CLIP_SECONDS);
+
   // ── Painting ─────────────────────────────────────────────────────
+  /** Seconds as a clock: 8 -> 0:08. */
+  const clock = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+
+  /**
+   * The photo's shape as PRESENTED — turned, before cropping. The crop rectangle is
+   * expressed against this, so a crop keeps framing what it framed when it was dragged
+   * and turning the photo afterwards does not re-frame the picture.
+   */
+  function oriented() {
+    const quarter = rotation % 180 !== 0;
+    return quarter
+      ? { width: photo.height, height: photo.width }
+      : { width: photo.width, height: photo.height };
+  }
+
   function paint() {
     rect.style.left = `${crop.x * 100}%`;
     rect.style.top = `${crop.y * 100}%`;
@@ -67,6 +104,26 @@ export function openPhotoEditor(photo, { isMain }) {
     rect.style.height = `${crop.h * 100}%`;
     dot.style.left = `${fpx * 100}%`;
     dot.style.top = `${fpy * 100}%`;
+
+    // The surface takes the turned shape, and the rotor turns the media inside it.
+    const o = oriented();
+    pane.style.setProperty('--img-ar', `${o.width} / ${o.height}`);
+    rotor.style.setProperty('--rot', rotation);
+    rotor.style.setProperty('--oar', o.width / o.height);
+    rotor.style.aspectRatio = `${o.width} / ${o.height}`;
+    rotor.classList.toggle('is-quarter', rotation % 180 !== 0);
+
+    if (!isClip) return;
+    const left = (trimStart / duration) * 100;
+    const right = (trimEnd / duration) * 100;
+    trimRangeEl.style.left = `${left}%`;
+    trimRangeEl.style.width = `${right - left}%`;
+    trimBar.querySelector('[data-trim="start"]').style.left = `${left}%`;
+    trimBar.querySelector('[data-trim="end"]').style.left = `${right}%`;
+    const length = trimEnd - trimStart;
+    trimRead.textContent =
+      `${clock(trimStart)} – ${clock(trimEnd)} · ${length.toFixed(1)}s`
+      + (length >= MAX_CLIP_SECONDS - 0.05 ? ' (the longest a memory can play)' : '');
   }
 
   /** A focal point outside the crop describes nothing, so keep it within. */
@@ -199,9 +256,92 @@ export function openPhotoEditor(photo, { isMain }) {
   }));
   presetBar.firstElementChild.classList.add('is-on');
 
+  // ── Rotating ─────────────────────────────────────────────────────
+  /**
+   * Turn the photo a quarter, and carry the crop and the focal point round with it.
+   *
+   * Both are expressed against the upright photo, so leaving them alone would slide the
+   * crop somewhere else the moment the photo turned. Rotating them by the same quarter
+   * keeps the rectangle over the same part of the picture, which is the only behaviour
+   * that can be defended: the parent framed a subject, not a set of coordinates.
+   */
+  function turn(by) {
+    const turned = turnFraming(crop, { x: fpx, y: fpy }, by);
+    crop = turned.crop;
+    fpx = turned.focal.x;
+    fpy = turned.focal.y;
+    rotation = (rotation + by + 360) % 360;
+    paint();
+  }
+
+  const onRotate = (e) => turn(Number(e.currentTarget.dataset.turn));
+  rotateBtns.forEach((b) => b.addEventListener('click', onRotate));
+
+  // ── Trimming ─────────────────────────────────────────────────────
+  /** Shortest a clip may be — below this it reads as a stutter rather than a moment. */
+  const MIN_CLIP = 0.5;
+
+  let dragTrim = null;
+
+  function trimAt(e) {
+    const box = trimBar.getBoundingClientRect();
+    return clamp01((e.clientX - box.left) / box.width) * duration;
+  }
+
+  function onTrimDown(e) {
+    const handle = e.target.closest('[data-trim]');
+    if (!handle) return;
+    dragTrim = handle.dataset.trim;
+    trimBar.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  }
+
+  function onTrimMove(e) {
+    if (!dragTrim) return;
+    const t = trimAt(e);
+    if (dragTrim === 'start') {
+      trimStart = Math.min(t, trimEnd - MIN_CLIP);
+      // A minute is the most that can play, so pushing the start along drags the end.
+      if (trimEnd - trimStart > MAX_CLIP_SECONDS) trimEnd = trimStart + MAX_CLIP_SECONDS;
+    } else {
+      trimEnd = Math.max(t, trimStart + MIN_CLIP);
+      if (trimEnd - trimStart > MAX_CLIP_SECONDS) trimStart = trimEnd - MAX_CLIP_SECONDS;
+    }
+    trimStart = Math.max(0, trimStart);
+    trimEnd = Math.min(duration, trimEnd);
+    paint();
+    // Show the frame being chosen — a trim handle you cannot see is a guess.
+    if (cropImg.tagName === 'VIDEO') {
+      cropImg.currentTime = dragTrim === 'start' ? trimStart : trimEnd;
+    }
+  }
+
+  const onTrimUp = () => { dragTrim = null; };
+
+  trimPane.hidden = !isClip;
+  if (isClip) {
+    trimBar.addEventListener('pointerdown', onTrimDown);
+    trimBar.addEventListener('pointermove', onTrimMove);
+    trimBar.addEventListener('pointerup', onTrimUp);
+    trimBar.addEventListener('pointercancel', onTrimUp);
+  }
+
   // ── Open ─────────────────────────────────────────────────────────
-  cropImg.src = photo.url;
-  pane.style.setProperty('--img-ar', `${photo.width} / ${photo.height}`);
+  // A clip is framed on its own frames rather than on a poster: dragging a trim handle
+  // has to show what is being chosen.
+  if (isClip) {
+    const video = document.createElement('video');
+    video.className = 'editor-crop-img rotor-media';
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.src = photo.videoUrl;
+    video.addEventListener('loadedmetadata', () => { video.currentTime = trimStart; });
+    cropImg.replaceWith(video);
+    cropImg = video;
+  } else {
+    cropImg.src = photo.url;
+  }
   paint();
 
   mainBtn.hidden = isMain;
@@ -224,8 +364,24 @@ export function openPhotoEditor(photo, { isMain }) {
       pane.removeEventListener('pointerup', onUp);
       pane.removeEventListener('pointercancel', onUp);
       mainBtn.removeEventListener('click', onMain);
+      rotateBtns.forEach((b) => b.removeEventListener('click', onRotate));
+      trimBar.removeEventListener('pointerdown', onTrimDown);
+      trimBar.removeEventListener('pointermove', onTrimMove);
+      trimBar.removeEventListener('pointerup', onTrimUp);
+      trimBar.removeEventListener('pointercancel', onTrimUp);
       sheet.removeEventListener('close', finish);
+
+      // The surface is shared between opens, so a clip's <video> has to give the <img>
+      // back — otherwise the next photo would be handed a video element to display.
       cropImg.removeAttribute('src');
+      if (cropImg.tagName === 'VIDEO') {
+        cropImg.pause();
+        const img = document.createElement('img');
+        img.className = 'editor-crop-img rotor-media';
+        img.alt = '';
+        cropImg.replaceWith(img);
+        cropImg = img;
+      }
 
       const whole = crop.w >= 0.999 && crop.h >= 0.999;
       resolve(saved ? {
@@ -236,6 +392,10 @@ export function openPhotoEditor(photo, { isMain }) {
         crop: whole ? null : {
           x: round(crop.x), y: round(crop.y), w: round(crop.w), h: round(crop.h),
         },
+        rotation,
+        // Only a clip carries a trim; null leaves a still's fields untouched.
+        trimStart: isClip ? round(trimStart) : null,
+        trimEnd: isClip ? round(trimEnd) : null,
         makeMain,
       } : null);
     };

@@ -78,6 +78,7 @@
       ART_PRESETS, assignSides, assignPresets,
     } from './js/milestone-art.js';
     import { initCarousels } from './js/carousel.js';
+    import { initMotion } from './js/motion-play.js';
     import { initLightbox } from './js/lightbox.js';
     import { centreProgress } from './js/fade.js';
 
@@ -90,6 +91,16 @@
       width,
       height,
       alt: '',
+    });
+
+    /** Any short clip dropped here exercises playback; without it the poster still shows,
+     *  which is exactly what a card shows before a video is tapped. */
+    const CLIP = 'assets/sample-clip.mp4';
+
+    /** Give a photo a video, turning it into a video card or a motion photo. */
+    const clip = (p, { duration, trimStart = 0, trimEnd = 0, motion = false }) => ({
+      ...p,
+      video: { url: CLIP, duration, trimStart, trimEnd, motion },
     });
 
     const post = (fields) => ({
@@ -215,6 +226,66 @@
         milestone: { isMilestone: true, title: 'Day one' },
       })],
       ['No photos, no caption · renders nothing', post({ memoryDate: '2026-03-22' })],
+
+      // ── Rotation ──────────────────────────────────────────────
+      // The engine reads the shape a photo PRESENTS, so a quarter turn changes the card.
+      ['Rotation · a landscape file turned upright is a PORTRAIT card', post({
+        memoryDate: '2026-02-20',
+        caption: 'Same file as the landscape sample, turned a quarter.',
+        photos: [{ ...photo('parkday', 1200, 800), rotation: 90 }],
+      })],
+      ['Rotation · the crop turns with the photo, framing the same picture', post({
+        memoryDate: '2026-02-19',
+        photos: [
+          { ...photo('cropme', 1600, 900), crop: { x: 0.25, y: 0, w: 0.25, h: 1 } },
+          { ...photo('cropme', 1600, 900), crop: { x: 0, y: 0.25, w: 1, h: 0.25 }, rotation: 90 },
+        ],
+      })],
+      ['Rotation · a turned lead photo reshapes the 3-grid hero', post({
+        memoryDate: '2026-02-18',
+        photos: [
+          { ...photo('hero', 1600, 900), rotation: 90 },
+          photo('heroB', 800, 800),
+          photo('heroC', 800, 800),
+        ],
+      })],
+
+      // ── Video and motion ──────────────────────────────────────
+      // A video's POSTER is the photo everything reasons about, so these render as cards
+      // whether or not the clip itself is present. Drop any short clip at the path in
+      // CLIP below to exercise playback and the motion loop as well.
+      ['Video · a clip is a landscape card with its length on it', post({
+        memoryDate: '2026-02-10',
+        caption: 'A video waits to be tapped — several decoders at once cost battery.',
+        photos: [clip(photo('clipwide', 1200, 800), { duration: 32 })],
+      })],
+      ['Video · portrait clip, trimmed to 12s of a 3-minute take', post({
+        memoryDate: '2026-02-09',
+        caption: 'The file keeps every frame; the trim says which stretch is the memory.',
+        photos: [clip(photo('cliptall', 900, 1200), { duration: 184, trimStart: 42, trimEnd: 54 })],
+      })],
+      ['Video · a clip longer than a minute still plays only a minute', post({
+        memoryDate: '2026-02-08',
+        photos: [clip(photo('cliplong', 1200, 900), { duration: 600 })],
+      })],
+      ['Motion photo · loops on screen, and carries no badge', post({
+        memoryDate: '2026-02-07',
+        caption: 'A motion photo IS its motion, so it plays without being asked.',
+        photos: [clip(photo('motion1', 900, 1200), { duration: 3, motion: true })],
+      })],
+      ['Motion + video + stills in one grid', post({
+        memoryDate: '2026-02-06',
+        photos: [
+          clip(photo('mix1', 800, 800), { duration: 2.5, motion: true }),
+          photo('mix2', 800, 800),
+          clip(photo('mix3', 800, 800), { duration: 47 }),
+          photo('mix4', 800, 800),
+        ],
+      })],
+      ['Video · turned upright, badge stays put', post({
+        memoryDate: '2026-02-05',
+        photos: [{ ...clip(photo('clipwide', 1200, 800), { duration: 18 }), rotation: 90 }],
+      })],
     ];
 
     for (const [label, sample] of samples) {
@@ -229,6 +300,9 @@
 
     initCarousels(timeline);
     initLightbox(timeline);
+    // Motion photos loop on screen here exactly as they do in the app — the bench mirrors
+    // the real behaviour rather than approximating it.
+    initMotion(timeline);
 
     // app.js normally assigns the alternating sides and fades the artwork with scroll;
     // this bench shows everything at once, so pin both up front.

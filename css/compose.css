@@ -166,6 +166,15 @@
 
 .editor-crop[hidden] { display: none; }
 
+/* The rotor fills the surface and turns the media inside it — the same wrapper the cards
+   and the lightbox use, so a photo is framed on exactly what a card will show. Its child
+   rules live in cards.css. */
+.editor-rotor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
 .editor-crop-img {
   width: 100%;
   height: 100%;
@@ -404,4 +413,77 @@
   color: var(--text-dim);
   cursor: not-allowed;
   transform: none;
+}
+
+/* ── Rotate ────────────────────────────────────────────────────── */
+.editor-rotate-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.editor-rotate {
+  min-width: 52px;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 8px 12px;
+}
+
+/* ── Trim ──────────────────────────────────────────────────────── */
+/* Trimming is framing, like cropping: the stored file keeps every frame and these two
+   handles say which stretch of it the memory is. */
+.editor-trim {
+  margin: 14px auto 0;
+  max-width: 320px;
+}
+
+.editor-trim[hidden] { display: none; }
+
+.editor-trim-bar {
+  position: relative;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  touch-action: none;   /* the handles own horizontal drags */
+  cursor: pointer;
+}
+
+/* The chosen stretch, lit against the rest of the clip */
+.editor-trim-range {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(var(--blue-rgb), 0.35);
+  border-top: 2px solid var(--blue-ink);
+  border-bottom: 2px solid var(--blue-ink);
+}
+
+.editor-trim-handle {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 44px;
+  margin-left: -7px;
+  transform: translateY(-50%);
+  border-radius: 6px;
+  background: var(--blue-ink);
+  box-shadow: var(--shadow-lift);
+  cursor: ew-resize;
+  /* Comfortably tappable on a phone without making the bar itself taller. */
+  touch-action: none;
+}
+
+.editor-trim-handle::after {
+  content: '';
+  position: absolute;
+  inset: 0 -10px;   /* invisible margin, so a thumb does not have to be precise */
+}
+
+.editor-trim-read {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-dim);
 }

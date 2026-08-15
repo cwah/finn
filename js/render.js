@@ -4,6 +4,7 @@
 
 import {
   inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, coverAlign,
+  rotationOf, orientedSize, trimRange, hasVideo, isMotion,
 } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { milestoneArtSvg, artImage } from './milestone-art.js';
@@ -15,16 +16,76 @@ function el(tag, className, props = {}) {
   return node;
 }
 
+/**
+ * The picture itself — a still, or the poster frame of something that moves.
+ *
+ * A video's poster IS a photo, which is literally true of a motion photo and true by
+ * construction of a video, whose poster is grabbed at upload. So this is the only place
+ * that knows the difference: the crop box, the engine and every layout rule above it go
+ * on reasoning about stored width/height and never learn that motion exists.
+ */
 function photoEl(photo) {
-  const img = el('img', 'card-photo', {
-    src: photo.url,
-    alt: photo.alt || '',
-    loading: 'lazy',
-    decoding: 'async',
+  if (!hasVideo(photo)) {
+    return el('img', 'card-photo rotor-media', {
+      src: photo.url,
+      alt: photo.alt || '',
+      loading: 'lazy',
+      decoding: 'async',
+      width: photo.width,
+      height: photo.height,
+    });
+  }
+
+  const { start, end } = trimRange(photo.video);
+  const motion = isMotion(photo);
+  // The media fragment asks the browser for just the trimmed stretch, so a 3-minute
+  // source does not download in full to play four seconds of it.
+  const video = el('video', 'card-photo card-video rotor-media', {
+    poster: photo.url,
+    // 'metadata' either way: with 'none' the first tap on the badge has nothing buffered
+    // and stalls on a blank frame. Metadata is a few KB and buys an instant start.
+    preload: 'metadata',
+    muted: true,
+    loop: motion,
+    playsInline: true,
+    // Controls belong to the lightbox; a card is a thumbnail, not a player.
+    controls: false,
     width: photo.width,
     height: photo.height,
   });
-  return img;
+  video.src = `${photo.video.url}#t=${start.toFixed(2)},${end.toFixed(2)}`;
+  // muted must be set as an attribute too, or autoplay is refused on some browsers.
+  video.setAttribute('muted', '');
+  video.dataset.motion = motion ? 'true' : 'false';
+  video.dataset.trimStart = start;
+  video.dataset.trimEnd = end;
+  return video;
+}
+
+/**
+ * Turn the media upright inside the crop box.
+ *
+ * A CSS transform does not change an element's layout box, so rotating the media alone
+ * would leave the crop box measuring the shape it used to be. The rotor is the layout box
+ * instead: it takes the ORIENTED aspect ratio, which is exactly what the media's own
+ * intrinsic ratio used to supply, and the media is turned inside it.
+ *
+ * Every photo gets one, turned or not — one code path rather than two that could
+ * disagree, the same reason every photo gets a crop box.
+ */
+function rotor(photo, media) {
+  const deg = rotationOf(photo);
+  const o = orientedSize(photo);
+  const wrap = el('div', 'rotor');
+  wrap.style.setProperty('--rot', deg);
+  // Unitless, because it is used in calc() as a number as well as in aspect-ratio.
+  wrap.style.setProperty('--oar', o.width / o.height);
+  wrap.style.aspectRatio = `${o.width} / ${o.height}`;
+  // A quarter turn swaps the axes, so the media is laid out across the rotor's other
+  // dimension before being turned into place.
+  if (deg % 180 !== 0) wrap.classList.add('is-quarter');
+  wrap.append(media);
+  return wrap;
 }
 
 /**
@@ -60,19 +121,66 @@ function cropped(photo, group, cellAspect = null) {
     box.style.setProperty('--py', p.y);
   }
 
-  box.append(makeViewable(photoEl(photo), photo, group));
+  const media = photoEl(photo);
+  box.append(rotor(photo, media));
+  makeViewable(media, photo, group);
+  return box;
+}
+
+/** Seconds as a clock, for the badge: 8 -> 0:08, 95 -> 1:35. */
+function clock(seconds) {
+  const whole = Math.round(seconds);
+  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
+}
+
+/**
+ * Mount a photo into the frame, cell or slide that holds it, with whatever the medium
+ * needs alongside — a duration badge for a video, nothing at all for a still.
+ *
+ * The badge is a sibling of the crop box rather than a child, because the box is
+ * deliberately oversized and offset to show its crop: anything inside it would be
+ * positioned against the picture rather than against the cell the parent can see.
+ */
+function mountMedia(container, photo, group, cellAspect = null) {
+  const box = cropped(photo, group, cellAspect);
+  container.append(box);
+
+  if (isMotion(photo)) {
+    // A motion photo carries no duration — it is a moment, and the number would be noise.
+    // What it does need is a way to STOP: the loop is already running, and until now the
+    // only thing a photo offered was "expand". Kept out of sight until pointed at.
+    const badge = el('button', 'video-badge video-badge--motion is-playing', { type: 'button' });
+    badge.setAttribute('aria-label', 'Pause this motion photo');
+    container.append(badge);
+  } else if (hasVideo(photo)) {
+    // A video waits to be asked, and the badge IS the ask — it plays the clip in place.
+    // Tapping the picture still expands it, so both remain available.
+    const length = clock(trimRange(photo.video).duration);
+    const badge = el('button', 'video-badge', { type: 'button', textContent: length });
+    badge.dataset.length = length;
+    badge.setAttribute('aria-label', `Play, ${length}`);
+    container.append(badge);
+  }
   return box;
 }
 
 /** Make a photo openable full-size. The lightbox reads these off the clicked element. */
 function makeViewable(img, photo, group) {
   const c = cropRect(photo);
+  const o = orientedSize(photo);
   img.dataset.full = photo.url;
-  img.dataset.fullW = photo.width;
-  img.dataset.fullH = photo.height;
+  // The size the picture PRESENTS, so the lightbox sizes a turned photo correctly.
+  img.dataset.fullW = o.width;
+  img.dataset.fullH = o.height;
   // The crop travels with it: opening a photo should show the picture that was framed,
-  // not the file it was framed from.
+  // not the file it was framed from. So does the rotation, for the same reason.
   img.dataset.crop = `${c.x} ${c.y} ${c.w} ${c.h}`;
+  img.dataset.rotation = rotationOf(photo);
+  if (hasVideo(photo)) {
+    const { start, end } = trimRange(photo.video);
+    img.dataset.video = photo.video.url;
+    img.dataset.trim = `${start} ${end}`;
+  }
   img.dataset.group = group;
   return img;
 }
@@ -100,10 +208,9 @@ function singlePhotoFrame(photo, group) {
   // Reserve space from the CROPPED dimensions, so nothing reflows once the file loads.
   frame.style.setProperty('--ar', `${size.width} / ${size.height}`);
 
-  const box = cropped(photo, group);
+  const box = mountMedia(frame, photo, group);
   box.classList.add('crop-box--exact'); // the frame already matches the crop's shape
   box.dataset.parallax = 'y';
-  frame.append(box);
   return frame;
 }
 
@@ -120,7 +227,7 @@ function gridPhotos(photos, group) {
   shown.forEach((p, i) => {
     const cell = el('div', 'grid-cell');
     const isHero = heroAspect !== null && i === 0;
-    cell.append(cropped(p, group, isHero ? heroAspect : 1)); // other cells are square
+    mountMedia(cell, p, group, isHero ? heroAspect : 1); // other cells are square
     wrap.append(cell);
   });
   return wrap;
@@ -141,7 +248,7 @@ function carouselPhotos(photos, group) {
   const track = el('div', 'carousel-track');
   photos.forEach((p) => {
     const slide = el('div', 'carousel-slide');
-    slide.append(cropped(p, group, slideAspect));
+    mountMedia(slide, p, group, slideAspect);
     track.append(slide);
   });
 

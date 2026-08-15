@@ -32,14 +32,123 @@ export function cropRect(photo) {
 }
 
 /**
- * What the photo measures AFTER its crop — the only size the layout should ever reason
- * about. Cropping a wide photo into a tall frame really does make it a portrait, and the
- * engine has to see that or the card would contradict what the parent framed.
+ * The rotation in force, in degrees clockwise. Only right angles exist: a photo is held
+ * the wrong way round, not askew, and anything else would need the frame to grow to hold
+ * the corners. Absent or nonsensical means upright, which is how photos behaved before
+ * rotation existed.
+ * @returns {0|90|180|270}
+ */
+export function rotationOf(photo) {
+  const q = Math.round(Number(photo?.rotation) / 90);
+  return Number.isFinite(q) ? (((q % 4) + 4) % 4) * 90 : 0;
+}
+
+/**
+ * What the photo measures once turned upright, before any crop.
+ *
+ * A quarter turn swaps the axes, so this is where a sideways portrait stops claiming to
+ * be a landscape. Everything downstream reasons about the *presented* shape, never the
+ * stored one.
+ * @returns {{width: number, height: number}}
+ */
+export function orientedSize(photo) {
+  const quarterTurned = rotationOf(photo) % 180 !== 0;
+  return quarterTurned
+    ? { width: photo.height, height: photo.width }
+    : { width: photo.width, height: photo.height };
+}
+
+/**
+ * What the photo measures AFTER rotation and crop — the only size the layout should ever
+ * reason about. Cropping a wide photo into a tall frame really does make it a portrait,
+ * and so does turning it a quarter turn; the engine has to see both or the card would
+ * contradict what the parent framed.
+ *
+ * Rotation is applied FIRST, so the crop rectangle is expressed against the upright
+ * photo. That is the photo the parent was looking at when they dragged the crop, and a
+ * crop that shifted when the photo was later turned would be indefensible.
  * @returns {{width: number, height: number}}
  */
 export function croppedSize(photo) {
   const c = cropRect(photo);
-  return { width: photo.width * c.w, height: photo.height * c.h };
+  const o = orientedSize(photo);
+  return { width: o.width * c.w, height: o.height * c.h };
+}
+
+/**
+ * Carry a crop and a focal point round with the photo as it turns.
+ *
+ * Both are expressed against the UPRIGHT photo, so turning the photo and leaving them
+ * alone would slide the crop onto a different part of the picture. A parent framed a
+ * subject, not a pair of coordinates, so the framing turns with it.
+ *
+ * A quarter turn clockwise sends a point at (x, y) to (1 - y, x); a rectangle's corner
+ * becomes its opposite corner, which is why x is built from y AND h.
+ *
+ * @param {{x, y, w, h}} crop
+ * @param {{x, y}} focal in the same upright space
+ * @param {number} by degrees clockwise, any multiple of 90
+ * @returns {{crop: {x, y, w, h}, focal: {x, y}}}
+ */
+export function turnFraming(crop, focal, by) {
+  const quarters = ((Math.round(Number(by) / 90) % 4) + 4) % 4 || 0;
+  let c = { ...crop };
+  let f = { ...focal };
+  for (let q = 0; q < quarters; q += 1) {
+    c = { x: 1 - c.y - c.h, y: c.x, w: c.h, h: c.w };
+    f = { x: 1 - f.y, y: f.x };
+  }
+  // Rounded, because these values are stored and turned again later: 1 - y - h drifts a
+  // little every time, and four turns of an unrounded rectangle do not land back where
+  // they started. Three decimals is finer than a pixel on any photo a phone takes.
+  const tidy = (v) => Math.round(v * 1000) / 1000;
+  return {
+    crop: { x: tidy(c.x), y: tidy(c.y), w: tidy(c.w), h: tidy(c.h) },
+    focal: { x: tidy(f.x), y: tidy(f.y) },
+  };
+}
+
+/** Longest a memory may play, in seconds. Beyond this the parent picks which minute. */
+export const MAX_CLIP_SECONDS = 60;
+
+/**
+ * The stretch of a video that actually plays, in seconds.
+ *
+ * Trimming is framing, never destruction — exactly like cropping. The stored file keeps
+ * every frame; these two numbers say which of them a memory is, so a trim can be widened,
+ * moved or removed forever.
+ *
+ * The result is always a valid window inside the source and never longer than
+ * MAX_CLIP_SECONDS, so a malformed or missing trim degrades to "the first minute" rather
+ * than to an error.
+ * @returns {{start: number, end: number, duration: number}}
+ */
+export function trimRange(video) {
+  const source = Number(video?.duration);
+  if (!(source > 0)) return { start: 0, end: 0, duration: 0 };
+
+  const start = Math.min(Math.max(Number(video.trimStart) || 0, 0), source);
+  const requested = Number(video.trimEnd);
+  // An absent or backwards end means "from here on", which the cap then shortens.
+  const end = requested > start ? Math.min(requested, source) : source;
+  const capped = Math.min(end, start + MAX_CLIP_SECONDS);
+  return { start, end: capped, duration: capped - start };
+}
+
+/** Whether a media item carries motion at all. A plain photo does not. */
+export function hasVideo(photo) {
+  return Boolean(photo?.video?.url) && trimRange(photo.video).duration > 0;
+}
+
+/**
+ * Whether an item should loop silently on screen rather than wait for a tap.
+ *
+ * A motion photo IS its motion — one that never moved would just be a photo. A longer
+ * clip is a video, and several decoders running at once is exactly the battery cost this
+ * app avoids elsewhere, so it waits to be asked.
+ */
+export function isMotion(photo) {
+  return hasVideo(photo) && Boolean(photo.video.motion);
 }
 
 /**

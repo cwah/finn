@@ -8,7 +8,8 @@ import assert from 'node:assert/strict';
 
 import {
   inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, FULL_CROP,
-  coverAlign,
+  coverAlign, rotationOf, orientedSize, trimRange, hasVideo, isMotion, MAX_CLIP_SECONDS,
+  turnFraming,
 } from '../js/layout-engine.js';
 
 /** A photo is only ever consulted for its stored dimensions. */
@@ -252,4 +253,187 @@ test('the engine is pure — it does not mutate the post it is given', () => {
   inferLayout(post);
   isMilestone(post);
   assert.equal(JSON.stringify(post), before);
+});
+
+// ── Rotation ──────────────────────────────────────────────────────
+test('rotation snaps to a right angle, and anything odd means upright', () => {
+  assert.equal(rotationOf({ rotation: 90 }), 90);
+  assert.equal(rotationOf({ rotation: 270 }), 270);
+  assert.equal(rotationOf({ rotation: -90 }), 270, 'anticlockwise comes round the other way');
+  assert.equal(rotationOf({ rotation: 450 }), 90, 'more than a full turn wraps');
+  for (const odd of [undefined, null, 'sideways', NaN, {}]) {
+    assert.equal(rotationOf({ rotation: odd }), 0, String(odd));
+  }
+  assert.equal(rotationOf(null), 0);
+});
+
+test('a quarter turn swaps the axes; a half turn does not', () => {
+  const p = photo(1600, 900);
+  assert.deepEqual(orientedSize({ ...p, rotation: 0 }), { width: 1600, height: 900 });
+  assert.deepEqual(orientedSize({ ...p, rotation: 90 }), { width: 900, height: 1600 });
+  assert.deepEqual(orientedSize({ ...p, rotation: 180 }), { width: 1600, height: 900 });
+  assert.deepEqual(orientedSize({ ...p, rotation: 270 }), { width: 900, height: 1600 });
+});
+
+test('turning a landscape upright makes it a PORTRAIT card', () => {
+  // The whole point: the card has to agree with the picture the parent is looking at.
+  const sideways = { ...photo(1600, 900), rotation: 90 };
+  assert.equal(inferLayout({ photos: [sideways] }), 'portrait');
+  assert.equal(inferLayout({ photos: [photo(1600, 900)] }), 'landscape', 'and back again');
+});
+
+test('the crop is measured against the UPRIGHT photo, not the stored one', () => {
+  // Rotation happens first, so a crop keeps framing what it framed when it was dragged.
+  const p = { ...photo(1600, 900), rotation: 90, crop: { x: 0, y: 0, w: 1, h: 0.5 } };
+  // Upright it is 900x1600; half its height is 900x800.
+  assert.deepEqual(croppedSize(p), { width: 900, height: 800 });
+});
+
+test('a crop keeps its meaning when the photo is turned', () => {
+  // Because rotation is applied first, "a tall quarter" stays a tall quarter of whatever
+  // the parent is looking at. Turning a photo must not re-frame the picture they chose.
+  const tallQuarter = { x: 0.25, y: 0, w: 0.25, h: 1 };
+  const wide = { ...photo(1600, 900), crop: tallQuarter };
+
+  assert.deepEqual(croppedSize(wide), { width: 400, height: 900 });
+  assert.deepEqual(croppedSize({ ...wide, rotation: 90 }), { width: 225, height: 1600 });
+  for (const rotation of [0, 90, 180, 270]) {
+    assert.equal(inferLayout({ photos: [{ ...wide, rotation }] }), 'portrait',
+      `a tall quarter is a portrait at ${rotation} degrees`);
+  }
+});
+
+test('rotation alone can flip the card, with no crop involved', () => {
+  const wide = photo(1600, 900);
+  assert.equal(inferLayout({ photos: [wide] }), 'landscape');
+  assert.equal(inferLayout({ photos: [{ ...wide, rotation: 90 }] }), 'portrait');
+  assert.equal(inferLayout({ photos: [{ ...wide, rotation: 180 }] }), 'landscape');
+});
+
+// ── Trimming ──────────────────────────────────────────────────────
+const clip = (duration, extra = {}) => ({ url: 'v.mp4', duration, ...extra });
+
+test('an untrimmed clip plays all of itself, up to the cap', () => {
+  assert.deepEqual(trimRange(clip(12)), { start: 0, end: 12, duration: 12 });
+});
+
+test('nothing ever plays for longer than a minute', () => {
+  const long = trimRange(clip(600));
+  assert.equal(long.duration, MAX_CLIP_SECONDS);
+  assert.deepEqual(long, { start: 0, end: 60, duration: 60 });
+
+  // Capped from wherever the trim starts, not from the beginning of the file.
+  assert.deepEqual(trimRange(clip(600, { trimStart: 100, trimEnd: 500 })),
+    { start: 100, end: 160, duration: 60 });
+});
+
+test('a trim is a window inside the source, and holds its shape', () => {
+  assert.deepEqual(trimRange(clip(30, { trimStart: 5, trimEnd: 12.5 })),
+    { start: 5, end: 12.5, duration: 7.5 });
+});
+
+test('a nonsensical trim degrades to the opening minute rather than erroring', () => {
+  for (const odd of [
+    clip(30, { trimStart: -5 }),
+    clip(30, { trimStart: 'soon' }),
+    clip(30, { trimEnd: 0 }),
+    clip(30, { trimEnd: 5, trimStart: 20 }),   // backwards
+    clip(30, { trimEnd: 999 }),                // past the end of the file
+  ]) {
+    const r = trimRange(odd);
+    assert.ok(r.start >= 0 && r.end <= 30 && r.duration > 0, JSON.stringify(odd));
+    assert.ok(r.duration <= MAX_CLIP_SECONDS);
+  }
+});
+
+test('a missing or broken clip has no playable range', () => {
+  for (const nothing of [null, undefined, {}, clip(0), clip(-1), clip('long')]) {
+    assert.equal(trimRange(nothing).duration, 0, JSON.stringify(nothing));
+  }
+});
+
+// ── Motion ────────────────────────────────────────────────────────
+test('a plain photo carries no motion', () => {
+  assert.equal(hasVideo(photo(800, 600)), false);
+  assert.equal(isMotion(photo(800, 600)), false);
+  assert.equal(hasVideo(null), false);
+});
+
+test('a motion photo loops; a video waits to be asked', () => {
+  const still = photo(1200, 1600);
+  const motion = { ...still, video: clip(2.5, { motion: true }) };
+  const video = { ...still, video: clip(45) };
+
+  assert.equal(isMotion(motion), true);
+  assert.equal(isMotion(video), false, 'a longer clip is a video, and video costs battery');
+  assert.equal(hasVideo(video), true);
+});
+
+test('a video with nothing playable is treated as a still', () => {
+  const broken = { ...photo(800, 600), video: clip(0, { motion: true }) };
+  assert.equal(hasVideo(broken), false);
+  assert.equal(isMotion(broken), false);
+});
+
+test('a video still picks its layout from the poster, like any photo', () => {
+  const tall = { ...photo(1080, 1920), video: clip(20) };
+  assert.equal(inferLayout({ photos: [tall] }), 'portrait');
+  const wideTurned = { ...photo(1920, 1080), video: clip(20), rotation: 270 };
+  assert.equal(inferLayout({ photos: [wideTurned] }), 'portrait');
+});
+
+// ── Turning the framing with the photo ────────────────────────────
+test('a crop turns with the photo, staying over the same part of the picture', () => {
+  // The top-left quarter, turned clockwise, is the top-RIGHT quarter.
+  const { crop } = turnFraming({ x: 0, y: 0, w: 0.5, h: 0.5 }, { x: 0.5, y: 0.5 }, 90);
+  assert.deepEqual(crop, { x: 0.5, y: 0, w: 0.5, h: 0.5 });
+});
+
+test('a quarter turn swaps a rectangle onto its other axis', () => {
+  const { crop } = turnFraming({ x: 0.25, y: 0, w: 0.25, h: 1 }, { x: 0.5, y: 0.5 }, 90);
+  assert.deepEqual(crop, { x: 0, y: 0.25, w: 1, h: 0.25 }, 'a tall slice becomes a wide one');
+});
+
+test('four quarter turns is where you started', () => {
+  const crop = { x: 0.1, y: 0.2, w: 0.3, h: 0.4 };
+  const focal = { x: 0.7, y: 0.3 };
+  let out = { crop, focal };
+  for (let i = 0; i < 4; i += 1) out = turnFraming(out.crop, out.focal, 90);
+  assert.deepEqual(out.crop, crop);
+  assert.deepEqual(out.focal, focal);
+});
+
+test('turning by 180 or -90 agrees with turning by quarters', () => {
+  const crop = { x: 0.1, y: 0.2, w: 0.3, h: 0.4 };
+  const focal = { x: 0.7, y: 0.3 };
+
+  const twice = turnFraming(...Object.values(turnFraming(crop, focal, 90)), 90);
+  assert.deepEqual(turnFraming(crop, focal, 180), twice);
+
+  const thrice = turnFraming(...Object.values(twice), 90);
+  assert.deepEqual(turnFraming(crop, focal, -90), thrice, 'anticlockwise is three clockwise');
+});
+
+test('the focal point stays inside the crop it belongs to', () => {
+  const crop = { x: 0.2, y: 0.1, w: 0.5, h: 0.6 };
+  const focal = { x: 0.4, y: 0.3 }; // inside
+  const out = turnFraming(crop, focal, 90);
+  assert.ok(out.focal.x >= out.crop.x && out.focal.x <= out.crop.x + out.crop.w, 'x');
+  assert.ok(out.focal.y >= out.crop.y && out.focal.y <= out.crop.y + out.crop.h, 'y');
+});
+
+test('turning is pure — it does not rewrite what it was given', () => {
+  const crop = { x: 0.1, y: 0.2, w: 0.3, h: 0.4 };
+  const focal = { x: 0.7, y: 0.3 };
+  const before = JSON.stringify({ crop, focal });
+  turnFraming(crop, focal, 90);
+  assert.equal(JSON.stringify({ crop, focal }), before);
+});
+
+test('turning by nothing changes nothing', () => {
+  const crop = { x: 0.1, y: 0.2, w: 0.3, h: 0.4 };
+  const focal = { x: 0.7, y: 0.3 };
+  for (const by of [0, 360, null, undefined, NaN, 'sideways']) {
+    assert.deepEqual(turnFraming(crop, focal, by), { crop, focal }, String(by));
+  }
 });

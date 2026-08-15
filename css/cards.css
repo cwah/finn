@@ -85,7 +85,11 @@
   background: var(--surface-2);
 }
 
-.crop-box > .card-photo {
+/* The rotor is the crop box's only child, and stands where the media used to: it carries
+   the ORIENTED aspect ratio, which is what the media's intrinsic ratio supplied before
+   rotation existed. A transform never changes a layout box, so rotating the media itself
+   would leave this maths measuring the shape it used to be. */
+.crop-box > .rotor {
   position: absolute;
   width: calc(100% / var(--cw, 1));
   height: auto;
@@ -94,6 +98,30 @@
   top: calc(var(--cy, 0) / var(--ch, 1) * -100%);
   display: block;
   background: none;
+  overflow: hidden;
+}
+
+/* Upright: the media simply fills its rotor. Shared with the lightbox, which builds
+   the same rotor around the same media. */
+.rotor > .rotor-media {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: block;
+  background: none;
+  object-fit: fill; /* the rotor already has the media's exact shape */
+  transform: translate(-50%, -50%) rotate(calc(var(--rot, 0) * 1deg));
+}
+
+/* A quarter turn: the media is laid out across the rotor's OTHER axis, then turned into
+   place. --oar is the rotor's width/height, so 100%/--oar is its height expressed against
+   its width, and 100%*--oar its width expressed against its height. */
+.rotor.is-quarter > .rotor-media {
+  width: calc(100% / var(--oar, 1));
+  height: calc(100% * var(--oar, 1));
 }
 
 /* Reserve space from intrinsic dimensions to prevent reflow on load */
@@ -374,3 +402,115 @@
 }
 
 .milestone-badge::before { content: "★"; }
+
+/* ── Video and motion photos ───────────────────────────────────── */
+/* A card is a thumbnail, not a player: the badge says how long the clip is and the
+   lightbox does the playing. Motion photos get no badge — they are already moving,
+   which is the whole of what they have to say. */
+.video-badge {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px 3px 6px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  /* Tinted with the page's own sage rather than black, like --shadow-card. */
+  background: rgba(var(--text-rgb), 0.55);
+  backdrop-filter: blur(6px);
+  /* A control, not decoration: it plays the clip in place. Tapping the picture around it
+     still expands. Reset the button chrome the browser would otherwise supply. */
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.video-badge:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+/* The play triangle, drawn rather than shipped as an asset. */
+.video-badge::before {
+  content: '';
+  /* A border triangle only reads as a triangle with a ZERO content box — give it a size
+     and the left border becomes a trapezoid with a transparent rectangle beside it, which
+     looks like the icon has been cut off. The border-box is still 7x8, so it lays out and
+     centres as if it had dimensions. */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 0 4px 7px;
+  border-color: transparent transparent transparent currentColor;
+}
+
+/* Playing: the triangle becomes a pause bar pair, drawn from the same box so the badge
+   does not change width and shift under the thumb mid-tap. */
+.video-badge.is-playing::before {
+  border: 0;
+  background: currentColor;
+  /* The second bar is a shadow, so it paints 5px to the right while taking no layout
+     width at all. The margin makes up the whole difference — 2px laid out, 7px seen —
+     or the label crowds against a bar the browser does not know is there. */
+  box-shadow: 5px 0 0 currentColor;
+  width: 2px;
+  height: 9px;
+  margin-right: 5px;
+}
+
+/* A video fills its rotor exactly like an image does. object-fit: fill is right here for
+   the same reason it is on .card-photo: the rotor already has the media's exact shape,
+   so there is nothing to letterbox. */
+.card-video {
+  background: var(--surface-2);
+}
+
+/* Someone who has asked for less movement is not handed a looping video — motion-play.js
+   simply never starts it, and a paused video already shows its poster, which is the same
+   picture holding still. Nothing to do here. */
+
+/* ── The motion photo's pause button ───────────────────────────── */
+/* A loop you cannot stop is tiring to sit with, but a control permanently parked on a
+   photo is its own kind of noise — so it waits until the photo is pointed at. */
+.video-badge--motion {
+  padding: 6px;
+  width: 28px;
+  height: 28px;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Revealed by pointing at the cell, or by tabbing to the button itself. */
+.grid-cell:hover .video-badge--motion,
+.carousel-slide:hover .video-badge--motion,
+.photo-frame:hover .video-badge--motion,
+.video-badge--motion:focus-visible {
+  opacity: 1;
+}
+
+/* Held still: the control STAYS, whatever the pointer is doing. A paused loop with no
+   visible way to restart it does not read as paused — it reads as broken. */
+.is-held .video-badge--motion {
+  opacity: 1;
+}
+
+/* No hover to speak of, so the button simply lives there — quieter than on desktop,
+   since on a phone it is the only way to reach it at all. */
+@media (hover: none) {
+  .video-badge--motion { opacity: 0.55; }
+}
+
+/* Icon only, with no label to be spaced away from — so the play triangle drops the gap
+   and centres on its own. The pause bars KEEP the base margin: it is not a gap there but
+   the layout width the shadow-drawn second bar never claims, and without it the pair
+   would sit left of centre. */
+.video-badge--motion::before { margin-right: 0; }

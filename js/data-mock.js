@@ -71,6 +71,16 @@ export async function updatePost(id, draft, author) {
       focalX: p.focalX ?? null,
       focalY: p.focalY ?? null,
       crop: p.crop ?? null,
+      rotation: p.rotation || 0,
+      // The mock source has no storage, so a clip is previewed from its object URL —
+      // but the SHAPE has to match what PocketBase returns, or the two sources drift.
+      video: p.videoUrl || p.videoFile ? {
+        url: p.videoUrl,
+        duration: p.duration || 0,
+        trimStart: p.trimStart || 0,
+        trimEnd: p.trimEnd || 0,
+        motion: Boolean(p.motion),
+      } : null,
     })),
   };
 }
@@ -95,6 +105,16 @@ export async function createPost(draft, author) {
       focalX: p.focalX ?? null,
       focalY: p.focalY ?? null,
       crop: p.crop ?? null,
+      rotation: p.rotation || 0,
+      // The mock source has no storage, so a clip is previewed from its object URL —
+      // but the SHAPE has to match what PocketBase returns, or the two sources drift.
+      video: p.videoUrl || p.videoFile ? {
+        url: p.videoUrl,
+        duration: p.duration || 0,
+        trimStart: p.trimStart || 0,
+        trimEnd: p.trimEnd || 0,
+        motion: Boolean(p.motion),
+      } : null,
     })),
   };
 }

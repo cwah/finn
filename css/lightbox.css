@@ -45,8 +45,8 @@
   border-radius: 6px;
 }
 
-/* Same offsets the cards use */
-.lightbox-img {
+/* Same offsets the cards use, and the same rotor inside — see .rotor in cards.css */
+.lightbox-crop > .rotor {
   position: absolute;
   width: calc(100% / var(--cw, 1));
   height: auto;

@@ -9,6 +9,7 @@ import { initScrubber } from './scrubber.js';
 import { ensureSignedIn, initSignOut } from './auth.js';
 import { initLightbox } from './lightbox.js';
 import { initCarousels } from './carousel.js';
+import { initMotion, releaseMotion } from './motion-play.js';
 import { centreProgress } from './fade.js';
 import { assignSides, assignPresets } from './milestone-art.js';
 
@@ -124,6 +125,7 @@ function mountCard(card) {
   card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
   if (card.classList.contains('milestone-scene')) artObserver.observe(card);
   initCarousels(card);
+  initMotion(card);
 }
 
 async function loadMore() {
@@ -157,6 +159,7 @@ function activate(card) {
   card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
   if (card.classList.contains('milestone-scene')) artObserver.observe(card);
   initCarousels(card);
+  initMotion(card);
 }
 
 // A freshly captured memory can be backdated, so it does not necessarily belong at
@@ -185,7 +188,7 @@ function replacePost(post) {
 
   // The date may have changed, which moves the card — so drop the old one and re-insert
   // rather than swapping in place, and let insertPost put it where it now belongs.
-  if (old) old.remove();
+  if (old) { releaseMotion(old); old.remove(); }
   if (!card) { restripeMilestones(); scrubber.refresh(); return; }
   insertPost(post);
 }
@@ -194,7 +197,8 @@ function replacePost(post) {
 function removePost(id) {
   loadedPosts.delete(id);
   const card = [...timeline.children].find((c) => c.dataset.postId === id);
-  if (card) card.remove();
+  // Stop decoding before the card goes, or an observed video outlives its own card.
+  if (card) { releaseMotion(card); card.remove(); }
   restripeMilestones();
   scrubber.refresh();
 }

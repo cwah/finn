@@ -74,6 +74,17 @@ function toPhoto(rec) {
     focalY: rec.focalY ?? null,
     // Absent, empty or malformed all mean "the whole photo" — cropRect() decides.
     crop: rec.crop && typeof rec.crop === 'object' && rec.crop.w ? rec.crop : null,
+    // 0 on every row that predates rotation, which is exactly what upright means.
+    rotation: rec.rotation || 0,
+    // A row with no video file is a still, and nothing downstream asks again.
+    video: rec.video ? {
+      url: pb.fileUrl('photos', rec.id, rec.video),
+      duration: rec.duration || 0,
+      trimStart: rec.trimStart || 0,
+      // 0 reads as "to the end", which trimRange() then caps at a minute.
+      trimEnd: rec.trimEnd || 0,
+      motion: Boolean(rec.isMotion),
+    } : null,
   };
 }
 
@@ -146,18 +157,10 @@ export async function createPost(draft, author) {
 
   const saved = [];
   for (const [i, photo] of draft.photos.entries()) {
-    const form = new FormData();
-    form.append('post', rec.id);
-    form.append('image', photo.file);
-    form.append('width', String(photo.width));
-    form.append('height', String(photo.height));
-    // Position in the draft IS the order: index 0 leads the post, which is what the
-    // compose sheet's "make main" reorders into place.
-    form.append('sort', String(i));
-    if (photo.focalX != null) form.append('focalX', String(photo.focalX));
-    if (photo.focalY != null) form.append('focalY', String(photo.focalY));
     try {
-      saved.push(toPhoto(await pb.create('photos', form)));
+      // Position in the draft IS the order: index 0 leads the post, which is what the
+      // compose sheet's "make main" reorders into place.
+      saved.push(toPhoto(await pb.create('photos', photoForm(rec.id, photo, i))));
     } catch (err) {
       console.error(`Photo ${i + 1} failed to upload`, err);
     }
@@ -176,18 +179,42 @@ function postBody(draft) {
   };
 }
 
-/** Upload one new photo for a post. */
-async function uploadPhoto(postId, photo, sort) {
+/**
+ * Everything a photo record is made of, in one place.
+ *
+ * Creating a post and adding a photo to an existing one build the same record, and when
+ * they each had their own copy of this they drifted: the create path never sent `crop`,
+ * so a crop chosen before the first save was silently thrown away.
+ */
+function photoForm(postId, photo, sort) {
   const form = new FormData();
   form.append('post', postId);
   form.append('image', photo.file);
+  // The stored dimensions are the FILE's. Rotation and crop are applied at render, so
+  // what is written here never changes when either is edited.
   form.append('width', String(photo.width));
   form.append('height', String(photo.height));
   form.append('sort', String(sort));
   if (photo.focalX != null) form.append('focalX', String(photo.focalX));
   if (photo.focalY != null) form.append('focalY', String(photo.focalY));
   if (photo.crop) form.append('crop', JSON.stringify(photo.crop));
-  return toPhoto(await pb.create('photos', form));
+  if (photo.rotation) form.append('rotation', String(photo.rotation));
+
+  // A video rides along with the poster frame that stands in for it. Non-destructive
+  // like the crop: the whole file is stored and the trim says which part is the memory.
+  if (photo.videoFile) {
+    form.append('video', photo.videoFile);
+    form.append('duration', String(photo.duration || 0));
+    form.append('trimStart', String(photo.trimStart || 0));
+    form.append('trimEnd', String(photo.trimEnd || 0));
+    form.append('isMotion', photo.motion ? 'true' : 'false');
+  }
+  return form;
+}
+
+/** Upload one new photo for a post. */
+async function uploadPhoto(postId, photo, sort) {
+  return toPhoto(await pb.create('photos', photoForm(postId, photo, sort)));
 }
 
 /**
@@ -220,12 +247,17 @@ export async function updatePost(id, draft, author) {
       saved.push(
         photo.id
           // Position and framing are the only things editing can change about a photo
-          // that is already stored; the file itself is never re-sent.
+          // that is already stored; the file itself is never re-sent. Rotation and the
+          // trim belong here for the same reason the crop does — all three are framing,
+          // held apart from the file so they can be undone forever.
           ? toPhoto(await pb.update('photos', photo.id, {
             sort: i,
             focalX: photo.focalX ?? null,
             focalY: photo.focalY ?? null,
             crop: photo.crop ?? null,
+            rotation: photo.rotation || 0,
+            trimStart: photo.trimStart || 0,
+            trimEnd: photo.trimEnd || 0,
           }))
           : await uploadPhoto(id, photo, i),
       );
