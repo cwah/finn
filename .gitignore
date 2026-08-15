@@ -11,3 +11,13 @@ pb_data/
 
 # Node (tests only — there is no build step)
 node_modules/
+
+# Sample media for the preview bench. Dropped in by hand, not part of the app: a phone
+# clip is tens of megabytes and would sit in git history forever. preview.html renders
+# video cards from their posters without it — only playback needs the file.
+assets/sample-clip.*
+
+# Telegram bot: secrets and its polling cursor. Never commit either — the token is a
+# password, and a stale offset would replay or skip messages on another machine.
+.env
+bot/.offset
