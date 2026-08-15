@@ -23,8 +23,6 @@ Shipped when it lands. No ceremony beyond that.
       pipeline, so it may be worth waiting and doing both at once. Note this is a
       consequence of the non-destructive design, not a bug in it: the whole original is
       deliberately kept.
-- [ ] **Reload scrapbook with new posts.** When a post is made and the scrapbook is being
-      viewed, reload for the new post.
 - [ ] **Inline metadata editing via Telegram posts.** Support certain post settings to be
       configured inline when creating a post, including modifying the date of the post.
 
@@ -48,6 +46,11 @@ Shipped when it lands. No ceremony beyond that.
       whole either way, so the trim remains re-editable.
 
 ## Shipped
+
+- [x] Pick up memories added elsewhere — an open scrapbook now polls for posts made by the
+      bot or by the other parent, and slots them in without a reload. Only while the tab
+      is visible, and immediately on coming back to it. Arriving cards never shove what
+      you are reading.
 
 - [x] Telegram bot access — allow users to upload and add new posts via Telegram bot.
 - [x] Pause a motion photo — a hover-revealed button on the card, which stays visible

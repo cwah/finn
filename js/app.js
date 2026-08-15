@@ -12,6 +12,7 @@ import { initCarousels } from './carousel.js';
 import { initMotion, releaseMotion } from './motion-play.js';
 import { centreProgress } from './fade.js';
 import { assignSides, assignPresets } from './milestone-art.js';
+import { pickNewPosts, oldestDate } from './sync.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -164,7 +165,11 @@ function activate(card) {
 
 // A freshly captured memory can be backdated, so it does not necessarily belong at
 // the top — drop it into place by memoryDate among the cards already on screen.
-function insertPost(post) {
+//
+// `reveal` is the difference between a memory YOU just made and one that arrived from
+// elsewhere. Scrolling to your own is helpful; yanking the page because the other parent
+// posted something while you were reading is not.
+function insertPost(post, { reveal = true } = {}) {
   loadedPosts.set(post.id, post);
   const card = renderPost(post, birthDate, { currentAuthorId });
   if (!card) return;
@@ -176,7 +181,7 @@ function insertPost(post) {
   else timeline.append(card);
 
   activate(card);
-  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (reveal) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   restripeMilestones(); // a milestone inserted mid-timeline flips every side below it
   scrubber.refresh();
 }
@@ -203,6 +208,80 @@ function removePost(id) {
   scrubber.refresh();
 }
 
+// ── Memories added somewhere else ─────────────────────────────────
+// The Telegram bot and the other parent's phone both write posts this tab knows nothing
+// about, so a scrapbook left open goes quietly stale.
+//
+// Polled rather than pushed. PocketBase can stream changes over SSE, but that is a
+// long-lived connection plus reconnection and re-auth handling, for an audience of two
+// who post a few times a day — a slow poll is the calmer trade. It runs ONLY while the
+// tab is visible, and fires immediately on coming back, which is the case that actually
+// matters: the phone goes in a pocket, something is posted, the phone comes out again.
+const SYNC_MS = 60000;
+
+let syncTimer = null;
+let syncing = false;
+
+async function syncNewPosts() {
+  // Paging owns the timeline while it is in flight; two writers would interleave badly.
+  if (syncing || loading || document.hidden) return;
+  syncing = true;
+  try {
+    const { items } = await getPosts({ page: 0 });
+    const fresh = pickNewPosts(items, {
+      known: loadedPosts,
+      oldestLoaded: oldestDate(loadedPosts.values()),
+      hasMore,
+    });
+    if (!fresh.length) return;
+
+    // New memories land at the top, above whatever is being read, so the page must not
+    // lurch because someone else posted. At the very top there is nothing to hold — the
+    // card simply arrives, which is the one moment it is worth seeing.
+    //
+    // Held by MEASURING a card that is already on screen, not by adding up the height
+    // inserted. Browsers do this themselves via scroll anchoring, so adding the height
+    // blindly corrects a shift that has already been corrected and moves the page twice
+    // as far as it should. Measuring is self-cancelling: where the browser has already
+    // held the line the difference is zero and nothing happens, and where it has not,
+    // this puts it back.
+    const anchor = window.scrollY > 4 ? timeline.querySelector('.timeline-item') : null;
+    const anchorTop = anchor?.getBoundingClientRect().top;
+
+    // Oldest first, so each is placed against a timeline that already holds the ones
+    // newer than it.
+    for (const post of [...fresh].reverse()) insertPost(post, { reveal: false });
+
+    if (anchor?.isConnected) {
+      const drift = anchor.getBoundingClientRect().top - anchorTop;
+      if (Math.abs(drift) > 1) {
+        window.scrollTo({ top: window.scrollY + drift, behavior: 'instant' });
+      }
+    }
+  } catch (err) {
+    // A failed poll is not worth telling anyone about: the next one is a minute away,
+    // and the timeline on screen is still perfectly good.
+    console.warn('could not check for new memories:', err.message);
+  } finally {
+    syncing = false;
+  }
+}
+
+function startSync() {
+  clearInterval(syncTimer);
+  syncTimer = setInterval(syncNewPosts, SYNC_MS);
+}
+
+function initSync() {
+  startSync();
+  document.addEventListener('visibilitychange', () => {
+    clearInterval(syncTimer);
+    if (document.hidden) return; // nothing decodes, nothing polls, nothing costs battery
+    syncNewPosts();
+    startSync();
+  });
+}
+
 async function init() {
   // Nothing is fetched until a parent is in — this scrapbook has no public view.
   await ensureSignedIn();
@@ -218,6 +297,7 @@ async function init() {
 
   await loadMore();
   pageObserver.observe(sentinel);
+  initSync();
   window.addEventListener('scroll', onScroll, { passive: true });
   initCapture({ author: config.currentAuthor }, {
     onCreate: insertPost,

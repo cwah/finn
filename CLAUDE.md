@@ -599,6 +599,30 @@ Adding a field to a populated collection needs thought about what existing rows 
   and the `live_photo` field. Each was only separable because the failures were reported
   precisely rather than lumped together.
 
+## Keeping an open scrapbook current
+
+Posts no longer only come from the tab you are looking at: the Telegram bot writes them,
+and so does the other parent's phone. `sync.js` + `syncNewPosts()` in `app.js` pick those
+up without a reload.
+
+- **Polled, not pushed.** PocketBase can stream changes over SSE, but that is a long-lived
+  connection plus reconnection and re-auth handling, for two people who post a few times a
+  day. A slow poll is the calmer trade. It runs **only while the tab is visible** and fires
+  immediately on becoming visible — which is the case that actually matters: the phone goes
+  in a pocket, something is posted, the phone comes out again.
+- **A post older than the timeline is left to paging.** The timeline is paged newest-first,
+  so a post older than the oldest card on screen belongs in a page not yet fetched.
+  Inserting it now would place it *above* those older posts and the next page would load
+  underneath it out of order. `pickNewPosts()` is pure and holds that rule.
+- **An arriving memory must not shove what you are reading.** The reader's place is held by
+  MEASURING a card already on screen, never by adding up the height inserted. Browsers do
+  this themselves via scroll anchoring, so adding the height blindly corrects a shift that
+  has already been corrected and moves the page **twice as far as it should** — which is
+  exactly what the first attempt did. Measuring is self-cancelling: zero drift where the
+  browser held the line, a correction where it did not.
+- `insertPost(post, { reveal })` — scrolling to a memory *you* just made is helpful;
+  doing it because someone else posted is not.
+
 ## Performance rules
 
 - Timeline paging is driven by `IntersectionObserver` sentinels, never scroll-event listeners.
