@@ -11,6 +11,9 @@
 /** Marks a post as a milestone. Anything after it on the same line becomes the title. */
 const MILESTONE_TAG = /#milestone\b[ \t]*:?[ \t]*([^\n]*)/i;
 
+/** Sets the day a memory belongs to. Everything after it on the line is the date. */
+const DATE_TAG = /#date\b[ \t]*:?[ \t]*([^\n]*)/i;
+
 /** `/start`, `/help@some_bot`. Telegram clients send these constantly. */
 const COMMAND = /^\/([a-z0-9_]+)(?:@[\w]+)?\s*$/i;
 
@@ -72,6 +75,25 @@ function localDay(unixSeconds) {
   const d = new Date(unixSeconds * 1000);
   const pad = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/**
+ * Pull a #date request out of the text, and return the text with the tag removed.
+ *
+ * Only the raw words are taken here. Turning them into a day needs to know what today is,
+ * and a module that reads the clock cannot be tested against awkward dates — so the
+ * parsing lives in parse-date.js and is handed a date by the caller.
+ *
+ * @returns {{caption: string, requested: string|null}}
+ */
+export function readDateTag(text) {
+  const source = String(text || '');
+  const match = source.match(DATE_TAG);
+  if (!match) return { caption: source, requested: null };
+  return {
+    caption: source.replace(DATE_TAG, ' ').replace(/\s+/g, ' ').trim(),
+    requested: (match[1] || '').trim() || null,
+  };
 }
 
 /**
@@ -191,11 +213,16 @@ export function draftFromMessages(group) {
     }
   }
 
-  const { caption, milestone } = readMilestone(text);
+  // #date comes off first, so its words cannot end up inside a milestone title.
+  const { caption: withoutDate, requested } = readDateTag(text);
+  const { caption, milestone } = readMilestone(withoutDate);
   if (!photos.length && !caption) return null; // nothing the engine could render
 
   return {
+    // When the message was sent. Only a fallback: the media usually knows better, and an
+    // explicit #date beats both. memoryDate is authored, never inferred from upload time.
     memoryDate: localDay(group[0].date),
+    dateRequest: requested,
     caption,
     milestone,
     photos,

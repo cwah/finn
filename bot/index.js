@@ -17,7 +17,11 @@ import { createClient as telegram } from './telegram.js';
 import { createClient as pocketbase } from './pocketbase.js';
 import { draftFromMessages, readCommand, summarise } from './message.js';
 import { imageSize } from './image-size.js';
-import { findEmbeddedVideo, looksLikeMotion, mp4Duration } from '../js/motion.js';
+import {
+  findEmbeddedVideo, looksLikeMotion, mp4Duration, mp4CreatedAt,
+} from '../js/motion.js';
+import { parseDate } from './parse-date.js';
+import { exifDate, filenameDate, latestDate } from './media-date.js';
 import { MAX_CLIP_SECONDS } from '../js/layout-engine.js';
 
 // Node reads .env itself since 20.6, so the token never has to be typed on a command line
@@ -71,10 +75,14 @@ const HELP = [
   '· a photo, or an album of them',
   '· a few words on their own — they become a quote card',
   '· #milestone First steps — marks a milestone',
+  '· #date 8/14 — dates the memory (month first; I assume this year)',
   '· a video or a GIF — it plays on the card',
   '',
-  'The memory is dated the day you send it. A clip plays for up to a minute; edit the',
-  'memory in the app to choose which minute.',
+  'A memory is dated from the media itself where it can be — a photo taken on Friday and',
+  'sent on Sunday belongs on Friday. Send it as a FILE to keep that timestamp; the',
+  'compressed path strips it and the send date has to stand. #date overrides either.',
+  '',
+  'A clip plays for up to a minute; edit the memory in the app to choose which minute.',
   '',
   'MOTION PHOTOS: send them as a FILE, not as a photo. Telegram strips the motion out of',
   'anything sent the normal way, and only the original file still has it.',
@@ -119,6 +127,7 @@ async function fetchItem(tg, photo, sort) {
   console.log(`  item ${sort + 1}: ${shape}, ${megabytes}${photo.name ? ` — ${photo.name}` : ''}`);
 
   let note;
+  let takenOn = null;
   let { width, height } = photo;
   let video = null;
 
@@ -128,15 +137,16 @@ async function fetchItem(tg, photo, sort) {
       throw new Error('no thumbnail to use as a poster — try sending it as a video');
     }
     const clip = await tg.downloadFile(photo.videoFileId);
+    const clipBytes = new Uint8Array(await clip.blob.arrayBuffer());
+    // A clip states when it was recorded in the same header that states its length.
+    takenOn = mp4CreatedAt(clipBytes) || filenameDate(photo.name);
 
     // Telegram states a duration in WHOLE seconds, so a live photo of 1.4s can arrive as
     // 1 — or as 0, which would store a clip that trimRange() reports as unplayable and
     // the card would silently render as a still. Read the real length from the file when
     // the stated one is missing; it is in the header, not the frames.
     let duration = Number(photo.duration) || 0;
-    if (!duration) {
-      duration = mp4Duration(new Uint8Array(await clip.blob.arrayBuffer()));
-    }
+    if (!duration) duration = mp4Duration(clipBytes);
 
     if (duration > MAX_CLIP_SECONDS) {
       note = `“${photo.name}” is ${Math.round(duration)}s; the first `
@@ -162,6 +172,9 @@ async function fetchItem(tg, photo, sort) {
   // Original bytes: measurable, and possibly a motion photo with an mp4 inside it.
   if (photo.needsMeasuring) {
     const bytes = new Uint8Array(await posterBlob.arrayBuffer());
+    // Original bytes, so the photographer's own timestamp is still in them. This is the
+    // best answer there is, and only the file path preserves it.
+    takenOn = takenOn || exifDate(bytes) || filenameDate(photo.name);
     const found = findEmbeddedVideo(bytes);
     if (found && !video) {
       const clip = bytes.subarray(found.offset);
@@ -190,6 +203,10 @@ async function fetchItem(tg, photo, sort) {
     ({ width, height } = size);
   }
 
+  // A compressed photo has neither EXIF nor a real filename — Telegram strips one and
+  // replaces the other — so there is nothing to read and the send date has to stand.
+  takenOn = takenOn || filenameDate(photo.name);
+
   // What it turned out to BE, not what was sent — a motion photo sent as a file arrives
   // looking like a photo and only becomes motion once its clip is found.
   const kind = video ? (video.motion ? 'motion photo' : 'video') : 'photo';
@@ -198,7 +215,8 @@ async function fetchItem(tg, photo, sort) {
   // picker still calls it a motion photo, so the loss is invisible from the phone.
   const compressed = !photo.videoFileId && !photo.needsMeasuring && !photo.isLive;
   return {
-    kind, note, compressed, blob: posterBlob, filename: poster.filename, width, height, video,
+    kind, note, compressed, takenOn,
+    blob: posterBlob, filename: poster.filename, width, height, video,
   };
 }
 
@@ -267,6 +285,28 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
     return;
   }
 
+  // An explicit #date is read before a single byte is fetched. A date that cannot be
+  // understood, or that lands in the future, stops the post here rather than after
+  // several megabytes have crossed the wire.
+  let dated = null;
+  if (draft.dateRequest) {
+    dated = parseDate(draft.dateRequest);
+    if (!dated) {
+      await tg.sendMessage(chatId,
+        `I could not read “${draft.dateRequest}” as a date, so nothing was saved.\n\n`
+        + 'Try 8/14, 8-14-26, or August 14 2026. Month comes first.');
+      return;
+    }
+    if (dated.future) {
+      const year = dated.hadYear ? '' : ' I assumed this year, since you did not say.';
+      await tg.sendMessage(chatId,
+        `${dated.date} is in the future, so I have not saved anything yet.${year}\n\n`
+        + 'Send it again with the date you meant — including the year if it was a while '
+        + 'ago, like #date 12/25/2025.');
+      return;
+    }
+  }
+
   // Fetch everything from Telegram BEFORE writing anything. An album is a handful of
   // phone photos, so holding them briefly is cheap next to leaving a post with nothing in
   // it — which is what a parent saw as a caption sitting alone in the timeline where a
@@ -297,7 +337,32 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
     return;
   }
 
-  const post = await pb.createPost({ ...draft, authorId: author.id });
+  // When the memory happened, in order of who knows best:
+  //
+  //   1. an explicit #date — the parent said so outright
+  //   2. the media's own timestamp — a photo taken on Friday and sent on Sunday belongs
+  //      on Friday, and memoryDate is authored, never inferred from upload time
+  //   3. the day it was sent, which is all a compressed photo leaves to go on
+  //
+  // The most RECENT item wins among several: a set of photos is one memory, and it
+  // belongs on the day it finished happening.
+  let memoryDate = draft.memoryDate;
+  let dateNote;
+  if (dated) {
+    memoryDate = dated.date;
+  } else {
+    const fromMedia = latestDate(fetched.map((f) => f.takenOn));
+    // A camera with a wrong clock can claim tomorrow; the send date is the safer answer.
+    if (fromMedia && fromMedia <= draft.memoryDate) {
+      memoryDate = fromMedia;
+      if (fromMedia !== draft.memoryDate) {
+        dateNote = `Dated ${fromMedia}, from the media itself. `
+          + 'Send #date to say otherwise, or change it in the app.';
+      }
+    }
+  }
+
+  const post = await pb.createPost({ ...draft, memoryDate, authorId: author.id });
 
   const savedKinds = [];
   for (const [sort, item] of fetched.entries()) {
@@ -321,6 +386,7 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
       + 'Attach as a FILE instead to keep it.');
   }
   if (failed.length) parts.push(`\n\nFailed: ${[...new Set(failed)].join('; ')}`);
+  if (dateNote) notes.push(dateNote);
   if (notes.length) parts.push(`\n\n${notes.join('\n')}`);
   if (draft.unsupported.length) {
     parts.push('\n\nSent as a file, so I skipped it: '

@@ -192,3 +192,43 @@ export async function splitMotionPhoto(file) {
     video: new Blob([bytes.subarray(found.offset)], { type: 'video/mp4' }),
   };
 }
+
+/**
+ * When a clip was recorded, from the same `mvhd` box that states its length.
+ *
+ * mp4 counts seconds from 1904-01-01 UTC, not 1970 — a leftover from QuickTime. Encoders
+ * that do not know the time write 0, which is why anything before 2000 is treated as no
+ * answer rather than as a memory from the Edwardian era.
+ *
+ * @param {Uint8Array} bytes
+ * @returns {string|null} YYYY-MM-DD, or null when it cannot be read or is not plausible
+ */
+export function mp4CreatedAt(bytes) {
+  if (!bytes || bytes.length < 16) return null;
+
+  const moov = findBox(bytes, 'moov', 0, bytes.length);
+  if (!moov) return null;
+  const mvhd = findBox(bytes, 'mvhd', moov.start, moov.end);
+  if (!mvhd) return null;
+
+  const at = mvhd.start;
+  if (at + 12 > bytes.length) return null;
+  const read32 = (i) =>
+    ((bytes[i] << 24) | (bytes[i + 1] << 16) | (bytes[i + 2] << 8) | bytes[i + 3]) >>> 0;
+
+  const version = bytes[at];
+  // version 1 stores 64-bit timestamps; the high word is zero for any real date, so the
+  // low word is enough and avoids BigInt.
+  const seconds = version === 1 ? read32(at + 8) : read32(at + 4);
+  if (!seconds) return null;
+
+  // 1904-01-01 to 1970-01-01, in seconds.
+  const EPOCH_OFFSET = 2082844800;
+  const unix = seconds - EPOCH_OFFSET;
+  const when = new Date(unix * 1000);
+  const year = when.getUTCFullYear();
+  if (!(year >= 2000 && year <= 2100)) return null;
+
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${year}-${pad(when.getUTCMonth() + 1)}-${pad(when.getUTCDate())}`;
+}

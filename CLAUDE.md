@@ -433,6 +433,8 @@ moves it.
 /bot/                    # Telegram bot — a separate node process, never served
   index.js               # polling loop, album debounce, sender auth
   message.js             # PURE: telegram messages -> post draft
+  parse-date.js          # PURE: "8/14", "aug 12" -> a day (month first)
+  media-date.js          # PURE: EXIF / filename -> when a photo was taken
   image-size.js          # PURE: jpeg/png header -> dimensions (node has no canvas)
   telegram.js            # Bot API client (long polling)
   pocketbase.js          # PocketBase client for node (no localStorage)
@@ -477,6 +479,26 @@ new fields, no layout hints. Rules that must hold:
   a frame, and Telegram states a clip's width, height and duration on the message, so
   nothing has to be inferred. A clip sent as a *file* is refused instead: it carries no
   thumbnail, and there is nothing to pose for it.
+- **A memory is dated from the media, not from when it was sent.** `memoryDate` is
+  authored, never inferred from upload time, and that has to hold whichever door a post
+  comes through — a photo taken on Friday and sent on Sunday belongs on Friday. In order
+  of who knows best: an explicit `#date`, then the media's own timestamp, then the send
+  date. Among several items the **most recent** wins: a set of photos is one memory, and
+  it belongs on the day it finished happening.
+- **EXIF outranks the filename**, and not arbitrarily. Google names files in UTC while
+  EXIF records local time, so a photo taken at half past ten on a Tuesday evening is
+  *named* for Wednesday. Checked against real stored photos: 11 of 13 agreed, and both
+  disagreements were the filename being wrong. A compressed photo has neither, which is
+  one more thing the file path preserves.
+- **`#date` is read before a single byte is fetched.** A date that cannot be understood,
+  or that lands in the future, stops the post there rather than after several megabytes
+  have crossed the wire. A future date is *asked about*, never guessed at: "12/25" in
+  August most likely means last Christmas, and assuming the current year would quietly
+  file a memory five months ahead.
+- Date parsing is **American convention, month first** — "8/14" is the 14th of August.
+  Stated because it is genuinely ambiguous and half the world reads it the other way.
+  `parse-date.js` is pure and is handed "today" rather than reading the clock, so the
+  awkward cases are testable without waiting for the calendar.
 - **`live_photo` must be read BEFORE `photo`.** The Bot API delivers a live/motion photo's
   clip in `Message.live_photo` and *also* fills in `Message.photo` for backward
   compatibility. Checking `photo` first finds it and silently discards the motion — which

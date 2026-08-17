@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  groupMessages, draftFromMessages, readMilestone, readCommand, summarise,
+  groupMessages, draftFromMessages, readMilestone, readCommand, summarise, readDateTag,
 } from '../bot/message.js';
 
 /** 2026-08-14 12:00 local, so the date assertions do not depend on the runner's clock. */
@@ -372,4 +372,46 @@ test('nothing saved says nothing at all', () => {
   assert.equal(summarise([]), '');
   assert.equal(summarise(null), '');
   assert.equal(summarise(undefined), '');
+});
+
+// ── #date ─────────────────────────────────────────────────────────
+// The words only. Turning them into a day needs to know what today is, and a module that
+// reads the clock cannot be tested against awkward dates — so parse-date.js does that.
+
+test('#date is lifted out and the words after it kept', () => {
+  const { caption, requested } = readDateTag('At the park #date 8/14');
+  assert.equal(requested, '8/14');
+  assert.equal(caption, 'At the park', 'the tag must not be left in the caption');
+});
+
+test('the tag may lead, and a colon is optional', () => {
+  assert.equal(readDateTag('#date 8/14').requested, '8/14');
+  assert.equal(readDateTag('#date: august 14 2026').requested, 'august 14 2026');
+  assert.equal(readDateTag('#DATE 8/14').requested, '8/14');
+});
+
+test('text with no tag is left exactly as it was', () => {
+  const { caption, requested } = readDateTag('Just a normal caption');
+  assert.equal(requested, null);
+  assert.equal(caption, 'Just a normal caption');
+});
+
+test('a bare tag asks for nothing', () => {
+  assert.equal(readDateTag('#date').requested, null);
+});
+
+test('#date and #milestone coexist without eating each other', () => {
+  // #date comes off first, so its words cannot end up inside the milestone title.
+  const draft = draftFromMessages([{
+    message_id: 1, date: AT,
+    photo: [{ file_id: 'p', width: 800, height: 600 }],
+    caption: '#milestone First steps #date 8/14',
+  }]);
+  assert.equal(draft.dateRequest, '8/14');
+  assert.equal(draft.milestone.title, 'First steps');
+});
+
+test('the draft still falls back to the day it was sent', () => {
+  assert.equal(draftFromMessages([photoMsg(1)]).memoryDate, DAY);
+  assert.equal(draftFromMessages([photoMsg(1)]).dateRequest, null);
 });

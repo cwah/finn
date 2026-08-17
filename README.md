@@ -87,9 +87,16 @@ the file is optional — set the environment directly if you prefer.
 | A video or a GIF                | A card that plays, up to a minute          |
 | A live or motion photo          | A card that loops                          |
 | `#milestone First steps`        | A milestone, titled "First steps"          |
+| `#date 8/14`                    | Dates the memory (month first, this year)  |
 | Anything, from an unknown sender| A refusal, plus the id to add if it's yours |
 
-The post is dated the day you sent it.
+**The post is dated from the media itself** where it can be — a photo taken on Friday and
+sent on Sunday belongs on Friday. Sending as a file preserves that timestamp; the
+compressed path strips it and the send date has to stand.
+
+`#date` overrides either: `8/14`, `aug 12`, `8-14-26`, `august 14 2026`. Month comes
+first, and a missing year means this one. A date that lands in the future is queried
+rather than saved — `12/25` in August probably means last Christmas, so say `12/25/2025`.
 
 Live and motion photos keep their motion. Sending as a **file** also works and preserves
 full resolution besides — the normal path re-encodes and caps photos at 2560px, which
