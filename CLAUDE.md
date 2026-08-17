@@ -495,6 +495,14 @@ new fields, no layout hints. Rules that must hold:
   have crossed the wire. A future date is *asked about*, never guessed at: "12/25" in
   August most likely means last Christmas, and assuming the current year would quietly
   file a memory five months ahead.
+- **Relative dates are counted back from today**: "yesterday", "two weeks ago", "last
+  friday", "last month". A bare weekday means the most recent one, today included — say
+  "friday" on a Friday and you mean today — while "last friday" reaches past it. Month
+  arithmetic reuses `addMonthsClamped` from `age.js` rather than growing a second copy of
+  a rule that fiddly. A **vague** quantity ("a few weeks ago") is refused, not guessed at:
+  it is a real amount to whoever wrote it, and picking three would date a memory wrongly
+  with total confidence. Relative dates settle their own year, so the reply does not offer
+  to explain that it assumed this one.
 - Date parsing is **American convention, month first** — "8/14" is the 14th of August.
   Stated because it is genuinely ambiguous and half the world reads it the other way.
   `parse-date.js` is pure and is handed "today" rather than reading the clock, so the

@@ -8,6 +8,8 @@
 // December. This is stated because it is genuinely ambiguous and half the world reads it
 // the other way; the app has two users and they both read it this way.
 
+import { addMonthsClamped } from '../js/age.js';
+
 const MONTHS = [
   'january', 'february', 'march', 'april', 'may', 'june',
   'july', 'august', 'september', 'october', 'november', 'december',
@@ -43,6 +45,78 @@ function isRealDate(y, m, d) {
 const iso = (y, m, d) =>
   `${y}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 
+const WEEKDAYS = [
+  'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday',
+];
+
+/** Small numbers as words, because "two weeks ago" is how people write it. */
+const NUMBER_WORDS = {
+  a: 1, an: 1, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6,
+  seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12,
+};
+
+const NAMED_DAY = /^(today|yesterday|tomorrow)$/i;
+const AGO = /^(\d+|[a-z]+)\s+(day|week|month|year)s?\s+ago$/i;
+const LAST_UNIT = /^last\s+(week|month|year)$/i;
+const WEEKDAY = /^(?:(last|past)\s+)?([a-z]+)$/i;
+
+/** Midnight on the day `days` before `from`. */
+const shiftDays = (from, days) =>
+  new Date(from.getFullYear(), from.getMonth(), from.getDate() + days);
+
+/**
+ * Dates written by counting back from today, rather than stated outright.
+ *
+ * Relative dates settle their own year — "two weeks ago" is never ambiguous about which
+ * year it means — which is why the result says so, and the caller does not offer to
+ * explain that it assumed the current one.
+ *
+ * @returns {Date|null} midnight on the day meant
+ */
+function relativeDate(raw, today) {
+  // "A couple" is two. Normalised to a numeral up front rather than threaded through the
+  // pattern, where a multi-word count fights the single-word one it has to sit beside.
+  const text = raw.toLowerCase().replace(/^a couple(?:\s+of)?\s+/, '2 ');
+  const midnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  const named = text.match(NAMED_DAY);
+  if (named) {
+    const offset = { today: 0, yesterday: -1, tomorrow: 1 }[named[1]];
+    return shiftDays(midnight, offset);
+  }
+
+  const ago = text.match(AGO);
+  if (ago) {
+    const count = /^\d+$/.test(ago[1]) ? Number(ago[1]) : NUMBER_WORDS[ago[1]];
+    // An unrecognised word — "a few weeks ago" — is refused rather than guessed at. It
+    // is a real quantity to the writer and picking a number would date a memory wrongly.
+    if (!count) return null;
+    const unit = ago[2];
+    if (unit === 'day') return shiftDays(midnight, -count);
+    if (unit === 'week') return shiftDays(midnight, -count * 7);
+    if (unit === 'month') return addMonthsClamped(midnight, -count);
+    return addMonthsClamped(midnight, -count * 12);
+  }
+
+  const lastUnit = text.match(LAST_UNIT);
+  if (lastUnit) {
+    if (lastUnit[1] === 'week') return shiftDays(midnight, -7);
+    return addMonthsClamped(midnight, lastUnit[1] === 'month' ? -1 : -12);
+  }
+
+  const weekday = text.match(WEEKDAY);
+  if (weekday) {
+    const wanted = WEEKDAYS.indexOf(weekday[2]);
+    if (wanted < 0) return null;
+    // A bare weekday is the most recent one, today included — say "friday" ON a Friday
+    // and you mean today. "Last friday" reaches past it to the one before.
+    let back = (midnight.getDay() - wanted + 7) % 7;
+    if (weekday[1] && back === 0) back = 7;
+    return shiftDays(midnight, -back);
+  }
+  return null;
+}
+
 const NUMERIC = /^(\d{1,2})[/\-.](\d{1,2})(?:[/\-.](\d{2,4}))?$/;
 const ISO_FORM = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
 const MONTH_FIRST = /^([a-z]+)\.?\s+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s*(\d{2,4}))?$/i;
@@ -53,8 +127,10 @@ const DAY_FIRST = /^(\d{1,2})(?:st|nd|rd|th)?\s+([a-z]+)\.?(?:,?\s*(\d{2,4}))?$/
  *
  * @param {string} text what followed the tag
  * @param {Date} today the day to reckon "this year" and "in the future" against
- * @returns {{date: string, hadYear: boolean, future: boolean}|null} null when
- *          nothing date-shaped was written
+ * @returns {{date: string, hadYear: boolean, relative: boolean, future: boolean}|null}
+ *          null when nothing date-shaped was written. `relative` says the day was counted
+ *          back from today, which settles its own year — so the caller should not offer
+ *          to explain that it assumed the current one.
  */
 export function parseDate(text, today = new Date()) {
   const raw = String(text || '').trim().replace(/\s+/g, ' ');
@@ -64,6 +140,7 @@ export function parseDate(text, today = new Date()) {
   let m;
   let d;
   let hadYear = false;
+  let relative = false;
 
   const isoMatch = raw.match(ISO_FORM);
   const numeric = raw.match(NUMERIC);
@@ -92,7 +169,13 @@ export function parseDate(text, today = new Date()) {
     hadYear = dayFirst[3] !== undefined;
     y = hadYear ? fullYear(dayFirst[3]) : today.getFullYear();
   } else {
-    return null;
+    // Nothing stated outright — try counting back from today instead.
+    const when = relativeDate(raw, today);
+    if (!when) return null;
+    y = when.getFullYear();
+    m = when.getMonth() + 1;
+    d = when.getDate();
+    relative = true;
   }
 
   if (!isRealDate(y, m, d)) return null;
@@ -101,5 +184,5 @@ export function parseDate(text, today = new Date()) {
   // the future at nine in the morning and past by teatime.
   const asDay = new Date(y, m - 1, d);
   const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-  return { date: iso(y, m, d), hadYear, future: asDay > todayDay };
+  return { date: iso(y, m, d), hadYear, relative, future: asDay > todayDay };
 }

@@ -115,7 +115,8 @@ test('a leap day is real in a leap year and not otherwise', () => {
 });
 
 test('text that is not a date returns nothing', () => {
-  for (const text of ['', '   ', 'yesterday', 'the park', 'aug', '14', 'hello 14']) {
+  // "yesterday" used to belong here and no longer does — see the relative dates below.
+  for (const text of ['', '   ', 'the park', 'aug', '14', 'hello 14']) {
     assert.equal(on(text), null, JSON.stringify(text));
   }
   assert.equal(parseDate(null, TODAY), null);
@@ -129,4 +130,91 @@ test('surrounding whitespace does not matter', () => {
 
 test('parsing is pure — the same text always reads the same way', () => {
   assert.deepEqual(on('8/14'), on('8/14'));
+});
+
+// ── Counting back from today ──────────────────────────────────────
+// TODAY is Monday 17 August 2026 throughout.
+
+test('the everyday words', () => {
+  assert.equal(on('yesterday').date, '2026-08-16');
+  assert.equal(on('today').date, '2026-08-17');
+  assert.equal(on('Yesterday').date, '2026-08-16', 'case does not matter');
+});
+
+test('tomorrow parses, and is flagged as the future rather than refused', () => {
+  const t = on('tomorrow');
+  assert.equal(t.date, '2026-08-18');
+  assert.equal(t.future, true);
+});
+
+test('a count of days, weeks, months or years back', () => {
+  assert.equal(on('3 days ago').date, '2026-08-14');
+  assert.equal(on('two weeks ago').date, '2026-08-03');
+  assert.equal(on('1 week ago').date, '2026-08-10');
+  assert.equal(on('two months ago').date, '2026-06-17');
+  assert.equal(on('one year ago').date, '2025-08-17');
+});
+
+test('singular and plural read the same, and so do words and digits', () => {
+  assert.equal(on('1 day ago').date, on('one day ago').date);
+  assert.equal(on('2 weeks ago').date, on('two weeks ago').date);
+  assert.equal(on('a week ago').date, '2026-08-10');
+  assert.equal(on('an hour ago'), null, 'sub-day units are not a date');
+});
+
+test('"a couple of weeks ago" is two', () => {
+  assert.equal(on('a couple of weeks ago').date, '2026-08-03');
+  assert.equal(on('a couple weeks ago').date, '2026-08-03');
+});
+
+test('a vague quantity is refused rather than guessed at', () => {
+  // "a few" is a real amount to whoever wrote it, and picking 3 would date a memory
+  // wrongly with total confidence.
+  assert.equal(on('a few weeks ago'), null);
+  assert.equal(on('several days ago'), null);
+  assert.equal(on('ages ago'), null);
+});
+
+test('last week, last month, last year', () => {
+  assert.equal(on('last week').date, '2026-08-10');
+  assert.equal(on('last month').date, '2026-07-17');
+  assert.equal(on('last year').date, '2025-08-17');
+});
+
+test('months count back by day-of-month, clamped to real month lengths', () => {
+  // The 31st of March, one month back, is the 28th of February — not the 3rd of March.
+  const march31 = new Date(2026, 2, 31);
+  assert.equal(parseDate('one month ago', march31).date, '2026-02-28');
+  assert.equal(parseDate('1 year ago', new Date(2028, 1, 29)).date, '2027-02-28');
+});
+
+test('a weekday means the most recent one, today included', () => {
+  // TODAY is a Monday.
+  assert.equal(on('friday').date, '2026-08-14');
+  assert.equal(on('sunday').date, '2026-08-16');
+  assert.equal(on('monday').date, '2026-08-17', 'saying Monday on a Monday means today');
+});
+
+test('"last <weekday>" reaches past today to the one before', () => {
+  assert.equal(on('last monday').date, '2026-08-10');
+  assert.equal(on('last friday').date, '2026-08-14');
+});
+
+test('a relative date settles its own year, and says so', () => {
+  // The caller uses this: offering "I assumed this year" for "tomorrow" is nonsense.
+  assert.equal(on('two weeks ago').relative, true);
+  assert.equal(on('8/14').relative, false);
+  assert.equal(on('8/14/2026').relative, false);
+});
+
+test('words that are not dates are still refused', () => {
+  for (const text of ['someday', 'lastweek', 'ago', '5 ago', 'friday the 13th', 'funday']) {
+    assert.equal(on(text), null, JSON.stringify(text));
+  }
+});
+
+test('an absolute date is never misread as a relative one', () => {
+  assert.equal(on('8/14').date, '2026-08-14');
+  assert.equal(on('1 may').date, '2026-05-01');
+  assert.equal(on('may 1').date, '2026-05-01');
 });

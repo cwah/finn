@@ -294,7 +294,8 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
     if (!dated) {
       await tg.sendMessage(chatId,
         `I could not read “${draft.dateRequest}” as a date, so nothing was saved.\n\n`
-        + 'Try 8/14, 8-14-26, or August 14 2026. Month comes first.');
+        + 'Try 8/14, 8-14-26 or August 14 2026 — month comes first — '
+        + 'or yesterday, two weeks ago, last friday.');
       return;
     }
     if (dated.future) {

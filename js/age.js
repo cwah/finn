@@ -20,9 +20,13 @@ const MS_PER_DAY = 86400000;
 
 /**
  * The same day-of-month, n months on, clamped to the target month's real length —
- * so one month after Jan 31 is Feb 28, not an overflow into March.
+ * so one month after Jan 31 is Feb 28, not an overflow into March. Negative months
+ * count backwards by the same rule.
+ *
+ * Exported because the bot's "#date two months ago" needs exactly this, and a second
+ * copy of a rule this fiddly is a rule that will eventually disagree with itself.
  */
-function addMonthsClamped(date, months) {
+export function addMonthsClamped(date, months) {
   const targetMonth = date.getMonth() + months;
   const lastDay = new Date(date.getFullYear(), targetMonth + 1, 0).getDate();
   return new Date(date.getFullYear(), targetMonth, Math.min(date.getDate(), lastDay));
