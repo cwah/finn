@@ -614,6 +614,21 @@ Adding a field to a populated collection needs thought about what existing rows 
   Test cross-account behaviour, not just your own.
 - Target single-handed operation; keep tap targets large and actions reachable from the bottom.
 
+## Serving it
+
+Both servers bind to `0.0.0.0`, because a mobile-first app has to be openable on a phone.
+Two things follow, and both have bitten:
+
+- **The frontend must not hardcode `127.0.0.1`.** `js/pb.js` builds the API URL from
+  `location.hostname`, so the page finds PocketBase on whatever host it was served from.
+  A hardcoded loopback address means "this phone" once the page is opened on one.
+- **PocketBase defaults to localhost** and needs `--http=0.0.0.0:8090` to match, or the
+  page loads on the phone and then fails every fetch.
+
+`serve.py` prints every address it can be reached at, ordinary private ones first. It does
+not just probe the default route: a VPN owns that route, so on a machine running Tailscale
+the probe returns a `100.x` address that a phone on the same wifi cannot use.
+
 ## Diagnosing
 
 - **An instrument must not be able to filter out the unexpected.** The bot's arrival log

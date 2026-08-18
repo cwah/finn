@@ -10,10 +10,15 @@
 /**
  * Where the API lives. Served by PocketBase itself (pb_public) it is same-origin, so
  * the empty string is right. In the dev flow the frontend comes off a plain static
- * server on another port, so fall back to PocketBase's default.
+ * server on another port, so PocketBase is found beside it.
+ *
+ * Beside it on the SAME HOST the page came from, never a hardcoded 127.0.0.1: this is a
+ * mobile-first app and it gets opened on a phone, where localhost is the phone itself.
+ * The page would load and then fail to reach a backend running on someone else's machine.
  */
-export const PB_URL =
-  location.port === '8090' || location.protocol === 'https:' ? '' : 'http://127.0.0.1:8090';
+export const PB_URL = location.port === '8090' || location.protocol === 'https:'
+  ? ''
+  : `http://${location.hostname || '127.0.0.1'}:8090`;
 
 const TOKEN_KEY = 'scrapbook.auth';
 

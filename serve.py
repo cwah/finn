@@ -20,6 +20,8 @@
 """
 
 import re
+import socket
+import subprocess
 import sys
 from functools import partial
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -102,10 +104,67 @@ class _Slice:
         self._f.close()
 
 
+def routed_address():
+    """The interface that would carry traffic off this machine."""
+    try:
+        # No packet is actually sent; connecting a UDP socket just selects a route.
+        probe = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        probe.connect(('8.8.8.8', 80))
+        address = probe.getsockname()[0]
+        probe.close()
+        return address
+    except OSError:
+        return None
+
+
+def local_addresses():
+    """
+    Every address this machine can be reached on, wifi first.
+
+    Not just the routed one: a VPN takes the default route, so probing for it on a machine
+    running Tailscale hands back a 100.x address that a phone on the same wifi cannot use.
+    The address someone actually wants is usually the boring private one.
+    """
+    found = []
+    try:
+        out = subprocess.run(['ifconfig'], capture_output=True, text=True, timeout=3).stdout
+        if not out:
+            out = subprocess.run(['ip', '-4', 'addr'], capture_output=True, text=True,
+                                 timeout=3).stdout
+        found = re.findall(r'inet (?:addr:)?(\d+\.\d+\.\d+\.\d+)', out)
+    except (OSError, subprocess.SubprocessError):
+        pass
+
+    routed = routed_address()
+    if routed and routed not in found:
+        found.append(routed)
+
+    private = ('192.168.', '10.', '172.16.', '172.17.', '172.18.', '172.19.',
+               '172.20.', '172.21.', '172.22.', '172.23.', '172.24.', '172.25.',
+               '172.26.', '172.27.', '172.28.', '172.29.', '172.30.', '172.31.')
+    usable = [a for a in dict.fromkeys(found) if not a.startswith('127.')]
+    # Ordinary home-network addresses first; 100.x is carrier-grade NAT, which in practice
+    # here means a VPN and is only reachable by other machines on it.
+    return sorted(usable, key=lambda a: (not a.startswith(private), a))
+
+
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
-    print(f'http://localhost:{port}/index.html  (no-store, ranges; Ctrl-C to stop)')
+
+    # 0.0.0.0 rather than localhost: this is a mobile-first app, and the only way to see
+    # whether it feels right on a phone is to open it on one. Note that this puts the
+    # scrapbook on the local network — fine at home, less so on café wifi.
+    print(f'  http://localhost:{port}/index.html')
+    others = local_addresses()
+    for i, address in enumerate(others):
+        hint = '   <- try this one from a phone' if i == 0 else ''
+        print(f'  http://{address}:{port}/index.html{hint}')
+    if others:
+        print('\n  PocketBase has to be reachable from the phone too, so start it with:'
+              '\n    pocketbase serve --http=0.0.0.0:8090')
+    print('\n  (no-store, ranges; Ctrl-C to stop)')
+
     # Threading, like `python3 -m http.server` itself: a browser opens several
     # connections at once, and a video stream held open on a single-threaded server
     # blocks every other request behind it.
-    ThreadingHTTPServer(('', port), partial(DevHandler, directory='.')).serve_forever()
+    ThreadingHTTPServer(('0.0.0.0', port), partial(DevHandler, directory='.')).serve_forever()

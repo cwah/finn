@@ -19,6 +19,31 @@ Both pages need to be served over HTTP; ES modules and `fetch` don't work from `
 python3 serve.py
 ```
 
+### Opening it on a phone
+
+This is a mobile-first app, and the only way to know whether it feels right on a phone is
+to open it on one. `serve.py` listens on `0.0.0.0` and prints every address it can be
+reached at — take the ordinary `192.168.x.x` one:
+
+```
+http://localhost:8765/index.html
+http://192.168.1.152:8765/index.html   <- try this one from a phone
+```
+
+**PocketBase has to be reachable too.** It defaults to localhost only, so the page would
+load on the phone and then fail to fetch anything:
+
+```sh
+./pocketbase/... serve --http=0.0.0.0:8090
+```
+
+The frontend finds the API on whatever host the page came from, so nothing needs
+configuring — `js/pb.js` builds the URL from `location.hostname` rather than assuming
+127.0.0.1, which on a phone means the phone.
+
+Both servers are then on your local network, admin UI included. Fine on home wifi; worth
+remembering before doing this on a café connection.
+
 `serve.py` is `http.server` with two fixes, and **video needs both**:
 
 - `Cache-Control: no-store` — otherwise Chrome caches ES modules heuristically, and since
