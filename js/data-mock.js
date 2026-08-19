@@ -31,7 +31,9 @@ export function signOut() {}
 /** App config (baby name, birthDate, current author). */
 export async function getConfig() {
   const { config } = await load();
-  return config;
+  // No accounts without a backend, so there is nobody to restrict: the mock source is
+  // always signed in and always allowed. Present so the shape matches data-pb.js.
+  return { canPost: true, ...config };
 }
 
 /**

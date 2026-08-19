@@ -74,6 +74,22 @@ xattr -d com.apple.quarantine ./pocketbase/pocketbase_0.39.10_darwin_arm64/pocke
 3. In **Collections → config**, create exactly **one** record with `babyName` and
    `birthDate`. Every age stamp in the app is computed from that single date.
 
+#### Viewer accounts
+
+To let someone see the scrapbook without adding to it, create a `users` record as normal
+and **leave `canPost` unticked**. That is the whole of it:
+
+|                    | parent | viewer |
+|--------------------|--------|--------|
+| See every memory   | yes    | yes    |
+| Add a memory       | yes    | no     |
+| Edit or delete one | own only | no   |
+| The `+` button     | shown  | not rendered |
+
+`canPost` defaults to off, so an account is a viewer unless you say otherwise. The server
+enforces it — hiding the button is only so a viewer is not offered something that would
+fail. Tick `canPost` for a parent, and for the Telegram bot's own account.
+
 ### Telegram bot (optional)
 
 A second way in: send a photo, an album, or a few words to the bot and it becomes a post,

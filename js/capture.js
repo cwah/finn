@@ -172,10 +172,15 @@ export let openForEdit = () => {};
  * One sheet for both on purpose: a separate edit form would be a second authoring
  * surface to keep in step, and every field means the same thing in both directions.
  *
- * @param {{author: {id: string, name: string}}} options signed-in parent, for attribution
+ * A viewer account gets none of this. The `+` is the only way in, so not wiring it is
+ * enough — and it is only a courtesy: PocketBase refuses the write regardless, which is
+ * where the rule actually lives.
+ *
+ * @param {{author: {id: string, name: string}, canPost: boolean}} options the signed-in
+ *        account, for attribution and for whether it may add anything
  * @param {{onCreate: (post) => void, onUpdate: (post) => void, onDelete: (id) => void}} handlers
  */
-export function initCapture({ author }, handlers) {
+export function initCapture({ author, canPost = true }, handlers) {
   const { onCreate, onUpdate, onDelete } = handlers;
   const input = document.getElementById('capture');
   const composeBtn = document.getElementById('composeBtn');
@@ -336,14 +341,22 @@ export function initCapture({ author }, handlers) {
     caption.focus();
   }
 
-  openForEdit = open;
-
   function close() {
     releasePending();
     if (sheet.open) sheet.close();
   }
 
   // ── The single entry point ───────────────────────────────────────
+  // A viewer wires nothing at all: no button, no listeners, and openForEdit left as the
+  // no-op it starts as, so there is no authoring surface to reach even by accident.
+  // Hidden rather than disabled — a greyed-out button invites a parent to wonder what
+  // they did wrong, and a viewer is not a broken parent, they are reading.
+  if (!canPost) {
+    composeBtn.hidden = true;
+    return;
+  }
+
+  openForEdit = open;
   composeBtn.addEventListener('click', () => open());
 
   // Photos arrive from inside the open sheet, so they ADD to what is already pending

@@ -57,7 +57,15 @@ export async function getConfig() {
     _config = { babyName: rec.babyName, birthDate: rec.birthDate.slice(0, 10) };
   }
   const me = pb.currentUser();
-  return { ..._config, currentAuthor: me ? { id: me.id, name: me.name || me.email } : null };
+  return {
+    ..._config,
+    currentAuthor: me ? { id: me.id, name: me.name || me.email } : null,
+    // Whether this account may ADD to the scrapbook, as opposed to read it. The stored
+    // record is refreshed by requireSession() on the way in, so this is current without
+    // a request of its own. The server enforces it regardless — this only decides
+    // whether a viewer is shown a button that would fail.
+    canPost: Boolean(me?.canPost),
+  };
 }
 
 /** A photo record -> the contract's photo shape. */

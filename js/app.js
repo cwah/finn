@@ -299,7 +299,7 @@ async function init() {
   pageObserver.observe(sentinel);
   initSync();
   window.addEventListener('scroll', onScroll, { passive: true });
-  initCapture({ author: config.currentAuthor }, {
+  initCapture({ author: config.currentAuthor, canPost: config.canPost }, {
     onCreate: insertPost,
     onUpdate: replacePost,
     onDelete: removePost,

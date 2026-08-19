@@ -553,6 +553,16 @@ tests. It has no dependencies and nothing bundles.
   would be a second authoring surface to keep in step, and every field means the same
   thing either way. Deleting a memory lives at the bottom of that sheet, behind a
   confirm — photos cascade with the post and there is no trash.
+- **Viewer accounts read, they do not write.** `users.canPost` splits "signed in" from
+  "may add", which used to be the same thing — `posts.createRule` was simply
+  `@request.auth.id != ""`, so any account handed to a grandparent could also post. New
+  accounts default to **false**: a viewer is created by doing nothing, and posting is
+  granted deliberately. `photos.createRule` carries the same check, because it is
+  *not* author-scoped (the bot attaches photos to a parent's post) and would otherwise
+  let a viewer add photos to someone else's memory.
+  The `+` is simply not rendered for a viewer, and `initCapture` returns before wiring
+  anything — but that is a courtesy. PocketBase refuses the write either way, which is
+  where the rule actually lives.
 - **Only the author of a memory can change it.** The pencil is rendered only on your own
   posts, and PocketBase enforces the same rule (`author = @request.auth.id` on posts,
   `post.author = @request.auth.id` on photos) so the UI is a convenience, not the
@@ -604,6 +614,11 @@ Adding a field to a populated collection needs thought about what existing rows 
   Write the backfill in the same change.
 - A new **`json`** field reads as empty, which a well-chosen default (`cropRect()` treats
   anything falsy as the whole photo) absorbs with no backfill at all.
+- A new **`bool`** reads back as **false**, which for a permission field means revoking
+  it from everyone. Adding `canPost` without its backfill would have silently stopped both
+  parents *and* the bot from posting, and it would have looked like the app breaking
+  rather than like a permissions change. `1755200000_viewer_accounts.js` sets it true for
+  every account that already existed, in the same migration.
 - The same `number`-backfills-0 rule made `rotation`, `trimStart` and `trimEnd` safe to
   add with **no** backfill: 0 degrees means upright, and a 0/0 trim on a row with no video
   is never read, because `trimRange()` returns nothing playable without a duration. The

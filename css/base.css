@@ -111,6 +111,11 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* A viewer account has no way in, so the button is not there. Needed explicitly: the
+   rule above sets `display: grid`, which outranks the browser's own
+   `[hidden] { display: none }` and would leave a hidden button perfectly visible. */
+.tray-capture[hidden] { display: none; }
+
 .tray-capture:active { transform: scale(0.94); }
 
 .tray-capture-icon {
