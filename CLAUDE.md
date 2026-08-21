@@ -40,8 +40,21 @@ account per parent) and photo upload to the local filesystem. Schema lives in
 `pb_migrations/` and is applied on startup, so it is version-controlled rather than
 clicked together in the admin UI. See `README.md` to run it.
 
-**Phase 3 — Production.** Photo optimization/compression pipeline + cloud bucket storage.
-Deploy.
+**Phase 3 — Production (current).** Deployed to Render as ONE Docker service: PocketBase
+serves the API and the frontend together, with a persistent disk at `/pb/pb_data` holding
+the database and every uploaded file. See `DEPLOY.md`.
+
+- **One service, one origin.** Serving the frontend from `pb_public` means no CORS, no
+  second deploy to keep in step, and no API URL to configure. The frontend is *not*
+  restructured into `pb_public` in the repo — it stays at the root so `serve.py` keeps
+  working, and the Dockerfile does the copying.
+- **The disk mounts over `pb_data`**, so `pb_migrations` lives beside it rather than
+  inside: schema is source and travels with the image, while data persists across deploys.
+  A container filesystem is thrown away on every deploy, and so are the memories.
+- **The PocketBase version is pinned and its checksum verified at build time.** A rebuild
+  must not quietly change the backend under a scrapbook that is already full.
+- Still outstanding for this phase: the photo optimisation/compression pipeline and cloud
+  bucket storage. Both are in `BACKLOG.md`; the deploy works without them.
 
 ### The data layer
 
@@ -630,6 +643,13 @@ Adding a field to a populated collection needs thought about what existing rows 
 - Target single-handed operation; keep tap targets large and actions reachable from the bottom.
 
 ## Serving it
+
+**The API base is resolved, never guessed.** `js/pb.js` asks its own origin whether it
+answers `/api/health` as PocketBase — once, on the way in. Guessing from the port was
+wrong in the worst direction: a container on 8080 went looking for an API on 8090 that was
+sitting right beside it, so the app would have worked in production and broken in the
+rehearsal for it. A static file server answers 404 there, which is the whole signal.
+
 
 Both servers bind to `0.0.0.0`, because a mobile-first app has to be openable on a phone.
 Two things follow, and both have bitten:

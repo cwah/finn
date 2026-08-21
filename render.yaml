@@ -1,0 +1,29 @@
+# Render blueprint: one web service, one persistent disk.
+#
+# Create it from this file (Render -> Blueprints -> New Blueprint Instance) rather than
+# clicking the settings together, so what is deployed is reviewable in the repo and the
+# next person to touch it can see why it looks the way it does.
+
+services:
+  - type: web
+    name: scrapbook
+    runtime: docker
+    plan: starter          # a persistent disk needs a paid instance type
+    region: oregon         # move this closer to home if you like; it only affects latency
+    branch: main
+    healthCheckPath: /api/health   # PocketBase answers this; Render restarts if it stops
+
+    # SQLite plus the photo and video files. NOT a database add-on: PocketBase keeps
+    # everything on its own disk, which is exactly why one has to be attached — a
+    # container filesystem is thrown away on every deploy, and so are the memories.
+    disk:
+      name: pb-data
+      mountPath: /pb/pb_data
+      # 106 MB of photos and video already exist, so this is room to grow. A Render disk
+      # can be enlarged later but NEVER shrunk, so starting modest is the cheap mistake
+      # and starting huge is the expensive one.
+      sizeGB: 5
+
+    # A disk pins the service to a single instance; scaling out would give each copy its
+    # own disk and its own idea of the scrapbook.
+    numInstances: 1

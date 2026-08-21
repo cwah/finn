@@ -1,0 +1,29 @@
+# Everything the running service has no use for. Keeps the image small and, more to the
+# point, keeps things that should never leave this machine out of it.
+
+# Secrets and local state
+.env
+bot/.offset
+pb_data/
+
+# The local PocketBase binary — the image fetches its own, for linux
+pocketbase/
+
+# Development only
+test/
+bot/
+preview.html
+serve.py
+data/
+node_modules/
+.git/
+.github/
+.claude/
+
+# Documentation
+*.md
+
+# Large sample media, dropped in by hand for the preview bench
+assets/sample-clip.*
+
+.DS_Store

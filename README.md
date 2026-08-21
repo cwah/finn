@@ -1,8 +1,8 @@
 # Scrapbook
 
 A private, mobile-web-first scrapbook for two parents. No build step, no bundler — open
-it and it runs. See `CLAUDE.md` for the architecture, `BACKLOG.md` for what's next, and
-`KNOWN-BUGS.md` for what is broken.
+it and it runs. See `CLAUDE.md` for the architecture, `BACKLOG.md` for what's next,
+`KNOWN-BUGS.md` for what is broken, and `DEPLOY.md` for putting it on Render.
 
 ## Running it
 
@@ -13,7 +13,7 @@ Both pages need to be served over HTTP; ES modules and `fetch` don't work from `
 ```sh
 # 1. Start the backend. It applies pb_migrations/ on first run, creating the
 #    config, posts and photos collections.
-./pocketbase/pocketbase_0.39.10_darwin_arm64/pocketbase serve
+pocketbase serve --http=0.0.0.0:8090
 
 # 2. Serve the frontend (separate terminal)
 python3 serve.py
@@ -34,7 +34,7 @@ http://192.168.1.152:8765/index.html   <- try this one from a phone
 load on the phone and then fail to fetch anything:
 
 ```sh
-./pocketbase/... serve --http=0.0.0.0:8090
+pocketbase serve --http=0.0.0.0:8090
 ```
 
 The frontend finds the API on whatever host the page came from, so nothing needs
@@ -62,7 +62,7 @@ macOS quarantines anything downloaded from the internet. If the first run is blo
 clear the flag once:
 
 ```sh
-xattr -d com.apple.quarantine ./pocketbase/pocketbase_0.39.10_darwin_arm64/pocketbase
+xattr -d com.apple.quarantine "$(which pocketbase)"
 ```
 
 #### First-time setup
@@ -185,3 +185,5 @@ specs as ES modules.
 | `pb_migrations/`  | PocketBase schema (version-controlled, auto-applied)   |
 | `test/`           | `node:test` specs                                      |
 | `KNOWN-BUGS.md`   | Broken behaviour, and what is known about why           |
+| `Dockerfile`      | Phase 3: PocketBase + the frontend, one container       |
+| `render.yaml`     | Render blueprint — service, plan and persistent disk    |

@@ -8,17 +8,49 @@
 // Record shapes are translated in data-pb.js; nothing PocketBase-specific escapes it.
 
 /**
- * Where the API lives. Served by PocketBase itself (pb_public) it is same-origin, so
- * the empty string is right. In the dev flow the frontend comes off a plain static
- * server on another port, so PocketBase is found beside it.
+ * Where the API lives.
  *
- * Beside it on the SAME HOST the page came from, never a hardcoded 127.0.0.1: this is a
- * mobile-first app and it gets opened on a phone, where localhost is the phone itself.
- * The page would load and then fail to reach a backend running on someone else's machine.
+ * Two arrangements exist and they are not distinguishable by looking:
+ *
+ *   PocketBase serves the page itself — production behind https, and the container run
+ *   locally. The API is then on the same origin and the base is empty.
+ *
+ *   The development flow — the frontend comes off serve.py on its own port while
+ *   PocketBase runs separately on 8090.
+ *
+ * Guessing from the port was wrong, and wrong in the worst direction: a container on
+ * 8080 would have gone looking for an API on 8090 that was sitting right there beside it,
+ * so the app would work in production and break in the rehearsal for it. So this ASKS —
+ * once, on the way in — whether the page's own origin answers as PocketBase.
+ *
+ * Whichever it turns out to be, the host is the one the page came from, never a hardcoded
+ * 127.0.0.1: this is a mobile-first app and gets opened on a phone, where localhost is
+ * the phone.
  */
-export const PB_URL = location.port === '8090' || location.protocol === 'https:'
-  ? ''
-  : `http://${location.hostname || '127.0.0.1'}:8090`;
+let apiBase = null;
+
+export async function resolveApiBase() {
+  if (apiBase !== null) return apiBase;
+  try {
+    // Same-origin, so this costs nothing when the answer is yes. A static file server
+    // answers 404 here, which is the whole signal.
+    const res = await fetch('/api/health', { cache: 'no-store' });
+    if (res.ok) {
+      apiBase = '';
+      return apiBase;
+    }
+  } catch { /* the page's own origin is not PocketBase */ }
+  apiBase = `http://${location.hostname || '127.0.0.1'}:8090`;
+  return apiBase;
+}
+
+/**
+ * The base, for the one caller that cannot wait for it. Every request() resolves it
+ * first, and file URLs are only ever built from records a request already fetched, so by
+ * then it is settled. The fallback is production's answer, which is the safe one to be
+ * wrong with.
+ */
+export const apiUrl = () => apiBase ?? '';
 
 const TOKEN_KEY = 'scrapbook.auth';
 
@@ -72,7 +104,7 @@ async function request(path, { method = 'GET', body, headers = {} } = {}) {
   }
   if (auth?.token) opts.headers.Authorization = auth.token;
 
-  const res = await fetch(`${PB_URL}${path}`, opts);
+  const res = await fetch(`${await resolveApiBase()}${path}`, opts);
   const payload = res.status === 204 ? null : await res.json().catch(() => null);
 
   if (!res.ok) {
@@ -141,7 +173,7 @@ export async function remove(collection, id) {
 
 /** Public URL for a file stored on a record. */
 export function fileUrl(collectionIdOrName, recordId, filename) {
-  return `${PB_URL}/api/files/${collectionIdOrName}/${recordId}/${filename}`;
+  return `${apiUrl()}/api/files/${collectionIdOrName}/${recordId}/${filename}`;
 }
 
 /** Escape a value for use inside a PocketBase filter string. */

@@ -1,0 +1,119 @@
+# Deploying to Render
+
+Phase 3. One Render web service running the `Dockerfile`: PocketBase serves the API *and*
+the frontend from the same origin, with a persistent disk holding the database and every
+photo and video.
+
+One service rather than two on purpose — same origin means no CORS, no second deploy to
+keep in step, and `js/pb.js` works out the API base by itself.
+
+---
+
+## 1. Put the repo somewhere Render can see it
+
+There is no git remote yet. Create an **empty, private** repository — the code carries no
+secrets (`.env` and `pb_data/` are gitignored) but it is the family scrapbook, and private
+costs nothing:
+
+```sh
+git remote add origin git@github.com:<you>/scrapbook.git
+git push -u origin main
+```
+
+## 2. Create the service
+
+Render → **Blueprints** → *New Blueprint Instance* → pick the repo. It reads
+`render.yaml`, which already declares everything:
+
+| | |
+|---|---|
+| Runtime | Docker |
+| Plan | Starter — a persistent disk needs a paid instance |
+| Disk | `pb-data`, mounted at `/pb/pb_data`, 5 GB |
+| Health check | `/api/health` |
+| Instances | 1 |
+
+Doing it by hand instead works too; just match those exactly. **The mount path matters**:
+the Dockerfile runs PocketBase with `--dir=/pb/pb_data`, and if the disk lands anywhere
+else the container will happily start with an empty database that vanishes on the next
+deploy.
+
+A Render disk can be **grown later but never shrunk**, so 5 GB is deliberate: there is
+about 106 MB of media today.
+
+## 3. Create the first superuser
+
+On first boot PocketBase prints a one-time link to the **deploy logs**:
+
+```
+(!) Launch the URL below in the browser ... to create your first superuser account:
+https://<your-service>.onrender.com/_/#/pbinstall/<token>
+```
+
+Open it from the logs. The dashboard cannot be claimed without that token, so nobody who
+finds the URL first can take it — but the link does expire, and a redeploy is how you get
+a fresh one.
+
+## 4. Move the existing memories across
+
+The scrapbook already holds real posts, photos and accounts. Do **not** re-create them by
+hand — PocketBase can move the lot:
+
+1. Locally: admin UI → **Backups** → *New backup*. Download the zip.
+2. On Render: admin UI → **Backups** → *Upload backup* → then **Restore**.
+
+That carries the database, the uploaded files, and the user accounts with their passwords,
+so both parents and the bot keep working. It is around 110 MB, so give it a minute.
+
+Restoring **replaces** everything on the Render side, which is what you want on a fresh
+deploy and emphatically not what you want later. After this, the local instance is a
+development copy: the memories that count live on Render.
+
+If you would rather start clean, skip this — but then create the `config` record and the
+user accounts as in `README.md`, or the app will refuse to load.
+
+## 5. Point the Telegram bot at production
+
+The bot is a separate process and still runs wherever you start it. In `.env`:
+
+```
+PB_URL=https://<your-service>.onrender.com
+```
+
+Its PocketBase account travels with the backup, so nothing else changes.
+
+**The bot only runs while its machine does.** On a laptop that sleeps, so does the bot,
+and Telegram will redeliver whatever it missed once it wakes. Running it as a Render
+background worker would fix that, and is a sensible follow-up rather than part of this.
+
+## 6. The frontend needs nothing
+
+`js/pb.js` asks its own origin whether it answers as PocketBase, once, on the way in. In
+the container the answer is yes, so the API base is empty and everything is same-origin.
+There is no build step and no URL to configure.
+
+---
+
+## Trying the container before deploying
+
+Worth doing — it is the same image Render runs:
+
+```sh
+docker build -t scrapbook .
+docker run -p 8080:8080 -v "$PWD/pb_data:/pb/pb_data" scrapbook
+```
+
+Then <http://localhost:8080>. Mounting your real `pb_data` gives it the actual memories;
+leave the `-v` off for an empty one.
+
+## Things worth knowing
+
+- **A disk pins the service to one instance.** Scaling out would give each copy its own
+  disk and its own idea of the scrapbook.
+- **Deploys are not zero-downtime** with a disk attached: the old container has to release
+  it before the new one starts. A few seconds, on a scrapbook two people read.
+- **Render's free tier cannot hold a disk**, which is why the plan is Starter. Free
+  instances also sleep, and a sleeping scrapbook is a slow scrapbook.
+- **The PocketBase version is pinned** in the Dockerfile, with the release's own sha256
+  checked at build time. Upgrading is a deliberate edit, not something a rebuild does to
+  you. Take a backup before changing it.
