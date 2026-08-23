@@ -15,16 +15,19 @@ keep in step, and `scrapbook/js/pb.js` works out the API base by itself.
 
 ---
 
-## 1. Put the repo somewhere Render can see it
+## 1. Let Render see the repo
 
-There is no git remote yet. Create an **empty, private** repository — the code carries no
-secrets (`.env` and `pb_data/` are gitignored) but it is the family scrapbook, and private
-costs nothing:
+Already done: `origin` is `github.com:cwah/finn.git` and `main` is pushed. Nothing to set
+up — Render just needs permission to read it, which it asks for when you connect the
+account.
 
-```sh
-git remote add origin git@github.com:<you>/finn.git
-git push -u origin main
-```
+Two things worth confirming while you are there:
+
+- **The repository is private.** No secrets are tracked (`scrapbook/.env`,
+  `scrapbook/pb_data/` and the bot's offset are all gitignored) but it is the family
+  scrapbook, and private costs nothing.
+- **Render is granted access to this repo only**, rather than to every repository on the
+  account. Its GitHub app offers that choice at install time.
 
 ## 2. Create the service
 
@@ -38,8 +41,12 @@ Render → **Blueprints** → *New Blueprint Instance* → pick the repo. It rea
 | Disk | `pb-data`, mounted at `/pb/pb_data`, 5 GB |
 | Health check | `/api/health` |
 | Instances | 1 |
+| Dockerfile path | `./deploy/Dockerfile` |
+| Docker build context | `.` — the repo ROOT, not `deploy/` |
 
-Doing it by hand instead works too; just match those exactly. **The mount path matters**:
+Doing it by hand instead works too; just match those exactly. The last two are the ones
+that catch you out: the Dockerfile `COPY`s from both `scrapbook/` and `gallery/`, so a
+context of `deploy/` cannot see either and the build fails on the first `COPY`. **The mount path matters**:
 the Dockerfile runs PocketBase with `--dir=/pb/pb_data`, and if the disk lands anywhere
 else the container will happily start with an empty database that vanishes on the next
 deploy.
@@ -76,11 +83,11 @@ deploy and emphatically not what you want later. After this, the local instance 
 development copy: the memories that count live on Render.
 
 If you would rather start clean, skip this — but then create the `config` record and the
-user accounts as in `README.md`, or the app will refuse to load.
+user accounts as in `scrapbook/README.md`, or the app will refuse to load.
 
 ## 5. Point the Telegram bot at production
 
-The bot is a separate process and still runs wherever you start it. In `.env`:
+The bot is a separate process and still runs wherever you start it. In `scrapbook/.env`:
 
 ```
 PB_URL=https://<your-service>.onrender.com
@@ -94,7 +101,8 @@ background worker would fix that, and is a sensible follow-up rather than part o
 
 ## 6. The frontend needs nothing
 
-`js/pb.js` asks its own origin whether it answers as PocketBase, once, on the way in. In
+`scrapbook/js/pb.js` asks its own origin whether it answers as PocketBase, once, on the
+way in. In
 the container the answer is yes, so the API base is empty and everything is same-origin.
 There is no build step and no URL to configure.
 
@@ -104,9 +112,11 @@ There is no build step and no URL to configure.
 
 Worth doing — it is the same image Render runs:
 
+Run both from the **repo root** — the build context is the root, not `deploy/`:
+
 ```sh
 docker build -f deploy/Dockerfile -t finn .
-docker run -p 8080:8080 -v "$PWD/pb_data:/pb/pb_data" scrapbook
+docker run -p 8080:8080 -v "$PWD/scrapbook/pb_data:/pb/pb_data" finn
 ```
 
 Then <http://localhost:8080> for the scrapbook and <http://localhost:8080/gallery/> for
@@ -130,8 +140,12 @@ root-absolute hrefs would both hard-code the mount point and break `serve.py` lo
 
 Check it once against the container above. If PocketBase answers `/gallery` with a 301 to
 `/gallery/`, there is nothing to do. If it serves the root `index.html` instead — the
-scrapbook, to someone who asked for the gallery — add a redirect in a PocketBase JS hook
-(`pb_hooks/`, copied in by the Dockerfile) so `/gallery` always lands on `/gallery/`.
+scrapbook, to someone who asked for the gallery — add a redirect in a PocketBase JS hook so
+`/gallery` always lands on `/gallery/`.
+
+Note the Dockerfile does **not** copy `pb_hooks/` today, because there are none — a hook
+would need its own `COPY` line and `--hooksDir` on the serve command, or it would sit in
+the repo doing nothing and look like the redirect had failed.
 
 Either way, link to the gallery **with** the slash. Deep links already carry it, since
 they look like `/gallery/?art=the-long-cat`.

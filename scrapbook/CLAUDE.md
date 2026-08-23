@@ -40,9 +40,10 @@ account per parent) and photo upload to the local filesystem. Schema lives in
 `pb_migrations/` and is applied on startup, so it is version-controlled rather than
 clicked together in the admin UI. See `README.md` to run it.
 
-**Phase 3 — Production (current).** Deployed to Render as ONE Docker service: PocketBase
-serves the API and the frontend together, with a persistent disk at `/pb/pb_data` holding
-the database and every uploaded file. See `../deploy/DEPLOY.md`.
+**Phase 3 — Production (current).** Set up to deploy to Render as ONE Docker service:
+PocketBase serves the API and the frontend together, with a persistent disk at
+`/pb/pb_data` holding the database and every uploaded file. The configuration is in the
+repo and the image has not been built yet — see `../deploy/DEPLOY.md`.
 
 - **One service, one origin.** Serving the frontend from `pb_public` means no CORS, no
   second deploy to keep in step, and no API URL to configure. The frontend is *not*
