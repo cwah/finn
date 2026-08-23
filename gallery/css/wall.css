@@ -1,0 +1,54 @@
+/* The gallery wall — one element, one swappable layer.
+
+   Everything here is a background property on a single .wall selector, and no other
+   file knows the wall exists. Replacing this with a photograph of a real wall is
+   replacing --wall-layers with a url() and --wall-size with `cover`; nothing else in
+   the app changes. That is the whole reason it is shaped this way. */
+
+:root {
+  /* Plaster tooth, as a small tiled noise field.
+
+     stitchTiles="stitch" is the load-bearing attribute: without it feTurbulence
+     restarts its lattice at every tile edge and you get a visible grid across the
+     wall. feColorMatrix saturate=0 drops the noise to grey, so the tile can be
+     blended over any wall colour without tinting it.
+
+     The tile stays small on purpose. A viewport-sized feTurbulence is rasterised at
+     full resolution and is a real memory spike on iOS; 180px costs nothing and, once
+     it is 5% opacity under a gradient, nobody can see the repeat. */
+  --wall-grain: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180">\
+<filter id="p" x="0" y="0" width="100%25" height="100%25">\
+<feTurbulence type="fractalNoise" baseFrequency="0.82" numOctaves="4" stitchTiles="stitch"/>\
+<feColorMatrix type="saturate" values="0"/></filter>\
+<rect width="180" height="180" filter="url(%23p)" opacity="0.5"/></svg>');
+
+  /* Note that every fade-to-nothing names its own colour at alpha 0 rather than
+     `transparent`. `transparent` is transparent BLACK, so a ramp to it greys out
+     through the middle — visible as a dirty band across a warm wall. */
+  --wall-layers:
+    var(--wall-grain),
+    /* the gallery spot: above the frame and a little to the left, matching the
+       upper-left key light that every shadow in the app is thrown from */
+    radial-gradient(56% 44% at 46% 10%, rgba(255, 249, 238, .17), rgba(255, 249, 238, 0) 74%),
+    /* light falling off toward the floor. Of everything in this file, this is the
+       single strongest "this is a room and not a page background" cue. */
+    linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(28, 22, 16, .05) 58%, rgba(28, 22, 16, .14)),
+    /* corner vignette, to stop the wall reading as a flat swatch at the edges */
+    radial-gradient(125% 82% at 50% 42%, rgba(28, 22, 16, 0) 38%, rgba(28, 22, 16, .11));
+
+  --wall-size: 180px 180px, auto, auto, auto;
+  /* The grain multiplies into the plaster; the spot adds light. The two gradients
+     that darken are plain `normal` — screening them would lighten instead. */
+  --wall-blend: overlay, screen, normal, normal;
+}
+
+.wall {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--wall);
+  background-image: var(--wall-layers);
+  background-size: var(--wall-size);
+  background-blend-mode: var(--wall-blend);
+}

@@ -1,0 +1,9 @@
+{
+  "name": "finnart",
+  "private": true,
+  "type": "module",
+  "description": "A one-artwork-at-a-time gallery for Finn's art. No build step and no dependencies — package.json exists only so node runs the test suite as ES modules.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

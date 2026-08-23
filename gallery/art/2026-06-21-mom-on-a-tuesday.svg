@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 300 300">
+  <rect width="300" height="300" fill="#f6f1e0"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="150" cy="104" r="52" fill="#ffd9b8" stroke="#c98b5e" stroke-width="6"/>
+    <path d="M98 96 C98 44 202 44 202 96 C202 74 186 58 150 58 C114 58 98 74 98 96 Z"
+          fill="#8a5a34" stroke="#5e3b20" stroke-width="6"/>
+    <path d="M100 92 q-16 34 -6 78 M200 92 q16 34 6 78" stroke="#5e3b20" stroke-width="7" fill="#8a5a34"/>
+    <circle cx="130" cy="104" r="6" fill="#22331f"/>
+    <circle cx="172" cy="104" r="6" fill="#22331f"/>
+    <path d="M126 88 q6 -8 14 -2 M166 86 q8 -8 16 0" stroke="#5e3b20" stroke-width="4"/>
+    <path d="M128 128 q22 22 46 0" stroke="#c2415c" stroke-width="6"/>
+    <circle cx="112" cy="126" r="9" fill="#ffb3c7" stroke="none" opacity=".8"/>
+    <circle cx="190" cy="126" r="9" fill="#ffb3c7" stroke="none" opacity=".8"/>
+    <path d="M110 158 C86 168 74 196 74 244 L226 244 C226 196 214 168 190 158
+             C176 178 124 178 110 158 Z" fill="#6fb3e0" stroke="#2f6b8c" stroke-width="6"/>
+    <path d="M78 186 l-30 44 M222 186 l30 44" stroke="#2f6b8c" stroke-width="9"/>
+    <circle cx="44" cy="238" r="10" fill="#ffd9b8" stroke="#c98b5e" stroke-width="5"/>
+    <circle cx="256" cy="238" r="10" fill="#ffd9b8" stroke="#c98b5e" stroke-width="5"/>
+    <path d="M150 178 l0 40" stroke="#2f6b8c" stroke-width="4"/>
+    <g stroke="#e0b800" fill="#ffe066" stroke-width="4">
+      <path d="M150 200 l5 12 l13 1 l-10 9 l3 13 l-11 -7 l-11 7 l3 -13 l-10 -9 l13 -1 Z"/>
+    </g>
+    <path d="M0 244 L300 244" stroke="#c4b89a" stroke-width="4"/>
+    <text x="150" y="278" font-family="Comic Sans MS, Chalkboard, cursive" font-size="26"
+          fill="#4a7fb5" text-anchor="middle" stroke="none">MOM</text>
+  </g>
+</svg>

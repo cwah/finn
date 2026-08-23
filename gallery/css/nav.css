@@ -1,0 +1,36 @@
+/* The two arrows.
+   They sit in the gutters .gallery already reserves (--lane), so they never overlap
+   the artwork and never change how big it can be. */
+
+.nav {
+  position: absolute;
+  inset-block: 0;
+  inline-size: var(--lane);
+  display: grid;
+  place-items: center;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: rgba(var(--shadow-rgb), .5);
+  cursor: pointer;
+  /* Only opacity and transform, as everywhere else in the app. */
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.nav[data-nav="older"] { inset-inline-start: 0; }
+.nav[data-nav="newer"] { inset-inline-end: 0; }
+
+.nav svg { inline-size: clamp(22px, 3.4vmin, 34px); block-size: auto; }
+
+@media (hover: hover) {
+  .nav:hover { color: rgba(var(--shadow-rgb), .85); transform: scale(1.12); }
+}
+
+/* aria-disabled, not the disabled attribute — see renderNav in js/render.js. The
+   button stays focusable and stays in the tab order; it simply does nothing, so a
+   visitor arrowing to the end of the collection never loses their place. */
+.nav[aria-disabled="true"] {
+  opacity: .22;
+  cursor: default;
+}
+.nav[aria-disabled="true"]:hover { transform: none; }

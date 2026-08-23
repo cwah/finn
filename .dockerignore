@@ -1,29 +1,44 @@
 # Everything the running service has no use for. Keeps the image small and, more to the
 # point, keeps things that should never leave this machine out of it.
+#
+# This file has to sit at the REPO ROOT, because Docker reads .dockerignore from the
+# build context and the context is the repo root (see render.yaml). Patterns are matched
+# from there, and a bare `test/` would only ever match a top-level test/ — which is why
+# every path below names its app explicitly rather than relying on a pattern to reach
+# down into both.
 
 # Secrets and local state
-.env
-bot/.offset
-pb_data/
+scrapbook/.env
+scrapbook/bot/.offset
+scrapbook/pb_data/
 
 # The local PocketBase binary — the image fetches its own, for linux
-pocketbase/
+scrapbook/pocketbase/
 
 # Development only
-test/
-bot/
-preview.html
-serve.py
-data/
-node_modules/
+scrapbook/test/
+scrapbook/bot/
+scrapbook/preview.html
+scrapbook/serve.py
+scrapbook/data/
+gallery/test/
+gallery/tools/
+gallery/preview.html
+gallery/serve.py
+
+# NOTE: gallery/data/ is deliberately NOT ignored. It looks like scrapbook/data/ above,
+# but it is the opposite thing: scrapbook/data/mock.json is a no-backend fixture, while
+# gallery/data/artworks.json IS the collection and the gallery is empty without it.
+
+**/node_modules/
 .git/
 .github/
-.claude/
+**/.claude/
 
-# Documentation
-*.md
+# Documentation. Needs the glob: a bare *.md only matches the root.
+**/*.md
 
 # Large sample media, dropped in by hand for the preview bench
-assets/sample-clip.*
+scrapbook/assets/sample-clip.*
 
-.DS_Store
+**/.DS_Store

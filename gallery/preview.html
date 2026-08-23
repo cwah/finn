@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>finnart — visual bench</title>
+
+<!-- The REAL stylesheets and the REAL modules. A bench that reimplements any of it
+     stops testing the app the moment either side is edited. -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/wall.css">
+<link rel="stylesheet" href="css/artwork.css">
+<link rel="stylesheet" href="css/frame-styles.css">
+<link rel="stylesheet" href="css/placard.css">
+
+<style>
+  /* Bench chrome only. Nothing here may teach the app anything it does not already
+     know — if a rule is needed to make a frame look right, it belongs in css/. */
+  body { overflow: auto; }
+  .bench { max-inline-size: 1100px; margin: 0 auto; padding: 2rem 1rem 6rem; }
+  .bench h1 { font-family: var(--serif); font-size: 1.6rem; margin: 0 0 .2em; }
+  .bench h2 {
+    font-family: var(--serif); font-size: 1.15rem; font-weight: 600;
+    margin: 3rem 0 .3em; padding-block-end: .3em;
+    border-block-end: 1px solid rgba(var(--shadow-rgb), .2);
+  }
+  .bench p.why { margin: 0 0 1.2rem; color: var(--ink-dim); font-size: .88rem; max-inline-size: 62ch; }
+  .row { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; }
+
+  /* Each cell is its own size container with a DEFINITE height — exactly how
+     .gallery behaves in the app, so the clamp is exercised through its real path. */
+  .cell {
+    container-type: size;
+    position: relative;
+    display: grid; place-items: center;
+    inline-size: 260px; block-size: 260px;
+    padding: var(--breath);
+    outline: 1px dashed rgba(var(--shadow-rgb), .25);
+  }
+  .cell.tall { block-size: 420px; }
+  .caption { font-size: .74rem; letter-spacing: .06em; text-transform: uppercase;
+             color: var(--ink-dim); margin: .45rem 0 0; text-align: center; }
+  .swatch { inline-size: 100%; block-size: 220px; background-color: var(--wall);
+            background-image: var(--wall-layers); background-size: var(--wall-size);
+            background-blend-mode: var(--wall-blend); }
+</style>
+</head>
+<body>
+<div class="wall" aria-hidden="true"></div>
+
+<main class="bench">
+  <h1>finnart — visual bench</h1>
+  <p class="why">Every frame, every shape, and the clamp under duress. Rendered through
+    the real modules and the real stylesheets. Dashed outlines are the size container
+    each assembly is measured against; the artwork must never cross one.</p>
+
+  <h2>1 · Every frame, one shape</h2>
+  <p class="why">A moulding comparison sheet at a fixed 4:5. Check the mitres at the
+    corners, the bevel, and which frames are glazed — glare is opt-in per style, so
+    walnut and plain should read as unglazed canvas frames.</p>
+  <div class="row" id="frames"></div>
+
+  <h2>2 · One frame, every shape</h2>
+  <p class="why">Walnut across the range of ratios a child's drawing actually arrives
+    in. The last two are the clamp stress test: a 4:1 panorama and a 1:4 tower must
+    both sit inside the container with room to spare, and their mats must have tapered.</p>
+  <div class="row" id="ratios"></div>
+
+  <h2>3 · The clamp under duress</h2>
+  <p class="why">The same tall portrait in containers of three different heights. This
+    is the regression that matters: if the height budget stops being honoured, the
+    first two will overflow their outlines and only this section will show it.</p>
+  <div class="row" id="clamp"></div>
+
+  <h2>4 · The wall alone</h2>
+  <p class="why">Plaster with nothing hung on it, so grain and falloff can be judged
+    without a picture competing. Look for a visible tile seam — that means
+    <code>stitchTiles</code> was dropped from the turbulence.</p>
+  <div class="swatch"></div>
+
+  <h2>5 · The placard, with and without</h2>
+  <p class="why">Every optional line present, then progressively absent. No missing
+    field may leave a gap behind it.</p>
+  <div class="row" id="placards"></div>
+</main>
+
+<script type="module">
+import { artVars, orientationOf } from './js/art-fit.js';
+import { FRAMES, FRAME_IDS } from './js/frames.js';
+import { baroqueUri } from './js/baroque-frame.js';
+import { placardLines } from './js/placard.js';
+
+const SAMPLE = 'art/2026-05-02-tyrannosaurus.svg';
+const PORTRAIT = 'art/2026-07-30-rocket-grocery.svg';
+const PANORAMA = 'art/2025-11-30-long-cat.svg';
+
+/** The same four boxes index.html has. Kept in step by hand — if this drifts, so does
+    the bench's usefulness, so it is the one thing here worth checking against
+    index.html when the markup changes. */
+function assembly(frame, { width, height, src }) {
+  const figure = document.createElement('figure');
+  figure.className = 'artwork';
+  figure.dataset.frame = frame;
+  figure.dataset.mat = (FRAMES[frame] ?? FRAMES.plain).mat ? 'paper' : 'none';
+  for (const [name, value] of Object.entries(artVars({ width, height }))) {
+    figure.style.setProperty(name, value);
+  }
+  if (frame === 'baroque') figure.style.setProperty('--frame-image', baroqueUri());
+
+  figure.innerHTML = `<div class="frame"><div class="mat"><div class="window">
+    <img class="art" alt="" src="${src}"></div></div>
+    <span class="glass" aria-hidden="true"></span></div>`;
+  return figure;
+}
+
+function cell(frame, image, caption, className = '') {
+  const wrap = document.createElement('div');
+  const box = document.createElement('div');
+  box.className = `cell ${className}`;
+  box.append(assembly(frame, image));
+  wrap.append(box);
+  const label = document.createElement('p');
+  label.className = 'caption';
+  label.textContent = caption;
+  wrap.append(label);
+  return wrap;
+}
+
+// 1 — every frame, one shape
+const one = { width: 4, height: 5, src: PORTRAIT };
+for (const id of FRAME_IDS) {
+  document.getElementById('frames').append(cell(id, one, `${FRAMES[id].label}`));
+}
+
+// 2 — one frame, every shape
+const RATIOS = [
+  [1, 2], [2, 3], [4, 5], [1, 1], [5, 4], [3, 2], [4, 1], [1, 4],
+];
+for (const [w, h] of RATIOS) {
+  const src = w / h >= 1 ? (w / h >= 3 ? PANORAMA : SAMPLE) : PORTRAIT;
+  document.getElementById('ratios').append(
+    cell('walnut', { width: w * 400, height: h * 400, src },
+      `${w}:${h} · ${orientationOf(w, h)}`));
+}
+
+// 3 — the clamp under duress
+for (const height of [200, 340, 600]) {
+  const wrap = document.createElement('div');
+  const box = document.createElement('div');
+  box.className = 'cell';
+  box.style.blockSize = `${height}px`;
+  box.append(assembly('matted', { width: 1200, height: 1600, src: PORTRAIT }));
+  wrap.append(box);
+  const label = document.createElement('p');
+  label.className = 'caption';
+  label.textContent = `container ${height}px tall`;
+  wrap.append(label);
+  document.getElementById('clamp').append(wrap);
+}
+
+// 5 — the placard
+const CONFIG = { artistName: 'Finn', birthDate: '2020-04-11', showAge: true,
+  creditLine: 'Gift of the artist' };
+const FULL = {
+  id: 'x', title: 'Tyrannosaurus at a Birthday Party', createdOn: '2026-05-02',
+  medium: 'Crayon and marker on construction paper', dimensions: '12 × 18 in (30 × 46 cm)',
+  note: 'Begun the morning after his own party and finished in one sitting.',
+};
+const CASES = [
+  ['everything', FULL, CONFIG],
+  ['no dimensions', { ...FULL, dimensions: null }, CONFIG],
+  ['no note', { ...FULL, note: null }, CONFIG],
+  ['no age', FULL, { ...CONFIG, showAge: false }],
+  ['title only', { id: 'y', title: 'Untitled Study' }, { artistName: 'Finn' }],
+];
+for (const [name, artwork, config] of CASES) {
+  const lines = placardLines(artwork, config, [artwork]);
+  const wrap = document.createElement('div');
+  const plate = document.createElement('section');
+  plate.className = 'placard';
+  plate.style.inlineSize = '19rem';
+  plate.innerHTML = [
+    `<h1 class="placard-title">${lines.title}</h1>`,
+    lines.artist ? `<p class="placard-artist">${lines.artist}</p>` : '',
+    ...[lines.year, lines.medium, lines.dimensions].filter(Boolean)
+      .map((f) => `<p class="placard-fact">${f}</p>`),
+    lines.note ? `<hr class="placard-rule"><p class="placard-note">${lines.note}</p>` : '',
+    lines.credit ? `<p class="placard-credit">${lines.credit}</p>` : '',
+  ].join('');
+  wrap.append(plate);
+  const label = document.createElement('p');
+  label.className = 'caption';
+  label.textContent = name;
+  wrap.append(label);
+  document.getElementById('placards').append(wrap);
+}
+</script>
+</body>
+</html>

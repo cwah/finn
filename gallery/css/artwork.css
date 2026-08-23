@@ -1,0 +1,206 @@
+/* The framed assembly: window, mat, moulding, glass, and the shadow it throws.
+
+   ── The structure, and why it is four boxes ────────────────────────────────────
+   .artwork  shrink-wraps the whole thing and carries the per-piece variables
+   .frame    padding = the moulding band, background = the moulding face
+   .mat      padding = the mat reveal, background = mat paper
+   .window   the ONLY element with a width and an aspect-ratio
+
+   The moulding is PADDING, not a border, because a border cannot carry a background
+   and walnut grain and brushed metal are gradients. .window has no padding and no
+   border of its own, so its aspect-ratio governs the artwork itself rather than the
+   artwork plus some chrome. Merging any two of these boxes breaks one of those. */
+
+.artwork {
+  /* Chrome is what the assembly adds AROUND the window, per axis. The two differ
+     because the mat is bottom-weighted the way a real museum mat is. */
+  --mat-xs: calc(var(--mat-x) * var(--mat-scale));
+  --mat-ts: calc(var(--mat-t) * var(--mat-scale));
+  --mat-bs: calc(var(--mat-b) * var(--mat-scale));
+  --ar: calc(var(--art-w) / var(--art-h));
+  --chrome-x: calc(2 * var(--frame-w) + 2 * var(--mat-xs));
+  --chrome-y: calc(2 * var(--frame-w) + var(--mat-ts) + var(--mat-bs));
+
+  inline-size: fit-content;
+  margin: 0;
+}
+
+/* ── The clamp ─────────────────────────────────────────────────────────────────
+   The assembly has two budgets — the gallery's width and its height — and only one
+   of them is expressible as a percentage, because `100%` inside a width calculation
+   always means width. Container query units are what give us both axes as lengths,
+   which is why .gallery is a size container and why this is not just `max-width`.
+
+   The second arm of the min() converts the HEIGHT budget into a width through the
+   aspect ratio. That is the entire trick: it is what makes a tall portrait shrink to
+   fit rather than run off the bottom of a phone.
+
+   100cqw / 100cqh resolve against the container's CONTENT box, so .gallery's --lane
+   and --breath padding is already subtracted here. Do not subtract it twice.
+
+   The max(0px, ...) is not a no-op and is not a minimum size. A container too short
+   to hold even the frame makes the height budget NEGATIVE, and a negative inline-size
+   is invalid at computed-value time — the declaration is dropped, the window falls
+   back to auto, and the image renders at its natural size, which is the worst
+   possible outcome and looks like the clamp was never written. Clamping at zero fails
+   to a picture too small to see instead of one the size of the file.
+
+   Note what this must NOT be: a real floor. An earlier version said max(140px, ...),
+   which sounds prudent and quietly beat the height budget — every tall portrait in a
+   short container overflowed, and section 3 of preview.html exists because of it. */
+.window {
+  aspect-ratio: var(--art-w) / var(--art-h);
+  inline-size: max(0px, min(
+    100cqw - var(--chrome-x),
+    (100cqh - var(--chrome-y)) * var(--ar)
+  ));
+  block-size: auto;
+  position: relative;   /* the mat's aperture shadow is an overlay on this box */
+  background: rgba(var(--shadow-rgb), .06);   /* shows through until the image decodes */
+}
+
+/* Nothing current lacks size containers, but a browser that did would get an
+   unsized artwork and a blank-looking page, so fall back to viewport units.
+   svh, not vh: on iOS Safari vh is the LARGER, address-bar-hidden height, so a tall
+   portrait would be sized to a viewport that is not on screen yet and get clipped. */
+@supports not (container-type: size) {
+  .window {
+    inline-size: max(0px, min(
+      calc(100vw - 2 * var(--lane) - var(--chrome-x)),
+      calc((62svh - var(--chrome-y)) * var(--ar))
+    ));
+  }
+}
+
+.art {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  /* cover, not fill. The window's ratio comes from the manifest and should already
+     equal the image's — but a manifest is hand-typed, and when it is wrong `cover`
+     crops a few imperceptible pixels while `fill` visibly stretches a child's
+     drawing, which is the one failure anybody would notice. */
+  object-fit: cover;
+}
+
+/* ── The mat ───────────────────────────────────────────────────────────────────  */
+.mat {
+  position: relative;
+  z-index: 1;   /* paints over the hollow centre of the baroque border-image pseudo */
+  padding: var(--mat-ts) var(--mat-xs) var(--mat-bs);
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, .55), rgba(0, 0, 0, .05) 70%),
+    var(--mat-paper);
+  box-shadow:
+    /* the frame's inner lip casting down onto the mat: strong at the top, gone by
+       the bottom, because the key light is up and to the left */
+    inset 0 4px 8px -3px rgba(var(--shadow-rgb), .32),
+    inset 0 -1px 0 rgba(255, 255, 255, .6);
+}
+
+/* Frames that hang unmatted still need the four boxes — one code path, never two
+   that could disagree — so the mat collapses to a hairline rather than disappearing. */
+.artwork[data-mat="none"] {
+  --mat-xs: 0px;
+  --mat-ts: 0px;
+  --mat-bs: 0px;
+}
+.artwork[data-mat="none"] .mat { box-shadow: none; background: none; }
+
+/* The mat board is thicker than the paper, so its bevelled aperture throws a shadow
+   onto the artwork itself.
+
+   This HAS to be an overlay element. An inset box-shadow set on the <img> is painted
+   underneath replaced content — the image covers it and you see absolutely nothing,
+   which looks like the rule was ignored. */
+.window::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow:
+    inset 0 3px 6px -1px rgba(var(--shadow-rgb), .40),   /* aperture, top-heavy */
+    inset 0 0 0 1px rgba(var(--shadow-rgb), .22);        /* the cut edge of the board */
+}
+
+/* ── The moulding ──────────────────────────────────────────────────────────────  */
+.frame {
+  position: relative;
+  padding: var(--frame-w);
+  background-image: var(--moulding);
+  background-color: #7a6a52;   /* under a gradient with alpha; never seen bare */
+  box-shadow:
+    /* Bevel. Four inset hairlines — lit on the top-left edge, shaded on the
+       bottom-right — do more for perceived depth than any amount of gradient. */
+    inset 1px 1px 0 rgba(255, 255, 255, .34),
+    inset -1px -1px 0 rgba(var(--shadow-rgb), .38),
+    /* Cast shadow, in three layers, all thrown down-and-right from the same light.
+       1. CONTACT: tight, dark, barely blurred. This is the occlusion right where the
+          frame meets the wall, and it is the one layer that stops it floating. */
+    1px 2px 2px rgba(var(--shadow-rgb), .44),
+    /* 2. MID: the body of the shadow. Negative spread keeps it from haloing. */
+    5px 13px 18px -5px rgba(var(--shadow-rgb), .35),
+    /* 3. AMBIENT: very soft, very wide, very low — the room bouncing around it. */
+    15px 36px 60px -18px rgba(var(--shadow-rgb), .28);
+}
+
+/* The moulding overlay: mitres for every frame, and the carved band for baroque.
+   inset: 0 on a padding-only box is its border box, so this pseudo covers exactly
+   the moulding band plus the mat; the mat's z-index paints back over the middle. */
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: var(--frame-w) solid transparent;
+  pointer-events: none;
+  z-index: 0;
+  /* Mitres. A real frame's four rails meet at 45 degrees and each catches the light
+     differently; a conic gradient from 45deg cuts the box into exactly those four
+     triangles. Only the moulding band shows it — the mat covers the rest. */
+  background-image: conic-gradient(from 45deg,
+    rgba(255, 255, 255, .13) 0 90deg,          /* right rail  — side-lit */
+    rgba(var(--shadow-rgb), .16) 0 180deg,     /* bottom rail — in shade */
+    rgba(0, 0, 0, .05) 0 270deg,               /* left rail   — half-lit */
+    rgba(255, 255, 255, .22) 0 360deg);        /* top rail    — facing the light */
+  mix-blend-mode: overlay;
+}
+
+/* ── Glass ─────────────────────────────────────────────────────────────────────
+   One soft diagonal band across the upper left, plus a whisper of a second. It is
+   the cue that reads "under glass" rather than "a JPEG on a beige page".
+
+   Off by default, opted into per frame style in frame-styles.css: walnut and plain
+   read as unglazed canvas frames, and the mix of glazed and unglazed pieces is a lot
+   of what makes a wall look like a real hang rather than a template. It doubles as
+   the legibility escape hatch — glare over pale crayon is where this effect hurts. */
+.glass {
+  position: absolute;
+  inset: var(--frame-w);   /* glazing sits inside the rabbet, over mat AND artwork */
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(112deg,
+    rgba(255, 255, 255, .15) 0 17%,
+    rgba(255, 255, 255, .045) 17% 23%,
+    rgba(255, 255, 255, 0) 23% 61%,
+    rgba(255, 255, 255, .05) 61% 66%,
+    rgba(255, 255, 255, 0) 66%);
+  mix-blend-mode: screen;
+  opacity: var(--glass, 0);
+}
+
+/* ── The crossfade ─────────────────────────────────────────────────────────────
+   The assembly's SIZE changes between a portrait and a landscape piece, and size is
+   a layout property that cannot be animated. So the swap happens at zero opacity and
+   only opacity and transform ever move. See app.js for the timing, and for why it is
+   not sequenced off transitionend. */
+.artwork,
+.placard {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.stage[data-swapping="true"] .artwork,
+.stage[data-swapping="true"] .placard {
+  opacity: 0;
+  transform: scale(.985);
+  transition-duration: 140ms;
+}

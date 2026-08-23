@@ -1,11 +1,17 @@
 # Deploying to Render
 
-Phase 3. One Render web service running the `Dockerfile`: PocketBase serves the API *and*
-the frontend from the same origin, with a persistent disk holding the database and every
-photo and video.
+Phase 3. One Render web service running `deploy/Dockerfile`: PocketBase serves the API,
+the scrapbook and Finn's art gallery from the same origin, with a persistent disk holding
+the database and every photo and video.
 
-One service rather than two on purpose — same origin means no CORS, no second deploy to
-keep in step, and `js/pb.js` works out the API base by itself.
+| what | where |
+|---|---|
+| the scrapbook | `/` |
+| the gallery | `/gallery/` — **the trailing slash matters**, see below |
+| the API and admin UI | `/api/`, `/_/` |
+
+One service rather than three on purpose — same origin means no CORS, no second deploy to
+keep in step, and `scrapbook/js/pb.js` works out the API base by itself.
 
 ---
 
@@ -16,7 +22,7 @@ secrets (`.env` and `pb_data/` are gitignored) but it is the family scrapbook, a
 costs nothing:
 
 ```sh
-git remote add origin git@github.com:<you>/scrapbook.git
+git remote add origin git@github.com:<you>/finn.git
 git push -u origin main
 ```
 
@@ -99,12 +105,36 @@ There is no build step and no URL to configure.
 Worth doing — it is the same image Render runs:
 
 ```sh
-docker build -t scrapbook .
+docker build -f deploy/Dockerfile -t finn .
 docker run -p 8080:8080 -v "$PWD/pb_data:/pb/pb_data" scrapbook
 ```
 
-Then <http://localhost:8080>. Mounting your real `pb_data` gives it the actual memories;
-leave the `-v` off for an empty one.
+Then <http://localhost:8080> for the scrapbook and <http://localhost:8080/gallery/> for
+the art gallery. Mounting your real `pb_data` gives it the actual memories; leave the
+`-v` off for an empty one.
+
+This is also the cheapest place to answer the trailing-slash question below — try
+<http://localhost:8080/gallery> without the slash and see what PocketBase does with it.
+
+## The gallery's trailing slash
+
+`/gallery/` works. `/gallery` may not, and if it does not it fails in a way that looks
+like the deploy is broken rather than like a URL is.
+
+Nothing in the gallery resolves a URL against the document — `gallery/js/paths.js`
+derives the app root from `import.meta.url` — but that only protects the app *after* it
+boots. Served at `/gallery` with no trailing slash, the browser resolves the page's own
+`<link>` and `<script>` against the origin root, so `css/base.css` and `js/app.js` 404
+and nothing runs at all. It cannot be fixed from inside the app: a `<base>` tag or
+root-absolute hrefs would both hard-code the mount point and break `serve.py` locally.
+
+Check it once against the container above. If PocketBase answers `/gallery` with a 301 to
+`/gallery/`, there is nothing to do. If it serves the root `index.html` instead — the
+scrapbook, to someone who asked for the gallery — add a redirect in a PocketBase JS hook
+(`pb_hooks/`, copied in by the Dockerfile) so `/gallery` always lands on `/gallery/`.
+
+Either way, link to the gallery **with** the slash. Deep links already carry it, since
+they look like `/gallery/?art=the-long-cat`.
 
 ## Things worth knowing
 

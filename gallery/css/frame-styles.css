@@ -1,0 +1,93 @@
+/* One block per frame style, selected by [data-frame] on .artwork.
+   Each sets its own moulding width, its moulding face, and whether it is glazed.
+
+   The geometry lives in artwork.css and is identical for every style — a block here
+   only ever changes variables, never structure. That is what keeps adding a frame to
+   ten lines and a registry entry in js/frames.js. */
+
+/* ── Plain oak — an unglazed canvas frame, pale and flat-ish ────────────────── */
+[data-frame="plain"] {
+  --frame-w: clamp(9px, 2vmin, 22px);
+  --moulding: linear-gradient(150deg, #d9c9ad, #c0ab8b 55%, #cdbb9c);
+  --mat-paper: #f3efe4;
+}
+
+/* ── Thin black — a gallery standard: nearly no moulding, generous mat ─────── */
+[data-frame="thin"] {
+  --frame-w: clamp(4px, .9vmin, 9px);
+  --moulding: linear-gradient(#2a2724, #14120f);
+  --mat-paper: #f7f5ef;
+  --glass: .55;
+}
+
+/* ── Matted white — the widest mat in the set; a small drawing given room ──── */
+[data-frame="matted"] {
+  --frame-w: clamp(5px, 1.1vmin, 11px);
+  --moulding: linear-gradient(#f4f1ea, #ddd7cb);
+  --mat-x: clamp(22px, 6vmin, 78px);
+  --mat-paper: #fbf9f4;
+  --glass: .5;
+}
+
+/* ── Brushed metal ──────────────────────────────────────────────────────────
+   Two layers: a fine vertical brush, over an anisotropic sheen. The sheen is what
+   makes it read as metal rather than as grey plastic — real brushed aluminium is
+   bright, dark, then bright again across its width, not a smooth ramp. */
+[data-frame="metal"] {
+  --frame-w: clamp(8px, 1.7vmin, 18px);
+  --moulding:
+    repeating-linear-gradient(90deg,
+      rgba(255, 255, 255, .14) 0 1px, rgba(255, 255, 255, 0) 1px 3px),
+    linear-gradient(150deg, #f2f4f6 0%, #b9bfc6 22%, #8c949c 48%,
+                            #cfd5da 62%, #9aa2aa 86%, #e6eaee);
+  --mat-paper: #eeefec;
+  --glass: .6;
+}
+
+/* ── Walnut — unglazed, warm, and the only style with visible grain ─────────
+   The two repeating gradients run at 91deg and 89deg with co-prime periods (7px and
+   11px), so the grain never lines up with itself and the tiling is invisible. A
+   single repeating gradient reads immediately as a stripe pattern. */
+[data-frame="walnut"] {
+  --frame-w: clamp(13px, 3vmin, 34px);
+  --moulding:
+    repeating-linear-gradient(91deg, rgba(58, 34, 18, .16) 0 2px, rgba(58, 34, 18, 0) 2px 7px),
+    repeating-linear-gradient(89deg, rgba(28, 14, 6, .10) 0 1px, rgba(28, 14, 6, 0) 1px 11px),
+    linear-gradient(135deg, #7c5334, #5b3a22 46%, #4a2e19 62%, #6b4529);
+  --mat-paper: #efe8d8;
+}
+
+/* ── Gilt baroque ───────────────────────────────────────────────────────────
+   The one style CSS cannot fake, so the carved band is an SVG painted onto the
+   pseudo-element's border box by border-image. --frame-image is written by JS
+   (see js/baroque-frame.js); the gradient below is the fallback that shows if that
+   never runs, so the frame is gold rather than invisible.
+
+   Hung without a mat: an ornate frame crowds a mat, and the two ornaments compete. */
+[data-frame="baroque"] {
+  --frame-w: clamp(18px, 4.4vmin, 46px);
+  --moulding: linear-gradient(140deg, #e2c26a, #a8862c 45%, #7c5f18 62%, #c9a227);
+  --glass: .5;
+}
+
+[data-frame="baroque"] .frame::before {
+  border-image-source: var(--frame-image);
+  /* 32% of a 300-unit viewBox is the 96-unit ornament band. Percent rather than a
+     number so it stays correct if the viewBox is ever changed. */
+  border-image-slice: 32%;
+  /* Lock the painted width to border-width. Anything else and the ornament bleeds
+     inward over the artwork. */
+  border-image-width: 1;
+  /* Outset does NOT affect layout, so anything non-zero here paints outside the box
+     the clamp in artwork.css measured, and the frame kisses the viewport edge. */
+  border-image-outset: 0;
+  /* `round` scales the rails to fit a whole number of tiles; the corners are never
+     repeated either way. `stretch` would smear the carving on a tall piece. */
+  border-image-repeat: round;
+  /* NOTE: no `fill` keyword above. With fill, the SVG's middle 9-slice region is
+     painted over the padding box — i.e. straight over the artwork. */
+
+  /* The mitre overlay is for flat mouldings; the SVG carries its own corners. */
+  background-image: none;
+  mix-blend-mode: normal;
+}

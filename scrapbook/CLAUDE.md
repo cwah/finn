@@ -42,12 +42,13 @@ clicked together in the admin UI. See `README.md` to run it.
 
 **Phase 3 — Production (current).** Deployed to Render as ONE Docker service: PocketBase
 serves the API and the frontend together, with a persistent disk at `/pb/pb_data` holding
-the database and every uploaded file. See `DEPLOY.md`.
+the database and every uploaded file. See `../deploy/DEPLOY.md`.
 
 - **One service, one origin.** Serving the frontend from `pb_public` means no CORS, no
   second deploy to keep in step, and no API URL to configure. The frontend is *not*
   restructured into `pb_public` in the repo — it stays at the root so `serve.py` keeps
-  working, and the Dockerfile does the copying.
+  working, and `../deploy/Dockerfile` does the copying. The scrapbook is served at
+  the root of `pb_public`; Finn's art gallery is a sibling app under `/gallery/`.
 - **The disk mounts over `pb_data`**, so `pb_migrations` lives beside it rather than
   inside: schema is source and travels with the image, while data persists across deploys.
   A container filesystem is thrown away on every deploy, and so are the memories.

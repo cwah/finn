@@ -1,0 +1,77 @@
+{
+  "config": {
+    "artistName": "Finn",
+    "birthDate": "2020-04-11",
+    "galleryTitle": "The Finn Collection",
+    "galleryBlurb": "Permanent collection · Gallery 1",
+    "showAge": true,
+    "creditLine": "Gift of the artist"
+  },
+  "artworks": [
+    {
+      "id": "rocket-grocery",
+      "title": "Rocket to the Grocery Store",
+      "createdOn": "2026-07-30",
+      "yearLabel": null,
+      "medium": "Oil pastel and gel pen on black paper",
+      "dimensions": "9 × 12 in (23 × 30 cm)",
+      "note": "The artist's first work on a dark ground, made after a week of asking whether the moon has a shop on it. The lettering at lower right is his own; he was told it should say FOOD and reports that it does.",
+      "image": { "src": "art/2026-07-30-rocket-grocery.svg", "width": 1200, "height": 1600 },
+      "alt": "A white rocket with an orange flame flying past yellow stars on a dark blue sky, with letters along the bottom.",
+      "frame": null,
+      "accession": null
+    },
+    {
+      "id": "mom-on-a-tuesday",
+      "title": "Mom on a Tuesday",
+      "createdOn": "2026-06-21",
+      "yearLabel": null,
+      "medium": "Marker and crayon on sketchbook paper",
+      "dimensions": "11 × 11 in (28 × 28 cm)",
+      "note": "One of an ongoing series of portraits, all of them made without the sitter present. The star on the shirt is not decoration: the artist explains that it is a badge, and that it is for being the mom.",
+      "image": { "src": "art/2026-06-21-mom-on-a-tuesday.svg", "width": 1600, "height": 1600 },
+      "alt": "A smiling person with brown hair and a blue shirt with a yellow star, labelled MOM.",
+      "frame": null,
+      "accession": null
+    },
+    {
+      "id": "tyrannosaurus-birthday",
+      "title": "Tyrannosaurus at a Birthday Party",
+      "createdOn": "2026-05-02",
+      "yearLabel": null,
+      "medium": "Crayon and marker on construction paper",
+      "dimensions": "12 × 18 in (30 × 46 cm)",
+      "note": "Begun the morning after his own party and finished in one sitting. The artist has confirmed that the dinosaur is a guest and not an intruder, and that the three shapes on the table at right are cupcakes, one of which is spoken for.",
+      "image": { "src": "art/2026-05-02-tyrannosaurus.svg", "width": 2048, "height": 1536 },
+      "alt": "A round green dinosaur wearing a party hat, standing on grass beside a table of cupcakes under a yellow sun.",
+      "frame": null,
+      "accession": null
+    },
+    {
+      "id": "our-house-in-the-rain",
+      "title": "Our House in the Rain",
+      "createdOn": "2026-03-14",
+      "yearLabel": null,
+      "medium": "Washable marker on printer paper",
+      "dimensions": "8½ × 11 in (22 × 28 cm)",
+      "note": "One of a series of four made during a week of storms, and the only one the artist kept. He explained that the blue lines are rain, and that the yellow square is the inside part, where it is dry.",
+      "image": { "src": "art/2026-03-14-house-rain.svg", "width": 1536, "height": 2048 },
+      "alt": "A red-roofed house with a glowing yellow window, under grey clouds and many diagonal blue rain lines.",
+      "frame": "matted",
+      "accession": null
+    },
+    {
+      "id": "the-long-cat",
+      "title": "The Long Cat",
+      "createdOn": "2025-11-30",
+      "yearLabel": null,
+      "medium": "Pencil and glitter glue on cardboard",
+      "dimensions": "6 × 24 in (15 × 61 cm)",
+      "note": "The artist's first work on a found support, cut from a delivery box because no paper in the house was the right shape. The proportions were not an error; asked about them, he said the cat was doing a stretch.",
+      "image": { "src": "art/2025-11-30-long-cat.svg", "width": 2400, "height": 600 },
+      "alt": "An extremely elongated grey cat drawn in pencil, with glitter along its raised tail.",
+      "frame": null,
+      "accession": null
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+/* Tokens, reset, and the stage grid.
+
+   The palette is a gallery, not an app: a warm greige wall, a near-white placard plate,
+   and brass for the one rule under a title. Everything is warm — a single cool grey
+   anywhere in here makes the wall read as a screen again. */
+
+:root {
+  /* The wall. Kept as channels because the grain, the spot, the falloff and the
+     vignette all composite against it at different alphas. */
+  --wall-rgb: 205, 197, 185;
+  --wall: rgb(var(--wall-rgb));
+
+  /* Every shadow in the app, from the frame's cast shadow to the placard's, is this
+     colour. Warm brown-black: pure black on a warm wall reads as dirt, not as shade. */
+  --shadow-rgb: 44, 33, 24;
+
+  /* The placard plate and its type. */
+  --plate-rgb: 246, 243, 235;
+  --plate: rgb(var(--plate-rgb));
+  --ink-rgb: 38, 32, 26;
+  --ink: rgb(var(--ink-rgb));      /* 12.4:1 on the plate */
+  --ink-dim: #6a6157;              /* 4.7:1 on the plate — the smallest text that passes */
+
+  /* Brass reaches only 2.6:1, so it is for RULES and gradient stops. Anything a person
+     reads uses --brass-ink (5.1:1). Same split as scrapbook's accent / accent-ink. */
+  --brass-rgb: 176, 141, 68;
+  --brass: rgb(var(--brass-rgb));
+  --brass-ink: #6d5622;
+
+  /* Assembly chrome. These are viewport-scaled, never artwork-scaled — see artwork.css,
+     where the reasoning matters enough to be load-bearing. */
+  --frame-w: clamp(9px, 2.1vmin, 26px);
+  --mat-x: clamp(12px, 3.4vmin, 46px);
+  --mat-t: var(--mat-x);
+  --mat-b: calc(var(--mat-x) * 1.28);   /* weighted mat — the museum convention */
+  --mat-paper: #f0ece2;
+
+  /* The gutters the arrows sit in, and the room the cast shadow needs so it is not
+     clipped against the edge of the gallery. Both are padding on .gallery, which means
+     100cqw/100cqh already exclude them. */
+  --lane: clamp(44px, 9vw, 88px);
+  --breath: clamp(16px, 6vmin, 72px);
+
+  /* Fallback ratio. A missing manifest dimension must not invalidate the calc that
+     sizes the whole assembly, so --art-w / --art-h always resolve to something. */
+  --art-w: 4;
+  --art-h: 5;
+  --mat-scale: 1;
+
+  --serif: "Hoefler Text", "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.45;
+  /* The wall is fixed and full-bleed; nothing here should ever scroll it. */
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* ── The stage ────────────────────────────────────────────────────────────────
+   A definite-height grid. This is not decorative: .gallery below uses
+   container-type: size, which is only legal — and 100cqh only a real number —
+   when its row resolves to a definite height. Changing these rows to `auto`
+   collapses the artwork to nothing with no error anywhere. */
+.stage {
+  display: grid;
+  block-size: 100dvh;
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-areas: "gallery" "placard";
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+           env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Wide and not portrait: the placard hangs beside the frame, the way it does on a
+   real wall. Below this it sits under the frame, which is what fits on a phone. */
+@media (min-width: 60rem) and (min-aspect-ratio: 1 / 1) {
+  .stage {
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) clamp(15rem, 24vw, 22rem);
+    grid-template-areas: "gallery placard";
+    /* NOTE: no align-items here, and nothing may add one.
+       .gallery is a size container, so `contain: size` stops its contents from
+       contributing to its height. Any align-items other than the default `stretch`
+       therefore sizes it to a content height of ZERO, 100cqh becomes ~0, and the
+       artwork silently collapses to the 140px floor of its clamp with no error
+       anywhere. The placard centres itself with align-self instead. */
+  }
+}
+
+.gallery {
+  grid-area: gallery;
+  /* THE size container. Everything about how big the artwork gets is measured
+     against this box — see the clamp in artwork.css. */
+  container-type: size;
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding-inline: var(--lane);
+  padding-block: var(--breath);
+  touch-action: pan-y;   /* the browser keeps vertical gestures; we take horizontal */
+}
+
+/* Screen-reader-only, for the role="status" navigation announcement. */
+.sr-only {
+  position: absolute;
+  inline-size: 1px; block-size: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+:where(button):focus-visible,
+:where(a):focus-visible {
+  outline: 2px solid var(--brass-ink);
+  outline-offset: 3px;
+}
+
+/* Reduce Motion kills every transition in the app. NOTE for anyone adding one:
+   under this rule `transitionend` never fires, so nothing may be sequenced off it.
+   app.js drives its crossfade from a timeout that is 0 here. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
