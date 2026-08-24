@@ -85,19 +85,80 @@ development copy: the memories that count live on Render.
 If you would rather start clean, skip this — but then create the `config` record and the
 user accounts as in `scrapbook/README.md`, or the app will refuse to load.
 
-## 5. Point the Telegram bot at production
+## 5. Move the Telegram bot across
 
-The bot is a separate process and still runs wherever you start it. In `scrapbook/.env`:
+The bot is a separate process — it is not in the container, and deploying does not move
+it. Two things travel with the backup and one very much does not.
+
+### The accounts come with the backup
+
+Restoring (step 4) carries the whole `users` collection: both parents, the bot's own
+account, their password hashes, `telegramId` and `canPost`. So the credentials already in
+`scrapbook/.env` keep working and there is nothing to re-enter.
+
+Starting clean instead means rebuilding all of it by hand, and it is easy to do
+incompletely — the failure modes are quiet:
+
+| miss this | what you see |
+|---|---|
+| the bot's account, same email and password as `.env` | the bot exits at startup, cannot sign in |
+| `telegramId` on a parent | that parent is refused and told their id, as a stranger would be |
+| `canPost` on the bot | posts refused 400, after the media has already been downloaded |
+| `canPost` on a parent | no `+` button in the app |
+
+### ONE bot instance, ever
+
+This is the one that will bite. Telegram allows a single poller per token: start a second
+and `getUpdates` fails with
+
+```
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+```
+
+So a bot pointed at Render and a bot pointed at localhost **cannot both run**, and the
+one that loses is arbitrary. Before switching, stop the local one:
+
+```sh
+pkill -f "node bot/index.js"
+```
+
+If you want to keep developing against the local database while production runs, get a
+**second bot from @BotFather** and use its token in a separate env file. Two tokens, two
+bots, no conflict.
+
+### The polling cursor
+
+`scrapbook/bot/.offset` is how far through Telegram's queue the bot has read. It is
+gitignored, so it does not travel with the code. Copy it if you move the bot to another
+machine; without it the bot resumes from whatever Telegram still has unconfirmed, which
+is usually nothing but can mean a message arriving twice.
+
+### Point it at production
+
+In `scrapbook/.env`:
 
 ```
 PB_URL=https://<your-service>.onrender.com
 ```
 
-Its PocketBase account travels with the backup, so nothing else changes.
+Then `cd scrapbook && node bot/index.js`. It prints which host it signed in to, so the
+first line of output confirms you are on production rather than localhost.
 
-**The bot only runs while its machine does.** On a laptop that sleeps, so does the bot,
-and Telegram will redeliver whatever it missed once it wakes. Running it as a Render
-background worker would fix that, and is a sensible follow-up rather than part of this.
+### Where it should actually run
+
+**On your Mac** — nothing to set up, but the bot only runs while the machine is awake.
+Telegram holds undelivered messages for about a day, so a closed laptop means memories
+arrive late rather than never.
+
+**As a Render background worker** — a second service, so a second paid instance. It needs
+no Dockerfile: Render's Node runtime can run it directly, with `rootDir: scrapbook` and
+`startCommand: node bot/index.js`, and no build step because there are no dependencies.
+The three secrets become Render environment variables rather than `.env`, which is
+gitignored and never deployed.
+
+That second service is not in `render.yaml` — adding it would create a billable resource
+the moment the blueprint is applied, which is not a decision a config file should make
+quietly. Add it when you want it.
 
 ## 6. The frontend needs nothing
 
