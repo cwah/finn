@@ -575,11 +575,17 @@ tests. It has no dependencies and nothing bundles.
   would be a second authoring surface to keep in step, and every field means the same
   thing either way. Deleting a memory lives at the bottom of that sheet, behind a
   confirm — photos cascade with the post and there is no trash.
-- **Logins are usernames, not email addresses.** `users.passwordAuth.identityFields` is
-  `['username']`, so PocketBase accepts nothing else — the frontend just passes an
-  `identity` through and does not care which it is. Widening it back to
-  `['username', 'email']` is a one-line change if a forgotten username ever needs a way
-  round. Email is still stored, for password resets.
+- **Logins accept a username or an email address.** `identityFields` is
+  `['username', 'email']` and PocketBase tries them in order; the frontend just passes an
+  `identity` through and does not care which it is. The username is what anyone will
+  actually type — the email is the way back in when it is forgotten, which is why the
+  field is labelled for both rather than hiding the fallback from the person who needs it.
+- **Migrations that change schema must tolerate the schema already existing.** The
+  username field was added by hand in the production admin UI before its migration ever
+  ran there, so a migration that assumes it is the only way a column can appear would fail
+  on startup — and on a container platform that is a deploy which never comes up.
+  `1755300000_username_login.js` checks before each step and is tested by running it twice
+  against the same database, the second time with its own record deleted.
 - **Viewer accounts read, they do not write.** `users.canPost` splits "signed in" from
   "may add", which used to be the same thing — `posts.createRule` was simply
   `@request.auth.id != ""`, so any account handed to a grandparent could also post. New

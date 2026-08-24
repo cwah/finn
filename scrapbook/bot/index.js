@@ -443,8 +443,9 @@ async function main() {
   } catch (err) {
     // The likeliest cause by far, and worth naming rather than leaving as a bare 400.
     console.error(`Could not sign in as “${identity}”: ${err.message}\n\n`
-      + 'Logins use a USERNAME, not an email address. Set PB_BOT_USERNAME to the bot\'s '
-      + 'username (the admin UI shows it on the account).');
+      + 'Logins accept a username or an email address, whichever the users collection '
+      + 'lists in identityFields. Check PB_BOT_USERNAME against the account in the '
+      + 'admin UI.');
     process.exit(1);
   }
   console.log(`@${me.username} -> ${PB_URL} as ${botAccount.username || botAccount.email}`);

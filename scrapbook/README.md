@@ -69,10 +69,9 @@ xattr -d com.apple.quarantine "$(which pocketbase)"
 
 1. Open the admin UI at <http://127.0.0.1:8090/_/> and create the superuser account it
    prompts for. Keep those credentials to yourself — nothing in the app needs them.
-2. In **Collections → users**, create one account per parent. Give each a `username` —
-   that is what they sign in with — and a `name`, which is the attribution shown on every
-   post they add. The email address is still stored (PocketBase uses it for password
-   resets) but it is **not** a login.
+2. In **Collections → users**, create one account per parent. Give each a `username` and
+   a `name` — the username is what they sign in with, the name is the attribution shown on
+   every post they add. Either the username or the email address will sign them in.
 3. In **Collections → config**, create exactly **one** record with `babyName` and
    `birthDate`. Every age stamp in the app is computed from that single date.
 

@@ -29,9 +29,9 @@ export async function requireSession() {
 /**
  * Sign a parent in.
  *
- * `identity` is a username. PocketBase decides what counts as one — `identityFields` on
- * the users collection — so nothing here needs to change if that is ever widened to
- * accept an email address again.
+ * `identity` is a username or an email address. PocketBase decides which are accepted —
+ * `identityFields` on the users collection — so nothing here needs to change if that list
+ * is ever narrowed or widened.
  *
  * @throws {Error} with a message fit to show, for bad credentials or an unreachable server
  */
@@ -42,7 +42,7 @@ export async function signIn(identity, password) {
   } catch (err) {
     if (err instanceof pb.PbError) {
       throw new Error(err.status === 400
-        ? 'That username and password do not match.' : err.message);
+        ? 'Those details do not match an account.' : err.message);
     }
     // fetch() rejects rather than returning a status when the server is not there.
     throw new Error('Cannot reach the scrapbook server. Is PocketBase running?');

@@ -118,7 +118,7 @@ async function request(path, { method = 'GET', body, headers = {} } = {}) {
 
 /**
  * Sign in one of the parents.
- * @param {string} identity a username — see identityFields on the users collection
+ * @param {string} identity a username or email — see identityFields on the collection
  * @param {string} password
  */
 export async function signIn(identity, password) {
