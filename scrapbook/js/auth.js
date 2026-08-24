@@ -15,7 +15,7 @@ export async function ensureSignedIn() {
 
   const screen = document.getElementById('signin');
   const form = document.getElementById('signinForm');
-  const email = document.getElementById('signinEmail');
+  const username = document.getElementById('signinUsername');
   const password = document.getElementById('signinPassword');
   const submit = document.getElementById('signinSubmit');
   const error = document.getElementById('signinError');
@@ -23,7 +23,7 @@ export async function ensureSignedIn() {
   if (await requireSession()) return;
 
   screen.hidden = false;
-  email.focus();
+  username.focus();
 
   await new Promise((resolve) => {
     form.addEventListener('submit', async (e) => {
@@ -32,7 +32,7 @@ export async function ensureSignedIn() {
       submit.disabled = true;
       submit.textContent = 'Signing in…';
       try {
-        await signIn(email.value.trim(), password.value);
+        await signIn(username.value.trim(), password.value);
         password.value = ''; // don't leave it sitting in the DOM
         screen.hidden = true;
         resolve();

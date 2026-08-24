@@ -4,7 +4,7 @@
 //
 // Reads its settings from the environment (see README):
 //   TELEGRAM_BOT_TOKEN   from @BotFather
-//   PB_BOT_EMAIL         a PocketBase account for the bot
+//   PB_BOT_USERNAME      the bot's own PocketBase account
 //   PB_BOT_PASSWORD
 //   PB_URL               optional, defaults to the local PocketBase
 //
@@ -417,12 +417,15 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
 
 async function main() {
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const email = process.env.PB_BOT_EMAIL;
+  // PB_BOT_EMAIL is still read, so an env file written before logins moved to usernames
+  // keeps starting the bot. It has to hold the USERNAME now either way: PocketBase only
+  // accepts what `identityFields` names, and that is no longer an address.
+  const identity = process.env.PB_BOT_USERNAME || process.env.PB_BOT_EMAIL;
   const password = process.env.PB_BOT_PASSWORD;
 
   const missing = [
     !token && 'TELEGRAM_BOT_TOKEN',
-    !email && 'PB_BOT_EMAIL',
+    !identity && 'PB_BOT_USERNAME',
     !password && 'PB_BOT_PASSWORD',
   ].filter(Boolean);
   if (missing.length) {
@@ -434,8 +437,17 @@ async function main() {
   const pb = pocketbase(PB_URL);
 
   const me = await tg.getMe();
-  const botAccount = await pb.signIn(email, password);
-  console.log(`@${me.username} -> ${PB_URL} as ${botAccount.email}`);
+  let botAccount;
+  try {
+    botAccount = await pb.signIn(identity, password);
+  } catch (err) {
+    // The likeliest cause by far, and worth naming rather than leaving as a bare 400.
+    console.error(`Could not sign in as “${identity}”: ${err.message}\n\n`
+      + 'Logins use a USERNAME, not an email address. Set PB_BOT_USERNAME to the bot\'s '
+      + 'username (the admin UI shows it on the account).');
+    process.exit(1);
+  }
+  console.log(`@${me.username} -> ${PB_URL} as ${botAccount.username || botAccount.email}`);
 
   let offset = await loadOffset();
   const buffer = createAlbumBuffer((messages) => {

@@ -101,7 +101,7 @@ incompletely — the failure modes are quiet:
 
 | miss this | what you see |
 |---|---|
-| the bot's account, same email and password as `.env` | the bot exits at startup, cannot sign in |
+| the bot's account, same **username** and password as `.env` | the bot exits at startup, cannot sign in |
 | `telegramId` on a parent | that parent is refused and told their id, as a stranger would be |
 | `canPost` on the bot | posts refused 400, after the media has already been downloaded |
 | `canPost` on a parent | no `+` button in the app |

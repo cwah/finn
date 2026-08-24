@@ -147,8 +147,11 @@
       <p class="signin-hint">Sign in to see and add memories.</p>
 
       <label class="compose-field">
-        <span class="compose-label">Email</span>
-        <input id="signinEmail" type="email" autocomplete="username"
+        <span class="compose-label">Username</span>
+        <!-- type="text", not "email": the browser would otherwise refuse to submit a
+             username as invalid. autocomplete stays "username", which is what it was
+             always semantically — the field just used to hold an address. -->
+        <input id="signinUsername" type="text" autocomplete="username"
                autocapitalize="none" spellcheck="false" required />
       </label>
 

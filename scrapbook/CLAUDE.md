@@ -575,6 +575,11 @@ tests. It has no dependencies and nothing bundles.
   would be a second authoring surface to keep in step, and every field means the same
   thing either way. Deleting a memory lives at the bottom of that sheet, behind a
   confirm — photos cascade with the post and there is no trash.
+- **Logins are usernames, not email addresses.** `users.passwordAuth.identityFields` is
+  `['username']`, so PocketBase accepts nothing else — the frontend just passes an
+  `identity` through and does not care which it is. Widening it back to
+  `['username', 'email']` is a one-line change if a forgotten username ever needs a way
+  round. Email is still stored, for password resets.
 - **Viewer accounts read, they do not write.** `users.canPost` splits "signed in" from
   "may add", which used to be the same thing — `posts.createRule` was simply
   `@request.auth.id != ""`, so any account handed to a grandparent could also post. New
@@ -636,6 +641,12 @@ Adding a field to a populated collection needs thought about what existing rows 
   Write the backfill in the same change.
 - A new **`json`** field reads as empty, which a well-chosen default (`cropRect()` treats
   anything falsy as the whole photo) absorbs with no backfill at all.
+- A new **`text`** reads back as an **empty string**, which is the same trap again and
+  bites three ways at once when the field is about to become a login identity: a unique
+  index collides with itself (every row shares ''), `identityFields` set too early leaves
+  nobody able to sign in, and `required` set too early makes every existing row invalid.
+  `1755300000_username_login.js` therefore adds, fills, and only then constrains — the
+  order is load-bearing and is commented as such.
 - A new **`bool`** reads back as **false**, which for a permission field means revoking
   it from everyone. Adding `canPost` without its backfill would have silently stopped both
   parents *and* the bot from posting, and it would have looked like the app breaking

@@ -118,13 +118,13 @@ async function request(path, { method = 'GET', body, headers = {} } = {}) {
 
 /**
  * Sign in one of the parents.
- * @param {string} email
+ * @param {string} identity a username — see identityFields on the users collection
  * @param {string} password
  */
-export async function signIn(email, password) {
+export async function signIn(identity, password) {
   const out = await request('/api/collections/users/auth-with-password', {
     method: 'POST',
-    body: { identity: email, password },
+    body: { identity, password },
   });
   persist({ token: out.token, record: out.record });
   return out.record;
