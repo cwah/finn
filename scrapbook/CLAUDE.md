@@ -540,6 +540,13 @@ new fields, no layout hints. Rules that must hold:
   is told plainly rather than left with a failed post.
 - `bot/message.js` stays pure, like the engine and the age maths: albums, captions,
   milestone tags and size selection are all testable without a token.
+- **Telegram is resolved IPv4-first** (`setDefaultResultOrder`). Long polls failed
+  intermittently with a bare "fetch failed" 0.3s in — a connect error, not a timeout —
+  because `api.telegram.org` has an AAAA record and this machine's IPv6 default route runs
+  into a VPN interface that discards the packets. Measured: IPv4 10/10, IPv6 0/10. Happy
+  Eyeballs hid it as flakiness rather than a broken route. No messages are lost when a
+  poll fails, since the offset only advances on success, but they are delayed — and a bot
+  that spends its time retrying looks like a bot that is broken.
 - The polling offset lives in `bot/.offset` (gitignored). Telegram redelivers anything
   unacknowledged, so losing it replays messages.
 

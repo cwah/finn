@@ -12,6 +12,7 @@
 // as an ordinary post, attributed to whichever parent sent it — the layout engine treats
 // it exactly like one made in the app, because it is one.
 
+import { setDefaultResultOrder } from 'node:dns';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createClient as telegram } from './telegram.js';
 import { createClient as pocketbase } from './pocketbase.js';
@@ -23,6 +24,23 @@ import {
 import { parseDate } from './parse-date.js';
 import { exifDate, filenameDate, latestDate } from './media-date.js';
 import { MAX_CLIP_SECONDS } from '../js/layout-engine.js';
+
+// Prefer IPv4 when resolving Telegram.
+//
+// Long polling failed intermittently with a bare "fetch failed", 0.3s in — a connect
+// error, not a timeout. api.telegram.org resolves to both families, and on a machine
+// running a VPN the IPv6 default route can lead somewhere that quietly discards the
+// packets: measured here, IPv4 succeeded 10/10 and IPv6 failed 10/10, with the v6 default
+// route pointing into a Tailscale interface.
+//
+// Node races both families (Happy Eyeballs) so most requests still got through, which is
+// why this looked like flakiness rather than a broken route. A failed poll costs no
+// messages — the offset only advances on success — but it does delay them, and a bot that
+// spends its time retrying looks exactly like a bot that is not working.
+//
+// Harmless where IPv6 works: it only orders the candidates, and IPv4 reaches Telegram
+// everywhere.
+setDefaultResultOrder('ipv4first');
 
 // Node reads .env itself since 20.6, so the token never has to be typed on a command line
 // where it would land in shell history. Absent is fine — the environment may be set
