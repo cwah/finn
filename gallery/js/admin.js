@@ -105,9 +105,14 @@ async function refreshHung() {
 
       const thumb = document.createElement('img');
       thumb.className = 'hung-thumb';
-      thumb.src = artwork.image.src;
       thumb.alt = '';
+      // ORDER MATTERS. `loading` has to be set BEFORE `src`: assigning src is what
+      // starts the load, and switching to lazy afterwards defers a load that never gets
+      // re-triggered — the element is still detached at that point, so it is judged
+      // out of view and then nothing brings it back. Written the other way round, every
+      // thumbnail past the first stayed blank while sitting in plain sight.
       thumb.loading = 'lazy';
+      thumb.src = artwork.image.src;
 
       const text = document.createElement('div');
       text.className = 'hung-text';
