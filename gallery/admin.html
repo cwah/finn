@@ -107,6 +107,16 @@
     <p class="hint" data-el="note-hint"></p>
   </section>
 
+  <!-- What is on the wall, and the only place a drawing can be taken off it. The wall
+       itself stays a wall: no management chrome, no add button, nothing that exists for
+       one person. Removing something is a deliberate trip to a different page, which
+       suits an action that cannot be undone. -->
+  <section class="panel hung">
+    <h2>Hung so far</h2>
+    <ul class="hung-list" data-el="hung"></ul>
+    <p class="hint" data-el="hung-note"></p>
+  </section>
+
   <footer class="panel actions" hidden>
     <button class="btn btn--primary" type="button" data-act="save">Hang it</button>
     <p class="status" role="status" data-el="status"></p>

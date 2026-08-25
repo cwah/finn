@@ -53,6 +53,14 @@
 
 * { box-sizing: border-box; }
 
+/* The `hidden` attribute only sets `display: none` from the UA stylesheet, so ANY
+   author display rule beats it — and most of the things worth hiding here have one.
+   `.stage` is `display: grid`, so `stage.hidden = true` hid nothing at all and the
+   sign-in gate rendered underneath the wall it was supposed to replace. `.actions` in
+   the studio is `display: flex` and had the same latent bug.
+   This is the whole fix, and it has to carry !important to outrank a class. */
+[hidden] { display: none !important; }
+
 html { -webkit-text-size-adjust: 100%; }
 
 body {

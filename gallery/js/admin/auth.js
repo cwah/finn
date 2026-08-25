@@ -11,61 +11,18 @@
 // that to be decided — a hidden button is a decoration, not a permission.
 
 import { resolveApiBase, PbError } from '../pb.js';
+import { token as sessionToken, clearSession, signIn as sessionSignIn } from '../session.js';
 
-/** Deliberately not 'scrapbook.auth'. One origin, two apps, two sessions. */
-const KEY = 'gallery.auth';
+// The session itself lives in js/session.js and is SHARED with the scrapbook: signing
+// in here signs you in there too, and vice versa. This file is only the studio's use of
+// it — what it needs on top is the authed fetch below and the birth date lookup.
 
-let session = read();
+export { currentUser as currentSession, clearSession as signOut, token } from '../session.js';
 
-function read() {
-  try {
-    const raw = localStorage.getItem(KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    // Corrupt or unavailable storage is the same as being signed out.
-    return null;
-  }
-}
-
-function write(value) {
-  session = value;
-  try {
-    if (value) localStorage.setItem(KEY, JSON.stringify(value));
-    else localStorage.removeItem(KEY);
-  } catch { /* private browsing; the session just will not outlive the tab */ }
-}
-
-/** @returns {{token: string, user: object}|null} */
-export function currentSession() {
-  return session;
-}
-
-export function token() {
-  return session?.token ?? null;
-}
-
-/**
- * Sign in with a username or email and a password.
- * @returns {Promise<object>} the user record
- */
+/** Sign in, resolving the API base first so callers do not have to. */
 export async function signIn(identity, password) {
   const base = await resolveApiBase();
-  const res = await fetch(`${base}/api/collections/users/auth-with-password`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ identity, password }),
-  });
-  if (!res.ok) {
-    throw new PbError(res.status === 400 ? 'That username and password did not match.'
-      : `Sign-in failed (${res.status})`, res.status);
-  }
-  const data = await res.json();
-  write({ token: data.token, user: data.record });
-  return data.record;
-}
-
-export function signOut() {
-  write(null);
+  return sessionSignIn(base, identity, password);
 }
 
 /**
@@ -77,11 +34,12 @@ export function signOut() {
 export async function authed(path, options = {}) {
   const base = await resolveApiBase();
   const headers = { ...(options.headers ?? {}) };
-  if (session?.token) headers.Authorization = session.token;
+  const auth = sessionToken();
+  if (auth) headers.Authorization = auth;
 
   const res = await fetch(`${base}${path}`, { ...options, headers });
   if (res.status === 401) {
-    signOut();
+    clearSession();
     throw new PbError('Signed out — please sign in again.', 401);
   }
   return res;

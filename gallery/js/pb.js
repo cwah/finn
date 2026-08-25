@@ -4,11 +4,9 @@
 // bundler and no dependencies, and the slice the public gallery needs is tiny: list
 // some records, build a file URL.
 //
-// THERE IS NO AUTH IN THIS FILE, and that is deliberate rather than incidental. The
-// gallery is public and its pages never sign anybody in; only admin.html does, through
-// js/admin/auth.js. Keeping the token out of the public page means a visitor's browser
-// never holds one, and the scrapbook's session — same origin, same PocketBase — is
-// never within reach of anything the gallery loads.
+// The gallery used to be public and this file used to have no auth in it at all. It is
+// password-protected now, like the scrapbook, so every request carries the session —
+// see js/session.js, which is the one place the two apps deliberately share anything.
 //
 // Everything above this layer speaks the JSON contract in CLAUDE.md, not PocketBase.
 // Record shapes are translated in data-pb.js; nothing PocketBase-specific escapes it.
@@ -27,6 +25,8 @@
  * deliberately not shared, since one app importing the other's code is the thing the
  * repo layout exists to prevent.
  */
+import { token } from './session.js';
+
 let apiBase = null;
 
 export async function resolveApiBase() {
@@ -63,11 +63,18 @@ export class PbError extends Error {
  */
 export async function list(collection, params = {}) {
   const base = await resolveApiBase();
+  const auth = token();
   const query = new URLSearchParams(
     Object.entries(params).filter(([, v]) => v != null).map(([k, v]) => [k, String(v)]));
   const url = `${base}/api/collections/${collection}/records?${query}`;
 
-  const res = await fetch(url, { cache: 'no-store' });
+  const res = await fetch(url, {
+    cache: 'no-store',
+    headers: auth ? { Authorization: auth } : {},
+  });
+  // 401 and 403 are both "you are not allowed to see this", and the caller turns either
+  // into the sign-in gate. They are kept distinct from a 500 on purpose: one means show
+  // a password box, the other means something is broken.
   if (!res.ok) throw new PbError(`${collection} responded ${res.status}`, res.status);
   return res.json();
 }
@@ -86,5 +93,32 @@ export async function list(collection, params = {}) {
 export function fileUrl(record, filename) {
   if (!record?.id || !filename) return '';
   const base = apiBase ?? '';
-  return `${base}/api/files/${record.collectionName}/${record.id}/${encodeURIComponent(filename)}`;
+  const url = `${base}/api/files/${record.collectionName}/${record.id}/${encodeURIComponent(filename)}`;
+
+  // A protected file cannot be fetched by an <img> tag, which sends no Authorization
+  // header and cannot be given one. PocketBase's answer is a short-lived file token
+  // passed in the query string; requestFileToken() gets one and app.js appends it.
+  // Without this the collection rules close and every frame goes empty.
+  return url;
+}
+
+/**
+ * A short-lived token for reading protected files.
+ *
+ * Needed because an <img> cannot carry an Authorization header. Returns '' when there
+ * is no session, which is the signed-out case and is handled upstream.
+ *
+ * @returns {Promise<string>}
+ */
+export async function requestFileToken() {
+  const auth = token();
+  if (!auth) return '';
+  const base = await resolveApiBase();
+  const res = await fetch(`${base}/api/files/token`, {
+    method: 'POST',
+    headers: { Authorization: auth },
+  });
+  if (!res.ok) return '';
+  const data = await res.json();
+  return data?.token ?? '';
 }

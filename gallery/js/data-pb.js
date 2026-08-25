@@ -8,10 +8,13 @@
 // `listRule: ''` to match. Adding a drawing happens in admin.html, which is a separate
 // page with a separate module and its own session.
 
-import { list, fileUrl, PbError } from './pb.js';
+import { list, fileUrl, requestFileToken, PbError } from './pb.js';
 
-/** A gallery_artworks record -> an artwork in the contract. */
-function toArtwork(record) {
+/**
+ * A gallery_artworks record -> an artwork in the contract.
+ * @param {string} fileToken appended to the image URL; see getGallery
+ */
+function toArtwork(record, fileToken) {
   return {
     id: record.id,
     title: record.title,
@@ -25,6 +28,9 @@ function toArtwork(record) {
     alt: record.alt || null,
     frame: record.frame || null,
     accession: record.accession || null,
+    // Who added it. The studio uses this to decide what may be deleted; the wall
+    // never shows it.
+    authorId: record.author || null,
 
     // Months old when it was drawn, stamped at save time. The static source has no
     // equivalent — there, placard.js derives it from config.birthDate. Both paths end up
@@ -41,7 +47,9 @@ function toArtwork(record) {
     image: {
       // Absolute, built here. The frontend never joins a path, which is the single rule
       // that makes this source and the static one interchangeable.
-      src: fileUrl(record, record.display),
+      src: fileToken
+        ? `${fileUrl(record, record.display)}?token=${encodeURIComponent(fileToken)}`
+        : fileUrl(record, record.display),
       // The dimensions of the DISPLAY file, which is the cropped and deskewed one. The
       // clamp in artwork.css sizes the frame from these before the image loads, so they
       // have to describe the picture actually shown, not the phone photo behind it.
@@ -81,16 +89,23 @@ function toConfig(record) {
  * @returns {Promise<{config: object, artworks: Array}>}
  */
 export async function getGallery() {
-  const [artworks, config] = await Promise.all([
+  // Three requests, all independent. The file token is the awkward one: now the
+  // collections are private, /api/files/ is too, and an <img> cannot send an
+  // Authorization header — so PocketBase hands out a short-lived token to put in the
+  // query string instead. Without it every frame on the wall renders empty.
+  const [artworks, config, fileToken] = await Promise.all([
     list('gallery_artworks', { perPage: 500, sort: '-createdOn' }),
     list('gallery_config', { perPage: 1 }),
+    requestFileToken(),
   ]);
 
   return {
     config: toConfig(config?.items?.[0]),
     // A drawing whose display file failed to attach would render as an empty frame, so
     // it is dropped rather than hung.
-    artworks: (artworks?.items ?? []).map(toArtwork).filter((a) => a.image.src),
+    artworks: (artworks?.items ?? [])
+      .map((record) => toArtwork(record, fileToken))
+      .filter((a) => a.image.src),
   };
 }
 

@@ -10,6 +10,7 @@
 // can be reopened exactly where it was left.
 
 import { signIn, signOut, currentSession, authed, birthDate } from './admin/auth.js';
+import { getGallery } from './data.js';
 import { loadImage, paintPreview, bakeDisplay } from './admin/bake-canvas.js';
 import { initCropBox } from './admin/crop-box.js';
 import { largestInscribedCrop, cropIsCovered, recipe, usableAngle } from './bake.js';
@@ -69,6 +70,92 @@ async function start() {
   // Read once, while signed in. It never reaches the public API — see auth.js.
   state.birthDate = await birthDate();
   updateAgePreview();
+  await refreshHung();
+}
+
+/**
+ * List what is on the wall, with a way to take your own drawings off it.
+ *
+ * Deleting lives here rather than on the wall on purpose: the gallery is a gallery, and
+ * management chrome that exists for one person does not belong on it. Somebody else's
+ * drawing is listed but has no delete — which is what the collection rule enforces
+ * anyway, so the interface simply agrees with the server instead of inviting a refusal.
+ */
+async function refreshHung() {
+  const list = at('hung');
+  const note = at('hung-note');
+  if (!list) return;
+
+  try {
+    const { artworks } = await getGallery();
+    const me = currentSession()?.id ?? null;
+    list.replaceChildren();
+
+    if (artworks.length === 0) {
+      note.textContent = 'Nothing is hanging yet.';
+      return;
+    }
+    note.textContent = '';
+
+    for (const artwork of artworks) {
+      const mine = Boolean(me) && artwork.authorId === me;
+      const item = document.createElement('li');
+      item.className = 'hung-item';
+      item.dataset.mine = String(mine);
+
+      const thumb = document.createElement('img');
+      thumb.className = 'hung-thumb';
+      thumb.src = artwork.image.src;
+      thumb.alt = '';
+      thumb.loading = 'lazy';
+
+      const text = document.createElement('div');
+      text.className = 'hung-text';
+      const title = document.createElement('strong');
+      title.className = 'hung-title';
+      title.textContent = artwork.title;
+      const meta = document.createElement('span');
+      meta.className = 'hung-meta';
+      meta.textContent = mine
+        ? artwork.createdOn
+        : `${artwork.createdOn} · added by someone else`;
+      text.append(title, meta);
+
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'hung-delete';
+      remove.textContent = 'Delete';
+      // Two presses, not a confirm() dialog: a browser modal blocks everything and is
+      // easy to dismiss by reflex. Arming the button in place is harder to do by accident
+      // and cheaper to back out of.
+      remove.addEventListener('click', async () => {
+        if (remove.dataset.confirm !== 'true') {
+          remove.dataset.confirm = 'true';
+          remove.textContent = 'Really delete?';
+          setTimeout(() => {
+            delete remove.dataset.confirm;
+            remove.textContent = 'Delete';
+          }, 4000);
+          return;
+        }
+        remove.disabled = true;
+        try {
+          const res = await authed(`/api/collections/gallery_artworks/records/${artwork.id}`,
+            { method: 'DELETE' });
+          if (!res.ok) throw new Error(`The gallery refused that (${res.status}).`);
+          await refreshHung();
+        } catch (problem) {
+          remove.disabled = false;
+          note.textContent = problem.message;
+        }
+      });
+
+      item.append(thumb, text, remove);
+      list.append(item);
+    }
+  } catch (problem) {
+    note.textContent = `Could not list what is hanging: ${problem.message}`;
+  }
 }
 
 /**
@@ -266,6 +353,10 @@ document.querySelector('[data-act="save"]').addEventListener('click', async () =
     form.set('width', String(display.width));
     form.set('height', String(display.height));
     form.set('adjust', JSON.stringify(recipe(state)));
+    // Who added it. The delete rule is `author = @request.auth.id`, so without this a
+    // drawing would be removable by nobody but a superuser.
+    const me = currentSession()?.id;
+    if (me) form.set('author', me);
     form.set('noteSource', field('note').value.trim().length >= THIN_NOTE ? 'human' : 'pending');
 
     form.set('display', display.blob, `${slug(title)}.jpg`);
@@ -280,6 +371,7 @@ document.querySelector('[data-act="save"]').addEventListener('click', async () =
       throw new Error(detail?.message || `The gallery refused it (${res.status}).`);
     }
     say('Hung. It is now the newest drawing in the collection.');
+    await refreshHung();
   } catch (problem) {
     say(problem.message, true);
   }

@@ -113,3 +113,43 @@
 .actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .status { margin: 0; font-size: .86rem; color: var(--ink-dim); }
 .status[data-error="true"] { color: #8c2f2f; }
+
+
+/* ── Hung so far ──────────────────────────────────────────────────────────── */
+.hung-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+
+.hung-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .45rem .55rem;
+  background: #fff;
+  border: 1px solid rgba(var(--shadow-rgb), .18);
+}
+
+.hung-thumb {
+  inline-size: 44px;
+  block-size: 44px;
+  object-fit: cover;
+  background: rgba(var(--shadow-rgb), .08);
+  flex: none;
+}
+
+.hung-text { flex: 1 1 auto; min-inline-size: 0; }
+.hung-title { display: block; font-family: var(--serif); font-size: .95rem; }
+.hung-meta { display: block; font-size: .76rem; color: var(--ink-dim); }
+
+/* Only shown on drawings this account added — someone else's is listed but not
+   removable, which is what the server would enforce anyway. */
+.hung-delete {
+  font: inherit;
+  font-size: .8rem;
+  padding: .3rem .6rem;
+  cursor: pointer;
+  color: #8c2f2f;
+  background: transparent;
+  border: 1px solid rgba(140, 47, 47, .35);
+  flex: none;
+}
+.hung-delete[data-confirm="true"] { color: #fff; background: #8c2f2f; border-color: #8c2f2f; }
+.hung-item[data-mine="false"] .hung-delete { display: none; }

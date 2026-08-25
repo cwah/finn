@@ -82,3 +82,70 @@
 @media (max-width: 60rem), (max-aspect-ratio: 1 / 1) {
   .placard { max-block-size: 40dvh; overflow-y: auto; }
 }
+
+
+/* ── The gate ─────────────────────────────────────────────────────────────────
+   The gallery is private, so an unsigned visitor gets a wall with a single label
+   on it rather than a login page. Same plate, same shadow, same serif — it should
+   read as part of the room, not as an interruption to it. */
+.gate {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: env(safe-area-inset-top) 1rem env(safe-area-inset-bottom);
+}
+
+.gate-form {
+  display: grid;
+  gap: .8rem;
+  inline-size: min(20rem, 100%);
+  padding: clamp(18px, 3vmin, 28px);
+  background:
+    linear-gradient(158deg, rgba(255, 255, 255, .7), rgba(0, 0, 0, .03) 72%),
+    var(--plate);
+  color: var(--ink);
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, .8),
+    inset -1px -1px 0 rgba(var(--shadow-rgb), .12),
+    0 1px 1px rgba(var(--shadow-rgb), .34),
+    2px 5px 9px -3px rgba(var(--shadow-rgb), .26);
+}
+
+.gate-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.2vmin, 1.3rem);
+  font-weight: 600;
+}
+
+.gate-sub {
+  margin: -.4rem 0 .2rem;
+  font-size: .82rem;
+  color: var(--ink-dim);
+}
+
+.gate-field { display: grid; gap: .25rem; font-size: .78rem; color: var(--ink-dim); }
+
+.gate-field input {
+  font: inherit;
+  font-size: .95rem;
+  padding: .45rem .55rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(var(--shadow-rgb), .25);
+  inline-size: 100%;
+}
+
+.gate-form button {
+  font: inherit;
+  font-size: .9rem;
+  padding: .5rem;
+  cursor: pointer;
+  color: #fff;
+  background: var(--brass-ink);
+  border: 1px solid var(--brass-ink);
+}
+
+.gate-error { margin: 0; font-size: .8rem; color: #8c2f2f; }

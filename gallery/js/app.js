@@ -5,6 +5,8 @@
 // events and timing.
 
 import { getGallery } from './data.js';
+import { isSignedIn, signIn, clearSession } from './session.js';
+import { resolveApiBase, PbError } from './pb.js';
 import {
   orderCollection, indexOfId, stepIndex, canStep, neighbourIndices,
 } from './collection.js';
@@ -28,6 +30,9 @@ const refs = {
   older: document.querySelector('[data-nav="older"]'),
   newer: document.querySelector('[data-nav="newer"]'),
   status: document.querySelector('[role="status"]'),
+  gate: document.querySelector('.gate'),
+  gateForm: document.querySelector('.gate-form'),
+  gateError: document.querySelector('.gate-error'),
 };
 
 /** @type {{list: Array, frames: Object<string,string>, config: object}} */
@@ -37,7 +42,36 @@ let current = 0;
 /** Motion is a preference, and it is allowed to change while the page is open. */
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
+/** Show the wall, or the label asking to be let in. */
+function showGate(show) {
+  if (refs.gate) refs.gate.hidden = !show;
+  refs.stage.hidden = show;
+}
+
+refs.gateForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  refs.gateError.hidden = true;
+  try {
+    await signIn(await resolveApiBase(), form.identity.value.trim(), form.password.value);
+    form.reset();
+    showGate(false);
+    await start();
+  } catch (problem) {
+    refs.gateError.textContent = problem.message;
+    refs.gateError.hidden = false;
+  }
+});
+
 async function start() {
+  // The gallery is private. Ask before fetching, so a signed-out visitor gets the gate
+  // rather than a failed request that has to be interpreted.
+  if (!isSignedIn()) {
+    showGate(true);
+    return;
+  }
+  showGate(false);
+
   const { config, artworks } = await getGallery();
 
   const list = orderCollection(artworks);
@@ -214,6 +248,13 @@ function wire() {
 }
 
 start().catch((error) => {
+  // A session that has expired or been revoked is not a broken gallery — it is a
+  // signed-out one. Anything else is a real failure and says so.
+  if (error instanceof PbError && (error.status === 401 || error.status === 403)) {
+    clearSession();
+    showGate(true);
+    return;
+  }
   console.error(error);
   refs.placard.replaceChildren();
   const message = document.createElement('p');

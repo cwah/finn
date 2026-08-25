@@ -271,11 +271,43 @@ boot. Before it, walking back to the newest drawing pushed `./`, which at any
 non-root mount resolved to `/` and pointed the gallery's own landing link at the root
 of the private scrapbook. There is a test named after that.
 
+## Who can see it
+
+Nobody, without a password. The gallery was built world-readable, on the assumption it
+would be sent to grandparents as a link; it is not, so `gallery_artworks` and
+`gallery_config` are `@request.auth.id != ""` like the scrapbook's collections, and the
+people who should see it get accounts — which is what viewer accounts already exist for.
+
+**The sign-in is shared with the scrapbook.** `js/session.js` reads and writes the same
+`localStorage` key, in the same shape, so one password gets you both apps. That file is
+the only place the two apps touch anything of each other's, and it says so loudly: the
+key and the shape are a contract with `scrapbook/js/pb.js`.
+
+Two consequences that are not obvious:
+
+- **A protected file cannot be loaded by an `<img>`.** It sends no `Authorization`
+  header and cannot be given one, so once the collection rules closed every frame on the
+  wall would have rendered empty. PocketBase's answer is a short-lived file token in the
+  query string; `pb.js` fetches one and `data-pb.js` appends it to each image URL.
+- **`[hidden]` needs `!important`.** The attribute only sets `display: none` from the UA
+  stylesheet, so any author display rule beats it — `.stage` is `display: grid`, and
+  hiding it to show the gate did nothing at all. The rule is in `base.css`.
+
+## Whose drawing is whose
+
+`author` is stamped at save time and `updateRule`/`deleteRule` are `author =
+@request.auth.id`, the same boundary the scrapbook draws: whoever added a thing can
+remove it, nobody else can remove it out from under them.
+
+**Deleting lives in the studio, not on the wall.** The wall is a wall — a frame, a
+placard, two arrows, and nothing that exists for only one person. `admin.html` grows a
+"Hung so far" list instead, which also makes removing something a deliberate trip to
+another page rather than a button next to what you are looking at.
+
 ## Where the collection lives
 
-PocketBase, as of the flip in `js/data.js`. `gallery_artworks` and `gallery_config` are
-world-readable; writing is gated on `canPost`, the flag on `users` that the scrapbook's
-viewer accounts added, so one login covers both apps.
+PocketBase, as of the flip in `js/data.js`. Writing is gated on `canPost`, the flag on
+`users` that the scrapbook's viewer accounts added.
 
 `data-static.js` and `data/artworks.json` are still here and still work — they are the
 no-backend mode, for working on the wall or the frames without running a server, the

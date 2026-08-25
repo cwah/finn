@@ -5,7 +5,7 @@ Two small sites about the same small person, deployed as one thing.
 | | | |
 |---|---|---|
 | [`scrapbook/`](scrapbook/) | a private mobile scrapbook of photos and video | served at `/` |
-| [`gallery/`](gallery/) | a public gallery of Finn's artwork, one drawing at a time | served at `/gallery/` |
+| [`gallery/`](gallery/) | Finn's artwork, one drawing at a time | served at `/gallery/` |
 | [`deploy/`](deploy/) | the Dockerfile that serves both, plus how to put it on Render | |
 
 They share an origin and a PocketBase instance, and nothing else. Neither imports the
@@ -47,7 +47,11 @@ Two rules, both of which are easy to get wrong once and hard to notice:
 - **Namespace the gallery's collections.** The scrapbook already owns `posts`, `photos`,
   `users` and `config` — that last one especially. The gallery's go in as `gallery_*`.
   There is one migrations directory, and it is `scrapbook/pb_migrations/`.
-- **Same origin means shared `localStorage`.** The scrapbook's auth token lives there
-  under `scrapbook.auth`, and any script running on the gallery page can read it. The
-  gallery is public and the scrapbook is not, so the gallery must never load third-party
-  script or render untrusted HTML. It loads nothing external today; keep it that way.
+- **They share a sign-in, deliberately.** Both apps are private, both authenticate
+  against the same `users` collection, and the gallery reads the session the scrapbook
+  writes — `scrapbook.auth` in `localStorage`. Signing in to either signs you in to
+  both. `gallery/js/session.js` is the ONLY place the two apps touch, and the key and
+  the shape in it are a contract with `scrapbook/js/pb.js`: change where either stores
+  auth and the other breaks, silently, by looking like everyone got signed out.
+- **Neither app may load third-party script.** One origin, one session, two apps — so
+  anything running on either page can read the token for both.

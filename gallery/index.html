@@ -59,6 +59,27 @@
   <section class="placard" aria-label="About this artwork"></section>
 </main>
 
+<!-- The gallery is private. This is the only interface the wall ever grows, it is only
+     ever shown instead of the wall, and it is deliberately the same plate the placard
+     is made of — a label on an otherwise empty wall. Signing in here signs you in to
+     the scrapbook too; see js/session.js. -->
+<section class="gate" hidden>
+  <form class="gate-form" autocomplete="on">
+    <h1 class="gate-title" data-el="gate-title">The Finn Collection</h1>
+    <p class="gate-sub">Sign in to see the collection.</p>
+    <label class="gate-field">
+      <span>Username or email</span>
+      <input name="identity" type="text" autocomplete="username" required>
+    </label>
+    <label class="gate-field">
+      <span>Password</span>
+      <input name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <button type="submit">Sign in</button>
+    <p class="gate-error" role="alert" hidden></p>
+  </form>
+</section>
+
 <!-- Just the position and the title. An aria-live region around the whole placard
      would re-read the entire note on every arrow press. -->
 <p class="sr-only" role="status" aria-live="polite"></p>
