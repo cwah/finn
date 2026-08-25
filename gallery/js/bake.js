@@ -265,3 +265,72 @@ export function recipe({ angle = 0, crop = FULL_CROP, brightness = 1, contrast =
     contrast: round(clamp(num(contrast, 1), 0.2, 2)),
   };
 }
+
+/** Distance between two crops, for choosing which near-miss is nearer. */
+function cropDistance(a, b) {
+  return Math.abs(a.x - b.x) + Math.abs(a.y - b.y)
+    + Math.abs(a.w - b.w) + Math.abs(a.h - b.h);
+}
+
+/** A crop somewhere on the line from `good` to `bad`. */
+function between(good, bad, t) {
+  return {
+    x: good.x + (bad.x - good.x) * t,
+    y: good.y + (bad.y - good.y) * t,
+    w: good.w + (bad.w - good.w) * t,
+    h: good.h + (bad.h - good.h) * t,
+  };
+}
+
+/**
+ * The closest crop to what the pointer asked for that is still entirely photograph.
+ *
+ * This is what stops the crop box being dragged into the empty wedges rotation leaves
+ * in the corners, rather than letting it go there and complaining afterwards. Being
+ * told off for something the interface allowed is worse than simply not being able to
+ * do it — the edge of the photo should feel like a wall.
+ *
+ * Three attempts, in order, because a wall you can slide along feels like a boundary
+ * and a wall you stick to feels like a bug:
+ *
+ *   1. the whole gesture, if it is legal
+ *   2. one axis of it, reverting the other — this is what lets the box slide along an
+ *      edge when a diagonal drag is only blocked in one direction
+ *   3. failing both, walk back along the gesture until it is legal
+ *
+ * @param {object} candidate where the pointer wants the crop
+ * @param {object} previous the last crop known to be good
+ * @returns {object} always covered, always usable
+ */
+export function constrainToPhoto(candidate, previous, width, height, angle) {
+  const want = usableCrop(candidate);
+  if (cropIsCovered(want, width, height, angle)) return want;
+
+  let prev = usableCrop(previous);
+  // A caller that hands over an already-illegal crop has nothing to walk back to, so
+  // fall back to the largest rectangle that is definitely inside.
+  if (!cropIsCovered(prev, width, height, angle)) {
+    prev = largestInscribedCrop(width, height, angle);
+  }
+
+  const xOnly = usableCrop({ x: want.x, w: want.w, y: prev.y, h: prev.h });
+  const yOnly = usableCrop({ x: prev.x, w: prev.w, y: want.y, h: want.h });
+  const xOk = cropIsCovered(xOnly, width, height, angle);
+  const yOk = cropIsCovered(yOnly, width, height, angle);
+  if (xOk && yOk) {
+    return cropDistance(xOnly, want) <= cropDistance(yOnly, want) ? xOnly : yOnly;
+  }
+  if (xOk) return xOnly;
+  if (yOk) return yOnly;
+
+  // Bisect toward the last good crop. Twelve halvings is far below a pixel at any
+  // sane image size, and it costs four corner tests each.
+  let lo = 0;
+  let hi = 1;
+  for (let i = 0; i < 12; i += 1) {
+    const mid = (lo + hi) / 2;
+    if (cropIsCovered(between(prev, want, mid), width, height, angle)) lo = mid;
+    else hi = mid;
+  }
+  return usableCrop(between(prev, want, lo));
+}

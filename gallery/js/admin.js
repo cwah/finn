@@ -86,6 +86,8 @@ at('file').addEventListener('change', async (event) => {
     at('filename').textContent =
       `${file.name} — ${image.naturalWidth} × ${image.naturalHeight}`;
     el('.editor').hidden = false;
+    el('.editor').dataset.mode = 'adjust';
+    document.querySelector('[data-act="mode"]').textContent = 'Done adjusting';
     el('.label-form').hidden = false;
     el('.actions').hidden = false;
 
@@ -98,21 +100,30 @@ at('file').addEventListener('change', async (event) => {
   }
 });
 
-function onCropChange(crop, covered) {
+function onCropChange(crop) {
+  // No covered/uncovered branch any more: crop-box.js constrains the gesture itself,
+  // so an illegal crop is unreachable rather than reported after the fact.
   state.crop = crop;
-  at('uncovered').hidden = covered;
 }
 
-/** Repaint the preview and keep the crop overlay exactly on top of it. */
+/**
+ * Repaint the preview and keep the crop overlay exactly on top of it.
+ *
+ * While adjusting, this shows the WHOLE rotated frame including the empty corners
+ * rotation leaves behind — they are much easier to stay clear of when visible. Once
+ * done, it shows the cropped result instead, so the last thing seen before saving is
+ * the thing that will actually hang.
+ */
 function redraw() {
   if (!state.image) return;
+  const done = el('.editor').dataset.mode === 'done';
   const size = paintPreview(at('preview'), state.image, {
     width: state.image.naturalWidth,
     height: state.image.naturalHeight,
     angle: state.angle,
     brightness: state.brightness,
     contrast: state.contrast,
-  }, PREVIEW_MAX);
+  }, PREVIEW_MAX, done ? state.crop : null);
 
   // The overlay is sized to the canvas rather than the other way round, so a crop
   // fraction is a percentage of the same box the geometry was computed in.
@@ -150,10 +161,12 @@ for (const [name, format] of [['brightness', (v) => `${Math.round(v * 100)}%`],
   });
 }
 
-document.querySelector('[data-act="fit"]').addEventListener('click', () => {
-  if (!state.image) return;
-  cropBox?.setCrop(largestInscribedCrop(state.image.naturalWidth,
-    state.image.naturalHeight, state.angle));
+document.querySelector('[data-act="mode"]').addEventListener('click', (event) => {
+  const editor = el('.editor');
+  const done = editor.dataset.mode !== 'done';
+  editor.dataset.mode = done ? 'done' : 'adjust';
+  event.currentTarget.textContent = done ? 'Adjust again' : 'Done adjusting';
+  redraw();
 });
 
 document.querySelector('[data-act="reset"]').addEventListener('click', () => {

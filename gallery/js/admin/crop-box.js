@@ -13,7 +13,7 @@
 // Adapted rather than imported. The two apps share an origin and a database and no code,
 // and a crop box is small enough that a copy is cheaper than a dependency between them.
 
-import { usableCrop, cropIsCovered, MIN_CROP } from '../bake.js';
+import { usableCrop, cropIsCovered, constrainToPhoto, MIN_CROP } from '../bake.js';
 
 const CORNERS = ['nw', 'ne', 'sw', 'se'];
 
@@ -39,9 +39,22 @@ export function initCropBox(root, { onChange }) {
   });
   root.replaceChildren(box);
 
-  /** Push the box's fractions into CSS, and tell the page what changed. */
-  function apply({ notify = true } = {}) {
-    crop = usableCrop(crop);
+  /** The last crop known to be entirely photograph, to fall back toward. */
+  let anchor = { x: 0, y: 0, w: 1, h: 1 };
+
+  /**
+   * Push the box's fractions into CSS, and tell the page what changed.
+   *
+   * `hold` runs the proposed crop through constrainToPhoto first, so a gesture is
+   * stopped at the edge of the photo rather than allowed past it and complained about
+   * afterwards. Only setSource skips it, because a new angle legitimately changes what
+   * is reachable and the caller re-fits.
+   */
+  function apply({ notify = true, hold = true } = {}) {
+    crop = hold
+      ? constrainToPhoto(crop, anchor, source.width, source.height, source.angle)
+      : usableCrop(crop);
+    if (cropIsCovered(crop, source.width, source.height, source.angle)) anchor = crop;
     box.style.left = `${crop.x * 100}%`;
     box.style.top = `${crop.y * 100}%`;
     box.style.width = `${crop.w * 100}%`;
@@ -135,7 +148,7 @@ export function initCropBox(root, { onChange }) {
 
   return {
     /** Point the box at a new image, or a new angle on the same one. */
-    setSource(next) { source = { ...source, ...next }; apply({ notify: false }); },
+    setSource(next) { source = { ...source, ...next }; apply({ notify: false, hold: false }); },
     setCrop(next) { crop = usableCrop(next); apply(); },
     getCrop() { return { ...crop }; },
     isCovered() { return cropIsCovered(crop, source.width, source.height, source.angle); },

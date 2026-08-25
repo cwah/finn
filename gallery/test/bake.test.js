@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import {
   MAX_ANGLE, MIN_CROP, FULL_CROP,
   usableAngle, rotatedSize, toOriginal, cropIsCovered, largestInscribedCrop,
-  usableCrop, outputSize, bakePlan, filterString, recipe,
+  usableCrop, outputSize, bakePlan, filterString, recipe, constrainToPhoto,
 } from '../js/bake.js';
 
 const ANGLES = [-15, -7.5, -3, -0.4, 0, 0.4, 3, 7.5, 15];
@@ -178,4 +178,59 @@ test('a legitimate zero is a setting, not a missing value', () => {
   assert.equal(filterString(1, 0), 'brightness(1) contrast(0.2)');
   assert.equal(usableCrop({ x: 0, y: 0, w: 0, h: 0 }).w, MIN_CROP);
   assert.equal(recipe({ brightness: 0 }).brightness, 0.2);
+});
+
+test('a crop dragged off the photo is stopped at the edge, not merely flagged', () => {
+  // Rotation leaves empty wedges in the corners of the bounding box. The interface
+  // should make those unreachable rather than allow them and complain.
+  const [w, h, angle] = [2048, 1536, 8];
+  const good = largestInscribedCrop(w, h, angle);
+  const overshoot = { x: 0, y: 0, w: 1, h: 1 };
+  const held = constrainToPhoto(overshoot, good, w, h, angle);
+  assert.equal(cropIsCovered(held, w, h, angle), true);
+});
+
+test('a legal drag is passed through exactly as asked', () => {
+  const [w, h, angle] = [2048, 1536, 0];
+  const want = { x: 0.1, y: 0.1, w: 0.5, h: 0.5 };
+  assert.deepEqual(constrainToPhoto(want, want, w, h, angle), usableCrop(want));
+});
+
+test('a diagonal drag blocked on one axis still slides along the other', () => {
+  // The behaviour that makes an edge feel like a wall rather than like glue.
+  //
+  // The starting crop has to have slack to slide INTO: largestInscribedCrop is
+  // maximal and touches every edge, so nothing can move from there in any direction.
+  // This one is narrowed horizontally — room to the sides, none above.
+  const [w, h, angle] = [2000, 1000, 10];
+  const full = largestInscribedCrop(w, h, angle);
+  const good = usableCrop({ ...full, x: full.x + 0.05, w: full.w - 0.1 });
+  assert.equal(cropIsCovered(good, w, h, angle), true, 'the premise: the start is legal');
+
+  // Push hard upward (illegal, the height is still maximal) and slightly right (legal).
+  const want = { ...good, x: good.x + 0.02, y: 0 };
+  const held = constrainToPhoto(want, good, w, h, angle);
+  assert.equal(cropIsCovered(held, w, h, angle), true);
+  assert.ok(held.x > good.x, 'the legal axis should still have moved');
+  assert.ok(held.y > 0.001, 'the blocked axis should not have gone to the top edge');
+});
+
+test('constraining never returns something the editor would reject', () => {
+  const [w, h] = [1600, 1200];
+  for (const angle of [-12, -5, 0, 5, 12]) {
+    const good = largestInscribedCrop(w, h, angle);
+    for (const want of [{ x: -0.5, y: -0.5, w: 1.4, h: 1.4 }, { x: 0.99, y: 0.99, w: 0.5, h: 0.5 },
+      { x: 0, y: 0, w: 1, h: 1 }, { x: 0.4, y: 0.4, w: 0.01, h: 0.01 }]) {
+      const held = constrainToPhoto(want, good, w, h, angle);
+      assert.equal(cropIsCovered(held, w, h, angle), true, `${angle} ${JSON.stringify(want)}`);
+      assert.deepEqual(held, usableCrop(held));
+    }
+  }
+});
+
+test('an already-illegal starting crop is recovered from rather than walked back to', () => {
+  const [w, h, angle] = [2048, 1536, 9];
+  const bad = { x: 0, y: 0, w: 1, h: 1 };
+  const held = constrainToPhoto({ x: 0, y: 0, w: 1, h: 1 }, bad, w, h, angle);
+  assert.equal(cropIsCovered(held, w, h, angle), true);
 });

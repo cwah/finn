@@ -51,7 +51,7 @@
   </section>
 
   <!-- Step 2: straighten, crop, adjust -->
-  <section class="panel editor" hidden>
+  <section class="panel editor" data-mode="adjust" hidden>
     <div class="stage-wrap">
       <!-- The preview canvas IS rotated space: the crop overlay sits exactly on top of
            it, so a crop fraction is simply a percentage of this box. -->
@@ -60,11 +60,6 @@
         <div class="crop-layer" data-el="crop"></div>
       </div>
     </div>
-
-    <p class="warn" data-el="uncovered" role="alert" hidden>
-      A corner of the crop is off the edge of the photo — it would come out transparent.
-      <button class="btn btn--quiet btn--tiny" type="button" data-act="fit">Fit it back in</button>
-    </p>
 
     <div class="controls">
       <label class="slider">
@@ -79,7 +74,12 @@
         <span>Contrast <output data-el="contrast-out">100%</output></span>
         <input type="range" data-el="contrast" min="0.5" max="1.6" step="0.01" value="1">
       </label>
-      <button class="btn btn--quiet" type="button" data-act="reset">Reset adjustments</button>
+      <div class="control-actions">
+        <button class="btn btn--quiet" type="button" data-act="reset">Reset adjustments</button>
+        <!-- The way out of the adjust state. Without it the crop overlay and its scrim
+             are permanent, which reads as a modal with no close button. -->
+        <button class="btn" type="button" data-act="mode">Done adjusting</button>
+      </div>
     </div>
   </section>
 
