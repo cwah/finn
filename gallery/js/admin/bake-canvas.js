@@ -74,9 +74,11 @@ export async function bakeDisplay(image, { width, height, angle, crop, brightnes
  * crop, corners and all — the empty wedges rotation leaves behind are the thing the crop
  * has to be kept out of, and they are much easier to stay clear of when they are visible.
  */
-export function paintPreview(canvas, image, { width, height, angle, brightness, contrast }, maxEdge) {
-  // A full-frame "crop" turns the plan into a plain rotate-and-fit.
-  const plan = bakePlan({ width, height, angle, crop: { x: 0, y: 0, w: 1, h: 1 }, maxEdge });
+export function paintPreview(canvas, image, { width, height, angle, brightness, contrast },
+  maxEdge, crop = null) {
+  // No crop means the whole rotated frame, corners and all — which is what the crop box
+  // is dragged around on. Passing one shows the finished result instead.
+  const plan = bakePlan({ width, height, angle, crop: crop ?? { x: 0, y: 0, w: 1, h: 1 }, maxEdge });
   canvas.width = plan.output.width;
   canvas.height = plan.output.height;
   paint(canvas.getContext('2d'), image, plan, filterString(brightness, contrast));

@@ -61,9 +61,20 @@
    ceiling arrives from JS as --nat-w; the crop overlay is inset:0 on this box, so
    whatever this resolves to IS rotated space as far as the crop fractions are
    concerned. Nothing may add padding or a border to it without breaking that. */
-.stage-inner { position: relative; inline-size: min(100%, var(--nat-w, 100%)); }
+/* overflow:hidden is load-bearing. The crop box scrims everything outside itself with
+   a 9999px box-shadow, and with nothing clipping it that shadow darkens the entire
+   PAGE rather than the area around the photo — which reads as the interface being
+   stuck in a modal state there is no way out of. */
+.stage-inner {
+  position: relative;
+  inline-size: min(100%, var(--nat-w, 100%));
+  overflow: hidden;
+}
 .stage-inner canvas { display: block; inline-size: 100%; block-size: auto; }
 .crop-layer { position: absolute; inset: 0; touch-action: none; }
+/* Done adjusting: the overlay and its scrim go away and the canvas shows the actual
+   cropped result, so the last thing seen before saving is the thing that will hang. */
+.editor[data-mode="done"] .crop-layer { display: none; }
 
 .crop-box {
   position: absolute;
@@ -90,6 +101,9 @@
 }
 
 .controls { display: grid; gap: .9rem; margin-block-start: 1rem; }
+.control-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+/* Adjusting is finished; the sliders are out of the way until asked for. */
+.editor[data-mode="done"] .slider { display: none; }
 .slider { display: grid; gap: .3rem; font-size: .85rem; color: var(--ink-dim); }
 .slider input { inline-size: 100%; }
 .slider output { color: var(--ink); font-variant-numeric: tabular-nums; }
