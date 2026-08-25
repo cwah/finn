@@ -70,6 +70,12 @@ COPY scrapbook/assets/    /pb/pb_public/assets/
 # browser resolves the gallery's own <link> and <script> against the origin root, they
 # 404, and the page never boots. See "Where the app is mounted" in gallery/CLAUDE.md.
 COPY gallery/index.html /pb/pb_public/gallery/index.html
+# admin.html ships too — adding a drawing from a phone is the point of it. It is
+# noindex, it signs in against the same users collection as the scrapbook, and writing
+# is refused server-side for accounts without canPost, so shipping it grants nothing
+# that a URL alone could exploit. Note that it is a NAMED file: everything else here is
+# a directory, and a page added beside index.html will not ship until it is listed.
+COPY gallery/admin.html /pb/pb_public/gallery/admin.html
 COPY gallery/css/       /pb/pb_public/gallery/css/
 COPY gallery/js/        /pb/pb_public/gallery/js/
 COPY gallery/data/      /pb/pb_public/gallery/data/
