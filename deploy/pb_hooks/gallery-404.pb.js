@@ -42,14 +42,26 @@ routerUse((e) => {
   // Never adjudicate the API or the admin UI.
   if (path.startsWith('/api/') || path.startsWith('/_/')) return e.next();
 
+  // TEMPORARY, and the reason this file is being deployed a second time.
+  //
+  // The first version shipped inert: a missing gallery file still answered with the
+  // scrapbook, which means the filesystem check never reached a definite verdict. The
+  // catch below was swallowing the only evidence of why, and PocketBase's logs are not
+  // readable from where this is written — so the verdict is reported as a response
+  // header instead, where a plain curl can see it. Remove once the cause is known.
+  let verdict = 'unknown';
   let missing = false;
   try {
     // Throws when there is nothing there. Any OTHER outcome — including these
     // bindings not existing at all — leaves `missing` false and changes nothing.
     $os.stat($filepath.join(PUBLIC_DIR, path));
+    verdict = 'found';
   } catch (err) {
-    missing = /no such file|not exist|cannot find/i.test(String(err));
+    const text = String(err);
+    missing = /no such file|not exist|cannot find/i.test(text);
+    verdict = missing ? 'missing' : `error:${text.slice(0, 90)}`;
   }
+  e.response.header().set('X-Gallery-404-Hook', verdict);
 
   if (missing) throw new NotFoundError('No such page in the gallery.');
   return e.next();
