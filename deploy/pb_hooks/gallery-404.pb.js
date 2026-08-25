@@ -28,11 +28,22 @@
 // every file in the gallery, which is a far worse thing to deploy than the confusion
 // this is meant to fix.
 
-// Matches --publicDir in the Dockerfile's CMD. Overridable so this is not a second
-// place to remember if that ever moves.
-const PUBLIC_DIR = ($os.getenv && $os.getenv('PB_PUBLIC_DIR')) || '/pb/pb_public';
+// ── Everything a handler needs must be declared INSIDE it ────────────────────
+// PocketBase executes each hook callback in its own goja runtime, so a handler cannot
+// see the file's outer scope. A `const` up here is not shared with the function below —
+// it is simply not defined by the time the function runs.
+//
+// This is not a guess. The first deploy of this file put PUBLIC_DIR at the top and the
+// hook reported, in its own diagnostic header:
+//
+//     x-gallery-404-hook: error:ReferenceError: PUBLIC_DIR is not defined
+//
+// which is also why cache.pb.js has always worked: everything it touches is declared
+// inside its callback. Anything added to pb_hooks/ has to follow the same rule.
 
 routerUse((e) => {
+  // Matches --publicDir in the Dockerfile's CMD. Inline, per the note above.
+  const PUBLIC_DIR = '/pb/pb_public';
   const path = e.request.url.path;
 
   // Only the gallery. The scrapbook IS a single-page app and wants the fallback.
