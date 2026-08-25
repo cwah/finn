@@ -204,9 +204,9 @@ Check it once against the container above. If PocketBase answers `/gallery` with
 scrapbook, to someone who asked for the gallery — add a redirect in a PocketBase JS hook so
 `/gallery` always lands on `/gallery/`.
 
-Note the Dockerfile does **not** copy `pb_hooks/` today, because there are none — a hook
-would need its own `COPY` line and `--hooksDir` on the serve command, or it would sit in
-the repo doing nothing and look like the redirect had failed.
+Hooks live in `deploy/pb_hooks/` and the Dockerfile copies them, so a redirect added
+there will ship. There is one already: `cache.pb.js`, which makes browsers revalidate the
+app's own code.
 
 Either way, link to the gallery **with** the slash. Deep links already carry it, since
 they look like `/gallery/?art=the-long-cat`.

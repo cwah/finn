@@ -49,6 +49,11 @@ COPY --from=fetch /pb/pocketbase /pb/pocketbase
 # names namespaced (`gallery_*`) so they cannot collide with the scrapbook's.
 COPY scrapbook/pb_migrations/ /pb/pb_migrations/
 
+# Hooks. Deployment-level rather than per-app: they apply to whatever PocketBase serves,
+# which is both sites. cache.pb.js makes the browser revalidate the app's own code — see
+# the note in it for the sign-in bug that shipped without it.
+COPY deploy/pb_hooks/ /pb/pb_hooks/
+
 # ── The scrapbook, at the root ────────────────────────────────────────────────
 # Only what the app needs — preview.html is a development bench, the bot is a separate
 # process, and data/mock.json belongs to the no-backend mode.
@@ -77,4 +82,5 @@ CMD /pb/pocketbase serve \
       --http=0.0.0.0:${PORT:-8080} \
       --dir=/pb/pb_data \
       --publicDir=/pb/pb_public \
-      --migrationsDir=/pb/pb_migrations
+      --migrationsDir=/pb/pb_migrations \
+      --hooksDir=/pb/pb_hooks
