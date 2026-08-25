@@ -184,29 +184,41 @@ Then <http://localhost:8080> for the scrapbook and <http://localhost:8080/galler
 the art gallery. Mounting your real `pb_data` gives it the actual memories; leave the
 `-v` off for an empty one.
 
-This is also the cheapest place to answer the trailing-slash question below — try
-<http://localhost:8080/gallery> without the slash and see what PocketBase does with it.
+## Two things about serving two apps from one directory
 
-## The gallery's trailing slash
+**The trailing slash is handled.** `/gallery` answers **301** to `/gallery/`, verified
+against the deployed service. Worth knowing why it matters, because nothing in the app
+can fix it: `gallery/js/paths.js` derives the app root from `import.meta.url` so no URL
+is resolved against the document — but that only protects the gallery *after* it boots.
+Served at `/gallery` with no slash, the browser resolves the page's own `<link>` and
+`<script>` against the origin root, `css/base.css` and `js/app.js` 404, and nothing runs.
+A `<base>` tag or root-absolute hrefs would both hard-code the mount point and break
+`serve.py` locally. PocketBase redirecting is what makes the question moot; if that ever
+changes, a redirect hook is the fix.
 
-`/gallery/` works. `/gallery` may not, and if it does not it fails in a way that looks
-like the deploy is broken rather than like a URL is.
+**A missing gallery file used to answer with the scrapbook.** PocketBase's index
+fallback answers an unmatched path with the ROOT `index.html` and a 200 — right for one
+single-page app, wrong for two apps sharing a public directory:
 
-Nothing in the gallery resolves a URL against the document — `gallery/js/paths.js`
-derives the app root from `import.meta.url` — but that only protects the app *after* it
-boots. Served at `/gallery` with no trailing slash, the browser resolves the page's own
-`<link>` and `<script>` against the origin root, so `css/base.css` and `js/app.js` 404
-and nothing runs at all. It cannot be fixed from inside the app: a `<base>` tag or
-root-absolute hrefs would both hard-code the mount point and break `serve.py` locally.
+```
+/gallery/admin.html             -> 200, <title>Scrapbook</title>
+/gallery/there-is-no-such-file  -> 200, <title>Scrapbook</title>
+```
 
-Check it once against the container above. If PocketBase answers `/gallery` with a 301 to
-`/gallery/`, there is nothing to do. If it serves the root `index.html` instead — the
-scrapbook, to someone who asked for the gallery — add a redirect in a PocketBase JS hook so
-`/gallery` always lands on `/gallery/`.
+Nothing leaked, since the scrapbook's content is behind auth. But a public visitor who
+mistyped a gallery URL landed on the private app, and a file genuinely missing from the
+image reported success — which is exactly how `admin.html` being absent from the
+Dockerfile went unnoticed. `gallery-404.pb.js` now answers those honestly.
 
-Hooks live in `deploy/pb_hooks/` and the Dockerfile copies them, so a redirect added
-there will ship. There is one already: `cache.pb.js`, which makes browsers revalidate the
-app's own code.
+That hook asks the filesystem whether a file exists, using a binding that could not be
+exercised before it shipped. It is written to fail INERT: it only 404s on a definite
+"no such file", and anything ambiguous — including the binding not existing — falls
+through to the old behaviour. If gallery URLs ever start 404ing wholesale, that hook is
+the first thing to remove.
+
+Hooks live in `deploy/pb_hooks/` and the Dockerfile copies them with `--hooksDir`, so
+anything added there ships. `cache.pb.js` is the other one, making browsers revalidate
+the app's own code.
 
 Either way, link to the gallery **with** the slash. Deep links already carry it, since
 they look like `/gallery/?art=the-long-cat`.
