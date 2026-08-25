@@ -321,10 +321,13 @@ function say(message, isError = false) {
 
 document.querySelector('[data-act="save"]').addEventListener('click', async () => {
   if (!state.image || !state.file) return say('Choose a photo first.', true);
-  const title = field('title').value.trim();
   const createdOn = field('createdOn').value;
-  if (!title) return say('The drawing needs a title.', true);
   if (!createdOn) return say('The drawing needs a date.', true);
+
+  // A drawing without a name is a real thing and museums have a word for it. The
+  // schema requires a title, so the fallback happens here rather than being sent empty
+  // and refused — placard.js renders the same word for the static path.
+  const title = field('title').value.trim() || 'Untitled';
 
   say('Baking the display copy…');
   try {
@@ -371,11 +374,59 @@ document.querySelector('[data-act="save"]').addEventListener('click', async () =
       throw new Error(detail?.message || `The gallery refused it (${res.status}).`);
     }
     say('Hung. It is now the newest drawing in the collection.');
+    resetStudio();
     await refreshHung();
   } catch (problem) {
     say(problem.message, true);
   }
 });
+
+/**
+ * Back to a clean sheet, after a drawing has been hung.
+ *
+ * Everything: the photo, the adjustments, the label, the panels. Leaving a saved
+ * drawing on screen invites adding it twice — the button stays live and the form still
+ * looks like unfinished work rather than finished work.
+ *
+ * The status line is deliberately NOT cleared. It is the only thing left saying the
+ * save worked, and wiping it at the same moment the form empties would make a
+ * successful save and a lost one look identical.
+ */
+function resetStudio() {
+  state.file = null;
+  state.image = null;
+  state.angle = 0;
+  state.brightness = 1;
+  state.contrast = 1;
+  state.crop = { x: 0, y: 0, w: 1, h: 1 };
+
+  at('file').value = '';
+  at('filename').textContent = 'Nothing chosen yet.';
+
+  for (const name of ['title', 'createdOn', 'medium', 'dimensions', 'alt', 'note']) {
+    field(name).value = '';
+  }
+  at('note-hint').textContent = '';
+  updateAgePreview();
+
+  at('angle').value = '0';
+  at('brightness').value = '1';
+  at('contrast').value = '1';
+  at('angle-out').textContent = '0.0°';
+  at('brightness-out').textContent = '100%';
+  at('contrast-out').textContent = '100%';
+
+  const editor = el('.editor');
+  editor.dataset.mode = 'adjust';
+  document.querySelector('[data-act="mode"]').textContent = 'Done adjusting';
+  editor.hidden = true;
+  el('.label-form').hidden = true;
+  el('.actions').hidden = true;
+
+  // The next photo re-initialises the crop box through its own change handler; this
+  // only stops the old one holding on to an image that has gone.
+  cropBox?.setSource({ width: 1, height: 1, angle: 0 });
+}
 
 const slug = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
   .replace(/^-|-$/g, '').slice(0, 60) || 'artwork';

@@ -38,7 +38,13 @@
 <main class="studio" hidden>
   <header class="studio-head">
     <h1>Add a drawing</h1>
-    <button class="btn btn--quiet" type="button" data-act="sign-out">Sign out</button>
+    <div class="studio-head-actions">
+      <!-- './' resolves to /gallery/ from /gallery/admin.html, so this is right at any
+           mount point without hard-coding one. New tab: the studio usually has a
+           half-finished drawing in it, and navigating away would throw that out. -->
+      <a class="btn btn--quiet" href="./" target="_blank" rel="noopener">View gallery</a>
+      <button class="btn btn--quiet" type="button" data-act="sign-out">Sign out</button>
+    </div>
   </header>
 
   <!-- Step 1: the photograph -->
@@ -87,8 +93,10 @@
   <section class="panel label-form" hidden>
     <h2>The label</h2>
     <div class="grid">
-      <label class="field"><span>Title</span>
-        <input data-f="title" type="text" required placeholder="Tyrannosaurus at a Birthday Party"></label>
+      <label class="field"><span>Title <em>optional</em></span>
+        <!-- Not required. A drawing without a name is a real thing, and museums have a
+             word for it — placard.js already renders one as "Untitled". -->
+        <input data-f="title" type="text" placeholder="Untitled"></label>
       <label class="field"><span>Date drawn</span>
         <input data-f="createdOn" type="date" required>
         <!-- The age is computed here and stored on the drawing, so a birth date that

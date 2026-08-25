@@ -19,7 +19,10 @@
 .gate-sub { margin: -.5rem 0 .3rem; color: var(--ink-dim); font-size: .88rem; }
 .gate-error { margin: 0; color: #8c2f2f; font-size: .85rem; }
 
-.studio-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.studio-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.studio-head-actions { display: flex; gap: .5rem; align-items: baseline; }
+.studio-head-actions .btn { text-decoration: none; }
+.field > span em { font-style: normal; opacity: .7; }
 .studio-head h1 { font-family: var(--serif); font-size: 1.35rem; margin: 0 0 .2em; }
 
 .panel {
