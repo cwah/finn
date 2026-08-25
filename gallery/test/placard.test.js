@@ -50,6 +50,23 @@ test('the artist line drops the age when the gallery turns it off or the date is
   assert.equal(artistLine({ createdOn: 'nope' }, CONFIG), 'Finn');
 });
 
+test('a stamped age is used when there is no birthDate to derive one from', () => {
+  // The PocketBase path: birthDate is private and never reaches the public API, so the
+  // admin stamps whole years onto the drawing instead.
+  const pb = { ...ART, ageYears: 5 };
+  assert.equal(artistLine(pb, { artistName: 'Finn', showAge: true }), 'Finn, age 5');
+});
+
+test('a derived age beats a stamped one, because it cannot go stale', () => {
+  const stale = { ...ART, ageYears: 99 };
+  assert.equal(artistLine(stale, CONFIG), 'Finn, age 5');
+});
+
+test('showAge false hides the age whichever source it came from', () => {
+  const pb = { ...ART, ageYears: 5 };
+  assert.equal(artistLine(pb, { artistName: 'Finn', showAge: false }), 'Finn');
+});
+
 test('an accession number is derived from the position within its year', () => {
   const all = [
     { id: 'a', createdOn: '2025-02-01' },

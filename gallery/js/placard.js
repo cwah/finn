@@ -54,7 +54,18 @@ export function artistLine(artwork, config) {
   const name = config?.artistName;
   if (!name) return null;
   if (config?.showAge === false) return name;
-  const age = ageAt(config?.birthDate, artwork?.createdOn);
+
+  // Two sources, and which one is available says which backend is in use.
+  //
+  // The static manifest carries birthDate in config, so the age is derived and
+  // correcting that one date corrects every label at once. PocketBase does not: the
+  // gallery is public, birthDate is a child's, and it stays on the scrapbook's private
+  // config — so the admin page stamps whole years onto each drawing as it saves, and
+  // the public API serves "6" instead of a date of birth.
+  //
+  // Derivation wins where it is possible, because it cannot go stale.
+  const derived = ageAt(config?.birthDate, artwork?.createdOn);
+  const age = derived ?? (Number.isFinite(artwork?.ageYears) ? artwork.ageYears : null);
   return age == null ? name : `${name}, age ${age}`;
 }
 
