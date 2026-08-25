@@ -90,7 +90,10 @@
       <label class="field"><span>Title</span>
         <input data-f="title" type="text" required placeholder="Tyrannosaurus at a Birthday Party"></label>
       <label class="field"><span>Date drawn</span>
-        <input data-f="createdOn" type="date" required></label>
+        <input data-f="createdOn" type="date" required>
+        <!-- The age is computed here and stored on the drawing, so a birth date that
+             could not be read would otherwise fail silently. -->
+        <small class="age-preview" data-el="age-preview"></small></label>
       <label class="field"><span>Medium</span>
         <input data-f="medium" type="text" placeholder="Crayon and marker on construction paper"></label>
       <label class="field"><span>Dimensions</span>

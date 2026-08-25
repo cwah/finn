@@ -11,7 +11,13 @@
 import * as staticJson from './data-static.js';
 import * as pocketbase from './data-pb.js';
 
-export const SOURCE = 'static';
+// PocketBase is the collection now. 'static' still works and is what data-static.js
+// plus data/artworks.json are for — a no-backend mode for working on the wall, the
+// frames or the placard without running a server, the same job scrapbook's mock.json
+// does. The five drawings in that manifest are placeholders and are NOT the real
+// collection; nothing seeds them into PocketBase on purpose, because their labels are
+// invented and this gallery is a real one.
+export const SOURCE = 'pocketbase';
 
 const impl = SOURCE === 'pocketbase' ? pocketbase : staticJson;
 

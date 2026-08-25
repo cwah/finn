@@ -54,6 +54,15 @@ async function start() {
 
   gallery = { list, frames, config };
 
+  // A collection can now genuinely be empty — the static manifest always had five
+  // drawings in it, PocketBase starts with none. Without this the wall renders a blank
+  // 4:5 frame and an empty placard, which looks like a bug rather than like a gallery
+  // waiting for its first piece.
+  if (list.length === 0) {
+    showEmpty();
+    return;
+  }
+
   // An unknown or missing ?art= falls back to the newest piece, and rewrites the URL
   // so a dead link does not sit in the address bar looking like it worked.
   const asked = artIdFromUrl(location.search);
@@ -64,6 +73,23 @@ async function start() {
   show(found >= 0 ? found : 0, { replace: true, immediate: true });
 
   wire();
+}
+
+/** Nothing has been hung yet. Say so, rather than showing an empty frame. */
+function showEmpty() {
+  refs.artwork.hidden = true;
+  refs.older.hidden = true;
+  refs.newer.hidden = true;
+  refs.placard.replaceChildren();
+
+  const title = document.createElement('h1');
+  title.className = 'placard-title';
+  title.textContent = gallery.config?.galleryTitle || 'The collection';
+  const note = document.createElement('p');
+  note.className = 'placard-note';
+  note.textContent = 'Nothing is hanging yet.';
+  refs.placard.append(title, note);
+  refs.status.textContent = 'The collection is empty.';
 }
 
 /** Put a piece on the wall. */

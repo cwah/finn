@@ -68,7 +68,40 @@ async function start() {
   showStudio(true);
   // Read once, while signed in. It never reaches the public API — see auth.js.
   state.birthDate = await birthDate();
+  updateAgePreview();
 }
+
+/**
+ * Show the artist line the placard will carry.
+ *
+ * The age is worked out here and stored on the drawing, so a failure to read the birth
+ * date is otherwise completely silent — the save succeeds and the label just quietly
+ * says nothing, or worse says "age 0". Putting it on screen next to the date makes a
+ * wrong answer visible while it can still be fixed.
+ */
+function updateAgePreview() {
+  const hint = at('age-preview');
+  if (!hint) return;
+  const createdOn = field('createdOn').value;
+  if (!state.birthDate) {
+    hint.textContent = 'No birth date available, so the label will carry no age.';
+    hint.dataset.warn = 'true';
+    return;
+  }
+  if (!createdOn) {
+    hint.textContent = '';
+    delete hint.dataset.warn;
+    return;
+  }
+  const age = ageAt(state.birthDate, createdOn);
+  hint.textContent = age == null
+    ? 'That date is before Finn was born, so the label will carry no age.'
+    : `The label will read "Finn, age ${age}".`;
+  if (age == null) hint.dataset.warn = 'true';
+  else delete hint.dataset.warn;
+}
+
+field('createdOn').addEventListener('input', updateAgePreview);
 
 // ── The photograph ──────────────────────────────────────────────────────────
 at('file').addEventListener('change', async (event) => {

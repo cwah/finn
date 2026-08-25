@@ -263,6 +263,29 @@ boot. Before it, walking back to the newest drawing pushed `./`, which at any
 non-root mount resolved to `/` and pointed the gallery's own landing link at the root
 of the private scrapbook. There is a test named after that.
 
+## Where the collection lives
+
+PocketBase, as of the flip in `js/data.js`. `gallery_artworks` and `gallery_config` are
+world-readable; writing is gated on `canPost`, the flag on `users` that the scrapbook's
+viewer accounts added, so one login covers both apps.
+
+`data-static.js` and `data/artworks.json` are still here and still work — they are the
+no-backend mode, for working on the wall or the frames without running a server, the
+same job `scrapbook/data/mock.json` does. **The five drawings in that manifest are
+placeholders with invented labels.** Nothing seeds them into PocketBase, deliberately:
+this is a real gallery and "The Long Cat" is not a drawing Finn made.
+
+Two traps worth knowing, both already sprung once:
+
+- **A PocketBase number field reads back as 0 when it was never set.** The first drawing
+  uploaded through the studio came back with `ageYears: 0`, because the birth date could
+  not be read and nothing was stored — and "Finn, age 0" is plausible enough to ship.
+  `data-pb.js` now reads a zero as "not known", and the studio shows the age it is about
+  to stamp so a silent failure is visible while it can still be fixed.
+- **The collection can be empty.** The static manifest always had five drawings in it,
+  so nothing ever exercised the zero case; PocketBase starts with none. `app.js` has an
+  empty state, and it is worth keeping it working.
+
 ## Later
 
 `js/data-pb.js` ships now, minimal and unreachable, because a switchboard with one

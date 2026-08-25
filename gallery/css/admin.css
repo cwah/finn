@@ -51,6 +51,8 @@
 .btn--file { display: inline-block; }
 
 .hint { margin: .6rem 0 0; font-size: .82rem; color: var(--ink-dim); }
+.age-preview { font-size: .78rem; color: var(--ink-dim); min-block-size: 1.1em; }
+.age-preview[data-warn="true"] { color: #8c2f2f; }
 
 /* ── The stage ───────────────────────────────────────────────────────────────
    .stage-inner is sized by JS to exactly match the preview canvas, so the crop

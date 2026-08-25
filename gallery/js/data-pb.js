@@ -29,7 +29,14 @@ function toArtwork(record) {
     // Whole years old when it was drawn, stamped at save time. The static source has no
     // equivalent — there, placard.js derives it from config.birthDate. Both paths end up
     // at the same line on the label; see the note in placard.js.
-    ageYears: Number.isFinite(record.ageYears) ? record.ageYears : null,
+    //
+    // A zero is read as "not known", not as an age. PocketBase gives an unset number
+    // field 0, so a drawing saved when the birth date could not be read is
+    // indistinguishable from one by a newborn — and the first record uploaded through
+    // the studio came back exactly like that. "Finn, age 0" is the worst kind of wrong:
+    // plausible enough to ship. This gallery has no work by a nought-year-old, so
+    // saying nothing is right, and the studio now shows the age before it saves.
+    ageYears: Number(record.ageYears) > 0 ? Number(record.ageYears) : null,
 
     image: {
       // Absolute, built here. The frontend never joins a path, which is the single rule
