@@ -13,7 +13,7 @@ import { signIn, signOut, currentSession, authed, birthDate } from './admin/auth
 import { loadImage, paintPreview, bakeDisplay } from './admin/bake-canvas.js';
 import { initCropBox } from './admin/crop-box.js';
 import { largestInscribedCrop, cropIsCovered, recipe, usableAngle } from './bake.js';
-import { ageAt } from './placard.js';
+import { monthsAt, ageLabel } from './placard.js';
 
 const PREVIEW_MAX = 900;
 /** Under this many characters, a note is a fragment and is offered to the model. */
@@ -93,12 +93,12 @@ function updateAgePreview() {
     delete hint.dataset.warn;
     return;
   }
-  const age = ageAt(state.birthDate, createdOn);
-  hint.textContent = age == null
-    ? 'That date is before Finn was born, so the label will carry no age.'
-    : `The label will read "Finn, age ${age}".`;
-  if (age == null) hint.dataset.warn = 'true';
-  else delete hint.dataset.warn;
+  const label = ageLabel(monthsAt(state.birthDate, createdOn));
+  hint.textContent = label
+    ? `The label will read "Finn, age ${label}".`
+    : 'That date is before Finn was born, so the label will carry no age.';
+  if (label) delete hint.dataset.warn;
+  else hint.dataset.warn = 'true';
 }
 
 field('createdOn').addEventListener('input', updateAgePreview);
@@ -256,9 +256,10 @@ document.querySelector('[data-act="save"]').addEventListener('click', async () =
     for (const name of ['medium', 'dimensions', 'alt', 'note']) {
       form.set(name, field(name).value.trim());
     }
-    // Whole years, worked out here from a date the public API never sees.
-    const age = ageAt(state.birthDate, createdOn);
-    if (age != null) form.set('ageYears', String(age));
+    // Months, worked out here from a date the public API never sees. Left unset when
+    // it cannot be worked out, rather than sent as a zero that would read as an age.
+    const months = monthsAt(state.birthDate, createdOn);
+    if (months != null && months > 0) form.set('ageMonths', String(months));
 
     // The dimensions of what will actually hang, so the frame is the right shape before
     // the file has loaded.

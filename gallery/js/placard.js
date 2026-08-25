@@ -5,26 +5,64 @@
 // enough when it goes wrong, to be worth testing on its own.
 
 /**
- * Whole years old on `on`, or null.
+ * Whole months old on `on`, or null.
  *
- * Borrows a year when the date has not reached the birthday yet — the same rule as
- * scrapbook's age.js. Returns null rather than a negative for a date before birth,
- * because "Finn, age -1" is worse than no line at all, and a mistyped year in the
- * manifest is exactly how that happens.
+ * Months rather than years because this is a child: between four and five there are
+ * eleven other answers, and "age 4" throws away almost everything that makes the
+ * drawings from either end of that year different from each other.
+ *
+ * Borrows a month when the date has not reached the day-of-month yet — the same rule
+ * scrapbook's age.js uses for years. Returns null rather than a negative for a date
+ * before birth, because "age -1" is worse than no line at all, and a mistyped year is
+ * exactly how that happens.
  *
  * @param {string} birthDate ISO yyyy-mm-dd
  * @param {string} on ISO yyyy-mm-dd
- * @returns {number|null}
+ * @returns {number|null} total months
  */
-export function ageAt(birthDate, on) {
+export function monthsAt(birthDate, on) {
   const b = parseIso(birthDate);
   const d = parseIso(on);
   if (!b || !d) return null;
 
-  let years = d.year - b.year;
-  // Not had this year's birthday yet: give the year back.
-  if (d.month < b.month || (d.month === b.month && d.day < b.day)) years -= 1;
-  return years < 0 ? null : years;
+  let months = (d.year - b.year) * 12 + (d.month - b.month);
+  // Not reached the day of the month yet: give the month back.
+  if (d.day < b.day) months -= 1;
+  return months < 0 ? null : months;
+}
+
+/**
+ * Whole years old on `on`, or null. Derived from the months so the two can never
+ * disagree about where a birthday falls.
+ * @returns {number|null}
+ */
+export function ageAt(birthDate, on) {
+  const months = monthsAt(birthDate, on);
+  return months == null ? null : Math.floor(months / 12);
+}
+
+/**
+ * Total months as a museum label reads it: "5 months", "1 year 1 month",
+ * "6 years 3 months", "4 years".
+ *
+ * A whole number of years drops the months rather than saying "0 months", and under a
+ * year there is no years part at all. Singular and plural are handled per unit, because
+ * "1 years 1 months" is the sort of thing that makes a careful label look careless.
+ *
+ * @param {number|null} months
+ * @returns {string|null}
+ */
+export function ageLabel(months) {
+  if (!Number.isFinite(months) || months < 0) return null;
+  const years = Math.floor(months / 12);
+  const rest = months % 12;
+
+  const parts = [];
+  if (years > 0) parts.push(`${years} year${years === 1 ? '' : 's'}`);
+  // The months part is dropped on an exact birthday, but kept when there are no years
+  // at all — otherwise a two-month-old would have no age rather than a small one.
+  if (rest > 0 || years === 0) parts.push(`${rest} month${rest === 1 ? '' : 's'}`);
+  return parts.join(' ');
 }
 
 /** yyyy-mm-dd -> {year, month, day}, or null for anything else. */
@@ -60,13 +98,14 @@ export function artistLine(artwork, config) {
   // The static manifest carries birthDate in config, so the age is derived and
   // correcting that one date corrects every label at once. PocketBase does not: the
   // gallery is public, birthDate is a child's, and it stays on the scrapbook's private
-  // config — so the admin page stamps whole years onto each drawing as it saves, and
-  // the public API serves "6" instead of a date of birth.
+  // config — so the admin page stamps the months onto each drawing as it saves, and the
+  // public API serves "75" instead of a date of birth.
   //
   // Derivation wins where it is possible, because it cannot go stale.
-  const derived = ageAt(config?.birthDate, artwork?.createdOn);
-  const age = derived ?? (Number.isFinite(artwork?.ageYears) ? artwork.ageYears : null);
-  return age == null ? name : `${name}, age ${age}`;
+  const derived = monthsAt(config?.birthDate, artwork?.createdOn);
+  const months = derived ?? (Number.isFinite(artwork?.ageMonths) ? artwork.ageMonths : null);
+  const label = ageLabel(months);
+  return label ? `${name}, age ${label}` : name;
 }
 
 /**

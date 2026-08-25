@@ -4,7 +4,9 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ageAt, yearOf, artistLine, accessionOf, placardLines } from '../js/placard.js';
+import {
+  ageAt, monthsAt, ageLabel, yearOf, artistLine, accessionOf, placardLines,
+} from '../js/placard.js';
 
 const BIRTH = '2020-04-11';
 const CONFIG = { artistName: 'Finn', birthDate: BIRTH, showAge: true, creditLine: 'Gift of the artist' };
@@ -42,7 +44,9 @@ test('the year comes from the date, unless the manifest states one', () => {
 });
 
 test('the artist line carries the age when it can be worked out', () => {
-  assert.equal(artistLine(ART, CONFIG), 'Finn, age 5');
+  // Months, not years: between five and six there are eleven other answers, and which
+  // one a drawing belongs to is most of why the age is on the label at all.
+  assert.equal(artistLine(ART, CONFIG), 'Finn, age 5 years 7 months');
 });
 
 test('the artist line drops the age when the gallery turns it off or the date is bad', () => {
@@ -52,19 +56,63 @@ test('the artist line drops the age when the gallery turns it off or the date is
 
 test('a stamped age is used when there is no birthDate to derive one from', () => {
   // The PocketBase path: birthDate is private and never reaches the public API, so the
-  // admin stamps whole years onto the drawing instead.
-  const pb = { ...ART, ageYears: 5 };
-  assert.equal(artistLine(pb, { artistName: 'Finn', showAge: true }), 'Finn, age 5');
+  // admin stamps the months onto the drawing instead.
+  const pb = { ...ART, ageMonths: 5 };
+  assert.equal(artistLine(pb, { artistName: 'Finn', showAge: true }), 'Finn, age 5 months');
 });
 
 test('a derived age beats a stamped one, because it cannot go stale', () => {
-  const stale = { ...ART, ageYears: 99 };
-  assert.equal(artistLine(stale, CONFIG), 'Finn, age 5');
+  const stale = { ...ART, ageMonths: 999 };
+  assert.equal(artistLine(stale, CONFIG), 'Finn, age 5 years 7 months');
 });
 
 test('showAge false hides the age whichever source it came from', () => {
-  const pb = { ...ART, ageYears: 5 };
+  const pb = { ...ART, ageMonths: 5 };
   assert.equal(artistLine(pb, { artistName: 'Finn', showAge: false }), 'Finn');
+});
+
+test('a label under a year is months alone, with no years part', () => {
+  assert.equal(ageLabel(0), '0 months');
+  assert.equal(ageLabel(1), '1 month');
+  assert.equal(ageLabel(5), '5 months');
+  assert.equal(ageLabel(11), '11 months');
+});
+
+test('an exact birthday drops the months rather than saying nought of them', () => {
+  assert.equal(ageLabel(12), '1 year');
+  assert.equal(ageLabel(72), '6 years');
+});
+
+test('singular and plural are decided per unit', () => {
+  // "1 years 1 months" is the sort of thing that makes a careful label look careless.
+  assert.equal(ageLabel(13), '1 year 1 month');
+  assert.equal(ageLabel(14), '1 year 2 months');
+  assert.equal(ageLabel(25), '2 years 1 month');
+  assert.equal(ageLabel(75), '6 years 3 months');
+});
+
+test('a label needs a real number of months', () => {
+  for (const bad of [null, undefined, NaN, -1, 'five']) {
+    assert.equal(ageLabel(bad), null, `${bad}`);
+  }
+});
+
+test('months borrow when the date has not reached the day of the month', () => {
+  assert.equal(monthsAt('2020-04-11', '2026-04-10'), 71);   // one day short of six
+  assert.equal(monthsAt('2020-04-11', '2026-04-11'), 72);
+  assert.equal(monthsAt('2020-04-11', '2026-08-07'), 75);
+});
+
+test('months and years never disagree about where a birthday falls', () => {
+  // ageAt is derived from monthsAt for exactly this reason.
+  for (const on of ['2026-04-10', '2026-04-11', '2026-08-07', '2021-01-01']) {
+    assert.equal(ageAt('2020-04-11', on), Math.floor(monthsAt('2020-04-11', on) / 12), on);
+  }
+});
+
+test('a date before birth gives no months rather than a negative count', () => {
+  assert.equal(monthsAt('2020-04-11', '2019-06-01'), null);
+  assert.equal(artistLine({ createdOn: '2019-06-01' }, CONFIG), 'Finn');
 });
 
 test('an accession number is derived from the position within its year', () => {
@@ -98,7 +146,7 @@ test('a piece with no title is called Untitled rather than left blank', () => {
 test('a full placard reads the way a museum label does', () => {
   const lines = placardLines(ART, CONFIG, [ART]);
   assert.equal(lines.title, 'The Long Cat');
-  assert.equal(lines.artist, 'Finn, age 5');
+  assert.equal(lines.artist, 'Finn, age 5 years 7 months');
   assert.equal(lines.year, '2025');
   assert.equal(lines.credit, 'Gift of the artist, 2025  ·  2025.001');
 });

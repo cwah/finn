@@ -26,17 +26,17 @@ function toArtwork(record) {
     frame: record.frame || null,
     accession: record.accession || null,
 
-    // Whole years old when it was drawn, stamped at save time. The static source has no
+    // Months old when it was drawn, stamped at save time. The static source has no
     // equivalent — there, placard.js derives it from config.birthDate. Both paths end up
     // at the same line on the label; see the note in placard.js.
     //
     // A zero is read as "not known", not as an age. PocketBase gives an unset number
     // field 0, so a drawing saved when the birth date could not be read is
-    // indistinguishable from one by a newborn — and the first record uploaded through
-    // the studio came back exactly like that. "Finn, age 0" is the worst kind of wrong:
-    // plausible enough to ship. This gallery has no work by a nought-year-old, so
-    // saying nothing is right, and the studio now shows the age before it saves.
-    ageYears: Number(record.ageYears) > 0 ? Number(record.ageYears) : null,
+    // indistinguishable from one made in the first month of life — and the first record
+    // uploaded through the studio came back exactly like that. In months the ambiguity
+    // is easier to accept than it was in years: nobody under one month old makes a
+    // drawing, so 0 can only mean the age was never worked out.
+    ageMonths: Number(record.ageMonths) > 0 ? Number(record.ageMonths) : null,
 
     image: {
       // Absolute, built here. The frontend never joins a path, which is the single rule
@@ -62,7 +62,7 @@ function toConfig(record) {
     showAge: record.showAge !== false,
     // birthDate is deliberately absent. It lives on the scrapbook's private config, and
     // the public API serves an age per artwork rather than a child's date of birth.
-    // placard.js falls back to the stamped ageYears when there is no birthDate to work
+    // placard.js falls back to the stamped ageMonths when there is no birthDate to work
     // from, which is exactly this case.
   };
 }

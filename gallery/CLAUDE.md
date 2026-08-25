@@ -75,8 +75,16 @@ Serving over HTTP is not optional: ES modules are blocked by CORS on `file://`, 
   collection and it drives the age on the placard.
 - **`alt` is not `note`.** The note is wall text for someone who can see the drawing;
   alt describes the drawing for someone who cannot. Neither works as the other.
-- **There is no `age` field.** Age is derived from one `birthDate` in config, so
-  correcting that date corrects every placard at once.
+- **There is no `age` field on the static manifest.** Age is derived from `birthDate` in
+  config, so correcting that one date corrects every placard at once. The PocketBase path
+  cannot do that — `birthDate` is a child's and stays on the scrapbook's private config —
+  so the studio stamps `ageMonths` at save time instead. `placard.js` takes either and
+  prefers the derived one.
+
+- **The age is in months.** `ageLabel` renders "5 months", "1 year 1 month", "6 years 3
+  months"; a whole number of years drops the months rather than saying nought of them.
+  Between four and five there are eleven other answers, and which one a drawing belongs
+  to is most of why the age is on the label at all.
 - `frame` overrides the frame for one piece. `yearLabel` overrides a derived year.
   `accession` overrides a derived accession number. All three are normally `null`.
 
@@ -280,8 +288,10 @@ Two traps worth knowing, both already sprung once:
 - **A PocketBase number field reads back as 0 when it was never set.** The first drawing
   uploaded through the studio came back with `ageYears: 0`, because the birth date could
   not be read and nothing was stored — and "Finn, age 0" is plausible enough to ship.
-  `data-pb.js` now reads a zero as "not known", and the studio shows the age it is about
-  to stamp so a silent failure is visible while it can still be fixed.
+  `data-pb.js` reads a zero as "not known", and the studio shows the age it is about to
+  stamp so a silent failure is visible while it can still be fixed. The field is
+  `ageMonths` now, which makes the ambiguity easier to live with: nobody under a month
+  old makes a drawing, so a zero can only mean the age was never worked out.
 - **The collection can be empty.** The static manifest always had five drawings in it,
   so nothing ever exercised the zero case; PocketBase starts with none. `app.js` has an
   empty state, and it is worth keeping it working.
