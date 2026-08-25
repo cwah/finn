@@ -584,8 +584,15 @@ tests. It has no dependencies and nothing bundles.
   username field was added by hand in the production admin UI before its migration ever
   ran there, so a migration that assumes it is the only way a column can appear would fail
   on startup — and on a container platform that is a deploy which never comes up.
-  `1755300000_username_login.js` checks before each step and is tested by running it twice
-  against the same database, the second time with its own record deleted.
+  `1755300000_username_login.js` checks before each step.
+
+  **Check the SHAPE, not the names this file would have used.** The first attempt looked
+  for its own index name, did not find it, added a second index over a column that already
+  had one, and Render refused the deploy with *"The index definition already exists"*.
+  What is already there was not put there by this file and does not look like it —
+  PocketBase names an index it generates itself. The test that passed beforehand was not
+  faithful: it simulated the field existing under this file's own index name, which is the
+  one case that could never happen in the wild.
 - **Viewer accounts read, they do not write.** `users.canPost` splits "signed in" from
   "may add", which used to be the same thing — `posts.createRule` was simply
   `@request.auth.id != ""`, so any account handed to a grandparent could also post. New

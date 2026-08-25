@@ -28,6 +28,11 @@
 // which on a container platform means a deploy that will not come up at all. Doing
 // nothing where there is nothing to do is the whole point.
 //
+// "Conditional" has to mean conditional on the SHAPE, not on the names this file would
+// have used. The first attempt checked for its own index name, found nothing, added a
+// second index over a column that already had one, and Render refused the deploy. What
+// already exists was not put there by this file and does not look like it.
+//
 // Usernames are derived from the email local part — catherine@… becomes `catherine` —
 // which is predictable, is what these two would have picked, and is trivially changed
 // afterwards in the admin UI.
@@ -56,7 +61,15 @@ migrate(
     const field = fresh.fields.getByName('username');
     if (field) field.required = true;
 
-    if (!fresh.indexes.some((i) => i.includes('idx_users_username'))) {
+    // Matched on the COLUMN, never on the name. An index over `username` may already
+    // exist under a name PocketBase generated for itself when the field was added by
+    // hand, and a second definition over the same column is rejected outright:
+    //
+    //   failed to apply migration ...: indexes: (4: The index definition already exists..)
+    //
+    // Which is precisely what a name-based check missed, because the names differ.
+    const coversUsername = (sql) => /\busername\b/i.test(String(sql));
+    if (!fresh.indexes.some(coversUsername)) {
       fresh.indexes = [
         ...fresh.indexes,
         'CREATE UNIQUE INDEX `idx_users_username` ON `users` (`username`)',
