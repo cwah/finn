@@ -1,0 +1,99 @@
+/* The studio. Not the gallery — this page is a tool, so it is plain, dense and legible
+   rather than atmospheric. It borrows only the tokens from base.css. */
+
+.admin {
+  overflow: auto;
+  background: #ece8df;
+  padding: env(safe-area-inset-top) 0 calc(env(safe-area-inset-bottom) + 3rem);
+}
+
+.gate, .studio { max-inline-size: 46rem; margin: 0 auto; padding: 1.25rem 1rem; }
+
+.gate-form {
+  display: grid; gap: .9rem;
+  max-inline-size: 22rem; margin: 12vh auto 0;
+  padding: 1.5rem; background: var(--plate);
+  box-shadow: 0 1px 1px rgba(var(--shadow-rgb), .3), 2px 6px 14px -4px rgba(var(--shadow-rgb), .28);
+}
+.gate-title { margin: 0; font-family: var(--serif); font-size: 1.3rem; font-style: italic; }
+.gate-sub { margin: -.5rem 0 .3rem; color: var(--ink-dim); font-size: .88rem; }
+.gate-error { margin: 0; color: #8c2f2f; font-size: .85rem; }
+
+.studio-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.studio-head h1 { font-family: var(--serif); font-size: 1.35rem; margin: 0 0 .2em; }
+
+.panel {
+  background: var(--plate); padding: 1rem 1.1rem; margin-block: 1rem;
+  box-shadow: 0 1px 1px rgba(var(--shadow-rgb), .22), 1px 4px 10px -4px rgba(var(--shadow-rgb), .2);
+}
+.panel h2 { font-family: var(--serif); font-size: 1.05rem; margin: 0 0 .8rem; }
+
+.field { display: grid; gap: .28rem; font-size: .85rem; }
+.field > span { color: var(--ink-dim); }
+.field input, .field textarea {
+  font: inherit; font-size: .95rem; padding: .5rem .6rem;
+  border: 1px solid rgba(var(--shadow-rgb), .25); background: #fff; color: var(--ink);
+  inline-size: 100%;
+}
+.field textarea { resize: vertical; line-height: 1.5; }
+
+.grid { display: grid; gap: .85rem; grid-template-columns: 1fr 1fr; }
+.field--wide { grid-column: 1 / -1; }
+@media (max-width: 34rem) { .grid { grid-template-columns: 1fr; } }
+
+.btn {
+  font: inherit; font-size: .9rem; padding: .5rem .9rem; cursor: pointer;
+  border: 1px solid rgba(var(--shadow-rgb), .3); background: #fff; color: var(--ink);
+}
+.btn--primary { background: var(--brass-ink); border-color: var(--brass-ink); color: #fff; }
+.btn--quiet { background: transparent; }
+.btn--tiny { padding: .2rem .5rem; font-size: .78rem; }
+.btn--file { display: inline-block; }
+
+.hint { margin: .6rem 0 0; font-size: .82rem; color: var(--ink-dim); }
+
+/* ── The stage ───────────────────────────────────────────────────────────────
+   .stage-inner is sized by JS to exactly match the preview canvas, so the crop
+   overlay's percentages ARE the crop fractions. Nothing here may add padding or a
+   border to it, or the two would drift apart and the crop would lie. */
+.stage-wrap { display: grid; place-items: center; background: #d9d4c9; padding: 1rem; }
+/* Never wider than the panel, never wider than the canvas actually is. The pixel
+   ceiling arrives from JS as --nat-w; the crop overlay is inset:0 on this box, so
+   whatever this resolves to IS rotated space as far as the crop fractions are
+   concerned. Nothing may add padding or a border to it without breaking that. */
+.stage-inner { position: relative; inline-size: min(100%, var(--nat-w, 100%)); }
+.stage-inner canvas { display: block; inline-size: 100%; block-size: auto; }
+.crop-layer { position: absolute; inset: 0; touch-action: none; }
+
+.crop-box {
+  position: absolute;
+  box-shadow: 0 0 0 9999px rgba(20, 16, 12, .5);   /* scrims everything outside it */
+  outline: 1px solid rgba(255, 255, 255, .9);
+  cursor: move;
+}
+/* The one state worth shouting about: a corner hanging off the edge of the photo. */
+.crop-box[data-covered="false"] { outline: 2px solid #e0673c; }
+
+.crop-handle {
+  position: absolute; inline-size: 22px; block-size: 22px; padding: 0;
+  background: #fff; border: 1px solid rgba(var(--shadow-rgb), .6); border-radius: 50%;
+  cursor: grab; touch-action: none;
+}
+.crop-handle--nw { inset-block-start: -11px; inset-inline-start: -11px; }
+.crop-handle--ne { inset-block-start: -11px; inset-inline-end: -11px; }
+.crop-handle--sw { inset-block-end: -11px; inset-inline-start: -11px; }
+.crop-handle--se { inset-block-end: -11px; inset-inline-end: -11px; }
+
+.warn {
+  margin: .8rem 0 0; padding: .55rem .7rem; font-size: .84rem;
+  background: #fbe9e2; border-inline-start: 3px solid #e0673c;
+}
+
+.controls { display: grid; gap: .9rem; margin-block-start: 1rem; }
+.slider { display: grid; gap: .3rem; font-size: .85rem; color: var(--ink-dim); }
+.slider input { inline-size: 100%; }
+.slider output { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.status { margin: 0; font-size: .86rem; color: var(--ink-dim); }
+.status[data-error="true"] { color: #8c2f2f; }

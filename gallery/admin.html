@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Add a drawing — The Finn Collection</title>
+
+<!-- NOT part of the public gallery. This page signs in, uploads, and is the only thing
+     in the app that ever holds a token. It ships in the image because adding art from a
+     phone is the point of it; it is reachable only by someone who can sign in, and
+     writing is refused server-side for accounts without canPost. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+
+<!-- ── Sign in ──────────────────────────────────────────────────────────── -->
+<section class="gate" hidden>
+  <form class="gate-form" autocomplete="on">
+    <h1 class="gate-title">The Finn Collection</h1>
+    <p class="gate-sub">Sign in to add a drawing.</p>
+    <label class="field">
+      <span>Username or email</span>
+      <input name="identity" type="text" autocomplete="username" required>
+    </label>
+    <label class="field">
+      <span>Password</span>
+      <input name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <button class="btn btn--primary" type="submit">Sign in</button>
+    <p class="gate-error" role="alert" hidden></p>
+  </form>
+</section>
+
+<!-- ── The editor ───────────────────────────────────────────────────────── -->
+<main class="studio" hidden>
+  <header class="studio-head">
+    <h1>Add a drawing</h1>
+    <button class="btn btn--quiet" type="button" data-act="sign-out">Sign out</button>
+  </header>
+
+  <!-- Step 1: the photograph -->
+  <section class="panel">
+    <label class="btn btn--file">
+      <input type="file" accept="image/*" data-el="file" hidden>
+      Choose a photo of the drawing
+    </label>
+    <p class="hint" data-el="filename">Nothing chosen yet.</p>
+  </section>
+
+  <!-- Step 2: straighten, crop, adjust -->
+  <section class="panel editor" hidden>
+    <div class="stage-wrap">
+      <!-- The preview canvas IS rotated space: the crop overlay sits exactly on top of
+           it, so a crop fraction is simply a percentage of this box. -->
+      <div class="stage-inner" data-el="stage">
+        <canvas data-el="preview"></canvas>
+        <div class="crop-layer" data-el="crop"></div>
+      </div>
+    </div>
+
+    <p class="warn" data-el="uncovered" role="alert" hidden>
+      A corner of the crop is off the edge of the photo — it would come out transparent.
+      <button class="btn btn--quiet btn--tiny" type="button" data-act="fit">Fit it back in</button>
+    </p>
+
+    <div class="controls">
+      <label class="slider">
+        <span>Straighten <output data-el="angle-out">0.0°</output></span>
+        <input type="range" data-el="angle" min="-15" max="15" step="0.1" value="0">
+      </label>
+      <label class="slider">
+        <span>Brightness <output data-el="brightness-out">100%</output></span>
+        <input type="range" data-el="brightness" min="0.5" max="1.6" step="0.01" value="1">
+      </label>
+      <label class="slider">
+        <span>Contrast <output data-el="contrast-out">100%</output></span>
+        <input type="range" data-el="contrast" min="0.5" max="1.6" step="0.01" value="1">
+      </label>
+      <button class="btn btn--quiet" type="button" data-act="reset">Reset adjustments</button>
+    </div>
+  </section>
+
+  <!-- Step 3: the label -->
+  <section class="panel label-form" hidden>
+    <h2>The label</h2>
+    <div class="grid">
+      <label class="field"><span>Title</span>
+        <input data-f="title" type="text" required placeholder="Tyrannosaurus at a Birthday Party"></label>
+      <label class="field"><span>Date drawn</span>
+        <input data-f="createdOn" type="date" required></label>
+      <label class="field"><span>Medium</span>
+        <input data-f="medium" type="text" placeholder="Crayon and marker on construction paper"></label>
+      <label class="field"><span>Dimensions</span>
+        <input data-f="dimensions" type="text" placeholder="12 × 18 in (30 × 46 cm)"></label>
+      <label class="field field--wide"><span>Alt text — what the drawing shows</span>
+        <input data-f="alt" type="text" placeholder="A green dinosaur wearing a party hat."></label>
+      <label class="field field--wide"><span>Note — the story behind it</span>
+        <textarea data-f="note" rows="5"
+          placeholder="Leave this blank or jot a fragment, and it can be written up in museum style."></textarea></label>
+    </div>
+    <p class="hint" data-el="note-hint"></p>
+  </section>
+
+  <footer class="panel actions" hidden>
+    <button class="btn btn--primary" type="button" data-act="save">Hang it</button>
+    <p class="status" role="status" data-el="status"></p>
+  </footer>
+</main>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>
