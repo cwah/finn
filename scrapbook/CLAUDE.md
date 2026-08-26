@@ -620,6 +620,14 @@ tests. It has no dependencies and nothing bundles.
   already pending rather than starting over.
 - `memoryDate` is authored, not inferred from upload time, so a new memory can be
   backdated — the timeline inserts it in date order rather than always at the top.
+- **The scrubber takes touches in a 24px strip, not across its full 60px.** The width is
+  for month labels; everything grabbable — rail, dots, thumb — sits within 20px of the
+  edge. As a full-width `pointer-events: auto` element at `z-index: 8` it was an invisible
+  column swallowing every tap beneath it, including a card's edit pencil, which at phone
+  width sits 26–60px from the edge. Tapping edit scrubbed the timeline instead.
+  Note the pencil could not simply be raised above it: a card is its own stacking context
+  at `z-index: 1`, so nothing inside a card can out-rank an element at 8. The scrubber had
+  to stop claiming ground it never used.
 - A **date scrubber** rides the right edge (Google Photos style): month ticks you can
   drag to fly through the timeline, with a bubble showing where you are. It fades in
   while scrolling and idles out of sight so it never covers a memory. It is

@@ -36,6 +36,10 @@
   <!-- Right-edge date scrubber. Hidden from assistive tech: it is a shortcut for
        scrolling, and the timeline it duplicates is already in the reading order. -->
   <div id="scrubber" class="scrubber" aria-hidden="true">
+    <!-- The only part that takes touches. The strip is 60px wide so month labels have
+         somewhere to sit, but everything grabbable — rail, dots, thumb — is within 20px
+         of the edge, and the other 40 were swallowing taps meant for the card beneath. -->
+    <div class="scrubber-grab"></div>
     <div class="scrubber-ticks"></div>
     <div class="scrubber-thumb"></div>
     <div class="scrubber-bubble"></div>

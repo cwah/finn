@@ -10,9 +10,32 @@
   z-index: 8;
   opacity: 0;
   transition: opacity 0.25s ease;
-  /* Vertical drags belong to the scrubber, not the page, once one starts here */
-  touch-action: none;
   -webkit-tap-highlight-color: transparent;
+
+  /* THE STRIP ITSELF TAKES NO TOUCHES. It is 60px wide so month labels have room, and it
+     sits above the cards at z-index 8 — which meant an invisible 60px column down the
+     right edge was swallowing every tap that landed in it, including the edit pencil in
+     a card's top-right corner. At phone width the pencil sits 26-60px from the edge:
+     entirely inside it. Tapping edit scrubbed the timeline instead.
+
+     Raising the pencil above it is not available: a card is its own stacking context at
+     z-index 1, so nothing inside a card can out-rank an element at 8. The fix has to be
+     that the scrubber stops claiming ground it does not use. */
+  pointer-events: none;
+}
+
+/* Everything grabbable — the rail at 13px, the tick dots at 9px, the thumb at 8px — is
+   within 20px of the edge. 24px covers all of it and stops short of the pencil. */
+.scrubber-grab {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 24px;
+  pointer-events: auto;
+  /* Moved here with the touches: a vertical drag beginning on the scrubber belongs to
+     the scrubber, but only where the scrubber is actually listening. */
+  touch-action: none;
 }
 
 .scrubber.is-active { opacity: 1; }
