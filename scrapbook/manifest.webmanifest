@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Finn's Scrapbook",
-  "short_name": "Finn",
+  "name": "Finnbook",
+  "short_name": "Finnbook",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
