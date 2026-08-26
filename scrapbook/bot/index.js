@@ -16,13 +16,13 @@ import { setDefaultResultOrder } from 'node:dns';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createClient as telegram } from './telegram.js';
 import { createClient as pocketbase } from './pocketbase.js';
-import { draftFromMessages, readCommand, summarise } from './message.js';
+import { draftFromMessages, readCommand, summarise, dateMemory } from './message.js';
 import { imageSize } from './image-size.js';
 import {
   findEmbeddedVideo, looksLikeMotion, mp4Duration, mp4CreatedAt,
 } from '../js/motion.js';
 import { parseDate } from './parse-date.js';
-import { exifDate, filenameDate, latestDate } from '../js/media-date.js';
+import { exifDate, filenameDate, distinctDates } from '../js/media-date.js';
 import { MAX_CLIP_SECONDS } from '../js/layout-engine.js';
 
 // Prefer IPv4 when resolving Telegram.
@@ -356,30 +356,15 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
     return;
   }
 
-  // When the memory happened, in order of who knows best:
-  //
-  //   1. an explicit #date — the parent said so outright
-  //   2. the media's own timestamp — a photo taken on Friday and sent on Sunday belongs
-  //      on Friday, and memoryDate is authored, never inferred from upload time
-  //   3. the day it was sent, which is all a compressed photo leaves to go on
-  //
-  // The most RECENT item wins among several: a set of photos is one memory, and it
-  // belongs on the day it finished happening.
-  let memoryDate = draft.memoryDate;
-  let dateNote;
-  if (dated) {
-    memoryDate = dated.date;
-  } else {
-    const fromMedia = latestDate(fetched.map((f) => f.takenOn));
-    // A camera with a wrong clock can claim tomorrow; the send date is the safer answer.
-    if (fromMedia && fromMedia <= draft.memoryDate) {
-      memoryDate = fromMedia;
-      if (fromMedia !== draft.memoryDate) {
-        dateNote = `Dated ${fromMedia}, from the media itself. `
-          + 'Send #date to say otherwise, or change it in the app.';
-      }
-    }
-  }
+  // When the memory happened, in order of who knows best.
+  // The rule itself is `dateMemory` in message.js, where it can be tested — #date first,
+  // then the media's own timestamps, then the send date. This is only the wiring.
+  // `draft.memoryDate` is the send date, which is the fallback when nothing is readable.
+  const { memoryDate, note: dateNote } = dateMemory({
+    days: distinctDates(fetched.map((f) => f.takenOn)),
+    dated: dated?.date || null,
+    sentOn: draft.memoryDate,
+  });
 
   const post = await pb.createPost({ ...draft, memoryDate, authorId: author.id });
 

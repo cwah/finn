@@ -254,3 +254,63 @@ export function summarise(kinds) {
   if (parts.length === 1) return parts[0];
   return `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
 }
+
+/**
+ * When the memory happened, and what to tell the parent about how that was decided.
+ *
+ * In order of who knows best:
+ *
+ *   1. an explicit #date — the parent said so outright, and nothing outranks that
+ *   2. the media's own timestamps — a photo taken on Friday and sent on Sunday belongs
+ *      on Friday, because memoryDate is authored, never inferred from upload time
+ *   3. the day it was sent, which is all a compressed photo leaves to go on
+ *
+ * Among several items the most RECENT wins: a set of photos is one memory, and it belongs
+ * on the day it finished happening.
+ *
+ * The app's compose sheet asks for UNANIMITY instead and falls back to today. That looks
+ * like an inconsistency and is a deliberate one: there, the fallback sits in an editable
+ * field in front of the parent before anything is saved, so an obvious placeholder costs
+ * nothing. Here the post is already written by the time they read the reply, and fixing it
+ * means opening the app — so the closer guess is worth keeping.
+ *
+ * What it must not be is SILENT about having guessed. When the media come from more than
+ * one day the note says which days were seen and which was picked, so a parent can tell a date
+ * that was READ from a date that was CHOSEN. There is no note when there was no judgement
+ * to report — an explicit #date, or media agreeing with the send date.
+ *
+ * @param {object} args
+ * @param {string[]} args.days distinct media days, ascending (see distinctDates)
+ * @param {string|null} args.dated an accepted #date, or null
+ * @param {string} args.sentOn the day it arrived, as a local calendar day
+ * @returns {{memoryDate: string, note: string|undefined}}
+ */
+export function dateMemory({ days = [], dated = null, sentOn }) {
+  if (dated) return { memoryDate: dated, note: undefined };
+
+  const latest = days.length ? days[days.length - 1] : null;
+
+  // A camera with a wrong clock can claim tomorrow. Rejecting the whole inference rather
+  // than falling back to the newest day that is not in the future is deliberate: a clock
+  // that is wrong by a day is wrong on every photo it took, so the "valid" ones are no
+  // more trustworthy than the one that gave the error away.
+  if (!latest || latest > sentOn) return { memoryDate: sentOn, note: undefined };
+
+  if (days.length > 1) {
+    return {
+      memoryDate: latest,
+      // "from 3 different days", not "span 3 days" — the latter reads as a three-day
+      // stretch, which is wrong the moment the oldest item is from years earlier.
+      note: `These are from ${days.length} different days (${days[0]} to ${latest}), `
+        + `so I dated the memory ${latest}, the last of them. `
+        + 'Send #date to say otherwise, or change it in the app.',
+    };
+  }
+
+  return {
+    memoryDate: latest,
+    note: latest === sentOn ? undefined
+      : `Dated ${latest}, from the media itself. `
+        + 'Send #date to say otherwise, or change it in the app.',
+  };
+}

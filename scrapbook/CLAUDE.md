@@ -499,7 +499,22 @@ new fields, no layout hints. Rules that must hold:
   comes through — a photo taken on Friday and sent on Sunday belongs on Friday. In order
   of who knows best: an explicit `#date`, then the media's own timestamp, then the send
   date. Among several items the **most recent** wins: a set of photos is one memory, and
-  it belongs on the day it finished happening.
+  it belongs on the day it finished happening. The rule is `dateMemory()` in `message.js`
+  rather than inline in the polling loop, because `index.js` starts the bot on import and
+  so nothing in it can be tested.
+- **The bot and the compose sheet date a multi-day set differently, on purpose.** The bot
+  takes the most recent; the app requires unanimity and falls back to today. The asymmetry
+  is about who is looking: the app's fallback sits in an editable field in front of a
+  parent *before* anything is saved, so an obvious placeholder costs nothing, whereas a
+  bot post is already written by the time the reply is read and fixing it means opening
+  the app. The closer guess is worth more where the correction is remote — provided it is
+  not silent. When the media come from more than one day the reply names the days it saw
+  and the one it picked, so a parent can tell a date that was READ from one that was
+  CHOSEN.
+- **A clock claiming tomorrow discredits the whole set, not just its own photo.** A camera
+  wrong by a day is wrong on every photo it took, so falling back to the newest day that
+  *isn't* in the future would be trusting siblings of the item that gave the error away.
+  The send date is the only thing known at that point.
 - `media-date.js` is **shared with the app** and lives in `js/`, not `bot/` — that is the
   direction dependencies already run here: the bot imports from the app, never the other
   way about. The compose sheet dates a new post with the same readers.

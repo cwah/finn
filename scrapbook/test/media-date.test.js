@@ -6,7 +6,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { filenameDate, exifDate, latestDate, agreedDate } from '../js/media-date.js';
+import { filenameDate, exifDate, latestDate, agreedDate, distinctDates } from '../js/media-date.js';
 
 // ── The camera's filename ─────────────────────────────────────────
 test('the date a camera wrote into the filename is read', () => {
@@ -152,4 +152,29 @@ test('nothing attached, nothing inferred', () => {
   assert.equal(agreedDate([]), null);
   assert.equal(agreedDate(null), null);
   assert.equal(agreedDate(undefined), null);
+});
+
+// ── What there was to choose from ─────────────────────────────────
+test('one day is one day, however many photos', () => {
+  assert.deepEqual(distinctDates(['2026-08-07', '2026-08-07', '2026-08-07']), ['2026-08-07']);
+});
+
+test('several days come back oldest first', () => {
+  // Ascending so the bot can say "8/7 to 8/9" without sorting it again at the call site.
+  assert.deepEqual(
+    distinctDates(['2026-08-09', '2026-08-07', '2026-08-09']),
+    ['2026-08-07', '2026-08-09'],
+  );
+});
+
+test('unreadable items are not a day', () => {
+  // An absence of evidence, not evidence of another day: one photo and one blank spans
+  // one day, and telling a parent otherwise invites them to hunt for a second.
+  assert.deepEqual(distinctDates(['2026-08-07', null]), ['2026-08-07']);
+  assert.deepEqual(distinctDates([null, null]), []);
+});
+
+test('nothing in, nothing out', () => {
+  assert.deepEqual(distinctDates([]), []);
+  assert.deepEqual(distinctDates(null), []);
 });

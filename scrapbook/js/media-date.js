@@ -164,6 +164,24 @@ export function latestDate(dates) {
 }
 
 /**
+ * The distinct days a set of media covers, oldest first.
+ *
+ * `latestDate` says which day to use; this says what there was to choose from, which is
+ * what the bot needs in order to admit that it chose. Items with no readable date are
+ * dropped rather than counted — an unreadable photo is not evidence of another day, it is
+ * an absence of evidence, and a parent told "these span 2 days" about one photo and one
+ * blank would rightly wonder what the second day was.
+ *
+ * @param {Array<string|null>} dates one per item, in any order
+ * @returns {string[]} unique YYYY-MM-DD, ascending; empty when nothing was readable
+ */
+export function distinctDates(dates) {
+  const seen = new Set();
+  for (const date of dates || []) if (date) seen.add(date);
+  return [...seen].sort();
+}
+
+/**
  * The one date a set of media agrees on, or nothing.
  *
  * Used to decide whether a new post can be dated from what was attached. Unanimity is the

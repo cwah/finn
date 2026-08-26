@@ -8,6 +8,7 @@ import assert from 'node:assert/strict';
 
 import {
   groupMessages, draftFromMessages, readMilestone, readCommand, summarise, readDateTag,
+  dateMemory,
 } from '../bot/message.js';
 
 /** 2026-08-14 12:00 local, so the date assertions do not depend on the runner's clock. */
@@ -414,4 +415,71 @@ test('#date and #milestone coexist without eating each other', () => {
 test('the draft still falls back to the day it was sent', () => {
   assert.equal(draftFromMessages([photoMsg(1)]).memoryDate, DAY);
   assert.equal(draftFromMessages([photoMsg(1)]).dateRequest, null);
+});
+
+// ── Dating a memory sent through the bot ──────────────────────────
+const SENT = '2026-08-26';
+
+test('#date outranks everything, and needs no explaining', () => {
+  const { memoryDate, note } = dateMemory({ days: ['2026-08-01'], dated: '2026-07-04', sentOn: SENT });
+  assert.equal(memoryDate, '2026-07-04');
+  assert.equal(note, undefined); // the parent said so; there is nothing to report back
+});
+
+test('a photo taken on Friday and sent on Sunday belongs on Friday', () => {
+  const { memoryDate, note } = dateMemory({ days: ['2026-08-21'], dated: null, sentOn: SENT });
+  assert.equal(memoryDate, '2026-08-21');
+  assert.match(note, /Dated 2026-08-21, from the media itself/);
+});
+
+test('media agreeing with the send date is not worth a word', () => {
+  // Nothing was decided, so saying "dated today, from the media" is noise.
+  const { memoryDate, note } = dateMemory({ days: [SENT], dated: null, sentOn: SENT });
+  assert.equal(memoryDate, SENT);
+  assert.equal(note, undefined);
+});
+
+test('nothing readable falls back to the day it was sent', () => {
+  // A compressed photo is stripped of EXIF, which is the common case, not an edge one.
+  const { memoryDate, note } = dateMemory({ days: [], dated: null, sentOn: SENT });
+  assert.equal(memoryDate, SENT);
+  assert.equal(note, undefined);
+});
+
+test('several days takes the last, and says which days it saw', () => {
+  // The app would fall back to today here. The bot keeps the closer guess because the post
+  // is already written by the time the parent reads this — but it must not be silent.
+  const { memoryDate, note } = dateMemory({
+    days: ['2026-08-21', '2026-08-22', '2026-08-24'], dated: null, sentOn: SENT,
+  });
+  assert.equal(memoryDate, '2026-08-24');
+  assert.match(note, /from 3 different days \(2026-08-21 to 2026-08-24\)/);
+  assert.match(note, /dated the memory 2026-08-24, the last of them/);
+  assert.match(note, /#date/); // and how to overrule it
+});
+
+test('several days is reported even when the last of them is today', () => {
+  // The date happens to equal the fallback, but a choice was still made between days —
+  // which is the thing being reported, not the value it landed on.
+  const { note } = dateMemory({ days: ['2026-08-24', SENT], dated: null, sentOn: SENT });
+  assert.match(note, /from 2 different days/);
+});
+
+test('a clock claiming tomorrow is not trusted at all', () => {
+  // Not "use the newest day that is not in the future": a clock wrong by a day is wrong on
+  // every photo it took, so the others are no more trustworthy than the one that gave it
+  // away. The send date is the only thing here that is known.
+  const { memoryDate, note } = dateMemory({
+    days: ['2026-08-21', '2027-01-01'], dated: null, sentOn: SENT,
+  });
+  assert.equal(memoryDate, SENT);
+  assert.equal(note, undefined);
+});
+
+test('a #date is honoured even when the media would have disagreed', () => {
+  const { memoryDate, note } = dateMemory({
+    days: ['2026-08-21', '2026-08-24'], dated: '2026-08-01', sentOn: SENT,
+  });
+  assert.equal(memoryDate, '2026-08-01');
+  assert.equal(note, undefined);
 });
