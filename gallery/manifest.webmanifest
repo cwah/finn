@@ -1,0 +1,14 @@
+{
+  "name": "The Finn Collection",
+  "short_name": "Finn Art",
+  "description": "A Finn-sized corner of the web reserved for Finn's masterpieces.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#cdc5b9",
+  "theme_color": "#cdc5b9",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -40,6 +40,29 @@ fail confusingly.
 
 The build context is the repo root, not `deploy/`; `render.yaml` at the root says so.
 
+## Both are installable
+
+Each site is a progressive web app in its own right: its own manifest, its own icons, its
+own service worker. Added to a phone's home screen either opens standalone, with no
+browser chrome.
+
+**The workers are scoped apart.** A service worker can only control its own directory and
+below, so the gallery's covers `/gallery/` and nothing else. The scrapbook's sits at the
+root and would otherwise shadow it, so it explicitly passes `/gallery/` requests through.
+
+**Caching is network-first for code, in both.** This is not the usual advice and it is
+deliberate: a stale cached module already broke sign-in on the scrapbook once, and a
+service worker cache is worse than an HTTP one — it survives a hard reload, so the usual
+way out does not work. Online you always get what was deployed; the cache is consulted
+only when the network fails.
+
+The two differ in what offline means for them:
+
+| | scrapbook | gallery |
+|---|---|---|
+| Offline | the shell, not the memories | the whole collection |
+| Why | `/api/` is never cached — auth tokens, private posts and family photos have no business on disk, and a stale copy would show memories that were deleted | five drawings under dated filenames whose contents never change, precached on install by reading the manifest |
+
 ## Sharing one PocketBase
 
 Two rules, both of which are easy to get wrong once and hard to notice:

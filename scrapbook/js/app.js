@@ -13,6 +13,7 @@ import { initMotion, releaseMotion } from './motion-play.js';
 import { centreProgress } from './fade.js';
 import { assignSides, assignPresets } from './milestone-art.js';
 import { pickNewPosts, oldestDate } from './sync.js';
+import { initPwa } from './pwa.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -298,6 +299,7 @@ async function init() {
   await loadMore();
   pageObserver.observe(sentinel);
   initSync();
+  initPwa();
   window.addEventListener('scroll', onScroll, { passive: true });
   initCapture({ author: config.currentAuthor, canPost: config.canPost }, {
     onCreate: insertPost,

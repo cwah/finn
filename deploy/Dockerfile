@@ -59,6 +59,9 @@ COPY deploy/pb_hooks/ /pb/pb_hooks/
 # process, and data/mock.json belongs to the no-backend mode.
 COPY scrapbook/index.html          /pb/pb_public/index.html
 COPY scrapbook/manifest.webmanifest /pb/pb_public/manifest.webmanifest
+# The worker must sit at the ROOT to claim the whole origin as its scope. A worker can
+# only ever control its own directory and below.
+COPY scrapbook/sw.js               /pb/pb_public/sw.js
 COPY scrapbook/css/       /pb/pb_public/css/
 COPY scrapbook/js/        /pb/pb_public/js/
 COPY scrapbook/assets/    /pb/pb_public/assets/
@@ -70,7 +73,11 @@ COPY scrapbook/assets/    /pb/pb_public/assets/
 # The trailing slash on /gallery/ is load-bearing. Served at /gallery without it, the
 # browser resolves the gallery's own <link> and <script> against the origin root, they
 # 404, and the page never boots. See "Where the app is mounted" in gallery/CLAUDE.md.
-COPY gallery/index.html /pb/pb_public/gallery/index.html
+COPY gallery/index.html          /pb/pb_public/gallery/index.html
+COPY gallery/manifest.webmanifest /pb/pb_public/gallery/manifest.webmanifest
+COPY gallery/assets/             /pb/pb_public/gallery/assets/
+# Beside the gallery, not at the root: its scope is /gallery/ and nothing above.
+COPY gallery/sw.js               /pb/pb_public/gallery/sw.js
 # admin.html ships too — adding a drawing from a phone is the point of it. It is
 # noindex, it signs in against the same users collection as the scrapbook, and writing
 # is refused server-side for accounts without canPost, so shipping it grants nothing

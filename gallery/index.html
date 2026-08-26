@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Finn Collection</title>
 <meta name="description" content="A Finn-sized corner of the web reserved for Finn's masterpieces.">
+<meta name="theme-color" content="#cdc5b9">
+
+<!-- Every href here is document-relative and that is safe: they are resolved by the
+     browser before any script runs, and the gallery is always served with the trailing
+     slash. The JS is the part that cannot rely on that — see js/paths.js. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
 
 <!-- Linked individually and in this order, no @import: base sets the tokens every
      later file reads, and frame-styles overrides the chrome variables artwork.css

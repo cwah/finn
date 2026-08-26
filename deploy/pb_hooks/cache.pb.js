@@ -22,7 +22,14 @@
 
 routerUse((e) => {
   const path = e.request.url.path;
-  const isCode = /\.(js|css|html|json)$/.test(path);
+
+  // A manifest served as text/plain works in practice, but the type is what tells a
+  // browser this is an installable app rather than a file someone linked to.
+  if (path.endsWith('.webmanifest')) {
+    e.response.header().set('Content-Type', 'application/manifest+json');
+  }
+
+  const isCode = /\.(js|css|html|json|webmanifest)$/.test(path);
   const isPage = path === '/' || path.endsWith('/');
   if (isCode || isPage) {
     e.response.header().set('Cache-Control', 'no-cache');

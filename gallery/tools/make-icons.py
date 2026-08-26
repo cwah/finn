@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""Regenerate the gallery's icons from one of Finn's drawings.
+
+    python3 tools/make-icons.py
+
+Not a build step — the output is committed and this runs only when the icon changes. No
+dependencies: `qlmanage` rasterises the SVG and `sips` resamples, both built into macOS,
+and the flattening below is stdlib.
+
+WHICH DRAWING: fixed here rather than "whatever is newest", because an installed app's
+icon changing under someone is worse than it being slightly out of date. Rocket to the
+Grocery Store was chosen for reading clearly at 32px — a strong silhouette on a dark
+ground, where the paler drawings turn to smudge.
+
+WHY FLATTEN: iOS composites a transparent apple-touch-icon onto BLACK. The drawings are
+transparent PNGs once rasterised, so the wall colour is baked in — which also makes the
+icon look like a piece hanging in the gallery rather than a cut-out.
+"""
+import struct
+import subprocess
+import sys
+import zlib
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent.parent
+ARTWORK = HERE / 'art' / '2026-07-30-rocket-grocery.svg'
+BACKGROUND = (0xcd, 0xc5, 0xb9)   # --wall, the gallery's own wall colour
+INSET = 0.10                      # more than the scrapbook's: a framed work needs a mount
+SIZES = (32, 180, 192, 512)
+
+
+def read_png(path):
+    data = path.read_bytes()
+    if data[:8] != b'\x89PNG\r\n\x1a\n':
+        raise SystemExit(f'{path} is not a PNG')
+    pos, idat, meta = 8, b'', None
+    while pos < len(data):
+        (length,) = struct.unpack('>I', data[pos:pos + 4])
+        kind = data[pos + 4:pos + 8]
+        body = data[pos + 8:pos + 8 + length]
+        if kind == b'IHDR':
+            w, h, depth, colour, _, _, interlace = struct.unpack('>IIBBBBB', body)
+            if depth != 8 or interlace:
+                raise SystemExit('only 8-bit, non-interlaced PNGs are supported')
+            meta = (w, h, colour)
+        elif kind == b'IDAT':
+            idat += body
+        elif kind == b'IEND':
+            break
+        pos += 12 + length
+
+    w, h, colour = meta
+    channels = {0: 1, 2: 3, 4: 2, 6: 4}[colour]
+    raw = zlib.decompress(idat)
+    stride = w * channels
+    out = bytearray(stride * h)
+    prev = bytearray(stride)
+    p = 0
+    for y in range(h):
+        ftype = raw[p]
+        p += 1
+        line = bytearray(raw[p:p + stride])
+        p += stride
+        if ftype == 1:
+            for i in range(channels, stride):
+                line[i] = (line[i] + line[i - channels]) & 255
+        elif ftype == 2:
+            for i in range(stride):
+                line[i] = (line[i] + prev[i]) & 255
+        elif ftype == 3:
+            for i in range(stride):
+                left = line[i - channels] if i >= channels else 0
+                line[i] = (line[i] + ((left + prev[i]) >> 1)) & 255
+        elif ftype == 4:
+            for i in range(stride):
+                a = line[i - channels] if i >= channels else 0
+                b = prev[i]
+                c = prev[i - channels] if i >= channels else 0
+                pa, pb, pc = abs(b - c), abs(a - c), abs(a + b - 2 * c)
+                pred = a if (pa <= pb and pa <= pc) else (b if pb <= pc else c)
+                line[i] = (line[i] + pred) & 255
+        out[y * stride:(y + 1) * stride] = line
+        prev = line
+    return w, h, channels, out
+
+
+def write_rgb_png(path, size, pixels):
+    def chunk(kind, body):
+        crc = zlib.crc32(kind + body) & 0xffffffff
+        return struct.pack('>I', len(body)) + kind + body + struct.pack('>I', crc)
+
+    raw = bytearray()
+    for y in range(size):
+        raw.append(0)
+        raw += pixels[y * size * 3:(y + 1) * size * 3]
+    path.write_bytes(
+        b'\x89PNG\r\n\x1a\n'
+        + chunk(b'IHDR', struct.pack('>IIBBBBB', size, size, 8, 2, 0, 0, 0))
+        + chunk(b'IDAT', zlib.compress(bytes(raw), 9))
+        + chunk(b'IEND', b'')
+    )
+
+
+def main():
+    if not ARTWORK.exists():
+        raise SystemExit(f'no {ARTWORK}')
+    scratch = HERE / 'assets' / '.scratch'
+    scratch.mkdir(parents=True, exist_ok=True)
+
+    # qlmanage renders SVG; sips cannot read one at all.
+    subprocess.run(['qlmanage', '-t', '-s', '1024', '-o', str(scratch), str(ARTWORK)],
+                   check=True, capture_output=True)
+    master = next(scratch.glob('*.png'))
+
+    for size in SIZES:
+        inset = round(size * INSET)
+        inner = size - inset * 2
+        small = scratch / f'{size}.png'
+        subprocess.run(['sips', '-Z', str(inner), '--out', str(small), str(master)],
+                       check=True, capture_output=True)
+
+        w, h, channels, px = read_png(small)
+        br, bg, bb = BACKGROUND
+        canvas = bytearray(bytes(BACKGROUND) * size * size)
+        # Centred: a rasterised drawing keeps its own proportions, so the shorter side
+        # is padded rather than stretched.
+        ox, oy = (size - w) // 2, (size - h) // 2
+        for y in range(h):
+            for x in range(w):
+                i = (y * w + x) * channels
+                alpha = px[i + 3] if channels == 4 else 255
+                if not alpha:
+                    continue
+                cx, cy = x + ox, y + oy
+                if not (0 <= cx < size and 0 <= cy < size):
+                    continue
+                o = (cy * size + cx) * 3
+                canvas[o] = (px[i] * alpha + br * (255 - alpha)) // 255
+                canvas[o + 1] = (px[i + 1] * alpha + bg * (255 - alpha)) // 255
+                canvas[o + 2] = (px[i + 2] * alpha + bb * (255 - alpha)) // 255
+
+        out = HERE / 'assets' / f'icon-{size}.png'
+        write_rgb_png(out, size, canvas)
+        print(f'  {out.name}  {size}x{size}  {out.stat().st_size:,} bytes')
+
+    for f in scratch.iterdir():
+        f.unlink()
+    scratch.rmdir()
+
+
+if __name__ == '__main__':
+    main()

@@ -18,6 +18,7 @@ import { artIdFromUrl, urlForIndex } from './deep-link.js';
 import { APP_ROOT } from './paths.js';
 import { renderArtwork, renderNav } from './render.js';
 import { preloadNeighbours } from './preload.js';
+import { initPwa } from './pwa.js';
 
 const FADE_OUT = 140;
 
@@ -262,3 +263,7 @@ start().catch((error) => {
   message.textContent = 'The collection could not be loaded.';
   refs.placard.append(message);
 });
+
+// The app works identically without a service worker; this only adds installability
+// and, for a collection of five drawings, the ability to look at them on a train.
+initPwa();
