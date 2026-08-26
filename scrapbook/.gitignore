@@ -21,3 +21,7 @@ assets/sample-clip.*
 # password, and a stale offset would replay or skip messages on another machine.
 .env
 bot/.offset
+
+# Where a detached bot writes its output. Run in a terminal it goes to the terminal, and
+# that terminal closing is how the only record of a signed-in-to-which-host line is lost.
+bot/bot.log
