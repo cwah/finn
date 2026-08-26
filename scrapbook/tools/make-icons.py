@@ -25,7 +25,13 @@ import zlib
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
-SOURCE = HERE / 'assets' / 'icon-source.png'
+
+# Preferred, in order. An SVG wins where both exist: it is the drawn mark, and a
+# photograph or illustration is the thing being replaced rather than the default.
+SOURCES = (
+    HERE / 'assets' / 'icon-source.svg',
+    HERE / 'assets' / 'icon-source.png',
+)
 BACKGROUND = (0xf2, 0xf4, 0xec)   # --bg / theme-color, the page's pale sage
 SIZES = (32, 180, 192, 512)
 
@@ -123,10 +129,10 @@ def content_box(w, h, channels, px):
     return (0, 0, w - 1, h - 1) if maxx < 0 else (minx, miny, maxx, maxy)
 
 
-def build(size, scratch):
+def build(size, scratch, master):
     # Resample from the full-resolution master every time, rather than from a smaller
     # intermediate, so the 32px is as good as it can be.
-    subprocess.run(['sips', '-Z', str(size), '--out', str(scratch), str(SOURCE)],
+    subprocess.run(['sips', '-Z', str(size), '--out', str(scratch), str(master)],
                    check=True, capture_output=True)
     w, h, channels, px = read_png(scratch)
 
@@ -161,12 +167,32 @@ def build(size, scratch):
 
 
 if __name__ == '__main__':
-    if not SOURCE.exists():
-        raise SystemExit(f'no {SOURCE} — drop a square PNG there first')
+    source = next((s for s in SOURCES if s.exists()), None)
+    if source is None:
+        raise SystemExit('no icon source — drop one at ' + str(SOURCES[0]))
+    print(f'  using {source.relative_to(HERE)}')
+
     scratch = HERE / 'assets' / '.icon-scratch.png'
+    rendered = None
     try:
+        if source.suffix.lower() == '.svg':
+            # sips cannot read an SVG at all; qlmanage rasterises one. Note that it
+            # composites onto opaque WHITE, so an SVG source must draw its own
+            # background — the flattening below will have nothing left to do.
+            out = HERE / 'assets' / '.svg-render'
+            out.mkdir(exist_ok=True)
+            subprocess.run(['qlmanage', '-t', '-s', '1024', '-o', str(out), str(source)],
+                           check=True, capture_output=True)
+            rendered = next(out.glob('*.png'))
+            master = rendered
+        else:
+            master = source
+
         for s in SIZES:
-            build(s, scratch)
+            build(s, scratch, master)
     finally:
         scratch.unlink(missing_ok=True)
+        if rendered:
+            rendered.unlink(missing_ok=True)
+            rendered.parent.rmdir()
     print('\n  Remember: the sizes are committed, so commit them.')

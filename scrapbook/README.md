@@ -164,8 +164,11 @@ so it works either way.
 
 ## The icon
 
-`assets/icon-source.png` is the master — square, transparent, as large as you like. The
-sizes actually served are derived from it and committed alongside:
+`assets/icon-source.svg` is the master: two snapshots and a heart, drawn flat in the
+app's own palette. `assets/icon-source.png` — the illustration this replaced — is kept
+beside it as a fallback, and used only when the SVG is removed.
+
+The sizes actually served are derived from whichever is found and committed alongside:
 
 | file | used by |
 |---|---|
@@ -173,13 +176,17 @@ sizes actually served are derived from it and committed alongside:
 | `icon-180.png` | iOS home screen (`apple-touch-icon`) |
 | `icon-192.png`, `icon-512.png` | `manifest.webmanifest`, Android and install prompts |
 
-**They are flattened onto the page's sage, not left transparent.** iOS composites a
-transparent `apple-touch-icon` onto *black*, which would put a black square on the home
-screen of a deliberately pale app. Each is also inset by 4%, so iOS's rounded mask does
-not shave the edges off the artwork.
+**They are flattened, not left transparent.** iOS composites a transparent
+`apple-touch-icon` onto *black*, which would put a black square on the home screen of a
+deliberately pale app. The SVG draws its own background, which it must: `qlmanage`
+rasterises SVG onto opaque white, so a transparent one arrives with nothing left to
+flatten.
 
-To replace it, drop in a new `icon-source.png` and regenerate — `sips` resamples, and a
-small stdlib script flattens, so there is nothing to install:
+**The script adds no margin.** A source composes its own — anything that must survive a
+round mask belongs well inside the square, since one keeps only the middle ~71%.
+
+To replace it, drop in a new `icon-source.svg` or `.png` and regenerate. Nothing to
+install: `qlmanage` rasterises SVG, `sips` resamples, and the flattening is stdlib.
 
 ```sh
 python3 tools/make-icons.py
