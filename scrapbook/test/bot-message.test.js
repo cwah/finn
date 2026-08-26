@@ -8,7 +8,7 @@ import assert from 'node:assert/strict';
 
 import {
   groupMessages, draftFromMessages, readMilestone, readCommand, summarise, readDateTag,
-  dateMemory,
+  dateMemory, countCompressed, readConfirmation,
 } from '../bot/message.js';
 
 /** 2026-08-14 12:00 local, so the date assertions do not depend on the runner's clock. */
@@ -511,4 +511,91 @@ test('a #date is honoured even when the media would have disagreed', () => {
   });
   assert.equal(memoryDate, '2026-08-01');
   assert.equal(note, undefined);
+});
+
+// ── Was it sent as a file, or as a photo? ─────────────────────────
+// Knowable before a byte is fetched, which is what makes the question askable at all.
+const docMsg = (id) => ({
+  message_id: id,
+  date: AT,
+  document: { file_id: `d${id}`, mime_type: 'image/jpeg', file_name: `PXL_${id}.jpg`, file_size: 900 },
+});
+
+test('a photo sent the normal way counts as compressed', () => {
+  assert.equal(countCompressed(draftFromMessages([photoMsg(1)])), 1);
+});
+
+test('an album of them counts them all', () => {
+  const group = groupMessages([
+    photoMsg(1, { media_group_id: 'a' }),
+    photoMsg(2, { media_group_id: 'a' }),
+    photoMsg(3, { media_group_id: 'a' }),
+  ])[0];
+  assert.equal(countCompressed(draftFromMessages(group)), 3);
+});
+
+test('a file is not compressed — it is the path being asked for', () => {
+  assert.equal(countCompressed(draftFromMessages([docMsg(1)])), 0);
+});
+
+test('a mixed album counts only the compressed ones', () => {
+  const group = groupMessages([
+    { ...photoMsg(1), media_group_id: 'a' },
+    { ...docMsg(2), media_group_id: 'a' },
+  ])[0];
+  assert.equal(countCompressed(draftFromMessages(group)), 1);
+});
+
+test('a video and a live photo are never queried', () => {
+  // Telegram hands over the original clip and states its shape, so the normal way of
+  // sending these IS the right way. Asking would be noise on every video ever sent.
+  assert.equal(countCompressed(draftFromMessages([livePhotoMsg()])), 0);
+  assert.equal(countCompressed(draftFromMessages([{
+    message_id: 1, date: AT,
+    video: { file_id: 'v', width: 1920, height: 1080, duration: 4, thumbnail: { file_id: 't' } },
+  }])), 0);
+});
+
+test('a quote card has nothing to ask about', () => {
+  assert.equal(countCompressed(draftFromMessages([{ message_id: 1, date: AT, text: 'First laugh' }])), 0);
+  assert.equal(countCompressed(null), 0);
+});
+
+// ── Reading a yes or a no ─────────────────────────────────────────
+const say = (text) => readConfirmation([{ message_id: 1, date: AT, text }]);
+
+test('yes, in the shapes a parent actually types', () => {
+  for (const t of ['yes', 'Yes', 'YES', 'y', 'yep', 'yeah', 'ok', 'sure', 'save it', '/yes']) {
+    assert.equal(say(t), 'yes', `“${t}” should read as yes`);
+  }
+});
+
+test('no, likewise', () => {
+  for (const t of ['no', 'No', 'n', 'nope', 'cancel', 'never mind', '/no']) {
+    assert.equal(say(t), 'no', `“${t}” should read as no`);
+  }
+});
+
+test('a sentence beginning with yes is a memory, not an answer', () => {
+  // The one real hazard of reading bare words as answers: a quote card would be swallowed.
+  // Length is the only thing telling them apart, so it has to be the test.
+  assert.equal(say('yes, that was his first word'), null);
+  assert.equal(say('no more nappies!'), null);
+});
+
+test('media is never an answer', () => {
+  // It is a new memory. Reading it as "yes" would attach the confirmation to the old post
+  // and silently save something the parent had moved on from.
+  assert.equal(readConfirmation([photoMsg(1)]), null);
+  assert.equal(readConfirmation([docMsg(1)]), null);
+});
+
+test('an album is never an answer either', () => {
+  assert.equal(readConfirmation([photoMsg(1), photoMsg(2)]), null);
+});
+
+test('anything unrecognised is left alone', () => {
+  assert.equal(say('maybe'), null);
+  assert.equal(say(''), null);
+  assert.equal(readConfirmation(null), null);
 });

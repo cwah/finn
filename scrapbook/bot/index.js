@@ -13,10 +13,14 @@
 // it exactly like one made in the app, because it is one.
 
 import { setDefaultResultOrder } from 'node:dns';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 import { createClient as telegram } from './telegram.js';
 import { createClient as pocketbase } from './pocketbase.js';
-import { draftFromMessages, readCommand, summarise, dateMemory } from './message.js';
+import {
+  draftFromMessages, readCommand, summarise, dateMemory, countCompressed, readConfirmation,
+} from './message.js';
 import { imageSize } from './image-size.js';
 import {
   findEmbeddedVideo, looksLikeMotion, mp4Duration, mp4CreatedAt,
@@ -88,23 +92,42 @@ function createAlbumBuffer(onReady) {
 }
 
 const HELP = [
+  'SEND PHOTOS AS FILES. On Android: paperclip -> File. On desktop: untick “Compress',
+  'images”. Sent the normal way, Telegram re-encodes the picture and three things go with',
+  'it — the date it was taken, the motion in a motion photo, and the original quality.',
+  'None of them can be recovered afterwards, so I check before saving one.',
+  '',
   'Send me anything and it goes in the scrapbook:',
   '',
-  '· a photo, or an album of them',
+  '· a photo, or an album of them — as a FILE',
   '· a few words on their own — they become a quote card',
   '· #milestone First steps — marks a milestone',
   '· #date 8/14 — dates the memory (month first; I assume this year)',
-  '· a video or a GIF — it plays on the card',
+  '· a video or a GIF — send these the normal way, they arrive intact',
   '',
   'A memory is dated from the media itself where it can be — a photo taken on Friday and',
-  'sent on Sunday belongs on Friday. Send it as a FILE to keep that timestamp; the',
-  'compressed path strips it and the send date has to stand. #date overrides either.',
+  'sent on Sunday belongs on Friday. Only the file keeps that timestamp. #date overrides',
+  'either.',
   '',
   'A clip plays for up to a minute; edit the memory in the app to choose which minute.',
-  '',
-  'MOTION PHOTOS: send them as a FILE, not as a photo. Telegram strips the motion out of',
-  'anything sent the normal way, and only the original file still has it.',
 ].join('\n');
+
+/**
+ * Drafts waiting on "are you sure?", one per chat.
+ *
+ * The MESSAGES are held, never the media: Telegram file_ids stay valid, so a confirmed
+ * post fetches the bytes then, and a forgotten one costs nothing but a little memory.
+ * Replaying messages rather than a stored draft also means there is one code path from the
+ * answer onwards instead of two that have to be kept agreeing.
+ *
+ * In memory, so a restart forgets them. That is the right trade for something a parent
+ * answers in seconds: the alternative is a file on disk that can outlive the question and
+ * save a post someone abandoned days ago. A restart mid-question just means sending again.
+ */
+const awaitingConfirmation = new Map(); // chatId -> { messages, askedAt }
+
+/** How long a question stands before the answer is assumed to be about something else. */
+const CONFIRM_TTL_MS = 60 * 60 * 1000;
 
 /** Telegram refuses to hand a bot any file bigger than this, whoever sent it. */
 const TELEGRAM_MAX_DOWNLOAD = 20 * 1024 * 1024;
@@ -270,7 +293,41 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
     return;
   }
 
-  const command = readCommand(messages);
+  // ── An outstanding "are you sure?" owns the next bare yes or no ──
+  // Before readCommand, because "/yes" is a command by shape and would otherwise be
+  // answered with the help text.
+  let group = messages;
+  let confirmed = false;
+  const pending = awaitingConfirmation.get(chatId);
+  if (pending) {
+    if (Date.now() - pending.askedAt > CONFIRM_TTL_MS) {
+      // Old enough that a "yes" now is more likely about something else entirely.
+      awaitingConfirmation.delete(chatId);
+    } else {
+      const answer = readConfirmation(messages);
+      if (answer === 'no') {
+        awaitingConfirmation.delete(chatId);
+        await tg.sendMessage(chatId,
+          'Dropped, nothing saved.\n\nSend them again as a FILE to keep the date they were '
+          + 'taken: paperclip -> File on Android, or untick “Compress images” on desktop.');
+        return;
+      }
+      if (answer === 'yes') {
+        // The MESSAGES are replayed, not a stored draft — draftFromMessages is pure, so
+        // re-deriving gives exactly what was asked about, and there is one code path from
+        // here on rather than two that have to be kept agreeing.
+        awaitingConfirmation.delete(chatId);
+        group = pending.messages;
+        confirmed = true;
+      } else {
+        // Anything else supersedes the question. One question outstanding at a time, or a
+        // "yes" tomorrow could save a post from an hour ago that was never meant to go in.
+        awaitingConfirmation.delete(chatId);
+      }
+    }
+  }
+
+  const command = readCommand(group);
   if (command === 'id') {
     await tg.sendMessage(chatId, `Your Telegram id is ${senderId}.`);
     return;
@@ -290,14 +347,14 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
   // Names only: captions are the parents' words and do not belong in a log.
   const BORING = new Set(['message_id', 'date', 'chat', 'from', 'caption',
     'caption_entities', 'entities', 'text', 'link_preview_options']);
-  for (const m of messages) {
+  for (const m of group) {
     const fields = Object.keys(m).filter((k) => !BORING.has(k));
     const sizes = Array.isArray(m.photo)
       ? ` photo=[${m.photo.map((p) => `${p.width}x${p.height}`).join(' ')}]` : '';
     console.log(`  message ${m.message_id}: ${fields.join(', ') || '(nothing)'}${sizes}`);
   }
 
-  const draft = draftFromMessages(messages);
+  const draft = draftFromMessages(group);
   if (!draft) {
     await tg.sendMessage(chatId, HELP);
     return;
@@ -324,6 +381,31 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
         + 'ago, like #date 12/25/2025.');
       return;
     }
+  }
+
+  // ── Sent as a photo rather than as a file? Check it was meant ────
+  // Asked here, after #date has been validated and before anything is downloaded: the
+  // compressed path is visible in the draft alone, so a parent who meant to send files
+  // finds out in seconds rather than after several megabytes and an unrecoverable post.
+  //
+  // Not refused, only queried. Sometimes compressed is exactly what someone wants — a
+  // screenshot, a photo forwarded from someone else, a memory worth more than its
+  // metadata — and a bot that will not save those is worse than one that asks.
+  const compressedItems = countCompressed(draft);
+  if (compressedItems && !confirmed) {
+    awaitingConfirmation.set(chatId, { messages: group, askedAt: Date.now() });
+    const one = compressedItems === 1;
+    const these = one ? 'That came' : `Those ${compressedItems} came`;
+    const when = one ? 'the date it was taken' : 'the dates they were taken';
+    await tg.sendMessage(chatId,
+      `${these} through compressed, so Telegram has already thrown away ${when}, `
+      + 'any motion, and some quality. None of that can be recovered.'
+      + '\n\nSave anyway? Reply YES.'
+      + '\n\nOr send again as a FILE to keep it all: paperclip -> File on Android, '
+      + 'or untick “Compress images” on desktop.'
+      + '\n\nAnything else you send takes its place.');
+    console.log(`  asked about ${compressedItems} compressed item(s)`);
+    return;
   }
 
   // Fetch everything from Telegram BEFORE writing anything. An album is a handful of
@@ -381,26 +463,38 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
     }
   }
 
-  const parts = [draft.milestone ? `Milestone saved: ${draft.milestone.title}` : 'Saved'];
-  if (savedKinds.length) parts.push(summarise(savedKinds));
-
   // If everything arrived compressed, say so once. A parent whose motion photo quietly
   // became a still has no other way of telling why — Telegram's own picker still shows it
   // as a motion photo, and the reply would otherwise just say "a photo". The TIMESTAMP is
   // lost the same way and is named separately by dateMemory, since "quality" does not
   // read as "and the date".
-  if (allCompressed) {
+  //
+  // Not when they were just ASKED and said yes. They know; repeating it is nagging, and
+  // "attach as a FILE instead" is advice they have this second declined. dateMemory's
+  // line stays either way — it reports which date the memory actually got, which is a
+  // fact about the post rather than a lecture about how it was sent.
+  if (allCompressed && !confirmed) {
     notes.push('Sent compressed, so any motion or original quality was lost on the way. '
       + 'Attach as a FILE instead to keep it.');
   }
-  if (failed.length) parts.push(`\n\nFailed: ${[...new Set(failed)].join('; ')}`);
   if (dateNote) notes.push(dateNote);
-  if (notes.length) parts.push(`\n\n${notes.join('\n')}`);
   if (draft.unsupported.length) {
-    parts.push('\n\nSent as a file, so I skipped it: '
+    notes.push('Sent as a file, so I skipped it: '
       + `${draft.unsupported.join(', ')}. Send it as a photo and I can size it properly.`);
   }
-  await tg.sendMessage(chatId, `${parts.join(' · ')} — for ${author.name || author.email}.`);
+
+  // The headline is one line and the notes are paragraphs below it. They used to share a
+  // " · " join, which put a dangling separator in front of every note — "3 photos · " and
+  // then a blank line — and stranded the attribution at the very end, after the advice.
+  const headline = [
+    draft.milestone ? `Milestone saved: ${draft.milestone.title}` : 'Saved',
+    savedKinds.length ? summarise(savedKinds) : null,
+    failed.length ? `Failed: ${[...new Set(failed)].join('; ')}` : null,
+  ].filter(Boolean).join(' · ');
+
+  await tg.sendMessage(chatId,
+    `${headline} — for ${author.name || author.email}.`
+    + (notes.length ? `\n\n${notes.join('\n\n')}` : ''));
   console.log(`saved ${post.id} for ${author.name} (${summarise(savedKinds) || 'no media'})`);
 }
 
@@ -467,7 +561,16 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Only when RUN, not when imported. handleGroup carries the confirmation flow — held
+// drafts, replayed messages, one question at a time — and none of that was reachable from
+// a test while importing this file started a bot polling Telegram. The pure modules were
+// well covered and the wiring between them was not, which is the shape of every assembly
+// bug this bot has had.
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
+
+export { handleGroup, awaitingConfirmation };

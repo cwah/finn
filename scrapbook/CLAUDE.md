@@ -518,6 +518,34 @@ new fields, no layout hints. Rules that must hold:
 - `media-date.js` is **shared with the app** and lives in `js/`, not `bot/` — that is the
   direction dependencies already run here: the bot imports from the app, never the other
   way about. The compose sheet dates a new post with the same readers.
+- **A photo sent as a photo is QUERIED before it is saved.** Not refused — sometimes
+  compressed is exactly what someone wants, and a bot that will not save a forwarded
+  screenshot is worse than one that asks. The question comes after `#date` has been
+  validated and **before a single byte is downloaded**: `countCompressed()` reads the
+  draft, so a parent who meant to send files finds out in seconds rather than after
+  several megabytes and an unrecoverable post. Videos, GIFs and live photos are never
+  queried — Telegram hands those over intact, so the normal way of sending them is also
+  the right one.
+  - **The MESSAGES are held, not a draft**, in `awaitingConfirmation` keyed by chat. A
+    "yes" replays them through the same code path, so there are not two paths to keep
+    agreeing, and `file_id`s stay valid so the media is fetched only once it is wanted.
+  - **One question outstanding at a time.** Anything that is not an answer clears it —
+    a second send supersedes the first, and an unrelated message drops it — because a
+    "yes" an hour later must not save a post someone had moved on from. An hour is also
+    the hard ceiling (`CONFIRM_TTL_MS`).
+  - **Only a bare yes or no counts.** "yes, that was his first word" is a memory, not an
+    answer, and length is the only thing distinguishing them. Media is never an answer.
+  - **A confirmed post is not lectured.** The compression note is suppressed once they
+    have said yes; `dateMemory`'s line stays, because it reports which date the post got
+    rather than how it should have been sent.
+  - In memory, so a restart forgets the question. That is the right trade for something
+    answered in seconds — a file on disk could outlive the question and save an
+    abandoned post days later.
+- **`bot/index.js` only starts the bot when RUN, not when imported** (`process.argv[1]`
+  against `import.meta.url`), which is what makes `handleGroup` testable at all. The pure
+  modules were always well covered and the wiring between them was not, which is the shape
+  of every assembly bug this bot has had. `test/bot-confirm.test.js` drives the whole flow
+  against stubbed Telegram and PocketBase clients.
 - **A compressed photo carries no date whatsoever, and this is the common case.** Checked
   against bytes Telegram actually delivered, not assumed: the JPEG has no APP1 segment at
   all — JFIF and an ICC profile and nothing else — the strings `Exif` and `DateTime` do

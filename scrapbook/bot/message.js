@@ -332,3 +332,54 @@ export function dateMemory({ days = [], dated = null, sentOn, compressed = false
         + 'Send #date to say otherwise, or change it in the app.',
   };
 }
+
+/**
+ * How many items came down Telegram's COMPRESSED path.
+ *
+ * Knowable from the draft alone, before a single byte is fetched, which is what makes it
+ * possible to ask a parent about it rather than discover it half a download later.
+ *
+ * The compressed path is anything sent as a "photo" rather than as a file. Telegram
+ * re-encodes it, and three things go: the motion in a motion photo, the original quality,
+ * and the EXIF timestamp — verified against delivered bytes, which have no APP1 segment at
+ * all and a filename of `file_23.jpg`.
+ *
+ * A video or a live photo is NOT compressed in this sense. Telegram states their
+ * dimensions and duration on the message and hands over the original clip, so the normal
+ * way of sending them is also the right one, and asking about those would be noise.
+ *
+ * @param {object} draft from draftFromMessages
+ * @returns {number}
+ */
+export function countCompressed(draft) {
+  const photos = draft?.photos || [];
+  return photos.filter((p) => !p.videoFileId && !p.needsMeasuring && !p.isLive).length;
+}
+
+/** Yes and no, as a parent would actually type them on a phone. */
+const YES = /^(y|yes|yep|yeah|ok|okay|sure|save|save it|go|go ahead|do it|\/yes|\/save)$/i;
+const NO = /^(n|no|nope|cancel|stop|discard|nevermind|never mind|\/no|\/cancel)$/i;
+
+/**
+ * A bare yes or no, when one has been asked for.
+ *
+ * Only ever consulted while something is waiting on an answer, which is what makes it safe
+ * to read a lone "yes" as a reply rather than as a quote card. Anything longer is left
+ * alone: "yes, that was his first word" is a memory, not an answer, and the length is the
+ * only thing distinguishing them.
+ *
+ * @param {object[]} group one Telegram album, already grouped
+ * @returns {'yes'|'no'|null}
+ */
+export function readConfirmation(group) {
+  if (!Array.isArray(group) || group.length !== 1) return null;
+  const message = group[0];
+  // Media is never an answer — it is a new memory, and treating it as a "yes" would
+  // attach the confirmation to the wrong post.
+  if (message.photo || message.document || message.video || message.animation
+      || message.live_photo) return null;
+  const text = String(message.text || '').trim();
+  if (YES.test(text)) return 'yes';
+  if (NO.test(text)) return 'no';
+  return null;
+}
