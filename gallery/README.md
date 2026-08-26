@@ -74,3 +74,25 @@ is a one-line change and the frontend does not move.
 
 See `CLAUDE.md` for the architecture, the JSON contract, and the handful of rules that
 are load-bearing.
+
+## The icon
+
+`assets/icon-source.svg` is the gallery's own mark — a framed work on the wall, in the
+app's palette. Deliberately *not* one of Finn's drawings: putting a particular piece on a
+home screen implies that piece is the app, and the collection is meant to change.
+
+Replace it by dropping a new `assets/icon-source.svg` or `.png` and running:
+
+```sh
+python3 tools/make-icons.py
+```
+
+It prints which source it used. With neither present it falls back to a drawing, so it
+always produces something.
+
+Two things to know if you supply an SVG:
+
+- **Draw its own background.** `qlmanage` rasterises SVG onto opaque white, so a
+  transparent source arrives with its transparency already gone.
+- **Compose its own margin.** The script adds none. A round home-screen mask keeps only
+  the middle ~71%, so anything that must survive belongs well inside the square.

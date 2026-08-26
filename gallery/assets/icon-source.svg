@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- The gallery's own mark: a framed work on the wall, in the app's own palette.
+       Not one of Finn's drawings — putting a particular piece on the home screen implies
+       that piece is the app, and the collection is meant to change.
+
+       Built to survive a 32px favicon and a round mask: one strong rectangle, a wide
+       cream mat for contrast against the greige wall, and inside it a shape that still
+       reads when it is four pixels tall. -->
+
+  <!-- The wall, drawn rather than left to the flattening step: qlmanage rasterises an
+       SVG onto opaque WHITE, so a transparent source arrives with no transparency left
+       and nothing to composite. An icon source should carry its own background. -->
+  <rect width="512" height="512" fill="#cdc5b9"/>
+
+  <!-- brass moulding -->
+  <rect x="86" y="66" width="340" height="380" rx="10" fill="#6d5622"/>
+  <rect x="98" y="78" width="316" height="356" rx="6" fill="#b08d44"/>
+  <!-- mat -->
+  <rect x="118" y="98" width="276" height="316" rx="3" fill="#f3efe4"/>
+  <!-- the window, and a child's sun-over-hill: the simplest thing a small person draws -->
+  <rect x="152" y="132" width="208" height="248" rx="2" fill="#fbf9f4"/>
+  <circle cx="306" cy="196" r="34" fill="#e8a33d"/>
+  <path d="M152 380 q54-96 104-96 t104 96 z" fill="#7d9c63"/>
+  <path d="M186 300 q28-44 56-10" stroke="#2c2118" stroke-width="9"
+        stroke-linecap="round" fill="none" opacity=".55"/>
+</svg>

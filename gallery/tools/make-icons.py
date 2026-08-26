@@ -16,7 +16,11 @@ Grocery Store is the fallback because it reads clearly at 32px, where the paler 
 turn to smudge. The fallback is FIXED rather than "whatever is newest": an installed app
 whose icon changes underneath someone is worse than one that is out of date.
 
-WHY FLATTEN: iOS composites a transparent apple-touch-icon onto BLACK. The drawings are
+A NOTE ON SVG SOURCES: qlmanage rasterises onto opaque white, so a transparent SVG
+arrives here with its transparency already gone and the flattening below does nothing.
+An SVG source must therefore draw its own background — assets/icon-source.svg does.
+
+WHY FLATTEN AT ALL: iOS composites a transparent apple-touch-icon onto BLACK. The drawings are
 transparent PNGs once rasterised, so the wall colour is baked in — which also makes the
 icon look like a piece hanging in the gallery rather than a cut-out.
 """
@@ -35,7 +39,11 @@ SOURCES = (
     HERE / 'art' / '2026-07-30-rocket-grocery.svg',   # fallback: a piece from the wall
 )
 BACKGROUND = (0xcd, 0xc5, 0xb9)   # --wall, the gallery's own wall colour
-INSET = 0.10                      # more than the scrapbook's: a framed work needs a mount
+# No inset. A purpose-drawn source composes its own margin — the frame in
+# assets/icon-source.svg already sits inside its square — and adding more on top is
+# exactly how the scrapbook's icon ended up marooned in the middle of a pale disc.
+# A source that needs breathing room should be drawn with it.
+INSET = 0.0
 SIZES = (32, 180, 192, 512)
 
 
