@@ -17,6 +17,7 @@ scrapbook/pocketbase/
 
 # Development only
 scrapbook/test/
+scrapbook/tools/
 scrapbook/bot/
 scrapbook/preview.html
 scrapbook/serve.py
@@ -40,5 +41,9 @@ gallery/serve.py
 
 # Large sample media, dropped in by hand for the preview bench
 scrapbook/assets/sample-clip.*
+
+# The icon master. Kept in git so the sizes can be regenerated, but 2 MB of it has no
+# business in the image when every size actually served is derived from it.
+scrapbook/assets/icon-source.png
 
 **/.DS_Store

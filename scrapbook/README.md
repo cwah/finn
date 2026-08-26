@@ -162,6 +162,29 @@ The app then reads `data/mock.json`, and the sign-in screen never appears. Usefu
 offline and for working on layout. `preview.html` doesn't touch the data layer at all,
 so it works either way.
 
+## The icon
+
+`assets/icon-source.png` is the master — square, transparent, as large as you like. The
+sizes actually served are derived from it and committed alongside:
+
+| file | used by |
+|---|---|
+| `icon-32.png` | browser tab |
+| `icon-180.png` | iOS home screen (`apple-touch-icon`) |
+| `icon-192.png`, `icon-512.png` | `manifest.webmanifest`, Android and install prompts |
+
+**They are flattened onto the page's sage, not left transparent.** iOS composites a
+transparent `apple-touch-icon` onto *black*, which would put a black square on the home
+screen of a deliberately pale app. Each is also inset by 4%, so iOS's rounded mask does
+not shave the edges off the artwork.
+
+To replace it, drop in a new `icon-source.png` and regenerate — `sips` resamples, and a
+small stdlib script flattens, so there is nothing to install:
+
+```sh
+python3 tools/make-icons.py
+```
+
 ## Tests
 
 ```sh

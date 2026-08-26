@@ -57,7 +57,8 @@ COPY deploy/pb_hooks/ /pb/pb_hooks/
 # ── The scrapbook, at the root ────────────────────────────────────────────────
 # Only what the app needs — preview.html is a development bench, the bot is a separate
 # process, and data/mock.json belongs to the no-backend mode.
-COPY scrapbook/index.html /pb/pb_public/index.html
+COPY scrapbook/index.html          /pb/pb_public/index.html
+COPY scrapbook/manifest.webmanifest /pb/pb_public/manifest.webmanifest
 COPY scrapbook/css/       /pb/pb_public/css/
 COPY scrapbook/js/        /pb/pb_public/js/
 COPY scrapbook/assets/    /pb/pb_public/assets/
