@@ -11,8 +11,12 @@ illustration would arrive on the home screen as a black square with a baby in it
 not what a pale sage app should look like. So the background is baked in, using the page's
 own colour.
 
-WHY INSET: iOS masks the icon to a rounded square, and this artwork has braids that reach
-towards the corners. A few percent of margin keeps them.
+WHY NO INSET: an earlier version added 4% of margin so a rounded mask would not clip the
+braids. That was the wrong trade. The source already carries 7-9% of transparent margin of
+its own, a round home-screen mask keeps only the middle ~71%, and the three together left
+the face marooned in the middle of a pale disc. So the artwork is TRIMMED to its own
+content and fills the square edge to edge — a clipped braid-tip costs less than a face too
+small to recognise.
 """
 import struct
 import subprocess
@@ -23,7 +27,6 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent.parent
 SOURCE = HERE / 'assets' / 'icon-source.png'
 BACKGROUND = (0xf2, 0xf4, 0xec)   # --bg / theme-color, the page's pale sage
-INSET = 0.04                      # fraction of the icon left as margin
 SIZES = (32, 180, 192, 512)
 
 
@@ -104,25 +107,48 @@ def write_rgb_png(path, size, pixels):
     )
 
 
-def build(size, scratch):
-    inset = round(size * INSET)
-    inner = size - inset * 2
-    # sips resamples from the full-resolution master every time, rather than from a
-    # smaller intermediate, so the 32px is as good as it can be.
-    subprocess.run(['sips', '-Z', str(inner), '--out', str(scratch), str(SOURCE)],
-                   check=True, capture_output=True)
+def content_box(w, h, channels, px):
+    """The smallest rectangle holding every pixel that is not transparent."""
+    if channels != 4:
+        return 0, 0, w - 1, h - 1
+    minx, miny, maxx, maxy = w, h, -1, -1
+    for y in range(h):
+        row = y * w
+        for x in range(w):
+            if px[(row + x) * 4 + 3] > 8:   # 8, not 0: ignore anti-aliasing dust
+                if x < minx: minx = x
+                if x > maxx: maxx = x
+                if y < miny: miny = y
+                if y > maxy: maxy = y
+    return (0, 0, w - 1, h - 1) if maxx < 0 else (minx, miny, maxx, maxy)
 
+
+def build(size, scratch):
+    # Resample from the full-resolution master every time, rather than from a smaller
+    # intermediate, so the 32px is as good as it can be.
+    subprocess.run(['sips', '-Z', str(size), '--out', str(scratch), str(SOURCE)],
+                   check=True, capture_output=True)
     w, h, channels, px = read_png(scratch)
+
+    # Trim the source's own transparent margin, then take the SQUARE that contains the
+    # content, so the drawing is not distorted and is centred on itself rather than on
+    # whatever empty space the artist left.
+    minx, miny, maxx, maxy = content_box(w, h, channels, px)
+    side = max(maxx - minx + 1, maxy - miny + 1)
+    ox = minx - (side - (maxx - minx + 1)) // 2
+    oy = miny - (side - (maxy - miny + 1)) // 2
+
     br, bg, bb = BACKGROUND
     canvas = bytearray(bytes(BACKGROUND) * size * size)
-    for y in range(h):
-        for x in range(w):
-            i = (y * w + x) * channels
+    for cy in range(size):
+        sy = oy + cy * side // size
+        for cx in range(size):
+            sx = ox + cx * side // size
+            if not (0 <= sx < w and 0 <= sy < h):
+                continue
+            i = (sy * w + sx) * channels
             alpha = px[i + 3] if channels == 4 else 255
             if not alpha:
-                continue
-            cx, cy = x + inset, y + inset
-            if not (0 <= cx < size and 0 <= cy < size):
                 continue
             o = (cy * size + cx) * 3
             canvas[o] = (px[i] * alpha + br * (255 - alpha)) // 255

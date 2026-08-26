@@ -7,10 +7,14 @@ Not a build step — the output is committed and this runs only when the icon ch
 dependencies: `qlmanage` rasterises the SVG and `sips` resamples, both built into macOS,
 and the flattening below is stdlib.
 
-WHICH DRAWING: fixed here rather than "whatever is newest", because an installed app's
-icon changing under someone is worse than it being slightly out of date. Rocket to the
-Grocery Store was chosen for reading clearly at 32px — a strong silhouette on a dark
-ground, where the paler drawings turn to smudge.
+WHERE THE IMAGE COMES FROM: `assets/icon-source.svg`, or `.png`, if one is there. The
+gallery deserves an icon of its own rather than borrowing a piece from the collection —
+an artwork on the home screen implies that artwork is the app.
+
+Failing that it falls back to a drawing, so this always produces something. Rocket to the
+Grocery Store is the fallback because it reads clearly at 32px, where the paler drawings
+turn to smudge. The fallback is FIXED rather than "whatever is newest": an installed app
+whose icon changes underneath someone is worse than one that is out of date.
 
 WHY FLATTEN: iOS composites a transparent apple-touch-icon onto BLACK. The drawings are
 transparent PNGs once rasterised, so the wall colour is baked in — which also makes the
@@ -23,7 +27,13 @@ import zlib
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent.parent
-ARTWORK = HERE / 'art' / '2026-07-30-rocket-grocery.svg'
+
+# Preferred, in order. Drop a file at the first of these and it is used instead.
+SOURCES = (
+    HERE / 'assets' / 'icon-source.svg',
+    HERE / 'assets' / 'icon-source.png',
+    HERE / 'art' / '2026-07-30-rocket-grocery.svg',   # fallback: a piece from the wall
+)
 BACKGROUND = (0xcd, 0xc5, 0xb9)   # --wall, the gallery's own wall colour
 INSET = 0.10                      # more than the scrapbook's: a framed work needs a mount
 SIZES = (32, 180, 192, 512)
@@ -102,15 +112,24 @@ def write_rgb_png(path, size, pixels):
 
 
 def main():
-    if not ARTWORK.exists():
-        raise SystemExit(f'no {ARTWORK}')
+    source = next((s for s in SOURCES if s.exists()), None)
+    if source is None:
+        raise SystemExit('no icon source — drop one at ' + str(SOURCES[0]))
+    if source is SOURCES[-1]:
+        print(f'  (no assets/icon-source.* — falling back to {source.name})')
+    else:
+        print(f'  using {source.relative_to(HERE)}')
+
     scratch = HERE / 'assets' / '.scratch'
     scratch.mkdir(parents=True, exist_ok=True)
 
-    # qlmanage renders SVG; sips cannot read one at all.
-    subprocess.run(['qlmanage', '-t', '-s', '1024', '-o', str(scratch), str(ARTWORK)],
-                   check=True, capture_output=True)
-    master = next(scratch.glob('*.png'))
+    if source.suffix.lower() == '.svg':
+        # qlmanage renders SVG; sips cannot read one at all.
+        subprocess.run(['qlmanage', '-t', '-s', '1024', '-o', str(scratch), str(source)],
+                       check=True, capture_output=True)
+        master = next(scratch.glob('*.png'))
+    else:
+        master = source
 
     for size in SIZES:
         inset = round(size * INSET)

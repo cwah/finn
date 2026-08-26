@@ -46,6 +46,15 @@ Each site is a progressive web app in its own right: its own manifest, its own i
 own service worker. Added to a phone's home screen either opens standalone, with no
 browser chrome.
 
+**They are genuinely two apps, not one with two pages.** Each manifest declares its own
+`id` — `/` and `/gallery/` — which is what a browser keys an installed app on. Install
+both and you get two home-screen icons, two entries in the browser's app list, and two
+standalone windows, each opening at its own `start_url` and staying inside its own scope.
+
+What they cannot have, sharing an origin, is separate storage: cookies, `localStorage` and
+IndexedDB are per-origin, so the scrapbook's auth token is readable from a gallery page.
+That is why the gallery must never load third-party script — see below.
+
 **The workers are scoped apart.** A service worker can only control its own directory and
 below, so the gallery's covers `/gallery/` and nothing else. The scrapbook's sits at the
 root and would otherwise shadow it, so it explicitly passes `/gallery/` requests through.
