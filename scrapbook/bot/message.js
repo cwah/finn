@@ -279,16 +279,34 @@ export function summarise(kinds) {
  * that was READ from a date that was CHOSEN. There is no note when there was no judgement
  * to report — an explicit #date, or media agreeing with the send date.
  *
+ * Falling back to the send date normally passes without comment — it is the ordinary case
+ * for a compressed photo, not a failure. It earns one when EVERY item arrived compressed,
+ * because then the fallback does not mean "these had no date", it means "Telegram threw
+ * the date away", and from the phone those look identical: the picker still shows the
+ * original, timestamp and all. Verified against delivered bytes rather than assumed —
+ * a photo sent the normal way arrives with no APP1 segment at all, only JFIF and an ICC
+ * profile, and the filename Telegram supplies is `file_23.jpg`.
+ *
  * @param {object} args
  * @param {string[]} args.days distinct media days, ascending (see distinctDates)
  * @param {string|null} args.dated an accepted #date, or null
  * @param {string} args.sentOn the day it arrived, as a local calendar day
+ * @param {boolean} args.compressed every item came down Telegram's compressed path
  * @returns {{memoryDate: string, note: string|undefined}}
  */
-export function dateMemory({ days = [], dated = null, sentOn }) {
+export function dateMemory({ days = [], dated = null, sentOn, compressed = false }) {
   if (dated) return { memoryDate: dated, note: undefined };
 
   const latest = days.length ? days[days.length - 1] : null;
+
+  // Nothing readable, and nothing was ever going to be. Say which of those it was.
+  if (!latest && compressed) {
+    return {
+      memoryDate: sentOn,
+      note: `Telegram strips the timestamp out of a compressed photo, so I dated this `
+        + `${sentOn}, the day it arrived. Send #date to say otherwise.`,
+    };
+  }
 
   // A camera with a wrong clock can claim tomorrow. Rejecting the whole inference rather
   // than falling back to the newest day that is not in the future is deliberate: a clock

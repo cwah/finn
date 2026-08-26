@@ -440,10 +440,39 @@ test('media agreeing with the send date is not worth a word', () => {
 });
 
 test('nothing readable falls back to the day it was sent', () => {
-  // A compressed photo is stripped of EXIF, which is the common case, not an edge one.
   const { memoryDate, note } = dateMemory({ days: [], dated: null, sentOn: SENT });
   assert.equal(memoryDate, SENT);
+  assert.equal(note, undefined); // an ordinary fallback, not worth a word
+});
+
+test('but a compressed send is told WHY there was no date', () => {
+  // The whole complaint this answers: three photos through the normal Telegram path all
+  // came out dated today, and the reply gave no hint that a date had ever existed. From
+  // the phone the two are indistinguishable — the picker still shows the original.
+  const { memoryDate, note } = dateMemory({ days: [], dated: null, sentOn: SENT, compressed: true });
+  assert.equal(memoryDate, SENT);
+  assert.match(note, /Telegram strips the timestamp/);
+  assert.match(note, new RegExp(`dated this ${SENT}`));
+  assert.match(note, /#date/); // and what to do about it
+});
+
+test('a compressed send with a #date says nothing about stripping', () => {
+  // The date is already right, so explaining where it did not come from is noise.
+  const { memoryDate, note } = dateMemory({
+    days: [], dated: '2026-07-04', sentOn: SENT, compressed: true,
+  });
+  assert.equal(memoryDate, '2026-07-04');
   assert.equal(note, undefined);
+});
+
+test('a readable date beats the compressed explanation', () => {
+  // A mixed album — one file, the rest compressed — still has a real date to report, and
+  // must not be told its timestamp was stripped when one survived.
+  const { memoryDate, note } = dateMemory({
+    days: ['2026-08-21'], dated: null, sentOn: SENT, compressed: false,
+  });
+  assert.equal(memoryDate, '2026-08-21');
+  assert.match(note, /from the media itself/);
 });
 
 test('several days takes the last, and says which days it saw', () => {

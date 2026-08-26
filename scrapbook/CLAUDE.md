@@ -518,6 +518,14 @@ new fields, no layout hints. Rules that must hold:
 - `media-date.js` is **shared with the app** and lives in `js/`, not `bot/` — that is the
   direction dependencies already run here: the bot imports from the app, never the other
   way about. The compose sheet dates a new post with the same readers.
+- **A compressed photo carries no date whatsoever, and this is the common case.** Checked
+  against bytes Telegram actually delivered, not assumed: the JPEG has no APP1 segment at
+  all — JFIF and an ICC profile and nothing else — the strings `Exif` and `DateTime` do
+  not appear, and the filename supplied is `file_23.jpg`. So dating works ONLY on the file
+  path, which is the same constraint that governs motion photos and for the same reason:
+  Telegram re-encodes anything sent as a "photo". The reply now says so outright, because
+  "I dated this today" and "there was no date to read" are indistinguishable from the
+  phone — the picker still shows the original, timestamp and all.
 - **EXIF outranks the filename**, and not arbitrarily. Google names files in UTC while
   EXIF records local time, so a photo taken at half past ten on a Tuesday evening is
   *named* for Wednesday. Checked against real stored photos: 11 of 13 agreed, and both

@@ -360,10 +360,12 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
   // The rule itself is `dateMemory` in message.js, where it can be tested — #date first,
   // then the media's own timestamps, then the send date. This is only the wiring.
   // `draft.memoryDate` is the send date, which is the fallback when nothing is readable.
+  const allCompressed = Boolean(fetched.length) && fetched.every((f) => f.compressed);
   const { memoryDate, note: dateNote } = dateMemory({
     days: distinctDates(fetched.map((f) => f.takenOn)),
     dated: dated?.date || null,
     sentOn: draft.memoryDate,
+    compressed: allCompressed,
   });
 
   const post = await pb.createPost({ ...draft, memoryDate, authorId: author.id });
@@ -384,8 +386,10 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
 
   // If everything arrived compressed, say so once. A parent whose motion photo quietly
   // became a still has no other way of telling why — Telegram's own picker still shows it
-  // as a motion photo, and the reply would otherwise just say "a photo".
-  if (fetched.length && fetched.every((f) => f.compressed)) {
+  // as a motion photo, and the reply would otherwise just say "a photo". The TIMESTAMP is
+  // lost the same way and is named separately by dateMemory, since "quality" does not
+  // read as "and the date".
+  if (allCompressed) {
     notes.push('Sent compressed, so any motion or original quality was lost on the way. '
       + 'Attach as a FILE instead to keep it.');
   }
