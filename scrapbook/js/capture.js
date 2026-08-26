@@ -174,7 +174,14 @@ export let openForEdit = () => {};
  * splitting, poster frames, dimensions, smart crop and the 60-second trim all already
  * happen there, and a second path would be a second place for them to stop happening.
  */
-export let openWithFiles = () => {};
+export let openWithFiles = (files) => {
+  // Loud on purpose. This is the value the export holds until initCapture replaces it,
+  // and calling it means the files have already been claimed and the cache emptied — so
+  // a silent no-op here is a share destroyed rather than a share deferred. It shipped
+  // exactly once, as "sharing does nothing".
+  console.error(`openWithFiles called before initCapture — ${files?.length ?? 0} shared `
+    + 'file(s) will be lost. It must be called after the compose sheet is wired.');
+};
 
 /**
  * Wire the compose sheet, which both creates and edits.

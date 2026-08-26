@@ -308,20 +308,28 @@ async function init() {
   pageObserver.observe(sentinel);
   initSync();
 
-  // Anything handed over by the system share sheet. Claimed AFTER sign-in, because the
-  // gate blocks above and the files keep perfectly well in the meantime — sharing a photo
-  // to a signed-out scrapbook should end in the compose sheet, not in a lost file.
-  if (cameFromShare()) {
-    const shared = await claimSharedFiles();
-    // A viewer has no compose sheet to open. Nothing is lost that they could have saved.
-    if (shared.length && config.canPost) openWithFiles(shared);
-  }
   window.addEventListener('scroll', onScroll, { passive: true });
   initCapture({ author: config.currentAuthor, canPost: config.canPost }, {
     onCreate: insertPost,
     onUpdate: replacePost,
     onDelete: removePost,
   });
+
+  // Anything handed over by the system share sheet.
+  //
+  // AFTER initCapture, and that is the whole point: openWithFiles does not exist until
+  // then. Placed before it, this claimed the files — emptying the cache and stripping the
+  // URL flag — and handed them to the no-op the export starts life as. The share was not
+  // ignored, it was destroyed, silently, which is what "sharing does nothing" looked like.
+  //
+  // Claimed after sign-in too, because the gate blocks above and the files keep perfectly
+  // well in the meantime: sharing to a signed-out scrapbook should end in the compose
+  // sheet, not in a lost photo.
+  if (cameFromShare()) {
+    const shared = await claimSharedFiles();
+    // A viewer has no compose sheet to open. Nothing is lost that they could have saved.
+    if (shared.length && config.canPost) openWithFiles(shared);
+  }
 
   // Delegated, because cards stream in as you scroll — one listener beats re-binding.
   timeline.addEventListener('click', (e) => {
