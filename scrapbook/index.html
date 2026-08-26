@@ -77,6 +77,9 @@
       <label class="compose-field">
         <span class="compose-label">When did this happen?</span>
         <input id="composeDate" type="date" />
+        <!-- Said out loud, because a date field that changes by itself is otherwise
+             indistinguishable from one that has gone wrong. -->
+        <p id="composeDateNote" class="compose-note" hidden></p>
       </label>
 
       <label class="compose-toggle">

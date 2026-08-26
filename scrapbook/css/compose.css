@@ -487,3 +487,14 @@
   font-variant-numeric: tabular-nums;
   color: var(--text-dim);
 }
+
+/* Said when the date has been taken from the media rather than left at today. Quiet: it
+   is a note about what happened, not a warning that something is wrong. */
+.compose-note {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+
+.compose-note[hidden] { display: none; }

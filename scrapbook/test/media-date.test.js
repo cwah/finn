@@ -6,7 +6,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { filenameDate, exifDate, latestDate } from '../bot/media-date.js';
+import { filenameDate, exifDate, latestDate, agreedDate } from '../js/media-date.js';
 
 // ── The camera's filename ─────────────────────────────────────────
 test('the date a camera wrote into the filename is read', () => {
@@ -122,4 +122,34 @@ test('a late-night photo is why EXIF outranks the filename', () => {
   // filename being wrong. fetchItem reads EXIF first for exactly this reason.
   assert.equal(exifDate(jpegWithExif('2026:03:17 22:32:31')), '2026-03-17');
   assert.equal(filenameDate('PXL_20260318_023231976.jpg'), '2026-03-18');
+});
+
+// ── Whether a set of media can date a memory ──────────────────────
+test('one item with a date, dates the memory', () => {
+  assert.equal(agreedDate(['2026-08-07']), '2026-08-07');
+});
+
+test('several from the same day date it too', () => {
+  // An afternoon's photos share a day, and that day is the memory.
+  assert.equal(agreedDate(['2026-08-07', '2026-08-07', '2026-08-07']), '2026-08-07');
+});
+
+test('several from different days date nothing', () => {
+  // There is no single answer, so it must not invent one.
+  assert.equal(agreedDate(['2026-08-07', '2026-08-09']), null);
+  assert.equal(agreedDate(['2026-08-09', '2026-08-07', '2026-08-07']), null);
+});
+
+test('one unreadable item spoils the agreement', () => {
+  // Not "the others agree, so use theirs": the unreadable one may be from another day
+  // entirely, and quietly ignoring it would date the memory on a guess.
+  assert.equal(agreedDate([null]), null);
+  assert.equal(agreedDate(['2026-08-07', null]), null);
+  assert.equal(agreedDate([null, '2026-08-07']), null);
+});
+
+test('nothing attached, nothing inferred', () => {
+  assert.equal(agreedDate([]), null);
+  assert.equal(agreedDate(null), null);
+  assert.equal(agreedDate(undefined), null);
 });

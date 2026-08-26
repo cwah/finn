@@ -84,7 +84,7 @@ function svgSize(bytes) {
 /**
  * The EXIF Orientation tag (0x0112) of a JPEG, 1-8, or null.
  *
- * The IFD walk is scrapbook's, from bot/media-date.js. The difference is the read:
+ * The IFD walk is scrapbook’s, from scrapbook/js/media-date.js. The difference is the read:
  * that file wants ASCII tags, and Orientation is a SHORT — u16 at the start of the
  * value field, which is where a 2-byte value sits under either byte order.
  *

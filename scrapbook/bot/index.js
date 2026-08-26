@@ -22,7 +22,7 @@ import {
   findEmbeddedVideo, looksLikeMotion, mp4Duration, mp4CreatedAt,
 } from '../js/motion.js';
 import { parseDate } from './parse-date.js';
-import { exifDate, filenameDate, latestDate } from './media-date.js';
+import { exifDate, filenameDate, latestDate } from '../js/media-date.js';
 import { MAX_CLIP_SECONDS } from '../js/layout-engine.js';
 
 // Prefer IPv4 when resolving Telegram.

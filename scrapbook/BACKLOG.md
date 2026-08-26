@@ -79,6 +79,9 @@ Shipped when it lands. No ceremony beyond that.
 - [x] Single entrypoint — one floating `+` opens the compose sheet; photos are attached
       from inside it. Replaced the two-button tray, and the bottom bar is gone with it.
 - [x] Compose sheet — caption, memory date, and an optional milestone on capture.
+- [x] Date a new post from the media attached to it, when every item agrees on a
+      day. Said out loud under the field, and never applied while editing or over a
+      date typed by hand.
 - [x] Parallax fade in/out of milestone art — the artwork is fixed to the viewport and
       never moves; `centreProgress()` maps the card's position to an opacity, so it fades
       up as the card arrives, is clearest when the card owns the screen, and fades away

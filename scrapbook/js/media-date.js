@@ -4,8 +4,12 @@
 // memory belongs on Friday — memoryDate is authored, never inferred from upload time, and
 // that principle should hold whichever door a post comes through.
 //
-// PURE. Three sources, because what survives depends entirely on how Telegram was asked
-// to send the thing:
+// PURE, and shared: the bot reads these from what Telegram delivers, and the compose
+// sheet reads them from what the file picker hands over. It lives in js/ rather than bot/
+// because that is the direction dependencies already run here — the bot imports from the
+// app, never the other way about.
+//
+// Three sources, because what survives depends on how the file arrived:
 //
 //   EXIF        the photographer's own timestamp. Present only when the ORIGINAL bytes
 //               arrive, i.e. sent as a file. Telegram's re-encode strips it.
@@ -157,4 +161,23 @@ export function latestDate(dates) {
     if (date && (!latest || date > latest)) latest = date;
   }
   return latest;
+}
+
+/**
+ * The one date a set of media agrees on, or nothing.
+ *
+ * Used to decide whether a new post can be dated from what was attached. Unanimity is the
+ * whole test: an afternoon's photos share a day and should date the memory, while a set
+ * spanning two days has no single answer and should not pretend to. A single item with no
+ * readable date is the same situation — nothing to go on.
+ *
+ * @param {Array<string|null>} dates one per item, in any order
+ * @returns {string|null} the agreed YYYY-MM-DD, or null if they differ or any is unknown
+ */
+export function agreedDate(dates) {
+  const list = Array.isArray(dates) ? dates : [];
+  if (!list.length) return null;
+  const [first] = list;
+  if (!first) return null;
+  return list.every((d) => d === first) ? first : null;
 }

@@ -17,6 +17,7 @@ import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
 import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
 import { MAX_CLIP_SECONDS } from './layout-engine.js';
+import { exifDate, filenameDate, agreedDate } from './media-date.js';
 import { openPhotoEditor } from './photo-editor.js';
 
 /** Today as a LOCAL calendar day — toISOString() would hand back UTC and can skew a day. */
@@ -113,6 +114,7 @@ async function readItem(entry) {
       width,
       height,
       videoFile: entry.video,
+      takenOn: await takenOn(entry.video),
       duration,
       trimStart: 0,
       // Longer than a minute is accepted and opened at the first minute, so the parent
@@ -141,6 +143,10 @@ async function readItem(entry) {
   ]);
   const item = {
     file: still, url, width, height, focalX: focal.x, focalY: focal.y,
+    // Read from the ORIGINAL the parent picked, not from `still` — a Google motion photo
+    // has had its clip split off by now, and the halves are new Blobs with no name and no
+    // modification time of their own.
+    takenOn: await takenOn(entry.still),
   };
   if (!video) return item;
 
@@ -161,6 +167,50 @@ async function readItem(entry) {
     trimEnd: Math.min(duration, MAX_CLIP_SECONDS),
     motion: looksLikeMotion(duration),
   };
+}
+
+/** A timestamp as a LOCAL calendar day, the same way todayISO reckons one. */
+function localDay(ms) {
+  const d = new Date(ms);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/**
+ * When a file was taken, as well as the browser can tell.
+ *
+ * In order of how much it can be trusted:
+ *
+ *   EXIF        the photographer's own timestamp, and the only one that is really the
+ *               moment rather than a fact about the file. Read from the first 256 KB —
+ *               EXIF sits near the front of a jpeg, and a memory is not worth reading a
+ *               hundred megabytes to date.
+ *   filename    PXL_20260807_..., IMG_..., VID_... Survives copying, which EXIF does not
+ *               always. Used for VIDEO first: an mp4 keeps its creation time in a header
+ *               that can sit at the END of the file, and reading a whole clip to find it
+ *               is a poor trade on a phone.
+ *   lastModified  a fact about the file rather than the moment, and often just when it
+ *               was copied. Last, and only because a date the parent can see and correct
+ *               beats no date at all.
+ *
+ * @returns {Promise<string|null>} YYYY-MM-DD
+ */
+async function takenOn(file) {
+  if (!file) return null;
+  const isVideo = (file.type || '').startsWith('video/');
+
+  if (!isVideo) {
+    try {
+      const head = new Uint8Array(await file.slice(0, 256 * 1024).arrayBuffer());
+      const exif = exifDate(head);
+      if (exif) return exif;
+    } catch { /* unreadable is simply unknown */ }
+  }
+
+  const named = filenameDate(file.name);
+  if (named) return named;
+
+  return file.lastModified ? localDay(file.lastModified) : null;
 }
 
 /** Opens the sheet on an existing post. Set by initCapture; used by app.js. */
@@ -207,6 +257,7 @@ export function initCapture({ author, canPost = true }, handlers) {
   const thumbs = document.getElementById('composePhotos');
   const caption = document.getElementById('composeCaption');
   const date = document.getElementById('composeDate');
+  const dateNote = document.getElementById('composeDateNote');
   const isMilestone = document.getElementById('composeMilestone');
   const milestoneTitle = document.getElementById('composeMilestoneTitle');
   const saveBtn = document.getElementById('composeSave');
@@ -216,6 +267,8 @@ export function initCapture({ author, canPost = true }, handlers) {
   const deleteBtn = document.getElementById('composeDelete');
 
   let pending = []; // photos on the post being composed
+  // Once a parent sets the date by hand, nothing may move it again.
+  let dateChosenByHand = false;
   let editing = null; // the post being edited, or null when composing a new one
 
   /**
@@ -273,6 +326,10 @@ export function initCapture({ author, canPost = true }, handlers) {
           const [gone] = pending.splice(i, 1);
           if (gone.file) URL.revokeObjectURL(gone.url); // only ours to revoke
           renderThumbs();
+          // Removing the odd one out can leave the rest agreeing after all, so the date
+          // is worked out again from whatever is left — including back to today when the
+          // last photo goes.
+          applyInferredDate();
           syncSaveState();
         });
 
@@ -313,6 +370,31 @@ export function initCapture({ author, canPost = true }, handlers) {
   }
 
   /**
+   * Date the memory from the media on it, when the media agree.
+   *
+   * NEW POSTS ONLY. Editing an existing memory never moves its date, even if the photos
+   * on it change: that date is something a parent already decided, possibly deliberately
+   * against what the files say, and re-deriving it would silently undo them.
+   *
+   * Nor does it touch a date typed by hand. Between the two, the parent is always right.
+   *
+   * When the media disagree there is no answer, so it goes back to today rather than
+   * picking a winner — a wrong date that arrived by itself is worse than today's, which
+   * is at least obviously a default.
+   */
+  function applyInferredDate() {
+    if (editing || dateChosenByHand) return;
+
+    const inferred = agreedDate(pending.map((p) => p.takenOn));
+    date.value = inferred || todayISO();
+
+    dateNote.textContent = inferred
+      ? 'Date taken from the media you added — change it if it\u2019s wrong.'
+      : '';
+    dateNote.hidden = !inferred;
+  }
+
+  /**
    * Open the sheet. With a post, it edits that post; without, it composes a new one.
    * @param {object|null} post
    */
@@ -346,6 +428,8 @@ export function initCapture({ author, canPost = true }, handlers) {
     deleteBtn.hidden = !post;
     saveError.hidden = true;
     caption.value = post?.caption || '';
+    dateChosenByHand = false;
+    dateNote.hidden = true;
     date.value = post?.memoryDate || todayISO();
     date.max = todayISO(); // a memory can't have happened tomorrow
     isMilestone.checked = Boolean(post?.milestone);
@@ -397,6 +481,7 @@ export function initCapture({ author, canPost = true }, handlers) {
       const added = await Promise.all(pairLivePhotos(files).map(readItem));
       pending = pending.concat(added);
       renderThumbs();
+      applyInferredDate();
       syncSaveState();
     } catch (err) {
       console.error(err);
@@ -405,6 +490,13 @@ export function initCapture({ author, canPost = true }, handlers) {
 
   // ── Sheet interactions ───────────────────────────────────────────
   caption.addEventListener('input', syncSaveState);
+
+  // Programmatic assignment fires no input event, so this only ever hears a real parent —
+  // which is what makes it safe to treat as final.
+  date.addEventListener('input', () => {
+    dateChosenByHand = true;
+    dateNote.hidden = true;
+  });
 
   isMilestone.addEventListener('change', () => {
     milestoneTitle.hidden = !isMilestone.checked;

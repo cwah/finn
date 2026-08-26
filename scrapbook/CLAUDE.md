@@ -444,12 +444,12 @@ moves it.
   lightbox.js            # full-size viewer (owns its own markup)
   carousel.js            # active-dot tracking for 5+ photo posts
   capture.js             # capture + compose flow
+  media-date.js          # PURE: EXIF / filename -> when a photo was taken (shared w/ bot)
   scrubber.js            # right-edge date scrubber
 /bot/                    # Telegram bot — a separate node process, never served
   index.js               # polling loop, album debounce, sender auth
   message.js             # PURE: telegram messages -> post draft
   parse-date.js          # PURE: "8/14", "aug 12" -> a day (month first)
-  media-date.js          # PURE: EXIF / filename -> when a photo was taken
   image-size.js          # PURE: jpeg/png header -> dimensions (node has no canvas)
   telegram.js            # Bot API client (long polling)
   pocketbase.js          # PocketBase client for node (no localStorage)
@@ -500,6 +500,9 @@ new fields, no layout hints. Rules that must hold:
   of who knows best: an explicit `#date`, then the media's own timestamp, then the send
   date. Among several items the **most recent** wins: a set of photos is one memory, and
   it belongs on the day it finished happening.
+- `media-date.js` is **shared with the app** and lives in `js/`, not `bot/` — that is the
+  direction dependencies already run here: the bot imports from the app, never the other
+  way about. The compose sheet dates a new post with the same readers.
 - **EXIF outranks the filename**, and not arbitrarily. Google names files in UTC while
   EXIF records local time, so a photo taken at half past ten on a Tuesday evening is
   *named* for Wednesday. Checked against real stored photos: 11 of 13 agreed, and both
@@ -620,6 +623,25 @@ tests. It has no dependencies and nothing bundles.
   already pending rather than starting over.
 - `memoryDate` is authored, not inferred from upload time, so a new memory can be
   backdated — the timeline inserts it in date order rather than always at the top.
+- **Attached media offer a date; they never impose one.** On a NEW post, when everything
+  attached was taken on the same day, the date field is set to that day and says so
+  underneath. It is said out loud because a field that changes by itself is otherwise
+  indistinguishable from one that has gone wrong.
+  - **Agreement, not a vote.** `agreedDate()` in `media-date.js` answers only when every
+    item names the same day — one unreadable item is a disagreement, not an abstention,
+    because it may well be from another day entirely. No agreement means today, which is
+    at least obviously a default; a wrong date that arrived by itself is worse.
+  - **Editing never moves the date, even when the photos change.** That date is something
+    a parent already decided, possibly deliberately against what the files say. Nor is a
+    hand-typed date ever overwritten: `dateChosenByHand` latches on the field's `input`
+    event, which programmatic assignment does not fire, so it only ever hears a parent.
+  - Re-run on removal too — dropping the odd one out can leave the rest agreeing after
+    all, and dropping the last photo goes back to today.
+  - Read from the first 256 KB for a still; a memory is not worth reading a hundred
+    megabytes to date. Video skips EXIF entirely and starts at the filename: an mp4's
+    creation time lives in a header that can sit at the *end* of the file.
+  - A motion photo is read from the **original** the parent picked, not from the still
+    split out of it — the halves are new Blobs with no name and no modification time.
 - **The scrubber takes touches in a 24px strip, not across its full 60px.** The width is
   for month labels; everything grabbable — rail, dots, thumb — sits within 20px of the
   edge. As a full-width `pointer-events: auto` element at `z-index: 8` it was an invisible
