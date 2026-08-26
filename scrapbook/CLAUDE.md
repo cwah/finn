@@ -625,6 +625,26 @@ tests. It has no dependencies and nothing bundles.
   while scrolling and idles out of sight so it never covers a memory. It is
   `aria-hidden` — a shortcut for scrolling, not a second copy of the timeline.
 
+## Type
+
+The baby's name at the top of the page is set in **Adam's own handwriting**
+(`assets/fonts/adam.ttf`, declared in `base.css`, applied only to `.app-title`). A
+scrapbook kept by two people ought to look like it was, and a name in a parent's hand does
+more of that than any typeface choice.
+
+- **Only that heading.** Everything else stays in the interface stack. Handwriting is the
+  exception that means something; used twice it would just be the site's font.
+- Shipped as a **TTF**, not woff2. woff2 would be about half the size, but producing one
+  needs tooling this project has no dependency for — and at 22 KB, for one heading, that
+  is not worth a build step.
+- `font-display: swap`, so the name is readable from first paint and merely changes hand
+  when the font arrives. The interface stack sits behind it in `font-family`, so a font
+  that never loads costs legibility and nothing else.
+- No `unicode-range`. The name is supplied by config, so narrowing the range risks one
+  letter of a future name silently falling back to a different face.
+- The size is larger and the letter-spacing zero, both because handwriting sits smaller on
+  the line than a UI face at the same size and carries its own spacing.
+
 ## Colour
 
 The palette is **sage green and baby blue**, light and pastel, defined once as tokens in

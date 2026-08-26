@@ -1,3 +1,23 @@
+/* Adam's handwriting, used for one thing: the baby's name at the top of the page.
+   A scrapbook written by two people ought to look like it was, and a name in a parent's
+   own hand does more of that than any typeface choice could.
+
+   Shipped as a TTF rather than woff2. woff2 would be roughly half the size, but making
+   one needs tooling this project does not have and refuses to grow a dependency for; at
+   22 KB, for one heading, the difference is not worth a build step.
+
+   `swap` so the name is readable from the first paint and simply changes hand when the
+   font lands. `unicode-range` is deliberately absent: the font covers 97 glyphs and the
+   name it renders comes from config, so narrowing it risks a name that silently falls
+   back for one letter. */
+@font-face {
+  font-family: 'Adam';
+  src: url('../assets/fonts/adam.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Light pastel: sage green and baby blue. Cards are near-white and lift off a pale
      sage page, so separation comes from soft shadow rather than from the card being
@@ -59,8 +79,15 @@ body {
 
 .app-title {
   margin: 0;
-  font-size: 1.5rem;
-  letter-spacing: 0.2px;
+  /* Handwriting, with the interface stack behind it — if the font has not arrived, or
+     will not load at all, the name still reads. */
+  font-family: 'Adam', system-ui, -apple-system, sans-serif;
+  /* Larger than the 1.5rem this was: handwriting sits smaller on the line than a UI face
+     at the same size, and Adam's is a light hand. The letter-spacing goes for the same
+     reason — joined writing has its own spacing built in, and adding more pulls it apart. */
+  font-size: 1.95rem;
+  line-height: 1.1;
+  letter-spacing: 0;
 }
 
 .app-subtitle {
