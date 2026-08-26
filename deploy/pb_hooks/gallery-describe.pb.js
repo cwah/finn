@@ -22,9 +22,18 @@
 
 routerAdd('POST', '/api/gallery/describe', (e) => {
   const KEY = $os.getenv('ANTHROPIC_API_KEY');
-  // Overridable without a deploy. Sonnet is a perfectly good writer of forty words and
-  // costs a fraction as much, if this is ever called often enough to notice.
-  const MODEL = $os.getenv('ANTHROPIC_MODEL') || 'claude-opus-5';
+  // Which model writes the label.
+  //
+  // The env var sets the default without a deploy. The request may also name one, but
+  // only from this list — an endpoint that forwards whatever string it is handed to a
+  // paid API is a bill waiting to happen, and an allowlist costs one line. The point of
+  // the per-request override is being able to put two models side by side on the SAME
+  // drawing, which is the only honest way to compare how they write.
+  const ALLOWED = ['claude-opus-5', 'claude-sonnet-5'];
+  const asked = String((e.requestInfo().body || {}).model || '');
+  const MODEL = ALLOWED.indexOf(asked) >= 0
+    ? asked
+    : ($os.getenv('ANTHROPIC_MODEL') || 'claude-opus-5');
   const ENDPOINT = 'https://api.anthropic.com/v1/messages';
 
   // Adding a drawing is a privilege, and so is spending money on one. Same flag the
