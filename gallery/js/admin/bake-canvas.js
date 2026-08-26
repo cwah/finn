@@ -48,8 +48,8 @@ export function paint(ctx, image, plan, filter) {
  *
  * @returns {Promise<{blob: Blob, width: number, height: number}>}
  */
-export async function bakeDisplay(image, { width, height, angle, crop, brightness, contrast }) {
-  const plan = bakePlan({ width, height, angle, crop });
+export async function bakeDisplay(image, { width, height, angle, crop, brightness, contrast, maxEdge }) {
+  const plan = bakePlan({ width, height, angle, crop, maxEdge });
 
   const canvas = document.createElement('canvas');
   canvas.width = plan.output.width;
@@ -104,4 +104,25 @@ export function loadImage(file) {
     // it is why the manifest tool had to read EXIF but this does not.
     img.src = url;
   });
+}
+
+/**
+ * A small JPEG of the corrected drawing, as base64, for sending to a model.
+ *
+ * Deliberately not the display copy. That is up to 2000px and a megabyte, the request
+ * body would have to carry it base64-encoded at four thirds the size, and the model
+ * resizes anything larger than about 1568px on its longest edge anyway. A thousand
+ * pixels is plenty to describe a drawing and makes the call quicker and cheaper.
+ *
+ * @returns {Promise<{data: string, mediaType: string}>} data has no data: prefix
+ */
+export async function bakeForModel(image, adjust, maxEdge = 1024) {
+  const { blob } = await bakeDisplay(image, { ...adjust, maxEdge });
+  const data = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(',')[1] ?? '');
+    reader.onerror = () => reject(new Error('Could not read the image back.'));
+    reader.readAsDataURL(blob);
+  });
+  return { data, mediaType: 'image/jpeg' };
 }

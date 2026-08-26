@@ -156,3 +156,6 @@
 }
 .hung-delete[data-confirm="true"] { color: #fff; background: #8c2f2f; border-color: #8c2f2f; }
 .hung-item[data-mine="false"] .hung-delete { display: none; }
+
+.note-actions { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+.note-actions .hint { margin: 0; }

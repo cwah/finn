@@ -11,7 +11,7 @@
 
 import { signIn, signOut, currentSession, authed, birthDate } from './admin/auth.js';
 import { getGallery } from './data.js';
-import { loadImage, paintPreview, bakeDisplay } from './admin/bake-canvas.js';
+import { loadImage, paintPreview, bakeDisplay, bakeForModel } from './admin/bake-canvas.js';
 import { initCropBox } from './admin/crop-box.js';
 import { largestInscribedCrop, cropIsCovered, recipe, usableAngle } from './bake.js';
 import { monthsAt, ageLabel } from './placard.js';
@@ -37,6 +37,10 @@ const state = {
   contrast: 1,
   crop: { x: 0, y: 0, w: 1, h: 1 },
   birthDate: null,
+  // The exact text the model last returned. Compared against the field at save time so
+  // noteSource can distinguish a label that was written by a model from one that was
+  // written by a model and then rewritten by a person.
+  generatedNote: null,
 };
 
 let cropBox = null;
@@ -234,6 +238,7 @@ at('file').addEventListener('change', async (event) => {
     // default becomes the largest rectangle that is still all photograph.
     state.angle = 0;
     state.crop = { x: 0, y: 0, w: 1, h: 1 };
+    state.generatedNote = null;
 
     at('filename').textContent =
       `${file.name} — ${image.naturalWidth} × ${image.naturalHeight}`;
@@ -340,8 +345,60 @@ document.querySelector('[data-act="reset"]').addEventListener('click', () => {
 field('note').addEventListener('input', () => {
   const words = field('note').value.trim();
   at('note-hint').textContent = words.length === 0 || words.length < THIN_NOTE
-    ? 'Short or blank — this will be written up in museum style when it is hung.'
+    ? 'Short or blank — "Write the label for me" will draft one from the picture.'
     : '';
+});
+
+// ── The label, written for you ──────────────────────────────────────────────
+document.querySelector('[data-act="describe"]').addEventListener('click', async () => {
+  const button = document.querySelector('[data-act="describe"]');
+  const status = at('describe-status');
+  if (!state.image) {
+    status.textContent = 'Choose a photo first — the label is written from the picture.';
+    return;
+  }
+
+  button.disabled = true;
+  status.textContent = 'Looking at the drawing…';
+  try {
+    const { data, mediaType } = await bakeForModel(state.image, {
+      width: state.image.naturalWidth,
+      height: state.image.naturalHeight,
+      angle: state.angle,
+      crop: state.crop,
+      brightness: state.brightness,
+      contrast: state.contrast,
+    });
+
+    const createdOn = field('createdOn').value;
+    const res = await authed('/api/gallery/describe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        image: data,
+        mediaType,
+        title: field('title').value.trim(),
+        medium: field('medium').value.trim(),
+        dimensions: field('dimensions').value.trim(),
+        createdOn,
+        age: ageLabel(monthsAt(state.birthDate, createdOn)),
+        note: field('note').value.trim(),
+      }),
+    });
+
+    const payload = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(payload?.message || `The label could not be written (${res.status}).`);
+
+    // Into the field, not into the record. Somebody reads it before it is hung.
+    field('note').value = payload.note;
+    state.generatedNote = payload.note;
+    at('note-hint').textContent = 'Written for you — edit it freely, or write over it.';
+    status.textContent = '';
+  } catch (problem) {
+    status.textContent = problem.message;
+  } finally {
+    button.disabled = false;
+  }
 });
 
 // ── Hang it ─────────────────────────────────────────────────────────────────
@@ -392,7 +449,11 @@ document.querySelector('[data-act="save"]').addEventListener('click', async () =
     // drawing would be removable by nobody but a superuser.
     const me = currentSession()?.id;
     if (me) form.set('author', me);
-    form.set('noteSource', field('note').value.trim().length >= THIN_NOTE ? 'human' : 'pending');
+    // 'generated' only when the words are the model's own and untouched. Edited at all
+    // and it is a person's writing again, which is the distinction worth being able to
+    // find later.
+    const note = field('note').value.trim();
+    form.set('noteSource', note && note === state.generatedNote?.trim() ? 'generated' : 'human');
 
     form.set('display', display.blob, `${slug(title)}.jpg`);
     // The untouched photograph, kept so every adjustment above stays undoable.
@@ -431,6 +492,7 @@ function resetStudio() {
   state.brightness = 1;
   state.contrast = 1;
   state.crop = { x: 0, y: 0, w: 1, h: 1 };
+  state.generatedNote = null;
 
   at('file').value = '';
   at('filename').textContent = 'Nothing chosen yet.';

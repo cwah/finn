@@ -328,6 +328,27 @@ Two traps worth knowing, both already sprung once:
   so nothing ever exercised the zero case; PocketBase starts with none. `app.js` has an
   empty state, and it is worth keeping it working.
 
+## The label that writes itself
+
+`deploy/pb_hooks/gallery-describe.pb.js` takes the picture and whatever was typed, asks
+Claude for a wall label, and hands the words back. It does not save anything: the text
+lands in the note field for a person to read, and the ordinary save path stores it if
+they keep it. A model should not be able to put words on a permanent label without
+somebody having looked at them first.
+
+The key is `ANTHROPIC_API_KEY` in Render's dashboard, deliberately not in `render.yaml`,
+which is committed. `ANTHROPIC_MODEL` overrides the model without a deploy.
+
+**The prompt forbids inventing what the artist said or meant, and that is not a stylistic
+preference.** The artist is a baby. He has said nothing about any of this, so a label
+that quotes him is a fabricated quotation from a real child, hung on a wall and kept.
+The parody only works while every fact on the label is true. The placeholder notes in
+`data/artworks.json` do exactly the wrong thing here — they invent quotations — which is
+one more reason they are not seeded.
+
+`noteSource` records `generated` only when the words are the model's own and untouched;
+edit them at all and it is `human` again.
+
 ## Later
 
 `js/data-pb.js` ships now, minimal and unreachable, because a switchboard with one
