@@ -1,0 +1,63 @@
+// Receiving files from the system share sheet.
+//
+// A share target POSTs into the app, and there is no server here to receive it — the
+// service worker catches the request instead, and the page has to get the files from
+// somewhere afterwards. That handoff is what this file is.
+//
+// The Cache API is the drop box. It is the one place a worker can put a whole file that
+// survives the redirect that follows: the POST is answered with a 303, the browser makes
+// a fresh GET, and the page that loads is a new document with no memory of the request.
+//
+// DUPLICATED IN BOTH APPS ON PURPOSE. The scrapbook and the gallery share an origin and
+// nothing else — no imports across the boundary, each with its own tests and its own
+// dev server. Forty lines repeated is the cheaper half of that bargain.
+
+export const SHARE_CACHE = 'share-inbox';
+
+/** The flag the worker redirects with, so a page knows to go looking. */
+export const SHARE_FLAG = 'shared';
+
+/**
+ * Take everything the share sheet handed over, and empty the drop box.
+ *
+ * Emptied on read, deliberately: a file left behind would reappear the next time the app
+ * was opened, attached to a memory nobody was making.
+ *
+ * @returns {Promise<File[]>}
+ */
+export async function claimSharedFiles() {
+  if (!('caches' in window)) return [];
+  let cache;
+  try {
+    cache = await caches.open(SHARE_CACHE);
+  } catch {
+    return [];
+  }
+
+  const requests = await cache.keys();
+  const files = [];
+  for (const request of requests) {
+    const response = await cache.match(request);
+    if (!response) continue;
+    const blob = await response.blob();
+    // The name does not survive a Response on its own; the worker parks it in a header.
+    const name = decodeURIComponent(response.headers.get('x-share-name') || 'shared');
+    files.push(new File([blob], name, {
+      type: response.headers.get('content-type') || blob.type,
+      lastModified: Number(response.headers.get('x-share-modified')) || Date.now(),
+    }));
+  }
+  await Promise.all(requests.map((r) => cache.delete(r)));
+  return files;
+}
+
+/** Whether this page load came from a share, and tidy the URL if it did. */
+export function cameFromShare() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has(SHARE_FLAG)) return false;
+  // Take the flag out of the address bar so a reload is an ordinary visit rather than a
+  // second attempt to consume files that have already been claimed.
+  url.searchParams.delete(SHARE_FLAG);
+  window.history.replaceState({}, '', url);
+  return true;
+}

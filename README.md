@@ -55,6 +55,25 @@ What they cannot have, sharing an origin, is separate storage: cookies, `localSt
 IndexedDB are per-origin, so the scrapbook's auth token is readable from a gallery page.
 That is why the gallery must never load third-party script — see below.
 
+**Both appear in the system share sheet.** Share a photo from the camera roll and the
+scrapbook opens its compose sheet with it already attached; share a drawing and the
+gallery opens its studio with it loaded. A share target POSTs into the app and there is no
+server here to receive it, so the service worker catches the POST, parks the files in a
+cache, and answers with a 303 — the page that follows claims them from there.
+
+| | scrapbook | gallery |
+|---|---|---|
+| Accepts | images, video, motion photos | images only |
+| Opens | the compose sheet | `admin.html`, image loaded |
+
+Shared files travel the **same path as ones chosen by hand**: they are put on the app's own
+file input and it is told to fire. Live Photo pairing, motion-photo splitting, poster
+frames, smart crop and the minute-long trim all already live behind that handler, and a
+second route in would be a second one to keep in step.
+
+Share targets are a Chrome/Android feature. iOS does not offer one, so on an iPhone both
+apps install and run but do not appear in the share sheet.
+
 **The workers are scoped apart.** A service worker can only control its own directory and
 below, so the gallery's covers `/gallery/` and nothing else. The scrapbook's sits at the
 root and would otherwise shadow it, so it explicitly passes `/gallery/` requests through.

@@ -15,6 +15,8 @@ import { loadImage, paintPreview, bakeDisplay } from './admin/bake-canvas.js';
 import { initCropBox } from './admin/crop-box.js';
 import { largestInscribedCrop, cropIsCovered, recipe, usableAngle } from './bake.js';
 import { monthsAt, ageLabel } from './placard.js';
+import { claimSharedFiles, cameFromShare } from './share.js';
+import { initPwa } from './pwa.js';
 
 const PREVIEW_MAX = 900;
 /** Under this many characters, a note is a fragment and is offered to the model. */
@@ -71,6 +73,31 @@ async function start() {
   state.birthDate = await birthDate();
   updateAgePreview();
   await refreshHung();
+  await acceptShare();
+}
+
+/**
+ * A drawing handed over by the system share sheet, dropped straight into the studio.
+ *
+ * Claimed here rather than on page load, because the studio is behind a gate: photograph
+ * a drawing, share it, sign in, and it should be waiting — not lost because the sign-in
+ * happened to come second.
+ *
+ * The file is put on the file input and the input is told to fire, so it travels the
+ * SAME path as one chosen by hand. Loading, cropping, the angle and the bake all already
+ * happen there, and a second route in would be a second one to keep in step.
+ */
+async function acceptShare() {
+  if (!cameFromShare()) return;
+  const [file] = await claimSharedFiles();
+  // Images only — the manifest says so, but a share sheet is not a promise.
+  if (!file || !file.type.startsWith('image/')) return;
+
+  const input = at('file');
+  const carrier = new DataTransfer();
+  carrier.items.add(file);
+  input.files = carrier.files;
+  input.dispatchEvent(new Event('change'));
 }
 
 /**
@@ -435,6 +462,10 @@ function resetStudio() {
 
 const slug = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
   .replace(/^-|-$/g, '').slice(0, 60) || 'artwork';
+
+// admin.html is its own document, so it registers the worker too — reaching the studio
+// without passing through the wall first would otherwise leave the app with none.
+initPwa();
 
 // A session that survived a reload goes straight to the studio.
 if (currentSession()) start();

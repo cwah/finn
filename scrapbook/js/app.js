@@ -4,7 +4,7 @@
 import { getConfig, getPosts } from './data.js';
 import { renderPost, setMilestoneArt } from './render.js';
 import { ageStamp } from './age.js';
-import { initCapture, openForEdit } from './capture.js';
+import { initCapture, openForEdit, openWithFiles } from './capture.js';
 import { initScrubber } from './scrubber.js';
 import { ensureSignedIn, initSignOut } from './auth.js';
 import { initLightbox } from './lightbox.js';
@@ -14,6 +14,7 @@ import { centreProgress } from './fade.js';
 import { assignSides, assignPresets } from './milestone-art.js';
 import { pickNewPosts, oldestDate } from './sync.js';
 import { initPwa } from './pwa.js';
+import { claimSharedFiles, cameFromShare } from './share.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -284,6 +285,13 @@ function initSync() {
 }
 
 async function init() {
+  // Before the gate, deliberately. Registration is not a privilege: the worker is what
+  // makes the app installable and what receives the system share sheet, and both have to
+  // work for someone whose session has simply expired. Gated behind sign-in, a signed-out
+  // visitor got no worker at all — so sharing a photo to the app would have had nothing
+  // listening for it.
+  initPwa();
+
   // Nothing is fetched until a parent is in — this scrapbook has no public view.
   await ensureSignedIn();
   initSignOut();
@@ -299,7 +307,15 @@ async function init() {
   await loadMore();
   pageObserver.observe(sentinel);
   initSync();
-  initPwa();
+
+  // Anything handed over by the system share sheet. Claimed AFTER sign-in, because the
+  // gate blocks above and the files keep perfectly well in the meantime — sharing a photo
+  // to a signed-out scrapbook should end in the compose sheet, not in a lost file.
+  if (cameFromShare()) {
+    const shared = await claimSharedFiles();
+    // A viewer has no compose sheet to open. Nothing is lost that they could have saved.
+    if (shared.length && config.canPost) openWithFiles(shared);
+  }
   window.addEventListener('scroll', onScroll, { passive: true });
   initCapture({ author: config.currentAuthor, canPost: config.canPost }, {
     onCreate: insertPost,

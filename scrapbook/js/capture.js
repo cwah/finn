@@ -167,6 +167,16 @@ async function readItem(entry) {
 export let openForEdit = () => {};
 
 /**
+ * Open a new memory with files already attached — what the system share sheet hands over.
+ *
+ * Deliberately routed through the SAME picker handler an ordinary attachment goes through,
+ * by putting the files on the input and letting it fire. Live Photo pairing, motion photo
+ * splitting, poster frames, dimensions, smart crop and the 60-second trim all already
+ * happen there, and a second path would be a second place for them to stop happening.
+ */
+export let openWithFiles = () => {};
+
+/**
  * Wire the compose sheet, which both creates and edits.
  *
  * One sheet for both on purpose: a separate edit form would be a second authoring
@@ -358,6 +368,15 @@ export function initCapture({ author, canPost = true }, handlers) {
 
   openForEdit = open;
   composeBtn.addEventListener('click', () => open());
+
+  openWithFiles = (files) => {
+    if (!files?.length) return;
+    open();                       // fresh sheet first: open() clears whatever was pending
+    const carrier = new DataTransfer();
+    for (const file of files) carrier.items.add(file);
+    input.files = carrier.files;
+    input.dispatchEvent(new Event('change'));
+  };
 
   // Photos arrive from inside the open sheet, so they ADD to what is already pending
   // rather than starting a new post.
