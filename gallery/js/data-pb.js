@@ -110,3 +110,26 @@ export async function getGallery() {
 }
 
 export { PbError };
+
+/**
+ * Re-sign an image URL with a fresh file token.
+ *
+ * PocketBase file tokens last about two minutes. The gallery asks for one when it
+ * loads and stamps it into every image URL, which is fine for the drawing on screen
+ * and quietly wrong for the next one: sit on the wall for three minutes, press the
+ * arrow, and the frame comes up empty because the token in that URL went stale while
+ * nobody was looking at it.
+ *
+ * So an image that fails to load asks for a new token and tries once more. Cheaper and
+ * more honest than polling to keep a token warm that is usually not needed at all.
+ *
+ * @param {string} src
+ * @returns {Promise<string>}
+ */
+export async function refreshImageUrl(src) {
+  const token = await requestFileToken();
+  if (!token) return src;
+  const url = new URL(src, location.href);
+  url.searchParams.set('token', token);
+  return url.href;
+}

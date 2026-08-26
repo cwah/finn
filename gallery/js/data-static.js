@@ -28,3 +28,13 @@ export async function getGallery() {
   };
   return _cache;
 }
+
+/**
+ * Re-sign an image URL. Nothing to do here — a file on disk needs no token — but the
+ * switchboard exports it either way, so render.js never learns which source it is
+ * talking to.
+ * @returns {Promise<string>}
+ */
+export async function refreshImageUrl(src) {
+  return src;
+}
