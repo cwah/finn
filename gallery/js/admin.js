@@ -13,6 +13,7 @@ import { signIn, signOut, currentSession, authed, birthDate } from './admin/auth
 import { getGallery } from './data.js';
 import { loadImage, paintPreview, bakeDisplay, bakeForModel } from './admin/bake-canvas.js';
 import { initCropBox } from './admin/crop-box.js';
+import { buildEditForm } from './admin/edit-form.js';
 import { largestInscribedCrop, cropIsCovered, recipe, usableAngle } from './bake.js';
 import { monthsAt, ageLabel } from './placard.js';
 import { claimSharedFiles, cameFromShare } from './share.js';
@@ -186,7 +187,39 @@ async function refreshHung() {
         }
       });
 
-      item.append(thumb, text, remove);
+      const edit = document.createElement('button');
+      edit.type = 'button';
+      edit.className = 'hung-edit';
+      edit.textContent = 'Edit';
+      edit.addEventListener('click', () => {
+        const open = item.querySelector('.edit-form');
+        if (open) {
+          open.remove();
+          edit.textContent = 'Edit';
+          return;
+        }
+        edit.textContent = 'Close';
+        item.append(buildEditForm(artwork, {
+          birthDate: state.birthDate,
+          onCancel: () => { item.querySelector('.edit-form')?.remove(); edit.textContent = 'Edit'; },
+          onDescribe: (facts) => fetchArtworkImage(artwork.image.src)
+            .then((picture) => describeArtwork(picture, facts)),
+          onSave: async (patch) => {
+            const res = await authed(`/api/collections/gallery_artworks/records/${artwork.id}`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(patch),
+            });
+            if (!res.ok) {
+              const detail = await res.json().catch(() => ({}));
+              throw new Error(detail?.message || `The change was refused (${res.status}).`);
+            }
+            await refreshHung();
+          },
+        }));
+      });
+
+      item.append(thumb, text, edit, remove);
       list.append(item);
     }
   } catch (problem) {
@@ -349,6 +382,49 @@ field('note').addEventListener('input', () => {
     : '';
 });
 
+/**
+ * Ask the model for a wall label.
+ *
+ * @param {{data: string, mediaType: string}} picture base64, no data: prefix
+ * @param {object} facts title, medium, dimensions, createdOn, note
+ * @returns {Promise<string>}
+ */
+async function describeArtwork(picture, facts) {
+  const res = await authed('/api/gallery/describe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      image: picture.data,
+      mediaType: picture.mediaType,
+      ...facts,
+      age: ageLabel(monthsAt(state.birthDate, facts.createdOn)),
+    }),
+  });
+  const payload = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(payload?.message || `The label could not be written (${res.status}).`);
+  return payload.note;
+}
+
+/**
+ * A hanging drawing's display file, as base64, for sending to the model.
+ *
+ * The add flow bakes a small copy from the photo in hand; there is no photo in hand
+ * when editing, so this fetches back what is already hung. The URL carries a file token
+ * — the collections are private — so it has to go through fetch rather than an <img>.
+ */
+async function fetchArtworkImage(src) {
+  const res = await fetch(src);
+  if (!res.ok) throw new Error(`Could not load the drawing back (${res.status}).`);
+  const blob = await res.blob();
+  const data = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result).split(',')[1] ?? '');
+    reader.onerror = () => reject(new Error('Could not read the drawing back.'));
+    reader.readAsDataURL(blob);
+  });
+  return { data, mediaType: blob.type || 'image/jpeg' };
+}
+
 // ── The label, written for you ──────────────────────────────────────────────
 document.querySelector('[data-act="describe"]').addEventListener('click', async () => {
   const button = document.querySelector('[data-act="describe"]');
@@ -370,28 +446,17 @@ document.querySelector('[data-act="describe"]').addEventListener('click', async 
       contrast: state.contrast,
     });
 
-    const createdOn = field('createdOn').value;
-    const res = await authed('/api/gallery/describe', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        image: data,
-        mediaType,
-        title: field('title').value.trim(),
-        medium: field('medium').value.trim(),
-        dimensions: field('dimensions').value.trim(),
-        createdOn,
-        age: ageLabel(monthsAt(state.birthDate, createdOn)),
-        note: field('note').value.trim(),
-      }),
+    const note = await describeArtwork({ data, mediaType }, {
+      title: field('title').value.trim(),
+      medium: field('medium').value.trim(),
+      dimensions: field('dimensions').value.trim(),
+      createdOn: field('createdOn').value,
+      note: field('note').value.trim(),
     });
 
-    const payload = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(payload?.message || `The label could not be written (${res.status}).`);
-
     // Into the field, not into the record. Somebody reads it before it is hung.
-    field('note').value = payload.note;
-    state.generatedNote = payload.note;
+    field('note').value = note;
+    state.generatedNote = note;
     at('note-hint').textContent = 'Written for you — edit it freely, or write over it.';
     status.textContent = '';
   } catch (problem) {

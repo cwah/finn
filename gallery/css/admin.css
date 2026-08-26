@@ -123,6 +123,7 @@
 
 .hung-item {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: .75rem;
   padding: .45rem .55rem;
@@ -159,3 +160,25 @@
 
 .note-actions { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
 .note-actions .hint { margin: 0; }
+
+/* Editing is only offered on drawings this account added, the same as deleting — the
+   collection rule would refuse anything else, so the interface agrees with it rather
+   than inviting a refusal. */
+.hung-edit {
+  font: inherit; font-size: .8rem; padding: .3rem .6rem; cursor: pointer;
+  color: var(--ink); background: transparent;
+  border: 1px solid rgba(var(--shadow-rgb), .3); flex: none;
+}
+.hung-item[data-mine="false"] .hung-edit { display: none; }
+
+.edit-form {
+  flex: 1 0 100%;
+  display: grid;
+  gap: .7rem;
+  grid-template-columns: 1fr 1fr;
+  margin-block-start: .6rem;
+  padding-block-start: .7rem;
+  border-block-start: 1px solid rgba(var(--shadow-rgb), .15);
+}
+@media (max-width: 34rem) { .edit-form { grid-template-columns: 1fr; } }
+.edit-actions { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
