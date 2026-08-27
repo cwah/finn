@@ -91,7 +91,7 @@ export async function deletePost() {}
 
 export async function createPost(draft, author) {
   const stamp = Date.now();
-  return {
+  const post = {
     id: `local-${stamp}`,
     memoryDate: draft.memoryDate,
     createdAt: new Date().toISOString(),
@@ -119,4 +119,14 @@ export async function createPost(draft, author) {
       } : null,
     })),
   };
+
+  // Kept, and kept IN ORDER, so paging afterwards sees the same world the real backend
+  // would. Returning the record without storing it made the mock quietly better behaved
+  // than PocketBase: a backdated post could never come back on a later page, so the
+  // duplicate that causes was invisible here — which is the one place it could have been
+  // caught without standing a server up.
+  const cache = await load();
+  cache.posts.push(post);
+  cache.posts.sort((a, b) => new Date(b.memoryDate) - new Date(a.memoryDate));
+  return post;
 }

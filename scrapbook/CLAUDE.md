@@ -711,6 +711,26 @@ tests. It has no dependencies and nothing bundles.
     creation time lives in a header that can sit at the *end* of the file.
   - A motion photo is read from the **original** the parent picked, not from the still
     split out of it — the halves are new Blobs with no name and no modification time.
+- **Paging is by OFFSET, so it assumes the list underneath does not move — and backdating
+  moves it.** A post inserted mid-timeline shifts every row below it down one, so the next
+  page hands back a card already on screen. Appended a second time, that was a memory
+  showing twice: one copy where it was placed, one where paging found it. `loadMore` now
+  drops anything already in `loadedPosts` (`pickUnseen`).
+  - Dedupe alone is not enough. A later page can also contain posts NEWER than one already
+    placed — backdate to April while only May onwards is loaded, and April 22nd arrives on
+    the next page and has to go ABOVE it. So paging no longer appends: `placeCard` puts
+    every card where its date says, and paging and insertion share the one rule.
+  - `hasMore` is taken from the SERVER's answer, never from how many items survived the
+    filter — a page that was entirely duplicates is still a page with more behind it.
+  - The mock source now KEEPS what it creates, in order. Returning the record without
+    storing it made the mock better behaved than PocketBase, so a backdated post could
+    never come back on a later page and this was invisible in the one place it could have
+    been caught without a server.
+  - Still unfixed, and the other half of the same weakness: a DELETION shifts rows the
+    other way and can skip a post entirely. Cursor paging would end the whole class.
+- **`loadMore` restores `loading` in a `finally`.** It did not, so one failed fetch left
+  the flag set and paging stopped for the rest of the session — silently, since nothing on
+  that path reports an error.
 - **The scrubber takes touches in a 24px strip, not across its full 60px.** The width is
   for month labels; everything grabbable — rail, dots, thumb — sits within 20px of the
   edge. As a full-width `pointer-events: auto` element at `z-index: 8` it was an invisible

@@ -12,7 +12,7 @@ import { initCarousels } from './carousel.js';
 import { initMotion, releaseMotion } from './motion-play.js';
 import { centreProgress } from './fade.js';
 import { assignSides, assignPresets } from './milestone-art.js';
-import { pickNewPosts, oldestDate } from './sync.js';
+import { pickNewPosts, oldestDate, insertionIndex, pickUnseen } from './sync.js';
 import { initPwa } from './pwa.js';
 import { claimSharedFiles, cameFromShare } from './share.js';
 
@@ -122,8 +122,22 @@ function restripeMilestones() {
   });
 }
 
+/**
+ * Put a card where its date says it goes, among the cards already there.
+ *
+ * Shared by paging and by insertion, because they were never really doing different
+ * things — paging simply got away with appending for as long as pages arrived in order.
+ */
+function placeCard(card) {
+  const dates = [...timeline.children].map((c) => c.dataset.memoryDate || null);
+  const at = insertionIndex(dates, card.dataset.memoryDate);
+  const before = timeline.children[at];
+  if (before) timeline.insertBefore(card, before);
+  else timeline.append(card);
+}
+
 function mountCard(card) {
-  timeline.append(card);
+  placeCard(card);
   revealObserver.observe(card);
   card.querySelectorAll('[data-parallax]').forEach((el) => parallaxObserver.observe(el));
   if (card.classList.contains('milestone-scene')) artObserver.observe(card);
@@ -134,16 +148,29 @@ function mountCard(card) {
 async function loadMore() {
   if (loading || !hasMore) return;
   loading = true;
-  const { items, hasMore: more } = await getPosts({ page });
-  // renderPost returns null for posts with nothing to show — skip those.
-  items.forEach((post) => loadedPosts.set(post.id, post));
-  items
-    .map((post) => renderPost(post, birthDate, { currentAuthorId }))
-    .filter(Boolean)
-    .forEach(mountCard);
-  hasMore = more;
-  page += 1;
-  loading = false;
+  // try/finally, or one failed fetch leaves `loading` true for the rest of the session and
+  // paging stops for good — silently, since nothing here reports an error.
+  try {
+    const { items, hasMore: more } = await getPosts({ page });
+
+    // Anything already on screen is dropped rather than added a second time. Pages are
+    // fetched by offset, so a post inserted into the middle of the timeline shifts every
+    // row below it down one and the next page hands back a card already displayed.
+    const unseen = pickUnseen(items, loadedPosts);
+    unseen.forEach((post) => loadedPosts.set(post.id, post));
+    unseen
+      // renderPost returns null for posts with nothing to show — skip those.
+      .map((post) => renderPost(post, birthDate, { currentAuthorId }))
+      .filter(Boolean)
+      .forEach(mountCard);
+
+    // From the SERVER's answer, not from how many survived the filter — a page that was
+    // entirely duplicates is still a page, and there may well be more behind it.
+    hasMore = more;
+    page += 1;
+  } finally {
+    loading = false;
+  }
   restripeMilestones();
   // New cards changed the document height and added months — re-measure once, here,
   // rather than from the scroll path.
@@ -176,12 +203,7 @@ function insertPost(post, { reveal = true } = {}) {
   const card = renderPost(post, birthDate, { currentAuthorId });
   if (!card) return;
 
-  const older = Array.from(timeline.children).find(
-    (c) => c.dataset.memoryDate && c.dataset.memoryDate < post.memoryDate,
-  );
-  if (older) timeline.insertBefore(card, older);
-  else timeline.append(card);
-
+  placeCard(card);
   activate(card);
   if (reveal) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   restripeMilestones(); // a milestone inserted mid-timeline flips every side below it

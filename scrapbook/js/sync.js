@@ -49,3 +49,46 @@ export function oldestDate(posts) {
   }
   return oldest;
 }
+
+/**
+ * Where a post belongs among those already on screen, by memory date.
+ *
+ * The timeline runs newest first, so a post goes immediately before the first card OLDER
+ * than it. Same-date cards count as neither older nor newer, so a new one joins the end of
+ * its own day rather than the front — which is the order they were added in.
+ *
+ * Paging used to assume "a later page is always older, so append", and that holds right up
+ * until something is inserted into the middle of the timeline. Then the next page can
+ * contain posts NEWER than one already placed, and appending files them underneath it.
+ *
+ * @param {Array<string|null>} dates memory dates of the cards on screen, in display order
+ * @param {string} memoryDate the post being placed
+ * @returns {number} index to insert before; dates.length means "append"
+ */
+export function insertionIndex(dates, memoryDate) {
+  const list = Array.isArray(dates) ? dates : [];
+  const at = list.findIndex((d) => d && d < memoryDate);
+  return at === -1 ? list.length : at;
+}
+
+/**
+ * A page of posts, minus anything already on screen.
+ *
+ * Paging is by OFFSET, so it assumes the list underneath does not move. Inserting a
+ * backdated post breaks that assumption outright: every row below it shifts down one, and
+ * the next page hands back something already displayed. Left unfiltered it was appended a
+ * second time, which is the duplicate — one copy where it was placed, one where paging
+ * found it.
+ *
+ * Deliberately NOT `pickNewPosts`: that also refuses posts older than what is loaded,
+ * which is right for a background poll and exactly wrong here, since reaching further back
+ * is the whole purpose of turning a page.
+ *
+ * @param {object[]} items a page as fetched
+ * @param {{has: (id: string) => boolean}} known posts already loaded
+ * @returns {object[]} in the order given
+ */
+export function pickUnseen(items, known) {
+  const list = Array.isArray(items) ? items : [];
+  return list.filter((post) => post?.id && !known?.has(post.id));
+}

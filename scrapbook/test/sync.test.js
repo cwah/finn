@@ -7,7 +7,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { pickNewPosts, oldestDate } from '../js/sync.js';
+import { pickNewPosts, oldestDate, insertionIndex, pickUnseen } from '../js/sync.js';
 
 const post = (id, memoryDate) => ({ id, memoryDate });
 
@@ -90,4 +90,67 @@ test('nothing on screen has no oldest date', () => {
 
 test('it reads a Map’s values, which is what the timeline actually holds', () => {
   assert.equal(oldestDate(known.values()), '2026-08-01');
+});
+
+// ── Where a card goes ─────────────────────────────────────────────
+// The timeline runs newest first. These pin the ORDER rule that paging and insertion now
+// share; appending blindly was right only for as long as pages arrived in order.
+
+test('a memory newer than everything goes to the top', () => {
+  assert.equal(insertionIndex(['2026-07-14', '2026-06-01'], '2026-08-01'), 0);
+});
+
+test('a memory older than everything is appended', () => {
+  assert.equal(insertionIndex(['2026-07-14', '2026-06-01'], '2026-05-01'), 2);
+});
+
+test('a backdated memory lands between the two it belongs between', () => {
+  assert.equal(insertionIndex(['2026-07-14', '2026-06-30', '2026-06-01'], '2026-06-17'), 2);
+});
+
+test('a memory joins the END of its own day, not the front', () => {
+  // Same date is neither older nor newer, so it follows the ones already there — which is
+  // the order they were added in.
+  assert.equal(insertionIndex(['2026-07-14', '2026-07-14', '2026-06-01'], '2026-07-14'), 2);
+});
+
+test('an empty timeline takes anything at position 0', () => {
+  assert.equal(insertionIndex([], '2026-07-14'), 0);
+  assert.equal(insertionIndex(null, '2026-07-14'), 0);
+});
+
+test('cards with no date are stepped over, never treated as older', () => {
+  // A card the renderer gave no date is not evidence of anything; placing a memory above
+  // it on that basis would put it in the wrong decade as easily as the wrong week.
+  assert.equal(insertionIndex([null, '2026-06-01'], '2026-07-01'), 1);
+});
+
+// ── A page, minus what is already showing ─────────────────────────
+
+test('a page already on screen adds nothing', () => {
+  const known = new Map([['a', 1], ['b', 1]]);
+  assert.deepEqual(pickUnseen([{ id: 'a' }, { id: 'b' }], known), []);
+});
+
+test('the shifted page keeps only what is genuinely new', () => {
+  // THE BUG. A backdated post pushes every row below it down one, so the next page hands
+  // back a card already displayed — appended a second time, that is the duplicate.
+  const known = new Map([['new', 1], ['p3', 1]]);
+  assert.deepEqual(
+    pickUnseen([{ id: 'new' }, { id: 'p2' }, { id: 'p1' }], known).map((p) => p.id),
+    ['p2', 'p1'],
+  );
+});
+
+test('order is preserved, and junk is dropped', () => {
+  const known = new Map();
+  assert.deepEqual(
+    pickUnseen([{ id: 'x' }, null, {}, { id: 'y' }], known).map((p) => p.id),
+    ['x', 'y'],
+  );
+});
+
+test('nothing in, nothing out', () => {
+  assert.deepEqual(pickUnseen(null, new Map()), []);
+  assert.deepEqual(pickUnseen([{ id: 'a' }], null), [{ id: 'a' }]);
 });
