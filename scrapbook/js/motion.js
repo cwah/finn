@@ -226,9 +226,28 @@ export function mp4CreatedAt(bytes) {
   const EPOCH_OFFSET = 2082844800;
   const unix = seconds - EPOCH_OFFSET;
   const when = new Date(unix * 1000);
-  const year = when.getUTCFullYear();
+
+  // A LOCAL calendar day, not a UTC one.
+  //
+  // mvhd holds a genuine UTC instant — checked against a Pixel clip whose Google filename,
+  // which is written in UTC, names the same day. But a memory belongs to the day it
+  // happened WHERE it happened, and every other date here is a local day: the send date
+  // this gets compared against, `localDay` in message.js, `todayISO` in capture.js.
+  //
+  // Read as UTC, an evening video was dated tomorrow. West of Greenwich anything shot
+  // after about 5pm falls on the next UTC day, so a clip taken at 19:35 on the 10th came
+  // back as the 11th — which then looked like a camera clock claiming the future and was
+  // thrown out altogether. It surfaced as "the date was not inferred", never as a date
+  // merely a day off, which is why it took a real file to see.
+  //
+  // The same trap EXIF sidesteps by recording wall-clock time and no zone at all.
+  //
+  // A device writing LOCAL time into mvhd while claiming UTC would now be shifted the
+  // wrong way. That inconsistency exists in the wild and nothing in the file distinguishes
+  // it; the clips checked here are correct, and correct devices are what to be right for.
+  const year = when.getFullYear();
   if (!(year >= 2000 && year <= 2100)) return null;
 
   const pad = (n) => String(n).padStart(2, '0');
-  return `${year}-${pad(when.getUTCMonth() + 1)}-${pad(when.getUTCDate())}`;
+  return `${year}-${pad(when.getMonth() + 1)}-${pad(when.getDate())}`;
 }

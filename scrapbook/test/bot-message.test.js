@@ -188,7 +188,7 @@ test('a video becomes a post, with its poster taken from Telegram’s thumbnail'
   assert.deepEqual(
     { ...draft.photos[0], name: undefined },
     { fileId: 'thumb', videoFileId: 'vid', width: 1920, height: 1080,
-      duration: 34, size: 5_000_000, name: undefined },
+      duration: 34, size: 5_000_000, name: undefined, isAnimation: false },
   );
   assert.equal(draft.caption, 'First splash');
 });
@@ -546,14 +546,28 @@ test('a mixed album counts only the compressed ones', () => {
   assert.equal(countCompressed(draftFromMessages(group)), 1);
 });
 
-test('a video and a live photo are never queried', () => {
-  // Telegram hands over the original clip and states its shape, so the normal way of
-  // sending these IS the right way. Asking would be noise on every video ever sent.
-  assert.equal(countCompressed(draftFromMessages([livePhotoMsg()])), 0);
+test('a video IS queried — Telegram re-encodes those too', () => {
+  // This test asserted the opposite, on the belief that Telegram passed videos through
+  // untouched. A delivered clip compared against the same phone's original settled it:
+  // brands `isomiso2avc1mp41` against `isomiso2mp41`, and every com.android.* tag gone.
+  // Its mvhd times the re-encode, so a video loses its date exactly like a photo.
   assert.equal(countCompressed(draftFromMessages([{
     message_id: 1, date: AT,
     video: { file_id: 'v', width: 1920, height: 1080, duration: 4, thumbnail: { file_id: 't' } },
+  }])), 1);
+});
+
+test('a GIF is never queried — there is no date in one to lose', () => {
+  assert.equal(countCompressed(draftFromMessages([{
+    message_id: 1, date: AT,
+    animation: { file_id: 'g', width: 480, height: 480, duration: 2, thumbnail: { file_id: 't' } },
   }])), 0);
+});
+
+test('a live photo is never queried — there is no better path to offer', () => {
+  // Telegram carries these on their own route; a question whose only advice is "send it
+  // some other way" is a toll on sending one at all.
+  assert.equal(countCompressed(draftFromMessages([livePhotoMsg()])), 0);
 });
 
 test('a quote card has nothing to ask about', () => {

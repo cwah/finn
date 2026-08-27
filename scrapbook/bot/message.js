@@ -177,6 +177,10 @@ export function draftFromMessages(group) {
         height: clip.height,
         duration: clip.duration || 0,
         size: clip.file_size || 0,
+        // A GIF, as opposed to something filmed. Carried because the two want different
+        // treatment when it comes to dates: a video off a phone HAS a moment it was taken
+        // and can lose it, while a GIF was downloaded from somewhere and never had one.
+        isAnimation: Boolean(message.animation && !message.video),
         // An animation has no sound and loops by nature; whether it reads as a motion
         // photo is still decided by its length, exactly as in the app.
         name: clip.file_name || 'clip',
@@ -303,8 +307,8 @@ export function dateMemory({ days = [], dated = null, sentOn, compressed = false
   if (!latest && compressed) {
     return {
       memoryDate: sentOn,
-      note: `Telegram strips the timestamp out of a compressed photo, so I dated this `
-        + `${sentOn}, the day it arrived. Send #date to say otherwise.`,
+      note: 'Telegram strips the timestamp out of anything sent as a photo or a video, so '
+        + `I dated this ${sentOn}, the day it arrived. Send #date to say otherwise.`,
     };
   }
 
@@ -339,21 +343,34 @@ export function dateMemory({ days = [], dated = null, sentOn, compressed = false
  * Knowable from the draft alone, before a single byte is fetched, which is what makes it
  * possible to ask a parent about it rather than discover it half a download later.
  *
- * The compressed path is anything sent as a "photo" rather than as a file. Telegram
- * re-encodes it, and three things go: the motion in a motion photo, the original quality,
- * and the EXIF timestamp — verified against delivered bytes, which have no APP1 segment at
- * all and a filename of `file_23.jpg`.
+ * The compressed path is anything sent as a "photo" or as a "video" rather than as a file.
+ * Telegram re-encodes both, and three things go: the motion in a motion photo, the original
+ * quality, and the timestamp.
  *
- * A video or a live photo is NOT compressed in this sense. Telegram states their
- * dimensions and duration on the message and hands over the original clip, so the normal
- * way of sending them is also the right one, and asking about those would be noise.
+ * Verified against delivered bytes rather than assumed, for each:
+ *
+ *   a photo    arrives with no APP1 segment at all — JFIF and an ICC profile and nothing
+ *              else — and a filename of `file_23.jpg`.
+ *   a video    arrives with brands `isomiso2avc1mp41` and no `com.android.*` metadata,
+ *              where the same phone's original has `isomiso2mp41` and carries
+ *              `com.android.model`. The `avc1` and the missing metadata are ffmpeg's
+ *              fingerprints: its mvhd timestamp is when TELEGRAM re-encoded it, not when
+ *              anything was filmed. This one was believed to be safe and is not.
+ *
+ * Two things are deliberately never queried:
+ *
+ *   a GIF          was downloaded from somewhere and never had a moment it was taken, so
+ *                  there is nothing to lose and nothing to ask about.
+ *   a live photo   has no compressed-or-file choice to offer — Telegram carries it on its
+ *                  own dedicated path — and a question with no better answer is just a
+ *                  toll on sending one.
  *
  * @param {object} draft from draftFromMessages
  * @returns {number}
  */
 export function countCompressed(draft) {
   const photos = draft?.photos || [];
-  return photos.filter((p) => !p.videoFileId && !p.needsMeasuring && !p.isLive).length;
+  return photos.filter((p) => !p.needsMeasuring && !p.isLive && !p.isAnimation).length;
 }
 
 /** Yes and no, as a parent would actually type them on a phone. */

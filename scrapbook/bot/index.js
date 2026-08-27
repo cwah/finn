@@ -91,11 +91,12 @@ function createAlbumBuffer(onReady) {
   };
 }
 
+// Each entry is ONE line as it appears on a phone. A paragraph is a single long string,
+// however far it runs past the margin here — the array joins with newlines, so wrapping
+// the source wraps the message, and "untick “Compress" / "images”" is what a parent read.
+// Telegram wraps to the screen it is on, which is the only width that is actually known.
 const HELP = [
-  'SEND PHOTOS AS FILES. On Android: paperclip -> File. On desktop: untick “Compress',
-  'images”. Sent the normal way, Telegram re-encodes the picture and three things go with',
-  'it — the date it was taken, the motion in a motion photo, and the original quality.',
-  'None of them can be recovered afterwards, so I check before saving one.',
+  'SEND PHOTOS AND VIDEOS AS FILES. On Android: paperclip -> File. On desktop: untick “Compress images”. Sent the normal way, Telegram re-encodes them, and three things go — the date it was taken, the motion in a motion photo, and the original quality. None of them can be recovered afterwards, so I check before saving one.',
   '',
   'Send me anything and it goes in the scrapbook:',
   '',
@@ -103,11 +104,10 @@ const HELP = [
   '· a few words on their own — they become a quote card',
   '· #milestone First steps — marks a milestone',
   '· #date 8/14 — dates the memory (month first; I assume this year)',
-  '· a video or a GIF — send these the normal way, they arrive intact',
+  '· a video — as a FILE too, or it arrives dated the day you sent it',
+  '· a GIF — send it however; there is no date in one to keep',
   '',
-  'A memory is dated from the media itself where it can be — a photo taken on Friday and',
-  'sent on Sunday belongs on Friday. Only the file keeps that timestamp. #date overrides',
-  'either.',
+  'A memory is dated from the media itself where it can be — something taken on Friday and sent on Sunday belongs on Friday. Only the file keeps that timestamp. #date overrides either.',
   '',
   'A clip plays for up to a minute; edit the memory in the app to choose which minute.',
 ].join('\n');
@@ -254,7 +254,13 @@ async function fetchItem(tg, photo, sort) {
   // Telegram re-encodes anything sent as a "photo" and caps it at 2560px, which destroys
   // a motion photo's appended clip before the bot ever sees it. Worth surfacing: the
   // picker still calls it a motion photo, so the loss is invisible from the phone.
-  const compressed = !photo.videoFileId && !photo.needsMeasuring && !photo.isLive;
+  //
+  // A VIDEO is re-encoded too, which was believed otherwise until a delivered one was
+  // compared against the original: same phone, brands `isomiso2avc1mp41` against
+  // `isomiso2mp41`, and every `com.android.*` tag gone. Its mvhd therefore times the
+  // re-encode, not the filming. The same reasoning as countCompressed, and the same
+  // exceptions — a GIF never had a date, and a live photo has no other path to offer.
+  const compressed = !photo.needsMeasuring && !photo.isLive && !photo.isAnimation;
   return {
     kind, note, compressed, takenOn,
     blob: posterBlob, filename: poster.filename, width, height, video,
@@ -398,8 +404,9 @@ async function handleGroup(messages, { tg, pb, botAccountId }) {
     const these = one ? 'That came' : `Those ${compressedItems} came`;
     const when = one ? 'the date it was taken' : 'the dates they were taken';
     await tg.sendMessage(chatId,
-      `${these} through compressed, so Telegram has already thrown away ${when}, `
-      + 'any motion, and some quality. None of that can be recovered.'
+      `${these} through compressed, so Telegram has re-encoded ${one ? 'it' : 'them'} and `
+      + `thrown away ${when}, along with some quality — and the motion, if there was any. `
+      + 'None of that can be recovered.'
       + '\n\nSave anyway? Reply YES.'
       + '\n\nOr send again as a FILE to keep it all: paperclip -> File on Android, '
       + 'or untick “Compress images” on desktop.'

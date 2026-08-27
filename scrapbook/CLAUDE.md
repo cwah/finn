@@ -518,14 +518,28 @@ new fields, no layout hints. Rules that must hold:
 - `media-date.js` is **shared with the app** and lives in `js/`, not `bot/` — that is the
   direction dependencies already run here: the bot imports from the app, never the other
   way about. The compose sheet dates a new post with the same readers.
-- **A photo sent as a photo is QUERIED before it is saved.** Not refused — sometimes
+- **`mp4CreatedAt` returns a LOCAL day, not a UTC one.** mvhd holds a genuine UTC instant
+  — confirmed against a Pixel clip whose Google filename, itself written in UTC, names the
+  same day — but every other date here is local, including the send date it gets compared
+  against. Read as UTC, a clip filmed at 19:35 on the 10th in Los Angeles came back as the
+  11th, which then looked like a camera clock claiming tomorrow and was discarded outright.
+  It surfaced as "the date was not inferred", never as a date one day off, which is why it
+  needed a real file to see. `test/motion.test.js` pins `TZ` for this reason: from a
+  machine running in UTC the two readings agree and the suite proves nothing.
+- **Telegram re-encodes VIDEOS as well as photos**, which was assumed otherwise here and
+  was wrong. Settled by comparing a delivered clip against the same phone's original:
+  brands `isomiso2avc1mp41` against `isomiso2mp41`, and every `com.android.*` tag gone —
+  ffmpeg's fingerprints. Its mvhd times the re-encode, not the filming, so a video sent
+  the normal way arrives dated the day it was sent, exactly like a photo.
+- **A photo or video sent as a photo or video is QUERIED before it is saved.** Not refused — sometimes
   compressed is exactly what someone wants, and a bot that will not save a forwarded
   screenshot is worse than one that asks. The question comes after `#date` has been
   validated and **before a single byte is downloaded**: `countCompressed()` reads the
   draft, so a parent who meant to send files finds out in seconds rather than after
-  several megabytes and an unrecoverable post. Videos, GIFs and live photos are never
-  queried — Telegram hands those over intact, so the normal way of sending them is also
-  the right one.
+  several megabytes and an unrecoverable post. Two things are deliberately never queried:
+  a **GIF**, which was downloaded from somewhere and never had a moment it was taken; and a
+  **live photo**, which Telegram carries on its own path, so the only advice a question
+  could give is "send it some other way".
   - **The MESSAGES are held, not a draft**, in `awaitingConfirmation` keyed by chat. A
     "yes" replays them through the same code path, so there are not two paths to keep
     agreeing, and `file_id`s stay valid so the media is fetched only once it is wanted.
@@ -546,6 +560,10 @@ new fields, no layout hints. Rules that must hold:
   modules were always well covered and the wiring between them was not, which is the shape
   of every assembly bug this bot has had. `test/bot-confirm.test.js` drives the whole flow
   against stubbed Telegram and PocketBase clients.
+- **Bot messages are written as whole paragraphs on one source line**, however far past
+  the margin they run. `HELP` joins its array with newlines, so wrapping the source wraps
+  the message — a parent read "untick “Compress" and then "images”" on a new line. Telegram
+  wraps to the screen it is on, which is the only width actually known.
 - **A compressed photo carries no date whatsoever, and this is the common case.** Checked
   against bytes Telegram actually delivered, not assumed: the JPEG has no APP1 segment at
   all — JFIF and an ICC profile and nothing else — the strings `Exif` and `DateTime` do

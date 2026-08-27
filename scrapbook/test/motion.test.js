@@ -4,11 +4,18 @@
 //
 //   npm test
 
+// Pinned BEFORE anything constructs a Date. The UTC-vs-local bug in mp4CreatedAt is
+// invisible from a machine running in UTC — the two readings agree there — so a suite that
+// inherits the runner's zone would have passed on the broken code and would pass again on
+// the next regression. node:test gives each file its own process, so this is local to here.
+process.env.TZ = 'America/Los_Angeles';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
   pairLivePhotos, findEmbeddedVideo, looksLikeMotion, MOTION_MAX_SECONDS, mp4Duration,
+  mp4CreatedAt,
 } from '../js/motion.js';
 
 const f = (name) => ({ name });
@@ -187,4 +194,77 @@ test('a box claiming to run past the end of the file is refused', () => {
   const bytes = mp4({ duration: 1400, timescale: 1000 });
   bytes[0] = 0x7f; // ftyp now claims an enormous size
   assert.equal(mp4Duration(bytes), 0);
+});
+
+
+// ── When a clip was recorded ──────────────────────────────────────
+// mvhd counts seconds from 1904-01-01 UTC. What comes back must be the LOCAL calendar day,
+// because that is what every other date in this codebase is — including the send date it
+// gets compared against.
+
+const u32 = (n) => [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255];
+
+/**
+ * A minimal moov/mvhd holding one instant.
+ *
+ * A version-0 mvhd body is 20 bytes — version+flags, creation, modification, timescale,
+ * duration — and the reader requires at least 12 of them before it will look. A shorter
+ * one is simply refused, which is correct of it and was wrong of the first draft here.
+ */
+function clipAt(date) {
+  const secs = Math.floor(date.getTime() / 1000) + 2082844800;
+  const body = [
+    0, 0, 0, 0,        // version 0 + flags
+    ...u32(secs),      // creation_time
+    ...u32(secs),      // modification_time
+    ...u32(1000),      // timescale
+    ...u32(8000),      // duration
+  ];
+  const mvhd = [...u32(8 + body.length), 0x6d, 0x76, 0x68, 0x64, ...body];
+  return Uint8Array.from([...u32(8 + mvhd.length), 0x6d, 0x6f, 0x6f, 0x76, ...mvhd]);
+}
+
+/** Where creation_time sits: moov header, mvhd header, then version+flags. */
+const CREATION_AT = 8 + 8 + 4;
+
+test('a clip is dated by the local day it was recorded', () => {
+  const noon = new Date(2026, 7, 10, 12, 0, 0); // local, unambiguous in any zone
+  assert.equal(mp4CreatedAt(clipAt(noon)), '2026-08-10');
+});
+
+test('an evening clip stays on the evening it happened', () => {
+  // THE BUG. Read as a UTC day, 19:35 on the 10th in Los Angeles comes back as the 11th —
+  // which then looks like a camera clock claiming tomorrow and is discarded outright, so
+  // it surfaced as "the date was not inferred" rather than as a date one day off.
+  const evening = new Date(2026, 7, 10, 19, 35, 43);
+  assert.equal(mp4CreatedAt(clipAt(evening)), '2026-08-10');
+});
+
+test('an early-morning clip does not slip to the day before', () => {
+  // The mirror image, for anywhere east of Greenwich.
+  const earlyHours = new Date(2026, 7, 11, 0, 20, 0);
+  assert.equal(mp4CreatedAt(clipAt(earlyHours)), '2026-08-11');
+});
+
+test('the last minute of a day belongs to that day', () => {
+  assert.equal(mp4CreatedAt(clipAt(new Date(2026, 7, 10, 23, 59, 59))), '2026-08-10');
+  assert.equal(mp4CreatedAt(clipAt(new Date(2026, 7, 11, 0, 0, 0))), '2026-08-11');
+});
+
+test('an encoder that did not know the time says nothing', () => {
+  // 0 means "unset", not 1904 — a memory from the Edwardian era is not the answer.
+  const zeroed = clipAt(new Date(2026, 7, 10, 12, 0, 0));
+  zeroed.set([0, 0, 0, 0], CREATION_AT);
+  assert.equal(mp4CreatedAt(zeroed), null);
+});
+
+test('an implausible year is not a date', () => {
+  assert.equal(mp4CreatedAt(clipAt(new Date(1970, 0, 2))), null);
+});
+
+test('nothing readable is null, not a throw', () => {
+  assert.equal(mp4CreatedAt(null), null);
+  assert.equal(mp4CreatedAt(new Uint8Array(4)), null);
+  assert.equal(mp4CreatedAt(Uint8Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    13, 14, 15, 16, 17, 18])), null, 'no moov box at all');
 });
