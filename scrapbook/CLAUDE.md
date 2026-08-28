@@ -738,6 +738,17 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
+- **Reading picked files uses `Promise.allSettled`, never `Promise.all`.** One rejection
+  threw the entire batch away, so picking five photos of which one was cloud-only added
+  NOTHING — and a parent who typed a caption then saved got a memory with no photos in it.
+  Order still holds: allSettled resolves positionally, and position 0 leads the post.
+- **A file the device lists but cannot hand over is the shared-album case, and it is worth
+  naming.** A photo in an album someone else owns is often only in the cloud; the picker
+  shows it and produces a `File`, but the bytes are not on the device. `assertReadable`
+  checks for an empty file and probes one byte BEFORE any measuring or decoding, so the
+  failure is fast and says the useful thing instead of surfacing as a decode error. The
+  message names the files and says what to do — open them in the photos app to download
+  them first. Nothing in the picker hints at any of this: the photo is right there.
 - **A photo that fails to upload is NEVER swallowed.** Both write paths caught a failed
   `photos` create, logged it to a console nobody has open, and carried on — so a memory
   with ten photos attached could save with four and still report success, with the files
