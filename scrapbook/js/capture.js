@@ -537,6 +537,12 @@ export function initCapture({ author, canPost = true }, handlers) {
    * a photo in an album someone else owns often is not on the phone at all, only in the
    * cloud, and the picker hands over a reference the browser cannot then read. Nothing
    * about the picker suggests that — the photo is right there in the grid.
+   *
+   * The advice is to SHARE rather than to download, because sharing is the path that
+   * works. A file picker asks the OS for a file that may not exist locally; the share
+   * sheet asks the photos app to PRODUCE one, and it will fetch the original from the
+   * cloud to do it. That is the same route a native app gets, and this app already has a
+   * share target — so the capability was never missing, only the signpost.
    */
   function readFailureMessage(lost, total) {
     const named = lost.slice(0, 3).join(', ') + (lost.length > 3 ? '…' : '');
@@ -546,8 +552,9 @@ export function initCapture({ author, canPost = true }, handlers) {
       ? `${lost.length} of those ${total} could not be read`
       : (total === 1 ? 'That photo could not be read' : `None of those ${total} could be read`);
     return `${clause} (${named}). `
-      + 'If they are in a shared album, they may not be downloaded to this device yet — '
-      + 'open them in your photos app to save them here first, then add them again.'
+      + 'Photos in a shared album are often only in the cloud, not on this phone. '
+      + 'Open them in your photos app and use Share \u2192 Finnbook instead: that makes '
+      + 'the phone fetch the full photo. Saving them to your device first also works.'
       + (lost.length < total ? ' The rest were added.' : '');
   }
 

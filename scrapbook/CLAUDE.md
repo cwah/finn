@@ -742,6 +742,18 @@ tests. It has no dependencies and nothing bundles.
   threw the entire batch away, so picking five photos of which one was cloud-only added
   NOTHING — and a parent who typed a caption then saved got a memory with no photos in it.
   Order still holds: allSettled resolves positionally, and position 0 leads the post.
+- **The file picker and the share sheet are NOT the same capability, and the difference is
+  the whole cloud-photo story.** A picker asks the OS for a file that may not exist
+  locally, and a cloud-only photo comes back as a reference with no bytes behind it. The
+  share sheet asks the photos app to PRODUCE a file, and it will fetch the original from
+  the cloud to do so — which is why sharing to a native app "just works" where the picker
+  does not. It is not a native-only power: a PWA with a `share_target` sits in the same
+  sheet and receives the same materialised bytes. Verified end to end here — three files
+  POSTed as `multipart/form-data` to `/share-target` land in the compose sheet as three
+  thumbnails, with the inbox cache emptied after the claim.
+  - Which makes the share sheet the ANSWER to an unreadable pick, not a workaround, and
+    the failure message says so. It needs Finnbook installed to the home screen to appear
+    in the sheet at all.
 - **A file the device lists but cannot hand over is the shared-album case, and it is worth
   naming.** A photo in an album someone else owns is often only in the cloud; the picker
   shows it and produces a `File`, but the bytes are not on the device. `assertReadable`
