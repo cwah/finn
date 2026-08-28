@@ -830,8 +830,26 @@ tests. It has no dependencies and nothing bundles.
     or a 5xx. A 400 means the record is wrong and will be wrong again.
   - What still fails comes back as `post.failedPhotos`, and the compose sheet **stays
     open** holding those photos, alongside the ones that saved. Pressing Save again edits
-    the post that was just created and uploads only what is missing. The post is handed to
-    the timeline either way — eight of ten photos is still a memory.
+    the post that was just created and uploads only what is missing.
+  - **The timeline is NOT told while the sheet is still open.** A post has to exist before
+    its photos can — a photo record needs a post to belong to — but announcing it as soon
+    as it was written put a caption-only card behind an error message saying the pictures
+    had failed, which reads as the app having thrown them away. It waits in `unannounced`
+    until the sheet is finished with: saved, cancelled or dismissed. Announced even on
+    dismissal, because the post really is on the server and a timeline that disagrees with
+    the database until the next reload is its own bug.
+  - `announceHeld()` is called from every route out of the sheet rather than from the
+    `close` event alone, and clears what it announces so it cannot fire twice. The
+    guarantee wanted is that the timeline agrees with the database exactly once — not that
+    any particular event fired.
+  - **An upload failure re-reads the file before choosing what to say.** A file that could
+    be read when it was PICKED and cannot be read now is the cloud photo: on Android a
+    `content://` reference can go stale between choosing a file and sending it, so it
+    measures and previews perfectly and has nothing behind it when the bytes are wanted.
+    That case gets the Share → Finnbook advice; a dropped connection gets "press Save to
+    try again". Both surface as a failed fetch, so the difference has to be established by
+    probing rather than inferred from the error — telling a parent to download photos they
+    already have would send them to fix the wrong thing.
   - Not reproducible as a server cap: ten sequential uploads of real photos to production
     all returned 200, and the client collects all ten into `pending`. So the loss was in
     transport, and the reason it could not be diagnosed afterwards IS the bug — the error

@@ -298,6 +298,21 @@ export function initCapture({ author, canPost = true }, handlers) {
   let reading = 0;
   // Once a parent sets the date by hand, nothing may move it again.
   let dateChosenByHand = false;
+
+  /**
+   * A post that exists on the server but has not been put on the timeline yet.
+   *
+   * It has to exist before its photos can be: a photo record needs a post to belong to.
+   * But a post with an error still on screen is not finished, and showing it the moment it
+   * was written put a caption-only card in the timeline while the parent was still being
+   * told the pictures had failed — which reads as the app having thrown the photos away.
+   *
+   * So it waits here until the sheet closes, whichever way that happens. Closing IS the
+   * confirmation: saved successfully, or given up on and dismissed. Announcing it even on
+   * dismissal is deliberate — the post is really there, and a timeline that quietly
+   * disagrees with the database until the next reload is its own bug.
+   */
+  let unannounced = null;
   let editing = null; // the post being edited, or null when composing a new one
 
   /**
@@ -569,6 +584,10 @@ export function initCapture({ author, canPost = true }, handlers) {
 
   function close() {
     releasePending();
+    // Here as well as on the `close` event: this is the route Cancel takes, and a post
+    // held back through a failed upload has to reach the timeline whichever way the parent
+    // finished with the sheet. Announcing twice is not possible — announceHeld clears it.
+    announceHeld();
     if (sheet.open) sheet.close();
   }
 
@@ -689,7 +708,64 @@ export function initCapture({ author, canPost = true }, handlers) {
 
   cancelBtn.addEventListener('click', close);
   // ESC dismisses a native <dialog> without firing our handlers — clean up regardless.
-  sheet.addEventListener('close', releasePending);
+  /**
+   * Put a held-back post on the timeline, once.
+   *
+   * Called from every route out of the sheet rather than from the `close` event alone.
+   * Idempotent by design — it clears what it announces — because "the sheet is finished
+   * with" is reached three ways and the guarantee wanted is that the timeline ends up
+   * agreeing with the database exactly once, not that any particular event fired.
+   */
+  function announceHeld() {
+    if (!unannounced) return;
+    onCreate(unannounced);
+    unannounced = null;
+  }
+
+  // ESC and the backdrop close a native <dialog> without going through `close()` above.
+  sheet.addEventListener('close', () => {
+    releasePending();
+    announceHeld();
+  });
+
+  /**
+   * Why an upload failed, and what to do about it.
+   *
+   * The interesting case is a file the device could read when it was PICKED and cannot
+   * read now. That is the cloud photo: on Android a `content://` reference can go stale
+   * between choosing a file and sending it, so it measures and previews perfectly and then
+   * has nothing behind it when the bytes are finally wanted. Nothing about it looks
+   * different until the upload — which is why it has to be said here rather than only at
+   * the picker.
+   *
+   * Established by RE-READING the files rather than inferred from the error: a dropped
+   * connection and a vanished file both surface as a failed fetch, and telling a parent to
+   * download photos they already have would send them off to fix the wrong thing.
+   */
+  async function uploadFailureMessage(lost) {
+    const gone = [];
+    for (const f of lost) {
+      try {
+        await assertReadable(f.photo?.file);
+      } catch {
+        gone.push(f.photo?.file?.name || 'one of them');
+      }
+    }
+
+    const n = lost.length;
+    const many = n === 1 ? 'photo' : 'photos';
+    if (!gone.length) {
+      return `${n} ${many} did not upload — press Save to try again. `
+        + 'They are still here until this is closed.';
+    }
+
+    const named = gone.slice(0, 3).join(', ') + (gone.length > 3 ? '…' : '');
+    return `${gone.length} of these could not be sent (${named}): this phone can no longer `
+      + 'read the file. That happens with a photo that lives in the cloud rather than on '
+      + 'the device — in a shared album, or not downloaded yet. '
+      + 'Open it in your photos app and use Share \u2192 Finnbook, which makes the phone '
+      + 'fetch the full photo, or download it to this device and add it again.';
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -717,27 +793,35 @@ export function initCapture({ author, canPost = true }, handlers) {
         ? await updatePost(target.id, draft, target.author || author)
         : await createPost(draft, author);
 
-      // The post itself is written either way, so the timeline is told about it either
-      // way — a memory that saved with eight of ten photos is still a memory, and hiding
-      // it until the rest arrive would be worse.
-      (target ? onUpdate : onCreate)(post);
-
       const lost = post.failedPhotos || [];
       if (lost.length) {
         // The sheet STAYS OPEN, holding the photos that did not make it. Their files exist
         // nowhere else — closing here is what turned a flaky connection into six lost
         // photos and a cheerful "saved". Pressing Save again now edits the post that was
         // just created and uploads only what is missing.
+        //
+        // And the timeline is NOT told yet. A card appearing behind an error message that
+        // says the pictures failed is the app contradicting itself.
+        if (!target) unannounced = post;
         editing = post;
         title.textContent = 'Edit memory';
         deleteBtn.hidden = false;
         pending = [...storedAsPending(post), ...lost.map((f) => f.photo)];
-        const n = lost.length;
-        saveError.textContent = `${n} photo${n === 1 ? '' : 's'} did not upload — the rest `
-          + 'of the memory saved. They are still here: press Save to try again.';
+        saveError.textContent = await uploadFailureMessage(lost);
         saveError.hidden = false;
         renderThumbs();
         return; // deliberately not closing
+      }
+
+      // Everything saved, so the sheet is finished with. A post held back from an earlier
+      // attempt is new to the timeline however it was finally written.
+      // A post held back from an earlier failed attempt is new to the timeline however it
+      // was finally written — so it is a create, not an update, even though this call was.
+      if (unannounced) {
+        unannounced = null;
+        onCreate(post);
+      } else {
+        (target ? onUpdate : onCreate)(post);
       }
 
       pending = []; // the saved post owns the previews now
