@@ -746,6 +746,21 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
+- **A motion photo loops INSIDE its trim, and native `loop` cannot do that.** `loop`
+  restarts the file, and the `#t=start,end` fragment only sets the opening position — no
+  browser enforces the end across a loop. So a trimmed motion photo played the whole take
+  and the trim looked as though it had never saved, while the same trim worked correctly
+  in the lightbox, which applies `holdToTrim`.
+  - `holdToTrim` is the VIDEO rule and pauses at the end, which is right for something
+    asked to play once and wrong for a loop. `wireMotionTrim` turns the attribute off and
+    rewinds instead, resuming only if the card is still on screen and nobody stopped it.
+    `ended` is the backstop: timeupdate fires a few times a second, so a trim ending on
+    the last frame can run out before it is noticed.
+  - Tested against a stub element in `test/motion-play.test.js` rather than a browser —
+    the rule is *where playback is allowed to be*, and a stub reaches the instant that
+    matters instead of waiting for a decoder. That is also why the module's environment
+    checks go through `globalThis` (`outOfSight`, `wantsStillness`): identical in a
+    browser, and reachable from node.
 - **The heading and the tab title both read "Finnbook", both written in `index.html`, and
   neither is assigned at runtime.** They match the manifest `name`, so the page, the
   home-screen icon and the share sheet all say the same word. Static is the point: filling

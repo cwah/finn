@@ -15,7 +15,16 @@ const VISIBLE = 0.35;
 /** Someone who asked for less movement gets the poster frame, which is the same picture
  *  holding still. Read live rather than cached — the setting can change mid-session. */
 const wantsStillness = () =>
-  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+
+/**
+ * Whether the tab is out of sight. Nothing should decode behind another window.
+ *
+ * Reached through `globalThis` so the trim rule below can be tested without a DOM. In a
+ * browser this is `document.hidden` and nothing else; with no document there is no tab to
+ * be hidden behind, so false is the right answer as well as the convenient one.
+ */
+const outOfSight = () => globalThis.document?.hidden ?? false;
 
 let observer = null;
 const playing = new Set();
@@ -29,13 +38,70 @@ const playing = new Set();
  */
 const heldStill = new WeakSet();
 
+/** The trimmed stretch of a card's video, as the renderer wrote it. */
+function trimOf(video) {
+  const start = Number(video.dataset.trimStart) || 0;
+  const end = Number(video.dataset.trimEnd) || 0;
+  return end > start ? { start, end } : null;
+}
+
+/** Exposed for tests: whether the observer currently considers a video on screen. */
+export function markOnScreen(video) {
+  playing.add(video);
+}
+
 function play(video) {
   playing.add(video);
-  if (document.hidden || wantsStillness() || heldStill.has(video)) return;
+  if (outOfSight() || wantsStillness() || heldStill.has(video)) return;
+  // Start inside the trim, not wherever it was left. Coming back to a card that scrolled
+  // away mid-loop would otherwise resume outside the chosen stretch.
+  const trim = trimOf(video);
+  if (trim && (video.currentTime < trim.start || video.currentTime >= trim.end)) {
+    video.currentTime = trim.start;
+  }
   // Autoplay can still be refused (a data-saver setting, a battery-saver mode). The
   // poster stays, which is exactly what a still would have shown, so there is nothing
   // to report and nothing to fix.
   video.play().catch(() => {});
+}
+
+/**
+ * Loop a motion photo INSIDE its trim.
+ *
+ * `holdToTrim` is the video version and pauses at the end, which is right for something
+ * that was asked to play once. A motion photo is a loop, so it has to go round again.
+ *
+ * Native `loop` cannot express a sub-range: it restarts the FILE, so a trimmed motion
+ * photo played the whole take and the trim looked as though it had not saved at all. The
+ * `#t=start,end` fragment sets the opening position and nothing more — no browser enforces
+ * the end across a loop. So the attribute goes and the range is kept here.
+ */
+export function wireMotionTrim(video) {
+  if (video.dataset.trimWired) return;
+  video.dataset.trimWired = 'true';
+
+  const trim = trimOf(video);
+  if (!trim) return;
+
+  video.loop = false;
+
+  const rewind = () => {
+    video.currentTime = trim.start;
+    // Only keep going if this card is still the one on screen and nobody stopped it.
+    if (playing.has(video) && !outOfSight() && !wantsStillness() && !heldStill.has(video)) {
+      video.play().catch(() => {});
+    }
+  };
+
+  video.addEventListener('timeupdate', () => {
+    if (video.currentTime >= trim.end) rewind();
+  });
+  // timeupdate fires a few times a second, so a trim ending at the last frame can run out
+  // before it notices. `ended` is the backstop.
+  video.addEventListener('ended', rewind);
+  video.addEventListener('seeking', () => {
+    if (video.currentTime < trim.start) video.currentTime = trim.start;
+  });
 }
 
 function stop(video) {
@@ -55,7 +121,7 @@ function ensureObserver() {
   // Leaving the tab should cost nothing; coming back should pick up where it was.
   document.addEventListener('visibilitychange', () => {
     for (const video of playing) {
-      if (document.hidden || wantsStillness() || heldStill.has(video)) video.pause();
+      if (outOfSight() || wantsStillness() || heldStill.has(video)) video.pause();
       else video.play().catch(() => {});
     }
   });
@@ -176,7 +242,10 @@ export function initMotion(root) {
   const videos = root.querySelectorAll('video[data-motion="true"]');
   if (!videos.length) return;
   const io = ensureObserver();
-  videos.forEach((video) => io.observe(video));
+  videos.forEach((video) => {
+    wireMotionTrim(video);
+    io.observe(video);
+  });
 }
 
 /** Release a card's videos when it leaves the timeline, so nothing decodes off-screen. */
