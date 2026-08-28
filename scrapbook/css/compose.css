@@ -124,6 +124,10 @@
 .editor {
   width: 100%;
   max-width: var(--maxw);
+  /* dvh, not vh: on a phone vh is the tallest the viewport ever gets, so the sheet would
+     be sized for a screen without the browser's own bars and the last control would sit
+     under them. dvh is what is actually visible right now. */
+  max-height: 100dvh;
   margin: auto auto 0;
   padding: 0;
   border: none;
@@ -139,7 +143,16 @@
   flex-direction: column;
   gap: 12px;
   padding: 20px 20px calc(20px + env(safe-area-inset-bottom));
+  /* The controls are the point of the sheet, so they keep their size and the PICTURE
+     gives way — see .editor-crop's max-height, which is what actually yields. Scrolling
+     is the fallback of last resort rather than the design: reaching Done should never
+     require finding it first. */
+  max-height: inherit;
+  overflow-y: auto;
 }
+
+/* Everything except the framing surface holds its height when the sheet is squeezed. */
+.editor-body > :not(.editor-crop) { flex: 0 0 auto; }
 
 .editor-hint {
   margin: 0;
@@ -158,6 +171,12 @@
   max-width: 320px;
   margin: 0 auto;
   aspect-ratio: var(--img-ar, 1);
+  /* The WIDTH is what gives way on a short screen, and it is set in JS — see fitPane() in
+     photo-editor.js. `max-height` cannot do it: with an aspect-ratio box the browser
+     clamps the height and keeps the width, so the surface stops being the photo's shape
+     and every crop coordinate lands somewhere else. The same reason the lightbox computes
+     its own sizes. */
+  max-width: min(320px, var(--pane-max, 320px));
   border-radius: 12px;
   overflow: hidden;
   background: var(--surface-2);
@@ -597,3 +616,83 @@
   border-color: var(--accent-ink);
   background: rgba(var(--accent-rgb), 0.28);
 }
+
+/* ── Light ─────────────────────────────────────────────────────── */
+/* Two sliders and a reset, on one line each. Compact on purpose: the editor is a bottom
+   sheet on a phone and everything in it has to be reachable without scrolling. */
+.editor-light {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.editor-slider {
+  display: contents; /* label and input become cells of the grid, so both sliders align */
+}
+
+.editor-slider-label {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.editor-range {
+  width: 100%;
+  height: 22px;             /* the touch target; the rail itself is drawn smaller */
+  margin: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.editor-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+}
+
+.editor-range::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+}
+
+/* 22px of thumb, which is the smallest that stays comfortable under a thumb on glass. */
+.editor-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -9px;         /* centres it on the 4px rail */
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent-ink);
+  box-shadow: var(--shadow-card);
+}
+
+.editor-range::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  background: var(--accent-ink);
+  box-shadow: var(--shadow-card);
+}
+
+/* Spans both columns so it sits under the sliders rather than squeezing them. */
+.editor-light-reset {
+  grid-column: 1 / -1;
+  justify-self: end;
+  padding: 2px 8px;
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.editor-light-reset[hidden] { display: none; }

@@ -4,7 +4,7 @@
 
 import {
   inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, coverAlign,
-  rotationOf, orientedSize, trimRange, hasVideo, isMotion,
+  rotationOf, orientedSize, trimRange, hasVideo, isMotion, lightFilter,
 } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { milestoneArtSvg, artImage } from './milestone-art.js';
@@ -25,8 +25,12 @@ function el(tag, className, props = {}) {
  * on reasoning about stored width/height and never learn that motion exists.
  */
 function photoEl(photo) {
+  // Set on the MEDIA, not on the rotor or the crop box: those carry transforms and
+  // overflow, and a filter on either would make a new containing block for them.
+  const light = lightFilter(photo);
+
   if (!hasVideo(photo)) {
-    return el('img', 'card-photo rotor-media', {
+    const img = el('img', 'card-photo rotor-media', {
       src: photo.url,
       alt: photo.alt || '',
       loading: 'lazy',
@@ -34,6 +38,8 @@ function photoEl(photo) {
       width: photo.width,
       height: photo.height,
     });
+    if (light) img.style.filter = light;
+    return img;
   }
 
   const { start, end } = trimRange(photo.video);
@@ -56,6 +62,8 @@ function photoEl(photo) {
   video.src = `${photo.video.url}#t=${start.toFixed(2)},${end.toFixed(2)}`;
   // muted must be set as an attribute too, or autoplay is refused on some browsers.
   video.setAttribute('muted', '');
+  // A clip's poster is the same picture as its frames, so both take the same light.
+  if (light) video.style.filter = light;
   video.dataset.motion = motion ? 'true' : 'false';
   video.dataset.trimStart = start;
   video.dataset.trimEnd = end;
@@ -176,6 +184,10 @@ function makeViewable(img, photo, group) {
   // not the file it was framed from. So does the rotation, for the same reason.
   img.dataset.crop = `${c.x} ${c.y} ${c.w} ${c.h}`;
   img.dataset.rotation = rotationOf(photo);
+  // Travels with the crop and the rotation, for the same reason: opening a photo should
+  // show the picture that was framed, not the file it was framed from.
+  const light = lightFilter(photo);
+  if (light) img.dataset.light = light;
   if (hasVideo(photo)) {
     const { start, end } = trimRange(photo.video);
     img.dataset.video = photo.video.url;

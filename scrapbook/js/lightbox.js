@@ -122,6 +122,8 @@ function fillRotor(rotor, photo) {
     img.decoding = 'async';
     img.src = photo.url;
     img.alt = photo.alt;
+    // The same filter the card used. Expanding a photo must not develop it differently.
+    if (photo.light) img.style.filter = photo.light;
     rotor.append(img);
     return null;
   }
@@ -134,6 +136,7 @@ function fillRotor(rotor, photo) {
   video.autoplay = true;
   video.poster = photo.url;
   video.src = `${photo.video}#t=${photo.trim.start.toFixed(2)},${photo.trim.end.toFixed(2)}`;
+  if (photo.light) video.style.filter = photo.light;
   rotor.append(video);
   return video;
 }
@@ -189,6 +192,7 @@ function collect(img) {
         height: Number(n.dataset.fullH),
         crop: { x, y, w, h },
         rotation: Number(n.dataset.rotation) || 0,
+        light: n.dataset.light || '',
         video: n.dataset.video || null,
         trim: { start, end },
         alt: n.alt || '',

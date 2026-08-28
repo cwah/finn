@@ -148,6 +148,23 @@
         <p class="editor-trim-read"></p>
       </div>
 
+      <!-- Light, held like the crop: numbers applied at render, so a heavy hand costs
+           nothing to undo and the file is never touched. Reset appears once something has
+           been moved — there is nothing to undo before that. -->
+      <div class="editor-light">
+        <label class="editor-slider">
+          <span class="editor-slider-label">Brightness</span>
+          <input class="editor-range" data-light="brightness" type="range"
+                 min="0.5" max="1.6" step="0.01" value="1" />
+        </label>
+        <label class="editor-slider">
+          <span class="editor-slider-label">Contrast</span>
+          <input class="editor-range" data-light="contrast" type="range"
+                 min="0.5" max="1.6" step="0.01" value="1" />
+        </label>
+        <button type="button" class="editor-light-reset" hidden>Reset</button>
+      </div>
+
       <div class="editor-presets"></div>
       <div class="editor-rotate-bar">
         <button type="button" class="btn btn--ghost editor-rotate" data-turn="-90"

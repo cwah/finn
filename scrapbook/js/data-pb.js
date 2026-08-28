@@ -90,6 +90,11 @@ function toPhoto(rec) {
     crop: rec.crop && typeof rec.crop === 'object' && rec.crop.w ? rec.crop : null,
     // 0 on every row that predates rotation, which is exactly what upright means.
     rotation: rec.rotation || 0,
+    // Light, held like framing and applied at render. A row that predates these fields
+    // reads 0, which lightFilter() takes as neutral — see the migration, which is where
+    // the zeros are actually put right.
+    brightness: rec.brightness || 1,
+    contrast: rec.contrast || 1,
     // A row with no video file is a still, and nothing downstream asks again.
     video: rec.video ? {
       url: pb.fileUrl('photos', rec.id, rec.video),
@@ -260,6 +265,11 @@ function photoForm(postId, photo, sort) {
   if (photo.focalY != null) form.append('focalY', String(photo.focalY));
   if (photo.crop) form.append('crop', JSON.stringify(photo.crop));
   if (photo.rotation) form.append('rotation', String(photo.rotation));
+  // Always sent, never conditionally: a neutral 1 must reach the row, or the column keeps
+  // the 0 it was created with and the photo would be read as black by anything that has
+  // not been taught otherwise.
+  form.append('brightness', String(photo.brightness ?? 1));
+  form.append('contrast', String(photo.contrast ?? 1));
 
   // A video rides along with the poster frame that stands in for it. Non-destructive
   // like the crop: the whole file is stored and the trim says which part is the memory.
@@ -318,6 +328,8 @@ export async function updatePost(id, draft, author) {
             focalY: photo.focalY ?? null,
             crop: photo.crop ?? null,
             rotation: photo.rotation || 0,
+            brightness: photo.brightness ?? 1,
+            contrast: photo.contrast ?? 1,
             trimStart: photo.trimStart || 0,
             trimEnd: photo.trimEnd || 0,
           })))

@@ -75,6 +75,8 @@ export async function updatePost(id, draft, author) {
       focalY: p.focalY ?? null,
       crop: p.crop ?? null,
       rotation: p.rotation || 0,
+      brightness: p.brightness ?? 1,
+      contrast: p.contrast ?? 1,
       // The mock source has no storage, so a clip is previewed from its object URL —
       // but the SHAPE has to match what PocketBase returns, or the two sources drift.
       video: p.videoUrl || p.videoFile ? {
@@ -109,6 +111,8 @@ export async function createPost(draft, author) {
       focalY: p.focalY ?? null,
       crop: p.crop ?? null,
       rotation: p.rotation || 0,
+      brightness: p.brightness ?? 1,
+      contrast: p.contrast ?? 1,
       // The mock source has no storage, so a clip is previewed from its object URL —
       // but the SHAPE has to match what PocketBase returns, or the two sources drift.
       video: p.videoUrl || p.videoFile ? {

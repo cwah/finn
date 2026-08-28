@@ -746,6 +746,37 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
+- **Brightness and contrast are FRAMING, not development.** Stored as numbers on the photo
+  and applied at render through one `lightFilter()`, exactly like crop, rotation and the
+  trim — so the file is never re-encoded and a heavy hand costs nothing to undo. The
+  gallery bakes its adjustments into a new file instead, because a print is a finished
+  thing and a memory is not.
+  - ONE function feeds the card, the lightbox, the compose thumbnail and the editor's live
+    preview. Three implementations would eventually disagree, and only after saving.
+  - It returns `''` when nothing is set, so the common case adds no compositing layer to
+    every photo in the timeline.
+  - The filter goes on the MEDIA element, never the rotor or the crop box — those carry
+    transforms and overflow, and a filter on either would make a containing block for them.
+  - **A new `number` field backfills 0, and 0 brightness is BLACK.** The migration fills
+    the rows in immediately after adding the columns, and `lightFilter` reads a stored 0 as
+    neutral as well. Belt and braces, deliberately: the failure mode here is every memory
+    at once.
+- **The editor's Done button must be unregistered on close, not `{ once: true }`.** `once`
+  only tidies up when Done is what happened, and usually it is not — ESC, the back gesture
+  and the backdrop all leave the listener attached for the life of the page. The next edit
+  then hit the stale one first, which called `close()`, and `close` fires SYNCHRONOUSLY:
+  the current `finish` ran while its own `saved` was still false, resolved null, and
+  capture.js dropped the edit. Cropping, rotating and trimming all vanished silently for
+  anyone who had ever dismissed the sheet without pressing Done. Long-standing, and found
+  only because the new sliders gave a visible thing to check.
+- **The editor sizes its framing surface in JS (`fitPane`), by WIDTH.** Everything in the
+  sheet has to be reachable without scrolling, so the photo yields to the controls rather
+  than the other way round. Width and not height because the surface must stay exactly the
+  photo's shape — the crop rectangle and the focal dot are positioned on it as percentages,
+  and capping the height of an aspect-ratio box leaves the width alone and breaks that. The
+  controls are measured rather than guessed, since they differ between a still and a clip.
+  Runs on open, on resize and on a quarter turn — never from `paint()`, which runs per
+  pointer move.
 - **A motion photo loops INSIDE its trim, and native `loop` cannot do that.** `loop`
   restarts the file, and the `#t=start,end` fragment only sets the opening position — no
   browser enforces the end across a loop. So a trimmed motion photo played the whole take

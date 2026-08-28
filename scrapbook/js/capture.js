@@ -16,7 +16,7 @@
 import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
 import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
-import { MAX_CLIP_SECONDS } from './layout-engine.js';
+import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
 import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
 import { openPhotoEditor } from './photo-editor.js';
 import { dateLabel } from './age.js';
@@ -335,6 +335,10 @@ export function initCapture({ author, canPost = true }, handlers) {
         img.src = p.url;
         img.alt = '';
         if (p.focalX != null) img.style.objectPosition = `${p.focalX * 100}% ${p.focalY * 100}%`;
+        // The strip is the only view of a photo between framing it and saving, so it has
+        // to show what was set — otherwise brightening one and returning to a row of
+        // untouched thumbnails reads as the adjustment not having taken.
+        img.style.filter = lightFilter(p);
         cell.append(img);
 
         if (i === 0) {
@@ -402,6 +406,8 @@ export function initCapture({ author, canPost = true }, handlers) {
       focalY: result.focalY,
       crop: result.crop,
       rotation: result.rotation,
+      brightness: result.brightness,
+      contrast: result.contrast,
       // Only a video carries a trim; the editor leaves these undefined for a still.
       ...(result.trimStart != null ? { trimStart: result.trimStart } : {}),
       ...(result.trimEnd != null ? { trimEnd: result.trimEnd } : {}),
@@ -516,6 +522,8 @@ export function initCapture({ author, canPost = true }, handlers) {
       focalY: p.focalY,
       crop: p.crop,
       rotation: p.rotation || 0,
+      brightness: p.brightness ?? 1,
+      contrast: p.contrast ?? 1,
       // The video comes back as a URL, not a File — it is already stored, and editing
       // only ever changes where the trim sits, never the file behind it.
       videoUrl: p.video?.url || null,

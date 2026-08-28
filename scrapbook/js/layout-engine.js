@@ -266,3 +266,57 @@ function hasCaption(post) {
 export function isMilestone(post) {
   return Boolean(post.milestone && post.milestone.isMilestone);
 }
+
+// ── Light ─────────────────────────────────────────────────────────
+// Brightness and contrast are framing too, by the same argument as crop, rotation and
+// trim: stored as numbers and applied at render, so the file is never re-encoded and a
+// heavy hand costs nothing to undo. The gallery bakes its adjustments into a new file
+// because a print is a finished thing; a memory is not.
+
+/** Neither adjustment does anything at 1, which is what every photo starts at. */
+const NEUTRAL = 1;
+
+/** Below this a photo is unrecognisable, above it, blown out. The gallery's range. */
+const ADJUST_MIN = 0.2;
+const ADJUST_MAX = 2;
+
+/**
+ * One adjustment, made safe.
+ *
+ * A stored 0 reads as NEUTRAL rather than as black. That is not defensive coding: adding a
+ * `number` field to PocketBase backfills every existing row with 0, so the first deploy
+ * would otherwise turn every photo in the scrapbook black at once. The migration fills
+ * them in properly; this is what makes the window between the two harmless, and what
+ * covers a row written by anything that does not know about these fields yet.
+ */
+function adjustment(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n) || n === 0) return NEUTRAL;
+  return Math.min(Math.max(n, ADJUST_MIN), ADJUST_MAX);
+}
+
+/** What a photo's light settings are, whatever the record does or does not carry. */
+export function adjustmentsOf(photo) {
+  return {
+    brightness: adjustment(photo?.brightness),
+    contrast: adjustment(photo?.contrast),
+  };
+}
+
+/**
+ * The CSS filter for a photo's light settings.
+ *
+ * One function for the card, the lightbox and the editor's live preview, so what a parent
+ * sets is exactly what they later see. Three implementations would eventually disagree,
+ * and the disagreement would only show up after saving.
+ *
+ * @returns {string} '' when nothing is adjusted, so the common case sets no filter at all
+ *   — and no needless compositing layer with it.
+ */
+export function lightFilter(photo) {
+  const { brightness, contrast } = adjustmentsOf(photo);
+  const off = (v) => Math.abs(v - NEUTRAL) < 1e-3;
+  if (off(brightness) && off(contrast)) return '';
+  const round = (v) => Math.round(v * 1000) / 1000;
+  return `brightness(${round(brightness)}) contrast(${round(contrast)})`;
+}

@@ -17,7 +17,7 @@
 // but a square grid cell crops again on top of that, and the focal point is what decides
 // where THAT crop centres.
 
-import { MAX_CLIP_SECONDS, rotationOf, turnFraming } from './layout-engine.js';
+import { MAX_CLIP_SECONDS, rotationOf, turnFraming, lightFilter, adjustmentsOf } from './layout-engine.js';
 
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
 const round = (v) => Math.round(v * 1000) / 1000;
@@ -57,6 +57,8 @@ export function openPhotoEditor(photo, { isMain }) {
   const trimBar = sheet.querySelector('.editor-trim-bar');
   const trimRangeEl = sheet.querySelector('.editor-trim-range');
   const trimRead = sheet.querySelector('.editor-trim-read');
+  const lightRanges = [...sheet.querySelectorAll('.editor-range')];
+  const lightReset = sheet.querySelector('.editor-light-reset');
 
   // Working copy — nothing is committed until Done.
   let crop = { ...(photo.crop || { x: 0, y: 0, w: 1, h: 1 }) };
@@ -72,6 +74,10 @@ export function openPhotoEditor(photo, { isMain }) {
   // Rotation is framing too: stored as degrees and applied at render, so the file is
   // never re-encoded and turning a photo the wrong way costs nothing to undo.
   let rotation = rotationOf(photo);
+
+  // Light. Neutral is 1 for both, and a stored 0 — which is what a row backfilled by the
+  // migration would carry for a moment — reads as neutral rather than as black.
+  const light = adjustmentsOf(photo);
 
   // Trimming, for a clip. Seconds into the SOURCE file, which keeps every frame.
   const duration = Number(photo.duration) || 0;
@@ -95,6 +101,52 @@ export function openPhotoEditor(photo, { isMain }) {
     return quarter
       ? { width: photo.height, height: photo.width }
       : { width: photo.width, height: photo.height };
+  }
+
+  /**
+   * Keep the whole sheet on screen by giving the PICTURE whatever the controls leave.
+   *
+   * Done, the presets, the rotate buttons and now two sliders all have to be reachable
+   * without hunting for them, and on a short phone in landscape there is not room for
+   * both them and a full-height photo. The controls are what the sheet is for, so the
+   * photo yields.
+   *
+   * Width rather than height, and in JS rather than CSS: the surface must stay exactly
+   * the photo's shape, because the crop rectangle and the focal dot are positioned on it
+   * as percentages. Capping height on an aspect-ratio box leaves the width alone and
+   * breaks that; capping width lets the ratio carry the height down with it.
+   *
+   * @param {number} ar width / height of the photo as it will be shown
+   */
+  function fitPane() {
+    // What the rest of the sheet needs, MEASURED rather than guessed: the controls differ
+    // between a still and a clip, and between the first photo and a later one.
+    const body = sheet.querySelector('.editor-body');
+    const siblings = [...body.children].filter((el) => el !== pane && !el.hidden);
+    const others = siblings.reduce((sum, el) => sum + el.getBoundingClientRect().height, 0);
+    // Gaps sit between VISIBLE children — a hidden one is display:none and makes no gap.
+    const gaps = parseFloat(getComputedStyle(body).rowGap || 0) * siblings.length;
+    const chrome = parseFloat(getComputedStyle(body).paddingTop)
+      + parseFloat(getComputedStyle(body).paddingBottom);
+
+    const room = window.innerHeight - others - gaps - chrome;
+    // Never so small that there is nothing left to frame on. Below this, a scrolling sheet
+    // is the better failure — a 40px photo would be worse than one that moves.
+    const height = Math.max(room, 140);
+    const o = oriented();
+    pane.style.setProperty('--pane-max', `${Math.round(height * (o.width / o.height))}px`);
+  }
+
+  /**
+   * Show the light settings on the photo being framed.
+   *
+   * The SAME `lightFilter` the card and the lightbox use, so the preview is not an
+   * approximation of the result — it is the result, computed once and shown early.
+   */
+  function paintLight() {
+    cropImg.style.filter = lightFilter(light);
+    const touched = Math.abs(light.brightness - 1) > 1e-3 || Math.abs(light.contrast - 1) > 1e-3;
+    lightReset.hidden = !touched;
   }
 
   function paint() {
@@ -274,8 +326,31 @@ export function openPhotoEditor(photo, { isMain }) {
     paint();
   }
 
-  const onRotate = (e) => turn(Number(e.currentTarget.dataset.turn));
+  const onRotate = (e) => {
+    turn(Number(e.currentTarget.dataset.turn));
+    // A quarter turn swaps the surface's shape, so the width it may occupy changes with it.
+    fitPane();
+  };
   rotateBtns.forEach((b) => b.addEventListener('click', onRotate));
+
+  // ── Light ────────────────────────────────────────────────────────
+  const onLight = (e) => {
+    light[e.target.dataset.light] = Number(e.target.value);
+    paintLight();
+  };
+  const onLightReset = () => {
+    light.brightness = 1;
+    light.contrast = 1;
+    for (const r of lightRanges) r.value = '1';
+    paintLight();
+  };
+  lightRanges.forEach((r) => r.addEventListener('input', onLight));
+  lightReset.addEventListener('click', onLightReset);
+
+  // Open where the photo actually is, not at neutral — reopening the editor must not
+  // silently offer to undo an adjustment made earlier.
+  for (const r of lightRanges) r.value = String(light[r.dataset.light]);
+  paintLight();
 
   // ── Trimming ─────────────────────────────────────────────────────
   /** Shortest a clip may be — below this it reads as a stutter rather than a moment. */
@@ -355,6 +430,10 @@ export function openPhotoEditor(photo, { isMain }) {
   mainBtn.addEventListener('click', onMain);
 
   sheet.showModal();
+  // After showModal, or there is no layout to measure.
+  fitPane();
+  const onResize = () => fitPane();
+  window.addEventListener('resize', onResize);
 
   return new Promise((resolve) => {
     let saved = false;
@@ -364,7 +443,14 @@ export function openPhotoEditor(photo, { isMain }) {
       pane.removeEventListener('pointerup', onUp);
       pane.removeEventListener('pointercancel', onUp);
       mainBtn.removeEventListener('click', onMain);
+      doneBtn.removeEventListener('click', onDone);
       rotateBtns.forEach((b) => b.removeEventListener('click', onRotate));
+      window.removeEventListener('resize', onResize);
+      lightRanges.forEach((r) => r.removeEventListener('input', onLight));
+      lightReset.removeEventListener('click', onLightReset);
+      // The surface is shared between opens, so the filter has to come off with it or the
+      // next photo would be shown through this one's settings.
+      cropImg.style.filter = '';
       trimBar.removeEventListener('pointerdown', onTrimDown);
       trimBar.removeEventListener('pointermove', onTrimMove);
       trimBar.removeEventListener('pointerup', onTrimUp);
@@ -393,6 +479,8 @@ export function openPhotoEditor(photo, { isMain }) {
           x: round(crop.x), y: round(crop.y), w: round(crop.w), h: round(crop.h),
         },
         rotation,
+        brightness: light.brightness,
+        contrast: light.contrast,
         // Only a clip carries a trim; null leaves a still's fields untouched.
         trimStart: isClip ? round(trimStart) : null,
         trimEnd: isClip ? round(trimEnd) : null,
@@ -400,7 +488,17 @@ export function openPhotoEditor(photo, { isMain }) {
       } : null);
     };
 
-    doneBtn.addEventListener('click', () => { saved = true; sheet.close(); }, { once: true });
+    // NOT `{ once: true }`. That only tidies up if Done is the thing that happens, and it
+    // usually is not — ESC, the back gesture and the backdrop all close the sheet with the
+    // listener still attached, and it then survives for the life of the page.
+    //
+    // What that cost: on the NEXT edit, the stale listener runs first, calls close(), and
+    // `close` fires SYNCHRONOUSLY — so this open's `finish` ran while its own `saved` was
+    // still false, resolved null, and capture.js dropped the edit on the floor. Cropping,
+    // rotating, trimming, all of it, silently, for anyone who had ever dismissed the sheet
+    // without pressing Done.
+    const onDone = () => { saved = true; sheet.close(); };
+    doneBtn.addEventListener('click', onDone);
     sheet.addEventListener('close', finish); // covers ESC and the backdrop too
   });
 }

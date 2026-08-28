@@ -9,8 +9,7 @@ import assert from 'node:assert/strict';
 import {
   inferLayout, isMilestone, GRID_MAX, leadAspect, cropRect, croppedSize, FULL_CROP,
   coverAlign, rotationOf, orientedSize, trimRange, hasVideo, isMotion, MAX_CLIP_SECONDS,
-  turnFraming,
-} from '../js/layout-engine.js';
+  turnFraming, lightFilter, adjustmentsOf } from '../js/layout-engine.js';
 
 /** A photo is only ever consulted for its stored dimensions. */
 const photo = (width, height) => ({ id: 'x', url: 'x.jpg', width, height, alt: null });
@@ -436,4 +435,50 @@ test('turning by nothing changes nothing', () => {
   for (const by of [0, 360, null, undefined, NaN, 'sideways']) {
     assert.deepEqual(turnFraming(crop, focal, by), { crop, focal }, String(by));
   }
+});
+
+
+// ── Brightness and contrast ───────────────────────────────────────
+// Held as numbers and applied at render, like crop and rotation. The card, the lightbox
+// and the editor's preview all read this one function, so what is set is what is seen.
+
+test('an untouched photo sets no filter at all', () => {
+  // '' rather than "brightness(1) contrast(1)": the common case should not create a
+  // compositing layer on every photo in the timeline for no visible effect.
+  assert.equal(lightFilter({ brightness: 1, contrast: 1 }), '');
+  assert.equal(lightFilter({}), '');
+  assert.equal(lightFilter(null), '');
+});
+
+test('an adjustment becomes a filter', () => {
+  assert.equal(lightFilter({ brightness: 1.2, contrast: 0.9 }), 'brightness(1.2) contrast(0.9)');
+});
+
+test('one adjusted still carries the other, so the filter is complete', () => {
+  assert.equal(lightFilter({ brightness: 1.2 }), 'brightness(1.2) contrast(1)');
+  assert.equal(lightFilter({ contrast: 0.8 }), 'brightness(1) contrast(0.8)');
+});
+
+test('a stored 0 is NEUTRAL, not black', () => {
+  // THE MIGRATION TRAP. Adding a `number` field backfills every existing row with 0, so
+  // reading 0 as a real brightness would turn the whole scrapbook black on deploy. The
+  // migration backfills 1; this is what makes the window between deploy and migrate
+  // harmless, and covers anything writing a row without these fields.
+  assert.equal(lightFilter({ brightness: 0, contrast: 0 }), '');
+  assert.equal(adjustmentsOf({ brightness: 0 }).brightness, 1);
+});
+
+test('nonsense reads as neutral rather than breaking the photo', () => {
+  assert.equal(lightFilter({ brightness: NaN, contrast: 'bright' }), '');
+  assert.equal(lightFilter({ brightness: undefined }), '');
+});
+
+test('extremes are clamped to something still recognisable as the photo', () => {
+  assert.equal(lightFilter({ brightness: 99, contrast: 99 }), 'brightness(2) contrast(2)');
+  assert.equal(lightFilter({ brightness: -5, contrast: 0.01 }), 'brightness(0.2) contrast(0.2)');
+});
+
+test('adjustmentsOf always answers with both, whatever it was given', () => {
+  assert.deepEqual(adjustmentsOf(undefined), { brightness: 1, contrast: 1 });
+  assert.deepEqual(adjustmentsOf({ brightness: 1.5, contrast: 0.7 }), { brightness: 1.5, contrast: 0.7 });
 });
