@@ -102,12 +102,19 @@ function fillRotor(rotor, photo) {
   rotor.replaceChildren();
   rotor.classList.toggle('is-quarter', quarter);
   rotor.style.setProperty('--rot', photo.rotation);
-  // The stored size is what the file measures; the rotor is laid out in the shape the
-  // picture presents, which for a quarter turn is the other way round.
-  const w = quarter ? photo.height : photo.width;
-  const h = quarter ? photo.width : photo.height;
-  rotor.style.setProperty('--oar', w / h);
-  rotor.style.aspectRatio = `${w} / ${h}`;
+
+  // NO SWAP HERE. `collect` reads data-full-w/h, which render.js already wrote as
+  // orientedSize — the shape the picture PRESENTS, not the shape the file measures. This
+  // turned them a second time, so a 4000x3000 photo stored at rotation 90 gave the rotor a
+  // landscape aspect ratio while the crop frame around it was correctly portrait, and the
+  // picture was squashed to fit. The card looked right throughout, because it builds the
+  // same rotor from orientedSize without swapping — see rotor() in render.js, which this
+  // must agree with.
+  //
+  // `quarter` still matters: it is what tells the CSS to lay the media across the rotor's
+  // other axis before turning it. Only the dimensions were already handled.
+  rotor.style.setProperty('--oar', photo.width / photo.height);
+  rotor.style.aspectRatio = `${photo.width} / ${photo.height}`;
 
   if (!photo.video) {
     const img = document.createElement('img');

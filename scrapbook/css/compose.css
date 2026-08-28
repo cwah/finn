@@ -498,3 +498,63 @@
 }
 
 .compose-note[hidden] { display: none; }
+
+/* ── Something is happening ────────────────────────────────────── */
+/* One spinner, used wherever a wait is worth showing. Reduced motion gets a steady pulse
+   rather than nothing at all: the point is to say work is in progress, and a frozen ring
+   says the opposite. */
+.spinner {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--hairline);
+  border-top-color: var(--accent-ink);
+  border-radius: 50%;
+  animation: spinner-turn 0.8s linear infinite;
+}
+
+@keyframes spinner-turn { to { transform: rotate(1turn); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: spinner-pulse 1.4s ease-in-out infinite; }
+  @keyframes spinner-pulse { 50% { opacity: 0.35; } }
+}
+
+/* A thumbnail's place, held while the file behind it is still being read. The exact
+   footprint of a real thumb — .compose-thumb's 76px plus the wrap's padding — so the strip
+   does not jump when the picture finally arrives. */
+.compose-thumb-loading {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin: 6px 6px 0 0; /* matches the wrap's padding, which this has no child to inherit */
+  padding: 0;
+  background: var(--surface-2);
+  border-radius: 12px;
+}
+
+/* Saving is usually quick and occasionally is not — on a phone uploading several photos
+   it is the longest wait in the app, and the button alone did not look busy. */
+.compose-actions .btn.is-busy,
+#composeSave.is-busy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#composeSave.is-busy::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: spinner-turn 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #composeSave.is-busy::before { animation: spinner-pulse 1.4s ease-in-out infinite; }
+}

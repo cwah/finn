@@ -267,6 +267,10 @@ export function initCapture({ author, canPost = true }, handlers) {
   const deleteBtn = document.getElementById('composeDelete');
 
   let pending = []; // photos on the post being composed
+  // Media picked but not yet decoded. A big photo off a phone takes a noticeable moment —
+  // EXIF, dimensions, splitting a motion photo, reading a clip's length — and until this
+  // was shown, choosing five photos looked exactly like the picker having done nothing.
+  let reading = 0;
   // Once a parent sets the date by hand, nothing may move it again.
   let dateChosenByHand = false;
   let editing = null; // the post being edited, or null when composing a new one
@@ -286,7 +290,9 @@ export function initCapture({ author, canPost = true }, handlers) {
 
   /** Save is live once there is something to show — a photo or a real caption. */
   function syncSaveState() {
-    saveBtn.disabled = pending.length === 0 && caption.value.trim() === '';
+    // Nothing may be saved mid-read: those photos are part of this memory and are not in
+    // `pending` yet, so saving now would quietly drop them.
+    saveBtn.disabled = reading > 0 || (pending.length === 0 && caption.value.trim() === '');
   }
 
   function renderThumbs() {
@@ -339,10 +345,25 @@ export function initCapture({ author, canPost = true }, handlers) {
         return wrap;
       }),
     );
-    thumbs.hidden = pending.length === 0;
+    // Placeholders for what is still being read, after the thumbs that are ready. They sit
+    // at the end because the real ones keep their picked order, which decides the main
+    // photo — arrival order would let a slow first pick end up somewhere else.
+    for (let i = 0; i < reading; i += 1) {
+      const wait = document.createElement('div');
+      wait.className = 'compose-thumb-wrap compose-thumb-loading';
+      const spin = document.createElement('span');
+      spin.className = 'spinner';
+      wait.append(spin);
+      wait.setAttribute('aria-label', 'Reading a photo');
+      thumbs.append(wait);
+    }
+
+    thumbs.hidden = pending.length === 0 && reading === 0;
     // The picker takes video too, and a label that only mentions photos reads as a
     // restriction. "Add more" once something is attached — by then the kind is obvious.
-    addLabel.textContent = pending.length ? 'Add more' : 'Add photos or videos';
+    addLabel.textContent = reading
+      ? `Reading ${reading} item${reading === 1 ? '' : 's'}…`
+      : (pending.length ? 'Add more' : 'Add photos or videos');
   }
 
   /** Reframe a photo, or promote it to lead the post. */
@@ -428,6 +449,7 @@ export function initCapture({ author, canPost = true }, handlers) {
     deleteBtn.hidden = !post;
     saveError.hidden = true;
     caption.value = post?.caption || '';
+    reading = 0;
     dateChosenByHand = false;
     dateNote.hidden = true;
     date.value = post?.memoryDate || todayISO();
@@ -475,16 +497,28 @@ export function initCapture({ author, canPost = true }, handlers) {
     const files = Array.from(input.files || []);
     input.value = ''; // allow re-picking the same file
     if (!files.length) return;
+    // A Live Photo arrives as two files that only a matching name ties together, so
+    // pairing happens before anything is measured — two files, one memory.
+    const entries = pairLivePhotos(files);
+
+    // Say so BEFORE the first await, or the sheet sits there looking ignored for exactly
+    // as long as the work takes.
+    reading += entries.length;
+    renderThumbs();
+    syncSaveState();
     try {
-      // A Live Photo arrives as two files that only a matching name ties together, so
-      // pairing happens before anything is measured — two files, one memory.
-      const added = await Promise.all(pairLivePhotos(files).map(readItem));
+      // Promise.all, so the order picked is the order kept — position 0 leads the post.
+      const added = await Promise.all(entries.map(readItem));
       pending = pending.concat(added);
+    } catch (err) {
+      console.error(err);
+      saveError.textContent = 'Could not read one of those. Try adding it again.';
+      saveError.hidden = false;
+    } finally {
+      reading -= entries.length;
       renderThumbs();
       applyInferredDate();
       syncSaveState();
-    } catch (err) {
-      console.error(err);
     }
   });
 
@@ -525,6 +559,7 @@ export function initCapture({ author, canPost = true }, handlers) {
     const target = editing;
     saveBtn.disabled = true;
     saveBtn.textContent = 'Saving…';
+    saveBtn.classList.add('is-busy');
     try {
       const post = target
         ? await updatePost(target.id, draft, target.author || author)
@@ -538,6 +573,7 @@ export function initCapture({ author, canPost = true }, handlers) {
       saveError.hidden = false;
     } finally {
       saveBtn.textContent = 'Save';
+      saveBtn.classList.remove('is-busy');
       syncSaveState();
     }
   });

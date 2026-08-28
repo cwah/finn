@@ -731,6 +731,23 @@ tests. It has no dependencies and nothing bundles.
 - **`loadMore` restores `loading` in a `finally`.** It did not, so one failed fetch left
   the flag set and paging stopped for the rest of the session — silently, since nothing on
   that path reports an error.
+- **`data-full-w`/`data-full-h` are ALREADY oriented.** `makeViewable` writes
+  `orientedSize`, so the lightbox is handed the shape the picture presents, not the shape
+  the file measures. `fillRotor` turned them a second time, so a 4000x3000 photo stored at
+  rotation 90 got a landscape rotor inside a correctly portrait crop frame and was squashed
+  to fit. The card looked right the whole time — `rotor()` in render.js builds the same
+  rotor from `orientedSize` without swapping, and the two must agree. One contract, written
+  down in both places now.
+- **Captions are `white-space: pre-wrap`.** They are set with `textContent`, so the
+  newlines were always in the DOM; HTML collapsed them, and a caption typed over three
+  lines ran together into one.
+- **A wait gets a spinner, and it is shown BEFORE the first `await`.** Reading picked media
+  — EXIF, dimensions, splitting a motion photo, a clip's length — takes a noticeable moment
+  on a phone, and until this the sheet sat there looking ignored. Placeholders go at the
+  END of the strip while the real thumbs keep their picked order, because position 0 leads
+  the post and arrival order would let a slow first pick land somewhere else. Save is
+  disabled while reading: those photos belong to this memory and are not in `pending` yet,
+  so saving would quietly drop them.
 - **The scrubber takes touches in a 24px strip, not across its full 60px.** The width is
   for month labels; everything grabbable — rail, dots, thumb — sits within 20px of the
   edge. As a full-width `pointer-events: auto` element at `z-index: 8` it was an invisible

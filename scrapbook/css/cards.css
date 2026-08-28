@@ -62,6 +62,10 @@
   padding: 10px 16px 16px;
   color: var(--text);
   font-size: 0.95rem;
+  /* A parent who pressed return meant it. The newlines are in the text either way — it is
+     set with textContent — but HTML collapses them, so a caption typed over three lines
+     ran together into one. Wrap, so long lines still behave normally. */
+  white-space: pre-wrap;
 }
 
 /* The caption normally supplies the card's bottom padding. Without one the meta row is
@@ -297,6 +301,7 @@
   font-size: 1.35rem;
   line-height: 1.5;
   font-style: italic;
+  white-space: pre-wrap; /* as .card-caption: line breaks were typed on purpose */
 }
 
 .card--quote .quote-mark {
