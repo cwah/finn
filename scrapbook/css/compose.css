@@ -558,3 +558,42 @@
 @media (prefers-reduced-motion: reduce) {
   #composeSave.is-busy::before { animation: spinner-pulse 1.4s ease-in-out infinite; }
 }
+
+/* ── Dates the media suggest ───────────────────────────────────── */
+/* Shown only when the media disagree, so there is no single answer to apply. Chips rather
+   than a sentence: the whole point is that each is one tap away. */
+.compose-date-picks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.compose-date-picks[hidden] { display: none; }
+
+.compose-date-picks-lead {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.compose-date-pick {
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.compose-date-pick:hover { border-color: var(--hairline); }
+
+/* Which one the field is currently on. Border and weight, not colour alone. */
+.compose-date-pick.is-chosen {
+  font-weight: 600;
+  border-color: var(--accent-ink);
+  background: rgba(var(--accent-rgb), 0.28);
+}

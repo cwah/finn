@@ -696,6 +696,14 @@ tests. It has no dependencies and nothing bundles.
   attached was taken on the same day, the date field is set to that day and says so
   underneath. It is said out loud because a field that changes by itself is otherwise
   indistinguishable from one that has gone wrong.
+  - **When the media disagree, the days are OFFERED, not applied.** The field stays on
+    today — there is no right answer to choose, and picking one silently would be a guess
+    dressed as a fact — but `distinctDates()` puts each day one tap away as a chip under
+    the field. Nothing is offered when they already agree: the field is on that day, so a
+    chip would only invite a pointless tap.
+  - A tapped chip counts exactly as a typed date: `dateChosenByHand` latches, and nothing
+    moves the date afterwards. The chips themselves are rebuilt whenever the media change,
+    even after a choice, because they are only ever an offer and a stale list is worse.
   - **Agreement, not a vote.** `agreedDate()` in `media-date.js` answers only when every
     item names the same day — one unreadable item is a disagreement, not an abstention,
     because it may well be from another day entirely. No agreement means today, which is
@@ -738,6 +746,12 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
+- **The tab title is STATIC in `index.html`, and is the baby's name, not the app's.**
+  Setting it only from config after load meant the tab read one thing and then visibly
+  changed to another. `app.js` assigns it now only when config genuinely disagrees with the
+  markup — and if it does, the markup is what should be corrected. The manifest `name`
+  stays "Finnbook": that is the app on a home screen, which is a different thing from the
+  page it opens.
 - **Reading picked files uses `Promise.allSettled`, never `Promise.all`.** One rejection
   threw the entire batch away, so picking five photos of which one was cloud-only added
   NOTHING — and a parent who typed a caption then saved got a memory with no photos in it.

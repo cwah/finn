@@ -322,6 +322,12 @@ async function init() {
   birthDate = config.birthDate;
   currentAuthorId = config.currentAuthor?.id || null;
   document.getElementById('babyName').textContent = config.babyName;
+  // The tab already says this, statically, so there is normally nothing to do — assigning
+  // regardless is what made the title visibly change during load. Only if config disagrees
+  // with the markup does it need correcting, and then the markup is what should be fixed.
+  if (config.babyName && document.title !== config.babyName) {
+    document.title = config.babyName;
+  }
   document.getElementById('babyAge').textContent = ageStamp(birthDate, new Date().toISOString());
 
   initLightbox(timeline);

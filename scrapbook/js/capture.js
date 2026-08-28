@@ -17,8 +17,9 @@ import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
 import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
 import { MAX_CLIP_SECONDS } from './layout-engine.js';
-import { exifDate, filenameDate, agreedDate } from './media-date.js';
+import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
 import { openPhotoEditor } from './photo-editor.js';
+import { dateLabel } from './age.js';
 
 /** Today as a LOCAL calendar day — toISOString() would hand back UTC and can skew a day. */
 function todayISO() {
@@ -281,6 +282,7 @@ export function initCapture({ author, canPost = true }, handlers) {
   const caption = document.getElementById('composeCaption');
   const date = document.getElementById('composeDate');
   const dateNote = document.getElementById('composeDateNote');
+  const datePicks = document.getElementById('composeDatePicks');
   const isMilestone = document.getElementById('composeMilestone');
   const milestoneTitle = document.getElementById('composeMilestoneTitle');
   const saveBtn = document.getElementById('composeSave');
@@ -427,15 +429,75 @@ export function initCapture({ author, canPost = true }, handlers) {
    * is at least obviously a default.
    */
   function applyInferredDate() {
-    if (editing || dateChosenByHand) return;
+    // Editing never touches the date, and never offers to: that date is already decided.
+    if (editing) return;
 
-    const inferred = agreedDate(pending.map((p) => p.takenOn));
-    date.value = inferred || todayISO();
+    const days = distinctDates(pending.map((p) => p.takenOn));
+    const agreed = agreedDate(pending.map((p) => p.takenOn));
 
-    dateNote.textContent = inferred
+    // A date typed or tapped by a parent is final. The SUGGESTIONS are still rebuilt
+    // below, because they are only ever an offer and a stale list would be worse.
+    if (!dateChosenByHand) date.value = agreed || todayISO();
+
+    const settled = Boolean(agreed) && !dateChosenByHand;
+    dateNote.textContent = settled
       ? 'Date taken from the media you added — change it if it\u2019s wrong.'
       : '';
-    dateNote.hidden = !inferred;
+    dateNote.hidden = !settled;
+
+    renderDatePicks(days);
+  }
+
+  /**
+   * Offer the days the media were taken on, when they do not agree.
+   *
+   * The field itself stays on today — there is no right answer to choose, and picking one
+   * silently would be a guess dressed as a fact. But the days ARE the best candidates
+   * there are, and leaving them buried in the files means a parent squinting at a phone
+   * to work out which afternoon this was.
+   *
+   * Nothing is offered when the media already agree: the field is on that day, so a chip
+   * repeating it would only invite a pointless tap.
+   */
+  function renderDatePicks(days) {
+    datePicks.replaceChildren();
+    if (days.length < 2) {
+      datePicks.hidden = true;
+      return;
+    }
+
+    const lead = document.createElement('span');
+    lead.className = 'compose-date-picks-lead';
+    lead.textContent = 'Taken on:';
+    datePicks.append(lead);
+
+    for (const day of days) {
+      const pick = document.createElement('button');
+      pick.type = 'button'; // inside a form: a bare button would submit it
+      pick.className = 'compose-date-pick';
+      pick.textContent = dateLabel(day);
+      pick.setAttribute('aria-label', `Use ${dateLabel(day)} as the date`);
+      pick.addEventListener('click', () => {
+        date.value = day;
+        // A tap is a decision, so nothing may move the date afterwards — the same rule a
+        // typed date gets. The chips stay, so a wrong tap costs one more tap.
+        dateChosenByHand = true;
+        dateNote.hidden = true;
+        markChosen();
+      });
+      datePicks.append(pick);
+    }
+    markChosen();
+    datePicks.hidden = false;
+  }
+
+  /** Show which offered day, if any, the field is currently on. */
+  function markChosen() {
+    for (const pick of datePicks.querySelectorAll('.compose-date-pick')) {
+      const on = dateLabel(date.value) === pick.textContent;
+      pick.classList.toggle('is-chosen', on);
+      pick.setAttribute('aria-pressed', String(on));
+    }
   }
 
   /**
@@ -482,6 +544,8 @@ export function initCapture({ author, canPost = true }, handlers) {
     caption.value = post?.caption || '';
     reading = 0;
     dateChosenByHand = false;
+    datePicks.replaceChildren();
+    datePicks.hidden = true;
     dateNote.hidden = true;
     date.value = post?.memoryDate || todayISO();
     date.max = todayISO(); // a memory can't have happened tomorrow
@@ -607,6 +671,7 @@ export function initCapture({ author, canPost = true }, handlers) {
   date.addEventListener('input', () => {
     dateChosenByHand = true;
     dateNote.hidden = true;
+    markChosen();
   });
 
   isMilestone.addEventListener('change', () => {

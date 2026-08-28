@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f2f4ec" />
-  <title>Finnbook</title>
+  <!-- The baby's name, not the app's. Static so it is right from the first paint: set
+       only from config after load, the tab read "Finnbook" first and visibly switched.
+       Kept in step with config.babyName by app.js, which is where it can actually change. -->
+  <title>Finn Lesinski</title>
 
   <!-- The icon is flattened onto the page's own sage rather than left transparent: iOS
        composites a transparent apple-touch-icon onto BLACK, which would put a black
@@ -80,6 +83,10 @@
         <!-- Said out loud, because a date field that changes by itself is otherwise
              indistinguishable from one that has gone wrong. -->
         <p id="composeDateNote" class="compose-note" hidden></p>
+        <!-- Offered, never applied. When the media disagree there is no right answer to
+             pick automatically, but the days themselves are still the best guesses there
+             are — so they are put within one tap rather than left in the files. -->
+        <div id="composeDatePicks" class="compose-date-picks" hidden></div>
       </label>
 
       <label class="compose-toggle">
