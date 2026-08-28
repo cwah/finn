@@ -321,10 +321,11 @@ async function init() {
   const config = await getConfig();
   birthDate = config.birthDate;
   currentAuthorId = config.currentAuthor?.id || null;
-  // The heading carries the baby's name; the TITLE does not, and nothing here assigns it.
-  // "Finnbook" is the app's name in index.html and in the manifest, and leaving it alone is
-  // what keeps the tab from changing under the reader mid-load.
-  document.getElementById('babyName').textContent = config.babyName;
+  // Neither the heading nor the tab title is assigned here. Both say "Finnbook", both are
+  // written in index.html, and both stay put — filling either from config is what made
+  // them change under the reader mid-load. `config.babyName` is still the record's field;
+  // nothing on this page displays it. The AGE below the heading is Finn's, and that does
+  // have to be worked out.
   document.getElementById('babyAge').textContent = ageStamp(birthDate, new Date().toISOString());
 
   initLightbox(timeline);

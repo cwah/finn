@@ -746,11 +746,12 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
-- **The tab title is "Finnbook", static in `index.html`, and nothing assigns
-  `document.title`.** It matches the manifest `name`, so the tab, the home-screen icon and
-  the share sheet all say the same word. Static is the point: anything setting it after
-  load makes the tab change under the reader, which is what it used to do. The baby's name
-  belongs to the heading, which config fills in.
+- **The heading and the tab title both read "Finnbook", both written in `index.html`, and
+  neither is assigned at runtime.** They match the manifest `name`, so the page, the
+  home-screen icon and the share sheet all say the same word. Static is the point: filling
+  either from config is what made them change under the reader mid-load. `config.babyName`
+  is still the record's field and still comes back from `getConfig`, but nothing on the
+  page displays it — the subtitle is the AGE, which genuinely has to be worked out.
 - **Reading picked files uses `Promise.allSettled`, never `Promise.all`.** One rejection
   threw the entire batch away, so picking five photos of which one was cloud-only added
   NOTHING — and a parent who typed a caption then saved got a memory with no photos in it.
