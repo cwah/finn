@@ -58,6 +58,7 @@ export async function getPosts({ page = 0, pageSize = 5 } = {}) {
 /** With no backend the edit lives only in memory, same as the original post did. */
 export async function updatePost(id, draft, author) {
   return {
+    failedPhotos: [], // shape parity with data-pb.js; see createPost
     id,
     memoryDate: draft.memoryDate,
     createdAt: new Date().toISOString(),
@@ -125,6 +126,10 @@ export async function createPost(draft, author) {
   // than PocketBase: a backdated post could never come back on a later page, so the
   // duplicate that causes was invisible here — which is the one place it could have been
   // caught without standing a server up.
+  // Shape parity with data-pb.js: nothing can fail to upload without a backend, but the
+  // field has to exist or the compose sheet would read undefined and skip the check.
+  post.failedPhotos = [];
+
   const cache = await load();
   cache.posts.push(post);
   cache.posts.sort((a, b) => new Date(b.memoryDate) - new Date(a.memoryDate));

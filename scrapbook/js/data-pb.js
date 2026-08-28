@@ -160,6 +160,46 @@ export async function getPosts({ page = 0, pageSize = 5 } = {}) {
  *          photos: Array<{file: File, width: number, height: number}>}} draft
  * @param {{id: string, name: string}} author
  */
+/**
+ * Try a photo a few times before giving up on it.
+ *
+ * A phone uploading ten photos over mobile data is the worst case this app has: tens of
+ * megabytes, one request each, and a locked screen or a lift is enough to drop one. A
+ * single blip should not cost a memory when trying again a second later almost always
+ * works.
+ *
+ * Only worth retrying what might succeed next time. A 400 means the record is wrong and
+ * will be just as wrong on the third go; a dropped connection, a 5xx or a 429 will not.
+ */
+async function withRetry(attemptFn, attempts = 3) {
+  let last;
+  for (let i = 0; i < attempts; i += 1) {
+    try {
+      return await attemptFn();
+    } catch (err) {
+      last = err;
+      // PbError carries the status; a network failure is a TypeError with none at all,
+      // which is exactly the case most worth retrying.
+      const status = err?.status;
+      const worthRetrying = !status || status === 429 || status >= 500;
+      if (!worthRetrying || i === attempts - 1) throw err;
+      await new Promise((r) => setTimeout(r, 400 * 2 ** i)); // 400ms, 800ms
+    }
+  }
+  throw last;
+}
+
+/**
+ * What a photo failure looks like to the caller.
+ *
+ * The draft photo is carried back, not just a message, so the compose sheet can put the
+ * ones that did not make it back in front of the parent and let them try again — the file
+ * is still in memory at that point, and it is the only copy the app will ever have.
+ */
+function describeFailure(photo, index, err) {
+  return { photo, index, status: err?.status ?? null, message: err?.message || String(err) };
+}
+
 export async function createPost(draft, author) {
   const rec = await pb.create('posts', {
     memoryDate: draft.memoryDate,
@@ -170,17 +210,24 @@ export async function createPost(draft, author) {
   });
 
   const saved = [];
+  const failed = [];
   for (const [i, photo] of draft.photos.entries()) {
     try {
       // Position in the draft IS the order: index 0 leads the post, which is what the
       // compose sheet's "make main" reorders into place.
-      saved.push(toPhoto(await pb.create('photos', photoForm(rec.id, photo, i))));
+      saved.push(toPhoto(await withRetry(() => pb.create('photos', photoForm(rec.id, photo, i)))));
     } catch (err) {
+      // NOT swallowed. This used to be a console.error and nothing else, so a parent who
+      // attached ten photos over a flaky connection was told the memory had saved while
+      // six of them had been dropped on the floor — and the files were gone with the sheet.
       console.error(`Photo ${i + 1} failed to upload`, err);
+      failed.push(describeFailure(photo, i, err));
     }
   }
 
-  return toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);
+  const post = toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);
+  post.failedPhotos = failed;
+  return post;
 }
 
 /** The post fields a parent can change. Author and creation time are not among them. */
@@ -256,6 +303,7 @@ export async function updatePost(id, draft, author) {
   }
 
   const saved = [];
+  const failed = [];
   for (const [i, photo] of draft.photos.entries()) {
     try {
       saved.push(
@@ -264,7 +312,7 @@ export async function updatePost(id, draft, author) {
           // that is already stored; the file itself is never re-sent. Rotation and the
           // trim belong here for the same reason the crop does — all three are framing,
           // held apart from the file so they can be undone forever.
-          ? toPhoto(await pb.update('photos', photo.id, {
+          ? toPhoto(await withRetry(() => pb.update('photos', photo.id, {
             sort: i,
             focalX: photo.focalX ?? null,
             focalY: photo.focalY ?? null,
@@ -272,15 +320,18 @@ export async function updatePost(id, draft, author) {
             rotation: photo.rotation || 0,
             trimStart: photo.trimStart || 0,
             trimEnd: photo.trimEnd || 0,
-          }))
-          : await uploadPhoto(id, photo, i),
+          })))
+          : await withRetry(() => uploadPhoto(id, photo, i)),
       );
     } catch (err) {
       console.error(`Photo ${i + 1} failed to save`, err);
+      failed.push(describeFailure(photo, i, err));
     }
   }
 
-  return toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);
+  const post = toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);
+  post.failedPhotos = failed;
+  return post;
 }
 
 /**

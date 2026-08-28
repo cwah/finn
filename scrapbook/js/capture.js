@@ -416,6 +416,32 @@ export function initCapture({ author, canPost = true }, handlers) {
   }
 
   /**
+   * A saved post's photos, in the shape `pending` uses.
+   *
+   * Existing photos carry an id and a server URL, so the data layer knows to patch them in
+   * place rather than re-uploading a file it already has.
+   */
+  function storedAsPending(post) {
+    return post.photos.map((p) => ({
+      id: p.id,
+      url: p.url,
+      width: p.width,
+      height: p.height,
+      focalX: p.focalX,
+      focalY: p.focalY,
+      crop: p.crop,
+      rotation: p.rotation || 0,
+      // The video comes back as a URL, not a File — it is already stored, and editing
+      // only ever changes where the trim sits, never the file behind it.
+      videoUrl: p.video?.url || null,
+      duration: p.video?.duration || 0,
+      trimStart: p.video?.trimStart || 0,
+      trimEnd: p.video?.trimEnd || 0,
+      motion: Boolean(p.video?.motion),
+    }));
+  }
+
+  /**
    * Open the sheet. With a post, it edits that post; without, it composes a new one.
    * @param {object|null} post
    */
@@ -424,25 +450,7 @@ export function initCapture({ author, canPost = true }, handlers) {
     editing = post;
 
     if (post) {
-      // Existing photos carry an id and a server URL, so the data layer knows to patch
-      // them in place rather than re-uploading a file it already has.
-      pending = post.photos.map((p) => ({
-        id: p.id,
-        url: p.url,
-        width: p.width,
-        height: p.height,
-        focalX: p.focalX,
-        focalY: p.focalY,
-        crop: p.crop,
-        rotation: p.rotation || 0,
-        // The video comes back as a URL, not a File — it is already stored, and editing
-        // only ever changes where the trim sits, never the file behind it.
-        videoUrl: p.video?.url || null,
-        duration: p.video?.duration || 0,
-        trimStart: p.video?.trimStart || 0,
-        trimEnd: p.video?.trimEnd || 0,
-        motion: Boolean(p.video?.motion),
-      }));
+      pending = storedAsPending(post);
     }
 
     title.textContent = post ? 'Edit memory' : 'New memory';
@@ -544,12 +552,14 @@ export function initCapture({ author, canPost = true }, handlers) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const title = milestoneTitle.value.trim();
+    // NOT `title` — that is the sheet's heading element in the enclosing scope, and
+    // shadowing it here meant a later `title.textContent = ...` wrote to a string.
+    const milestoneName = milestoneTitle.value.trim();
     const draft = {
       memoryDate: date.value || todayISO(),
       caption: caption.value.trim() || null,
       milestone: isMilestone.checked
-        ? { isMilestone: true, title: title || 'Milestone' }
+        ? { isMilestone: true, title: milestoneName || 'Milestone' }
         : null,
       photos: pending,
     };
@@ -564,9 +574,33 @@ export function initCapture({ author, canPost = true }, handlers) {
       const post = target
         ? await updatePost(target.id, draft, target.author || author)
         : await createPost(draft, author);
-      pending = []; // the saved post owns the previews now
-      sheet.close();
+
+      // The post itself is written either way, so the timeline is told about it either
+      // way — a memory that saved with eight of ten photos is still a memory, and hiding
+      // it until the rest arrive would be worse.
       (target ? onUpdate : onCreate)(post);
+
+      const lost = post.failedPhotos || [];
+      if (lost.length) {
+        // The sheet STAYS OPEN, holding the photos that did not make it. Their files exist
+        // nowhere else — closing here is what turned a flaky connection into six lost
+        // photos and a cheerful "saved". Pressing Save again now edits the post that was
+        // just created and uploads only what is missing.
+        editing = post;
+        title.textContent = 'Edit memory';
+        deleteBtn.hidden = false;
+        pending = [...storedAsPending(post), ...lost.map((f) => f.photo)];
+        const n = lost.length;
+        saveError.textContent = `${n} photo${n === 1 ? '' : 's'} did not upload — the rest `
+          + 'of the memory saved. They are still here: press Save to try again.';
+        saveError.hidden = false;
+        renderThumbs();
+        return; // deliberately not closing
+      }
+
+      pending = []; // the saved post owns the previews now
+      saveError.hidden = true;
+      sheet.close();
     } catch (err) {
       console.error(err);
       saveError.textContent = 'Could not save that memory. It is still here — try again.';

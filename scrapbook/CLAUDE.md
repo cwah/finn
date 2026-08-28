@@ -738,6 +738,21 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
+- **A photo that fails to upload is NEVER swallowed.** Both write paths caught a failed
+  `photos` create, logged it to a console nobody has open, and carried on — so a memory
+  with ten photos attached could save with four and still report success, with the files
+  gone the moment the sheet closed. They are the only copy the app ever holds.
+  - `withRetry` gives each photo three attempts, backing off 400ms then 800ms, but ONLY
+    for failures that might go differently: a dropped connection (no status at all), a 429
+    or a 5xx. A 400 means the record is wrong and will be wrong again.
+  - What still fails comes back as `post.failedPhotos`, and the compose sheet **stays
+    open** holding those photos, alongside the ones that saved. Pressing Save again edits
+    the post that was just created and uploads only what is missing. The post is handed to
+    the timeline either way — eight of ten photos is still a memory.
+  - Not reproducible as a server cap: ten sequential uploads of real photos to production
+    all returned 200, and the client collects all ten into `pending`. So the loss was in
+    transport, and the reason it could not be diagnosed afterwards IS the bug — the error
+    was thrown away.
 - **Captions are `white-space: pre-wrap`.** They are set with `textContent`, so the
   newlines were always in the DOM; HTML collapsed them, and a caption typed over three
   lines ran together into one.
