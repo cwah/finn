@@ -321,13 +321,10 @@ async function init() {
   const config = await getConfig();
   birthDate = config.birthDate;
   currentAuthorId = config.currentAuthor?.id || null;
+  // The heading carries the baby's name; the TITLE does not, and nothing here assigns it.
+  // "Finnbook" is the app's name in index.html and in the manifest, and leaving it alone is
+  // what keeps the tab from changing under the reader mid-load.
   document.getElementById('babyName').textContent = config.babyName;
-  // The tab already says this, statically, so there is normally nothing to do — assigning
-  // regardless is what made the title visibly change during load. Only if config disagrees
-  // with the markup does it need correcting, and then the markup is what should be fixed.
-  if (config.babyName && document.title !== config.babyName) {
-    document.title = config.babyName;
-  }
   document.getElementById('babyAge').textContent = ageStamp(birthDate, new Date().toISOString());
 
   initLightbox(timeline);

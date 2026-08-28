@@ -746,12 +746,11 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
-- **The tab title is STATIC in `index.html`, and is the baby's name, not the app's.**
-  Setting it only from config after load meant the tab read one thing and then visibly
-  changed to another. `app.js` assigns it now only when config genuinely disagrees with the
-  markup — and if it does, the markup is what should be corrected. The manifest `name`
-  stays "Finnbook": that is the app on a home screen, which is a different thing from the
-  page it opens.
+- **The tab title is "Finnbook", static in `index.html`, and nothing assigns
+  `document.title`.** It matches the manifest `name`, so the tab, the home-screen icon and
+  the share sheet all say the same word. Static is the point: anything setting it after
+  load makes the tab change under the reader, which is what it used to do. The baby's name
+  belongs to the heading, which config fills in.
 - **Reading picked files uses `Promise.allSettled`, never `Promise.all`.** One rejection
   threw the entire batch away, so picking five photos of which one was cloud-only added
   NOTHING — and a parent who typed a caption then saved got a memory with no photos in it.

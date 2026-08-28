@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f2f4ec" />
-  <!-- The baby's name, not the app's. Static so it is right from the first paint: set
-       only from config after load, the tab read "Finnbook" first and visibly switched.
-       Kept in step with config.babyName by app.js, which is where it can actually change. -->
-  <title>Finn Lesinski</title>
+  <!-- Static, and never touched afterwards. Matching the manifest name means the tab, the
+       home-screen icon and the share sheet all say the same word, and nothing can change
+       it mid-load — which is what made the title visibly switch before. -->
+  <title>Finnbook</title>
 
   <!-- The icon is flattened onto the page's own sage rather than left transparent: iOS
        composites a transparent apple-touch-icon onto BLACK, which would put a black
