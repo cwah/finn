@@ -34,6 +34,20 @@ Shipped when it lands. No ceremony beyond that.
       (and move `moov` to the front while there, so playback can start before the whole
       file arrives).
 
+- [ ] **Object storage for media.** Researched 2026-08-31 and deliberately NOT done, so
+      the question does not get re-opened from scratch. Render DOES have a native
+      S3-compatible object store, but it has been in **alpha behind a waitlist since March
+      2026** and there is no GA entry in the changelog as of August — not somewhere to put
+      irreplaceable memories, and not something that can simply be switched on.
+      The other one-provider option is the MinIO template, which is S3-compatible and runs
+      on Render — but it stores objects on a Render SSD disk with daily snapshots, which is
+      precisely what PocketBase's own disk already is. That trades a second service, a
+      second bill and an extra hop between PocketBase and its files for no gain in
+      durability. It is strictly worse here.
+      So the trigger for revisiting is CAPACITY, not durability: the disk enlarges but
+      never shrinks, and the two-copy video scheme pushes usage up. Revisit when the 5 GB
+      is genuinely in sight, or when Render's own object storage reaches GA.
+
 - [ ] **Re-encode video on upload.** Deferred deliberately, with the numbers measured
       2026-08-30: 17 stored clips came to 157 MB, and two of them — 58.8 MB/24s and
       46.4 MB/8.8s — were two thirds of that. So the win is real but concentrated in a
