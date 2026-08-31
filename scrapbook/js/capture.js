@@ -17,6 +17,7 @@ import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
 import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
 import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
+import { forDisplay, previewUrl } from './downscale.js';
 import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
 import { openPhotoEditor } from './photo-editor.js';
 import { dateLabel } from './age.js';
@@ -129,14 +130,21 @@ async function readItem(entry) {
   // A movie with no still of its own: its poster is a frame of itself.
   if (!entry.still) {
     const { url: videoUrl, width, height, duration, poster } = await measureVideo(entry.video);
+    // A 4K clip yields a 4K poster, which is a large jpeg to store and a larger one to
+    // decode for a 76px square. Same treatment as any other still.
+    const shown = await forDisplay(new File([poster], 'poster.jpg', { type: 'image/jpeg' }),
+      width, height);
     return {
-      file: new File([poster], 'poster.jpg', { type: 'image/jpeg' }),
+      file: shown.file,
       // The thumbnail and the crop surface show the POSTER; the clip is previewed from
       // its own url in the editor. Two urls because they are two different files.
-      url: URL.createObjectURL(poster),
+      url: await previewUrl(shown.file),
+      editUrl: URL.createObjectURL(shown.file),
       videoUrl,
-      width,
-      height,
+      // The poster's size, which is what the layout reasons about — and after a reduction
+      // that is no longer the video's own. The clip still plays at its full resolution.
+      width: shown.width,
+      height: shown.height,
       videoFile: entry.video,
       takenOn: await takenOn(entry.video),
       duration,
@@ -161,12 +169,30 @@ async function readItem(entry) {
     video = split.video;
   }
 
-  const [{ url, width, height }, focal] = await Promise.all([
+  const [measured, focal] = await Promise.all([
     measure(still),
     detectFocalPoint(still),
   ]);
+
+  // What gets STORED: reduced to what a screen can show, when it is worth doing. An
+  // ordinary photo passes through untouched — see needsDownscale.
+  const shown = await forDisplay(still, measured.width, measured.height);
+
+  // What the STRIP shows: a 320px thumbnail, not the original. Ten 4000px photos decoded
+  // for ten 76px squares is tens of megabytes and a visibly stalled sheet on a phone.
+  URL.revokeObjectURL(measured.url); // measure() made one; the thumbnail replaces it
+  const url = await previewUrl(shown.file);
+
   const item = {
-    file: still, url, width, height, focalX: focal.x, focalY: focal.y,
+    file: shown.file,
+    url,
+    // What the framing editor draws. The file itself, which after forDisplay is at most
+    // DISPLAY_EDGE — sharp to crop on, and already in memory either way.
+    editUrl: URL.createObjectURL(shown.file),
+    width: shown.width,
+    height: shown.height,
+    focalX: focal.x,
+    focalY: focal.y,
     // Read from the ORIGINAL the parent picked, not from `still` — a Google motion photo
     // has had its clip split off by now, and the halves are new Blobs with no name and no
     // modification time of their own.
@@ -323,7 +349,10 @@ export function initCapture({ author, canPost = true }, handlers) {
     pending.forEach((p) => {
       if (!p.file) return; // an existing photo's url belongs to the server, not to us
       URL.revokeObjectURL(p.url);
-      if (p.videoUrl) URL.revokeObjectURL(p.videoUrl); // a clip has a second one
+      // The framing image is a second object URL over the same file, and the clip a third.
+      // Each has to be given back by name; revoking one does not release the others.
+      if (p.editUrl) URL.revokeObjectURL(p.editUrl);
+      if (p.videoUrl) URL.revokeObjectURL(p.videoUrl);
     });
     pending = [];
   }
@@ -382,7 +411,11 @@ export function initCapture({ author, canPost = true }, handlers) {
         drop.addEventListener('click', (e) => {
           e.stopPropagation();
           const [gone] = pending.splice(i, 1);
-          if (gone.file) URL.revokeObjectURL(gone.url); // only ours to revoke
+          if (gone.file) {
+            // Only ours to revoke — a stored photo's urls belong to the server.
+            URL.revokeObjectURL(gone.url);
+            if (gone.editUrl) URL.revokeObjectURL(gone.editUrl);
+          }
           renderThumbs();
           // Removing the odd one out can leave the rest agreeing after all, so the date
           // is worked out again from whatever is left — including back to today when the
@@ -538,7 +571,9 @@ export function initCapture({ author, canPost = true }, handlers) {
   function storedAsPending(post) {
     return post.photos.map((p) => ({
       id: p.id,
-      url: p.url,
+      // Neither the strip nor the framing surface needs the original.
+      url: p.thumbUrl || p.url,
+      editUrl: p.cardUrl || p.url,
       width: p.width,
       height: p.height,
       focalX: p.focalX,

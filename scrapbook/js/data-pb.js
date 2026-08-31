@@ -79,6 +79,12 @@ function toPhoto(rec) {
   return {
     id: rec.id,
     url: pb.fileUrl('photos', rec.id, rec.image),
+    // A card is at most 560 CSS px wide and the compose strip is 76: neither has any use
+    // for a 3000px original, and fetching one for each is most of what made a timeline
+    // slow to fill in. The lightbox still asks for `url`, because expanding a photo is the
+    // one place the whole thing is wanted.
+    cardUrl: pb.fileUrl('photos', rec.id, rec.image, '1280x1280f'),
+    thumbUrl: pb.fileUrl('photos', rec.id, rec.image, '320x320f'),
     width: rec.width,
     height: rec.height,
     alt: rec.alt || null,

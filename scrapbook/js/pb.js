@@ -172,8 +172,12 @@ export async function remove(collection, id) {
 }
 
 /** Public URL for a file stored on a record. */
-export function fileUrl(collectionIdOrName, recordId, filename) {
-  return `${apiUrl()}/api/files/${collectionIdOrName}/${recordId}/${filename}`;
+export function fileUrl(collectionIdOrName, recordId, filename, thumb = null) {
+  const base = `${apiUrl()}/api/files/${collectionIdOrName}/${recordId}/${filename}`;
+  // Only sizes DECLARED on the field are honoured; anything else is served as the original
+  // at full size, with a 200 and no complaint. See pb_migrations/1756100000_photo_thumbs.js
+  // — asking here for a size that is not declared there is silently a no-op.
+  return thumb ? `${base}?thumb=${thumb}` : base;
 }
 
 /** Escape a value for use inside a PocketBase filter string. */

@@ -746,6 +746,29 @@ tests. It has no dependencies and nothing bundles.
   to fit. The card looked right the whole time — `rotor()` in render.js builds the same
   rotor from `orientedSize` without swapping, and the two must agree. One contract, written
   down in both places now.
+- **A photo is reduced to what a screen can show before it is stored.** `DISPLAY_EDGE` is
+  2560 — as much as the largest screen in the house actually displays, since the lightbox
+  fits to the viewport and zooms only to the photo's own pixels. A 3042x1812 / 4 MB photo
+  comes out 2560x1525 / 1.1 MB. Ordinary photos pass through UNTOUCHED (`needsDownscale`),
+  so nothing is re-encoded to save nothing.
+  - The trade is real: the stored copy is a display copy. The original stays on the phone
+    that took it, which is where the negative has always lived.
+  - The FILENAME is kept through the re-encode. It carries the date `filenameDate` reads,
+    and a memory renamed `photo.jpg` would be dated today.
+  - Always JPEG out, transparency flattened onto white — unpainted canvas encodes as black,
+    which would turn a transparent PNG into a black rectangle.
+- **Three sizes of every photo, because three places want different things.** The compose
+  strip is 76 CSS px, the framing surface 320, a card 560, and the lightbox wants the whole
+  thing. Locally that is a 320px thumbnail plus the reduced file; for stored photos it is
+  `?thumb=` on the file URL.
+  - **PocketBase serves ONLY thumb sizes declared on the field, and silently returns the
+    ORIGINAL for anything else** — a 200, no error, full bytes. Measured before relying on
+    it: `?thumb=100x100` gave 7 KB, while `240x240f`, `1600x1600f` and `240x0` all gave the
+    original 1480 KB. A page asking for thumbnails and getting full-size photos looks
+    exactly like a page that is merely slow, which is the bug this was meant to fix. The
+    sizes are declared in `pb_migrations/1756100000_photo_thumbs.js`.
+  - `f` is fit-inside. The plain `WxH` form CROPS to fill, which would quietly re-frame
+    what a parent chose — framing is the crop rectangle's job.
 - **Brightness and contrast are FRAMING, not development.** Stored as numbers on the photo
   and applied at render through one `lightFilter()`, exactly like crop, rotation and the
   trim — so the file is never re-encoded and a heavy hand costs nothing to undo. The

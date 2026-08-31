@@ -68,6 +68,10 @@ export async function updatePost(id, draft, author) {
     photos: draft.photos.map((p, i) => ({
       id: p.id || `local-${Date.now()}-${i}`,
       url: p.url,
+      // No server to resize, so one url stands in for all three — the SHAPE has to
+      // match data-pb.js or the renderer would read undefined and show nothing.
+      cardUrl: p.url,
+      thumbUrl: p.url,
       width: p.width,
       height: p.height,
       alt: null,
@@ -104,6 +108,10 @@ export async function createPost(draft, author) {
     photos: draft.photos.map((p, i) => ({
       id: `local-${stamp}-${i}`,
       url: p.url,
+      // No server to resize, so one url stands in for all three — the SHAPE has to
+      // match data-pb.js or the renderer would read undefined and show nothing.
+      cardUrl: p.url,
+      thumbUrl: p.url,
       width: p.width,
       height: p.height,
       alt: null,

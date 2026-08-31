@@ -415,7 +415,10 @@ export function openPhotoEditor(photo, { isMain }) {
     cropImg.replaceWith(video);
     cropImg = video;
   } else {
-    cropImg.src = photo.url;
+    // The framing image, NOT the strip's thumbnail: this is drawn at up to 320 CSS px and
+    // cropped on, so a 320px source would be visibly soft on a 2x screen. `url` stays the
+    // small one because it is shown at 76px in fifty places.
+    cropImg.src = photo.editUrl || photo.url;
   }
   paint();
 

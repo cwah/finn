@@ -31,7 +31,8 @@ function photoEl(photo) {
 
   if (!hasVideo(photo)) {
     const img = el('img', 'card-photo rotor-media', {
-      src: photo.url,
+      // The card's own size, not the original. `url` is what the lightbox opens.
+      src: photo.cardUrl || photo.url,
       alt: photo.alt || '',
       loading: 'lazy',
       decoding: 'async',
@@ -47,7 +48,7 @@ function photoEl(photo) {
   // The media fragment asks the browser for just the trimmed stretch, so a 3-minute
   // source does not download in full to play four seconds of it.
   const video = el('video', 'card-photo card-video rotor-media', {
-    poster: photo.url,
+    poster: photo.cardUrl || photo.url,
     // 'metadata' either way: with 'none' the first tap on the badge has nothing buffered
     // and stalls on a blank frame. Metadata is a few KB and buys an instant start.
     preload: 'metadata',
