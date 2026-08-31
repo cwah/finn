@@ -800,6 +800,37 @@ tests. It has no dependencies and nothing bundles.
   controls are measured rather than guessed, since they differ between a still and a clip.
   Runs on open, on resize and on a quarter turn — never from `paint()`, which runs per
   pointer move.
+- **Two copies of every clip: the original and a display copy.** A darkroom keeps the
+  negative and the print, for the same reason.
+  - `video` is the DISPLAY copy — 1080p H.264 — and is what every view loads: the compose
+    strip, the card, the lightbox. It stays the field everything already reads, so rows
+    written before this are simply their own display copy and nothing needed a backfill.
+  - `videoOriginal` is whatever came off the phone, uploaded in the BACKGROUND after the
+    memory is safe (`attachOriginal`). It is the slow one — tens of megabytes against a
+    couple — and nothing waits for it. It is allowed to fail: a post without an original
+    shows and plays exactly right, it merely has no negative behind it.
+  - **Crop and trim are NOT baked in.** They stay non-destructive and applied at render,
+    as for a photo — and not only for consistency: a video's poster IS a photo and is
+    cropped at render, so baking the crop into the clip alone would leave the two framed
+    differently on the same card.
+  - **Encoding runs in REAL TIME**, so a 24s clip takes 24s, and the picker's own label
+    carries the progress rather than a mute spinner. Small clips and motion photos are
+    skipped entirely (`needsEncoding`): re-encoding two seconds is a generation of loss
+    and a wait to save nothing.
+  - **Every dimension is rounded to an EVEN number.** H.264 stores chroma at half
+    resolution per axis, so an odd side has no legal representation, and encoders round,
+    refuse, or emit a green edge — none of which shows up until playback.
+  - **`toDisplayCopy` never throws, and every exit returns the original.** A bigger file is
+    a disappointment; an exception would be a memory that refused to save. `play()` is
+    RACED rather than awaited and the draw loop has a hard ceiling, because a promise that
+    never settles in a tab the browser has stopped running is precisely what hung every
+    attempt to test this. A run cut short discards its partial encode rather than storing
+    half a memory.
+  - **The recorder half is UNVERIFIED and cannot be verified from here.** It needs a clip
+    to play through in real time in a foreground tab; the automation browser backgrounds
+    every tab, so `requestAnimationFrame` never fires, `play()` never settles, and one
+    attempt froze the renderer. The arithmetic and the fail-safe contract are tested; the
+    encode itself needs a real device.
 - **A video can be played with SOUND from the card, and starts muted every time.** Muted
   is the default per VIDEO, not per session: a parent who unmuted one memory has not asked
   the rest of the timeline to make noise as they scroll past it, and a scrapbook that

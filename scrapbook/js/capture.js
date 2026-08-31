@@ -13,11 +13,12 @@
 // PocketBase or only in memory. Photos preview through object URLs while composing;
 // the File itself rides along so the data layer can upload it.
 
-import { createPost, updatePost, deletePost } from './data.js';
+import { createPost, updatePost, deletePost, attachOriginal } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
 import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
 import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
 import { forDisplay, previewUrl } from './downscale.js';
+import { toDisplayCopy, needsEncoding, estimateSeconds } from './video-encode.js';
 import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
 import { openPhotoEditor } from './photo-editor.js';
 import { dateLabel } from './age.js';
@@ -103,6 +104,43 @@ function measureVideo(file) {
  *   a jpeg with an mp4 inside it   -> a motion photo (Google)
  *   a movie on its own             -> a video, poster grabbed from its own frames
  */
+// ── Encoding progress ─────────────────────────────────────────────
+// Re-encoding a clip runs in REAL TIME: a 24-second video takes 24 seconds, and a spinner
+// that says nothing for that long reads as a hung app rather than a busy one. So the
+// picker's own label carries the news.
+//
+// Held at module level because readItem is a module-level function while the label lives
+// inside initCapture. The callback is set once, on wiring.
+
+const encoding = new Map(); // source file -> { done, seconds }
+let paintEncoding = () => {};
+let lastPaint = 0;
+
+function announceEncoding(file, duration, done) {
+  encoding.set(file, { done, seconds: estimateSeconds(duration) });
+  // onProgress fires once per animation frame — sixty times a second — and the label only
+  // ever shows whole percents. Four updates a second is past the point of noticing.
+  const now = Date.now();
+  if (now - lastPaint < 250) return;
+  lastPaint = now;
+  paintEncoding();
+}
+
+function clearEncoding(file) {
+  encoding.delete(file);
+  lastPaint = 0;
+  paintEncoding();
+}
+
+/** What to say while clips are being reduced, or null when none are. */
+export function encodingSummary() {
+  if (!encoding.size) return null;
+  const jobs = [...encoding.values()];
+  const done = jobs.reduce((sum, j) => sum + j.done, 0) / jobs.length;
+  const clips = jobs.length === 1 ? 'video' : `${jobs.length} videos`;
+  return `Shrinking the ${clips}… ${Math.round(done * 100)}%`;
+}
+
 /**
  * Fail early, and for a reason worth reporting, on a file the device cannot actually hand
  * over.
@@ -130,6 +168,13 @@ async function readItem(entry) {
   // A movie with no still of its own: its poster is a frame of itself.
   if (!entry.still) {
     const { url: videoUrl, width, height, duration, poster } = await measureVideo(entry.video);
+
+    // Reduce the clip before anything else touches it. Real time, so it is the longest
+    // wait in the app by far — hence the announcement below rather than a mute spinner.
+    const display = await toDisplayCopy(entry.video, {
+      onProgress: (done) => announceEncoding(entry.video, duration, done),
+    });
+    clearEncoding(entry.video);
     // A 4K clip yields a 4K poster, which is a large jpeg to store and a larger one to
     // decode for a 76px square. Same treatment as any other still.
     const shown = await forDisplay(new File([poster], 'poster.jpg', { type: 'image/jpeg' }),
@@ -145,7 +190,12 @@ async function readItem(entry) {
       // that is no longer the video's own. The clip still plays at its full resolution.
       width: shown.width,
       height: shown.height,
-      videoFile: entry.video,
+      // The DISPLAY copy — 1080p H.264 — is what gets stored and what every view plays.
+      videoFile: display.file,
+      // The untouched clip, held so it can go up in the background once the memory is
+      // safe. Only when it is genuinely a different file: an unencoded clip is its own
+      // original, and uploading it twice would double the storage to archive nothing.
+      videoOriginalFile: display.encoded ? entry.video : null,
       takenOn: await takenOn(entry.video),
       duration,
       trimStart: 0,
@@ -308,6 +358,13 @@ export function initCapture({ author, canPost = true }, handlers) {
   const caption = document.getElementById('composeCaption');
   const date = document.getElementById('composeDate');
   const dateNote = document.getElementById('composeDateNote');
+  // Only the label, never renderThumbs: progress ticks many times a second and rebuilding
+  // the strip on each would be its own stall.
+  paintEncoding = () => {
+    const news = encodingSummary();
+    if (news) addLabel.textContent = news;
+    else renderThumbs();
+  };
   const datePicks = document.getElementById('composeDatePicks');
   const isMilestone = document.getElementById('composeMilestone');
   const milestoneTitle = document.getElementById('composeMilestoneTitle');
@@ -446,9 +503,11 @@ export function initCapture({ author, canPost = true }, handlers) {
     thumbs.hidden = pending.length === 0 && reading === 0;
     // The picker takes video too, and a label that only mentions photos reads as a
     // restriction. "Add more" once something is attached — by then the kind is obvious.
-    addLabel.textContent = reading
-      ? `Reading ${reading} item${reading === 1 ? '' : 's'}…`
-      : (pending.length ? 'Add more' : 'Add photos or videos');
+    // Encoding first: it is the long wait, and saying "Reading 1 item" for twenty-five
+    // seconds is the message that makes an app look broken.
+    addLabel.textContent = encodingSummary()
+      || (reading ? `Reading ${reading} item${reading === 1 ? '' : 's'}…` : null)
+      || (pending.length ? 'Add more' : 'Add photos or videos');
   }
 
   /** Reframe a photo, or promote it to lead the post. */
@@ -752,6 +811,31 @@ export function initCapture({ author, canPost = true }, handlers) {
   cancelBtn.addEventListener('click', close);
   // ESC dismisses a native <dialog> without firing our handlers — clean up regardless.
   /**
+   * Send the untouched clips up, after the memory is already safe.
+   *
+   * Deliberately NOT awaited by the save. The original is tens of megabytes where the
+   * display copy is a couple, and making a parent watch that finish would be charging them
+   * for an archive they will never open — the memory is complete without it, because every
+   * view plays the display copy.
+   *
+   * Which also means it is allowed to fail, and to be interrupted by the page closing. A
+   * post with no original is a post that shows and plays exactly as it should; it simply
+   * has no negative behind it. Nothing here may take the post down with it.
+   *
+   * Matched by ORDER, since a stored photo's id is not on the pending item: `post.photos`
+   * comes back in the order it was sent, which is the order of `sent`.
+   */
+  function sendOriginals(post, sent) {
+    const stored = post?.photos || [];
+    stored.forEach((photo, i) => {
+      const original = sent[i]?.videoOriginalFile;
+      if (!original || !photo?.id) return;
+      // Fire and forget, on purpose. Errors are swallowed inside attachOriginal.
+      attachOriginal(photo.id, original);
+    });
+  }
+
+  /**
    * Put a held-back post on the timeline, once.
    *
    * Called from every route out of the sheet rather than from the `close` event alone.
@@ -929,6 +1013,9 @@ export function initCapture({ author, canPost = true }, handlers) {
       } else {
         (target ? onUpdate : onCreate)(post);
       }
+
+      // The originals go up behind the save, once there is somewhere to attach them.
+      sendOriginals(post, draft.photos);
 
       pending = []; // the saved post owns the previews now
       saveError.hidden = true;

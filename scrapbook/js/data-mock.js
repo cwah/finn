@@ -89,6 +89,8 @@ export async function updatePost(id, draft, author) {
         trimStart: p.trimStart || 0,
         trimEnd: p.trimEnd || 0,
         motion: Boolean(p.motion),
+        // No backend, so nothing is ever archived — the field exists for shape.
+        originalUrl: null,
       } : null,
     })),
   };
@@ -129,6 +131,8 @@ export async function createPost(draft, author) {
         trimStart: p.trimStart || 0,
         trimEnd: p.trimEnd || 0,
         motion: Boolean(p.motion),
+        // No backend, so nothing is ever archived — the field exists for shape.
+        originalUrl: null,
       } : null,
     })),
   };
@@ -146,4 +150,14 @@ export async function createPost(draft, author) {
   cache.posts.push(post);
   cache.posts.sort((a, b) => new Date(b.memoryDate) - new Date(a.memoryDate));
   return post;
+}
+
+
+/**
+ * Attach the untouched clip. Nothing to attach it to without a backend, so this reports
+ * honestly rather than pretending: the shape has to match data-pb.js, but the answer is
+ * that no original was kept.
+ */
+export async function attachOriginal() {
+  return false;
 }
