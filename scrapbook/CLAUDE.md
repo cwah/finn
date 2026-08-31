@@ -800,6 +800,25 @@ tests. It has no dependencies and nothing bundles.
   controls are measured rather than guessed, since they differ between a still and a clip.
   Runs on open, on resize and on a quarter turn — never from `paint()`, which runs per
   pointer move.
+- **A video can be played with SOUND from the card, and starts muted every time.** Muted
+  is the default per VIDEO, not per session: a parent who unmuted one memory has not asked
+  the rest of the timeline to make noise as they scroll past it, and a scrapbook that
+  played audio unbidden at 3am would be worse than useless.
+  - Only a real video gets the button. A motion photo loops on sight, and a loop with
+    sound is the same second of noise over and over — it takes the `isMotion` branch and
+    never reaches the one that appends the control.
+  - **At most one video is ever audible.** Unmuting or playing one mutes the others; it
+    does not PAUSE them, since a clip someone started deliberately should not stop from
+    under them.
+  - `muted` is set as a PROPERTY, never the attribute. The attribute is what lets a motion
+    photo autoplay at all, and removing it from an element the browser has already agreed
+    to play invites that permission to be reconsidered.
+  - Unmuting also starts playback — pressing "sound on" and watching a still frame stay
+    still reads as a broken button. That needs a real user gesture, so `play()`'s rejection
+    is what puts the UI back, not a `paused` check on the next line: play settles a tick
+    later and `paused` is still true by then.
+  - The icon draws both states (waves, or a cross) rather than only the one you would move
+    to — an icon showing a single picture cannot say which state it is IN.
 - **A motion photo loops INSIDE its trim, and native `loop` cannot do that.** `loop`
   restarts the file, and the `#t=start,end` fragment only sets the opening position — no
   browser enforces the end across a loop. So a trimmed motion photo played the whole take

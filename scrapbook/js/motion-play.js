@@ -185,14 +185,82 @@ function wireBadge(badge) {
       video.pause();
       return;
     }
-    if (video.currentTime < trim.start || video.currentTime >= trim.end) {
-      video.currentTime = trim.start;
-    }
     badge.classList.add('is-playing');
     badge.setAttribute('aria-label', 'Pause');
-    playing.add(video);
-    video.play().catch(reset); // refused playback must not leave a pause icon showing
+    // Whatever else was audible gives way to the clip being started deliberately.
+    silenceOthers(video);
+    // play() settles a tick later, so `paused` is still true on the next line — the
+    // rejection is the only honest signal that playback was refused.
+    playFromTrim(video).catch(reset);
   });
+}
+
+/**
+ * Turn a card's sound on or off.
+ *
+ * Muted is where every clip starts, and where the next one starts too: the setting belongs
+ * to the video, not to the session. A parent who unmuted one memory has not asked the rest
+ * of the timeline to make noise as they scroll past it.
+ *
+ * `muted` is set as a PROPERTY here, never the attribute. The attribute is what lets a
+ * motion photo autoplay at all, and removing it from an element the browser has already
+ * agreed to play is asking for that permission to be reconsidered.
+ */
+function wireSoundBadge(badge) {
+  if (badge.dataset.wired) return;
+  badge.dataset.wired = 'true';
+
+  const box = badge.parentElement.querySelector('.crop-box');
+  const video = box?.querySelector('video');
+  if (!video) { badge.hidden = true; return; }
+
+  const paint = () => {
+    badge.classList.toggle('is-muted', video.muted);
+    badge.setAttribute('aria-pressed', String(!video.muted));
+    badge.setAttribute('aria-label', video.muted ? 'Turn sound on' : 'Turn sound off');
+  };
+
+  badge.addEventListener('click', (e) => {
+    // The badge sits over the picture, whose own tap opens the lightbox.
+    e.stopPropagation();
+    video.muted = !video.muted;
+    if (!video.muted) {
+      // Unmuting is the ask, so it is also the moment to play — pressing "sound on" and
+      // watching a still frame stay still would read as the button being broken.
+      silenceOthers(video);
+      if (video.paused) playFromTrim(video).catch(() => {});
+    }
+    paint();
+  });
+
+  video.addEventListener('volumechange', paint);
+  paint();
+}
+
+/**
+ * Leave one video making noise, at most.
+ *
+ * Two clips talking over each other is nobody's idea of a scrapbook, and with sound the
+ * mistake is much louder than with pictures. The others are muted rather than paused: a
+ * parent who started one deliberately should not have it stopped from under them.
+ */
+function silenceOthers(keep) {
+  for (const other of document.querySelectorAll('video[data-motion="false"]')) {
+    if (other !== keep) other.muted = true;
+  }
+}
+
+/**
+ * Start a clip inside its trim, wherever it was left.
+ * @returns {Promise<void>} rejects if the browser refuses, so callers can put the UI back
+ */
+function playFromTrim(video) {
+  const trim = trimOf(video);
+  if (trim && (video.currentTime < trim.start || video.currentTime >= trim.end)) {
+    video.currentTime = trim.start;
+  }
+  playing.add(video);
+  return video.play();
 }
 
 /**
@@ -237,7 +305,9 @@ function wireMotionBadge(badge) {
  */
 export function initMotion(root) {
   root.querySelectorAll('.video-badge--motion').forEach(wireMotionBadge);
-  root.querySelectorAll('.video-badge:not(.video-badge--motion)').forEach(wireBadge);
+  root.querySelectorAll('.video-badge--sound').forEach(wireSoundBadge);
+  root.querySelectorAll('.video-badge:not(.video-badge--motion):not(.video-badge--sound)')
+    .forEach(wireBadge);
 
   const videos = root.querySelectorAll('video[data-motion="true"]');
   if (!videos.length) return;

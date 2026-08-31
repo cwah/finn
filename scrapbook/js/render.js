@@ -169,9 +169,35 @@ function mountMedia(container, photo, group, cellAspect = null) {
     badge.dataset.length = length;
     badge.setAttribute('aria-label', `Play, ${length}`);
     container.append(badge);
+
+    // Sound, off to begin with. A timeline that made noise as you scrolled past would be
+    // unusable — and on a phone at 3am it would be worse than unusable — so the clip plays
+    // silently unless someone asks, and asks again for the next one.
+    //
+    // Only for a real video. A motion photo loops on sight, and a loop with sound would be
+    // the same second of noise over and over.
+    const sound = el('button', 'video-badge video-badge--sound', { type: 'button' });
+    sound.setAttribute('aria-label', 'Turn sound on');
+    sound.setAttribute('aria-pressed', 'false');
+    sound.innerHTML = SPEAKER_SVG;
+    container.append(sound);
   }
   return box;
 }
+
+/**
+ * A speaker, drawn rather than shipped.
+ *
+ * Inline SVG rather than an emoji: 🔊 renders as a different picture on every platform and
+ * as a colour glyph on most, which is not a control. Two parts, so CSS can cross it out
+ * when the sound is off without swapping the markup.
+ */
+const SPEAKER_SVG = `
+  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+    <path class="speaker-body" d="M7.2 2.6 4.1 5.2H2a.9.9 0 0 0-.9.9v3.8a.9.9 0 0 0 .9.9h2.1l3.1 2.6a.6.6 0 0 0 1-.46V3.06a.6.6 0 0 0-1-.46z"/>
+    <path class="speaker-waves" d="M10.6 5.4a3.4 3.4 0 0 1 0 5.2M12.7 3.6a6.2 6.2 0 0 1 0 8.8"/>
+    <path class="speaker-cross" d="M10.8 6.2l4 3.6M14.8 6.2l-4 3.6"/>
+  </svg>`;
 
 /** Make a photo openable full-size. The lightbox reads these off the clicked element. */
 function makeViewable(img, photo, group) {
