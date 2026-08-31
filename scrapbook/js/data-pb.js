@@ -71,7 +71,30 @@ export async function getConfig() {
     // a request of its own. The server enforces it regardless — this only decides
     // whether a viewer is shown a button that would fail.
     canPost: Boolean(me?.canPost),
+    // Whether this account has asked to be emailed when a memory is added. Off unless
+    // someone said otherwise — the migration deliberately backfills nothing, because a
+    // deploy must not sign anyone up for mail.
+    notifyByEmail: Boolean(me?.notifyByEmail),
   };
+}
+
+/**
+ * Turn email updates on or off for the signed-in account.
+ *
+ * A person edits their OWN row — `users.updateRule` is `id = @request.auth.id`, checked
+ * against production before building this — so no elevated access is involved and one
+ * account cannot sign another up for mail.
+ *
+ * The cached record is refreshed too, or `getConfig` would keep reporting the old answer
+ * until the next sign-in and the switch would appear to spring back.
+ */
+export async function setEmailNotifications(on) {
+  const me = pb.currentUser();
+  if (!me) throw new Error('not signed in');
+  const updated = await pb.update('users', me.id, { notifyByEmail: Boolean(on) });
+  pb.rememberUser(updated);
+  _config = null; // so the next getConfig reads the new value
+  return Boolean(updated.notifyByEmail);
 }
 
 /** A photo record -> the contract's photo shape. */

@@ -160,3 +160,56 @@ body {
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* ── Account controls ──────────────────────────────────────────── */
+.app-account {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Email updates. A quiet control: it is a preference, not an action anyone came here to
+   take, so it sits at the weight of the date and author text rather than a button's. */
+.app-notify {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  background: none;
+  border: 1px solid var(--hairline);
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-notify[hidden] { display: none; }
+.app-notify:hover { border-color: var(--text-dim); }
+
+.app-notify:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+
+/* The state is carried by a filled dot as well as the words, so it does not rest on
+   colour alone — and the words change too, which is what a screen reader reads. */
+.app-notify-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-dim);
+}
+
+.app-notify[aria-pressed="true"] {
+  color: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+.app-notify[aria-pressed="true"] .app-notify-dot {
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+.app-notify:disabled { opacity: 0.5; cursor: default; }

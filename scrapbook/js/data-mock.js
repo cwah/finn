@@ -33,7 +33,9 @@ export async function getConfig() {
   const { config } = await load();
   // No accounts without a backend, so there is nobody to restrict: the mock source is
   // always signed in and always allowed. Present so the shape matches data-pb.js.
-  return { canPost: true, ...config };
+  // notifyByEmail: no accounts and no mail server without a backend, so the switch has
+  // nothing to control. Present for shape; the UI hides it when there are no accounts.
+  return { canPost: true, notifyByEmail: false, ...config };
 }
 
 /**
@@ -149,3 +151,9 @@ export async function createPost(draft, author) {
 }
 
 
+
+
+/** No accounts without a backend, so there is nobody to email and nothing to remember. */
+export async function setEmailNotifications() {
+  return false;
+}

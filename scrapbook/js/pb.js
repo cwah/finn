@@ -75,6 +75,18 @@ export function currentUser() {
   return auth ? auth.record : null;
 }
 
+/**
+ * Replace the cached copy of the signed-in account, keeping the same token.
+ *
+ * For when a person changes something about themselves and the stored record would
+ * otherwise report the old answer until they next sign in — a switch that springs back
+ * the moment the page is reloaded reads as a switch that did not work.
+ */
+export function rememberUser(record) {
+  if (!auth || !record) return;
+  persist({ token: auth.token, record });
+}
+
 export function isSignedIn() {
   return Boolean(auth && auth.token);
 }

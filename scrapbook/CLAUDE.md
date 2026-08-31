@@ -988,6 +988,52 @@ tests. It has no dependencies and nothing bundles.
   while scrolling and idles out of sight so it never covers a memory. It is
   `aria-hidden` — a shortcut for scrolling, not a second copy of the timeline.
 
+## Email notifications
+
+An email when a new memory is added, sent by a cron **inside PocketBase** — the only part
+of this that is always running. The bot lives on a laptop and the frontend is a page nobody
+may have open.
+
+- **PREREQUISITE: SMTP must be configured** in Settings → Mail. Without it PocketBase falls
+  back to a local `sendmail` that does not exist in the container, so every send fails, is
+  retried for a day, and stops. Nothing else breaks and no mail arrives.
+- **OPT-IN.** `users.notifyByEmail` is a bool, and the false backfill is exactly right
+  here: nobody is signed up by a deploy. That is the opposite of `canPost`, where the same
+  false would have revoked posting and needed repairing in the same migration — the rule is
+  not "always backfill a bool", it is **work out what false MEANS for this field**.
+- **Three conditions, each answering a different way of getting it wrong**, in
+  `deploy/pb_hooks/notify-rule.js`:
+  - *settled* — created at least 5 minutes ago. Test posts get made and deleted in
+    production, and a post gets edited seconds after saving. Waiting is what turns "a post
+    exists" into "a post was meant".
+  - *recent* — `memoryDate` within 7 days. Backfilling a year of photos is a pleasant
+    afternoon for one person and a hundred emails for everyone else.
+  - *unsent* — `posts.notifiedAt` is empty.
+  - and a fourth that bounds damage rather than describing intent: *fresh*, created within
+    24 hours. Sending may fail and retry, but a failure that never resolves must not mail
+    everyone a week late when it recovers.
+- **The rule is a shared CommonJS module, required by both the hook and the test suite**
+  (`createRequire` from `test/notify-rule.test.js`), so what ships is what was tested. A
+  second copy would drift, and the drift would arrive as mail nobody expected.
+- **`require()` happens INSIDE the cron handler**, per PocketBase's own guidance: handlers
+  run in a pooled runtime that does not necessarily share the file's top-level scope. A
+  binding resolved at load time and undefined at run time would fail as silence, which is
+  indistinguishable from "nobody posted anything". The rule is passed down explicitly from
+  there.
+- Only `*.pb.js` is auto-loaded as a hook, so `notify-rule.js` sits beside it without being
+  loaded twice.
+- **Marked as sent when at least one message got through, AND when there was nobody to
+  tell** — otherwise a post with no opted-in audience is re-examined every minute until it
+  ages out. Not marked when there were recipients and every one failed: that is the case
+  worth retrying.
+- The author is never emailed about their own post. Captions are escaped before they go
+  anywhere near an HTML body.
+- The switch is in the header and writes the person's OWN row (`users.updateRule` is
+  `id = @request.auth.id`, checked against production before building it), so nobody can
+  sign anyone else up. It is disabled while in flight and put back if the write fails —
+  a switch reading "on" while the server disagrees means silently missing every
+  notification.
+
 ## Type
 
 The baby's name at the top of the page is set in **Adam's own handwriting**

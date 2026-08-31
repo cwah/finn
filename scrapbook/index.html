@@ -30,7 +30,16 @@
       <h1 class="app-title">Finnbook</h1>
       <p class="app-subtitle" id="babyAge"></p>
     </div>
-    <button id="signOutBtn" class="app-signout" type="button" hidden>Sign out</button>
+    <div class="app-account">
+      <!-- Opt-IN. Off until someone asks, because a deploy must not sign anyone up for
+           mail. aria-pressed rather than a checkbox: it is an action with a state, and it
+           reads correctly to a screen reader either way round. -->
+      <button id="notifyBtn" class="app-notify" type="button" hidden aria-pressed="false">
+        <span class="app-notify-dot" aria-hidden="true"></span>
+        <span id="notifyLabel">Email updates off</span>
+      </button>
+      <button id="signOutBtn" class="app-signout" type="button" hidden>Sign out</button>
+    </div>
   </header>
 
   <main id="timeline" class="timeline" aria-live="polite"></main>
