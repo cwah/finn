@@ -15,7 +15,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { wireMotionTrim, markOnScreen } from '../js/motion-play.js';
+import { wireMotionTrim, markOnScreen, onVisibility } from '../js/motion-play.js';
 
 /** The slice of <video> this rule touches, and nothing else. */
 function fakeVideo({ trimStart = 0.8, trimEnd = 1.8, duration = 2.334 } = {}) {
@@ -127,4 +127,58 @@ test('wiring twice does not stack a second set of listeners', () => {
   markOnScreen(v);
   v.advanceTo(1.9);
   assert.equal(v.playCount, 1, 'one rewind, not two');
+});
+
+
+// ── Scrolling away ────────────────────────────────────────────────
+// Both kinds stop when they leave the screen. Only one of them starts again by itself,
+// and the difference is what keeps a tapped clip from replaying every time it is scrolled
+// back to.
+
+/** Enough of a <video> for the visibility rule, with the kind it is. */
+function onCard({ motion = false, playing = false } = {}) {
+  const v = fakeVideo();
+  v.dataset.motion = motion ? 'true' : 'false';
+  v.paused = !playing;
+  v.muted = !playing; // a clip someone started with sound is the interesting case
+  return v;
+}
+
+test('a video that scrolls out of view stops', () => {
+  // THE BUG. Only motion photos were watched, so a tapped clip played on — and since
+  // sound arrived, talked on — from a card no longer on screen.
+  const v = onCard({ playing: true });
+  onVisibility(v, false);
+  assert.equal(v.paused, true);
+});
+
+test('and goes silent with it', () => {
+  // A clip that is not playing is muted, without exception: one left unmuted and paused
+  // just off screen would speak the moment anything started it again, which is the
+  // surprise the muted default exists to prevent.
+  const v = onCard({ playing: true });
+  onVisibility(v, false);
+  assert.equal(v.muted, true);
+});
+
+test('scrolling BACK does not start it again', () => {
+  // Coming into view is not a request to play. Restarting here would make a video
+  // impossible to leave paused, and would undo the tap that stopped it.
+  const v = onCard();
+  onVisibility(v, true);
+  assert.equal(v.paused, true);
+  assert.equal(v.playCount, 0);
+});
+
+test('a motion photo does start itself when it comes into view', () => {
+  // It IS its motion — one that never moved would just be a photo.
+  const v = onCard({ motion: true });
+  onVisibility(v, true);
+  assert.equal(v.playCount, 1);
+});
+
+test('a motion photo stops when it leaves, like everything else', () => {
+  const v = onCard({ motion: true, playing: true });
+  onVisibility(v, false);
+  assert.equal(v.paused, true);
 });

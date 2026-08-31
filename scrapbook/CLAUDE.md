@@ -819,6 +819,19 @@ tests. It has no dependencies and nothing bundles.
     later and `paused` is still true by then.
   - The icon draws both states (waves, or a cross) rather than only the one you would move
     to — an icon showing a single picture cannot say which state it is IN.
+- **EVERY video is watched by the observer, not only the looping ones.** Watching only
+  `data-motion="true"` was what let a tapped clip play on — and, once sound arrived, talk
+  on — from a card scrolled well past. `onVisibility()` holds the rule and is exported so
+  it can be tested, since an IntersectionObserver is not something a test can scroll.
+  - **Off screen, both kinds stop. On screen, only a motion photo starts itself.** Coming
+    back into view is not a request to play: restarting a video there would make one
+    impossible to leave paused and would undo the tap that stopped it.
+  - **A stopped video is muted, without exception.** One left unmuted and paused just off
+    screen would speak the moment anything started it again, which is precisely the
+    surprise the muted default exists to prevent. Restarting is one tap, and that tap can
+    ask for sound again.
+  - A clip paused by hand leaves `playing` as well, or returning to the tab would resume
+    something deliberately stopped — `playing` is what `visibilitychange` restores from.
 - **A motion photo loops INSIDE its trim, and native `loop` cannot do that.** `loop`
   restarts the file, and the `#t=start,end` fragment only sets the opening position — no
   browser enforces the end across a loop. So a trimmed motion photo played the whole take

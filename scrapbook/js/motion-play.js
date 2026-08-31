@@ -104,18 +104,49 @@ export function wireMotionTrim(video) {
   });
 }
 
+/**
+ * Give up a video that has gone off screen.
+ *
+ * The sound is handed back with it. A clip that is not playing is silent, without
+ * exception — otherwise a video left unmuted and paused just off screen would speak the
+ * moment anything started it again, which is precisely the surprise the muted default
+ * exists to prevent. Restarting it is one tap, and that tap can ask for sound again.
+ *
+ * A motion photo is muted already and has no sound control, so this costs it nothing.
+ */
 function stop(video) {
   playing.delete(video);
   video.pause();
+  video.muted = true;
+}
+
+/**
+ * What being on or off screen means for a video.
+ *
+ * The two kinds part company here, and the asymmetry is the whole point:
+ *
+ *   OFF SCREEN  both stop, always. A video that carried on playing — and, since sound
+ *               arrived, carried on TALKING — from somewhere above the fold is the
+ *               clearest case of the app doing something nobody asked for.
+ *   ON SCREEN   only a motion photo starts itself, because a motion photo IS its motion.
+ *               A video was tapped once and has to be tapped again: scrolling back to a
+ *               card is not a request to play what is on it.
+ *
+ * Exported for tests — the rule is worth pinning, and an IntersectionObserver is not
+ * something a test can move a card past.
+ */
+export function onVisibility(video, visible) {
+  if (!visible) {
+    stop(video);
+    return;
+  }
+  if (video.dataset.motion === 'true') play(video);
 }
 
 function ensureObserver() {
   if (observer) return observer;
   observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) play(entry.target);
-      else stop(entry.target);
-    }
+    for (const entry of entries) onVisibility(entry.target, entry.isIntersecting);
   }, { threshold: VISIBLE });
 
   // Leaving the tab should cost nothing; coming back should pick up where it was.
@@ -182,6 +213,9 @@ function wireBadge(badge) {
     // The badge sits over the picture, whose own tap opens the lightbox.
     e.stopPropagation();
     if (!video.paused) {
+      // Out of `playing` as well as paused: that set is what the tab resumes from when it
+      // comes back to the front, and a clip stopped on purpose must stay stopped.
+      playing.delete(video);
       video.pause();
       return;
     }
@@ -309,11 +343,15 @@ export function initMotion(root) {
   root.querySelectorAll('.video-badge:not(.video-badge--motion):not(.video-badge--sound)')
     .forEach(wireBadge);
 
-  const videos = root.querySelectorAll('video[data-motion="true"]');
+  // EVERY video, not just the looping ones. Watching only motion photos was what let a
+  // tapped clip play on after its card had been scrolled away from.
+  const videos = root.querySelectorAll('video');
   if (!videos.length) return;
   const io = ensureObserver();
   videos.forEach((video) => {
-    wireMotionTrim(video);
+    // Only a loop needs the trim kept by hand; a video is held to it by holdToTrim, which
+    // pauses at the end instead of going round again.
+    if (video.dataset.motion === 'true') wireMotionTrim(video);
     io.observe(video);
   });
 }
@@ -321,7 +359,7 @@ export function initMotion(root) {
 /** Release a card's videos when it leaves the timeline, so nothing decodes off-screen. */
 export function releaseMotion(root) {
   if (!observer) return;
-  root.querySelectorAll('video[data-motion="true"]').forEach((video) => {
+  root.querySelectorAll('video').forEach((video) => {
     observer.unobserve(video);
     playing.delete(video);
   });
