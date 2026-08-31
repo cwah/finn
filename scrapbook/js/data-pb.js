@@ -195,6 +195,31 @@ async function withRetry(attemptFn, attempts = 3) {
 }
 
 /**
+ * Why the SERVER refused a photo, in its own words.
+ *
+ * PocketBase answers a rejected upload with `{ data: { image: { code, message } } }`, and
+ * that message is exact where anything written here would be a guess:
+ *
+ *   "Failed to upload IMG_3312.jpg - the maximum allowed file size is 15728640 bytes."
+ *
+ * Guessing is what went wrong before. A failed upload was reported as a stale cloud
+ * reference because that was the cause I had in mind, and a photo genuinely on the device
+ * but over 15 MB — verified against production, it is a hard 400 — got advice that could
+ * not have helped. The server knows; the job here is to carry what it said rather than
+ * substitute a theory for it.
+ *
+ * @returns {string|null} null when the server said nothing, e.g. the request never arrived
+ */
+function serverReason(err) {
+  const fields = err?.data;
+  if (!fields || typeof fields !== 'object') return null;
+  for (const detail of Object.values(fields)) {
+    if (detail && typeof detail.message === 'string' && detail.message) return detail.message;
+  }
+  return null;
+}
+
+/**
  * What a photo failure looks like to the caller.
  *
  * The draft photo is carried back, not just a message, so the compose sheet can put the
@@ -202,7 +227,14 @@ async function withRetry(attemptFn, attempts = 3) {
  * is still in memory at that point, and it is the only copy the app will ever have.
  */
 function describeFailure(photo, index, err) {
-  return { photo, index, status: err?.status ?? null, message: err?.message || String(err) };
+  return {
+    photo,
+    index,
+    status: err?.status ?? null,
+    // The server's own words where there are any; `message` is only ever the fallback.
+    reason: serverReason(err),
+    message: err?.message || String(err),
+  };
 }
 
 export async function createPost(draft, author) {
@@ -228,6 +260,27 @@ export async function createPost(draft, author) {
       console.error(`Photo ${i + 1} failed to upload`, err);
       failed.push(describeFailure(photo, i, err));
     }
+  }
+
+  // A memory that was ABOUT photos, none of which arrived, is not a memory — it is a
+  // caption sitting alone in the timeline where a picture should have been. The post has
+  // to be created before its photos can be (a photo record needs a post to belong to), so
+  // the only way to honour that is to take it back again.
+  //
+  // Only when the draft HAD photos: a caption on its own is a quote card, and a perfectly
+  // good post with nothing to fail.
+  if (draft.photos.length && !saved.length) {
+    try {
+      await pb.remove('posts', rec.id);
+    } catch (err) {
+      // Leaving an empty post behind is bad; losing the reason the photos failed is worse,
+      // because that is the thing the parent needs to see. Log and carry on.
+      console.error('could not remove the post whose photos all failed', err);
+    }
+    const nothing = new Error('no photos could be uploaded');
+    nothing.failedPhotos = failed;
+    nothing.postDiscarded = true;
+    throw nothing;
   }
 
   const post = toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);

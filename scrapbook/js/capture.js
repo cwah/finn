@@ -346,6 +346,14 @@ export function initCapture({ author, canPost = true }, handlers) {
         if (i === 0) cell.classList.add('is-main');
         cell.setAttribute('aria-label', `Photo ${i + 1} of ${pending.length}. Edit framing.`);
 
+        if (p.uploadError) {
+          cell.classList.add('is-failed');
+          // The border says WHICH; the title says why, for anyone who hovers or holds.
+          cell.title = p.uploadError;
+          cell.setAttribute('aria-label',
+            `Photo ${i + 1} of ${pending.length}. Did not upload. Edit framing.`);
+        }
+
         const img = new Image();
         img.src = p.url;
         img.alt = '';
@@ -729,6 +737,24 @@ export function initCapture({ author, canPost = true }, handlers) {
   });
 
   /**
+   * Remember which items the server refused, so the strip can point at them.
+   *
+   * A filename is a poor way to identify a photo — "PXL_20260807_194258664.jpg" says
+   * nothing about which picture it is — so the answer is to mark the THUMBNAIL rather than
+   * name the file. The names stay in the message as a secondary handle.
+   *
+   * Held on the pending item itself, so it survives renderThumbs and the reorder that
+   * "make main" does.
+   */
+  function markFailures(lost) {
+    for (const item of pending) delete item.uploadError;
+    for (const f of lost) {
+      const item = pending.find((p) => p.file && p.file === f.photo?.file);
+      if (item) item.uploadError = f.reason || f.message || 'did not upload';
+    }
+  }
+
+  /**
    * Why an upload failed, and what to do about it.
    *
    * The interesting case is a file the device could read when it was PICKED and cannot
@@ -742,29 +768,73 @@ export function initCapture({ author, canPost = true }, handlers) {
    * connection and a vanished file both surface as a failed fetch, and telling a parent to
    * download photos they already have would send them off to fix the wrong thing.
    */
-  async function uploadFailureMessage(lost) {
+  async function uploadFailureMessage(lost, { discarded = false } = {}) {
+    // What the SERVER said, where it said anything. Checked first, because it is the only
+    // account of the failure that is not a guess — and guessing is exactly what went wrong
+    // before: a photo over the 15 MB limit was reported as a stale cloud reference, which
+    // sent a parent off to fix something that was never broken.
+    const refused = lost.filter((f) => f.reason);
+    if (refused.length) {
+      const reasons = [...new Set(refused.map((f) => tidyReason(f.reason)))];
+      return `${headline(lost.length, discarded)} ${reasons.join(' ')}`;
+    }
+
+    // Nothing from the server means the request never got there. Two very different
+    // reasons for that, and they are told apart by RE-READING the file: one the device can
+    // no longer read is the cloud photo, whatever the picker showed at the time.
     const gone = [];
     for (const f of lost) {
       try {
         await assertReadable(f.photo?.file);
       } catch {
-        gone.push(f.photo?.file?.name || 'one of them');
+        gone.push(f);
       }
     }
 
-    const n = lost.length;
-    const many = n === 1 ? 'photo' : 'photos';
     if (!gone.length) {
-      return `${n} ${many} did not upload — press Save to try again. `
-        + 'They are still here until this is closed.';
+      return `${headline(lost.length, discarded)} The connection dropped on the way. `
+        + (discarded ? 'Press Save to try again.' : 'Press Save to try the rest again.');
     }
 
-    const named = gone.slice(0, 3).join(', ') + (gone.length > 3 ? '…' : '');
-    return `${gone.length} of these could not be sent (${named}): this phone can no longer `
-      + 'read the file. That happens with a photo that lives in the cloud rather than on '
-      + 'the device — in a shared album, or not downloaded yet. '
-      + 'Open it in your photos app and use Share \u2192 Finnbook, which makes the phone '
-      + 'fetch the full photo, or download it to this device and add it again.';
+    return `${headline(lost.length, discarded)} This phone can no longer read `
+      + `${gone.length === 1 ? 'that file' : 'those files'} — which happens with a photo `
+      + 'that lives in the cloud rather than on the device, in a shared album or not '
+      + 'downloaded yet. Open it in your photos app and use Share \u2192 Finnbook, which '
+      + 'makes the phone fetch the full picture, or download it here and add it again.';
+  }
+
+  /** The first sentence: what happened to the memory, before why. */
+  function headline(n, discarded) {
+    const these = n === 1 ? 'The photo' : `${n} photos`;
+    if (discarded) {
+      return n === 1
+        ? 'That photo did not upload, so nothing was saved — the memory is still here.'
+        : `None of those ${n} photos uploaded, so nothing was saved — the memory is still here.`;
+    }
+    return `${these} marked below did not upload; the rest of the memory saved.`;
+  }
+
+  /**
+   * The server's message, in a parent's terms.
+   *
+   * PocketBase writes for whoever is holding the API — file names it generated, byte
+   * counts — and that is not who is reading this. The FACT is kept and the units are made
+   * legible; anything unrecognised is passed through rather than swallowed, because a
+   * puzzling true reason still beats a confident wrong one.
+   */
+  function tidyReason(reason) {
+    const size = /maximum allowed file size is (\d+) bytes/.exec(reason);
+    if (size) {
+      const mb = Math.round(Number(size[1]) / 1048576);
+      // Count-neutral: the same sentence is used whether one photo was too big or five,
+      // since identical reasons are collapsed into one before they get here.
+      return `A photo has to be under ${mb} MB, and these are larger. `
+        + 'Sharing them from your photos app usually sends smaller copies that fit.';
+    }
+    if (/mime type must be one of/i.test(reason)) {
+      return 'That file is a kind the scrapbook cannot store.';
+    }
+    return reason;
   }
 
   form.addEventListener('submit', async (e) => {
@@ -807,6 +877,7 @@ export function initCapture({ author, canPost = true }, handlers) {
         title.textContent = 'Edit memory';
         deleteBtn.hidden = false;
         pending = [...storedAsPending(post), ...lost.map((f) => f.photo)];
+        markFailures(lost);
         saveError.textContent = await uploadFailureMessage(lost);
         saveError.hidden = false;
         renderThumbs();
@@ -829,6 +900,17 @@ export function initCapture({ author, canPost = true }, handlers) {
       sheet.close();
     } catch (err) {
       console.error(err);
+      // Every photo failed, so the data layer took the post back rather than leave a
+      // caption where a picture should have been. Nothing was created, nothing is on the
+      // timeline, and everything the parent chose is still in the sheet.
+      if (err.postDiscarded) {
+        const lost = err.failedPhotos || [];
+        markFailures(lost);
+        saveError.textContent = await uploadFailureMessage(lost, { discarded: true });
+        saveError.hidden = false;
+        renderThumbs();
+        return;
+      }
       saveError.textContent = 'Could not save that memory. It is still here — try again.';
       saveError.hidden = false;
     } finally {

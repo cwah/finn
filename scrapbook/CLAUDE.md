@@ -842,6 +842,26 @@ tests. It has no dependencies and nothing bundles.
     `close` event alone, and clears what it announces so it cannot fire twice. The
     guarantee wanted is that the timeline agrees with the database exactly once — not that
     any particular event fired.
+  - **The SERVER'S OWN reason comes first, always.** PocketBase answers a rejected upload
+    with `{ data: { image: { code, message } } }`, and that is exact where anything written
+    here is a guess. Guessing is what went wrong: a photo over the 15 MB image limit — a
+    hard 400, verified against production — was reported as a stale cloud reference, which
+    sent a parent to fix something that was never broken. `serverReason()` carries it out;
+    `tidyReason()` puts it in a parent's terms and passes anything unrecognised straight
+    through, because a puzzling true reason beats a confident wrong one.
+  - **Confirmed limits, measured not assumed:** images 15 MB (400,
+    `validation_file_size_limit`), video 200 MB and restricted to mp4/quicktime/webm by
+    mime type. Mime type is NOT enforced on images — PocketBase sniffs content, and a jpeg
+    named `.heic`, an empty type and `image/x-adobe-dng` were all accepted. A 60 MB body
+    reaches the server fine, so there is no platform limit below that.
+  - **If nothing uploaded, the post does not survive.** The post has to be created before
+    its photos can be, so `createPost` takes it back again when the draft had photos and
+    none of them saved — a caption alone in the timeline where a picture should have been
+    is not the memory anyone meant. A caption-only draft is untouched: that is a quote
+    card, not a failure. It throws with `postDiscarded` and the failures attached.
+  - **The failing THUMBNAILS are marked, not just named.** "PXL_20260807_194258664.jpg"
+    says nothing about which picture it is. Outline plus a `!` badge, since red alone on a
+    76px image is easy to miss and invisible to some; the reason rides on `title`.
   - **An upload failure re-reads the file before choosing what to say.** A file that could
     be read when it was PICKED and cannot be read now is the cloud photo: on Android a
     `content://` reference can go stale between choosing a file and sending it, so it

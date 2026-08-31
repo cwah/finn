@@ -696,3 +696,32 @@
 }
 
 .editor-light-reset[hidden] { display: none; }
+
+/* A photo the server would not take. The filename is a poor handle — "PXL_20260807_..."
+   says nothing about which picture it is — so the thumbnail itself is what is marked.
+   Border AND a corner dot, not colour alone: red on a small image is easy to miss, and
+   impossible to see for some. */
+.compose-thumb.is-failed {
+  outline: 2px solid var(--warn, #b4432f);
+  outline-offset: -2px;
+}
+
+.compose-thumb.is-failed::after {
+  content: '!';
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: var(--warn, #b4432f);
+  border-radius: 50%;
+}
+
+/* The lead photo's "Main" tag sits bottom-left too; move it clear of the mark. */
+.compose-thumb.is-failed .compose-thumb-tag { left: 26px; }
