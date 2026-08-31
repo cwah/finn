@@ -29,6 +29,21 @@ services:
       # and starting huge is the expensive one.
       sizeGB: 5
 
+      # THE DISK IS SNAPSHOTTED DAILY BY RENDER. Configured on Render's side, not here —
+      # which is worth writing down, because reading this file alone gives the opposite
+      # impression and that conclusion has already been drawn once.
+      #
+      # What that covers: a lost disk, a bad deploy, a corrupted database. A snapshot is
+      # equivalent to pulling the power, and SQLite recovers from that by design.
+      #
+      # What it does NOT cover, and is worth knowing before relying on it:
+      #   - it is all-or-nothing. Restoring one deleted memory means rolling the whole
+      #     scrapbook back to yesterday, losing anything added since.
+      #   - it is bounded by the retention window. A deletion nobody notices for longer
+      #     than that is gone. Check what the window actually is on the Render dashboard.
+      #   - everything sits with one provider. That is a tail risk, not a daily one, but
+      #     it is the reason a periodic copy taken somewhere else is still worth having.
+
     # A disk pins the service to a single instance; scaling out would give each copy its
     # own disk and its own idea of the scrapbook.
     numInstances: 1

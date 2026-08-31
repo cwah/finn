@@ -72,6 +72,15 @@ a fresh one.
 The scrapbook already holds real posts, photos and accounts. Do **not** re-create them by
 hand — PocketBase can move the lot:
 
+> **The disk is snapshotted daily by Render**, configured on Render's side rather than in
+> `render.yaml`. That covers a lost disk, a bad deploy or a corrupted database — a snapshot
+> is equivalent to pulling the power, which SQLite is built to survive.
+>
+> It is all-or-nothing, though: restoring one deleted memory means rolling the whole
+> scrapbook back a day. And it is bounded by whatever retention Render is set to, so a
+> deletion noticed later than that is gone. The manual backup below is still the way to
+> take a copy that lives somewhere other than Render.
+
 1. Locally: admin UI → **Backups** → *New backup*. Download the zip.
 2. On Render: admin UI → **Backups** → *Upload backup* → then **Restore**.
 
