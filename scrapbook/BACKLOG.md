@@ -34,6 +34,21 @@ Shipped when it lands. No ceremony beyond that.
       (and move `moov` to the front while there, so playback can start before the whole
       file arrives).
 
+- [ ] **Re-encode video on upload.** Deferred deliberately, with the numbers measured
+      2026-08-30: 17 stored clips came to 157 MB, and two of them — 58.8 MB/24s and
+      46.4 MB/8.8s — were two thirds of that. So the win is real but concentrated in a
+      couple of long 4K clips, and the 200 MB field limit keeps it from running away.
+      What was established while looking, so it need not be re-derived:
+      `MediaRecorder.isTypeSupported('video/mp4')` is TRUE on current Chrome, so H.264
+      MP4 can be produced with the browser's own muxer — no hand-written byte-level
+      muxing, which is what makes this tractable at all. The cost is that MediaRecorder
+      runs in REAL TIME and needs the tab in front: a 24s clip takes 24s. Encoding only
+      the trimmed stretch would fix both the time and the size at once, but would make
+      the trim destructive, which is against how framing works everywhere else here.
+      WebCodecs is faster but needs an MP4 muxer written by hand, and a subtle bug there
+      is an unplayable memory rather than an obvious error.
+      Pairs naturally with the HEVC item above — both are "re-encode on the way in".
+
 - [ ] **The expanded video shows the untrimmed length.** Playback *is* trimmed — it starts
       at `trimStart` and `holdToTrim` stops it at `trimEnd` — but the native `<video
       controls>` scrub bar spans the whole source file, so a 17s clip trimmed to 13.9s
@@ -46,6 +61,10 @@ Shipped when it lands. No ceremony beyond that.
       whole either way, so the trim remains re-editable.
 
 ## Shipped
+
+- [x] Downscale photos for display on upload (2560px long edge), and serve sized
+      thumbnails to the compose strip, the framing surface and the timeline cards rather
+      than full-size originals.
 
 - [x] Pick up memories added elsewhere — an open scrapbook now polls for posts made by the
       bot or by the other parent, and slots them in without a reload. Only while the tab
