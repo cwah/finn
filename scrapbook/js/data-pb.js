@@ -109,12 +109,6 @@ function toPhoto(rec) {
       // 0 reads as "to the end", which trimRange() then caps at a minute.
       trimEnd: rec.trimEnd || 0,
       motion: Boolean(rec.isMotion),
-      // The untouched clip, when one was kept. Nothing in the app plays it — every view
-      // loads `url`, which is the display copy — but it is what a future re-encode would
-      // start from, and knowing whether it arrived is worth surfacing.
-      originalUrl: rec.videoOriginal
-        ? pb.fileUrl('photos', rec.id, rec.videoOriginal)
-        : null,
     } : null,
   };
 }
@@ -339,8 +333,9 @@ function photoForm(postId, photo, sort) {
   // A video rides along with the poster frame that stands in for it. Non-destructive
   // like the crop: the whole file is stored and the trim says which part is the memory.
   if (photo.videoFile) {
-    // The DISPLAY copy, always — `videoFile` is what capture.js has already reduced.
-    // The original follows on its own, after the memory is safe; see attachOriginal.
+    // The display copy — capture.js has already reduced it where that was worth doing.
+    // No original is kept: it was write-only, and the phone that shot the clip still has
+    // it. The same bargain photos make.
     form.append('video', photo.videoFile);
     form.append('duration', String(photo.duration || 0));
     form.append('trimStart', String(photo.trimStart || 0));
@@ -411,32 +406,6 @@ export async function updatePost(id, draft, author) {
   const post = toPost({ ...rec, expand: { author: { id: author.id, name: author.name } } }, saved);
   post.failedPhotos = failed;
   return post;
-}
-
-/**
- * Attach the untouched clip to a photo already stored.
- *
- * Separate from the save, and deliberately after it. The original is the slow upload —
- * tens of megabytes where the display copy is a couple — and making a parent wait for it
- * would be charging them for an archive they will never watch. The memory is complete
- * without it: every view loads the display copy.
- *
- * So this is allowed to fail quietly. What it must never do is take the post down with
- * it, which is why it is not part of createPost's own failure accounting.
- *
- * @returns {Promise<boolean>} whether the original made it
- */
-export async function attachOriginal(photoId, file) {
-  if (!photoId || !file) return false;
-  try {
-    const form = new FormData();
-    form.append('videoOriginal', file);
-    await pb.update('photos', photoId, form);
-    return true;
-  } catch (err) {
-    console.warn('the original clip did not upload; the memory is unaffected', err);
-    return false;
-  }
 }
 
 /**

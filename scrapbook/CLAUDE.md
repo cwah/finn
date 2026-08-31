@@ -800,23 +800,28 @@ tests. It has no dependencies and nothing bundles.
   controls are measured rather than guessed, since they differ between a still and a clip.
   Runs on open, on resize and on a quarter turn — never from `paint()`, which runs per
   pointer move.
-- **Two copies of every clip: the original and a display copy.** A darkroom keeps the
-  negative and the print, for the same reason.
-  - `video` is the DISPLAY copy — 1080p H.264 — and is what every view loads: the compose
-    strip, the card, the lightbox. It stays the field everything already reads, so rows
-    written before this are simply their own display copy and nothing needed a backfill.
-  - `videoOriginal` is whatever came off the phone, uploaded in the BACKGROUND after the
-    memory is safe (`attachOriginal`). It is the slow one — tens of megabytes against a
-    couple — and nothing waits for it. It is allowed to fail: a post without an original
-    shows and plays exactly right, it merely has no negative behind it.
+- **One copy of every clip: the display copy.** `video` holds a 1080p H.264 re-encode and
+  is what every view loads — the compose strip, the card, the lightbox. It stays the field
+  everything already reads, so rows predating this are simply their own display copy and
+  nothing needed a backfill.
+  - **No original is archived.** One was, briefly (`videoOriginal`), and was taken out
+    again before anything was written to it. It was write-only: every view loads the
+    display copy, and crop and trim are applied at render, so no framing change ever needed
+    to re-derive from a negative. Against that it doubled video storage and put a
+    tens-of-megabytes background upload on whatever connection a parent happened to be on.
+    Photos already make this bargain — the negative stays on the phone that took it.
   - **Crop and trim are NOT baked in.** They stay non-destructive and applied at render,
     as for a photo — and not only for consistency: a video's poster IS a photo and is
     cropped at render, so baking the crop into the clip alone would leave the two framed
     differently on the same card.
-  - **Encoding runs in REAL TIME**, so a 24s clip takes 24s, and the picker's own label
-    carries the progress rather than a mute spinner. Small clips and motion photos are
-    skipped entirely (`needsEncoding`): re-encoding two seconds is a generation of loss
-    and a wait to save nothing.
+  - **Encoding runs in REAL TIME** — inherent to MediaRecorder, which consumes frames as
+    the video plays them. A 30s clip is a 34s wait, so the picker's own label carries the
+    progress rather than a mute spinner.
+  - **A MOTION PHOTO IS NEVER ENCODED**, whatever it weighs, and is declined before it is
+    even decoded. Measured against the real library: 13 of 17 stored clips are motion
+    photos of 1.4 to 3.0 seconds, several over the byte threshold — so a size rule alone
+    put a four-second wait on the most common thing anyone posts, to save a couple of
+    megabytes. It is also the one kind of clip that plays unprompted and on a loop.
   - **Every dimension is rounded to an EVEN number.** H.264 stores chroma at half
     resolution per axis, so an odd side has no legal representation, and encoders round,
     refuse, or emit a green edge — none of which shows up until playback.

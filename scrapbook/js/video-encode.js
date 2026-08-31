@@ -75,10 +75,16 @@ export function bitrateFor(width, height, fps = 30) {
  *
  * A small clip re-encoded is a small clip made slightly worse: the saving is not worth a
  * generation of loss, and on a phone it is not worth the wait either, since encoding runs
- * in REAL TIME. A motion photo — a second or two, already tiny — is exactly this case and
- * should always pass straight through.
+ * in REAL TIME.
+ *
+ * A MOTION PHOTO NEVER IS, whatever it weighs. Measured against the real library: 13 of 17
+ * stored clips are motion photos of 1.4 to 3.0 seconds, several of them over the byte
+ * threshold — so a size rule alone put a four-second wait on the most common thing anyone
+ * posts, to save a couple of megabytes. It is also the one kind of clip that plays
+ * unprompted and on a loop, which is a poor thing to have re-encoded.
  */
-export function needsEncoding({ width, height, size }) {
+export function needsEncoding({ width, height, size, motion }) {
+  if (motion) return false;
   const big = Number(size) > WORTH_ENCODING_BYTES;
   const large = Math.max(Number(width) || 0, Number(height) || 0) > VIDEO_EDGE;
   return Boolean(big || large);
@@ -130,8 +136,12 @@ export function pickMimeType() {
  * @param {{onProgress?: (fraction: number) => void, signal?: AbortSignal}} opts
  * @returns {Promise<{file: File|Blob, width: number, height: number, encoded: boolean}>}
  */
-export async function toDisplayCopy(file, { onProgress, signal } = {}) {
+export async function toDisplayCopy(file, { onProgress, signal, motion = false } = {}) {
   const give = (f, width = 0, height = 0, encoded = false) => ({ file: f, width, height, encoded });
+
+  // Before anything is decoded. A motion photo is never re-encoded, so there is no reason
+  // to spend a decode working that out.
+  if (motion) return give(file);
 
   const mimeType = pickMimeType();
   if (!mimeType || typeof document === 'undefined') return give(file);
@@ -148,9 +158,10 @@ export async function toDisplayCopy(file, { onProgress, signal } = {}) {
     await once(video, 'loadedmetadata', 20000);
 
     const size = encodeSize(video.videoWidth, video.videoHeight);
-    if (!size.width || !needsEncoding({ width: video.videoWidth, height: video.videoHeight, size: file.size })) {
-      return give(file, video.videoWidth, video.videoHeight);
-    }
+    const worth = needsEncoding({
+      width: video.videoWidth, height: video.videoHeight, size: file.size, motion,
+    });
+    if (!size.width || !worth) return give(file, video.videoWidth, video.videoHeight);
 
     const canvas = document.createElement('canvas');
     canvas.width = size.width;

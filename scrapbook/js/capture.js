@@ -13,7 +13,7 @@
 // PocketBase or only in memory. Photos preview through object URLs while composing;
 // the File itself rides along so the data layer can upload it.
 
-import { createPost, updatePost, deletePost, attachOriginal } from './data.js';
+import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
 import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
 import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
@@ -171,7 +171,9 @@ async function readItem(entry) {
 
     // Reduce the clip before anything else touches it. Real time, so it is the longest
     // wait in the app by far — hence the announcement below rather than a mute spinner.
+    // A motion photo loops on sight and lasts a second or two; it goes up as it is.
     const display = await toDisplayCopy(entry.video, {
+      motion: looksLikeMotion(duration),
       onProgress: (done) => announceEncoding(entry.video, duration, done),
     });
     clearEncoding(entry.video);
@@ -191,11 +193,9 @@ async function readItem(entry) {
       width: shown.width,
       height: shown.height,
       // The DISPLAY copy — 1080p H.264 — is what gets stored and what every view plays.
+      // No original is kept beside it: nothing ever read one, and the phone that shot the
+      // clip still has it. Photos make the same bargain.
       videoFile: display.file,
-      // The untouched clip, held so it can go up in the background once the memory is
-      // safe. Only when it is genuinely a different file: an unencoded clip is its own
-      // original, and uploading it twice would double the storage to archive nothing.
-      videoOriginalFile: display.encoded ? entry.video : null,
       takenOn: await takenOn(entry.video),
       duration,
       trimStart: 0,
@@ -811,31 +811,6 @@ export function initCapture({ author, canPost = true }, handlers) {
   cancelBtn.addEventListener('click', close);
   // ESC dismisses a native <dialog> without firing our handlers — clean up regardless.
   /**
-   * Send the untouched clips up, after the memory is already safe.
-   *
-   * Deliberately NOT awaited by the save. The original is tens of megabytes where the
-   * display copy is a couple, and making a parent watch that finish would be charging them
-   * for an archive they will never open — the memory is complete without it, because every
-   * view plays the display copy.
-   *
-   * Which also means it is allowed to fail, and to be interrupted by the page closing. A
-   * post with no original is a post that shows and plays exactly as it should; it simply
-   * has no negative behind it. Nothing here may take the post down with it.
-   *
-   * Matched by ORDER, since a stored photo's id is not on the pending item: `post.photos`
-   * comes back in the order it was sent, which is the order of `sent`.
-   */
-  function sendOriginals(post, sent) {
-    const stored = post?.photos || [];
-    stored.forEach((photo, i) => {
-      const original = sent[i]?.videoOriginalFile;
-      if (!original || !photo?.id) return;
-      // Fire and forget, on purpose. Errors are swallowed inside attachOriginal.
-      attachOriginal(photo.id, original);
-    });
-  }
-
-  /**
    * Put a held-back post on the timeline, once.
    *
    * Called from every route out of the sheet rather than from the `close` event alone.
@@ -1013,9 +988,6 @@ export function initCapture({ author, canPost = true }, handlers) {
       } else {
         (target ? onUpdate : onCreate)(post);
       }
-
-      // The originals go up behind the save, once there is somewhere to attach them.
-      sendOriginals(post, draft.photos);
 
       pending = []; // the saved post owns the previews now
       saveError.hidden = true;

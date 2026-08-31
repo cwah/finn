@@ -10,7 +10,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
-  encodeSize, bitrateFor, needsEncoding, estimateSeconds, VIDEO_EDGE, WORTH_ENCODING_BYTES,
+  encodeSize, bitrateFor, needsEncoding, estimateSeconds, toDisplayCopy,
+  VIDEO_EDGE, WORTH_ENCODING_BYTES,
 } from '../js/video-encode.js';
 
 // ── Frame size ────────────────────────────────────────────────────
@@ -91,10 +92,24 @@ test('a long clip at modest size is re-encoded on bytes alone', () => {
   assert.equal(needsEncoding({ width: 1280, height: 720, size: 40 * MB }), true);
 });
 
-test('a motion photo passes straight through', () => {
-  // A second or two, already tiny. Re-encoding it is a generation of loss to save
-  // nothing, and on a phone it is a wait for nothing — encoding runs in real time.
+test('a motion photo is NEVER encoded, whatever it weighs', () => {
+  // Measured against the real library: 13 of 17 stored clips are motion photos of 1.4 to
+  // 3.0 seconds, several of them over the byte threshold. A size rule alone put a
+  // four-second wait on the most common thing anyone posts, to save a couple of MB.
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 2 * MB, motion: true }), false);
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 40 * MB, motion: true }), false);
+  assert.equal(needsEncoding({ width: 3840, height: 2160, size: 40 * MB, motion: true }), false);
+});
+
+test('a small clip that is not a motion photo also passes through', () => {
   assert.equal(needsEncoding({ width: 1080, height: 1440, size: 2 * MB }), false);
+});
+
+test('a motion photo is declined without even decoding it', async () => {
+  // The cheapest exit there is: no <video>, no metadata wait, no decode.
+  const out = await toDisplayCopy({ name: 'live.mp4', size: 40 * MB }, { motion: true });
+  assert.equal(out.encoded, false);
+  assert.equal(out.file.name, 'live.mp4');
 });
 
 test('the size threshold is where it says it is', () => {
@@ -125,7 +140,6 @@ test('the display edge is 1080p, which is more than any view here shows', () => 
 // a memory is never lost to a failed optimisation. These run with no DOM at all, which is
 // itself one of the failure modes.
 
-import { toDisplayCopy } from '../js/video-encode.js';
 
 const fakeClip = (bytes = 8 * 1024 * 1024) => ({
   name: 'PXL_20260811_023543.mp4',
