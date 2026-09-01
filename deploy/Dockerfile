@@ -36,7 +36,10 @@ RUN wget -q -O /tmp/pb.zip \
 # ── The image that actually runs ──────────────────────────────────────────────
 FROM alpine:3.21
 
-RUN apk add --no-cache ca-certificates
+# openssl is not decoration: the JSVM has no asymmetric crypto, so VAPID's ES256
+# signature is produced by shelling out to `openssl dgst -sha256 -sign`. Without this
+# package the hook loads, the cron runs, and every push fails.
+RUN apk add --no-cache ca-certificates openssl
 
 COPY --from=fetch /pb/pocketbase /pb/pocketbase
 

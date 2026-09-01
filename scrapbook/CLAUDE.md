@@ -1019,19 +1019,47 @@ tests. It has no dependencies and nothing bundles.
   while scrolling and idles out of sight so it never covers a memory. It is
   `aria-hidden` — a shortcut for scrolling, not a second copy of the timeline.
 
-## Email notifications
+## Notifications
 
-An email when a new memory is added, sent by a cron **inside PocketBase** — the only part
-of this that is always running. The bot lives on a laptop and the frontend is a page nobody
-may have open.
+A push when a new memory is added, sent by a cron **inside PocketBase** — the only part of
+this that is always running. The bot lives on a laptop and the frontend is a page nobody
+may have open. Email came first and was replaced; `users.notifyByEmail` is gone.
 
-- **PREREQUISITE: SMTP must be configured** in Settings → Mail. Without it PocketBase falls
-  back to a local `sendmail` that does not exist in the container, so every send fails, is
-  retried for a day, and stops. Nothing else breaks and no mail arrives.
-- **OPT-IN.** `users.notifyByEmail` is a bool, and the false backfill is exactly right
-  here: nobody is signed up by a deploy. That is the opposite of `canPost`, where the same
-  false would have revoked posting and needed repairing in the same migration — the rule is
-  not "always backfill a bool", it is **work out what false MEANS for this field**.
+- **AN OPTIONAL FEATURE MUST NOT BE ABLE TO BREAK THE APP.** Push was built, shipped, and
+  ROLLED BACK ENTIRELY, because `initNotifications()` sat unwrapped between `getConfig()`
+  and `initCapture()` in `init()`. init() is a straight line: a throw abandons every step
+  after it and rejects init() as well. So a fault in the bell — the most optional thing on
+  the page — presented as a scrapbook that would not load AND an add-post button that did
+  nothing. Two symptoms, one line, neither pointing at notifications.
+  - The exact throw was never identified, and it did not need to be. `optional()` in
+    `js/optional.js` makes a fault in an enhancement cost exactly itself.
+  - NOT a blanket try/catch around init(): that hides a broken timeline just as eagerly.
+    Enhancements are named and wrapped one at a time, so what may fail quietly is a
+    decision that was written down. `ensureSignedIn`, `getConfig` and `initCapture` stay
+    bare — an app that cannot do those has nothing worth showing.
+  - `test/startup-isolation.test.js` asserts this against the source, because the next
+    enhancement will look perfectly reasonable while failing the same way.
+  - An enhancement must also RETURN its promise. `initNotifications` ended with a bare
+    `refresh();`, and a rejection from an unawaited call escapes the wrapper entirely — the
+    wrapping looks correct and covers nothing.
+- **Reinstated in five separate commits**, after the rollback: isolation, schema, data
+  layer, bell, server. Each one deployable and checkable on its own. The first attempt went
+  in as one commit and the only available response to it failing was to remove all of it.
+- **Reverting code does not revert schema.** The rollback took the push CODE out and
+  deliberately LEFT the collection: dropping one destroys its contents, and an unused table
+  costs nothing. That asymmetry is the delicate part of any rollback here — the restored
+  email code needed `users.notifyByEmail`, which the push migration had dropped, so it had
+  to be put back by a NEW forward migration. PocketBase records a migration as applied by
+  FILENAME and never reads the file again: editing or restoring an old file changes
+  nothing, and reusing its name means production silently skips whatever it now says.
+- **Migration order carried the feature swap.** `1756700000` adds the push schema and
+  deliberately does NOT drop `notifyByEmail`, because email was still the live feature at
+  that point; `1756800000` drops it only once the bell replaced it. Doing both at once —
+  which is what the original single migration did — breaks a working feature to prepare for
+  one that does not exist yet.
+- **A migration is executed in the tests, not read.** It runs once, unattended, against
+  real data, on a box nobody is watching. `test/push-schema-migration.test.js` drives the
+  real files against stubs and covers idempotence, both database shapes, and both orders.
 - **Three conditions, each answering a different way of getting it wrong**, in
   `deploy/pb_hooks/notify-rule.js`:
   - *settled* — created at least 5 minutes ago. Test posts get made and deleted in
@@ -1050,31 +1078,37 @@ may have open.
   exact shape of "the feature does nothing". Both shapes are handled rather than one
   guessed at, because the cost of guessing here is silence.
 - **Every tick logs what it found**, and a filter/rule disagreement logs loudly. From
-  outside, "no mail arrived", "no post qualified" and "nobody has opted in" are the same
+  outside, "nothing arrived", "no post qualified" and "nobody has subscribed" are the same
   observation; the log is what separates them.
-- **The author is never emailed about their own post**, so a single opted-in account that
-  is also the only person posting will correctly receive nothing.
+- **The author is never notified about their own post**, so a single subscribed account
+  that is also the only person posting will correctly receive nothing.
 - **The rule is a shared CommonJS module, required by both the hook and the test suite**
   (`createRequire` from `test/notify-rule.test.js`), so what ships is what was tested. A
-  second copy would drift, and the drift would arrive as mail nobody expected.
-- **`require()` happens INSIDE the cron handler**, per PocketBase's own guidance: handlers
-  run in a pooled runtime that does not necessarily share the file's top-level scope. A
-  binding resolved at load time and undefined at run time would fail as silence, which is
-  indistinguishable from "nobody posted anything". The rule is passed down explicitly from
-  there.
+  second copy would drift, and the drift would arrive as notifications nobody expected.
+- **A hook handler CANNOT SEE ITS OWN FILE'S TOP-LEVEL SCOPE.** Handlers run in a pooled
+  runtime, so `.pb.js` is loaded to REGISTER the handler and the handler later runs
+  somewhere that has none of the file around it. A cron calling a function defined twenty
+  lines above it throws `notifyPending is not defined` — at 03:00, into a container log,
+  with nothing on the page to show for it. The docs say "`require()` inside the handler";
+  the reason is that nothing else from the file is reachable either.
+  - So `notify.pb.js` declares NOTHING. It is one `require().run()`, and the work lives in
+    `notify-send.js`, where the functions are module scope and can see each other.
+    `test/notify-send.test.js` asserts that shape, because a stub cannot reproduce a pooled
+    runtime and the shape is the checkable part.
 - Only `*.pb.js` is auto-loaded as a hook, so `notify-rule.js` sits beside it without being
   loaded twice.
 - **Marked as sent when at least one message got through, AND when there was nobody to
   tell** — otherwise a post with no opted-in audience is re-examined every minute until it
   ages out. Not marked when there were recipients and every one failed: that is the case
   worth retrying.
-- The author is never emailed about their own post. Captions are escaped before they go
-  anywhere near an HTML body.
-- The switch is in the header and writes the person's OWN row (`users.updateRule` is
-  `id = @request.auth.id`, checked against production before building it), so nobody can
-  sign anyone else up. It is disabled while in flight and put back if the write fails —
-  a switch reading "on" while the server disagrees means silently missing every
-  notification.
+- **A subscription belongs to a DEVICE, not an account.** The same person on a phone and a
+  laptop is two rows, and the bell reflects what THIS browser holds. The endpoint is
+  uniquely indexed because a browser re-issues the same one for the same device — without
+  it, subscribing twice buzzes twice for one memory.
+- **`blocked` is a distinct state from `off`.** Permission refused cannot be re-requested
+  from script, so a button offering to turn it on would silently do nothing; the bell says
+  where the browser setting lives instead. On iPhone push needs the PWA installed to the
+  home screen (iOS 16.4+); Safari alone reports `unsupported`.
 
 ## Type
 

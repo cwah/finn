@@ -15,7 +15,6 @@ const impl = SOURCE === 'mock' ? mock : pocketbase;
 
 export const {
   requireSession, signIn, signOut, getConfig, getPosts, createPost, updatePost, deletePost,
-  setEmailNotifications,
   pushPublicKey, savePushSubscription, removePushSubscription,
 } = impl;
 

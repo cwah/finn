@@ -23,6 +23,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const SOURCE = new URL('../pb_migrations/1756700000_push_schema.js', import.meta.url);
+const RETIRE = new URL('../pb_migrations/1756800000_retire_email_flag.js', import.meta.url);
 
 /** A PocketBase collection, as much of one as a migration touches. */
 function collection(name, fieldNames = []) {
@@ -47,7 +48,7 @@ function collection(name, fieldNames = []) {
  * Run the migration file's up (or down) against a stub app.
  * The file calls a global `migrate(up, down)`, so it is loaded with that in place.
  */
-function runMigration({ existing, direction = 'up' }) {
+function runMigration({ existing, direction = 'up', source = SOURCE }) {
   const created = [];
   const deleted = [];
   const app = {
@@ -73,14 +74,15 @@ function runMigration({ existing, direction = 'up' }) {
   let down = null;
   const sandbox = {
     migrate: (u, d) => { up = u; down = d; },
+    BoolField: function BoolField(spec) { return { name: spec.name, id: `b_${spec.name}` }; },
     Collection: function Collection(spec) { return collection(spec.name, (spec.fields || []).map((f) => f.name)); },
     TextField: function TextField(spec) { return { name: spec.name, id: `t_${spec.name}` }; },
   };
 
-  const src = readFileSync(SOURCE, 'utf8');
+  const src = readFileSync(source, 'utf8');
   // eslint-disable-next-line no-new-func
-  new Function('migrate', 'Collection', 'TextField', src)(
-    sandbox.migrate, sandbox.Collection, sandbox.TextField,
+  new Function('migrate', 'Collection', 'TextField', 'BoolField', src)(
+    sandbox.migrate, sandbox.Collection, sandbox.TextField, sandbox.BoolField,
   );
 
   (direction === 'up' ? up : down)(app);
@@ -158,4 +160,50 @@ test('down leaves the email opt-in alone as well', () => {
   runMigration({ existing: db });
   const { existing } = runMigration({ existing: db, direction: 'down' });
   assert.ok(existing.find((c) => c.name === 'users').fields.getByName('notifyByEmail'));
+});
+
+
+// ── Retiring the email flag (1756800000) ──────────────────────────
+// Ordering is the point. 1756700000 deliberately kept notifyByEmail alive because the
+// rollback had restored the email code and it was still the live feature; this drops it
+// only now that the bell has replaced it. Getting these two the wrong way round would
+// break a working feature to prepare for one that did not exist yet — which is exactly
+// what the original single migration did.
+
+test('retiring drops the email flag', () => {
+  const { existing } = runMigration({ existing: freshDb(), source: RETIRE });
+  assert.equal(existing.find((c) => c.name === 'users').fields.getByName('notifyByEmail'), null);
+});
+
+test('retiring is safe to run twice', () => {
+  const db = freshDb();
+  runMigration({ existing: db, source: RETIRE });
+  assert.doesNotThrow(() => runMigration({ existing: db, source: RETIRE }));
+});
+
+test('retiring restores the flag on the way down', () => {
+  const db = freshDb();
+  runMigration({ existing: db, source: RETIRE });
+  runMigration({ existing: db, direction: 'down', source: RETIRE });
+  assert.ok(db.find((c) => c.name === 'users').fields.getByName('notifyByEmail'));
+});
+
+test('the two migrations run in order leave push schema up and email gone', () => {
+  // The end state this whole sequence was aiming at, asserted as one thing.
+  const db = freshDb();
+  runMigration({ existing: db });                    // 1756700000: add push schema
+  runMigration({ existing: db, source: RETIRE });    // 1756800000: drop email flag
+  assert.ok(db.find((c) => c.name === 'pushSubscriptions'), 'push schema present');
+  assert.ok(db.find((c) => c.name === 'config').fields.getByName('pushPublicKey'));
+  assert.equal(db.find((c) => c.name === 'users').fields.getByName('notifyByEmail'), null);
+});
+
+test('running them in the WRONG order still ends correctly', () => {
+  // Defensive: PocketBase applies by filename order, but a hand-run or a future rename
+  // should not silently leave the email flag behind.
+  const db = freshDb();
+  runMigration({ existing: db, source: RETIRE });
+  runMigration({ existing: db });
+  assert.equal(db.find((c) => c.name === 'users').fields.getByName('notifyByEmail'), null,
+    '1756700000 must not resurrect the flag it never owned');
 });

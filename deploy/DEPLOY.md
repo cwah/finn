@@ -169,7 +169,55 @@ That second service is not in `render.yaml` — adding it would create a billabl
 the moment the blueprint is applied, which is not a decision a config file should make
 quietly. Add it when you want it.
 
-## 6. The frontend needs nothing
+## 6. Push notifications
+
+Optional, and off until it is set up: without the keys the notify hook logs once a minute
+and does nothing. Nothing else is affected.
+
+Web Push authenticates with a VAPID key pair. **Run these yourself** — the private key is a
+credential and should not pass through anyone else's hands, including a coding assistant's.
+
+**Generate it OUTSIDE the repository.** This has already gone wrong once here: the key was
+written to `vapid.pem` in the repo root, committed, and pushed to GitHub, and the pair had
+to be rotated and the file purged from history. `*.pem` is in `.gitignore` now, which is a
+second line of defence and not the first one. `cd ~` before running these, or pass a path
+somewhere else.
+
+```sh
+# 1. The private key. Keep it; it never leaves your machine except as a Render env var.
+openssl ecparam -genkey -name prime256v1 -noout -out ~/vapid.pem
+
+# 2. The public key, base64url, as browsers and push services expect it.
+openssl ec -in ~/vapid.pem -pubout -outform DER | tail -c 65 | base64 | tr '+/' '-_' | tr -d '='
+```
+
+The second command should print **87 characters starting with `B`** — that is the 65-byte
+uncompressed point (leading `0x04`) in base64url. Anything shorter, or containing `+`, `/`
+or `=`, is the wrong encoding and will be rejected when a browser tries to subscribe.
+
+`tail -c 65` works because the raw point is the last 65 bytes of the DER
+SubjectPublicKeyInfo; the fixed prefix before it identifies the curve.
+
+Then, on Render → Environment:
+
+| variable | value |
+|---|---|
+| `VAPID_PRIVATE_KEY` | the whole contents of `~/vapid.pem`, `-----BEGIN` line included |
+| `VAPID_PUBLIC_KEY` | the 87-character string from step 2 |
+| `VAPID_SUBJECT` | `mailto:you@example.com` — how a push service reaches you about it |
+
+And finally, in the PocketBase admin UI, put the **same public key** on the `config`
+record's `pushPublicKey` field. The browser needs it to subscribe and the server needs it to
+sign; they must be the same key or every push is rejected with a bare 401.
+
+> Rotating the pair later means re-issuing every subscription: existing ones are bound to
+> the old key and will fail. Delete the `pushSubscriptions` rows when you rotate, and each
+> device will re-subscribe the next time its bell is switched on.
+
+To check it is working, watch the Render logs for `[notify]` — one line per tick that finds
+anything, saying how many posts were due and how many subscriptions it had.
+
+## 6b. The frontend needs nothing
 
 `scrapbook/js/pb.js` asks its own origin whether it answers as PocketBase, once, on the
 way in. In
