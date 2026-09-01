@@ -33,9 +33,9 @@ export async function getConfig() {
   const { config } = await load();
   // No accounts without a backend, so there is nobody to restrict: the mock source is
   // always signed in and always allowed. Present so the shape matches data-pb.js.
-  // notifyByEmail: no accounts and no mail server without a backend, so the switch has
-  // nothing to control. Present for shape; the UI hides it when there are no accounts.
-  return { canPost: true, notifyByEmail: false, ...config };
+  // No backend means no push service to subscribe to. Present for shape; the bell hides
+  // itself when there is no key.
+  return { canPost: true, pushPublicKey: null, ...config };
 }
 
 /**
@@ -153,7 +153,8 @@ export async function createPost(draft, author) {
 
 
 
-/** No accounts without a backend, so there is nobody to email and nothing to remember. */
-export async function setEmailNotifications() {
-  return false;
-}
+
+/** No backend, so there is nothing to subscribe to and nothing to remember. */
+export async function pushPublicKey() { return null; }
+export async function savePushSubscription() { return null; }
+export async function removePushSubscription() { return true; }

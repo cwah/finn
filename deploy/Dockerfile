@@ -36,7 +36,12 @@ RUN wget -q -O /tmp/pb.zip \
 # ── The image that actually runs ──────────────────────────────────────────────
 FROM alpine:3.21
 
-RUN apk add --no-cache ca-certificates
+# openssl is not decoration here. Web Push authenticates with a VAPID token that must be
+# signed ES256, and PocketBase's JSVM has no asymmetric crypto at all — $security.createJWT
+# is HS256 only, and $security has no ECDSA. The notify hook shells out to
+# `openssl dgst -sha256 -sign` through $os.cmd, so this package is the one thing standing
+# between "server code runs in the container" and "push actually sends".
+RUN apk add --no-cache ca-certificates openssl
 
 COPY --from=fetch /pb/pocketbase /pb/pocketbase
 

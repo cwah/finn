@@ -1019,62 +1019,47 @@ tests. It has no dependencies and nothing bundles.
   while scrolling and idles out of sight so it never covers a memory. It is
   `aria-hidden` — a shortcut for scrolling, not a second copy of the timeline.
 
-## Email notifications
+## Push notifications
 
-An email when a new memory is added, sent by a cron **inside PocketBase** — the only part
-of this that is always running. The bot lives on a laptop and the frontend is a page nobody
-may have open.
+A notification when a new memory is added, sent by a cron **inside PocketBase** — the only
+part of this that is always running.
 
-- **PREREQUISITE: SMTP must be configured** in Settings → Mail. Without it PocketBase falls
-  back to a local `sendmail` that does not exist in the container, so every send fails, is
-  retried for a day, and stops. Nothing else breaks and no mail arrives.
-- **OPT-IN.** `users.notifyByEmail` is a bool, and the false backfill is exactly right
-  here: nobody is signed up by a deploy. That is the opposite of `canPost`, where the same
-  false would have revoked posting and needed repairing in the same migration — the rule is
-  not "always backfill a bool", it is **work out what false MEANS for this field**.
-- **Three conditions, each answering a different way of getting it wrong**, in
-  `deploy/pb_hooks/notify-rule.js`:
-  - *settled* — created at least 5 minutes ago. Test posts get made and deleted in
-    production, and a post gets edited seconds after saving. Waiting is what turns "a post
-    exists" into "a post was meant".
-  - *recent* — `memoryDate` within 7 days. Backfilling a year of photos is a pleasant
-    afternoon for one person and a hundred emails for everyone else.
-  - *unsent* — `posts.notifiedAt` is empty.
-  - and a fourth that bounds damage rather than describing intent: *fresh*, created within
-    24 hours. Sending may fail and retry, but a failure that never resolves must not mail
-    everyone a week late when it recovers.
-- **System fields are read through `asText`, never `getString`.** `created` is a system
-  field AND a date, so it can come back as a DateTime wrapper rather than a string —
-  `getString('created')` returned empty, `shouldNotify` could not parse it, and every post
-  was silently judged unnotifiable. Nothing sent, nothing marked, no error anywhere: the
-  exact shape of "the feature does nothing". Both shapes are handled rather than one
-  guessed at, because the cost of guessing here is silence.
-- **Every tick logs what it found**, and a filter/rule disagreement logs loudly. From
-  outside, "no mail arrived", "no post qualified" and "nobody has opted in" are the same
-  observation; the log is what separates them.
-- **The author is never emailed about their own post**, so a single opted-in account that
-  is also the only person posting will correctly receive nothing.
-- **The rule is a shared CommonJS module, required by both the hook and the test suite**
-  (`createRequire` from `test/notify-rule.test.js`), so what ships is what was tested. A
-  second copy would drift, and the drift would arrive as mail nobody expected.
-- **`require()` happens INSIDE the cron handler**, per PocketBase's own guidance: handlers
-  run in a pooled runtime that does not necessarily share the file's top-level scope. A
-  binding resolved at load time and undefined at run time would fail as silence, which is
-  indistinguishable from "nobody posted anything". The rule is passed down explicitly from
-  there.
-- Only `*.pb.js` is auto-loaded as a hook, so `notify-rule.js` sits beside it without being
-  loaded twice.
-- **Marked as sent when at least one message got through, AND when there was nobody to
-  tell** — otherwise a post with no opted-in audience is re-examined every minute until it
-  ages out. Not marked when there were recipients and every one failed: that is the case
-  worth retrying.
-- The author is never emailed about their own post. Captions are escaped before they go
-  anywhere near an HTML body.
-- The switch is in the header and writes the person's OWN row (`users.updateRule` is
-  `id = @request.auth.id`, checked against production before building it), so nobody can
-  sign anyone else up. It is disabled while in flight and put back if the write fails —
-  a switch reading "on" while the server disagrees means silently missing every
-  notification.
+- **PocketBase's JSVM has no asymmetric crypto**, and VAPID needs ES256.
+  `$security.createJWT` is documented HS256-only and `$security` has no ECDSA at all. The
+  way through is `$os.cmd`, which runs external commands: the hook shells out to
+  `openssl dgst -sha256 -sign`, which is why the Dockerfile installs `openssl`. That one
+  package is the whole difference between "server code runs in the container" and "push
+  sends".
+- **The push carries NO BODY.** A payload must be encrypted per RFC 8291 — ECDH, HKDF,
+  AES128GCM — which is a lot of hand-rolled crypto to get subtly wrong, and it would put a
+  parent's caption through a third-party push service. Bodiless needs only the VAPID
+  header; the service worker says "a new memory" and the app fetches the detail on open.
+- **openssl emits DER; JOSE wants raw R||S.** `derToJose` converts, and it is the piece
+  that fails only SOMETIMES: DER integers are signed, so a value whose top bit is set gains
+  a leading `0x00` (about half of all signatures), and a value with leading zero bits is
+  encoded short. Either one, copied through, shifts everything after it. Tested by
+  VERIFYING 200 real signatures against node's crypto, and asserting that padded integers
+  were actually encountered — a green run that never met one would prove nothing.
+  - The first version of that test COMPARED node's DER and JOSE outputs and failed every
+    time. ECDSA is randomised: signing the same bytes twice gives two different valid
+    signatures. Verification is the only sound oracle.
+- **`aud` is the endpoint's ORIGIN, never its path.** The path is the subscription secret,
+  so putting it in a claim would leak it — and push services reject it anyway.
+- **A 404 or 410 deletes the subscription.** The browser has thrown it away; keeping it
+  means retrying a dead endpoint every minute forever.
+- **Subscriptions belong to DEVICES**, not accounts, and the bell reflects what THIS
+  browser holds. The endpoint is uniquely indexed because a browser re-issues the same one
+  for the same device — without it, subscribing twice buzzes twice for one memory.
+- **`blocked` is a distinct state from `off`.** Permission refused cannot be asked for
+  again from script, so a button that would silently do nothing is worse than saying where
+  the browser setting lives. On iPhone, push requires the PWA on the home screen (iOS
+  16.4+); Safari alone reports `unsupported`.
+- The VAPID public key lives on the `config` record, so rotating the pair is an admin edit
+  rather than a deploy. The private key is a Render environment variable and is written to
+  a temp file for the length of one signature, then removed.
+- The **when** is unchanged and still in `deploy/pb_hooks/notify-rule.js`: settled five
+  minutes, memoryDate within a week, unsent, and given up on after a day. `posts.notifiedAt`
+  survives the switch from email because it means "announced", which is as true of a push.
 
 ## Type
 

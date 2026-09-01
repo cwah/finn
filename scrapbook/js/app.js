@@ -6,7 +6,7 @@ import { renderPost, setMilestoneArt } from './render.js';
 import { ageStamp } from './age.js';
 import { initCapture, openForEdit, openWithFiles } from './capture.js';
 import { initScrubber } from './scrubber.js';
-import { ensureSignedIn, initSignOut, initEmailToggle } from './auth.js';
+import { ensureSignedIn, initSignOut, initNotifications } from './auth.js';
 import { initLightbox } from './lightbox.js';
 import { initCarousels } from './carousel.js';
 import { initMotion, releaseMotion } from './motion-play.js';
@@ -319,7 +319,7 @@ async function init() {
   initSignOut();
 
   const config = await getConfig();
-  initEmailToggle(config);
+  initNotifications();
   birthDate = config.birthDate;
   currentAuthorId = config.currentAuthor?.id || null;
   // Neither the heading nor the tab title is assigned here. Both say "Finnbook", both are

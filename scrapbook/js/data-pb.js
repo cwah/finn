@@ -60,7 +60,13 @@ export async function getConfig() {
     const out = await pb.list('config', { perPage: 1 });
     const rec = out.items[0];
     if (!rec) throw new Error('No config record — create one in the PocketBase admin UI.');
-    _config = { babyName: rec.babyName, birthDate: rec.birthDate.slice(0, 10) };
+    _config = {
+      babyName: rec.babyName,
+      birthDate: rec.birthDate.slice(0, 10),
+      // Read from the record rather than hardcoded, so rotating the VAPID pair is an
+      // admin edit and not a deploy. Absent simply means push is not set up yet.
+      pushPublicKey: rec.pushPublicKey || null,
+    };
   }
   const me = pb.currentUser();
   return {
@@ -71,87 +77,61 @@ export async function getConfig() {
     // a request of its own. The server enforces it regardless — this only decides
     // whether a viewer is shown a button that would fail.
     canPost: Boolean(me?.canPost),
-    // Whether this account has asked to be emailed when a memory is added. Off unless
-    // someone said otherwise — the migration deliberately backfills nothing, because a
-    // deploy must not sign anyone up for mail.
-    notifyByEmail: Boolean(me?.notifyByEmail),
+    // The VAPID public key, so a browser can subscribe. Public by definition.
+    pushPublicKey: _config?.pushPublicKey || null,
   };
 }
 
 /**
- * Turn email updates on or off for the signed-in account.
+ * The VAPID public key the browser needs in order to subscribe.
  *
- * A person edits their OWN row — `users.updateRule` is `id = @request.auth.id`, checked
- * against production before building this — so no elevated access is involved and one
- * account cannot sign another up for mail.
- *
- * The cached record is refreshed too, or `getConfig` would keep reporting the old answer
- * until the next sign-in and the switch would appear to spring back.
+ * Public by definition — it is what verifies the server's signature, and every push
+ * subscription carries it. Served from the config record rather than hardcoded, so
+ * rotating the key pair does not need a deploy.
  */
-export async function setEmailNotifications(on) {
+export async function pushPublicKey() {
+  const config = await getConfig();
+  return config.pushPublicKey || null;
+}
+
+/**
+ * Remember this device's subscription.
+ *
+ * Upserted on the ENDPOINT, because a browser re-issues the same one for the same device
+ * and site: creating blindly would either fail the unique index or, without it, buzz twice
+ * for one memory.
+ */
+export async function savePushSubscription(sub) {
   const me = pb.currentUser();
   if (!me) throw new Error('not signed in');
-  const updated = await pb.update('users', me.id, { notifyByEmail: Boolean(on) });
-  pb.rememberUser(updated);
-  _config = null; // so the next getConfig reads the new value
-  return Boolean(updated.notifyByEmail);
+
+  const body = {
+    user: me.id,
+    endpoint: sub.endpoint,
+    p256dh: sub.keys?.p256dh || '',
+    auth: sub.keys?.auth || '',
+    label: navigator.userAgent.slice(0, 190),
+  };
+
+  const existing = await pb.list('pushSubscriptions', {
+    perPage: 1,
+    filter: `endpoint=${pb.quote(sub.endpoint)}`,
+  });
+  if (existing.items.length) {
+    return pb.update('pushSubscriptions', existing.items[0].id, body);
+  }
+  return pb.create('pushSubscriptions', body);
 }
 
-/** A photo record -> the contract's photo shape. */
-function toPhoto(rec) {
-  return {
-    id: rec.id,
-    url: pb.fileUrl('photos', rec.id, rec.image),
-    // A card is at most 560 CSS px wide and the compose strip is 76: neither has any use
-    // for a 3000px original, and fetching one for each is most of what made a timeline
-    // slow to fill in. The lightbox still asks for `url`, because expanding a photo is the
-    // one place the whole thing is wanted.
-    cardUrl: pb.fileUrl('photos', rec.id, rec.image, '1280x1280f'),
-    thumbUrl: pb.fileUrl('photos', rec.id, rec.image, '320x320f'),
-    width: rec.width,
-    height: rec.height,
-    alt: rec.alt || null,
-    // Photos saved before focal points existed have none; the renderer treats a missing
-    // focal point as dead centre, which is exactly how they used to be cropped.
-    focalX: rec.focalX ?? null,
-    focalY: rec.focalY ?? null,
-    // Absent, empty or malformed all mean "the whole photo" — cropRect() decides.
-    crop: rec.crop && typeof rec.crop === 'object' && rec.crop.w ? rec.crop : null,
-    // 0 on every row that predates rotation, which is exactly what upright means.
-    rotation: rec.rotation || 0,
-    // Light, held like framing and applied at render. A row that predates these fields
-    // reads 0, which lightFilter() takes as neutral — see the migration, which is where
-    // the zeros are actually put right.
-    brightness: rec.brightness || 1,
-    contrast: rec.contrast || 1,
-    // A row with no video file is a still, and nothing downstream asks again.
-    video: rec.video ? {
-      url: pb.fileUrl('photos', rec.id, rec.video),
-      duration: rec.duration || 0,
-      trimStart: rec.trimStart || 0,
-      // 0 reads as "to the end", which trimRange() then caps at a minute.
-      trimEnd: rec.trimEnd || 0,
-      motion: Boolean(rec.isMotion),
-    } : null,
-  };
-}
-
-/** A post record (+ its photos) -> the contract's post shape. */
-function toPost(rec, photos) {
-  const author = rec.expand?.author;
-  return {
-    id: rec.id,
-    // PocketBase date fields come back as "2026-03-17 00:00:00.000Z"; the contract wants
-    // a plain calendar day, and age.js parses that as a LOCAL day on purpose.
-    memoryDate: rec.memoryDate.slice(0, 10),
-    createdAt: rec.created,
-    author: author ? { id: author.id, name: author.name || author.email } : null,
-    caption: rec.caption || null,
-    milestone: rec.isMilestone
-      ? { isMilestone: true, title: rec.milestoneTitle || 'Milestone' }
-      : null,
-    photos,
-  };
+/** Forget it. Missing is success: the aim is that it is gone, not that we removed it. */
+export async function removePushSubscription(endpoint) {
+  const found = await pb.list('pushSubscriptions', {
+    perPage: 1,
+    filter: `endpoint=${pb.quote(endpoint)}`,
+  });
+  if (!found.items.length) return true;
+  await pb.remove('pushSubscriptions', found.items[0].id);
+  return true;
 }
 
 /**

@@ -11,14 +11,26 @@
 //
 // DELIBERATELY QUIET ABOUT ITS OWN FAILURES, in one direction only. A send that fails is
 // logged and retried on the next tick for up to a day, then given up on — SMTP has bad
-// days, and mail arriving a week late would be worse than mail that never came. What it
+// days, and a notification arriving a week late is worse than one that never came. What it
 // must never do is throw out of the cron handler, which in PocketBase's JSVM would take
 // the scheduled job down with it.
 //
-// PREREQUISITE, and there is no way around it from code: SMTP has to be configured in
-// Settings → Mail. Without it PocketBase falls back to a local `sendmail` binary, which
-// does not exist in the container — so every send fails, is retried for a day, and stops.
-// Nothing else breaks, but no mail arrives either.
+// PREREQUISITES, neither of which code can supply:
+//
+//   VAPID_PRIVATE_KEY   a P-256 private key in PEM, as a Render environment variable.
+//                       Generate with:  openssl ecparam -genkey -name prime256v1 -noout
+//   VAPID_PUBLIC_KEY    the matching public key, base64url, uncompressed point (65 bytes
+//                       starting 0x04). The browser needs it to subscribe, so it is served
+//                       to the app; it is public by design.
+//   VAPID_SUBJECT       a mailto: or https: URL identifying the sender, per RFC 8292.
+//
+// Without them the tick logs once and does nothing. Nothing else breaks.
+//
+// NO PAYLOAD IS SENT. A push with a body must be encrypted per RFC 8291 — ECDH, HKDF and
+// AES128GCM — which is a great deal of hand-rolled crypto to get subtly wrong, and it would
+// put the caption through a third-party push service besides. A bodiless push needs only
+// the VAPID header; the service worker says "a new memory" and the app fetches the detail
+// when it is opened.
 
 /** How often to look. A minute is far finer than the five-minute settling delay needs. */
 const EVERY_MINUTE = '* * * * *';
@@ -50,16 +62,16 @@ function notifyPending(rule) {
     'posts',
     'notifiedAt = "" && created <= {:until} && created >= {:since} && memoryDate >= {:recent}',
     'created',
-    20, // a burst ceiling: a bulk import must not become a hundred emails in one tick
+    20, // a burst ceiling: a bulk import must not become a hundred buzzes in one tick
     0,
     { until: window.until, since: window.since, recent: rule.recentSince(now) },
   );
   if (!posts.length) return;
 
-  const recipients = $app.findRecordsByFilter('users', 'notifyByEmail = true', 'id', 200, 0);
-  // One line per non-empty tick. Without it, "no mail arrived" and "no post qualified" and
-  // "nobody has opted in" are the same observation from outside.
-  console.log('[notify]', posts.length, 'post(s) due,', recipients.length, 'opted-in account(s)');
+  const recipients = $app.findRecordsByFilter('pushSubscriptions', 'id != ""', 'id', 200, 0);
+  // One line per non-empty tick. Without it, "no notification arrived", "no post
+  // qualified" and "nobody has subscribed" are the same observation from outside.
+  console.log('[notify]', posts.length, 'post(s) due,', recipients.length, 'subscription(s)');
 
   for (const post of posts) {
     try {
@@ -110,15 +122,25 @@ function deliver(rule, post, recipients, now) {
 
   // Nobody is told about their own post. They were there.
   const authorId = asText(post, 'author');
-  const audience = recipients.filter((u) => u.id !== authorId && u.email());
+  const audience = recipients.filter((sub) => asText(sub, 'user') !== authorId);
 
   let sent = 0;
-  for (const person of audience) {
+  for (const sub of audience) {
+    const endpoint = asText(sub, 'endpoint');
     try {
-      $app.newMailClient().send(compose(post, person));
+      pushTo(endpoint);
       sent += 1;
     } catch (err) {
-      console.log('[notify] could not mail', person.email(), err);
+      const gone = String(err).includes('410') || String(err).includes('404');
+      if (gone) {
+        // The browser has thrown this subscription away — an uninstalled app, cleared site
+        // data, a device that is gone. Keeping it means retrying a dead endpoint every
+        // minute forever, so it goes.
+        try { $app.delete(sub); console.log('[notify] dropped a dead subscription'); }
+        catch (e) { console.log('[notify] could not drop a dead subscription:', e); }
+      } else {
+        console.log('[notify] push failed:', err);
+      }
     }
   }
 
@@ -133,40 +155,81 @@ function deliver(rule, post, recipients, now) {
   }
 }
 
-/** The message itself. Plain and short: it is a nudge, not a newsletter. */
-function compose(post, person) {
-  const settings = $app.settings();
-  const site = settings.meta.appURL || '';
-  const caption = asText(post, 'caption');
-  const milestone = post.getBool('isMilestone') ? asText(post, 'milestoneTitle') : '';
+/**
+ * Wake one device.
+ *
+ * A bodiless Web Push: a POST to the subscription's endpoint carrying only the VAPID
+ * authorisation and a TTL. There is nothing to encrypt because there is nothing to send —
+ * the service worker knows what to say.
+ *
+ * Throws on anything that is not a 2xx, so the caller can tell a dead subscription (404 or
+ * 410, drop it) from a bad day (anything else, try again next tick).
+ */
+function pushTo(endpoint) {
+  const vapid = require(`${__hooks}/vapid.js`);
+  const priv = $os.getenv('VAPID_PRIVATE_KEY');
+  const pub = $os.getenv('VAPID_PUBLIC_KEY');
+  const subject = $os.getenv('VAPID_SUBJECT') || 'mailto:nobody@example.com';
+  if (!priv || !pub) throw new Error('VAPID keys are not configured');
 
-  const headline = milestone || 'A new memory';
-  // The caption is a parent's own words and may contain anything, so it is escaped before
-  // it goes anywhere near an HTML body.
-  const body = caption ? `<p>${escapeHtml(caption)}</p>` : '';
+  // Twelve hours. The spec caps a VAPID token at 24; well inside it, and re-signed every
+  // send anyway, so there is no reason to sail close.
+  const exp = Math.floor(Date.now() / 1000) + 12 * 3600;
+  const input = vapid.signingInput(vapid.audienceFor(endpoint), subject, exp);
+  const signature = signES256(input, priv);
 
-  return new MailerMessage({
-    from: { address: settings.meta.senderAddress, name: settings.meta.senderName },
-    to: [{ address: person.email() }],
-    subject: `${headline} in Finnbook`,
-    html: `
-      <p>${escapeHtml(headline)} was added to Finnbook.</p>
-      ${body}
-      <p><a href="${escapeHtml(site)}">Open Finnbook</a></p>
-      <p style="color:#5c6a60;font-size:12px">
-        You are getting this because email updates are switched on for your account.
-        Turn them off at the top of the scrapbook.
-      </p>`,
-    text: `${headline} was added to Finnbook.\n\n${caption || ''}\n\n${site}\n\n`
-      + 'You are getting this because email updates are switched on for your account. '
-      + 'Turn them off at the top of the scrapbook.',
+  const res = $http.send({
+    url: endpoint,
+    method: 'POST',
+    headers: {
+      // `vapid` scheme: the token, then the public key that verifies it.
+      Authorization: `vapid t=${input}.${signature}, k=${pub}`,
+      TTL: '86400',            // hold it for a day if the device is offline
+      'Content-Length': '0',   // explicit, because there is deliberately no body
+    },
+    timeout: 30,
   });
+
+  if (res.statusCode < 200 || res.statusCode >= 300) {
+    throw new Error(`push ${res.statusCode}: ${String(res.body || '').slice(0, 200)}`);
+  }
 }
 
-function escapeHtml(value) {
-  return String(value || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+/**
+ * ES256, by way of openssl.
+ *
+ * The JSVM cannot do asymmetric crypto, so the signing is shelled out. Files rather than
+ * stdin because `$os.cmd(...).output()` gives no way to write to a process — and the key
+ * has to reach openssl somehow, since it will not take one on a command line either.
+ *
+ * The key file is removed in a finally. It is a private key sitting on a container
+ * filesystem for the length of one signature, which is brief but not nothing.
+ */
+function signES256(input, privatePem) {
+  const vapid = require(`${__hooks}/vapid.js`);
+  const dir = $os.tempDir();
+  const stamp = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  const keyPath = `${dir}/vapid-${stamp}.pem`;
+  const dataPath = `${dir}/vapid-${stamp}.txt`;
+  const sigPath = `${dir}/vapid-${stamp}.der`;
+
+  try {
+    $os.writeFile(keyPath, privatePem, 0o600);
+    $os.writeFile(dataPath, input, 0o600);
+    // Writes DER to sigPath; anything on stdout here is an error worth surfacing.
+    const noise = toString($os.cmd('openssl', 'dgst', '-sha256',
+      '-sign', keyPath, '-out', sigPath, dataPath).output());
+    if (noise && noise.trim()) console.log('[notify] openssl said:', noise.trim());
+
+    // DER -> JOSE, and this conversion is NOT optional. openssl emits ASN.1
+    // (SEQUENCE { INTEGER r, INTEGER s }); JOSE wants the two numbers concatenated at 32
+    // bytes each. Base64url-ing the DER straight through — which is what this line did
+    // first — produces a token every push service rejects with a bare 401.
+    const der = $os.readFile(sigPath);
+    return vapid.base64url(vapid.derToJose(new Uint8Array(der)));
+  } finally {
+    for (const path of [keyPath, dataPath, sigPath]) {
+      try { $os.remove(path); } catch { /* already gone */ }
+    }
+  }
 }

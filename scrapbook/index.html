@@ -31,12 +31,18 @@
       <p class="app-subtitle" id="babyAge"></p>
     </div>
     <div class="app-account">
-      <!-- Opt-IN. Off until someone asks, because a deploy must not sign anyone up for
-           mail. aria-pressed rather than a checkbox: it is an action with a state, and it
-           reads correctly to a screen reader either way round. -->
+      <!-- Opt-IN, per DEVICE. Off until someone asks: a browser only grants notification
+           permission once, and a page that prompts on load is a page people refuse.
+           aria-pressed rather than a checkbox — it is an action with a state. The label is
+           visually hidden on narrow screens, where the bell has to speak for itself. -->
       <button id="notifyBtn" class="app-notify" type="button" hidden aria-pressed="false">
-        <span class="app-notify-dot" aria-hidden="true"></span>
-        <span id="notifyLabel">Email updates off</span>
+        <svg class="app-bell" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <path class="bell-body"
+                d="M8 1.8a3.6 3.6 0 0 0-3.6 3.6c0 2.4-.7 3.6-1.4 4.3a.5.5 0 0 0 .35.85h9.3a.5.5 0 0 0 .35-.85c-.7-.7-1.4-1.9-1.4-4.3A3.6 3.6 0 0 0 8 1.8z"/>
+          <path class="bell-clapper" d="M6.5 12.6a1.6 1.6 0 0 0 3 0"/>
+          <path class="bell-slash" d="M2.6 2.6l10.8 10.8"/>
+        </svg>
+        <span id="notifyLabel" class="app-notify-label">Notifications off</span>
       </button>
       <button id="signOutBtn" class="app-signout" type="button" hidden>Sign out</button>
     </div>
