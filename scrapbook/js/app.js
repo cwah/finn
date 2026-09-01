@@ -7,6 +7,7 @@ import { ageStamp } from './age.js';
 import { initCapture, openForEdit, openWithFiles } from './capture.js';
 import { initScrubber } from './scrubber.js';
 import { ensureSignedIn, initSignOut, initNotifications } from './auth.js';
+import { loadMessage, canRetry } from './load-error.js';
 import { initLightbox } from './lightbox.js';
 import { initCarousels } from './carousel.js';
 import { initMotion, releaseMotion } from './motion-play.js';
@@ -369,5 +370,20 @@ async function init() {
 
 init().catch((err) => {
   console.error(err);
-  document.getElementById('babyAge').textContent = 'Could not load memories.';
+  const el = document.getElementById('babyAge');
+  el.textContent = loadMessage(err);
+
+  // A server that was briefly away is the common case — a redeploy, a sleeping phone, a
+  // train tunnel — and it comes back. Reloading is the whole fix, so it should not require
+  // knowing that: without this, the app just sat there reading like the memories were lost.
+  if (canRetry(err)) {
+    const again = document.createElement('button');
+    again.type = 'button';
+    again.className = 'btn btn--ghost';
+    again.textContent = 'Try again';
+    // A reload rather than re-running init(): init() binds listeners and registers the
+    // worker, and calling it twice would stack both.
+    again.addEventListener('click', () => location.reload());
+    el.after(again);
+  }
 });
