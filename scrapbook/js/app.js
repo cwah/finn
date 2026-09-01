@@ -15,6 +15,7 @@ import { assignSides, assignPresets } from './milestone-art.js';
 import { pickNewPosts, oldestDate, insertionIndex, pickUnseen } from './sync.js';
 import { initPwa } from './pwa.js';
 import { optional } from './optional.js';
+import { wantedPost, pageUntilFound } from './deep-link.js';
 import { claimSharedFiles, cameFromShare } from './share.js';
 
 const timeline = document.getElementById('timeline');
@@ -144,6 +145,34 @@ function mountCard(card) {
   if (card.classList.contains('milestone-scene')) artObserver.observe(card);
   initCarousels(card);
   initMotion(card);
+}
+
+/**
+ * Bring one post into view, loading pages until it is there.
+ *
+ * Used by a notification tap. The card may be a long way down: a memory backdated to June
+ * is the newest thing that happened and sits months below the fold, which is exactly the
+ * case where landing at the top is no help.
+ *
+ * Silent when it cannot find it. A deleted post, or a stale notification, should leave
+ * someone at the top of their scrapbook rather than being told about an id.
+ */
+async function showPost(id) {
+  const cardFor = (postId) => timeline.querySelector(`[data-post-id="${CSS.escape(postId)}"]`);
+  const found = await pageUntilFound(id, {
+    has: (postId) => Boolean(cardFor(postId)),
+    hasMore: () => hasMore,
+    loadMore,
+  });
+  if (!found) return false;
+
+  const card = cardFor(id);
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // A brief mark, because arriving mid-timeline is disorienting on its own — several
+  // cards are on screen and nothing says which one was the point.
+  card.classList.add('is-linked');
+  setTimeout(() => card.classList.remove('is-linked'), 2400);
+  return true;
 }
 
 async function loadMore() {
@@ -343,6 +372,24 @@ async function init() {
   await loadMore();
   pageObserver.observe(sentinel);
   initSync();
+
+  // A notification tap arrives as ?post=<id>. Wrapped: paging to a card is a convenience,
+  // and a scrapbook that would not open because a deep link misbehaved would be a poor
+  // trade. The query is cleared either way, so a reload is an ordinary visit rather than
+  // a second scramble down the page.
+  const asked = wantedPost(location.href);
+  if (asked) {
+    optional('deep link', () => showPost(asked));
+    history.replaceState(null, '', location.pathname);
+  }
+
+  // The same tap, on a tab that was ALREADY open. It does not reload, so it never reads a
+  // query string; the worker tells it instead.
+  navigator.serviceWorker?.addEventListener('message', (e) => {
+    if (e.data?.type !== 'show-post') return;
+    const id = wantedPost(e.data.url);
+    if (id) optional('deep link', () => showPost(id));
+  });
 
   window.addEventListener('scroll', onScroll, { passive: true });
   initCapture({ author: config.currentAuthor, canPost: config.canPost }, {

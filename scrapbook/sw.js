@@ -21,12 +21,22 @@
 // Bumped with the bell. A changed sw.js installs a new worker on its own, but activate
 // only drops caches that are not this one — so without a bump a browser could keep
 // serving its cached copy of the app modules that changed alongside it.
-const VERSION = 'scrapbook-v3';
+const VERSION = 'scrapbook-v4';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because
 // the worker happened to change would lose whatever someone was trying to save.
 const SHARE_CACHE = 'share-inbox';
+const AUTH_CACHE = 'finnbook-auth';
+const AUTH_KEY = '/__session-token';
+
+/** Caches that survive a version bump, because they hold the person's state, not the build's. */
+const KEEP = [SHARE_CACHE, AUTH_CACHE];
+
+// The wording and the landing rules, shared verbatim with the tests. A worker cannot
+// import an ES module, so this is a classic script loaded the old way — the same
+// arrangement as the notifier's rule module on the server.
+importScripts('/sw-notify.js');
 
 // Only the entry point is precached. Listing every stylesheet and module would be a
 // second copy of the file tree, silently wrong the moment one is added — everything else
@@ -49,7 +59,12 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((names) => Promise.all(
-        names.filter((n) => n !== VERSION && n !== SHARE_CACHE).map((n) => caches.delete(n)),
+        // KEEP is every cache that is not the app shell. The shell is versioned and old
+        // copies are rubbish; these two hold state that belongs to the person, not to the
+        // build — a share waiting to be claimed, and the token a push needs to find out
+        // who posted. Sweeping them on a version bump would quietly downgrade every
+        // notification to the plain wording until the app was next opened.
+        names.filter((n) => n !== VERSION && !KEEP.includes(n)).map((n) => caches.delete(n)),
       ))
       .then(() => self.clients.claim()),
   );
@@ -139,27 +154,86 @@ self.addEventListener('fetch', (event) => {
 // eventually posts its own "this site was updated in the background" — worse than saying
 // nothing, because it is both vague and clearly not ours.
 
+/**
+ * The session token the page left for us, or null.
+ *
+ * A service worker cannot read localStorage, so this is the only way it has of being
+ * anyone. Null is a normal outcome — signed out, a fresh install, a browser that refuses
+ * site data — and it simply costs the detail, not the notification.
+ */
+async function sessionToken() {
+  try {
+    const hit = await caches.open(AUTH_CACHE).then((c) => c.match(AUTH_KEY));
+    return hit ? (await hit.text()) || null : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * What this push is about.
+ *
+ * The push carries no body, so the detail is fetched here. Newest-created first, with the
+ * author expanded — `notification()` decides which of them the push is actually about, by
+ * what the server recorded as announced.
+ *
+ * Every failure returns null and the caller shows the plain wording. A notification that
+ * says slightly less is a small loss; one that never appears is not, because a browser
+ * shown nothing eventually posts its own "this site was updated in the background".
+ */
+async function recentPosts() {
+  const token = await sessionToken();
+  if (!token) return null;
+  try {
+    const res = await fetch(
+      '/api/collections/posts/records?perPage=10&sort=-created&expand=author',
+      { headers: { Authorization: token }, cache: 'no-store' },
+    );
+    if (!res.ok) return null;      // 401 after a token expires is the ordinary case
+    const body = await res.json();
+    return Array.isArray(body.items) ? body.items : null;
+  } catch {
+    return null;                   // offline, which a push can outrun
+  }
+}
+
 self.addEventListener('push', (event) => {
-  event.waitUntil(self.registration.showNotification('Finnbook', {
-    body: 'A new memory was added.',
-    icon: '/assets/icon-192.png',
-    badge: '/assets/icon-192.png',
-    // One notification, replaced rather than stacked: three memories in an evening should
-    // be one line on the lock screen, not three.
-    tag: 'finnbook-new-memory',
-    renotify: true,
-  }));
+  event.waitUntil((async () => {
+    const posts = await recentPosts();
+    const news = notification(posts, Date.now());
+    await self.registration.showNotification(news.title, {
+      body: news.body,
+      icon: '/assets/icon-192.png',
+      badge: '/assets/icon-192.png',
+      // One notification, replaced rather than stacked: three memories in an evening should
+      // be one line on the lock screen, not three. Each push recomputes the wording, so the
+      // replacement is what says "2 new memories" once a second one arrives.
+      tag: 'finnbook-new-memory',
+      renotify: true,
+      // Where tapping lands. Carried on the notification so notificationclick does not have
+      // to fetch it all over again.
+      data: { url: landingUrl(news.postId) },
+    });
+  })());
 });
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  // Focus the app if it is already open rather than opening a second copy — a scrapbook
-  // in two tabs is two timelines that disagree about what has been read.
+  const url = (event.notification.data && event.notification.data.url) || '/';
+
   event.waitUntil((async () => {
+    // Focus the app if it is already open rather than opening a second copy — a scrapbook
+    // in two tabs is two timelines that disagree about what has been read.
     const open = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
     for (const client of open) {
-      if (new URL(client.url).origin === self.location.origin) return client.focus();
+      if (new URL(client.url).origin !== self.location.origin) continue;
+      await client.focus();
+      // A focused tab does not reload, so the query string alone would do nothing — it is
+      // already past the point where it reads one. Telling it directly is what makes the
+      // deep link work on the tab someone already had open, which is the common case.
+      client.postMessage({ type: 'show-post', url });
+      return undefined;
     }
-    return self.clients.openWindow('/');
+    return self.clients.openWindow(url);
   })());
 });

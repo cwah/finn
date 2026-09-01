@@ -249,3 +249,23 @@ body {
     clip-path: inset(50%);
     white-space: nowrap;
   }
+
+/* The card a notification pointed at.
+   Arriving mid-timeline is disorienting on its own — several cards are on screen and
+   nothing says which one was the point. A ring that fades is enough to answer that
+   without becoming decoration on a page that is mostly photographs. */
+.card.is-linked,
+.milestone-scene.is-linked {
+  animation: linked-card 2.4s ease-out;
+}
+
+@keyframes linked-card {
+  0%, 55% { box-shadow: 0 0 0 3px var(--accent-ink); }
+  100%    { box-shadow: 0 0 0 3px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Still marked, just not animated: the point is which card, not the movement. */
+  .card.is-linked,
+  .milestone-scene.is-linked { animation: none; box-shadow: 0 0 0 3px var(--accent-ink); }
+}

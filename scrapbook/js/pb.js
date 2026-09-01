@@ -27,6 +27,8 @@
  * 127.0.0.1: this is a mobile-first app and gets opened on a phone, where localhost is
  * the phone.
  */
+import { publishToken } from './sw-token.js';
+
 let apiBase = null;
 
 export async function resolveApiBase() {
@@ -68,6 +70,11 @@ function persist(next) {
   auth = next;
   if (next) localStorage.setItem(TOKEN_KEY, JSON.stringify(next));
   else localStorage.removeItem(TOKEN_KEY);
+  // The ONE place a token changes, which makes it the one place worth telling the service
+  // worker from. A worker cannot read localStorage, so without this a push has no way to
+  // ask who posted. Deliberately not awaited: a notification detail must never hold up
+  // signing in, and publishToken swallows its own failures.
+  publishToken(next ? next.token : null);
 }
 
 /** The signed-in parent, or null. `{ id, name, email }` */
