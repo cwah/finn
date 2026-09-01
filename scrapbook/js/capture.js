@@ -15,7 +15,9 @@
 
 import { createPost, updatePost, deletePost } from './data.js';
 import { detectFocalPoint } from './smart-crop.js';
-import { pairLivePhotos, splitMotionPhoto, looksLikeMotion } from './motion.js';
+import {
+  pairLivePhotos, splitMotionPhoto, looksLikeMotion, mp4CreatedAtFromFile,
+} from './motion.js';
 import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
 import { forDisplay, previewUrl } from './downscale.js';
 import { toDisplayCopy, needsEncoding, estimateSeconds } from './video-encode.js';
@@ -307,9 +309,24 @@ async function takenOn(file) {
     } catch { /* unreadable is simply unknown */ }
   }
 
+  // A CLIP STATES WHEN IT WAS RECORDED, in the same mvhd box that states its length. The
+  // bot has always read this; the browser did not, and went straight to the filename —
+  // so a clip whose name carries no date was dated TODAY, from `lastModified`, which is
+  // when it landed on the device rather than when it was taken. The two doors into the
+  // same scrapbook disagreed, and the browser was the wrong one.
+  //
+  // Read by walking the box headers rather than loading the file: a phone writes `moov`
+  // at the end, so a header-sized read finds nothing on exactly the files that matter.
+  if (isVideo) {
+    const recorded = await mp4CreatedAtFromFile(file);
+    if (recorded) return recorded;
+  }
+
   const named = filenameDate(file.name);
   if (named) return named;
 
+  // Last, and least: when the file landed on this device, which for anything copied,
+  // exported or downloaded is not when it was taken.
   return file.lastModified ? localDay(file.lastModified) : null;
 }
 
@@ -1000,7 +1017,15 @@ export function initCapture({ author, canPost = true }, handlers) {
       if (err.postDiscarded) {
         const lost = err.failedPhotos || [];
         markFailures(lost);
-        saveError.textContent = await uploadFailureMessage(lost, { discarded: true });
+        let note = await uploadFailureMessage(lost, { discarded: true });
+        // The post could not be taken back — almost always because the same dead
+        // connection that lost the photos also lost the delete. Say so, rather than
+        // repeating "nothing was saved" while a caption sits on the timeline.
+        if (err.postRemoved === false) {
+          note += ' One empty memory was left behind and could not be removed — '
+            + 'delete it from the timeline when you are back online.';
+        }
+        saveError.textContent = note;
         saveError.hidden = false;
         renderThumbs();
         return;

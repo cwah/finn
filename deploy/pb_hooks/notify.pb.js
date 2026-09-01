@@ -56,7 +56,10 @@ function notifyPending(rule) {
   );
   if (!posts.length) return;
 
-  const recipients = $app.findRecordsByFilter('users', 'notifyByEmail = true', '', 200, 0);
+  const recipients = $app.findRecordsByFilter('users', 'notifyByEmail = true', 'id', 200, 0);
+  // One line per non-empty tick. Without it, "no mail arrived" and "no post qualified" and
+  // "nobody has opted in" are the same observation from outside.
+  console.log('[notify]', posts.length, 'post(s) due,', recipients.length, 'opted-in account(s)');
 
   for (const post of posts) {
     try {
@@ -69,17 +72,44 @@ function notifyPending(rule) {
   }
 }
 
+/**
+ * A record field as a plain string, whatever shape the JSVM hands back.
+ *
+ * `created` is a SYSTEM field and a date besides, so it does not necessarily come back
+ * from `getString` the way an ordinary text field does — it can arrive as a DateTime
+ * wrapper. The first version read it with `getString` and got an empty string, which
+ * `shouldNotify` then failed to parse, so every post was silently judged unnotifiable:
+ * nothing sent, nothing marked, and no error anywhere. Exactly the shape of a bug that
+ * looks like "the feature does nothing".
+ *
+ * Both shapes are handled rather than one guessed at, because the cost of guessing wrong
+ * here is silence.
+ */
+function asText(record, field) {
+  const raw = record.get(field);
+  if (raw === null || raw === undefined) return '';
+  if (typeof raw === 'string') return raw;
+  if (typeof raw.string === 'function') return raw.string();
+  return String(raw);
+}
+
 function deliver(rule, post, recipients, now) {
   // Re-checked against the values actually read. The filter and the rule are meant to
   // agree; if they ever drift, this is the side that decides, because it is the tested one.
-  if (!rule.shouldNotify({
-    created: post.getString('created'),
-    memoryDate: post.getString('memoryDate'),
-    notifiedAt: post.getString('notifiedAt'),
-  }, now)) return;
+  const seen = {
+    created: asText(post, 'created'),
+    memoryDate: asText(post, 'memoryDate'),
+    notifiedAt: asText(post, 'notifiedAt'),
+  };
+  if (!rule.shouldNotify(seen, now)) {
+    // Loud on purpose. The filter selected this post, so the two disagreeing is a bug
+    // rather than a quiet no — and the values are what would identify it.
+    console.log('[notify] filter and rule disagree on', post.id, JSON.stringify(seen));
+    return;
+  }
 
   // Nobody is told about their own post. They were there.
-  const authorId = post.getString('author');
+  const authorId = asText(post, 'author');
   const audience = recipients.filter((u) => u.id !== authorId && u.email());
 
   let sent = 0;
@@ -107,8 +137,8 @@ function deliver(rule, post, recipients, now) {
 function compose(post, person) {
   const settings = $app.settings();
   const site = settings.meta.appURL || '';
-  const caption = post.getString('caption');
-  const milestone = post.getBool('isMilestone') ? post.getString('milestoneTitle') : '';
+  const caption = asText(post, 'caption');
+  const milestone = post.getBool('isMilestone') ? asText(post, 'milestoneTitle') : '';
 
   const headline = milestone || 'A new memory';
   // The caption is a parent's own words and may contain anything, so it is escaped before

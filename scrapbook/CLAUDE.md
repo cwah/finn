@@ -249,6 +249,20 @@ Video is not a second kind of post. **A video's poster frame IS its photo**, so 
 travels through the same `photos` array, the same crop box and the same layout rules as a
 still. `photoEl()` in `render.js` is the only place that knows the difference.
 
+- **A trim can be TYPED, and the bar is full width.** A bar a few hundred pixels wide puts
+  more than half a second behind every pixel of a three-minute clip, so the handle moves in
+  jumps larger than the thing being chosen — dragging is the wrong instrument for a long
+  video however it is styled. `timecode.js` is pure and parses what people actually write:
+  `12`, `1:04`, `1:04.5`, `:30`, `.5`.
+  - Junk parses as **null, not 0**. Zero is a legitimate start time, and reading "abc" as
+    "the beginning" would silently rewrite a trim someone was midway through typing.
+  - A field being typed in is **never rewritten by `paint()`** — rewriting under the cursor
+    moves the caret and mangles a half-typed value. Unreadable input is flagged with a
+    border and settled on blur, rather than snapping back mid-keystroke.
+  - `settleTrim` moves the handle that was NOT just typed, so an end typed before the start
+    holds the other end out of the way instead of fighting the keystroke.
+  - **Preview plays just the chosen stretch** on the editor's own video element. Two
+    numbers and a bar do not tell anyone what a trim looks or sounds like.
 - **Trimming is framing, never destruction** — the same rule as cropping. The stored file
   keeps every frame; `trimStart`/`trimEnd` say which stretch the memory is, so a trim can
   be widened, moved or removed forever. `trimRange()` is pure and tested, and always
@@ -719,6 +733,18 @@ tests. It has no dependencies and nothing bundles.
     creation time lives in a header that can sit at the *end* of the file.
   - A motion photo is read from the **original** the parent picked, not from the still
     split out of it — the halves are new Blobs with no name and no modification time.
+  - **A CLIP STATES WHEN IT WAS RECORDED**, in the same `mvhd` box that states its length,
+    and the browser now reads it as the bot always has. It did not, and went straight to
+    the filename — so a clip whose name carries no date was dated TODAY from
+    `lastModified`, which is when it landed on the device rather than when it was taken.
+    The two doors into the same scrapbook disagreed and the browser was the wrong one.
+  - Read by WALKING the box headers (`mp4CreatedAtFromFile`), not by loading the file: a
+    phone writes `moov` at the end, so a header-sized read finds nothing on exactly the
+    files that matter, while reading it whole means pulling a hundred megabytes into memory
+    on a phone to learn a date. A handful of eight-byte reads finds the box wherever it is.
+  - Dates are read from the ORIGINAL, before any re-encode. The stored copy loses its
+    embedded EXIF and mvhd — a canvas re-encode cannot carry them — but `memoryDate` is
+    captured into the record first, which is what the app actually reads.
 - **Paging is by OFFSET, so it assumes the list underneath does not move — and backdating
   moves it.** A post inserted mid-timeline shifts every row below it down one, so the next
   page hands back a card already on screen. Appended a second time, that was a memory
@@ -945,7 +971,12 @@ tests. It has no dependencies and nothing bundles.
     mime type. Mime type is NOT enforced on images — PocketBase sniffs content, and a jpeg
     named `.heic`, an empty type and `image/x-adobe-dng` were all accepted. A 60 MB body
     reaches the server fine, so there is no platform limit below that.
-  - **If nothing uploaded, the post does not survive.** The post has to be created before
+  - **If nothing uploaded, the post does not survive — and the delete is RETRIED.** The
+    likeliest reason every photo failed is that the connection went, and a delete sent down
+    that same connection fails for the same reason. One attempt was not enough: two
+    captions with no pictures ended up on the timeline while the sheet said nothing had
+    been saved. When the delete still fails, `postRemoved: false` comes back and the sheet
+    says an empty memory was left behind, rather than repeating a claim it cannot support. The post has to be created before
     its photos can be, so `createPost` takes it back again when the draft had photos and
     none of them saved — a caption alone in the timeline where a picture should have been
     is not the memory anyone meant. A caption-only draft is untouched: that is a quote
@@ -1012,6 +1043,17 @@ may have open.
   - and a fourth that bounds damage rather than describing intent: *fresh*, created within
     24 hours. Sending may fail and retry, but a failure that never resolves must not mail
     everyone a week late when it recovers.
+- **System fields are read through `asText`, never `getString`.** `created` is a system
+  field AND a date, so it can come back as a DateTime wrapper rather than a string —
+  `getString('created')` returned empty, `shouldNotify` could not parse it, and every post
+  was silently judged unnotifiable. Nothing sent, nothing marked, no error anywhere: the
+  exact shape of "the feature does nothing". Both shapes are handled rather than one
+  guessed at, because the cost of guessing here is silence.
+- **Every tick logs what it found**, and a filter/rule disagreement logs loudly. From
+  outside, "no mail arrived", "no post qualified" and "nobody has opted in" are the same
+  observation; the log is what separates them.
+- **The author is never emailed about their own post**, so a single opted-in account that
+  is also the only person posting will correctly receive nothing.
 - **The rule is a shared CommonJS module, required by both the hook and the test suite**
   (`createRequire` from `test/notify-rule.test.js`), so what ships is what was tested. A
   second copy would drift, and the drift would arrive as mail nobody expected.

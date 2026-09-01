@@ -154,6 +154,24 @@
           <span class="editor-trim-handle" data-trim="start"></span>
           <span class="editor-trim-handle" data-trim="end"></span>
         </div>
+
+        <!-- Typing, because dragging cannot reach the precision a long clip needs: a bar
+             a few hundred pixels wide puts half a second behind every pixel of a
+             three-minute video. inputmode is decimal so a phone offers the right keys. -->
+        <div class="editor-trim-fields">
+          <label class="editor-trim-field">
+            <span>Start</span>
+            <input class="editor-trim-time" data-trim-field="start" type="text"
+                   inputmode="decimal" autocomplete="off" spellcheck="false" size="7" />
+          </label>
+          <label class="editor-trim-field">
+            <span>End</span>
+            <input class="editor-trim-time" data-trim-field="end" type="text"
+                   inputmode="decimal" autocomplete="off" spellcheck="false" size="7" />
+          </label>
+          <button type="button" class="editor-trim-play">Preview</button>
+        </div>
+
         <p class="editor-trim-read"></p>
       </div>
 

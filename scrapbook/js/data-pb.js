@@ -299,16 +299,26 @@ export async function createPost(draft, author) {
   // Only when the draft HAD photos: a caption on its own is a quote card, and a perfectly
   // good post with nothing to fail.
   if (draft.photos.length && !saved.length) {
+    // RETRIED, like the uploads themselves. The likeliest reason every photo failed is
+    // that the connection went — and a delete sent down that same connection will fail for
+    // the same reason. Giving up after one attempt is how two captions with no pictures
+    // ended up on the timeline while the sheet said nothing had been saved.
+    let removed = false;
     try {
-      await pb.remove('posts', rec.id);
+      await withRetry(() => pb.remove('posts', rec.id));
+      removed = true;
     } catch (err) {
-      // Leaving an empty post behind is bad; losing the reason the photos failed is worse,
-      // because that is the thing the parent needs to see. Log and carry on.
       console.error('could not remove the post whose photos all failed', err);
     }
+
     const nothing = new Error('no photos could be uploaded');
     nothing.failedPhotos = failed;
     nothing.postDiscarded = true;
+    // Whether the post is REALLY gone. Saying "nothing was saved" while a caption sits in
+    // the timeline is the app lying about its own state, and the parent then cannot tell
+    // that there is something to tidy up.
+    nothing.postRemoved = removed;
+    if (!removed) nothing.orphanId = rec.id;
     throw nothing;
   }
 

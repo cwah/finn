@@ -18,6 +18,7 @@
 // where THAT crop centres.
 
 import { MAX_CLIP_SECONDS, rotationOf, turnFraming, lightFilter, adjustmentsOf } from './layout-engine.js';
+import { parseTimecode, formatTimecode, settleTrim } from './timecode.js';
 
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
 const round = (v) => Math.round(v * 1000) / 1000;
@@ -57,6 +58,8 @@ export function openPhotoEditor(photo, { isMain }) {
   const trimBar = sheet.querySelector('.editor-trim-bar');
   const trimRangeEl = sheet.querySelector('.editor-trim-range');
   const trimRead = sheet.querySelector('.editor-trim-read');
+  const trimFields = [...sheet.querySelectorAll('.editor-trim-time')];
+  const trimPlay = sheet.querySelector('.editor-trim-play');
   const lightRanges = [...sheet.querySelectorAll('.editor-range')];
   const lightReset = sheet.querySelector('.editor-light-reset');
 
@@ -78,6 +81,15 @@ export function openPhotoEditor(photo, { isMain }) {
   // Light. Neutral is 1 for both, and a stored 0 — which is what a row backfilled by the
   // migration would carry for a moment — reads as neutral rather than as black.
   const light = adjustmentsOf(photo);
+
+  /**
+   * Shortest a clip may be — below this it reads as a stutter rather than a moment.
+   *
+   * Declared here with the rest of the trim state rather than beside the drag handlers,
+   * because typing reaches it too and a constant that sits below half its callers is one
+   * refactor away from a temporal dead zone.
+   */
+  const MIN_CLIP = 0.5;
 
   // Trimming, for a clip. Seconds into the SOURCE file, which keeps every frame.
   const duration = Number(photo.duration) || 0;
@@ -176,6 +188,14 @@ export function openPhotoEditor(photo, { isMain }) {
     trimRead.textContent =
       `${clock(trimStart)} – ${clock(trimEnd)} · ${length.toFixed(1)}s`
       + (length >= MAX_CLIP_SECONDS - 0.05 ? ' (the longest a memory can play)' : '');
+
+    // The typed fields follow the bar, EXCEPT the one being typed in. Rewriting a field
+    // under someone's cursor moves the caret and mangles what they are half-way through.
+    for (const field of trimFields) {
+      if (document.activeElement === field) continue;
+      field.value = formatTimecode(field.dataset.trimField === 'start' ? trimStart : trimEnd);
+      field.classList.remove('is-bad');
+    }
   }
 
   /** A focal point outside the crop describes nothing, so keep it within. */
@@ -326,6 +346,75 @@ export function openPhotoEditor(photo, { isMain }) {
     paint();
   }
 
+  // ── Typing a trim, and hearing it back ───────────────────────────
+  const onTrimTyped = (e) => {
+    const field = e.target;
+    const which = field.dataset.trimField;
+    const typed = parseTimecode(field.value);
+
+    // Unreadable is SAID, not silently reverted. Someone mid-way through typing "1:0" has
+    // not made a mistake, and snapping the field back under them would be maddening; the
+    // border simply says "not yet a time" until it is one.
+    if (typed === null) {
+      field.classList.add('is-bad');
+      return;
+    }
+    field.classList.remove('is-bad');
+
+    const wanted = which === 'start'
+      ? { start: typed, end: trimEnd }
+      : { start: trimStart, end: typed };
+    const settled = settleTrim(wanted, { duration, minClip: MIN_CLIP, moved: which });
+
+    trimStart = settled.start;
+    // A minute is still the most that can play, whichever way the value arrived.
+    trimEnd = Math.min(settled.end, trimStart + MAX_CLIP_SECONDS);
+    paint();
+  };
+
+  /** On blur, put the field back to what was actually accepted. */
+  const onTrimBlur = (e) => {
+    e.target.classList.remove('is-bad');
+    e.target.value = formatTimecode(e.target.dataset.trimField === 'start' ? trimStart : trimEnd);
+  };
+
+  /**
+   * Play just the chosen stretch.
+   *
+   * The point of a trim is what it sounds and looks like, and neither is knowable from two
+   * numbers and a bar. The editor already has the clip loaded on its framing surface, so
+   * previewing is a seek and a stop rather than anything new.
+   */
+  let previewStop = null;
+  const onPreview = () => {
+    const video = cropImg.tagName === 'VIDEO' ? cropImg : null;
+    if (!video) return;
+
+    if (previewStop) { previewStop(); return; } // a second tap stops it
+
+    const stopAt = trimEnd;
+    const watch = () => {
+      if (video.currentTime >= stopAt) previewStop?.();
+    };
+    previewStop = () => {
+      video.removeEventListener('timeupdate', watch);
+      video.pause();
+      previewStop = null;
+      trimPlay.textContent = 'Preview';
+    };
+
+    video.addEventListener('timeupdate', watch);
+    video.currentTime = trimStart;
+    trimPlay.textContent = 'Stop';
+    video.play().catch(() => previewStop?.());
+  };
+
+  trimFields.forEach((f) => {
+    f.addEventListener('input', onTrimTyped);
+    f.addEventListener('blur', onTrimBlur);
+  });
+  trimPlay.addEventListener('click', onPreview);
+
   const onRotate = (e) => {
     turn(Number(e.currentTarget.dataset.turn));
     // A quarter turn swaps the surface's shape, so the width it may occupy changes with it.
@@ -353,9 +442,6 @@ export function openPhotoEditor(photo, { isMain }) {
   paintLight();
 
   // ── Trimming ─────────────────────────────────────────────────────
-  /** Shortest a clip may be — below this it reads as a stutter rather than a moment. */
-  const MIN_CLIP = 0.5;
-
   let dragTrim = null;
 
   function trimAt(e) {
@@ -448,6 +534,12 @@ export function openPhotoEditor(photo, { isMain }) {
       mainBtn.removeEventListener('click', onMain);
       doneBtn.removeEventListener('click', onDone);
       rotateBtns.forEach((b) => b.removeEventListener('click', onRotate));
+      previewStop?.(); // a preview must not play on after the sheet has gone
+      trimFields.forEach((f) => {
+        f.removeEventListener('input', onTrimTyped);
+        f.removeEventListener('blur', onTrimBlur);
+      });
+      trimPlay.removeEventListener('click', onPreview);
       window.removeEventListener('resize', onResize);
       lightRanges.forEach((r) => r.removeEventListener('input', onLight));
       lightReset.removeEventListener('click', onLightReset);

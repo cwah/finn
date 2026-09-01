@@ -454,7 +454,10 @@
    handles say which stretch of it the memory is. */
 .editor-trim {
   margin: 14px auto 0;
-  max-width: 320px;
+  /* The FULL width of the sheet, not the 320px the framing surface uses. Every pixel is
+     resolution: at 320px a three-minute clip put more than half a second behind each one,
+     and the handle moved in jumps bigger than the thing being chosen. */
+  width: 100%;
 }
 
 .editor-trim[hidden] { display: none; }
@@ -725,3 +728,59 @@
 
 /* The lead photo's "Main" tag sits bottom-left too; move it clear of the mark. */
 .compose-thumb.is-failed .compose-thumb-tag { left: 26px; }
+
+/* ── Typing a trim ─────────────────────────────────────────────── */
+/* The bar is for finding the moment, these are for landing on it. */
+.editor-trim-fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.editor-trim-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.editor-trim-time {
+  width: 5.5em;
+  padding: 5px 8px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;  /* so the digits do not shuffle while typing */
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.editor-trim-time:focus-visible {
+  outline: none;
+  border-color: var(--accent-ink);
+}
+
+/* Said out loud when what was typed could not be read, rather than silently reverting. */
+.editor-trim-time.is-bad { border-color: var(--warn); }
+
+.editor-trim-play {
+  margin-left: auto;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.editor-trim-play:hover { border-color: var(--hairline); }
+
+.editor-trim-play:focus-visible {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}

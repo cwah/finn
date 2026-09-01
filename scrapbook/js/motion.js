@@ -251,3 +251,64 @@ export function mp4CreatedAt(bytes) {
   const pad = (n) => String(n).padStart(2, '0');
   return `${year}-${pad(when.getMonth() + 1)}-${pad(when.getDate())}`;
 }
+
+/**
+ * When a clip was recorded, read from the file without loading the file.
+ *
+ * `mp4CreatedAt` needs the `moov` box, and a phone writes that at the END — a clip is
+ * recorded before its index can be written, and only a "faststart" pass moves it to the
+ * front. So a header-sized read finds nothing on exactly the files that matter, while
+ * reading the whole thing means pulling a hundred megabytes into memory on a phone to
+ * learn a date.
+ *
+ * Neither is necessary. An mp4 is a flat list of length-prefixed boxes, so the top level
+ * can be WALKED: read eight bytes, learn the size, skip. A handful of tiny reads finds
+ * `moov` wherever it lives, and only that box is actually fetched.
+ *
+ * @param {File|Blob} file
+ * @returns {Promise<string|null>} YYYY-MM-DD, local, or null
+ */
+export async function mp4CreatedAtFromFile(file) {
+  if (!file || !file.size) return null;
+  const total = file.size;
+  let at = 0;
+
+  // A malformed file must not become an unbounded loop. No real mp4 has thousands of
+  // top-level boxes; a hundred is already generous.
+  for (let hops = 0; hops < 100 && at + 8 <= total; hops += 1) {
+    let head;
+    try {
+      head = new Uint8Array(await file.slice(at, at + 16).arrayBuffer());
+    } catch {
+      return null; // unreadable is unknown, never an error
+    }
+    if (head.length < 8) return null;
+
+    const u32 = (i) => ((head[i] << 24) | (head[i + 1] << 16) | (head[i + 2] << 8) | head[i + 3]) >>> 0;
+    const type = String.fromCharCode(head[4], head[5], head[6], head[7]);
+
+    let size = u32(0);
+    let headerLen = 8;
+    if (size === 1) {
+      // A 64-bit length follows the type. The high word is zero for any real file.
+      if (head.length < 16) return null;
+      size = u32(12);
+      headerLen = 16;
+    } else if (size === 0) {
+      size = total - at; // the last box, running to the end
+    }
+    if (size < headerLen) return null; // nonsense length; stop rather than loop
+
+    if (type === 'moov') {
+      try {
+        // Only this box. mp4CreatedAt walks from offset 0, and moov is at 0 here.
+        const moov = new Uint8Array(await file.slice(at, at + size).arrayBuffer());
+        return mp4CreatedAt(moov);
+      } catch {
+        return null;
+      }
+    }
+    at += size;
+  }
+  return null;
+}
