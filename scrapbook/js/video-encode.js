@@ -136,7 +136,9 @@ export function pickMimeType() {
  * @param {{onProgress?: (fraction: number) => void, signal?: AbortSignal}} opts
  * @returns {Promise<{file: File|Blob, width: number, height: number, encoded: boolean}>}
  */
-export async function toDisplayCopy(file, { onProgress, signal, motion = false } = {}) {
+export async function toDisplayCopy(file, {
+  onProgress, signal, motion = false, start = 0, end = Infinity,
+} = {}) {
   const give = (f, width = 0, height = 0, encoded = false) => ({ file: f, width, height, encoded });
 
   // Before anything is decoded. A motion photo is never re-encoded, so there is no reason
@@ -185,6 +187,21 @@ export async function toDisplayCopy(file, { onProgress, signal, motion = false }
     // in a parent's console for a failure that was already dealt with.
     finished.catch(() => {});
 
+    // ONLY THE STRETCH THAT WILL PLAY. Encoding is real time — the clip is played through
+    // a canvas — so encoding a three-minute file to show thirty seconds of it cost three
+    // minutes of a parent's evening for two and a half minutes nobody would ever see. The
+    // window is bounded by MAX_CLIP_SECONDS, so the wait is now bounded too, whatever was
+    // filmed.
+    const from = Math.max(0, Number(start) || 0);
+    const to = Math.min(Number.isFinite(end) ? Number(end) : video.duration, video.duration || 0);
+    const span = Math.max(0, to - from);
+    if (from > 0) {
+      video.currentTime = from;
+      // Waiting for the seek matters: recording from a decoder that is still at frame zero
+      // captures the wrong opening, and on a long file that is a second or two of it.
+      await once(video, 'seeked', 10000).catch(() => {});
+    }
+
     recorder.start();
 
     // play() is raced, not awaited outright. It is what hung every attempt to test this:
@@ -209,7 +226,7 @@ export async function toDisplayCopy(file, { onProgress, signal, motion = false }
     //
     // Generous, because the loop is real-time by nature and a slow phone is not a stall:
     // three times the clip's length plus ten seconds.
-    const ceiling = Math.max(15000, (video.duration || 0) * 3000 + 10000);
+    const ceiling = Math.max(15000, span * 3000 + 10000);
     const ranOut = await new Promise((resolve) => {
       let stopped = false;
       const end = (timedOut) => () => { if (!stopped) { stopped = true; resolve(Boolean(timedOut)); } };
@@ -220,8 +237,12 @@ export async function toDisplayCopy(file, { onProgress, signal, motion = false }
       video.addEventListener('error', finish, { once: true });
       const draw = () => {
         if (stopped) return;
+        // Reaching the end of the WINDOW is a normal finish, exactly like reaching the end
+        // of the file. `ended` still covers the case where the window runs to the last
+        // frame and playback stops on its own.
+        if (video.currentTime >= to) { finish(); return; }
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        if (video.duration) onProgress?.(Math.min(1, video.currentTime / video.duration));
+        if (span > 0) onProgress?.(Math.min(1, (video.currentTime - from) / span));
         requestAnimationFrame(draw);
       };
       requestAnimationFrame(draw);

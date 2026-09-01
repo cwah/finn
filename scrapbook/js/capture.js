@@ -21,7 +21,10 @@ import {
 import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
 import { clipNotice } from './clip-limit.js';
 import { forDisplay, previewUrl } from './downscale.js';
-import { toDisplayCopy, needsEncoding, estimateSeconds } from './video-encode.js';
+// toDisplayCopy is no longer called from here: clips are reduced at save, by
+// prepare-upload.js, once the trim is known.
+import { estimateSeconds } from './video-encode.js';
+import { prepareForUpload } from './prepare-upload.js';
 import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
 import { openPhotoEditor } from './photo-editor.js';
 import { dateLabel } from './age.js';
@@ -135,6 +138,13 @@ function clearEncoding(file) {
   paintEncoding();
 }
 
+/** Everything at once, for when a save has finished with all of them. */
+function clearAllEncoding() {
+  encoding.clear();
+  lastPaint = 0;
+  paintEncoding();
+}
+
 /** What to say while clips are being reduced, or null when none are. */
 export function encodingSummary() {
   if (!encoding.size) return null;
@@ -172,14 +182,14 @@ async function readItem(entry) {
   if (!entry.still) {
     const { url: videoUrl, width, height, duration, poster } = await measureVideo(entry.video);
 
-    // Reduce the clip before anything else touches it. Real time, so it is the longest
-    // wait in the app by far — hence the announcement below rather than a mute spinner.
-    // A motion photo loops on sight and lasts a second or two; it goes up as it is.
-    const display = await toDisplayCopy(entry.video, {
-      motion: looksLikeMotion(duration),
-      onProgress: (done) => announceEncoding(entry.video, duration, done),
-    });
-    clearEncoding(entry.video);
+    // NOT ENCODED HERE. Reducing a clip is real time — it is played through a canvas —
+    // so doing it on the way in meant staring at a progress line for the length of the
+    // whole film before the editor would open, and the editor does not even use the
+    // result: it previews the ORIGINAL from `videoUrl`, and the encoded copy is read only
+    // by the uploader.
+    //
+    // So it waits for save, by which point the trim is known and only the stretch that
+    // will actually play has to be encoded. See prepareForUpload below.
     // A 4K clip yields a 4K poster, which is a large jpeg to store and a larger one to
     // decode for a 76px square. Same treatment as any other still.
     const shown = await forDisplay(new File([poster], 'poster.jpg', { type: 'image/jpeg' }),
@@ -195,10 +205,9 @@ async function readItem(entry) {
       // that is no longer the video's own. The clip still plays at its full resolution.
       width: shown.width,
       height: shown.height,
-      // The DISPLAY copy — 1080p H.264 — is what gets stored and what every view plays.
-      // No original is kept beside it: nothing ever read one, and the phone that shot the
-      // clip still has it. Photos make the same bargain.
-      videoFile: display.file,
+      // The source, for now. It becomes the display copy at save; until then the editor
+      // needs something to play and this is the only thing there is.
+      videoFile: entry.video,
       takenOn: await takenOn(entry.video),
       duration,
       trimStart: 0,
@@ -524,8 +533,9 @@ export function initCapture({ author, canPost = true }, handlers) {
     thumbs.hidden = pending.length === 0 && reading === 0;
     // The picker takes video too, and a label that only mentions photos reads as a
     // restriction. "Add more" once something is attached — by then the kind is obvious.
-    // Encoding first: it is the long wait, and saying "Reading 1 item" for twenty-five
-    // seconds is the message that makes an app look broken.
+    // Encoding is checked first out of order-of-severity, though it no longer happens
+    // while adding: clips are reduced at save now. It still shows there, because a save
+    // that is encoding is the one moment the sheet has something slow to report.
     addLabel.textContent = encodingSummary()
       || (reading ? `Reading ${reading} item${reading === 1 ? '' : 's'}…` : null)
       || (pending.length ? 'Add more' : 'Add photos or videos');
@@ -989,6 +999,21 @@ export function initCapture({ author, canPost = true }, handlers) {
     saveBtn.textContent = 'Saving…';
     saveBtn.classList.add('is-busy');
     try {
+      // The clips are reduced HERE, not when they were picked, and only across the stretch
+      // the trim kept. Encoding is real time, so doing it on the way in charged a parent
+      // the length of the whole film before the editor would open — and then encoded
+      // minutes that the cap means nobody can ever watch.
+      //
+      // `pending` is deliberately not touched. If this save fails the sheet stays open
+      // holding the ORIGINALS, so pressing Save again re-cuts from the full clip instead
+      // of trimming an already-trimmed one.
+      draft.photos = await prepareForUpload(pending, (item, done) => {
+        announceEncoding(item.videoFile, (item.trimEnd || 0) - (item.trimStart || 0), done);
+        saveBtn.textContent = encodingSummary() || 'Saving…';
+      });
+      clearAllEncoding();
+      saveBtn.textContent = 'Saving…';
+
       const post = target
         ? await updatePost(target.id, draft, target.author || author)
         : await createPost(draft, author);

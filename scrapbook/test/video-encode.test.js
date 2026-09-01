@@ -8,6 +8,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 import {
   encodeSize, bitrateFor, needsEncoding, estimateSeconds, toDisplayCopy,
@@ -170,4 +171,38 @@ test('the result always has the fields the caller reads', async () => {
     assert.ok(key in out, `missing ${key}`);
   }
   assert.equal(typeof out.encoded, 'boolean');
+});
+
+// ── Encoding only the window ──────────────────────────────────────
+// Encoding is real time, so the length of the window IS the wait. Encoding a whole
+// three-minute file to show thirty seconds of it cost a parent three minutes for two and a
+// half minutes nobody could ever watch — the cap means the rest is unreachable.
+
+test('the encoder accepts a window to encode', () => {
+  // A signature check, not a behaviour one: node has no MediaRecorder, so the encode
+  // itself cannot run here. What is worth pinning is that the option exists and is named
+  // as the caller in prepare-upload.js expects.
+  const src = readFileSync(new URL('../js/video-encode.js', import.meta.url), 'utf8');
+  assert.match(src, /start = 0, end = Infinity/, 'toDisplayCopy must take a window');
+});
+
+test('the draw loop stops at the end of the window, not the end of the file', () => {
+  const src = readFileSync(new URL('../js/video-encode.js', import.meta.url), 'utf8');
+  assert.match(src, /video\.currentTime >= to/,
+    'without this it plays the whole file and the window buys nothing');
+});
+
+test('the stall ceiling is sized to the window, not the source', () => {
+  // A thirty-second window out of a two-hour file must not be given two hours of rope
+  // before it is called stalled.
+  const src = readFileSync(new URL('../js/video-encode.js', import.meta.url), 'utf8');
+  assert.match(src, /span \* 3000/);
+  assert.doesNotMatch(src, /video\.duration \|\| 0\) \* 3000/);
+});
+
+test('it seeks to the start before recording', () => {
+  // Recording from a decoder still sitting at frame zero captures the wrong opening, and
+  // on a long file that is a second or two of the wrong thing.
+  const src = readFileSync(new URL('../js/video-encode.js', import.meta.url), 'utf8');
+  assert.match(src, /once\(video, 'seeked'/);
 });

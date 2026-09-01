@@ -268,6 +268,29 @@ still. `photoEl()` in `render.js` is the only place that knows the difference.
   be widened, moved or removed forever. `trimRange()` is pure and tested, and always
   returns a valid window: a missing or nonsensical trim degrades to the opening stretch
   rather than to an error.
+- **Clips are encoded at SAVE, and only across the window that will play.** Encoding is
+  real time — the clip is played through a canvas into `MediaRecorder` — so the length of
+  what is encoded IS the wait. Doing it when the video was PICKED charged a parent the
+  length of the whole film before the editor would open, and then encoded minutes that
+  `MAX_CLIP_SECONDS` means nobody can ever watch. The editor never needed it: it previews
+  the ORIGINAL from `videoUrl`, and the encoded copy is read only by the uploader.
+  - Waiting until save is also what makes the window CORRECT. Encoding eagerly had to
+    guess the window before the parent chose it, so it always guessed the opening — encode
+    0-30s eagerly and the editor could still select 2:00-2:30, and the stored file would
+    not contain it.
+  - `prepare-upload.js` uses `trimRange` rather than its own arithmetic, because that is
+    what caps the window at `MAX_CLIP_SECONDS`. A missing or backwards `trimEnd` means
+    "from here on", and hand-rolling that is how a three-minute clip quietly gets encoded
+    in full again.
+  - **A re-encoded clip has its trim BAKED IN**, so `trimStart`/`trimEnd` are reset to
+    0/length. Leaving the old numbers would apply the trim twice and leave a memory that is
+    three seconds of itself, with nothing reporting an error. A clip small enough to be
+    left alone is not baked, and keeps every frame.
+  - The cost: a baked trim can be narrowed later but not moved outside what was kept. That
+    is a real loss against "trimming is framing, never destruction", accepted for the same
+    reason the original is already discarded — the phone still has the whole thing.
+  - `pending` is never mutated. A failed save leaves the sheet holding the ORIGINALS, so
+    pressing Save again re-cuts from the full clip rather than trimming a trimmed one.
 - **Typed trim times are read on BLUR, never on input.** Applying each keystroke meant
   clearing the end field to retype it walked through "0:12" → "0:1" → "0:" → "", and the
   middle two both parse to 0 — so the end became zero, the minimum-clip rule dragged the
