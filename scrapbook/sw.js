@@ -18,7 +18,10 @@
 //   /gallery/  a separate app with its own worker. This worker's scope is the whole
 //              origin and would otherwise shadow it.
 
-const VERSION = 'scrapbook-v2';
+// Bumped with the bell. A changed sw.js installs a new worker on its own, but activate
+// only drops caches that are not this one — so without a bump a browser could keep
+// serving its cached copy of the app modules that changed alongside it.
+const VERSION = 'scrapbook-v3';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because
@@ -124,4 +127,39 @@ self.addEventListener('fetch', (event) => {
         throw new Error('offline and not cached');
       }),
   );
+});
+
+
+// ── Push ──────────────────────────────────────────────────────────
+// The notification arrives with NO BODY, on purpose: a push carrying one would have to be
+// encrypted per RFC 8291, and the caption would pass through a third-party push service on
+// the way. So the server says only "something happened" and the wording lives here.
+//
+// A push event MUST show a notification. A browser that receives one and is shown nothing
+// eventually posts its own "this site was updated in the background" — worse than saying
+// nothing, because it is both vague and clearly not ours.
+
+self.addEventListener('push', (event) => {
+  event.waitUntil(self.registration.showNotification('Finnbook', {
+    body: 'A new memory was added.',
+    icon: '/assets/icon-192.png',
+    badge: '/assets/icon-192.png',
+    // One notification, replaced rather than stacked: three memories in an evening should
+    // be one line on the lock screen, not three.
+    tag: 'finnbook-new-memory',
+    renotify: true,
+  }));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  // Focus the app if it is already open rather than opening a second copy — a scrapbook
+  // in two tabs is two timelines that disagree about what has been read.
+  event.waitUntil((async () => {
+    const open = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    for (const client of open) {
+      if (new URL(client.url).origin === self.location.origin) return client.focus();
+    }
+    return self.clients.openWindow('/');
+  })());
 });
