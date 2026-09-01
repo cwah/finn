@@ -31,23 +31,6 @@ let apiBase = null;
 
 export async function resolveApiBase() {
   if (apiBase !== null) return apiBase;
-
-  // On https there is nothing to ask. The dev arrangement CANNOT exist here: a plain-http
-  // API on another port is mixed content and the browser blocks it outright, so the only
-  // possible answer is same-origin.
-  //
-  // This is not a shortcut, it is the bug fix. The probe below can fail for reasons that
-  // have nothing to do with where the API lives — a service worker claiming the page
-  // mid-flight, a moment of no signal, a redeploy — and its result is remembered for the
-  // life of the page. One unlucky probe therefore pinned the base to a `http://…:8090`
-  // that is blocked as mixed content and has nothing listening, and EVERY request after it
-  // failed, through reloads, until the tab was closed. Asking a question whose only valid
-  // answer is already known is how that happened.
-  if (location.protocol === 'https:') {
-    apiBase = '';
-    return apiBase;
-  }
-
   try {
     // Same-origin, so this costs nothing when the answer is yes. A static file server
     // answers 404 here, which is the whole signal.
@@ -113,24 +96,6 @@ export function signOut() {
 }
 
 /** Thrown for any non-2xx response, carrying the status so callers can branch on 401. */
-/**
- * A request that never reached the server.
- *
- * Distinct from PbError, which means the server answered and said no. `fetch()` rejects
- * with a bare TypeError for both a dead connection and a dozen unrelated causes, and
- * "an error with no status" turned out to be far too broad a test for offline — our own
- * thrown Errors have no status either, so a genuine fault was being reported as a
- * connection problem.
- */
-export class NetworkError extends Error {
-  constructor(cause) {
-    super('Cannot reach the server');
-    this.name = 'NetworkError';
-    this.offline = true;
-    this.cause = cause;
-  }
-}
-
 export class PbError extends Error {
   constructor(status, body) {
     super(body?.message || `PocketBase request failed (${status})`);
@@ -151,14 +116,7 @@ async function request(path, { method = 'GET', body, headers = {} } = {}) {
   }
   if (auth?.token) opts.headers.Authorization = auth.token;
 
-  let res;
-  try {
-    res = await fetch(`${await resolveApiBase()}${path}`, opts);
-  } catch (err) {
-    // Nothing answered. Marked as such, so the boundary can say so instead of guessing
-    // from the absence of a status code.
-    throw new NetworkError(err);
-  }
+  const res = await fetch(`${await resolveApiBase()}${path}`, opts);
   const payload = res.status === 204 ? null : await res.json().catch(() => null);
 
   if (!res.ok) {

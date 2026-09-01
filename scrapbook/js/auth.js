@@ -3,8 +3,7 @@
 // Backend-agnostic on purpose: it only talks to data.js, which is what makes the mock
 // source (no accounts at all) and PocketBase interchangeable without touching this file.
 
-import { requireSession, signIn, signOut, HAS_ACCOUNTS } from './data.js';
-import { pushState, enablePush, disablePush } from './push.js';
+import { requireSession, signIn, signOut, HAS_ACCOUNTS, setEmailNotifications } from './data.js';
 
 /**
  * Resolve once there is a usable session. Shows the sign-in screen if there isn't, and
@@ -62,72 +61,50 @@ export function initSignOut() {
 
 
 /**
- * The bell.
+ * The email-updates switch.
  *
- * A subscription belongs to a DEVICE, not an account, so this reflects what THIS browser is
- * subscribed to — turning it on here must not claim to have turned it on everywhere.
+ * Opt-IN: it starts off for everyone, and a deploy never signs anyone up. The wording
+ * carries the state rather than only the colour — "Email updates on" / "off" — because a
+ * dot alone leaves a reader guessing which way round it is.
  *
- * Four states, and each needs different words:
+ * The button is disabled while the change is in flight and put back if it fails, so it can
+ * never report a preference the server did not accept. That matters more here than usual:
+ * a switch that says "on" while the server thinks otherwise means silently missing every
+ * notification.
  *
- *   on           subscribed; tapping unsubscribes
- *   off          not subscribed; tapping asks the browser for permission
- *   blocked      permission was refused, and script CANNOT ask again — the browser
- *                remembers. Offering a button that would silently do nothing is worse than
- *                saying where the setting actually lives.
- *   unsupported  no push here at all. On an iPhone that means Safari rather than the
- *                installed app: iOS grants push only to a PWA on the home screen.
+ * @param {{notifyByEmail: boolean}} config as getConfig returned it
  */
-export function initNotifications() {
+export function initEmailToggle(config) {
   const btn = document.getElementById('notifyBtn');
   const label = document.getElementById('notifyLabel');
+  // No accounts means no mail server and nobody to address — the switch would control
+  // nothing, so it is not offered.
   if (!HAS_ACCOUNTS || !btn) return;
 
-  let state = 'off';
-  const words = {
-    on: 'Notifications on',
-    off: 'Notifications off',
-    blocked: 'Notifications blocked',
-    unsupported: '',
-  };
-  const hints = {
-    on: 'You get a notification when a new memory is added. Tap to stop.',
-    off: 'Get a notification when a new memory is added.',
-    blocked: 'Your browser is blocking notifications for this site — allow them in its '
-      + 'site settings, then tap again.',
-  };
-
+  let on = Boolean(config?.notifyByEmail);
   const paint = () => {
-    btn.hidden = state === 'unsupported';
-    btn.setAttribute('aria-pressed', String(state === 'on'));
-    btn.classList.toggle('is-blocked', state === 'blocked');
-    label.textContent = words[state] || '';
-    btn.title = hints[state] || '';
+    btn.setAttribute('aria-pressed', String(on));
+    label.textContent = on ? 'Email updates on' : 'Email updates off';
+    btn.title = on
+      ? 'You get an email when a new memory is added. Tap to stop.'
+      : 'Get an email when a new memory is added.';
   };
 
-  const refresh = async () => {
-    try {
-      state = await pushState();
-    } catch {
-      state = 'off';
-    }
-    paint();
-  };
+  paint();
+  btn.hidden = false;
 
   btn.addEventListener('click', async () => {
-    if (state === 'blocked') return; // nothing script can do; the title says where to go
+    const wanted = !on;
     btn.disabled = true;
     try {
-      state = state === 'on' ? await disablePush() : await enablePush();
+      on = await setEmailNotifications(wanted);
     } catch (err) {
-      console.error('could not change notifications', err);
-      // Re-read rather than assume: the truth is whatever the browser and server now hold,
-      // and a bell reading "on" while nothing is subscribed is the one useless outcome.
-      await refresh();
+      console.error('could not change email updates', err);
+      // Left exactly as it was. Reporting a preference the server refused is the one
+      // outcome worth avoiding here.
     } finally {
       btn.disabled = false;
       paint();
     }
   });
-
-  refresh();
 }
