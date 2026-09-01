@@ -1122,6 +1122,34 @@ may have open. Email came first and was replaced; `users.notifyByEmail` is gone.
 - **Every tick logs what it found**, and a filter/rule disagreement logs loudly. From
   outside, "nothing arrived", "no post qualified" and "nobody has subscribed" are the same
   observation; the log is what separates them.
+- **The WORDS live in the service worker, and the detail is fetched there.** The push
+  carries no body — a payload would have to be encrypted per RFC 8291 and would put a
+  caption and a baby's name through a third-party push service — so on receiving one the
+  worker asks for the ten newest posts and decides what to say. One new memory names who
+  added it. SEVERAL name NOBODY: two people posting in an evening is not one person's news,
+  and "Alex and 2 others" is clumsy as well as a small leak on a screen anyone walking past
+  can read. Which posts a push is about comes from the server's own `notifiedAt`.
+  - `sw-notify.js` holds those rules, loaded by `importScripts` in the worker and evaluated
+    in a `vm` context by the tests, so what ships is what was tested — the same arrangement
+    as `notify-rule.js`. `importScripts` exposes FUNCTION declarations only; a `const`
+    would be unreachable, and the failure is a ReferenceError inside a push handler, where
+    nobody is looking. It also sidesteps this package being `type: module`, which makes
+    `require()` treat the file as ESM and skip its CommonJS exports entirely.
+  - **A service worker cannot read localStorage**, which is where the session lives, so
+    `pb.js` publishes the token to the Cache API from `persist()` — the single place a
+    token changes. No token means the plain wording, which is a soft failure by design.
+  - `activate` deletes every cache that is not the current version. The auth cache and the
+    share inbox hold the PERSON's state rather than the build's, so they are in `KEEP` —
+    without that a deploy threw the token away and quietly downgraded every notification
+    until the app was next opened.
+- **Tapping a notification lands on the POST**, not the top of the page. `?post=<id>`, and
+  the app pages until that card exists then scrolls to it — bounded at 40 pages, because
+  "keep loading until you find it" is a request to download the whole scrapbook when the id
+  is deleted or invisible to this account. The landing post is chosen by MEMORY DATE, not
+  creation date, because that is where the card sits: a post backdated to June is the
+  newest thing that happened and is months down the page, the one case where landing at the
+  top is useless. A tab already open never reloads, so it never reads a query string — the
+  worker `postMessage`s it instead.
 - **The author is never notified about their own post**, so a single subscribed account
   that is also the only person posting will correctly receive nothing.
 - **The rule is a shared CommonJS module, required by both the hook and the test suite**
