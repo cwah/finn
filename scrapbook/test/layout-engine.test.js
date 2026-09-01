@@ -316,14 +316,23 @@ test('an untrimmed clip plays all of itself, up to the cap', () => {
   assert.deepEqual(trimRange(clip(12)), { start: 0, end: 12, duration: 12 });
 });
 
-test('nothing ever plays for longer than a minute', () => {
+test('nothing ever plays for longer than the cap', () => {
+  // Written against MAX_CLIP_SECONDS rather than a number. The cap moved from 60 to 30 —
+  // encoding the display copy happens on the phone, in real time, so the ceiling is a
+  // property of the device and will move again if that work moves off it.
   const long = trimRange(clip(600));
   assert.equal(long.duration, MAX_CLIP_SECONDS);
-  assert.deepEqual(long, { start: 0, end: 60, duration: 60 });
+  assert.deepEqual(long, { start: 0, end: MAX_CLIP_SECONDS, duration: MAX_CLIP_SECONDS });
 
   // Capped from wherever the trim starts, not from the beginning of the file.
   assert.deepEqual(trimRange(clip(600, { trimStart: 100, trimEnd: 500 })),
-    { start: 100, end: 160, duration: 60 });
+    { start: 100, end: 100 + MAX_CLIP_SECONDS, duration: MAX_CLIP_SECONDS });
+});
+
+test('the cap is thirty seconds', () => {
+  // Pinned on its own, so changing it is a decision rather than a side effect. It is the
+  // interim answer to on-device encoding being slow; see BACKLOG.md.
+  assert.equal(MAX_CLIP_SECONDS, 30);
 });
 
 test('a trim is a window inside the source, and holds its shape', () => {

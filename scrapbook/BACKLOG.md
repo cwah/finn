@@ -26,6 +26,22 @@ Shipped when it lands. No ceremony beyond that.
 - [ ] **Inline metadata editing via Telegram posts.** Support certain post settings to be
       configured inline when creating a post, including modifying the date of the post.
 
+- [ ] **Move video encoding off the device.** The display copy is produced ON THE PHONE,
+      in real time, by playing the clip through a canvas into `MediaRecorder`
+      (`js/video-encode.js`). That costs roughly the clip's own length in wall time before
+      a post can be saved, holds the compose sheet open throughout, and competes with
+      whatever else the phone is doing — and a 3+ minute clip did not merely crawl, it
+      failed outright. `MAX_CLIP_SECONDS` was cut from 60 to 30 as the interim answer, so
+      the cap is currently a property of the slowest plausible phone rather than of what a
+      memory should be.
+      Encoding server-side would let the cap go back up (or away), take the wait out of
+      saving, and produce better files than a canvas pipeline can — but PocketBase's
+      container has no ffmpeg, the work is CPU-heavy on an instance sized for serving a
+      family scrapbook, and it needs somewhere to put the original while it waits. Worth
+      pricing against a queue plus a worker, or a hosted transcoding service. Overlaps
+      **Transcode HEVC on upload** below and Phase 3's optimisation pipeline; if any of
+      this is built, build it once.
+
 - [ ] **Transcode HEVC on upload.** iPhones record `hvc1` (H.265) by default, and
       `assets/sample-clip.mp4` is one. Chrome reports `canPlayType` as "probably" on Apple
       hardware, but HEVC support is uneven across browsers and machines in a way H.264 is

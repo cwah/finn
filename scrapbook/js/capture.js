@@ -19,6 +19,7 @@ import {
   pairLivePhotos, splitMotionPhoto, looksLikeMotion, mp4CreatedAtFromFile,
 } from './motion.js';
 import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
+import { clipNotice } from './clip-limit.js';
 import { forDisplay, previewUrl } from './downscale.js';
 import { toDisplayCopy, needsEncoding, estimateSeconds } from './video-encode.js';
 import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
@@ -201,8 +202,9 @@ async function readItem(entry) {
       takenOn: await takenOn(entry.video),
       duration,
       trimStart: 0,
-      // Longer than a minute is accepted and opened at the first minute, so the parent
-      // picks which minute matters rather than being sent back to their phone.
+      // Longer than the cap is accepted and opened at the first stretch of it, so the
+      // parent moves the window to what matters rather than being sent back to their phone
+      // with nothing saved.
       trimEnd: Math.min(duration, MAX_CLIP_SECONDS),
       motion: looksLikeMotion(duration),
       // A frame grabbed from a video has no focal point of its own worth detecting;
@@ -375,6 +377,7 @@ export function initCapture({ author, canPost = true }, handlers) {
   const caption = document.getElementById('composeCaption');
   const date = document.getElementById('composeDate');
   const dateNote = document.getElementById('composeDateNote');
+  const clipNote = document.getElementById('composeClipNote');
   // Only the label, never renderThumbs: progress ticks many times a second and rebuilding
   // the strip on each would be its own stall.
   paintEncoding = () => {
@@ -495,6 +498,7 @@ export function initCapture({ author, canPost = true }, handlers) {
           // is worked out again from whatever is left — including back to today when the
           // last photo goes.
           applyInferredDate();
+          applyClipNotice();
           syncSaveState();
         });
 
@@ -566,6 +570,19 @@ export function initCapture({ author, canPost = true }, handlers) {
    * picking a winner — a wrong date that arrived by itself is worse than today's, which
    * is at least obviously a default.
    */
+  /**
+   * Say so when a clip will not play in full.
+   *
+   * Recomputed from `pending` every time the media change rather than announced once at
+   * the moment of adding: a parent who removes the long video should stop being told about
+   * it, and one who adds a second should be told about both.
+   */
+  function applyClipNotice() {
+    const notice = clipNotice(pending);
+    clipNote.textContent = notice || '';
+    clipNote.hidden = !notice;
+  }
+
   function applyInferredDate() {
     // Editing never touches the date, and never offers to: that date is already decided.
     if (editing) return;
@@ -689,6 +706,7 @@ export function initCapture({ author, canPost = true }, handlers) {
     datePicks.replaceChildren();
     datePicks.hidden = true;
     dateNote.hidden = true;
+    clipNote.hidden = true;
     date.value = post?.memoryDate || todayISO();
     date.max = todayISO(); // a memory can't have happened tomorrow
     isMilestone.checked = Boolean(post?.milestone);
@@ -801,6 +819,7 @@ export function initCapture({ author, canPost = true }, handlers) {
     reading -= entries.length;
     renderThumbs();
     applyInferredDate();
+    applyClipNotice();
     syncSaveState();
 
     if (lost.length) {

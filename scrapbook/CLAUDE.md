@@ -266,11 +266,19 @@ still. `photoEl()` in `render.js` is the only place that knows the difference.
 - **Trimming is framing, never destruction** — the same rule as cropping. The stored file
   keeps every frame; `trimStart`/`trimEnd` say which stretch the memory is, so a trim can
   be widened, moved or removed forever. `trimRange()` is pure and tested, and always
-  returns a valid window: a missing or nonsensical trim degrades to the opening minute
+  returns a valid window: a missing or nonsensical trim degrades to the opening stretch
   rather than to an error.
-- **Nothing plays for longer than `MAX_CLIP_SECONDS` (60).** The cap is applied in
+- **Typed trim times are read on BLUR, never on input.** Applying each keystroke meant
+  clearing the end field to retype it walked through "0:12" → "0:1" → "0:" → "", and the
+  middle two both parse to 0 — so the end became zero, the minimum-clip rule dragged the
+  start down with it, and the trim was gone before the replacement was typed. Typing "30"
+  applied 3 on the way past. The fix is not a cleverer parse: every one of those strings is
+  a valid timecode. A half-typed field is simply not a request, and the maximum-length rule
+  waits for the same moment, because enforcing a maximum against a half-typed number fights
+  the person typing it.
+- **Nothing plays for longer than `MAX_CLIP_SECONDS` (30).** The cap is applied in
   `trimRange`, not in the UI, so no stored value can out-argue it. A longer source is
-  *accepted* — the editor opens on its first minute and the parent picks which minute
+  *accepted* — the editor opens on its first stretch and the parent picks which stretch
   matters, rather than being sent back to their phone to cut it first.
 - **A motion photo can be stopped.** It loops by itself, so its badge is a *pause* rather
   than a play — hidden until the photo is pointed at, because a control parked permanently
@@ -696,7 +704,7 @@ tests. It has no dependencies and nothing bundles.
 - **Video and motion photos ride the same door.** The picker takes `image/*,video/*`; a
   Live Photo's two files are paired into one memory, and a Google motion photo is split
   into its still and its clip. The editor gains a rotate control for everything and a trim
-  bar for clips — start and end handles, capped at a minute, over the clip's own frames so
+  bar for clips — start and end handles, capped at MAX_CLIP_SECONDS, over the clip's frames so
   what is being chosen can be seen. No `capture` attribute on the input: it forces the
   camera and hides the library, and most memories are already on the phone.
 - Photos are optional content inside that one flow, not a second door. Attach some and

@@ -108,8 +108,20 @@ export function turnFraming(crop, focal, by) {
   };
 }
 
-/** Longest a memory may play, in seconds. Beyond this the parent picks which minute. */
-export const MAX_CLIP_SECONDS = 60;
+/**
+ * Longest a memory may play, in seconds.
+ *
+ * Thirty, down from sixty, and the reason is the phone rather than the page. Encoding the
+ * display copy happens ON DEVICE, in real time through a canvas and MediaRecorder, so a
+ * clip costs roughly its own length in wall time before a post can be saved — and a long
+ * one was failing outright rather than merely being slow. Halving the cap halves the worst
+ * case. Moving that work off the device is in BACKLOG.md; this is the interim.
+ *
+ * A longer clip is still ACCEPTED, and truncated to the first thirty seconds rather than
+ * refused: the parent is told, and can move the window or crop in Photos first. Being sent
+ * back to the phone with nothing saved is the worse outcome.
+ */
+export const MAX_CLIP_SECONDS = 30;
 
 /**
  * The stretch of a video that actually plays, in seconds.
@@ -119,8 +131,8 @@ export const MAX_CLIP_SECONDS = 60;
  * moved or removed forever.
  *
  * The result is always a valid window inside the source and never longer than
- * MAX_CLIP_SECONDS, so a malformed or missing trim degrades to "the first minute" rather
- * than to an error.
+ * MAX_CLIP_SECONDS, so a malformed or missing trim degrades to "the first half minute"
+ * rather than to an error.
  * @returns {{start: number, end: number, duration: number}}
  */
 export function trimRange(video) {

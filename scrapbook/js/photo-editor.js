@@ -347,35 +347,61 @@ export function openPhotoEditor(photo, { isMain }) {
   }
 
   // ── Typing a trim, and hearing it back ───────────────────────────
-  const onTrimTyped = (e) => {
+  /**
+   * While typing: say whether it reads as a time, and change NOTHING else.
+   *
+   * A half-typed number is not a request. Applying every keystroke meant that clearing the
+   * end field to retype it walked through "0:12" -> "0:1" -> "0:" -> "0", and BOTH of the
+   * last two parse to zero — so the end became 0, the minimum-clip rule dragged the start
+   * down to 0 with it, and the trim someone had already set was gone before they typed the
+   * first digit of the replacement. Typing "30" applied 3 on the way past, for the same
+   * reason.
+   *
+   * The values are only read when the field is FINISHED — blur, or Enter. That is also
+   * what makes the maximum-length rule bearable: enforcing it against a partial number
+   * fights the person typing it.
+   */
+  const onTrimInput = (e) => {
+    const field = e.target;
+    // Empty is not wrong, it is unfinished — a field being cleared to be retyped should
+    // not turn red for it.
+    const unreadable = field.value.trim() !== '' && parseTimecode(field.value) === null;
+    field.classList.toggle('is-bad', unreadable);
+  };
+
+  /**
+   * On commit: read the field, apply the rules, and show what was actually accepted.
+   *
+   * Cleared or unreadable reverts to the value in force. There is no sensible reading of
+   * an empty box, and silently treating it as zero is the bug this whole split exists for.
+   */
+  const commitTrim = (e) => {
     const field = e.target;
     const which = field.dataset.trimField;
     const typed = parseTimecode(field.value);
 
-    // Unreadable is SAID, not silently reverted. Someone mid-way through typing "1:0" has
-    // not made a mistake, and snapping the field back under them would be maddening; the
-    // border simply says "not yet a time" until it is one.
-    if (typed === null) {
-      field.classList.add('is-bad');
-      return;
+    if (typed !== null) {
+      const wanted = which === 'start'
+        ? { start: typed, end: trimEnd }
+        : { start: trimStart, end: typed };
+      const settled = settleTrim(wanted, { duration, minClip: MIN_CLIP, moved: which });
+
+      trimStart = settled.start;
+      // The cap is still the most that can play, whichever way the value arrived.
+      trimEnd = Math.min(settled.end, trimStart + MAX_CLIP_SECONDS);
+      paint();
     }
+
     field.classList.remove('is-bad');
-
-    const wanted = which === 'start'
-      ? { start: typed, end: trimEnd }
-      : { start: trimStart, end: typed };
-    const settled = settleTrim(wanted, { duration, minClip: MIN_CLIP, moved: which });
-
-    trimStart = settled.start;
-    // A minute is still the most that can play, whichever way the value arrived.
-    trimEnd = Math.min(settled.end, trimStart + MAX_CLIP_SECONDS);
-    paint();
+    field.value = formatTimecode(which === 'start' ? trimStart : trimEnd);
   };
 
-  /** On blur, put the field back to what was actually accepted. */
-  const onTrimBlur = (e) => {
-    e.target.classList.remove('is-bad');
-    e.target.value = formatTimecode(e.target.dataset.trimField === 'start' ? trimStart : trimEnd);
+  /** Enter commits, by finishing with the field — which is what blur already means. */
+  const onTrimKey = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.target.blur();
+    }
   };
 
   /**
@@ -410,8 +436,9 @@ export function openPhotoEditor(photo, { isMain }) {
   };
 
   trimFields.forEach((f) => {
-    f.addEventListener('input', onTrimTyped);
-    f.addEventListener('blur', onTrimBlur);
+    f.addEventListener('input', onTrimInput);   // validate only
+    f.addEventListener('blur', commitTrim);     // and only here does anything move
+    f.addEventListener('keydown', onTrimKey);
   });
   trimPlay.addEventListener('click', onPreview);
 
@@ -462,7 +489,7 @@ export function openPhotoEditor(photo, { isMain }) {
     const t = trimAt(e);
     if (dragTrim === 'start') {
       trimStart = Math.min(t, trimEnd - MIN_CLIP);
-      // A minute is the most that can play, so pushing the start along drags the end.
+      // The cap is the most that can play, so pushing the start along drags the end.
       if (trimEnd - trimStart > MAX_CLIP_SECONDS) trimEnd = trimStart + MAX_CLIP_SECONDS;
     } else {
       trimEnd = Math.max(t, trimStart + MIN_CLIP);
