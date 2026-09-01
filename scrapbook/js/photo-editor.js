@@ -563,8 +563,9 @@ export function openPhotoEditor(photo, { isMain }) {
       rotateBtns.forEach((b) => b.removeEventListener('click', onRotate));
       previewStop?.(); // a preview must not play on after the sheet has gone
       trimFields.forEach((f) => {
-        f.removeEventListener('input', onTrimTyped);
-        f.removeEventListener('blur', onTrimBlur);
+        f.removeEventListener('input', onTrimInput);
+        f.removeEventListener('blur', commitTrim);
+        f.removeEventListener('keydown', onTrimKey);
       });
       trimPlay.removeEventListener('click', onPreview);
       window.removeEventListener('resize', onResize);

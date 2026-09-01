@@ -291,6 +291,17 @@ still. `photoEl()` in `render.js` is the only place that knows the difference.
     reason the original is already discarded — the phone still has the whole thing.
   - `pending` is never mutated. A failed save leaves the sheet holding the ORIGINALS, so
     pressing Save again re-cuts from the full clip rather than trimming a trimmed one.
+- **Renaming a handler means renaming it in the teardown too.** The editor sheet is REUSED
+  between opens, so `finish()` takes every listener off again. Renaming the trim handlers
+  updated where they were added and not where they were removed, so `finish()` referred to
+  a name that no longer existed — a ReferenceError thrown BEFORE the `resolve()` at the end
+  of that same function. The promise never settled, `await openPhotoEditor(...)` never
+  returned, and `pending[i]` was never written back, so EVERY edit was silently discarded:
+  crop, rotation, brightness, trim. It was reported as "the crop box resets", which points
+  at the crop and not at a teardown forty lines away. `node --check` is happy with a name
+  that is never declared; it only fails when the line runs, and that line runs after anyone
+  has stopped looking. `test/editor-listeners.test.js` checks add/remove symmetry and that
+  every named handler exists.
 - **Typed trim times are read on BLUR, never on input.** Applying each keystroke meant
   clearing the end field to retype it walked through "0:12" → "0:1" → "0:" → "", and the
   middle two both parse to 0 — so the end became zero, the minimum-clip rule dragged the
