@@ -5,3 +5,10 @@
 .DS_Store
 .claude/settings.local.json
 node_modules/
+
+# Key material. A VAPID private key reached a commit once, from a file sitting in the
+# repo root during setup; the pair had to be rotated. Keys belong in Render's environment,
+# never on disk here.
+*.pem
+*.key
+.*.swp

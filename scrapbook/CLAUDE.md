@@ -1024,6 +1024,19 @@ tests. It has no dependencies and nothing bundles.
 A notification when a new memory is added, sent by a cron **inside PocketBase** — the only
 part of this that is always running.
 
+- **A hook handler CANNOT SEE ITS OWN FILE'S TOP-LEVEL SCOPE.** PocketBase runs handlers
+  in a pooled runtime, so `.pb.js` is loaded to REGISTER the handler and the handler later
+  runs somewhere that has none of the file around it. A cron calling a function defined
+  twenty lines above it throws `notifyPending is not defined` — at 03:00, into the container
+  log, with nothing on the page to show for it. The docs say "`require()` inside the
+  handler"; the reason is that nothing else from the file is reachable either.
+  - So `notify.pb.js` declares NOTHING. It is one `require().run()`, and all the work lives
+    in `notify-send.js`, where the functions are module scope and can see each other.
+    `test/notify-send.test.js` asserts that shape, because a stub cannot reproduce a pooled
+    runtime and the shape is the part that is checkable.
+  - This is the same lesson as the getString-on-a-system-field silence: the notifier has
+    now been broken twice by something no unit test could see, because every part was
+    tested and the assembly was not.
 - **PocketBase's JSVM has no asymmetric crypto**, and VAPID needs ES256.
   `$security.createJWT` is documented HS256-only and `$security` has no ECDSA at all. The
   way through is `$os.cmd`, which runs external commands: the hook shells out to
