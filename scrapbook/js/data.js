@@ -16,6 +16,7 @@ const impl = SOURCE === 'mock' ? mock : pocketbase;
 export const {
   requireSession, signIn, signOut, getConfig, getPosts, createPost, updatePost, deletePost,
   setEmailNotifications,
+  pushPublicKey, savePushSubscription, removePushSubscription,
 } = impl;
 
 /** True when the backend has real accounts, so the UI knows to offer signing in/out. */

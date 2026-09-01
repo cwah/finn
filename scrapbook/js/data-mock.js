@@ -157,3 +157,8 @@ export async function createPost(draft, author) {
 export async function setEmailNotifications() {
   return false;
 }
+
+/** No backend, so there is nothing to subscribe to and nothing to remember. */
+export async function pushPublicKey() { return null; }
+export async function savePushSubscription() { return null; }
+export async function removePushSubscription() { return true; }

@@ -60,7 +60,13 @@ export async function getConfig() {
     const out = await pb.list('config', { perPage: 1 });
     const rec = out.items[0];
     if (!rec) throw new Error('No config record — create one in the PocketBase admin UI.');
-    _config = { babyName: rec.babyName, birthDate: rec.birthDate.slice(0, 10) };
+    _config = {
+      babyName: rec.babyName,
+      birthDate: rec.birthDate.slice(0, 10),
+      // Read from the record rather than hardcoded, so rotating the VAPID pair is an
+      // admin edit and not a deploy. Absent simply means push is not set up yet.
+      pushPublicKey: rec.pushPublicKey || null,
+    };
   }
   const me = pb.currentUser();
   return {
@@ -75,7 +81,61 @@ export async function getConfig() {
     // someone said otherwise — the migration deliberately backfills nothing, because a
     // deploy must not sign anyone up for mail.
     notifyByEmail: Boolean(me?.notifyByEmail),
+    // The VAPID public key, so a browser can subscribe. Public by definition.
+    pushPublicKey: _config?.pushPublicKey || null,
   };
+}
+
+/**
+ * The VAPID public key the browser needs in order to subscribe.
+ *
+ * Public by definition — it is what verifies the server's signature, and every push
+ * subscription carries it. Served from the config record rather than hardcoded, so
+ * rotating the key pair does not need a deploy.
+ */
+export async function pushPublicKey() {
+  const config = await getConfig();
+  return config.pushPublicKey || null;
+}
+
+/**
+ * Remember this device's subscription.
+ *
+ * Upserted on the ENDPOINT, because a browser re-issues the same one for the same device
+ * and site: creating blindly would either fail the unique index or, without it, buzz twice
+ * for one memory.
+ */
+export async function savePushSubscription(sub) {
+  const me = pb.currentUser();
+  if (!me) throw new Error('not signed in');
+
+  const body = {
+    user: me.id,
+    endpoint: sub.endpoint,
+    p256dh: sub.keys?.p256dh || '',
+    auth: sub.keys?.auth || '',
+    label: navigator.userAgent.slice(0, 190),
+  };
+
+  const existing = await pb.list('pushSubscriptions', {
+    perPage: 1,
+    filter: `endpoint=${pb.quote(sub.endpoint)}`,
+  });
+  if (existing.items.length) {
+    return pb.update('pushSubscriptions', existing.items[0].id, body);
+  }
+  return pb.create('pushSubscriptions', body);
+}
+
+/** Forget it. Missing is success: the aim is that it is gone, not that we removed it. */
+export async function removePushSubscription(endpoint) {
+  const found = await pb.list('pushSubscriptions', {
+    perPage: 1,
+    filter: `endpoint=${pb.quote(endpoint)}`,
+  });
+  if (!found.items.length) return true;
+  await pb.remove('pushSubscriptions', found.items[0].id);
+  return true;
 }
 
 /**
