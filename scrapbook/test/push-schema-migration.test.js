@@ -24,6 +24,7 @@ import { readFileSync } from 'node:fs';
 
 const SOURCE = new URL('../pb_migrations/1756700000_push_schema.js', import.meta.url);
 const RETIRE = new URL('../pb_migrations/1756800000_retire_email_flag.js', import.meta.url);
+const DATES = new URL('../pb_migrations/1756900000_push_subscription_dates.js', import.meta.url);
 
 /** A PocketBase collection, as much of one as a migration touches. */
 function collection(name, fieldNames = []) {
@@ -75,14 +76,16 @@ function runMigration({ existing, direction = 'up', source = SOURCE }) {
   const sandbox = {
     migrate: (u, d) => { up = u; down = d; },
     BoolField: function BoolField(spec) { return { name: spec.name, id: `b_${spec.name}` }; },
+    AutodateField: function AutodateField(spec) { return { name: spec.name, id: `a_${spec.name}` }; },
     Collection: function Collection(spec) { return collection(spec.name, (spec.fields || []).map((f) => f.name)); },
     TextField: function TextField(spec) { return { name: spec.name, id: `t_${spec.name}` }; },
   };
 
   const src = readFileSync(source, 'utf8');
   // eslint-disable-next-line no-new-func
-  new Function('migrate', 'Collection', 'TextField', 'BoolField', src)(
+  new Function('migrate', 'Collection', 'TextField', 'BoolField', 'AutodateField', src)(
     sandbox.migrate, sandbox.Collection, sandbox.TextField, sandbox.BoolField,
+    sandbox.AutodateField,
   );
 
   (direction === 'up' ? up : down)(app);
@@ -206,4 +209,47 @@ test('running them in the WRONG order still ends correctly', () => {
   runMigration({ existing: db });
   assert.equal(db.find((c) => c.name === 'users').fields.getByName('notifyByEmail'), null,
     '1756700000 must not resurrect the flag it never owned');
+});
+
+
+// ── created/updated on subscriptions (1756900000) ─────────────────
+// PocketBase 0.39 does not add these by itself; a collection has them only if its
+// migration asked. 1756700000 did not, and nothing broke — the API just returns records
+// without them and `sort=created` answers 400. It surfaced as being unable to tell a
+// subscription made an hour ago from one made before the VAPID pair was rotated, which is
+// the question that decides whether a subscription is still valid at all.
+
+test('subscriptions gain created and updated', () => {
+  const db = [
+    collection('users', ['name']),
+    collection('config', ['babyName']),
+    collection('pushSubscriptions', ['user', 'endpoint', 'p256dh', 'auth', 'label']),
+  ];
+  runMigration({ existing: db, source: DATES });
+  const subs = db.find((c) => c.name === 'pushSubscriptions');
+  assert.ok(subs.fields.getByName('created'), 'created must exist');
+  assert.ok(subs.fields.getByName('updated'), 'updated must exist');
+});
+
+test('it is safe to run twice', () => {
+  const db = [
+    collection('users', ['name']),
+    collection('config', ['babyName']),
+    collection('pushSubscriptions', ['user', 'endpoint']),
+  ];
+  runMigration({ existing: db, source: DATES });
+  runMigration({ existing: db, source: DATES });
+  const names = db.find((c) => c.name === 'pushSubscriptions').fields.names();
+  assert.equal(names.filter((n) => n === 'created').length, 1, 'not added twice');
+});
+
+test('a fresh database ends with dated subscriptions too', () => {
+  // The three migrations in filename order, which is the order PocketBase applies them.
+  const db = freshDb();
+  runMigration({ existing: db });
+  runMigration({ existing: db, source: RETIRE });
+  runMigration({ existing: db, source: DATES });
+  const subs = db.find((c) => c.name === 'pushSubscriptions');
+  assert.ok(subs.fields.getByName('created'));
+  assert.equal(db.find((c) => c.name === 'users').fields.getByName('notifyByEmail'), null);
 });
