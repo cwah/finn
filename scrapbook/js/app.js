@@ -14,6 +14,7 @@ import { centreProgress } from './fade.js';
 import { assignSides, assignPresets } from './milestone-art.js';
 import { pickNewPosts, oldestDate, insertionIndex, pickUnseen } from './sync.js';
 import { initPwa } from './pwa.js';
+import { optional } from './optional.js';
 import { claimSharedFiles, cameFromShare } from './share.js';
 
 const timeline = document.getElementById('timeline');
@@ -312,7 +313,11 @@ async function init() {
   // work for someone whose session has simply expired. Gated behind sign-in, a signed-out
   // visitor got no worker at all — so sharing a photo to the app would have had nothing
   // listening for it.
-  initPwa();
+  // Wrapped: the worker makes the app installable and receives the share sheet, and both
+  // matter — but neither is worth the timeline for. Registration touches browser APIs that
+  // vary by platform and by whether the page is secure, which is exactly the kind of thing
+  // that throws on one device and nowhere else.
+  optional('pwa', initPwa);
 
   // Nothing is fetched until a parent is in — this scrapbook has no public view.
   await ensureSignedIn();
