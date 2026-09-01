@@ -14,20 +14,72 @@
 // PURE, and CommonJS, so the byte-level part can be tested from node against node's own
 // crypto — which is exactly how the DER conversion below was checked.
 
-/** base64url: standard base64 with the URL alphabet and no padding, as JOSE requires. */
+// The URL alphabet, used directly rather than swapped in afterwards.
+const B64URL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+
+/**
+ * base64url: the URL alphabet, no padding, as JOSE requires.
+ *
+ * WRITTEN OUT BY HAND, and that is the point. This used `btoa`, above a comment of mine
+ * asserting that "btoa exists in the JSVM". It does not. PocketBase's engine is Goja,
+ * which implements ECMAScript and not the browser's web APIs — there is no btoa, no atob,
+ * no TextEncoder, no fetch. Every push therefore died on `btoa is not defined`, inside a
+ * cron, where the only trace was a container log nobody was reading.
+ *
+ * The tests did not catch it because they run in node, where btoa is perfectly real. A
+ * pure module tested in the wrong environment is not tested. See vapid-jsvm.test.js, which
+ * runs this file with those globals taken away.
+ */
 function base64url(bytes) {
-  let binary = '';
-  for (let i = 0; i < bytes.length; i += 1) binary += String.fromCharCode(bytes[i]);
-  // btoa exists in the JSVM and in node 16+; the alphabet swap is the JOSE part.
-  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  let out = '';
+  for (let i = 0; i < bytes.length; i += 3) {
+    const b0 = bytes[i];
+    const b1 = i + 1 < bytes.length ? bytes[i + 1] : -1;
+    const b2 = i + 2 < bytes.length ? bytes[i + 2] : -1;
+
+    out += B64URL[b0 >> 2];
+    out += B64URL[((b0 & 3) << 4) | (b1 < 0 ? 0 : b1 >> 4)];
+    if (b1 < 0) break;                       // one byte left: two characters, no padding
+    out += B64URL[((b1 & 15) << 2) | (b2 < 0 ? 0 : b2 >> 6)];
+    if (b2 < 0) break;                       // two bytes left: three characters
+    out += B64URL[b2 & 63];
+  }
+  return out;
+}
+
+/**
+ * UTF-8 bytes of a string, without TextEncoder.
+ *
+ * The previous version went through `unescape(encodeURIComponent(...))`, which works but
+ * leans on `unescape` — an Annex B leftover that an engine is not obliged to have. Since
+ * the whole lesson here is not to assume what the JSVM provides, this uses nothing beyond
+ * charCodeAt.
+ */
+function utf8Bytes(text) {
+  const s = String(text);
+  const out = [];
+  for (let i = 0; i < s.length; i += 1) {
+    const c = s.charCodeAt(i);
+    if (c < 0x80) {
+      out.push(c);
+    } else if (c < 0x800) {
+      out.push(0xc0 | (c >> 6), 0x80 | (c & 63));
+    } else if (c >= 0xd800 && c <= 0xdbff && i + 1 < s.length) {
+      // A surrogate pair is ONE code point; encoding each half separately produces the
+      // mojibake that makes an emoji in a subject line into three broken characters.
+      const cp = 0x10000 + ((c - 0xd800) << 10) + (s.charCodeAt(i + 1) - 0xdc00);
+      out.push(0xf0 | (cp >> 18), 0x80 | ((cp >> 12) & 63), 0x80 | ((cp >> 6) & 63), 0x80 | (cp & 63));
+      i += 1;
+    } else {
+      out.push(0xe0 | (c >> 12), 0x80 | ((c >> 6) & 63), 0x80 | (c & 63));
+    }
+  }
+  return new Uint8Array(out);
 }
 
 /** The same, for text. */
 function base64urlText(text) {
-  const utf8 = unescape(encodeURIComponent(String(text)));
-  const bytes = new Uint8Array(utf8.length);
-  for (let i = 0; i < utf8.length; i += 1) bytes[i] = utf8.charCodeAt(i);
-  return base64url(bytes);
+  return base64url(utf8Bytes(text));
 }
 
 /**

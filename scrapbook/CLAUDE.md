@@ -1127,6 +1127,22 @@ may have open. Email came first and was replaced; `users.notifyByEmail` is gone.
 - **The rule is a shared CommonJS module, required by both the hook and the test suite**
   (`createRequire` from `test/notify-rule.test.js`), so what ships is what was tested. A
   second copy would drift, and the drift would arrive as notifications nobody expected.
+- **The JSVM IS NOT A BROWSER AND IS NOT NODE.** PocketBase runs Goja, which implements
+  ECMAScript and none of the web platform: no `btoa`, no `atob`, no `TextEncoder`, no
+  `fetch`, no `Buffer`. `base64url()` called `btoa`, under a comment of mine asserting that
+  "btoa exists in the JSVM", so every push died on `btoa is not defined` — thrown inside a
+  cron, where the only trace was a container log nobody reads. From outside it was
+  indistinguishable from push simply not working: no error on any page, no failed request,
+  nothing marked.
+  - **The tests could not have caught it.** They ran the pure module from node, where
+    `btoa` is perfectly real. A module being PURE is not the same as being PORTABLE, and
+    testing it in the wrong environment tests the wrong thing — the same shape as verifying
+    parts and not the assembly.
+  - `test/vapid-jsvm.test.js` runs the real hook files inside a `vm` context whose globals
+    are a WHITELIST of what Goja provides, so anything reaching for a web API throws on
+    this machine instead of at three in the morning on a container. base64url is checked
+    against node's own `base64url` for every remainder length, which is where hand-rolled
+    encoders go wrong.
 - **A hook handler CANNOT SEE ITS OWN FILE'S TOP-LEVEL SCOPE.** Handlers run in a pooled
   runtime, so `.pb.js` is loaded to REGISTER the handler and the handler later runs
   somewhere that has none of the file around it. A cron calling a function defined twenty
