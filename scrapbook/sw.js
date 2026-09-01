@@ -18,7 +18,9 @@
 //   /gallery/  a separate app with its own worker. This worker's scope is the whole
 //              origin and would otherwise shadow it.
 
-const VERSION = 'scrapbook-v2';
+// Bumped with the API-base fix: activate deletes every cache that is not this one, so a
+// browser holding the stranded build gets the corrected modules rather than its copy.
+const VERSION = 'scrapbook-v3';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because

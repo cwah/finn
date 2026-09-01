@@ -20,11 +20,29 @@ import { isUnreachable, loadMessage, canRetry } from '../js/load-error.js';
 /** What pb.js throws when PocketBase answers with a status. */
 const pbError = (status) => Object.assign(new Error(`PocketBase said ${status}`), { status });
 
-/** What fetch() rejects with when nothing answered. */
-const networkError = () => new TypeError('Failed to fetch');
+/** What pb.js throws when fetch() itself rejects — carries the offline flag. */
+const networkError = () => Object.assign(new Error('Cannot reach the server'), { offline: true });
+
+/** An error the app throws for its own reasons: no status, and NOT a connection problem. */
+const appError = (msg) => new Error(msg);
 
 test('a fetch that never reached the server is unreachable', () => {
   assert.equal(isUnreachable(networkError()), true);
+});
+
+test('one of our own errors is NOT a connection problem', () => {
+  // THE SECOND BUG, and mine. Testing for "no numeric status" made this true of every
+  // plain Error the app throws, so getConfig()'s "No config record" was reported to a
+  // parent as "check your connection" — pointing at the one part that was working.
+  assert.equal(isUnreachable(appError('No config record — create one in the admin UI.')), false);
+  assert.equal(loadMessage(appError('No config record')), 'Could not load memories.');
+  assert.equal(canRetry(appError('No config record')), false, 'retrying cannot fix it');
+});
+
+test('a TypeError alone is not enough — the flag is what counts', () => {
+  // A bare TypeError reaching the boundary is a programming fault (reading a property of
+  // undefined, say), not a dead connection. pb.js marks the real thing.
+  assert.equal(isUnreachable(new TypeError('x is not a function')), false);
 });
 
 test('a server that answered is NOT unreachable, whatever it said', () => {
@@ -54,11 +72,11 @@ test('retry is offered when another go might work, and not otherwise', () => {
   assert.equal(canRetry(pbError(500)), false);
 });
 
-test('junk thrown from anywhere is treated as unreachable', () => {
-  // Nothing here should ever throw a bare string or undefined, but the catch is the last
-  // thing standing between a parent and a blank page: it must not itself fall over.
+test('junk thrown from anywhere still yields a sentence, and never claims offline', () => {
+  // The catch is the last thing standing between a parent and a blank page: it must not
+  // itself fall over, and it must not invent a connection problem it cannot know about.
   for (const junk of [undefined, null, 'boom', 0, {}, { status: 'nope' }]) {
-    assert.equal(isUnreachable(junk), true, `for ${JSON.stringify(junk)}`);
-    assert.equal(typeof loadMessage(junk), 'string');
+    assert.equal(isUnreachable(junk), false, `for ${JSON.stringify(junk)}`);
+    assert.equal(loadMessage(junk), 'Could not load memories.');
   }
 });

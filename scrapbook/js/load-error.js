@@ -15,9 +15,17 @@
 // takes the server away for a window, and every open scrapbook that reloads inside it
 // reported "Could not load memories." — which sounds like the memories are gone.
 
-/** A request that never reached the server, as opposed to one that was refused. */
+/**
+ * A request that never reached the server, as opposed to one that was refused.
+ *
+ * Tested by the flag pb.js sets when `fetch()` itself rejects, NOT by the absence of a
+ * status code. The first version of this asked "is there no numeric status?", which is
+ * true of every plain Error the app throws for its own reasons — so "No config record"
+ * was shown to a parent as "check your connection", pointing at the one thing that was
+ * fine. Absence of evidence read as evidence.
+ */
 export function isUnreachable(err) {
-  return !Number.isInteger(err?.status);
+  return err?.offline === true;
 }
 
 /**
