@@ -1007,12 +1007,15 @@ export function initCapture({ author, canPost = true }, handlers) {
       // `pending` is deliberately not touched. If this save fails the sheet stays open
       // holding the ORIGINALS, so pressing Save again re-cuts from the full clip instead
       // of trimming an already-trimmed one.
+      // Progress is announced in ONE place: the label under the media, which is where the
+      // clips being shrunk actually are. announceEncoding already paints it. The button
+      // was showing the same sentence, which is both a second thing to read and a poor fit
+      // — "Shrinking the video… 40%" in a Save button either wraps or is clipped, and the
+      // button's job is to say that saving is under way, which "Saving…" already does.
       draft.photos = await prepareForUpload(pending, (item, done) => {
         announceEncoding(item.videoFile, (item.trimEnd || 0) - (item.trimStart || 0), done);
-        saveBtn.textContent = encodingSummary() || 'Saving…';
       });
       clearAllEncoding();
-      saveBtn.textContent = 'Saving…';
 
       const post = target
         ? await updatePost(target.id, draft, target.author || author)
