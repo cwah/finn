@@ -58,6 +58,13 @@ const TOKEN_KEY = 'scrapbook.auth';
 
 let auth = load();
 
+// Published on the way in, not only when the token next changes. persist() covers every
+// CHANGE, but a device that opens the scrapbook offline — or whose refresh fails — would
+// otherwise never seed the cache the service worker reads, and every notification on that
+// device would quietly fall back to wording with no author and no deep link. Opening the
+// app once should be enough to fix that, and this is what makes it enough.
+publishToken(auth?.token || null);
+
 function load() {
   try {
     return JSON.parse(localStorage.getItem(TOKEN_KEY)) || null;

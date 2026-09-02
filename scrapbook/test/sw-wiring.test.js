@@ -79,6 +79,23 @@ test('the token is published wherever the session changes', () => {
   assert.match(pb, /function persist\(next\) \{[\s\S]*?publishToken\(/);
 });
 
+test('and again on load, not only when it changes', () => {
+  // A device whose refresh fails — offline, a flaky morning — would otherwise never seed
+  // the cache the worker reads, and every notification on it would fall back to wording
+  // with no author and no deep link. "Open the app once" has to actually be enough.
+  const pb = read('../js/pb.js');
+  assert.match(pb, /let auth = load\(\);[\s\S]{0,600}?publishToken\(auth\?\.token/);
+});
+
+test('the worker is re-registered on every load, so an update is noticed', () => {
+  // A push arriving on a device that has not opened the app since a deploy runs the OLD
+  // worker, with the old wording. register() on an existing registration is what asks the
+  // browser to compare the script; updateViaCache:'none' stops the HTTP cache answering
+  // that question with yesterday's copy.
+  const pwa = read('../js/pwa.js');
+  assert.match(pwa, /updateViaCache: 'none'/);
+});
+
 test('deep linking cannot take the app down', () => {
   // Paging to a card is a convenience. A scrapbook that would not open because a
   // notification pointed at a deleted post would be a poor trade.
