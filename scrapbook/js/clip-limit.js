@@ -13,6 +13,7 @@
 // to any thirty seconds in the editor, and cropping in Photos first avoids the question.
 
 import { MAX_CLIP_SECONDS } from './layout-engine.js';
+import { needsEncoding, pickMimeType } from './video-encode.js';
 
 export { MAX_CLIP_SECONDS };
 
@@ -57,4 +58,49 @@ export function clipNotice(items = []) {
   }
   return `${long.length} videos are longer than ${limit} — only the first ${limit} of each `
     + `will play. ${advice}`;
+}
+
+/** Megabytes, to one decimal, for a sentence rather than a spec sheet. */
+function mb(bytes) {
+  return `${Math.round((Number(bytes) || 0) / 104857.6) / 10} MB`;
+}
+
+/**
+ * When this browser cannot shrink a video at all.
+ *
+ * `MediaRecorder` has to be able to produce MP4/H.264. Where it cannot — Android Chrome
+ * still could not at version 124 — `toDisplayCopy` hands the original straight back, and
+ * everything downstream works exactly as designed: the clip uploads whole, the trim stays
+ * metadata, nothing errors. It is simply forty megabytes going up a phone connection with
+ * no indication that anything unusual is happening, and a big enough clip is how an upload
+ * fails twice for no visible reason.
+ *
+ * WebM is deliberately NOT accepted as a substitute. `MediaRecorder` offers it almost
+ * everywhere, but iPhones cannot play it back, and a memory that stores fine and will not
+ * play on half the family's phones is worse than a large one that plays everywhere.
+ *
+ * So the answer is to say so. Known at the moment the clip is added — it needs no decode,
+ * only the file's size and what the browser admits to supporting.
+ */
+export function shrinkNotice(items = []) {
+  if (pickMimeType()) return null;   // it can shrink; nothing to say
+
+  const stuck = (items || []).filter((item) => {
+    if (!item || item.motion || !item.videoFile) return false;
+    return needsEncoding({
+      width: item.width, height: item.height, size: item.videoFile.size, motion: false,
+    });
+  });
+  if (!stuck.length) return null;
+
+  const total = stuck.reduce((sum, i) => sum + (i.videoFile.size || 0), 0);
+  const what = stuck.length === 1 ? 'That video' : `Those ${stuck.length} videos`;
+  return `${what} cannot be made smaller in this browser, so ${stuck.length === 1 ? 'it' : 'they'} `
+    + `will upload at full size (${mb(total)}). A large upload can fail on a slow connection — `
+    + 'Chrome on a computer will shrink it, or crop it in Photos first.';
+}
+
+/** Everything worth saying about the media just added, in order. */
+export function mediaNotices(items = []) {
+  return [clipNotice(items), shrinkNotice(items)].filter(Boolean);
 }

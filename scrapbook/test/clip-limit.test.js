@@ -78,3 +78,98 @@ test('a missing or nonsense duration is not announced', () => {
 test('whole seconds read without a pointless decimal', () => {
   assert.match(clipNotice([clip(90)]), /\b90s\b/);
 });
+
+// ── When the browser cannot shrink a video at all ─────────────────
+// FOUND ON AN ANDROID EMULATOR, and invisible from a desktop. MediaRecorder has to be able
+// to produce MP4/H.264; Android Chrome 124 cannot, so pickMimeType() returns null and
+// toDisplayCopy hands the original straight back. Everything downstream then behaves
+// exactly as designed — the clip uploads whole, the trim stays metadata, nothing errors —
+// and forty megabytes go up a phone connection with nothing said. A big enough clip is how
+// an upload fails twice for no visible reason.
+//
+// WebM is deliberately not accepted instead: MediaRecorder offers it almost everywhere,
+// but iPhones cannot play it, and a memory that stores fine and will not play on half the
+// family's phones is worse than a large one that plays everywhere.
+
+import { shrinkNotice, mediaNotices } from '../js/clip-limit.js';
+
+/** Control what the browser admits to supporting. */
+function recorder(supported) {
+  globalThis.MediaRecorder = supported
+    ? { isTypeSupported: (t) => t.startsWith('video/mp4') }
+    : { isTypeSupported: () => false };
+}
+
+const bigClip = (over = {}) => ({
+  duration: 20,
+  width: 3840,
+  height: 2160,
+  videoFile: { size: 43 * 1024 * 1024 },
+  ...over,
+});
+
+test('a browser that CAN shrink says nothing', () => {
+  recorder(true);
+  assert.equal(shrinkNotice([bigClip()]), null);
+});
+
+test('a browser that cannot says so, with the real size', () => {
+  recorder(false);
+  const msg = shrinkNotice([bigClip()]);
+  assert.match(msg, /cannot be made smaller/i);
+  assert.match(msg, /43 MB/);
+});
+
+test('it says what to do about it', () => {
+  // A limit stated without a remedy reads as a refusal.
+  recorder(false);
+  const msg = shrinkNotice([bigClip()]);
+  assert.match(msg, /computer|Photos/);
+});
+
+test('a motion photo is never counted', () => {
+  // Never re-encoded by design, so its size is not a problem this notice can solve.
+  recorder(false);
+  assert.equal(shrinkNotice([bigClip({ motion: true })]), null);
+});
+
+test('a small clip is not worth mentioning', () => {
+  // needsEncoding already decides what is worth shrinking; if it would not have been
+  // shrunk anyway, not being able to shrink it costs nothing.
+  recorder(false);
+  assert.equal(shrinkNotice([bigClip({ width: 640, height: 480, videoFile: { size: 300 * 1024 } })]), null);
+});
+
+test('a photo is not a video', () => {
+  recorder(false);
+  assert.equal(shrinkNotice([{ file: { size: 9e9 }, width: 4000, height: 3000 }]), null);
+});
+
+test('several stuck clips are counted and their sizes added up', () => {
+  recorder(false);
+  const msg = shrinkNotice([bigClip(), bigClip()]);
+  assert.match(msg, /Those 2 videos/);
+  assert.match(msg, /86 MB/);
+});
+
+test('no MediaRecorder at all is handled', () => {
+  delete globalThis.MediaRecorder;
+  assert.doesNotThrow(() => shrinkNotice([bigClip()]));
+});
+
+test('both notices can appear together', () => {
+  // A clip over the cap, in a browser that also cannot shrink it: two different facts
+  // about the same file, and a parent should hear both.
+  recorder(false);
+  const long = bigClip({ duration: 120 });
+  const both = mediaNotices([long]);
+  assert.equal(both.length, 2);
+  assert.match(both[0], /only the first 30 seconds/);
+  assert.match(both[1], /cannot be made smaller/);
+});
+
+test('mediaNotices is empty when there is nothing to say', () => {
+  recorder(true);
+  assert.deepEqual(mediaNotices([bigClip({ duration: 5 })]), []);
+  assert.deepEqual(mediaNotices([]), []);
+});

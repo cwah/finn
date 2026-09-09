@@ -19,7 +19,7 @@ import {
   pairLivePhotos, splitMotionPhoto, looksLikeMotion, mp4CreatedAtFromFile,
 } from './motion.js';
 import { MAX_CLIP_SECONDS, lightFilter } from './layout-engine.js';
-import { clipNotice } from './clip-limit.js';
+import { mediaNotices } from './clip-limit.js';
 import { forDisplay, previewUrl } from './downscale.js';
 // toDisplayCopy is no longer called from here: clips are reduced at save, by
 // prepare-upload.js, once the trim is known.
@@ -588,9 +588,12 @@ export function initCapture({ author, canPost = true }, handlers) {
    * it, and one who adds a second should be told about both.
    */
   function applyClipNotice() {
-    const notice = clipNotice(pending);
-    clipNote.textContent = notice || '';
-    clipNote.hidden = !notice;
+    // Two things can be worth saying at once: a clip longer than the cap, and a browser
+    // that cannot shrink one at all. Both are about the media just added, so they share a
+    // line rather than competing for it.
+    const notices = mediaNotices(pending);
+    clipNote.textContent = notices.join(' ');
+    clipNote.hidden = notices.length === 0;
   }
 
   function applyInferredDate() {
