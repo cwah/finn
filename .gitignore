@@ -12,3 +12,9 @@ node_modules/
 *.pem
 *.key
 .*.swp
+
+# A stray PocketBase data directory. `--dir=./pb_data` is relative, so starting the server
+# from the repo root instead of scrapbook/ creates a second, empty database here and serves
+# THAT — which looks exactly like "my data is gone". scrapbook/.gitignore only covers
+# scrapbook/pb_data, so this one was untracked and committable.
+pb_data/

@@ -1135,6 +1135,13 @@ may have open. Email came first and was replaced; `users.notifyByEmail` is gone.
     would be unreachable, and the failure is a ReferenceError inside a push handler, where
     nobody is looking. It also sidesteps this package being `type: module`, which makes
     `require()` treat the file as ESM and skip its CommonJS exports entirely.
+  - **The worker is TOLD where the API is; it does not assume same-origin.** It fetched
+    `/api/...` relative, which is right in production — PocketBase serves the page and the
+    API from one origin — and wrong in development, where the frontend is on serve.py's
+    port and PocketBase is on 8090. The request reached the static file server, came back
+    404, and every notification lost its author and its deep link with nothing reporting
+    why. The page already solves this in `resolveApiBase`, so it publishes the answer
+    alongside the token. Found on an Android emulator, not by reading the code.
   - **A service worker cannot read localStorage**, which is where the session lives, so
     `pb.js` publishes the token to the Cache API from `persist()` — the single place a
     token changes. No token means the plain wording, which is a soft failure by design.

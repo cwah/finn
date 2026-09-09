@@ -63,7 +63,7 @@ let auth = load();
 // otherwise never seed the cache the service worker reads, and every notification on that
 // device would quietly fall back to wording with no author and no deep link. Opening the
 // app once should be enough to fix that, and this is what makes it enough.
-publishToken(auth?.token || null);
+publishToken(auth?.token || null, apiUrl());
 
 function load() {
   try {
@@ -81,7 +81,7 @@ function persist(next) {
   // worker from. A worker cannot read localStorage, so without this a push has no way to
   // ask who posted. Deliberately not awaited: a notification detail must never hold up
   // signing in, and publishToken swallows its own failures.
-  publishToken(next ? next.token : null);
+  publishToken(next ? next.token : null, apiUrl());
 }
 
 /** The signed-in parent, or null. `{ id, name, email }` */

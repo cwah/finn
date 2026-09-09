@@ -21,7 +21,7 @@
 // Bumped with the bell. A changed sw.js installs a new worker on its own, but activate
 // only drops caches that are not this one — so without a bump a browser could keep
 // serving its cached copy of the app modules that changed alongside it.
-const VERSION = 'scrapbook-v4';
+const VERSION = 'scrapbook-v5';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because
@@ -161,10 +161,21 @@ self.addEventListener('fetch', (event) => {
  * anyone. Null is a normal outcome — signed out, a fresh install, a browser that refuses
  * site data — and it simply costs the detail, not the notification.
  */
-async function sessionToken() {
+async function session() {
   try {
     const hit = await caches.open(AUTH_CACHE).then((c) => c.match(AUTH_KEY));
-    return hit ? (await hit.text()) || null : null;
+    if (!hit) return null;
+    const body = (await hit.text()) || '';
+    if (!body) return null;
+    try {
+      const parsed = JSON.parse(body);
+      return parsed && parsed.token ? { token: parsed.token, apiBase: parsed.apiBase || '' } : null;
+    } catch {
+      // A bare token, written by a version of the page from before the base was included.
+      // Devices keep this until the app is next opened, and same-origin is the right guess
+      // for the only place that matters — production serves both from one origin.
+      return { token: body, apiBase: '' };
+    }
   } catch {
     return null;
   }
@@ -182,12 +193,16 @@ async function sessionToken() {
  * shown nothing eventually posts its own "this site was updated in the background".
  */
 async function recentPosts() {
-  const token = await sessionToken();
-  if (!token) return null;
+  const who = await session();
+  if (!who) return null;
   try {
+    // The base comes from the page, which already had to work it out. Hardcoding a
+    // same-origin path here was right in production and wrong in development, where the
+    // request reached the static file server instead and came back 404 — so every
+    // notification lost its author and its deep link, for a reason nothing reported.
     const res = await fetch(
-      '/api/collections/posts/records?perPage=10&sort=-created&expand=author',
-      { headers: { Authorization: token }, cache: 'no-store' },
+      `${who.apiBase}/api/collections/posts/records?perPage=10&sort=-created&expand=author`,
+      { headers: { Authorization: who.token }, cache: 'no-store' },
     );
     if (!res.ok) return null;      // 401 after a token expires is the ordinary case
     const body = await res.json();

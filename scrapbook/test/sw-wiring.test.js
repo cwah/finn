@@ -20,6 +20,27 @@ const notify = read('../sw-notify.js');
 /** The string assigned to a name, e.g. const FOO = 'bar'. */
 const literal = (src, name) => (src.match(new RegExp(`${name}\\s*=\\s*'([^']*)'`)) || [])[1];
 
+test('the worker asks the API where the page says it is', () => {
+  // THE BUG THE EMULATOR FOUND. The worker fetched `/api/...` same-origin, which is right
+  // in production — PocketBase serves the page and the API together — and wrong in
+  // development, where the frontend is on serve.py's port and PocketBase is on 8090. The
+  // request reached the static file server, came back 404, and every notification lost its
+  // author and its deep link with nothing reporting why. The page already solves this in
+  // resolveApiBase; the worker is handed the answer rather than guessing it again.
+  assert.match(sw, /\$\{who\.apiBase\}\/api\/collections\/posts/);
+  assert.doesNotMatch(sw, /fetch\(\s*'\/api\/collections/,
+    'a hardcoded same-origin API path is the bug');
+  assert.match(read('../js/pb.js'), /publishToken\([^)]*apiUrl\(\)\)/);
+});
+
+test('a token cached in the old bare format still works', () => {
+  // Devices keep whatever the previous version wrote until the app is next opened. If the
+  // worker only understood the new shape, those devices would lose their author line at
+  // the exact moment this was meant to fix it.
+  assert.match(sw, /A bare token, written by a version of the page/);
+  assert.match(sw, /return \{ token: body, apiBase: '' \}/);
+});
+
 test('the page and the worker agree on where the token is kept', () => {
   // A worker cannot read localStorage, so the Cache API is the only channel. Two spellings
   // of the cache name means the worker finds nothing and every push loses its detail.
