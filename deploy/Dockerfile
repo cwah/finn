@@ -65,6 +65,12 @@ COPY scrapbook/manifest.webmanifest /pb/pb_public/manifest.webmanifest
 # The worker must sit at the ROOT to claim the whole origin as its scope. A worker can
 # only ever control its own directory and below.
 COPY scrapbook/sw.js               /pb/pb_public/sw.js
+# The worker importScripts this at startup. Left out of the image, the request fell
+# through to the SPA index.html, importScripts parsed HTML as JavaScript and threw, and
+# the new worker could not install AT ALL — so every device silently went on running
+# the previous one. Notifications kept arriving, with the old wording and no deep link,
+# which is indistinguishable from a device that simply had not updated yet.
+COPY scrapbook/sw-notify.js        /pb/pb_public/sw-notify.js
 COPY scrapbook/css/       /pb/pb_public/css/
 COPY scrapbook/js/        /pb/pb_public/js/
 COPY scrapbook/assets/    /pb/pb_public/assets/

@@ -1142,6 +1142,18 @@ may have open. Email came first and was replaced; `users.notifyByEmail` is gone.
     404, and every notification lost its author and its deep link with nothing reporting
     why. The page already solves this in `resolveApiBase`, so it publishes the answer
     alongside the token. Found on an Android emulator, not by reading the code.
+  - **A FILE THE WORKER IMPORTS MUST BE IN THE IMAGE.** The Dockerfile copies scrapbook's
+    root files one by one, deliberately, so `.env`, `serve.py` and the notes stay out of a
+    public web root — and `sw-notify.js` was added to the repo without being added to that
+    list. Production served it as a 404 that PocketBase answered with `index.html`,
+    `importScripts` parsed HTML as JavaScript and threw, and THE NEW WORKER COULD NOT
+    INSTALL. Every device carried on running the previous one for ten days. Notifications
+    still arrived, with the old wording and no deep link, which is indistinguishable from a
+    device that has simply not updated yet — and I spent days telling people to reopen the
+    app. Invisible locally, because serve.py serves the whole directory; only the container
+    has an opinion about what was copied. `test/shipped-files.test.js` now checks every
+    importScripts target and every root-relative reference in index.html against the
+    Dockerfile, and also checks that the fix was not "copy the whole directory".
   - **A service worker cannot read localStorage**, which is where the session lives, so
     `pb.js` publishes the token to the Cache API from `persist()` — the single place a
     token changes. No token means the plain wording, which is a soft failure by design.
