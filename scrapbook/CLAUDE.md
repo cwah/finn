@@ -680,14 +680,39 @@ new fields, no layout hints. Rules that must hold:
 
 ## Running it
 
-Both pages need to be served over HTTP — ES modules and `fetch` don't work from
-`file://`. There is still no build step:
+**TEST AGAINST THE CONTAINER, NOT serve.py.** Building and trying a feature means running
+the real image:
 
 ```
-python3 serve.py                # then open /index.html or /preview.html
-                                # (http.server + no-store; ES modules cache otherwise)
-npm test                        # node:test specs for layout-engine.js and age.js
+docker build -f deploy/Dockerfile -t finnbook:test .    # context is the REPO ROOT
+docker run -d --name finnbook -p 8099:8080 \
+  -v "$PWD/scrapbook/pb_data:/pb/pb_data" finnbook:test  # then open http://localhost:8099
+npm test                                                 # node:test specs, no container needed
 ```
+
+The container is the only place the production ARRANGEMENT exists: PocketBase serving the
+page and the API from ONE origin, with only the files the Dockerfile copied. `serve.py`
+serves the whole working directory from a second port, and both of those differences have
+already cost days.
+
+- `sw-notify.js` was in the repo but never added to the Dockerfile's copy list, so
+  production answered `/sw-notify.js` with `index.html`, `importScripts` threw, and the
+  service worker could not install on any device for ten days. Every local test passed,
+  because serve.py serves whatever is on disk.
+- The service worker fetched `/api/...` same-origin, which is right in the container and
+  wrong under serve.py, where the API is on another port.
+
+Those are opposite failures — one only breaks in production, one only breaks locally — and
+neither is visible from the other side. A container is the only place both are true at once.
+
+Notes on running it: it listens on **8080** unless `PORT` is set (Render sets 10000). Mount
+`pb_data` or every run starts an empty database and asks you to create a superuser. Rebuild
+after changing anything the image copies, including migrations and `deploy/pb_hooks/` —
+a hook is baked in, so editing one and reloading the page does nothing.
+
+`serve.py` remains for a quick look at `preview.html`, and for iterating on pure layout
+where no backend is involved. Anything touching the API, the service worker, push, or
+uploads goes through the container.
 
 `package.json` exists only so node treats the `.js` files as ES modules when running
 tests. It has no dependencies and nothing bundles.
