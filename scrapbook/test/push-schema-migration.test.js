@@ -25,6 +25,7 @@ import { readFileSync } from 'node:fs';
 const SOURCE = new URL('../pb_migrations/1756700000_push_schema.js', import.meta.url);
 const RETIRE = new URL('../pb_migrations/1756800000_retire_email_flag.js', import.meta.url);
 const DATES = new URL('../pb_migrations/1756900000_push_subscription_dates.js', import.meta.url);
+const PERPERSON = new URL('../pb_migrations/1757000000_subscription_per_person.js', import.meta.url);
 
 /** A PocketBase collection, as much of one as a migration touches. */
 function collection(name, fieldNames = []) {
@@ -252,4 +253,56 @@ test('a fresh database ends with dated subscriptions too', () => {
   const subs = db.find((c) => c.name === 'pushSubscriptions');
   assert.ok(subs.fields.getByName('created'));
   assert.equal(db.find((c) => c.name === 'users').fields.getByName('notifyByEmail'), null);
+});
+
+
+// ── One subscription per PERSON per device (1757000000) ───────────
+// REPORTED: one account's notifications kept turning themselves off after being enabled.
+//
+// The unique index was on `endpoint` alone, which assumes one endpoint means one
+// subscriber. A push endpoint belongs to a browser REGISTRATION, so two people signing in
+// on the same browser share it. `savePushSubscription` looks the endpoint up first, but
+// `listRule` is `user = @request.auth.id` — so the lookup only ever sees the caller's own
+// rows. When the row belonged to the other person it came back empty, the code created
+// rather than updated, and the unique index refused it. Enabling threw; the bell went on
+// reading the browser's own subscription and said "on".
+
+test('the index is per person AND endpoint, not endpoint alone', () => {
+  const src = readFileSync(PERPERSON, 'utf8');
+  assert.match(src, /CREATE UNIQUE INDEX[^\n]*\(`user`, `endpoint`\)/);
+});
+
+test('the old endpoint-only index is gone', () => {
+  const db = [
+    collection('users', ['name']),
+    collection('config', ['babyName']),
+    collection('pushSubscriptions', ['user', 'endpoint']),
+  ];
+  const before = db.find((c) => c.name === 'pushSubscriptions');
+  before.indexes = ['CREATE UNIQUE INDEX `idx_push_endpoint` ON `pushSubscriptions` (`endpoint`)'];
+  runMigration({ existing: db, source: PERPERSON });
+  const after = db.find((c) => c.name === 'pushSubscriptions');
+  const joined = (after.indexes || []).join(' ');
+  assert.doesNotMatch(joined, /idx_push_endpoint`? ON `pushSubscriptions` \(`endpoint`\)/,
+    'the endpoint-only index must not survive — it is what made two people fight over one row');
+  assert.match(joined, /user`, `endpoint/);
+});
+
+test('down restores the endpoint-only index', () => {
+  const db = [
+    collection('users', ['name']),
+    collection('config', ['babyName']),
+    collection('pushSubscriptions', ['user', 'endpoint']),
+  ];
+  runMigration({ existing: db, source: PERPERSON });
+  runMigration({ existing: db, direction: 'down', source: PERPERSON });
+  assert.match((db.find((c) => c.name === 'pushSubscriptions').indexes || []).join(' '), /\(`endpoint`\)/);
+});
+
+test('the client asks the question the rules can answer', () => {
+  // The lookup has to be scoped to the person, or it cannot see its own row reliably and
+  // the upsert turns into a create that the index rejects.
+  const dataPb = readFileSync(new URL('../js/data-pb.js', import.meta.url), 'utf8');
+  const fn = dataPb.match(/export async function savePushSubscription[\s\S]*?\n\}/)[0];
+  assert.match(fn, /user=\$\{pb\.quote\(me\.id\)\} && endpoint=/);
 });

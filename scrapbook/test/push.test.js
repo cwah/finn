@@ -136,3 +136,39 @@ test('default permission with no subscription is off', async () => {
   browser({ notification: 'default' });
   assert.equal(await pushState(), 'off');
 });
+
+// ── A rotated key strands every existing subscription ─────────────
+// REPORTED: notifications stop arriving, and turning the bell off and on does not help.
+// Rotating the VAPID pair invalidates every subscription taken out under the old one, but
+// the browser keeps handing the old one back — getSubscription() knows nothing about whose
+// key it was. So the server signs with the new key, the push service rejects it, and the
+// bell goes on reading the browser's subscription and saying "on".
+
+const { matchesKey } = await import('../js/push.js');
+
+/** A subscription carrying the key it was created with, as the spec provides. */
+const subWithKey = (bytes) => ({ options: { applicationServerKey: new Uint8Array(bytes).buffer } });
+const KEY = 'BPY9739cazgYjFeAv64oW8M3x2SiPKlWedhnE6g4aPm2xgsqqY4bqyaekE3VHp-w_smiQdwdHniJ2DHlnWb-Np8';
+
+test('a subscription taken out with the current key matches', () => {
+  assert.equal(matchesKey(subWithKey(keyBytes(KEY)), KEY), true);
+});
+
+test('one taken out with a DIFFERENT key does not', () => {
+  // The whole bug: this is the case that must be noticed and re-subscribed.
+  const other = keyBytes(KEY).slice();
+  other[10] ^= 0xff;
+  assert.equal(matchesKey(subWithKey(other), KEY), false);
+});
+
+test('a key of the wrong length does not match either', () => {
+  assert.equal(matchesKey(subWithKey([1, 2, 3]), KEY), false);
+});
+
+test('a browser that does not expose the key is given the benefit of the doubt', () => {
+  // Throwing away a working subscription over a missing field would be worse than the bug
+  // being fixed — the person would lose notifications that were arriving perfectly well.
+  assert.equal(matchesKey({ options: {} }, KEY), true);
+  assert.equal(matchesKey({}, KEY), true);
+  assert.equal(matchesKey(null, KEY), true);
+});

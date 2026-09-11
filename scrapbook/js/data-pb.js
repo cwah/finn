@@ -113,9 +113,14 @@ export async function savePushSubscription(sub) {
     label: navigator.userAgent.slice(0, 190),
   };
 
+  // Scoped to THIS person as well as this endpoint. `listRule` is `user = @request.auth.id`,
+  // so a lookup by endpoint alone could only ever see the caller's own rows anyway — and
+  // when the row belonged to someone else it came back empty, the code created instead of
+  // updating, and the unique index refused it. Asking the question the rules can actually
+  // answer is what makes the upsert reliable.
   const existing = await pb.list('pushSubscriptions', {
     perPage: 1,
-    filter: `endpoint=${pb.quote(sub.endpoint)}`,
+    filter: `user=${pb.quote(me.id)} && endpoint=${pb.quote(sub.endpoint)}`,
   });
   if (existing.items.length) {
     return pb.update('pushSubscriptions', existing.items[0].id, body);

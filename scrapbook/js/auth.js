@@ -4,7 +4,7 @@
 // source (no accounts at all) and PocketBase interchangeable without touching this file.
 
 import { requireSession, signIn, signOut, HAS_ACCOUNTS } from './data.js';
-import { pushState, enablePush, disablePush } from './push.js';
+import { pushState, enablePush, disablePush, healPush } from './push.js';
 
 /**
  * Resolve once there is a usable session. Shows the sign-in screen if there isn't, and
@@ -114,6 +114,14 @@ export function initNotifications() {
       state = 'off';
     }
     paint();
+
+    // Then quietly put right anything that has gone missing server-side since last time.
+    // Separate from the read above, and after painting, because the bell should show what
+    // is true NOW rather than wait on a round trip — and because a failure here must cost
+    // nothing. Someone whose row has vanished gets it back without ever knowing it went.
+    if (state === 'on') {
+      try { await healPush(); } catch (err) { console.error('could not reaffirm notifications', err); }
+    }
   };
 
   btn.addEventListener('click', async () => {
