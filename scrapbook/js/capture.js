@@ -754,13 +754,23 @@ export function initCapture({ author, canPost = true }, handlers) {
   openForEdit = open;
   composeBtn.addEventListener('click', () => open());
 
-  openWithFiles = (files) => {
-    if (!files?.length) return;
+  openWithFiles = (files, notice = null) => {
+    // A notice with no files is still worth opening for: it means a share arrived and
+    // NOTHING could be read from it, which is the case that used to look like the app
+    // ignoring the share entirely. An empty sheet with an explanation is a far better
+    // answer than the timeline appearing as though nothing happened.
+    if (!files?.length && !notice) return;
     open();                       // fresh sheet first: open() clears whatever was pending
-    const carrier = new DataTransfer();
-    for (const file of files) carrier.items.add(file);
-    input.files = carrier.files;
-    input.dispatchEvent(new Event('change'));
+    if (files?.length) {
+      const carrier = new DataTransfer();
+      for (const file of files) carrier.items.add(file);
+      input.files = carrier.files;
+      input.dispatchEvent(new Event('change'));
+    }
+    if (notice) {
+      saveError.textContent = notice;
+      saveError.hidden = false;
+    }
   };
 
   /** Whatever the picker called it, for saying which one could not be read. */

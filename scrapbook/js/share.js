@@ -58,6 +58,31 @@ export function cameFromShare() {
   // Take the flag out of the address bar so a reload is an ordinary visit rather than a
   // second attempt to consume files that have already been claimed.
   url.searchParams.delete(SHARE_FLAG);
+  // The unreadable marker goes with it. Read it BEFORE calling this — it is gone after.
+  url.searchParams.delete('unreadable');
   window.history.replaceState({}, '', url);
   return true;
+}
+
+/**
+ * How many shared items arrived with no bytes behind them.
+ *
+ * Android hands over a file with a name and a type but nothing to read when it cannot
+ * produce the content — routine for a Google Photos item that lives in the cloud and has
+ * not been downloaded. Those cannot be stored, but they MUST be mentioned: dropping them
+ * in silence is what made sharing look as though it did nothing at all.
+ */
+export function unreadableShareCount(search = globalThis.location?.search || '') {
+  const n = Number(new URLSearchParams(search).get('unreadable'));
+  return Number.isInteger(n) && n > 0 ? n : 0;
+}
+
+/** What to say about them. Null when there is nothing to say. */
+export function unreadableShareNotice(count) {
+  if (!count) return null;
+  const what = count === 1 ? 'That photo or video' : `${count} of those photos or videos`;
+  const it = count === 1 ? 'it' : 'them';
+  return `${what} could not be read from the share — Google Photos does that when the `
+    + `original is still in the cloud. Open ${it} in Photos and download ${it} to the `
+    + 'device first, then share again, or add from this screen instead.';
 }

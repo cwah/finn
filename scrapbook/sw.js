@@ -79,9 +79,18 @@ self.addEventListener('activate', (event) => {
 // 303 rather than 302, deliberately: it is the status that says "go and GET this
 // instead", and without it a reload would re-submit the share.
 async function receiveShare(event, redirectTo) {
+  let empty = 0;
   try {
     const form = await event.request.formData();
-    const files = form.getAll('media').filter((f) => f && f.size);
+    const offered = form.getAll('media').filter(Boolean);
+    const files = offered.filter((f) => f.size);
+
+    // COUNTED, NOT JUST DROPPED. Android hands over a file with a name and a type but no
+    // bytes when it cannot produce the content — which is the normal outcome for a Google
+    // Photos item that lives in the cloud and has not been downloaded to the phone.
+    // Discarding those silently is what made sharing "do nothing": the app opened, found
+    // no files, and carried on as if nobody had shared anything at all.
+    empty = offered.length - files.length;
     const cache = await caches.open(SHARE_CACHE);
     // Clear first: a share that was never opened should not turn up attached to this one.
     for (const old of await cache.keys()) await cache.delete(old);
@@ -99,7 +108,10 @@ async function receiveShare(event, redirectTo) {
     // Losing the files is bad; leaving the browser on a dead POST is worse.
     console.warn('share failed:', err);
   }
-  return Response.redirect(redirectTo, 303);
+  // Carried on the URL rather than in the cache: it has to survive even when nothing was
+  // stashed, which is exactly the case worth reporting.
+  const target = empty > 0 ? `${redirectTo}&unreadable=${empty}` : redirectTo;
+  return Response.redirect(target, 303);
 }
 
 self.addEventListener('fetch', (event) => {

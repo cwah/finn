@@ -16,7 +16,7 @@ import { pickNewPosts, oldestDate, insertionIndex, pickUnseen } from './sync.js'
 import { initPwa } from './pwa.js';
 import { optional } from './optional.js';
 import { wantedPost, pageUntilFound } from './deep-link.js';
-import { claimSharedFiles, cameFromShare } from './share.js';
+import { claimSharedFiles, cameFromShare, unreadableShareCount, unreadableShareNotice } from './share.js';
 
 const timeline = document.getElementById('timeline');
 const sentinel = document.getElementById('sentinel');
@@ -408,10 +408,15 @@ async function init() {
   // Claimed after sign-in too, because the gate blocks above and the files keep perfectly
   // well in the meantime: sharing to a signed-out scrapbook should end in the compose
   // sheet, not in a lost photo.
+  // Read BEFORE cameFromShare, which clears both markers out of the address bar.
+  const unreadable = unreadableShareCount();
   if (cameFromShare()) {
     const shared = await claimSharedFiles();
+    const notice = unreadableShareNotice(unreadable);
     // A viewer has no compose sheet to open. Nothing is lost that they could have saved.
-    if (shared.length && config.canPost) openWithFiles(shared);
+    // Opened for the notice alone when nothing could be read: a share that produced no
+    // files and no explanation is indistinguishable from the app ignoring the share.
+    if (config.canPost && (shared.length || notice)) openWithFiles(shared, notice);
   }
 
   // Delegated, because cards stream in as you scroll — one listener beats re-binding.
