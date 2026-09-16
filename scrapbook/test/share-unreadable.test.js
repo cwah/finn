@@ -31,18 +31,18 @@ const read = (rel) => require('node:fs').readFileSync(new URL(rel, import.meta.u
 // ── Reading the worker's report ───────────────────────────────────
 
 test('the counts are read off the redirect url', () => {
-  assert.deepEqual(shareReport('?shared=1&sent=3&unreadable=2'), { sent: 3, unreadable: 2 });
+  assert.deepEqual(shareReport('?shared=1&sent=3&unreadable=2'), { sent: 3, unreadable: 2, why: '' });
 });
 
 test('a share that carried nothing is distinguishable from one that carried nothing READABLE', () => {
   // The whole reason both numbers travel.
-  assert.deepEqual(shareReport('?shared=1&sent=0&unreadable=0'), { sent: 0, unreadable: 0 });
-  assert.deepEqual(shareReport('?shared=1&sent=2&unreadable=2'), { sent: 2, unreadable: 2 });
+  assert.deepEqual(shareReport('?shared=1&sent=0&unreadable=0'), { sent: 0, unreadable: 0, why: '' });
+  assert.deepEqual(shareReport('?shared=1&sent=2&unreadable=2'), { sent: 2, unreadable: 2, why: '' });
 });
 
 test('a missing report is not mistaken for a report of zero', () => {
   // An older worker sends no markers at all. That is unknown, not "sent nothing".
-  assert.deepEqual(shareReport('?shared=1'), { sent: null, unreadable: 0 });
+  assert.deepEqual(shareReport('?shared=1'), { sent: null, unreadable: 0, why: '' });
 });
 
 test('junk on the url is ignored rather than believed', () => {
@@ -139,4 +139,40 @@ test('the markers are cleared so a reload does not repeat itself', () => {
   for (const key of ["'unreadable'", "'sent'"]) {
     assert.ok(share.includes(`searchParams.delete(${key})`), `${key} must be cleared`);
   }
+});
+
+// ── Saying what went wrong ────────────────────────────────────────
+// REPORTED: sharing an on-device photo from Google Photos gives the "no photo in it"
+// message. So request.formData() is THROWING in the worker, not returning an empty form —
+// and nobody can open a service worker's console on a phone. The reason is carried out to
+// where it can be read back.
+
+test('the reason is read off the url when the worker could not parse the share', () => {
+  const r = shareReport('?shared=1&sent=-1&unreadable=0&why=TypeError.0b.none');
+  assert.equal(r.why, 'TypeError.0b.none');
+});
+
+test('the detail is appended to what the parent sees', () => {
+  const msg = shareNotice({ sent: -1, unreadable: 0, why: 'TypeError.0b.none' }, 0);
+  assert.match(msg, /without the photo or video in it/);
+  assert.match(msg, /detail: TypeError\.0b\.none/);
+});
+
+test('a share that simply carried no files says nothing technical', () => {
+  // The detail only appears when something actually failed to be read.
+  const msg = shareNotice({ sent: 0, unreadable: 0, why: '' }, 0);
+  assert.doesNotMatch(msg, /detail:/);
+});
+
+test('the reason marker is cleared from the url too', () => {
+  assert.ok(read('../js/share.js').includes("searchParams.delete('why')"));
+});
+
+test('the worker records the body size and content type, not just the error name', () => {
+  // The error name alone does not say whether Android sent a body, sent it under another
+  // content type, or sent nothing — and those need different fixes.
+  const sw = read('../sw.js');
+  assert.match(sw, /const probe = event\.request\.clone\(\)/);
+  assert.match(sw, /\$\{raw\.length\}b/);
+  assert.match(sw, /content-type/);
 });

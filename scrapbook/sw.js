@@ -78,23 +78,124 @@ self.addEventListener('activate', (event) => {
 //
 // 303 rather than 302, deliberately: it is the status that says "go and GET this
 // instead", and without it a reload would re-submit the share.
+/**
+ * Parse a multipart body by hand.
+ *
+ * A FALLBACK FOR `request.formData()`, which throws on Android for shares it ought to
+ * handle — confirmed in the container, where a well-formed multipart body with no parts
+ * raises a TypeError rather than returning an empty form. When it throws there is no way
+ * to tell from the error whether anything useful arrived, and the files are lost either
+ * way. Reading the bytes ourselves is the only answer that does not depend on it.
+ *
+ * Deliberately INLINE rather than a module of its own: a file the worker importScripts
+ * must also be copied into the image, and forgetting that once stopped every device from
+ * updating for ten days. Nothing new to ship, nothing new to forget.
+ *
+ * @returns {{name: string, type: string, bytes: Uint8Array}[]} the parts that carry files
+ */
+function parseMultipart(bytes, contentType) {
+  const found = /boundary=(?:"([^"]+)"|([^;]+))/i.exec(contentType || '');
+  if (!found) return [];
+  const boundary = `--${(found[1] || found[2]).trim()}`;
+
+  const encoder = new TextEncoder();
+  const marker = encoder.encode(boundary);
+  const at = (i, seq) => {
+    for (let j = 0; j < seq.length; j += 1) if (bytes[i + j] !== seq[j]) return false;
+    return true;
+  };
+
+  // Boundaries are found by scanning, but the scan is anchored on `\r\n--` first: a bare
+  // `-` is common in photo bytes and a naive byte-by-byte compare over several megabytes
+  // is slow enough to matter on a phone.
+  const starts = [];
+  if (at(0, marker)) starts.push(0);
+  const anchor = encoder.encode('\r\n--');
+  for (let i = 0; i <= bytes.length - marker.length - 2; i += 1) {
+    if (bytes[i] !== 13 || !at(i, anchor)) continue;
+    if (at(i + 2, marker)) { starts.push(i + 2); i += marker.length; }
+  }
+
+  const parts = [];
+  for (let k = 0; k < starts.length - 1; k += 1) {
+    let from = starts[k] + marker.length;
+    if (bytes[from] === 13 && bytes[from + 1] === 10) from += 2;   // the CRLF after it
+    const to = starts[k + 1] - 2;                                   // drop the trailing CRLF
+    if (to <= from) continue;
+
+    // Headers end at a blank line. They are ASCII, so only that stretch is decoded.
+    let split = -1;
+    for (let i = from; i < to - 3; i += 1) {
+      if (bytes[i] === 13 && bytes[i + 1] === 10 && bytes[i + 2] === 13 && bytes[i + 3] === 10) {
+        split = i; break;
+      }
+    }
+    if (split < 0) continue;
+
+    const head = new TextDecoder().decode(bytes.subarray(from, split));
+    const disposition = /name="([^"]*)"/i.exec(head);
+    const filename = /filename="([^"]*)"/i.exec(head);
+    const type = /content-type:\s*([^\r\n]+)/i.exec(head);
+    // Only file parts matter here; a plain text field has no filename.
+    if (!disposition || !filename) continue;
+
+    parts.push({
+      field: disposition[1],
+      name: filename[1] || 'shared',
+      type: (type && type[1].trim()) || 'application/octet-stream',
+      bytes: bytes.subarray(split + 4, to),
+    });
+  }
+  return parts;
+}
+
 async function receiveShare(event, redirectTo) {
   let empty = 0;
-  let sent = -1;   // -1 means the form could not even be read
+  let sent = -1;   // -1 means the body could not be read as a form at all
+  let why = '';
+  let files = [];
+
+  // Cloned BEFORE anything reads the body: a body can only be read once, and if
+  // formData() throws, the bytes are the only way to find out what actually arrived.
+  const probe = event.request.clone();
+
   try {
     const form = await event.request.formData();
     const offered = form.getAll('media').filter(Boolean);
-    const files = offered.filter((f) => f.size);
-
+    files = offered.filter((f) => f.size);
     // COUNTED, NOT JUST DROPPED. Android hands over a file with a name and a type but no
-    // bytes when it cannot produce the content — which is the normal outcome for a Google
-    // Photos item that lives in the cloud and has not been downloaded to the phone.
-    // Discarding those silently is what made sharing "do nothing": the app opened, found
-    // no files, and carried on as if nobody had shared anything at all.
+    // bytes when it cannot produce the content — the normal outcome for a Google Photos
+    // item still in the cloud. Discarding those silently is what made sharing "do
+    // nothing": the app opened, found no files, and carried on.
     empty = offered.length - files.length;
     sent = offered.length;
+  } catch (err) {
+    // formData() throws on Android for shares it ought to handle — confirmed in the
+    // container, where a well-formed multipart body with no parts raises a TypeError
+    // rather than returning an empty form. So the bytes get read directly instead. This
+    // is a fallback, not the normal path: when formData() works it is used.
+    console.warn('share: formData failed, parsing the body directly:', err);
+    why = (err && err.name) || 'error';
+    try {
+      const type = probe.headers.get('content-type') || '';
+      const raw = new Uint8Array(await probe.arrayBuffer());
+      why += `.${raw.length}b.${(type || 'none').split(';')[0]}`;
+
+      const parts = parseMultipart(raw, type).filter((part) => part.field === 'media');
+      const carried = parts.filter((part) => part.bytes.length);
+      sent = parts.length;
+      empty = parts.length - carried.length;
+      files = carried.map((part) => new File([part.bytes], part.name, { type: part.type }));
+      if (files.length) why += '.recovered';
+    } catch {
+      why += '.body-unreadable';
+    }
+  }
+
+  try {
     const cache = await caches.open(SHARE_CACHE);
-    // Clear first: a share that was never opened should not turn up attached to this one.
+    // Cleared even when nothing new arrived: a share that was never opened should not turn
+    // up attached to this one.
     for (const old of await cache.keys()) await cache.delete(old);
     await Promise.all(files.map((file, i) => cache.put(
       new Request(`${self.registration.scope}__shared/${i}`),
@@ -108,14 +209,18 @@ async function receiveShare(event, redirectTo) {
     )));
   } catch (err) {
     // Losing the files is bad; leaving the browser on a dead POST is worse.
-    console.warn('share failed:', err);
+    console.warn('share: could not stash the files:', err);
+    why = why ? `${why}.unstashable` : 'unstashable';
+    files = [];
   }
+
   // Carried on the URL rather than in the cache: it has to survive even when nothing was
-  // stashed, which is exactly the case worth reporting. BOTH numbers go, because they say
+  // stashed, which is exactly the case worth reporting. Both numbers go, because they say
   // different things — `sent` is how many files the sharing app actually handed over, and
   // an app that sends a link instead of a picture sends none at all, which is a different
   // problem from one whose files cannot be read.
-  const target = `${redirectTo}&sent=${sent}&unreadable=${empty}`;
+  const target = `${redirectTo}&sent=${sent}&unreadable=${empty}`
+    + (why ? `&why=${encodeURIComponent(why)}` : '');
   return Response.redirect(target, 303);
 }
 

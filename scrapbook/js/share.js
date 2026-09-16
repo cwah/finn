@@ -63,6 +63,7 @@ export function cameFromShare() {
   // that have already been claimed, or a repeat of an explanation already given.
   url.searchParams.delete('unreadable');
   url.searchParams.delete('sent');
+  url.searchParams.delete('why');
   window.history.replaceState({}, '', url);
   return true;
 }
@@ -84,7 +85,13 @@ export function shareReport(search = globalThis.location?.search || '') {
     const n = Number(q.get(name));
     return Number.isInteger(n) ? n : fallback;
   };
-  return { sent: num('sent', null), unreadable: Math.max(0, num('unreadable', 0)) };
+  return {
+    sent: num('sent', null),
+    unreadable: Math.max(0, num('unreadable', 0)),
+    // Only present when the worker could not read the share at all. Short and technical
+    // on purpose: it is meant to be read back to whoever is fixing it.
+    why: q.get('why') || '',
+  };
 }
 
 /**
@@ -99,7 +106,7 @@ export function shareReport(search = globalThis.location?.search || '') {
  * @param {{sent: number|null, unreadable: number}} report from the URL
  * @param {number} claimed how many files actually came through
  */
-export function shareNotice({ sent = null, unreadable = 0 } = {}, claimed = 0) {
+export function shareNotice({ sent = null, unreadable = 0, why = '' } = {}, claimed = 0) {
   if (claimed > 0 && unreadable === 0) return null;   // it worked
 
   const cloud = 'Google Photos does that when the original is still in the cloud — open it '
@@ -123,11 +130,14 @@ export function shareNotice({ sent = null, unreadable = 0 } = {}, claimed = 0) {
   if (sent !== null && sent <= 0) {
     return 'That share arrived without the photo or video in it — some apps send a link '
       + 'instead of the file. Try sharing again and choosing the original, or add it from '
-      + 'this screen instead.';
+      + 'this screen instead.'
+      // Appended only when the worker actually failed to read it. Nobody can open a
+      // service worker's console on a phone, and without this the next step is guesswork.
+      + (why ? ` (detail: ${why})` : '');
   }
 
   // Everything else: the share arrived and nothing came of it, for a reason we do not yet
   // know. Said plainly rather than swallowed.
   return 'Nothing came through from that share. Try adding the photo or video from this '
-    + 'screen instead.';
+    + 'screen instead.' + (why ? ` (detail: ${why})` : '');
 }
