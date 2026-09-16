@@ -710,6 +710,20 @@ Notes on running it: it listens on **8080** unless `PORT` is set (Render sets 10
 after changing anything the image copies, including migrations and `deploy/pb_hooks/` —
 a hook is baked in, so editing one and reloading the page does nothing.
 
+When a build hangs on `load metadata for docker.io/library/alpine`, the daemon has lost
+its route to Docker Hub — it happens after the Mac sleeps, and restarting Docker Desktop
+does not always cure it. Both builders hang the same way. To keep testing without a
+rebuild, copy the changed files straight into the running container:
+
+```
+docker cp scrapbook/sw.js finnbook:/pb/pb_public/sw.js
+docker cp scrapbook/js/. finnbook:/pb/pb_public/js/
+```
+
+That still exercises the real arrangement — one origin, PocketBase serving both — but it
+does NOT check the Dockerfile, so it cannot catch a file that was never copied into the
+image. Rebuild before trusting anything about what ships.
+
 `serve.py` remains for a quick look at `preview.html`, and for iterating on pure layout
 where no backend is involved. Anything touching the API, the service worker, push, or
 uploads goes through the container.

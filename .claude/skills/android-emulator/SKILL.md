@@ -37,6 +37,11 @@ It listens on **8080** inside unless `PORT` is set. Mount `pb_data` or each run 
 empty database. Hooks and migrations are baked in: **rebuild after editing
 `deploy/pb_hooks/` or `pb_migrations/`** — reloading the page will not pick them up.
 
+If the build hangs on `load metadata for docker.io/library/alpine`, the daemon has lost
+Docker Hub; restarting Docker Desktop does not always fix it and both builders hang alike.
+`docker cp` the changed files into the running container to carry on testing — but that
+does not verify the Dockerfile, so rebuild before trusting what ships.
+
 ## 3. Boot the emulator and bridge it
 
 ```sh
