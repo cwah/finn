@@ -116,8 +116,11 @@ export function shareNotice({ sent = null, unreadable = 0 } = {}, claimed = 0) {
     return `${what} could not be read from the share. ${cloud}`;
   }
 
-  if (sent === 0) {
-    // The sharing app sent no files at all — typically a link instead of the picture.
+  // `0` is no file parts; `-1` is a body that could not be parsed as a form at all — which
+  // is what an empty multipart POST actually produces, confirmed in the container. Both
+  // mean the same thing to a parent: the share carried no picture. Treating only 0 as that
+  // case sent the commonest real failure to the vague fallback below.
+  if (sent !== null && sent <= 0) {
     return 'That share arrived without the photo or video in it — some apps send a link '
       + 'instead of the file. Try sharing again and choosing the original, or add it from '
       + 'this screen instead.';

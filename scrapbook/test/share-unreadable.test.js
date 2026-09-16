@@ -82,6 +82,15 @@ test('an app that sent no files at all gets different advice', () => {
   assert.doesNotMatch(msg, /Google Photos does that/);
 });
 
+test('an unparseable form is the SAME case as no files, not a mystery', () => {
+  // Confirmed in the container: an empty multipart POST makes request.formData() throw, so
+  // the worker reports -1 rather than 0. That is the commonest real no-photo share, and it
+  // must get the useful advice rather than the vague fallback.
+  const msg = shareNotice({ sent: -1, unreadable: 0 }, 0);
+  assert.match(msg, /without the photo or video in it/);
+  assert.doesNotMatch(msg, /Nothing came through/);
+});
+
 test('an undiagnosed failure is still reported', () => {
   // THE POINT. Nothing claimed, nothing explained — this is the branch that used to be
   // silence, and silence is what made the bug unfindable.
