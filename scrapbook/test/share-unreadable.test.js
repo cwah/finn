@@ -1,90 +1,133 @@
-// A share that arrives with nothing in it.
+// A share that yields nothing must still say something.
 //
 //   npm test
 //
-// REPORTED: sharing to Finnbook from Google Photos does nothing.
+// REPORTED: sharing from Google Photos opens Finnbook on the timeline, as though nobody
+// had shared anything.
 //
-// Android hands over a file with a name and a type but NO BYTES when it cannot produce the
-// content — which is routine for a Google Photos item whose original is still in the cloud
-// and has not been downloaded to the phone. The service worker filtered those out by size
-// and said nothing, so the app opened, found no files, and carried on exactly as if nobody
-// had shared anything. The share was not refused; it was discarded in silence, which is
-// indistinguishable from the feature being broken.
+// Two distinct things can go wrong, and they need different advice:
 //
-// Nothing can be stored for such a file. But it has to be MENTIONED, and the person told
-// what would make it work.
+//   the app sends NO FILES          some apps hand over a link rather than the picture
+//   the files have NO BYTES         routine for a Google Photos item still in the cloud
+//
+// Both were discarded in silence. The worker filtered empty files by size and said
+// nothing; the app found no files and carried on. A share that produces neither a photo
+// nor an explanation is indistinguishable from the feature being broken — which is exactly
+// how it was reported.
+//
+// So the worker now reports what it was handed, and the app ALWAYS answers a share. The
+// final branch covers reasons nobody has diagnosed yet: an unexplained failure is still
+// better reported than hidden.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 
+import { shareReport, shareNotice } from '../js/share.js';
+
 const require = createRequire(import.meta.url);
+const read = (rel) => require('node:fs').readFileSync(new URL(rel, import.meta.url), 'utf8');
 
-import { unreadableShareCount, unreadableShareNotice } from '../js/share.js';
+// ── Reading the worker's report ───────────────────────────────────
 
-test('the count is read from the url the worker redirected to', () => {
-  assert.equal(unreadableShareCount('?shared=1&unreadable=2'), 2);
-  assert.equal(unreadableShareCount('?shared=1&unreadable=1'), 1);
+test('the counts are read off the redirect url', () => {
+  assert.deepEqual(shareReport('?shared=1&sent=3&unreadable=2'), { sent: 3, unreadable: 2 });
 });
 
-test('a share with nothing unreadable reports nothing', () => {
-  for (const search of ['?shared=1', '', '?other=3']) {
-    assert.equal(unreadableShareCount(search), 0, JSON.stringify(search));
+test('a share that carried nothing is distinguishable from one that carried nothing READABLE', () => {
+  // The whole reason both numbers travel.
+  assert.deepEqual(shareReport('?shared=1&sent=0&unreadable=0'), { sent: 0, unreadable: 0 });
+  assert.deepEqual(shareReport('?shared=1&sent=2&unreadable=2'), { sent: 2, unreadable: 2 });
+});
+
+test('a missing report is not mistaken for a report of zero', () => {
+  // An older worker sends no markers at all. That is unknown, not "sent nothing".
+  assert.deepEqual(shareReport('?shared=1'), { sent: null, unreadable: 0 });
+});
+
+test('junk on the url is ignored rather than believed', () => {
+  for (const s of ['?sent=abc&unreadable=xyz', '?sent=1.5', '?unreadable=-4']) {
+    const r = shareReport(s);
+    assert.ok(r.unreadable >= 0, s);
+    assert.ok(r.sent === null || Number.isInteger(r.sent), s);
   }
 });
 
-test('junk in the marker is ignored rather than believed', () => {
-  // It arrives on a URL, which anyone can edit.
-  for (const search of ['?unreadable=abc', '?unreadable=-1', '?unreadable=0', '?unreadable=1.5']) {
-    assert.equal(unreadableShareCount(search), 0, search);
-  }
+// ── What gets said ────────────────────────────────────────────────
+
+test('a share that fully worked says nothing at all', () => {
+  assert.equal(shareNotice({ sent: 2, unreadable: 0 }, 2), null);
 });
 
-test('one unreadable item is described in the singular', () => {
-  const msg = unreadableShareNotice(1);
-  assert.match(msg, /That photo or video/);
-  assert.doesNotMatch(msg, /\b1 of those\b/);
-});
-
-test('several are counted', () => {
-  assert.match(unreadableShareNotice(3), /3 of those photos or videos/);
-});
-
-test('the notice names the cause and the remedy', () => {
-  // Naming Google Photos matters: it is the app people share from, and the behaviour is
-  // specific to its cloud library rather than a general fault in sharing.
-  const msg = unreadableShareNotice(1);
+test('files with no bytes name Google Photos and the remedy', () => {
+  const msg = shareNotice({ sent: 1, unreadable: 1 }, 0);
+  assert.match(msg, /could not be read/i);
   assert.match(msg, /Google Photos/);
   assert.match(msg, /download/i);
 });
 
-test('nothing unreadable means no notice at all', () => {
-  assert.equal(unreadableShareNotice(0), null);
-  assert.equal(unreadableShareNotice(undefined), null);
+test('a partial share says what is missing, not that everything failed', () => {
+  // Three picked, two arrived: the two are already in the sheet and must not be implied
+  // lost as well.
+  const msg = shareNotice({ sent: 3, unreadable: 1 }, 2);
+  assert.match(msg, /One of those/);
+  assert.doesNotMatch(msg, /Nothing came through/);
 });
 
-// ── The worker's half ─────────────────────────────────────────────
-
-test('the worker counts what it dropped and puts it on the redirect', () => {
-  // Carried on the URL rather than in the cache, because it has to survive the case where
-  // NOTHING was stashed — which is exactly the case worth reporting.
-  const sw = new URL('../sw.js', import.meta.url);
-  const src = require('node:fs').readFileSync(sw, 'utf8');
-  assert.match(src, /empty = offered\.length - files\.length/);
-  assert.match(src, /unreadable=\$\{empty\}/);
+test('an app that sent no files at all gets different advice', () => {
+  // Not a cloud problem — a link was shared instead of the picture, and telling someone to
+  // download the original would send them somewhere useless.
+  const msg = shareNotice({ sent: 0, unreadable: 0 }, 0);
+  assert.match(msg, /without the photo or video in it|sends? a link/i);
+  assert.doesNotMatch(msg, /Google Photos does that/);
 });
 
-test('the app opens the sheet for the notice even with no files', () => {
-  // The whole point. A share that produced no files and no explanation is what looked
-  // like the app ignoring the share.
-  const src = require('node:fs').readFileSync(new URL('../js/app.js', import.meta.url), 'utf8');
-  assert.match(src, /shared\.length \|\| notice/);
-  const capture = require('node:fs').readFileSync(new URL('../js/capture.js', import.meta.url), 'utf8');
+test('an undiagnosed failure is still reported', () => {
+  // THE POINT. Nothing claimed, nothing explained — this is the branch that used to be
+  // silence, and silence is what made the bug unfindable.
+  const msg = shareNotice({ sent: null, unreadable: 0 }, 0);
+  assert.ok(msg && msg.length > 20);
+  assert.match(msg, /Nothing came through/);
+});
+
+test('every failing shape produces a sentence', () => {
+  for (const [report, claimed] of [
+    [{ sent: null, unreadable: 0 }, 0],
+    [{ sent: -1, unreadable: 0 }, 0],
+    [{ sent: 0, unreadable: 0 }, 0],
+    [{ sent: 1, unreadable: 1 }, 0],
+    [{ sent: 4, unreadable: 2 }, 2],
+    [{}, 0],
+    [undefined, 0],
+  ]) {
+    const msg = shareNotice(report, claimed);
+    assert.ok(msg, `expected something to be said for ${JSON.stringify(report)}`);
+  }
+});
+
+// ── The wiring ────────────────────────────────────────────────────
+
+test('the worker reports both numbers on the redirect', () => {
+  const sw = read('../sw.js');
+  assert.match(sw, /sent=\$\{sent\}&unreadable=\$\{empty\}/);
+  assert.match(sw, /empty = offered\.length - files\.length/);
+});
+
+test('the app answers EVERY share, not only ones with files', () => {
+  const app = read('../js/app.js');
+  assert.match(app, /if \(config\.canPost\) openWithFiles\(shared, shareNotice\(/);
+  // The old shape — opening only when something arrived — is the bug.
+  assert.doesNotMatch(app, /shared\.length && config\.canPost/);
+});
+
+test('the compose sheet opens for a notice alone', () => {
+  const capture = read('../js/capture.js');
   assert.match(capture, /if \(!files\?\.length && !notice\) return;/);
 });
 
-test('the marker is cleared from the address bar', () => {
-  // Or a reload would re-announce a problem that has already been explained.
-  const src = require('node:fs').readFileSync(new URL('../js/share.js', import.meta.url), 'utf8');
-  assert.match(src, /searchParams\.delete\('unreadable'\)/);
+test('the markers are cleared so a reload does not repeat itself', () => {
+  const share = read('../js/share.js');
+  for (const key of ["'unreadable'", "'sent'"]) {
+    assert.ok(share.includes(`searchParams.delete(${key})`), `${key} must be cleared`);
+  }
 });

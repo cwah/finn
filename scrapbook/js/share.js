@@ -58,31 +58,73 @@ export function cameFromShare() {
   // Take the flag out of the address bar so a reload is an ordinary visit rather than a
   // second attempt to consume files that have already been claimed.
   url.searchParams.delete(SHARE_FLAG);
-  // The unreadable marker goes with it. Read it BEFORE calling this — it is gone after.
+  // The worker's markers go with it. Read them BEFORE calling this — they are gone after,
+  // so that a reload is an ordinary visit rather than a second attempt to consume files
+  // that have already been claimed, or a repeat of an explanation already given.
   url.searchParams.delete('unreadable');
+  url.searchParams.delete('sent');
   window.history.replaceState({}, '', url);
   return true;
 }
 
 /**
- * How many shared items arrived with no bytes behind them.
+ * What the worker said about the share, read off the URL it redirected to.
  *
- * Android hands over a file with a name and a type but nothing to read when it cannot
- * produce the content — routine for a Google Photos item that lives in the cloud and has
- * not been downloaded. Those cannot be stored, but they MUST be mentioned: dropping them
- * in silence is what made sharing look as though it did nothing at all.
+ * `sent` is how many files the sharing app actually handed over — none at all is a
+ * different problem from files that cannot be read, and the two need different advice.
+ * `-1` means the form could not be parsed at all.
  */
-export function unreadableShareCount(search = globalThis.location?.search || '') {
-  const n = Number(new URLSearchParams(search).get('unreadable'));
-  return Number.isInteger(n) && n > 0 ? n : 0;
+export function shareReport(search = globalThis.location?.search || '') {
+  const q = new URLSearchParams(search);
+  const num = (name, fallback) => {
+    // `has` first: Number(null) is 0, so an ABSENT marker would otherwise read as "the
+    // app sent zero files" — and a device still running an older worker sends no markers
+    // at all. That would have answered an unknown outcome with confident, wrong advice.
+    if (!q.has(name)) return fallback;
+    const n = Number(q.get(name));
+    return Number.isInteger(n) ? n : fallback;
+  };
+  return { sent: num('sent', null), unreadable: Math.max(0, num('unreadable', 0)) };
 }
 
-/** What to say about them. Null when there is nothing to say. */
-export function unreadableShareNotice(count) {
-  if (!count) return null;
-  const what = count === 1 ? 'That photo or video' : `${count} of those photos or videos`;
-  const it = count === 1 ? 'it' : 'them';
-  return `${what} could not be read from the share — Google Photos does that when the `
-    + `original is still in the cloud. Open ${it} in Photos and download ${it} to the `
-    + 'device first, then share again, or add from this screen instead.';
+/**
+ * What to say about a share, or null when it simply worked.
+ *
+ * A SHARE MUST NEVER BE SILENT. Someone who picked photos in another app and chose
+ * Finnbook has already told us what they want; opening the timeline as though nothing
+ * happened is the one outcome that reads as the feature being broken. Every way this can
+ * fail gets a sentence, including the ones we do not expect — an unexplained failure is
+ * still better reported than hidden.
+ *
+ * @param {{sent: number|null, unreadable: number}} report from the URL
+ * @param {number} claimed how many files actually came through
+ */
+export function shareNotice({ sent = null, unreadable = 0 } = {}, claimed = 0) {
+  if (claimed > 0 && unreadable === 0) return null;   // it worked
+
+  const cloud = 'Google Photos does that when the original is still in the cloud — open it '
+    + 'there and download it to the device first, then share again.';
+
+  if (claimed > 0) {
+    // Some came through, some did not. The ones that did are already in the sheet.
+    const what = unreadable === 1 ? 'One of those' : `${unreadable} of those`;
+    return `${what} could not be read from the share, so they are not here. ${cloud}`;
+  }
+
+  if (unreadable > 0) {
+    const what = unreadable === 1 ? 'That photo or video' : `Those ${unreadable} photos and videos`;
+    return `${what} could not be read from the share. ${cloud}`;
+  }
+
+  if (sent === 0) {
+    // The sharing app sent no files at all — typically a link instead of the picture.
+    return 'That share arrived without the photo or video in it — some apps send a link '
+      + 'instead of the file. Try sharing again and choosing the original, or add it from '
+      + 'this screen instead.';
+  }
+
+  // Everything else: the share arrived and nothing came of it, for a reason we do not yet
+  // know. Said plainly rather than swallowed.
+  return 'Nothing came through from that share. Try adding the photo or video from this '
+    + 'screen instead.';
 }

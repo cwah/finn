@@ -80,6 +80,7 @@ self.addEventListener('activate', (event) => {
 // instead", and without it a reload would re-submit the share.
 async function receiveShare(event, redirectTo) {
   let empty = 0;
+  let sent = -1;   // -1 means the form could not even be read
   try {
     const form = await event.request.formData();
     const offered = form.getAll('media').filter(Boolean);
@@ -91,6 +92,7 @@ async function receiveShare(event, redirectTo) {
     // Discarding those silently is what made sharing "do nothing": the app opened, found
     // no files, and carried on as if nobody had shared anything at all.
     empty = offered.length - files.length;
+    sent = offered.length;
     const cache = await caches.open(SHARE_CACHE);
     // Clear first: a share that was never opened should not turn up attached to this one.
     for (const old of await cache.keys()) await cache.delete(old);
@@ -109,8 +111,11 @@ async function receiveShare(event, redirectTo) {
     console.warn('share failed:', err);
   }
   // Carried on the URL rather than in the cache: it has to survive even when nothing was
-  // stashed, which is exactly the case worth reporting.
-  const target = empty > 0 ? `${redirectTo}&unreadable=${empty}` : redirectTo;
+  // stashed, which is exactly the case worth reporting. BOTH numbers go, because they say
+  // different things — `sent` is how many files the sharing app actually handed over, and
+  // an app that sends a link instead of a picture sends none at all, which is a different
+  // problem from one whose files cannot be read.
+  const target = `${redirectTo}&sent=${sent}&unreadable=${empty}`;
   return Response.redirect(target, 303);
 }
 
