@@ -186,7 +186,16 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
     .join('\n')
     .trim();
 
-  if (!text) throw new ApiError(502, 'The model returned nothing.', null);
+  if (!text) {
+    // "The model returned nothing" is unactionable, and it happens: a 200 can come back
+    // with no text in it. The reason is in stop_reason and in what the content blocks
+    // actually were, so say both. A refusal and a truncation look identical from here
+    // otherwise, and they want completely different fixes.
+    const why = parsed.stop_reason || 'no stop_reason';
+    const kinds = (parsed.content || []).map((part) => part.type).join(', ') || 'no content blocks';
+    throw new ApiError(502,
+      `The model returned no text (stop_reason: ${why}; blocks: ${kinds}).`, null);
+  }
 
   return e.json(200, { note: text, model: MODEL });
 }, $apis.requireAuth());
