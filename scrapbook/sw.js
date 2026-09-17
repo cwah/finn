@@ -242,6 +242,24 @@ async function receiveShare(event, redirectTo) {
     files = [];
   }
 
+  // TEMPORARY. Reported to the server as well as the URL, because the URL only helps if
+  // somebody reads it off a phone and types it back. This lands in the container log.
+  // Remove with /share-debug once sharing works.
+  try {
+    await fetch('/share-debug', {
+      method: 'POST',
+      body: JSON.stringify({
+        at: 'worker',
+        sent, empty, why,
+        stashed: files.length,
+        method: event.request.method,
+        contentType: event.request.headers.get('content-type') || null,
+        ua: (self.navigator && self.navigator.userAgent || '').slice(0, 120),
+      }),
+      headers: { 'content-type': 'application/json' },
+    });
+  } catch { /* a diagnostic must never break the thing it is watching */ }
+
   // Carried on the URL rather than in the cache: it has to survive even when nothing was
   // stashed, which is exactly the case worth reporting. Both numbers go, because they say
   // different things — `sent` is how many files the sharing app actually handed over, and
