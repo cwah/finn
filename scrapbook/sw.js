@@ -154,9 +154,11 @@ async function receiveShare(event, redirectTo) {
   let sent = -1;   // -1 means the body could not be read as a form at all
   let why = '';
   let files = [];
+  let threw = false;
+  let bodyBytes = -1;
 
-  // Cloned BEFORE anything reads the body: a body can only be read once, and if
-  // formData() throws, the bytes are the only way to find out what actually arrived.
+  // Cloned BEFORE anything reads the body: a body can only be read once, and what the
+  // bytes contain is the only way to check what formData() claims about them.
   const probe = event.request.clone();
 
   try {
@@ -165,24 +167,20 @@ async function receiveShare(event, redirectTo) {
     files = offered.filter((f) => f.size);
     // COUNTED, NOT JUST DROPPED. Android hands over a file with a name and a type but no
     // bytes when it cannot produce the content — the normal outcome for a Google Photos
-    // item still in the cloud. Discarding those silently is what made sharing "do
-    // nothing": the app opened, found no files, and carried on.
+    // item still in the cloud.
     empty = offered.length - files.length;
     sent = offered.length;
 
-    // NOTHING UNDER `media`, yet the form read fine. From the outside that is
-    // indistinguishable from a share that carried no photo — but it may equally mean the
-    // sharing app used a different field name, or sent a link where a file was expected.
-    // Saying which fields WERE there is the only way to tell those apart, and a service
-    // worker's console cannot be opened on a phone.
     if (!sent) {
+      // Which fields WERE there. A form that reads fine but holds no `media` is otherwise
+      // indistinguishable from a share that carried no photo, and a worker's console
+      // cannot be opened on a phone.
       const seen = [];
       for (const key of form.keys()) if (!seen.includes(key)) seen.push(key);
       why = seen.length ? `fields:${seen.join('+')}` : 'empty-form';
 
-      // AND TAKE THEM ANYWAY. The field name is ours to declare but the sharing app's to
-      // honour, and a photo arriving under another name is still the photo someone meant
-      // to send. A FormData value is a string or a file, so anything not a string is one.
+      // Taken anyway, whatever field they arrived under: the name is ours to declare but
+      // the sharing app's to honour. A FormData value is a string or a file.
       const anywhere = [];
       for (const value of form.values()) if (typeof value !== 'string') anywhere.push(value);
       if (anywhere.length) {
@@ -193,30 +191,40 @@ async function receiveShare(event, redirectTo) {
       }
     }
   } catch (err) {
-    // formData() throws on Android for shares it ought to handle — confirmed in the
-    // container, where a well-formed multipart body with no parts raises a TypeError
-    // rather than returning an empty form. So the bytes get read directly instead. This
-    // is a fallback, not the normal path: when formData() works it is used.
-    console.warn('share: formData failed, parsing the body directly:', err);
+    console.warn('share: formData failed; the bytes will be read directly:', err);
     why = (err && err.name) || 'error';
+    threw = true;
+  }
+
+  // THE BYTES, when the form yielded nothing — whether it threw or simply came back empty.
+  //
+  // An empty form is not proof of an empty body. formData() on Android already misreports
+  // a share once: it throws on a body with no parts rather than returning an empty form.
+  // So before believing that Chrome sent nothing, the body is parsed directly. If the photo
+  // is in there, this is where it is found — and either way `bodyBytes` finally says which
+  // of the two is happening, which nothing until now could tell apart.
+  if (!files.length) {
     try {
       const type = probe.headers.get('content-type') || '';
       const raw = new Uint8Array(await probe.arrayBuffer());
-      why += `.${raw.length}b.${(type || 'none').split(';')[0]}`;
+      bodyBytes = raw.length;
+      if (threw) why += `.${raw.length}b.${(type || 'none').split(';')[0]}`;
 
       const all = parseMultipart(raw, type);
-      // `media` first, because that is what the manifest asks for; anything else with a
-      // filename if there is none, for the same reason as above.
       const named = all.filter((part) => part.field === 'media');
       const parts = named.length ? named : all;
       if (!named.length && all.length) why += '.taken-anyway';
       const carried = parts.filter((part) => part.bytes.length);
-      sent = parts.length;
-      empty = parts.length - carried.length;
-      files = carried.map((part) => new File([part.bytes], part.name, { type: part.type }));
-      if (files.length) why += '.recovered';
+      if (parts.length) {
+        sent = parts.length;
+        empty = parts.length - carried.length;
+      }
+      if (carried.length) {
+        files = carried.map((part) => new File([part.bytes], part.name, { type: part.type }));
+        why += threw ? '.recovered' : '.rescued-from-bytes';
+      }
     } catch {
-      why += '.body-unreadable';
+      why += '.bytes-unreadable';
     }
   }
 
@@ -250,7 +258,7 @@ async function receiveShare(event, redirectTo) {
       method: 'POST',
       body: JSON.stringify({
         at: 'worker',
-        sent, empty, why,
+        sent, empty, why, threw, bodyBytes,
         stashed: files.length,
         method: event.request.method,
         contentType: event.request.headers.get('content-type') || null,
@@ -261,10 +269,7 @@ async function receiveShare(event, redirectTo) {
   } catch { /* a diagnostic must never break the thing it is watching */ }
 
   // Carried on the URL rather than in the cache: it has to survive even when nothing was
-  // stashed, which is exactly the case worth reporting. Both numbers go, because they say
-  // different things — `sent` is how many files the sharing app actually handed over, and
-  // an app that sends a link instead of a picture sends none at all, which is a different
-  // problem from one whose files cannot be read.
+  // stashed, which is exactly the case worth reporting.
   const target = `${redirectTo}&sent=${sent}&unreadable=${empty}`
     + (why ? `&why=${encodeURIComponent(why)}` : '');
   return Response.redirect(target, 303);

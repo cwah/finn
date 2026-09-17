@@ -152,9 +152,19 @@ test('a megabyte parses quickly enough for a phone', () => {
   assert.ok(Date.now() - started < 2000, `took ${Date.now() - started}ms`);
 });
 
-test('the worker actually uses it when formData throws', () => {
-  assert.match(src, /catch \(err\) \{[\s\S]*?parseMultipart\(raw, type\)/);
-  assert.match(src, /why \+= '\.recovered'/);
+test('the bytes are read whenever the form yields nothing', () => {
+  // Not only when formData() THROWS. An empty form is not proof of an empty body — the
+  // same API already misreports a share by throwing on a body with no parts, so a form
+  // that comes back empty is checked against the bytes before it is believed.
+  assert.match(src, /if \(!files\.length\) \{[\s\S]*?parseMultipart\(raw, type\)/);
+  assert.match(src, /threw \? '\.recovered' : '\.rescued-from-bytes'/);
+});
+
+test('the body SIZE is always reported', () => {
+  // The measurement that separates "Chrome sent nothing" from "formData lied about what
+  // Chrome sent". Without it both look identical from the server.
+  assert.match(src, /bodyBytes = raw\.length/);
+  assert.match(src, /sent, empty, why, threw, bodyBytes,/);
 });
 
 // ── Taking the photo whatever field it came under ─────────────────
