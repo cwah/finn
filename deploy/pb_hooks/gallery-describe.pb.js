@@ -184,7 +184,14 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 400,
+        // Room to think, not room to ramble. The label itself is capped at sixty words
+        // by the prompt, so 400 looked generous — but the model returns THINKING blocks
+        // before its answer, and they are billed against the same budget. A label would
+        // sometimes come back empty with stop_reason: max_tokens and nothing but
+        // thinking in it, which is what the diagnostic above was added to catch and
+        // caught on its first outing. This is headroom for the reasoning, not a licence
+        // for a longer label.
+        max_tokens: 3000,
         // Marked cacheable, and currently INERT — say so plainly rather than let the
         // next person assume it is saving anything. Anthropic will not create a cache
         // entry below 1024 tokens and this block is roughly a third of that, so the
