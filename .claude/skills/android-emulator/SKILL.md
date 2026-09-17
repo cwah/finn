@@ -93,6 +93,15 @@ adb shell uiautomator dump /sdcard/ui.xml && adb shell cat /sdcard/ui.xml \
 
 ## Gotchas worth remembering
 
+- **`reg.update()` installs a worker; it does not put it in control.** Testing right after
+  it silently exercises the OLD worker — which looks exactly like the change not working.
+  Navigate to a fresh URL and test there.
+- **Old tabs pile up and Android discards them.** A discarded tab has no
+  `navigator.serviceWorker`, and every call fails in a way that reads as a bug in the page.
+  `cdp.mjs` takes the newest matching tab; `CDP_MATCH=fresh=7` narrows it further.
+- **The local container runs an amd64 PocketBase under emulation** on an arm64 Mac and
+  occasionally dies with `fatal error: found pointer to free object`. That is the emulation,
+  not the app — `docker start finnbook` and carry on.
 - **Origins are per port.** Moving 8814 → 8099 means a new service worker registration, a
   new push subscription, a fresh permission prompt and signing in again.
 - **`ServiceWorker.deliverPushMessage` is on the PAGE target**, not the browser target. It
