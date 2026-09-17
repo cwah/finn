@@ -55,18 +55,34 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
   // Deadpan, not jokey. The comedy is the seriousness of a museum applied to the life
   // of an infant, so the moment it winks it stops working.
   //
-  // It is told NOT to describe the picture. The visitor is standing in front of it; a
-  // label that recites what they can already see is the one thing a real wall label
-  // never does. The image is still sent, because the anecdote has to be about THIS
-  // work — but it is source material, not subject matter.
+  // ── Why there is an ANGLE, picked at random ──────────────────────────────
+  // The first version of this prompt handed the model the family as its grounding
+  // facts, and got back ten labels that were all the same label: "Commissioned by
+  // [parent] … the artist contributed by [milestone] … Babka [did something]". Four of
+  // six opened with the word "Commissioned". Asking for variety does not produce it —
+  // the model reaches for the strongest pattern in the prompt every time.
   //
-  // The one rule kept from the documentary version: no invented quotations from Finn.
-  // Not for accuracy now, but because it is funnier. "A title was solicited and none
-  // was forthcoming" beats putting words in a five-month-old's mouth every time.
-  //
-  // Everything here is static on purpose — the family, the rules, the register. The
-  // per-drawing facts go in the user turn below, which keeps this block identical
-  // between calls. See the note on caching where it is sent.
+  // So the variety is imposed from outside rather than requested. One angle is drawn
+  // per call from a list of the things real wall text actually does — provenance,
+  // condition, exhibition history, attribution disputes, curatorial hedging — and the
+  // label has to take that angle. Two labels written a minute apart now differ because
+  // they were asked different questions, not because the sampler happened to wander.
+  const ANGLES = [
+    'A conservation note: the physical condition of the work, what has happened to it since, and what the studio has decided to do about it.',
+    'Provenance: how the work came into the collection, and where it had been before that.',
+    'Exhibition history: where this has previously been displayed, and how it was received there.',
+    'The circumstances of its making — the room, the hour, what else was going on.',
+    'Technique and materials, described with more rigour than they can possibly bear.',
+    'A question of attribution: how much of this is actually the artist\'s own work, and how the studio has settled the matter.',
+    'Its reception: what happened when the work was first shown, and to whom.',
+    'A comparison with the artist\'s earlier work, and what it shows about the direction of his practice.',
+    'A scholarly disagreement — about the dating, the subject, or the intent — that remains unresolved.',
+    'An incident that occurred during or shortly after the work was made.',
+    'What the artist was doing INSTEAD, while the work was being completed.',
+    'A note on the work\'s title, or the absence of one.',
+  ];
+  const ANGLE = ANGLES[Math.floor(Math.random() * ANGLES.length)];
+
   const SYSTEM = [
     'You write wall labels for a museum whose permanent collection is the work of Finn,',
     'a baby. The museum is deadpan: it treats the collection with exactly the seriousness',
@@ -77,25 +93,39 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
     'Two or three sentences. Sixty words at most.',
     '',
     'DO NOT DESCRIBE THE PICTURE. The visitor is standing in front of it. Use what you can',
-    'see to invent an ANECDOTE about the work — how it was commissioned, how the sitting',
-    'went, how it was received in the house, what the artist was doing instead.',
+    'see as raw material for something else — an anecdote, a note, a small institutional',
+    'fuss. The anecdote need not be true, but it must be dry, specific and plausible.',
     '',
-    'The anecdote need not be true. It must be dry, specific and plausible, and grounded',
-    'in these:',
-    '  - The artist is Finn. His parents are Adam and Catherine.',
-    '  - His older sister is Babka, a tortoiseshell cat born September 2022.',
-    '  - Anchor at least one detail to what a baby of the stated age can and cannot do:',
-    '    rolling over, grabbing his feet, mouthing everything, babbling in vowels,',
-    '    holding his head up, sleeping through things.',
+    'WHO IS IN THE ARTIST\'S LIFE:',
+    '  - Finn is in daycare. If the work needed adult hands, they were most likely an',
+    '    instructor\'s — unnamed, or named with an initial and treated as staff. The room,',
+    '    the routine, the other infants and the daily report are all fair material.',
+    '  - His parents are Adam and Catherine. His elder sister is Babka, a tortoiseshell',
+    '    cat born September 2022.',
+    '',
+    'USE THE FAMILY SPARINGLY. They have been badly overused. Most labels should mention',
+    'none of them. Never mention more than one of them in a single label, and only when',
+    'that particular label genuinely needs them — a work made at home, a reception, a',
+    'question of who was holding the brush. The daycare and the institution itself are the',
+    'default cast; the family is the exception.',
+    '',
+    'Anchor at least one detail to what a baby of the stated age can and cannot do, and be',
+    'specific to that age rather than reaching for the same few: at six months, sitting',
+    'propped, rolling both ways, transferring an object hand to hand, mouthing everything,',
+    'consonants arriving, unable to be left on anything raised.',
+    '',
+    'DO NOT begin the label with "Commissioned by". Vary how you open — a date, a',
+    'condition, a disagreement, a fact about the room. Avoid the formula of naming a',
+    'commissioner, then a milestone, then the cat.',
     '',
     'Not everything in this collection was made by Finn — some of it was made for him, or',
     'around him, or by a machine. Where he plainly did not hold the brush, do not pretend',
-    'he did; that he attended and contributed by sleeping through it is the better line.',
+    'he did; that he attended and slept through it is the better line.',
     '',
     'Never invent a quotation from Finn. He cannot speak, and that he cannot speak is',
     'almost always the better joke.',
-    'Do not invent other relatives, places, or anything medical.',
-    'Return the label text and nothing else.',
+    'Do not invent other relatives, or anything medical.',
+    'Return the label text and nothing else — no title, no heading, no medium line.',
   ].join('\n');
 
   const facts = [
@@ -133,7 +163,7 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
           role: 'user',
           content: [
             { type: 'image', source: { type: 'base64', media_type: mediaType, data: image } },
-            { type: 'text', text: `${facts}\n\nWrite the wall label.` },
+            { type: 'text', text: `${facts}\n\nTake this angle for this label:\n${ANGLE}\n\nWrite the wall label.` },
           ],
         }],
       }),

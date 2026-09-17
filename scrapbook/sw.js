@@ -169,6 +169,29 @@ async function receiveShare(event, redirectTo) {
     // nothing": the app opened, found no files, and carried on.
     empty = offered.length - files.length;
     sent = offered.length;
+
+    // NOTHING UNDER `media`, yet the form read fine. From the outside that is
+    // indistinguishable from a share that carried no photo — but it may equally mean the
+    // sharing app used a different field name, or sent a link where a file was expected.
+    // Saying which fields WERE there is the only way to tell those apart, and a service
+    // worker's console cannot be opened on a phone.
+    if (!sent) {
+      const seen = [];
+      for (const key of form.keys()) if (!seen.includes(key)) seen.push(key);
+      why = seen.length ? `fields:${seen.join('+')}` : 'empty-form';
+
+      // AND TAKE THEM ANYWAY. The field name is ours to declare but the sharing app's to
+      // honour, and a photo arriving under another name is still the photo someone meant
+      // to send. A FormData value is a string or a file, so anything not a string is one.
+      const anywhere = [];
+      for (const value of form.values()) if (typeof value !== 'string') anywhere.push(value);
+      if (anywhere.length) {
+        files = anywhere.filter((f) => f.size);
+        empty = anywhere.length - files.length;
+        sent = anywhere.length;
+        why += '.taken-anyway';
+      }
+    }
   } catch (err) {
     // formData() throws on Android for shares it ought to handle — confirmed in the
     // container, where a well-formed multipart body with no parts raises a TypeError
@@ -181,7 +204,12 @@ async function receiveShare(event, redirectTo) {
       const raw = new Uint8Array(await probe.arrayBuffer());
       why += `.${raw.length}b.${(type || 'none').split(';')[0]}`;
 
-      const parts = parseMultipart(raw, type).filter((part) => part.field === 'media');
+      const all = parseMultipart(raw, type);
+      // `media` first, because that is what the manifest asks for; anything else with a
+      // filename if there is none, for the same reason as above.
+      const named = all.filter((part) => part.field === 'media');
+      const parts = named.length ? named : all;
+      if (!named.length && all.length) why += '.taken-anyway';
       const carried = parts.filter((part) => part.bytes.length);
       sent = parts.length;
       empty = parts.length - carried.length;

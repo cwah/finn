@@ -156,3 +156,31 @@ test('the worker actually uses it when formData throws', () => {
   assert.match(src, /catch \(err\) \{[\s\S]*?parseMultipart\(raw, type\)/);
   assert.match(src, /why \+= '\.recovered'/);
 });
+
+// ── Taking the photo whatever field it came under ─────────────────
+// The manifest asks for `media`, but the field name is the sharing app's to honour. A
+// photo arriving under another name is still the photo someone meant to send, and the
+// alternative — dropping it and saying the share was empty — is how this looked when it
+// was reported.
+
+test('the parser reports the field name, so a mismatch is visible', () => {
+  const parts = parseMultipart(body([
+    { field: 'file', filename: 'IMG_9.jpg', type: 'image/jpeg', bytes: new Uint8Array([4, 5]) },
+  ]), CT);
+  assert.equal(parts.length, 1);
+  assert.equal(parts[0].field, 'file', 'the caller decides what to do about the name');
+  assert.equal(parts[0].bytes.length, 2);
+});
+
+test('the worker falls back to any file when none is named media', () => {
+  assert.match(src, /const named = all\.filter\(\(part\) => part\.field === 'media'\)/);
+  assert.match(src, /const parts = named\.length \? named : all/);
+  assert.match(src, /taken-anyway/);
+});
+
+test('the form path does the same, and says which fields it saw', () => {
+  // formData() succeeding with nothing under `media` used to teach us nothing at all.
+  assert.match(src, /for \(const key of form\.keys\(\)\)/);
+  assert.match(src, /fields:\$\{seen\.join\('\+'\)\}/);
+  assert.match(src, /for \(const value of form\.values\(\)\) if \(typeof value !== 'string'\)/);
+});

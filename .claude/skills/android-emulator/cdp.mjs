@@ -19,8 +19,13 @@ if (mode === 'targets') {
 }
 
 // The page target, NOT the browser target — ServiceWorker.deliverPushMessage lives here.
-const page = list.find((t) => t.type === 'page' && t.url.includes(`:${WANT}`))
-  || list.find((t) => t.type === 'page' && /localhost:\d+/.test(t.url));
+// The LAST match, not the first: tabs accumulate across a session and an older one is
+// often discarded by Android, where `navigator.serviceWorker` is undefined and every call
+// fails in a way that looks like a bug in the page. CDP_MATCH narrows it further.
+const MATCH = process.env.CDP_MATCH || `:${WANT}`;
+const pages = list.filter((t) => t.type === 'page' && t.url.includes(MATCH));
+const page = pages[pages.length - 1]
+  || list.filter((t) => t.type === 'page' && /localhost:\d+/.test(t.url)).pop();
 if (!page) { console.error(`no page on :${WANT}. Try: node cdp.mjs targets`); process.exit(1); }
 
 const ws = new WebSocket(page.webSocketDebuggerUrl);
