@@ -397,6 +397,15 @@ field('note').addEventListener('input', () => {
  * @returns {Promise<string>}
  */
 async function describeArtwork(picture, facts) {
+  // Send what is already hanging. Every call to the model is otherwise blind to every
+  // other one, which is why two labels a minute apart both said "consistent with
+  // sustained mouthing" — the model cannot avoid a phrase it has never seen. Failing to
+  // fetch them is not worth failing the whole request over; the label is just likelier
+  // to rhyme with its neighbours.
+  const existing = await getGallery()
+    .then(({ artworks }) => artworks.map((a) => a.note).filter(Boolean))
+    .catch(() => []);
+
   const res = await authed('/api/gallery/describe', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -404,6 +413,7 @@ async function describeArtwork(picture, facts) {
       image: picture.data,
       mediaType: picture.mediaType,
       ...facts,
+      existing,
       age: ageLabel(monthsAt(state.birthDate, facts.createdOn)),
     }),
   });

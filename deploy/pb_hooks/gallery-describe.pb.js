@@ -46,6 +46,13 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
   }
 
   const body = e.requestInfo().body || {};
+  // What is already on the wall, sent by the studio. The single biggest cause of
+  // repetition is that every call is blind to every other one, so the model converges on
+  // the same phrasing for the same angle. Capped, because this grows forever and the
+  // oldest labels are the least likely to be read alongside the new one.
+  const existing = Array.isArray(body.existing)
+    ? body.existing.filter(Boolean).slice(0, 12).map((s) => `- ${String(s).slice(0, 400)}`).join('\n')
+    : '';
   const image = String(body.image || '');
   const mediaType = String(body.mediaType || 'image/jpeg');
   if (!image) throw new BadRequestError('No image was sent.');
@@ -82,6 +89,23 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
     'A note on the work\'s title, or the absence of one.',
   ];
   const ANGLE = ANGLES[Math.floor(Math.random() * ANGLES.length)];
+
+  // Angle alone was not enough. Two labels that drew the conservation angle came back
+  // nearly word for word — both "consistent with sustained mouthing", both declining to
+  // intervene — because the angle fixes the SUBJECT and leaves the sentence shapes free
+  // to converge. This fixes the shape too, so even a repeated angle has to be built
+  // differently.
+  const SHAPES = [
+    'Write it as one long unbroken sentence.',
+    'Write three short sentences. Make the last one blunt.',
+    'Write a terse note of under thirty words.',
+    'Write two sentences, the second much longer than the first.',
+    'Open with a date, a time, or a catalogue number.',
+    'Write two sentences, neither of which names the artist.',
+    'Open mid-argument, as though continuing a disagreement the reader missed the start of.',
+    'Write it as a flat procedural record, with no adjectives at all.',
+  ];
+  const SHAPE = SHAPES[Math.floor(Math.random() * SHAPES.length)];
 
   const SYSTEM = [
     'You write wall labels for a museum whose permanent collection is the work of Finn,',
@@ -121,6 +145,16 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
     'Not everything in this collection was made by Finn — some of it was made for him, or',
     'around him, or by a machine. Where he plainly did not hold the brush, do not pretend',
     'he did; that he attended and slept through it is the better line.',
+    '',
+    'WORN-OUT PHRASING. These have all been used already. Do not reuse them, and do not',
+    'reach for near-variants of them:',
+    '  - "consistent with sustained mouthing", and any "consistent with ..." formulation',
+    '  - "has declined to intervene", "has elected not to intervene", "the studio has',
+    '    elected", and every other way of saying the museum left something alone',
+    '  - "at [N] months the artist cannot yet ...", as a clause explaining a limitation',
+    '  - "the studio maintains", "his file notes without further comment"',
+    '  - "attended and contributed by sleeping through it"',
+    'Say the same things differently, or say different things.',
     '',
     'Never invent a quotation from Finn. He cannot speak, and that he cannot speak is',
     'almost always the better joke.',
@@ -163,7 +197,16 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
           role: 'user',
           content: [
             { type: 'image', source: { type: 'base64', media_type: mediaType, data: image } },
-            { type: 'text', text: `${facts}\n\nTake this angle for this label:\n${ANGLE}\n\nWrite the wall label.` },
+            { type: 'text', text: [
+              facts,
+              '',
+              existing ? `Labels already hanging in this museum. Do not reuse their phrasing, their sentence shapes, or their closing moves — a visitor reads these one after another:\n${existing}` : '',
+              '',
+              `Take this angle for this label:\n${ANGLE}`,
+              `Shape: ${SHAPE}`,
+              '',
+              'Write the wall label.',
+            ].filter(Boolean).join('\n') },
           ],
         }],
       }),
