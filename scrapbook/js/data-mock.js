@@ -71,6 +71,10 @@ export async function updatePost(id, draft, author) {
       // No server to resize, so one url stands in for all three — the SHAPE has to
       // match data-pb.js or the renderer would read undefined and show nothing.
       cardUrl: p.url,
+      // No thumbnailer without a backend, so every size is the same file. Present so the
+      // shape matches data-pb.js — the renderer reads these and must not find them absent.
+      cardSet: null,
+      viewUrl: p.url,
       thumbUrl: p.url,
       width: p.width,
       height: p.height,
@@ -111,6 +115,10 @@ export async function createPost(draft, author) {
       // No server to resize, so one url stands in for all three — the SHAPE has to
       // match data-pb.js or the renderer would read undefined and show nothing.
       cardUrl: p.url,
+      // No thumbnailer without a backend, so every size is the same file. Present so the
+      // shape matches data-pb.js — the renderer reads these and must not find them absent.
+      cardSet: null,
+      viewUrl: p.url,
       thumbUrl: p.url,
       width: p.width,
       height: p.height,

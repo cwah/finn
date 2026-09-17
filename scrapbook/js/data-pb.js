@@ -149,6 +149,18 @@ function toPhoto(rec) {
     // slow to fill in. The lightbox still asks for `url`, because expanding a photo is the
     // one place the whole thing is wanted.
     cardUrl: pb.fileUrl('photos', rec.id, rec.image, '1280x1280f'),
+    // The same picture at the sizes a card might want, so a browser can pick one instead
+    // of being handed the largest. A phone card is ~390 CSS px; at 2x it needs 960, not
+    // 1280, and that difference is most of the timeline's bandwidth.
+    cardSet: {
+      640: pb.fileUrl('photos', rec.id, rec.image, '640x640f'),
+      960: pb.fileUrl('photos', rec.id, rec.image, '960x960f'),
+      1280: pb.fileUrl('photos', rec.id, rec.image, '1280x1280f'),
+    },
+    // What the LIGHTBOX opens. It used to be handed `url`, the stored file — up to 2560px
+    // on anything recent and larger on older uploads. 2048 is beyond what a phone or a
+    // laptop can show, at a fraction of the bytes. `url` remains the file itself.
+    viewUrl: pb.fileUrl('photos', rec.id, rec.image, '2048x2048f'),
     thumbUrl: pb.fileUrl('photos', rec.id, rec.image, '320x320f'),
     width: rec.width,
     height: rec.height,

@@ -13,25 +13,39 @@
 //
 // TWO THINGS ARE NEVER TOUCHED:
 //
-//   /api/      auth tokens, private posts, and family photos. None of it belongs in a
-//              cache on disk, and a stale one would show memories that were deleted.
+//   /api/collections/, /api/files/ WITH A RANGE, and everything else under /api/.
+//              Auth tokens and post JSON are mutable, and a stale copy would show
+//              memories that were deleted. Video is excluded separately because seeking
+//              is a range request, and answering one from a whole cached file breaks it.
+//
+// THE ONE EXCEPTION IS /api/files/ IMAGES, added when bandwidth became the binding
+// constraint. A PocketBase file URL carries a filename generated at upload, so the bytes
+// at a given URL never change — which is what makes a cache safe here and unsafe for the
+// JSON beside it. They are already on disk in the HTTP cache; this only stops them being
+// fetched twice.
 //   /gallery/  a separate app with its own worker. This worker's scope is the whole
 //              origin and would otherwise shadow it.
 
 // Bumped with the bell. A changed sw.js installs a new worker on its own, but activate
 // only drops caches that are not this one — so without a bump a browser could keep
 // serving its cached copy of the app modules that changed alongside it.
-const VERSION = 'scrapbook-v5';
+const VERSION = 'scrapbook-v6';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because
 // the worker happened to change would lose whatever someone was trying to save.
 const SHARE_CACHE = 'share-inbox';
 const AUTH_CACHE = 'finnbook-auth';
+
+// Photos, kept across deploys — the app shell is versioned because it changes, and these
+// never do. Bounded, because a family scrapbook grows without limit and a cache that
+// grows with it would quietly fill a phone.
+const MEDIA_CACHE = 'finnbook-media';
+const MEDIA_LIMIT = 500;
 const AUTH_KEY = '/__session-token';
 
 /** Caches that survive a version bump, because they hold the person's state, not the build's. */
-const KEEP = [SHARE_CACHE, AUTH_CACHE];
+const KEEP = [SHARE_CACHE, AUTH_CACHE, MEDIA_CACHE];
 
 // The wording and the landing rules, shared verbatim with the tests. A worker cannot
 // import an ES module, so this is a classic script loaded the old way — the same
@@ -275,6 +289,48 @@ async function receiveShare(event, redirectTo) {
   return Response.redirect(target, 303);
 }
 
+/**
+ * A photo, from the cache if it is there.
+ *
+ * CACHE FIRST, which is the opposite of everything else this worker does — and safe for
+ * the same reason the rest is not. A PocketBase file URL contains a filename generated at
+ * upload, so the bytes never change; there is no stale version to be served. The app's own
+ * code is network-first precisely because it DOES change.
+ *
+ * Only images are kept. A video arrives in ranges and is far too big to hold.
+ */
+async function serveMedia(request) {
+  let cache = null;
+  try {
+    cache = await caches.open(MEDIA_CACHE);
+    const hit = await cache.match(request);
+    if (hit) return hit;
+  } catch {
+    return fetch(request);   // no storage available; the network still works
+  }
+
+  const response = await fetch(request);
+  const type = response.headers.get('content-type') || '';
+  // 200 only: a 206 is a piece of something, and a 404 cached is a photo that never comes
+  // back. Images only, for the reason above.
+  if (response.status === 200 && type.startsWith('image/')) {
+    try {
+      await cache.put(request, response.clone());
+      await trimMedia(cache);
+    } catch { /* quota, private mode — the photo still loads */ }
+  }
+  return response;
+}
+
+/** Keep the photo cache from growing without end. */
+async function trimMedia(cache) {
+  const keys = await cache.keys();
+  if (keys.length <= MEDIA_LIMIT) return;
+  // Oldest first: cache.keys() returns them in insertion order, and the oldest photo is
+  // the one furthest down a timeline nobody is scrolling.
+  for (const old of keys.slice(0, keys.length - MEDIA_LIMIT)) await cache.delete(old);
+}
+
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const target = new URL(request.url);
@@ -289,6 +345,14 @@ self.addEventListener('fetch', (event) => {
 
   const url = target;
   if (url.origin !== self.location.origin) return;
+
+  // Photos: served from the cache when they are in it, because the bytes behind a file URL
+  // never change. A range request is left alone — that is video seeking, and answering it
+  // with a whole file breaks it.
+  if (url.pathname.startsWith('/api/files/') && !request.headers.has('range')) {
+    event.respondWith(serveMedia(request));
+    return;
+  }
   if (url.pathname.startsWith('/api/')) return;
   if (url.pathname.startsWith('/gallery/')) return;
 

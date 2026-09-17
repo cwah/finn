@@ -128,3 +128,60 @@ test('the query is cleared once used', () => {
   // carries a post id that means nothing to anyone else.
   assert.match(app, /history\.replaceState\(null, '', location\.pathname\)/);
 });
+
+// ── Photos are cached; the JSON beside them is not ────────────────
+// Bandwidth became the binding constraint. The worker deliberately never touched /api/,
+// for two reasons that do not apply equally: auth tokens and post JSON are MUTABLE and a
+// stale copy would show deleted memories — but a PocketBase file URL carries a filename
+// generated at upload, so the bytes at that URL never change. That difference is what
+// makes caching one safe and the other not, and the split has to stay exactly there.
+
+test('photo files are served from the cache', () => {
+  assert.match(sw, /url\.pathname\.startsWith\('\/api\/files\/'\)/);
+  assert.match(sw, /async function serveMedia/);
+});
+
+test('the JSON API is still never cached', () => {
+  // The whole reason /api/ was excluded. A cached posts list would show memories that
+  // were deleted.
+  assert.match(sw, /if \(url\.pathname\.startsWith\('\/api\/'\)\) return;/);
+  assert.doesNotMatch(sw, /startsWith\('\/api\/collections\/'\)[\s\S]{0,80}cache\.put/);
+});
+
+test('a range request is left alone, so video seeking still works', () => {
+  // Answering a range with a whole cached file breaks scrubbing.
+  assert.match(sw, /!request\.headers\.has\('range'\)/);
+});
+
+test('only whole images are kept', () => {
+  // A 206 is a piece of something; a cached 404 is a photo that never comes back.
+  assert.match(sw, /response\.status === 200 && type\.startsWith\('image\/'\)/);
+});
+
+test('the photo cache is bounded', () => {
+  // A family scrapbook grows without limit, and a cache that grew with it would fill a
+  // phone.
+  assert.match(sw, /MEDIA_LIMIT/);
+  assert.match(sw, /async function trimMedia/);
+});
+
+test('the photo cache survives a deploy', () => {
+  // The app shell is versioned because it changes; these files never do, and re-fetching
+  // every photo on every deploy is the bandwidth this was meant to save.
+  const keep = (sw.match(/const KEEP = \[([^\]]*)\]/) || [])[1] || '';
+  assert.match(keep, /MEDIA_CACHE/);
+});
+
+test('the server tells browsers the files never change', () => {
+  const hook = readFileSync(new URL('../../deploy/pb_hooks/cache.pb.js', import.meta.url), 'utf8');
+  assert.match(hook, /path\.startsWith\('\/api\/files\/'\)/);
+  assert.match(hook, /immutable/);
+  // `private`: a family's photographs have no business in a shared cache between here and
+  // the phone.
+  assert.match(hook, /'private, max-age=\d+, immutable'/);
+});
+
+test('code is still revalidated, or a stale module breaks sign-in again', () => {
+  const hook = readFileSync(new URL('../../deploy/pb_hooks/cache.pb.js', import.meta.url), 'utf8');
+  assert.match(hook, /Cache-Control', 'no-cache'/);
+});

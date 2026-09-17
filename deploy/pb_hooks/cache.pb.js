@@ -17,8 +17,15 @@
 // impossible, so the fix is to say plainly: check with me first. `no-cache` does not mean
 // "do not cache" — it means revalidate, so an unchanged file still costs only a 304.
 //
-// Scoped to code, deliberately. Photos and video are served from /api/files/ and are the
-// large, unchanging things worth caching properly; nothing here touches them.
+// Scoped to code, deliberately — and the opposite instruction is given to /api/files/,
+// which is where the bandwidth actually goes. A PocketBase file URL carries a filename
+// generated at upload, so the bytes at a given URL never change: a browser that has one
+// never needs to ask again. Without a Cache-Control header at all, Chrome falls back to
+// heuristic caching and re-fetches far more than it needs to, and on a metered host that
+// is paid for twice over.
+//
+// `private`, not `public`: these are a family's photographs, and a shared cache anywhere
+// between here and the phone has no business holding them.
 
 routerUse((e) => {
   const path = e.request.url.path;
@@ -27,6 +34,12 @@ routerUse((e) => {
   // browser this is an installable app rather than a file someone linked to.
   if (path.endsWith('.webmanifest')) {
     e.response.header().set('Content-Type', 'application/manifest+json');
+  }
+
+  // Photos and video. Immutable by construction, so a year is not optimistic.
+  if (path.startsWith('/api/files/')) {
+    e.response.header().set('Cache-Control', 'private, max-age=31536000, immutable');
+    return e.next();
   }
 
   const isCode = /\.(js|css|html|json|webmanifest)$/.test(path);

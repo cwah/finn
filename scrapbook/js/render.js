@@ -8,6 +8,7 @@ import {
 } from './layout-engine.js';
 import { ageStamp, dateLabel } from './age.js';
 import { milestoneArtSvg, artImage } from './milestone-art.js';
+import { cardSrcset, cardSizes } from './image-sizes.js';
 
 function el(tag, className, props = {}) {
   const node = document.createElement(tag);
@@ -24,7 +25,7 @@ function el(tag, className, props = {}) {
  * that knows the difference: the crop box, the engine and every layout rule above it go
  * on reasoning about stored width/height and never learn that motion exists.
  */
-function photoEl(photo) {
+function photoEl(photo, share = 1) {
   // Set on the MEDIA, not on the rotor or the crop box: those carry transforms and
   // overflow, and a filter on either would make a new containing block for them.
   const light = lightFilter(photo);
@@ -39,6 +40,14 @@ function photoEl(photo) {
       width: photo.width,
       height: photo.height,
     });
+    // The candidates, and the width this one will actually be shown at. Without `sizes` a
+    // browser assumes the picture fills the viewport and takes the largest — which is what
+    // it was doing, and most of the timeline's bandwidth.
+    const set = cardSrcset(photo);
+    if (set) {
+      img.srcset = set;
+      img.sizes = cardSizes(share);
+    }
     if (light) img.style.filter = light;
     return img;
   }
@@ -110,7 +119,7 @@ function rotor(photo, media) {
  * @param {number|null} cellAspect shape of the cell this must cover, or null when the
  *        surrounding frame already matches the crop exactly and no further crop happens
  */
-function cropped(photo, group, cellAspect = null) {
+function cropped(photo, group, cellAspect = null, share = 1) {
   const c = cropRect(photo);
   const size = croppedSize(photo);
 
@@ -130,7 +139,7 @@ function cropped(photo, group, cellAspect = null) {
     box.style.setProperty('--py', p.y);
   }
 
-  const media = photoEl(photo);
+  const media = photoEl(photo, share);
   box.append(rotor(photo, media));
   makeViewable(media, photo, group);
   return box;
@@ -150,8 +159,8 @@ function clock(seconds) {
  * deliberately oversized and offset to show its crop: anything inside it would be
  * positioned against the picture rather than against the cell the parent can see.
  */
-function mountMedia(container, photo, group, cellAspect = null) {
-  const box = cropped(photo, group, cellAspect);
+function mountMedia(container, photo, group, cellAspect = null, share = 1) {
+  const box = cropped(photo, group, cellAspect, share);
   container.append(box);
 
   if (isMotion(photo)) {
@@ -203,7 +212,10 @@ const SPEAKER_SVG = `
 function makeViewable(img, photo, group) {
   const c = cropRect(photo);
   const o = orientedSize(photo);
-  img.dataset.full = photo.url;
+  // The size the lightbox opens — NOT the stored file. Expanding a photo used to fetch
+  // the original, which is up to 2560px on anything recent and larger on older uploads;
+  // 2048 is past what a phone or a laptop can show, at a fraction of the bytes.
+  img.dataset.full = photo.viewUrl || photo.url;
   // The size the picture PRESENTS, so the lightbox sizes a turned photo correctly.
   img.dataset.fullW = o.width;
   img.dataset.fullH = o.height;
@@ -266,7 +278,7 @@ function gridPhotos(photos, group) {
   shown.forEach((p, i) => {
     const cell = el('div', 'grid-cell');
     const isHero = heroAspect !== null && i === 0;
-    mountMedia(cell, p, group, isHero ? heroAspect : 1); // other cells are square
+    mountMedia(cell, p, group, isHero ? heroAspect : 1, isHero ? 1 : 2); // other cells are square, two across
     wrap.append(cell);
   });
   return wrap;
