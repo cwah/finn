@@ -171,7 +171,10 @@ function render() {
   frame.style.setProperty('--ch', photo.crop.h);
 
   const video = fillRotor(rotor, photo);
-  if (video) holdToTrim(video, photo.trim);
+  // A motion photo loops inside its trim; a clip plays its stretch once and stops.
+  // `video.loop` above still covers an UNTRIMMED motion photo, where there is no
+  // sub-range and the native mechanism is the right one.
+  if (video) holdToTrim(video, photo.trim, null, { loop: photo.motion });
   layout(box);
 
   // A motion photo gets the same small badge it has on the card, and nothing else: it is a

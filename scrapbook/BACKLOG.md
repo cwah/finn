@@ -18,13 +18,15 @@ Shipped when it lands. No ceremony beyond that.
 - [ ] **Location.** Use photo metadata to infer location. Also allow 
       users to manually set location. Have location preselected and 
       enabled by default.
-- [ ] **Loop motion photos.** Automatically loop motion photos in the
-      viewer. Don't show the video progress bar and only have a play/
-      pause button, similar to the main page
-- [ ] **Gesture based swipes.** Use gestures on photos/media to swipe
-      through photos on viewer. Have photos follow the swipe, not
-      just be an animation. Use dots below the photo to indicate
-      which photo/progress.
+- [ ] **Make the swipe follow the finger, and show dots.** Swiping between photos in the
+      viewer now works — but it is a threshold gesture, not a drag: the photo does not
+      move with the finger and there is no sense of the next one arriving. Position is
+      still shown as "3 / 6" text rather than dots under the picture.
+      What is already there: a horizontal drag over the picture pages forward or back, a
+      mostly-vertical drag is ignored, and a zoomed photo keeps its panning.
+      `touch-action: pan-y pinch-zoom` on `.lightbox-crop` is what makes the gesture reach
+      the page at all — without it the browser claims a sideways drag for scrolling and
+      ends it with `pointercancel`, which is why this looked unimplemented when it was not.
 - [ ] **Paused motion photos.** When you pause a motion photo, reset
       to the main frame.
 - [ ] **Download the cropped image.** Right-click → Save Image currently saves the
@@ -76,22 +78,9 @@ Shipped when it lands. No ceremony beyond that.
       never shrinks, and the two-copy video scheme pushes usage up. Revisit when the 5 GB
       is genuinely in sight, or when Render's own object storage reaches GA.
 
-- [ ] **Re-encode video on upload.** Deferred deliberately, with the numbers measured
-      2026-08-30: 17 stored clips came to 157 MB, and two of them — 58.8 MB/24s and
-      46.4 MB/8.8s — were two thirds of that. So the win is real but concentrated in a
-      couple of long 4K clips, and the 200 MB field limit keeps it from running away.
-      What was established while looking, so it need not be re-derived:
-      `MediaRecorder.isTypeSupported('video/mp4')` is TRUE on current Chrome, so H.264
-      MP4 can be produced with the browser's own muxer — no hand-written byte-level
-      muxing, which is what makes this tractable at all. The cost is that MediaRecorder
-      runs in REAL TIME and needs the tab in front: a 24s clip takes 24s. Encoding only
-      the trimmed stretch would fix both the time and the size at once, but would make
-      the trim destructive, which is against how framing works everywhere else here.
-      WebCodecs is faster but needs an MP4 muxer written by hand, and a subtle bug there
-      is an unplayable memory rather than an obvious error.
-      Pairs naturally with the HEVC item above — both are "re-encode on the way in".
-
-- [ ] **The expanded video shows the untrimmed length.** Playback *is* trimmed — it starts
+- [ ] **The expanded VIDEO shows the untrimmed length.** No longer true of motion
+      photos, which lost the control bar entirely — it is a still that moves, and there is
+      nothing to scrub. Still true of real clips. Playback *is* trimmed — it starts
       at `trimStart` and `holdToTrim` stops it at `trimEnd` — but the native `<video
       controls>` scrub bar spans the whole source file, so a 17s clip trimmed to 13.9s
       still reads "0:17" and the handle can be dragged past the end. The control bar is
@@ -103,6 +92,24 @@ Shipped when it lands. No ceremony beyond that.
       whole either way, so the trim remains re-editable.
 
 ## Shipped
+
+- [x] **Loop motion photos in the viewer**, with no progress bar and a small play/pause
+      badge on the picture, as on the main page. The looping needed doing by hand: native
+      `loop` restarts the FILE, and the trim is a sub-range — so a trimmed motion photo
+      played its stretch once and stopped. `holdToTrim` takes a `loop` option now, and the
+      badge sits inside the crop box rather than the rotor, which turns.
+- [x] **Re-encode video on upload** — as encode-at-save, of only the stretch the trim
+      keeps. Encoding when the clip was PICKED cost its own length in wall time before the
+      editor would open, and encoded minutes the 30s cap means nobody can watch.
+      This takes the trade-off the item warned about: a re-encoded clip has its trim BAKED
+      IN, so it can be narrowed later but not moved outside what was kept. Accepted for the
+      same reason the original is already discarded — the phone that filmed it still has
+      the whole thing. A clip small enough to be left alone is not baked.
+      One thing recorded here contradicts what was measured later:
+      `MediaRecorder.isTypeSupported('video/mp4')` is NOT universally true. It is false on
+      Android Chrome 124, measured on an emulator, where nothing is re-encoded at all and
+      the clip uploads whole — the compose sheet now says so. Worth re-checking on a
+      current phone before relying on it.
 
 - [X] Notify subscribers of new posts - Add functionality to allow 
       other viewers to subscribe to new posts. Consider a simpler web hook to share on a timeline or feed somewhere.

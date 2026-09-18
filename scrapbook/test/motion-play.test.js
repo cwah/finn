@@ -15,7 +15,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { wireMotionTrim, markOnScreen, onVisibility } from '../js/motion-play.js';
+import { wireMotionTrim, markOnScreen, onVisibility, holdToTrim } from '../js/motion-play.js';
 
 /** The slice of <video> this rule touches, and nothing else. */
 function fakeVideo({ trimStart = 0.8, trimEnd = 1.8, duration = 2.334 } = {}) {
@@ -181,4 +181,55 @@ test('a motion photo stops when it leaves, like everything else', () => {
   const v = onCard({ motion: true, playing: true });
   onVisibility(v, false);
   assert.equal(v.paused, true);
+});
+
+// ── Looping inside the trim, in the expanded view ─────────────────
+// The lightbox used holdToTrim, which PAUSES at the trim end — right for a clip asked to
+// play once, wrong for a motion photo, which is a photograph that moves. `video.loop` does
+// not help: native loop restarts the FILE, so a trimmed motion photo played its stretch
+// once and stopped. Nearly shipped as "looping" without ever looping.
+
+test('a looping trim goes round instead of stopping', () => {
+  const v = fakeVideo({ trimStart: 0.8, trimEnd: 1.8 });
+  holdToTrim(v, { start: 0.8, end: 1.8 }, null, { loop: true });
+  v.advanceTo(1.85);
+  assert.equal(v.currentTime, 0.8, 'back to the top of the trim');
+  assert.equal(v.paused, false, 'and still playing');
+  assert.equal(v.playCount, 1);
+});
+
+test('native loop is turned off when we do the looping', () => {
+  // Otherwise the browser restarts the whole file while we are restarting the trim.
+  const v = fakeVideo();
+  v.loop = true;
+  holdToTrim(v, { start: 0.8, end: 1.8 }, null, { loop: true });
+  assert.equal(v.loop, false);
+});
+
+test('without the option it still stops, as a clip should', () => {
+  const v = fakeVideo();
+  holdToTrim(v, { start: 0.8, end: 1.8 });
+  v.advanceTo(1.85);
+  assert.equal(v.paused, true);
+  assert.equal(v.currentTime, 0.8, 'ready to play again from the top');
+});
+
+test('running out of file loops too', () => {
+  // timeupdate fires a few times a second; a trim ending on the last frame can run out
+  // before it is noticed.
+  const v = fakeVideo({ trimEnd: 2.334 });
+  holdToTrim(v, { start: 0.8, end: 2.334 }, null, { loop: true });
+  v.currentTime = 2.334;
+  v.fire('ended');
+  assert.equal(v.currentTime, 0.8);
+  assert.equal(v.paused, false);
+});
+
+test('an untrimmed motion photo is left to the browser', () => {
+  // No sub-range, so native loop is the right mechanism and nothing here should interfere.
+  const v = fakeVideo();
+  v.loop = true;
+  holdToTrim(v, { start: 0, end: 0 }, null, { loop: true });
+  assert.equal(v.loop, true);
+  assert.equal(v.has('timeupdate'), false);
 });

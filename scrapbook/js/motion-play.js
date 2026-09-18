@@ -169,14 +169,32 @@ function ensureObserver() {
  *
  * Shared by the cards and the lightbox, because a trim has to mean the same thing in both.
  */
-export function holdToTrim(video, { start, end }, onEnd) {
+export function holdToTrim(video, { start, end }, onEnd, { loop = false } = {}) {
   if (!(end > start)) return;
-  video.addEventListener('timeupdate', () => {
-    if (video.currentTime < end) return;
+
+  // NATIVE `loop` CANNOT EXPRESS A SUB-RANGE — it restarts the FILE — so when the caller
+  // wants a loop it is done here, and the native one is turned off so the two cannot
+  // fight. Without this a trimmed motion photo played its stretch once and stopped, which
+  // is right for a clip asked to play and wrong for a photograph that moves.
+  if (loop) video.loop = false;
+
+  const atEnd = () => {
+    if (loop) {
+      video.currentTime = start;
+      video.play().catch(() => {});
+      return;
+    }
     video.pause();
     video.currentTime = start; // ready to play again from the top of the trim
     if (onEnd) onEnd();
+  };
+
+  video.addEventListener('timeupdate', () => {
+    if (video.currentTime >= end) atEnd();
   });
+  // timeupdate fires only a few times a second, so a trim ending on the last frame can run
+  // out before it is noticed. `ended` is the backstop.
+  video.addEventListener('ended', atEnd);
   // Scrubbing behind the start, or replaying, lands back inside the range.
   video.addEventListener('seeking', () => {
     if (video.currentTime < start) video.currentTime = start;
