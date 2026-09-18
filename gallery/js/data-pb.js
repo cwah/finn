@@ -8,13 +8,10 @@
 // `listRule: ''` to match. Adding a drawing happens in admin.html, which is a separate
 // page with a separate module and its own session.
 
-import { list, fileUrl, requestFileToken, PbError } from './pb.js';
+import { list, fileUrl, PbError } from './pb.js';
 
-/**
- * A gallery_artworks record -> an artwork in the contract.
- * @param {string} fileToken appended to the image URL; see getGallery
- */
-function toArtwork(record, fileToken) {
+/** A gallery_artworks record -> an artwork in the contract. */
+function toArtwork(record) {
   return {
     id: record.id,
     title: record.title,
@@ -47,9 +44,8 @@ function toArtwork(record, fileToken) {
     image: {
       // Absolute, built here. The frontend never joins a path, which is the single rule
       // that makes this source and the static one interchangeable.
-      src: fileToken
-        ? `${fileUrl(record, record.display)}?token=${encodeURIComponent(fileToken)}`
-        : fileUrl(record, record.display),
+      // Bare, so the immutable caching in cache.pb.js can actually work. See fileUrl.
+      src: fileUrl(record, record.display),
       // The dimensions of the DISPLAY file, which is the cropped and deskewed one. The
       // clamp in artwork.css sizes the frame from these before the image loads, so they
       // have to describe the picture actually shown, not the phone photo behind it.
@@ -89,47 +85,18 @@ function toConfig(record) {
  * @returns {Promise<{config: object, artworks: Array}>}
  */
 export async function getGallery() {
-  // Three requests, all independent. The file token is the awkward one: now the
-  // collections are private, /api/files/ is too, and an <img> cannot send an
-  // Authorization header — so PocketBase hands out a short-lived token to put in the
-  // query string instead. Without it every frame on the wall renders empty.
-  const [artworks, config, fileToken] = await Promise.all([
+  // Two requests, independent of each other, neither needed by the other.
+  const [artworks, config] = await Promise.all([
     list('gallery_artworks', { perPage: 500, sort: '-createdOn' }),
     list('gallery_config', { perPage: 1 }),
-    requestFileToken(),
   ]);
 
   return {
     config: toConfig(config?.items?.[0]),
     // A drawing whose display file failed to attach would render as an empty frame, so
     // it is dropped rather than hung.
-    artworks: (artworks?.items ?? [])
-      .map((record) => toArtwork(record, fileToken))
-      .filter((a) => a.image.src),
+    artworks: (artworks?.items ?? []).map(toArtwork).filter((a) => a.image.src),
   };
 }
 
 export { PbError };
-
-/**
- * Re-sign an image URL with a fresh file token.
- *
- * PocketBase file tokens last about two minutes. The gallery asks for one when it
- * loads and stamps it into every image URL, which is fine for the drawing on screen
- * and quietly wrong for the next one: sit on the wall for three minutes, press the
- * arrow, and the frame comes up empty because the token in that URL went stale while
- * nobody was looking at it.
- *
- * So an image that fails to load asks for a new token and tries once more. Cheaper and
- * more honest than polling to keep a token warm that is usually not needed at all.
- *
- * @param {string} src
- * @returns {Promise<string>}
- */
-export async function refreshImageUrl(src) {
-  const token = await requestFileToken();
-  if (!token) return src;
-  const url = new URL(src, location.href);
-  url.searchParams.set('token', token);
-  return url.href;
-}

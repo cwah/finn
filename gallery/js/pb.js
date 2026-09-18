@@ -86,6 +86,24 @@ export async function list(collection, params = {}) {
  * absolute URL and nothing downstream ever joins a path — the one rule that lets the
  * static and PocketBase sources be swapped without the app noticing.
  *
+ * ── NO TOKEN, ON PURPOSE ────────────────────────────────────────────────────
+ * This used to append a short-lived file token, on the assumption that a private
+ * collection means private files. It does not. A PocketBase file field is only
+ * token-guarded when it is declared `protected`, and neither app declares one — so the
+ * bytes are reachable by URL, verified against production with no credentials at all.
+ *
+ * The token was worse than redundant. cache.pb.js serves /api/files/ with
+ * `immutable, max-age=31536000`, and the filename PocketBase generates at upload never
+ * changes, so a browser should fetch a drawing exactly once ever. A token in the query
+ * string is a new cache key on every page load, which quietly turned that year into
+ * nothing at all.
+ *
+ * The trade this accepts: anyone holding one of these URLs can read the file without
+ * signing in. The URL contains two random ids and is not guessable, and it is the same
+ * bargain the scrapbook has always made with the family's photographs. Declaring the
+ * fields `protected` would close it — and would put the token, and the broken caching,
+ * straight back.
+ *
  * @param {{collectionName: string, id: string}} record
  * @param {string} filename as stored on the record
  * @returns {string} '' when there is no file, so a caller can test it plainly
@@ -93,32 +111,5 @@ export async function list(collection, params = {}) {
 export function fileUrl(record, filename) {
   if (!record?.id || !filename) return '';
   const base = apiBase ?? '';
-  const url = `${base}/api/files/${record.collectionName}/${record.id}/${encodeURIComponent(filename)}`;
-
-  // A protected file cannot be fetched by an <img> tag, which sends no Authorization
-  // header and cannot be given one. PocketBase's answer is a short-lived file token
-  // passed in the query string; requestFileToken() gets one and app.js appends it.
-  // Without this the collection rules close and every frame goes empty.
-  return url;
-}
-
-/**
- * A short-lived token for reading protected files.
- *
- * Needed because an <img> cannot carry an Authorization header. Returns '' when there
- * is no session, which is the signed-out case and is handled upstream.
- *
- * @returns {Promise<string>}
- */
-export async function requestFileToken() {
-  const auth = token();
-  if (!auth) return '';
-  const base = await resolveApiBase();
-  const res = await fetch(`${base}/api/files/token`, {
-    method: 'POST',
-    headers: { Authorization: auth },
-  });
-  if (!res.ok) return '';
-  const data = await res.json();
-  return data?.token ?? '';
+  return `${base}/api/files/${record.collectionName}/${record.id}/${encodeURIComponent(filename)}`;
 }

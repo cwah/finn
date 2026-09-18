@@ -21,4 +21,4 @@ export const SOURCE = 'pocketbase';
 
 const impl = SOURCE === 'pocketbase' ? pocketbase : staticJson;
 
-export const { getGallery, refreshImageUrl } = impl;
+export const { getGallery } = impl;

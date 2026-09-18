@@ -14,7 +14,6 @@ import { artVars } from './art-fit.js';
 import { FRAMES } from './frames.js';
 import { baroqueUri } from './baroque-frame.js';
 import { fromRoot } from './paths.js';
-import { refreshImageUrl } from './data.js';
 
 /** Same tiny builder as scrapbook's render.js. No templating, no innerHTML. */
 function el(tag, className, props = {}) {
@@ -60,25 +59,12 @@ export function renderArtwork(refs, view) {
 
   // fromRoot leaves an absolute URL alone, so this is correct for both a manifest
   // path and the full /api/files/... URL data-pb.js builds.
-  delete refs.art.dataset.retried;
   refs.art.src = artwork?.image?.src ? fromRoot(artwork.image.src) : '';
   refs.art.alt = artwork?.alt || artwork?.title || '';
   // Never lazy: this is the one thing on the screen, and lazy would defer the only
   // image the visitor came for.
   refs.art.loading = 'eager';
   refs.art.fetchPriority = 'high';
-
-  // One retry with a freshly signed URL. A PocketBase file token lasts about two
-  // minutes, so the token stamped in at page load is stale by the time somebody who has
-  // been looking at one drawing presses the arrow — and an empty frame is the failure
-  // this whole app is least able to explain to its visitor. Guarded so a genuinely
-  // missing file fails once rather than looping.
-  refs.art.onerror = async () => {
-    if (refs.art.dataset.retried === 'true') return;
-    refs.art.dataset.retried = 'true';
-    const fresh = await refreshImageUrl(refs.art.src).catch(() => null);
-    if (fresh && fresh !== refs.art.src) refs.art.src = fresh;
-  };
 
   renderPlacard(refs.placard, lines);
 

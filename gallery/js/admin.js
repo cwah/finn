@@ -10,7 +10,7 @@
 // can be reopened exactly where it was left.
 
 import { signIn, signOut, currentSession, authed, birthDate } from './admin/auth.js';
-import { getGallery, refreshImageUrl } from './data.js';
+import { getGallery } from './data.js';
 import { loadImage, paintPreview, bakeDisplay, bakeForModel } from './admin/bake-canvas.js';
 import { initCropBox } from './admin/crop-box.js';
 import { buildEditForm } from './admin/edit-form.js';
@@ -144,13 +144,6 @@ async function refreshHung() {
       // out of view and then nothing brings it back. Written the other way round, every
       // thumbnail past the first stayed blank while sitting in plain sight.
       thumb.loading = 'lazy';
-      // Same two-minute token as the wall: a list left open goes blank. One retry.
-      thumb.onerror = async () => {
-        if (thumb.dataset.retried === 'true') return;
-        thumb.dataset.retried = 'true';
-        const fresh = await refreshImageUrl(thumb.src).catch(() => null);
-        if (fresh && fresh !== thumb.src) thumb.src = fresh;
-      };
       thumb.src = artwork.image.src;
 
       const text = document.createElement('div');

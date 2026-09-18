@@ -285,10 +285,15 @@ key and the shape are a contract with `scrapbook/js/pb.js`.
 
 Two consequences that are not obvious:
 
-- **A protected file cannot be loaded by an `<img>`.** It sends no `Authorization`
-  header and cannot be given one, so once the collection rules closed every frame on the
-  wall would have rendered empty. PocketBase's answer is a short-lived file token in the
-  query string; `pb.js` fetches one and `data-pb.js` appends it to each image URL.
+- **A private collection does not mean private files.** A PocketBase file field is only
+  token-guarded when it is declared `protected`, and neither app declares one — so the
+  bytes are reachable by URL without signing in, verified against production. This once
+  carried a short-lived file token on every image URL, on the opposite assumption. That
+  was worse than redundant: `cache.pb.js` serves `/api/files/` as `immutable` for a
+  year, and a token in the query string is a fresh cache key on every page load, so a
+  drawing that should be fetched once ever was fetched every time. The trade being
+  accepted is that a URL is a capability — it holds two random ids and is not guessable,
+  and it is the same bargain the scrapbook makes with the family's photographs.
 - **`[hidden]` needs `!important`.** The attribute only sets `display: none` from the UA
   stylesheet, so any author display rule beats it — `.stage` is `display: grid`, and
   hiding it to show the gate did nothing at all. The rule is in `base.css`.
@@ -303,6 +308,21 @@ remove it, nobody else can remove it out from under them.
 placard, two arrows, and nothing that exists for only one person. `admin.html` grows a
 "Hung so far" list instead, which also makes removing something a deliberate trip to
 another page rather than a button next to what you are looking at.
+
+## The bytes on the wire
+
+The stored copy is **WebP at 0.85**, 2000px on its long edge, falling back to JPEG where
+a browser cannot encode WebP — and that fallback is measured, not assumed, because
+`canvas.toBlob` silently returns a PNG when asked for a type it cannot produce, which for
+a photograph is larger than the JPEG it replaced.
+
+Measured on three real drawings: JPEG/0.92 gave 361, 422 and 505 KB; JPEG/0.85 gave 272,
+331 and 325; WebP/0.85 gave 153, 187 and 174. About a third of the bytes, with no visible
+difference on a flat wash of paint — which is where lossy compression shows first, and
+these are mostly flat washes of paint.
+
+The **original** is stored untouched and is never served to the wall, so it costs disk
+rather than bandwidth. That is the whole point of keeping it.
 
 ## Where the collection lives
 
