@@ -231,6 +231,10 @@ function makeViewable(img, photo, group) {
     const { start, end } = trimRange(photo.video);
     img.dataset.video = photo.video.url;
     img.dataset.trim = `${start} ${end}`;
+    // A motion photo is not a clip and must not be expanded into a player — it loops, it
+    // has no length worth showing, and a scrub bar over a two-second moment is furniture.
+    // The lightbox cannot tell from the URL, so it is told here.
+    img.dataset.motion = isMotion(photo) ? 'true' : 'false';
   }
   img.dataset.group = group;
   return img;

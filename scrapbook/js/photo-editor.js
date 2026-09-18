@@ -116,6 +116,18 @@ export function openPhotoEditor(photo, { isMain }) {
   }
 
   /**
+   * The aspect the picture is SHOWN at, which is what a crop preset has to work in.
+   *
+   * The crop rectangle is positioned as a percentage of the pane, and the pane is given the
+   * oriented aspect — so a preset computed from the unrotated one is wrong by exactly the
+   * amount the rotation changed, and 1:1 comes out oblong.
+   */
+  function orientedAspect() {
+    const o = oriented();
+    return o.height ? o.width / o.height : 1;
+  }
+
+  /**
    * Keep the whole sheet on screen by giving the PICTURE whatever the controls leave.
    *
    * Done, the presets, the rotate buttons and now two sliders all have to be reachable
@@ -225,9 +237,12 @@ export function openPhotoEditor(photo, { isMain }) {
     else { h = Math.max(MIN_CROP, py - crop.y); }
 
     if (ratio) {
-      // Honour the preset by deriving the shorter side, in the photo's own proportions.
-      const photoAr = photo.width / photo.height;
-      h = (w * photoAr) / ratio;
+      // Honour the preset by deriving the shorter side, in the proportions the picture is
+      // SHOWN in. The crop rectangle is a percentage of the pane, and the pane takes the
+      // oriented aspect — so using the unrotated one made 1:1 come out oblong on anything
+      // turned a quarter, which is exactly what it looks like.
+      const shownAr = orientedAspect();
+      h = (w * shownAr) / ratio;
       if (corner.includes('n')) y = bottom - h;
     }
 
@@ -311,10 +326,10 @@ export function openPhotoEditor(photo, { isMain }) {
         // Re-shape around the current centre so the subject does not jump.
         const cx = crop.x + crop.w / 2;
         const cy = crop.y + crop.h / 2;
-        const photoAr = photo.width / photo.height;
+        const shownAr = orientedAspect();
         let w = crop.w;
-        let h = (w * photoAr) / ratio;
-        if (h > 1) { h = 1; w = (h * ratio) / photoAr; }
+        let h = (w * shownAr) / ratio;
+        if (h > 1) { h = 1; w = (h * ratio) / shownAr; }
         crop = {
           w, h,
           x: clamp01(Math.min(Math.max(cx - w / 2, 0), 1 - w)),

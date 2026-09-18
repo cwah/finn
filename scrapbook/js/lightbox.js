@@ -28,6 +28,12 @@ const TEMPLATE = `
   <button type="button" class="lightbox-prev" aria-label="Previous photo">&#8249;</button>
   <button type="button" class="lightbox-next" aria-label="Next photo">&#8250;</button>
   <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+  <!-- Beside the close button, NOT inside the rotor or the stage. The rotor carries the
+       rotation, so a control within it turns with the picture — which is how a play bar
+       ended up down the side of a photograph someone had rotated. The stage scrolls when
+       a photo is zoomed, and a control that scrolled away would be worse than none. -->
+  <button type="button" class="lightbox-motion video-badge video-badge--motion is-playing"
+          hidden aria-label="Pause this motion photo"></button>
   <p class="lightbox-count" aria-hidden="true"></p>
 `;
 
@@ -131,7 +137,13 @@ function fillRotor(rotor, photo) {
   // Expanding a video plays it: the lightbox is the player, which is why the card is not.
   const video = document.createElement('video');
   video.className = 'lightbox-img rotor-media';
-  video.controls = true;
+  // A MOTION PHOTO GETS NO CONTROL BAR. It is a still that moves for a moment — there is
+  // no length to scrub and nothing to seek, so a transport bar is furniture over a
+  // photograph. It also sits INSIDE the rotor, so on a picture turned a quarter the bar
+  // ends up down the side, which is how this was noticed.
+  video.controls = !photo.motion;
+  video.loop = photo.motion;
+  video.muted = photo.motion;    // a loop with sound is not a photograph
   video.playsInline = true;
   video.autoplay = true;
   video.poster = photo.url;
@@ -161,6 +173,30 @@ function render() {
   const video = fillRotor(rotor, photo);
   if (video) holdToTrim(video, photo.trim);
   layout(box);
+
+  // A motion photo gets the same small badge it has on the card, and nothing else: it is a
+  // still that moves, so the only thing worth offering is a way to stop it.
+  const motionBtn = box.querySelector('.lightbox-motion');
+  motionBtn.hidden = !(video && photo.motion);
+  if (!motionBtn.hidden) {
+    const playing = () => !video.paused;
+    const paint = () => {
+      motionBtn.classList.toggle('is-playing', playing());
+      motionBtn.setAttribute('aria-label',
+        playing() ? 'Pause this motion photo' : 'Play this motion photo');
+    };
+    paint();
+    // Replaced rather than added to: render() runs again for every photo paged to, and a
+    // listener left behind would pause a clip the viewer has already moved past.
+    motionBtn.onclick = () => {
+      if (playing()) video.pause(); else video.play().catch(() => {});
+      paint();
+    };
+    video.onplay = paint;
+    video.onpause = paint;
+  } else {
+    motionBtn.onclick = null;
+  }
 
   // Paging controls earn their space only when there is somewhere to page to.
   const many = group.length > 1;
@@ -194,6 +230,7 @@ function collect(img) {
         rotation: Number(n.dataset.rotation) || 0,
         light: n.dataset.light || '',
         video: n.dataset.video || null,
+        motion: n.dataset.motion === 'true',
         trim: { start, end },
         alt: n.alt || '',
       };
