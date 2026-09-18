@@ -118,19 +118,32 @@
   pointer-events: none;
 }
 
-/* The motion badge in the expanded view.
-   Fixed to the viewport like the close and paging buttons, and deliberately outside both
-   the rotor and the stage: the rotor carries the rotation, so a control inside it turns
-   with the picture, and the stage scrolls when a photo is zoomed. Bottom-right, so the
-   same gesture sits in the same place whether a memory is expanded or not. */
+/* The motion badge, on the picture rather than in the corner of the screen.
+   A sibling of the rotor, not a child: the rotor carries the rotation, so a control inside
+   it turns with the photo — which is how a play bar ended up down the side of one. The
+   crop box is already `position: relative`, and it is the visible picture, so the badge
+   lands in the lower-right of the photograph exactly as it does on a card. */
 .lightbox-motion {
-  position: fixed;
-  right: max(16px, env(safe-area-inset-right));
-  bottom: calc(env(safe-area-inset-bottom) + 16px);
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
   z-index: 2;
-  /* The card reveals this on hover; here it is the only control there is, so it stays. */
+  /* The card reveals this on hover; expanded, it is the only control there is. */
   opacity: 1;
 }
 
 /* .video-badge sets display:flex, which would otherwise win over the attribute. */
 .lightbox-motion[hidden] { display: none; }
+
+/* Focus has to land somewhere for arrow keys and Escape, but it should not be seen doing
+   it. Without this, showModal drew a ring around whatever it focused first. */
+.lightbox-stage:focus { outline: none; }
+
+/* HORIZONTAL MOVEMENT OVER THE PICTURE IS OURS. The stage scrolls, so without this the
+   browser claims a sideways drag for itself and ends the gesture with `pointercancel` —
+   which is why swiping between photos did nothing on a phone. `pan-y` leaves vertical
+   scrolling and pinch-zoom alone. */
+.lightbox-crop { touch-action: pan-y pinch-zoom; }
+
+/* Zoomed, a drag IS panning the photo, so the browser gets it back. */
+.lightbox-stage.is-zoomed .lightbox-crop { touch-action: auto; }

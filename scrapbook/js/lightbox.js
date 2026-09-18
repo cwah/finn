@@ -20,20 +20,20 @@ import { holdToTrim } from './motion-play.js';
 // The module owns its markup. Keeping it out of index.html means the preview bench gets
 // the lightbox for free, and there is no second copy to drift out of step.
 const TEMPLATE = `
-  <div class="lightbox-stage">
+  <div class="lightbox-stage" tabindex="-1">
     <div class="lightbox-crop">
       <div class="rotor"></div>
+      <!-- On the picture, in its lower-right corner — the same place the card puts it, so
+           the gesture does not move when a memory is expanded. A sibling of the rotor
+           rather than a child: the rotor is what turns, and a control inside it would end
+           up down the side of a photograph someone had rotated. -->
+      <button type="button" class="lightbox-motion video-badge video-badge--motion is-playing"
+              hidden aria-label="Pause this motion photo"></button>
     </div>
   </div>
   <button type="button" class="lightbox-prev" aria-label="Previous photo">&#8249;</button>
   <button type="button" class="lightbox-next" aria-label="Next photo">&#8250;</button>
   <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
-  <!-- Beside the close button, NOT inside the rotor or the stage. The rotor carries the
-       rotation, so a control within it turns with the picture — which is how a play bar
-       ended up down the side of a photograph someone had rotated. The stage scrolls when
-       a photo is zoomed, and a control that scrolled away would be worse than none. -->
-  <button type="button" class="lightbox-motion video-badge video-badge--motion is-playing"
-          hidden aria-label="Pause this motion photo"></button>
   <p class="lightbox-count" aria-hidden="true"></p>
 `;
 
@@ -253,6 +253,11 @@ export function initLightbox(timeline) {
     index = Math.max(0, group.findIndex((p) => p.url === clicked.dataset.full));
     render();
     box.showModal();
+    // showModal hands focus to the first focusable thing it finds, which was the previous
+    // arrow — so every expanded photo opened with a ring drawn around it, looking selected
+    // for no reason. The stage takes it instead: focus has to land somewhere for the arrow
+    // keys and Escape to work, and a container shows nothing.
+    stage.focus({ preventScroll: true });
     layout(box); // the stage has real dimensions only once the dialog is open
   });
 
@@ -307,17 +312,27 @@ export function initLightbox(timeline) {
     // ESC is handled natively by <dialog>.
   });
 
-  // Swipe between photos on a touch screen — but not while zoomed, where a horizontal
-  // drag is panning the photo rather than asking for the next one.
-  let startX = null;
+  // Swipe between photos on a touch screen — but not while zoomed, where a horizontal drag
+  // is panning the photo rather than asking for the next one.
+  //
+  // This did not work on a phone, and the reason is the stage: it scrolls, so the browser
+  // claimed horizontal drags for itself and ended the gesture with `pointercancel` — an
+  // event nothing here listened for, leaving the start point set and every later swipe
+  // measured from a stale one. The CSS now tells the browser that horizontal movement over
+  // the picture is ours (`touch-action: pan-y`), and a cancelled gesture is forgotten.
+  let start = null;
   box.addEventListener('pointerdown', (e) => {
-    startX = stage.classList.contains('is-zoomed') ? null : e.clientX;
+    start = stage.classList.contains('is-zoomed') ? null : { x: e.clientX, y: e.clientY };
   });
+  const forget = () => { start = null; };
+  box.addEventListener('pointercancel', forget);
   box.addEventListener('pointerup', (e) => {
-    if (startX === null) return;
-    const dx = e.clientX - startX;
-    startX = null;
-    if (Math.abs(dx) > 45) step(dx < 0 ? 1 : -1);
+    if (!start) return;
+    const dx = e.clientX - start.x;
+    const dy = e.clientY - start.y;
+    start = null;
+    // Mostly sideways, or it was a scroll, a tap, or a drag towards the close button.
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
   });
 
   // Drop the big image on close so it is not held in memory behind the scenes.
