@@ -60,7 +60,7 @@
 .lightbox-crop.can-zoom { cursor: zoom-in; }
 
 /* Zoomed: the crop at its own natural pixels, and the stage becomes a pannable window */
-.lightbox-stage.is-zoomed .lightbox-crop {
+.lightbox-stage.is-zoomed .lightbox-pane[data-pane="0"] .lightbox-crop {
   border-radius: 0;
   cursor: zoom-out;
 }
@@ -146,4 +146,87 @@
 .lightbox-crop { touch-action: pan-y pinch-zoom; }
 
 /* Zoomed, a drag IS panning the photo, so the browser gets it back. */
-.lightbox-stage.is-zoomed .lightbox-crop { touch-action: auto; }
+.lightbox-stage.is-zoomed .lightbox-pane[data-pane="0"] .lightbox-crop { touch-action: auto; }
+
+/* ── The sliding track ─────────────────────────────────────────────
+   Three panes side by side, each the width of the stage, with the one being looked at in
+   the middle. `--slide` is how far the track has moved in pane-widths: 0 is centred, a
+   fraction is a finger part-way through a swipe, and ±1 is a completed one. Moving the
+   track rather than the picture keeps the crop maths inside each pane untouched. */
+.lightbox-track {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  transform: translate3d(calc(var(--slide, 0) * 100%), 0, 0);
+}
+
+/* Only while settling. During the drag there must be no transition at all, or the picture
+   lags behind the finger and the whole point is lost. */
+.lightbox-track.is-settling {
+  transition: transform 0.18s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.lightbox-pane {
+  flex: 0 0 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* The middle pane is the whole stage wide; its neighbours sit either side of it and are
+     simply off screen, which is why they need no hiding of their own. */
+  min-width: 100%;
+}
+
+.lightbox-pane[hidden] { display: none; }
+
+/* A zoomed photo scrolls within the stage, and the track must not fight it. */
+.lightbox-stage.is-zoomed .lightbox-track { transform: none; }
+
+/* ── Dots ──────────────────────────────────────────────────────────
+   Under the picture, saying which of them this is. They replace the "3 / 6" text up to a
+   dozen photos; past that a number says more than a row of specks. */
+.lightbox-dots {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(env(safe-area-inset-bottom) + 14px);
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  pointer-events: auto;
+  z-index: 3;
+}
+
+.lightbox-dots[hidden] { display: none; }
+
+.lightbox-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.lightbox-dot.is-on {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.25);
+}
+
+/* The dot itself is 8px, which is far too small to aim a thumb at. The tappable area is
+   not: a transparent ring around it brings the target to the 44px everything else here
+   uses, without making the dots look like buttons. */
+.lightbox-dot::before {
+  content: '';
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  margin: -12px;
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-track.is-settling { transition: none; }
+  .lightbox-dot { transition: none; }
+}

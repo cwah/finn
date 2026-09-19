@@ -18,15 +18,6 @@ Shipped when it lands. No ceremony beyond that.
 - [ ] **Location.** Use photo metadata to infer location. Also allow 
       users to manually set location. Have location preselected and 
       enabled by default.
-- [ ] **Make the swipe follow the finger, and show dots.** Swiping between photos in the
-      viewer now works — but it is a threshold gesture, not a drag: the photo does not
-      move with the finger and there is no sense of the next one arriving. Position is
-      still shown as "3 / 6" text rather than dots under the picture.
-      What is already there: a horizontal drag over the picture pages forward or back, a
-      mostly-vertical drag is ignored, and a zoomed photo keeps its panning.
-      `touch-action: pan-y pinch-zoom` on `.lightbox-crop` is what makes the gesture reach
-      the page at all — without it the browser claims a sideways drag for scrolling and
-      ends it with `pointercancel`, which is why this looked unimplemented when it was not.
 - [ ] **Paused motion photos.** When you pause a motion photo, reset
       to the main frame.
 - [ ] **Download the cropped image.** Right-click → Save Image currently saves the
@@ -93,6 +84,18 @@ Shipped when it lands. No ceremony beyond that.
 
 ## Shipped
 
+- [x] **Gesture based swipes**, with the photo following the finger. The viewer is a track
+      of three panes now — the photo and the one either side — so there is something to
+      follow the swipe WITH; a threshold plus a transition afterwards is what this
+      replaced. Letting go completes the movement or returns it, a flick counts as well as
+      a long drag, the ends resist rather than sliding into nothing, a mostly-vertical drag
+      is released as a scroll, and dots under the picture say which photo this is and jump
+      to it (up to a dozen; past that a count says more).
+      Two things only a browser showed: a 30px drag advanced the photo, because the flick
+      threshold was 12px and anything quick counted; and `touch-action: pan-y pinch-zoom`
+      on the picture is what lets the gesture reach the page at all, since the stage
+      scrolls and the browser otherwise claims a sideways drag and ends it with
+      `pointercancel`.
 - [x] **Loop motion photos in the viewer**, with no progress bar and a small play/pause
       badge on the picture, as on the main page. The looping needed doing by hand: native
       `loop` restarts the FILE, and the trim is a sub-range — so a trimmed motion photo

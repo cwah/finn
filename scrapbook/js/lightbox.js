@@ -19,21 +19,36 @@ import { holdToTrim } from './motion-play.js';
 
 // The module owns its markup. Keeping it out of index.html means the preview bench gets
 // the lightbox for free, and there is no second copy to drift out of step.
+// THREE PANES, not one. A swipe that follows the finger has to have something to follow
+// it WITH: the photo either side must already be on screen, just beyond the edge, or the
+// gesture is an animation played after the fact rather than the picture moving under your
+// thumb. The track slides; the panes stay put within it.
 const TEMPLATE = `
   <div class="lightbox-stage" tabindex="-1">
-    <div class="lightbox-crop">
-      <div class="rotor"></div>
-      <!-- On the picture, in its lower-right corner — the same place the card puts it, so
-           the gesture does not move when a memory is expanded. A sibling of the rotor
-           rather than a child: the rotor is what turns, and a control inside it would end
-           up down the side of a photograph someone had rotated. -->
-      <button type="button" class="lightbox-motion video-badge video-badge--motion is-playing"
-              hidden aria-label="Pause this motion photo"></button>
+    <div class="lightbox-track">
+      <div class="lightbox-pane" data-pane="-1" aria-hidden="true">
+        <div class="lightbox-crop"><div class="rotor"></div></div>
+      </div>
+      <div class="lightbox-pane" data-pane="0">
+        <div class="lightbox-crop">
+          <div class="rotor"></div>
+          <!-- On the picture, in its lower-right corner — the same place the card puts it,
+               so the gesture does not move when a memory is expanded. A sibling of the
+               rotor rather than a child: the rotor is what turns, and a control inside it
+               would end up down the side of a photograph someone had rotated. -->
+          <button type="button" class="lightbox-motion video-badge video-badge--motion is-playing"
+                  hidden aria-label="Pause this motion photo"></button>
+        </div>
+      </div>
+      <div class="lightbox-pane" data-pane="1" aria-hidden="true">
+        <div class="lightbox-crop"><div class="rotor"></div></div>
+      </div>
     </div>
   </div>
   <button type="button" class="lightbox-prev" aria-label="Previous photo">&#8249;</button>
   <button type="button" class="lightbox-next" aria-label="Next photo">&#8250;</button>
   <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+  <nav class="lightbox-dots" aria-label="Photos"></nav>
   <p class="lightbox-count" aria-hidden="true"></p>
 `;
 
@@ -66,24 +81,43 @@ function available(stage) {
  * zoomed. Never scaled UP to fit — a photo smaller than the screen is shown as it is.
  */
 function layout(box) {
-  const photo = group[index];
-  if (!photo) return;
-
   const stage = box.querySelector('.lightbox-stage');
-  const frame = box.querySelector('.lightbox-crop');
+  const room = available(stage);
+  for (const pane of box.querySelectorAll('.lightbox-pane')) {
+    layoutPane(stage, room, pane);
+  }
+}
+
+/**
+ * Size one pane's crop box to the photo in it.
+ *
+ * Per pane rather than for the current photo alone: the neighbours are on screen the
+ * moment a swipe starts, and one sized to the wrong picture would stretch as it arrived.
+ */
+function layoutPane(stage, room, pane) {
+  const frame = pane.querySelector('.lightbox-crop');
+  const photo = group[Number(pane.dataset.pane) + index];
+  if (!photo) {
+    frame.style.width = '0px';
+    frame.style.height = '0px';
+    return;
+  }
+
   const cropW = photo.width * photo.crop.w;
   const cropH = photo.height * photo.crop.h;
-  const room = available(stage);
-
   const fit = Math.min(1, room.w / cropW, room.h / cropH);
-  const scale = stage.classList.contains('is-zoomed') ? 1 : fit;
+  // Only the photo being LOOKED AT can be zoomed, so only it is ever shown at its own
+  // pixels; a neighbour is always fitted.
+  const current = pane.dataset.pane === '0';
+  const scale = current && stage.classList.contains('is-zoomed') ? 1 : fit;
 
   frame.style.width = `${cropW * scale}px`;
   frame.style.height = `${cropH * scale}px`;
 
   // Zoom is only worth offering when the crop is actually being shown smaller than it is,
   // and never for a video, whose taps belong to its own controls.
-  const zoomable = fit < 1 && !photo.video && !stage.classList.contains('is-zoomed');
+  const zoomable = current && fit < 1 && !photo.video
+    && !stage.classList.contains('is-zoomed');
   frame.classList.toggle('can-zoom', zoomable);
 }
 
@@ -100,7 +134,7 @@ function resetZoom(box) {
  * <video> — and because leaving the previous element in place would keep a video
  * decoding after it had been paged away from.
  */
-function fillRotor(rotor, photo) {
+function fillRotor(rotor, photo, active = true) {
   const quarter = photo.rotation % 180 !== 0;
   // Stop whatever was playing before its element is dropped, so nothing decodes on
   // after it has been paged away from.
@@ -145,7 +179,9 @@ function fillRotor(rotor, photo) {
   video.loop = photo.motion;
   video.muted = photo.motion;    // a loop with sound is not a photograph
   video.playsInline = true;
-  video.autoplay = true;
+  // A neighbour is on screen but not being watched: it shows its poster and stays quiet,
+  // or three decoders run for one photograph.
+  video.autoplay = active;
   video.poster = photo.url;
   video.src = `${photo.video}#t=${photo.trim.start.toFixed(2)},${photo.trim.end.toFixed(2)}`;
   if (photo.light) video.style.filter = photo.light;
@@ -153,15 +189,21 @@ function fillRotor(rotor, photo) {
   return video;
 }
 
-function render() {
-  const box = document.getElementById('lightbox');
-  const photo = group[index];
-  if (!photo) return;
+/** Fill one pane with whichever photo sits at that offset, or empty it. */
+function renderPane(box, offset) {
+  const pane = box.querySelector(`.lightbox-pane[data-pane="${offset}"]`);
+  const frame = pane.querySelector('.lightbox-crop');
+  const rotor = pane.querySelector('.rotor');
+  const photo = group[index + offset];
 
-  const frame = box.querySelector('.lightbox-crop');
-  const rotor = box.querySelector('.rotor');
-
-  resetZoom(box);
+  // At either end there is no neighbour, and an empty pane is the honest answer: the
+  // picture drags to a dead stop rather than revealing a blank one pretending to be next.
+  pane.hidden = !photo;
+  if (!photo) {
+    rotor.querySelector('video')?.pause();
+    rotor.replaceChildren();
+    return null;
+  }
 
   // Same crop maths the cards use: oversize the image and offset it until the chosen
   // region fills the frame.
@@ -170,15 +212,55 @@ function render() {
   frame.style.setProperty('--cw', photo.crop.w);
   frame.style.setProperty('--ch', photo.crop.h);
 
-  const video = fillRotor(rotor, photo);
+  const video = fillRotor(rotor, photo, offset === 0);
   // A motion photo loops inside its trim; a clip plays its stretch once and stops.
-  // `video.loop` above still covers an UNTRIMMED motion photo, where there is no
-  // sub-range and the native mechanism is the right one.
-  if (video) holdToTrim(video, photo.trim, null, { loop: photo.motion });
+  // `video.loop` still covers an UNTRIMMED motion photo, where there is no sub-range and
+  // the native mechanism is the right one.
+  if (video && offset === 0) holdToTrim(video, photo.trim, null, { loop: photo.motion });
+  return video;
+}
+
+/** Dots under the picture, or a count when there are too many to dot. */
+function paintDots(box) {
+  const dots = box.querySelector('.lightbox-dots');
+  const count = box.querySelector('.lightbox-count');
+  const many = group.length > 1;
+  // Past a dozen the dots stop saying anything a number does not say better, and start
+  // being a row of specks too small to aim at.
+  const dotted = many && group.length <= 12;
+
+  dots.hidden = !dotted;
+  count.hidden = !many || dotted;
+  count.textContent = `${index + 1} / ${group.length}`;
+
+  if (!dotted) { dots.replaceChildren(); return; }
+  dots.replaceChildren(...group.map((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'lightbox-dot';
+    dot.classList.toggle('is-on', i === index);
+    dot.setAttribute('aria-label', `Photo ${i + 1} of ${group.length}`);
+    if (i === index) dot.setAttribute('aria-current', 'true');
+    dot.addEventListener('click', () => { index = i; render(); });
+    return dot;
+  }));
+}
+
+function render() {
+  const box = document.getElementById('lightbox');
+  if (!group[index]) return;
+
+  resetZoom(box);
+  settleTrack(box, 0);            // back to centre, with no animation
+
+  renderPane(box, -1);
+  const video = renderPane(box, 0);
+  renderPane(box, 1);
   layout(box);
 
   // A motion photo gets the same small badge it has on the card, and nothing else: it is a
   // still that moves, so the only thing worth offering is a way to stop it.
+  const photo = group[index];
   const motionBtn = box.querySelector('.lightbox-motion');
   motionBtn.hidden = !(video && photo.motion);
   if (!motionBtn.hidden) {
@@ -205,9 +287,19 @@ function render() {
   const many = group.length > 1;
   box.querySelector('.lightbox-prev').hidden = !many;
   box.querySelector('.lightbox-next').hidden = !many;
-  const count = box.querySelector('.lightbox-count');
-  count.hidden = !many;
-  count.textContent = `${index + 1} / ${group.length}`;
+  paintDots(box);
+}
+
+/**
+ * Put the track at an offset, in pane-widths.
+ *
+ * `0` is the photo being looked at. Dragging moves it a fraction either way; letting go
+ * settles it to a whole number, and `commit` is what turns that into a new index.
+ */
+function settleTrack(box, panes, { animate = false } = {}) {
+  const track = box.querySelector('.lightbox-track');
+  track.classList.toggle('is-settling', animate);
+  track.style.setProperty('--slide', String(panes));
 }
 
 function step(by) {
@@ -315,27 +407,82 @@ export function initLightbox(timeline) {
     // ESC is handled natively by <dialog>.
   });
 
-  // Swipe between photos on a touch screen — but not while zoomed, where a horizontal drag
-  // is panning the photo rather than asking for the next one.
+  // THE PICTURE FOLLOWS THE FINGER. Not a threshold and an animation afterwards: the
+  // track moves as you move, the next photo comes in from the edge, and letting go either
+  // completes the movement or returns it. The difference is whether the gesture feels like
+  // moving a photograph or like operating a control that plays a transition at you.
   //
-  // This did not work on a phone, and the reason is the stage: it scrolls, so the browser
-  // claimed horizontal drags for itself and ended the gesture with `pointercancel` — an
-  // event nothing here listened for, leaving the start point set and every later swipe
-  // measured from a stale one. The CSS now tells the browser that horizontal movement over
-  // the picture is ours (`touch-action: pan-y`), and a cancelled gesture is forgotten.
-  let start = null;
+  // Not while zoomed, where a horizontal drag is panning the photo instead.
+  //
+  // The stage scrolls, so the browser claims sideways drags unless told otherwise — see
+  // `touch-action` on .lightbox-crop. Without it the gesture ends in `pointercancel` and
+  // never reaches pointerup, which is why this did nothing on a phone for a long time.
+  let drag = null;
+
+  const paneWidth = () => stage.clientWidth || 1;
+
+  const endDrag = (dx) => {
+    const width = paneWidth();
+    const moved = dx / width;
+    // A third of the way, or a flick — a short fast movement is as clear an instruction as
+    // a long slow one, and demanding distance from both makes a phone feel stiff.
+    //
+    // A flick still has to be a real movement. At 12px it was not: anything quick enough
+    // counted, so a thumb that slipped a few pixels changed the photograph. 40 is past
+    // what a tap wanders by and well short of what a deliberate drag covers.
+    const elapsed = Math.max(1, performance.now() - drag.at);
+    const flick = Math.abs(dx) > 40 && Math.abs(dx) / elapsed > 0.4;
+    const far = Math.abs(moved) > 0.33;
+    const dir = dx < 0 ? 1 : -1;
+    const canGo = Boolean(group[index + dir]);
+
+    drag = null;
+    if ((far || flick) && canGo) {
+      // Carry the movement through, then swap in the new photo once it has arrived. The
+      // pane it lands on is already showing it, so the change is invisible.
+      settleTrack(box, -dir, { animate: true });
+      window.setTimeout(() => { index += dir; render(); }, 180);
+    } else {
+      settleTrack(box, 0, { animate: true });   // back where it was
+    }
+  };
+
   box.addEventListener('pointerdown', (e) => {
-    start = stage.classList.contains('is-zoomed') ? null : { x: e.clientX, y: e.clientY };
+    if (stage.classList.contains('is-zoomed')) return;
+    if (e.target.closest('button, video')) return;   // controls own their own taps
+    drag = { x: e.clientX, y: e.clientY, at: performance.now(), moving: false };
   });
-  const forget = () => { start = null; };
-  box.addEventListener('pointercancel', forget);
-  box.addEventListener('pointerup', (e) => {
-    if (!start) return;
-    const dx = e.clientX - start.x;
-    const dy = e.clientY - start.y;
-    start = null;
-    // Mostly sideways, or it was a scroll, a tap, or a drag towards the close button.
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+
+  box.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    const dy = e.clientY - drag.y;
+    // Wait until the direction is obvious. Deciding on the first pixel would steal
+    // vertical scrolls and make every tap a tiny slide.
+    if (!drag.moving) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      if (Math.abs(dy) > Math.abs(dx)) { drag = null; return; }   // that is a scroll
+      drag.moving = true;
+    }
+    // Resisted at the ends: it still moves, so the gesture is answered, but it is
+    // obviously not going anywhere.
+    const wanted = dx / paneWidth();
+    const blocked = (wanted > 0 && !group[index - 1]) || (wanted < 0 && !group[index + 1]);
+    settleTrack(box, blocked ? wanted * 0.25 : wanted);
+  });
+
+  const release = (e) => {
+    if (!drag) return;
+    if (!drag.moving) { drag = null; return; }      // a tap, not a swipe
+    endDrag(e.clientX - drag.x);
+  };
+  box.addEventListener('pointerup', release);
+  // A cancelled gesture must be forgotten AND the track put back, or the picture is left
+  // hanging half way off the screen.
+  box.addEventListener('pointercancel', () => {
+    if (!drag) return;
+    drag = null;
+    settleTrack(box, 0, { animate: true });
   });
 
   // Drop the big image on close so it is not held in memory behind the scenes.
