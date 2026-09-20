@@ -1,0 +1,383 @@
+Mexico City|MX||1943|-9913
+Iztapalapa|MX||1936|-9906
+Puebla|MX||1905|-9821
+Ecatepec de Morelos|MX||1960|-9906
+Gustavo Adolfo Madero|MX||1949|-9911
+Ciudad Nezahualcoyotl|MX||1940|-9901
+Guatemala City|GT||1464|-9051
+Naucalpan de Juárez|MX||1948|-9924
+Álvaro Obregón|MX||1936|-9920
+Acapulco de Juárez|MX||1685|-9991
+Tlalnepantla|MX||1954|-9920
+Villa Nueva|GT||1453|-9059
+Coyoacán|MX||1935|-9916
+Tuxtla|MX||1675|-9312
+Tlalpan|MX||1930|-9916
+Cuautitlán Izcalli|MX||1964|-9922
+Cuauhtémoc|MX||1945|-9915
+Toluca|MX||1929|-9965
+Ciudad López Mateos|MX||1956|-9926
+Mixco|GT||1463|-9061
+Xochimilco|MX||1925|-9910
+Venustiano Carranza|MX||1944|-9910
+Veracruz|MX||1918|-9614
+Xalapa de Enríquez|MX||1953|-9692
+Azcapotzalco|MX||1949|-9919
+Ojo de Agua|MX||1968|-9901
+Benito Juárez|MX||1937|-9916
+Xico|MX||1927|-9895
+Iztacalco|MX||1940|-9910
+Miguel Hidalgo|MX||1943|-9920
+Benito Juarez|MX||1940|-9916
+Tapachula|MX||1491|-9226
+Villahermosa|MX||1799|-9294
+Cuernavaca|MX||1893|-9923
+Ixtapaluca|MX||1932|-9888
+Coatzacoalcos|MX||1815|-9444
+Tláhuac|MX||1929|-9901
+Cholula|MX||1906|-9830
+Nicolás Romero|MX||1964|-9931
+Zumpango|MX||1980|-9910
+Coacalco|MX||1963|-9911
+Oaxaca|MX||1706|-9673
+Colonia del Valle|MX||1939|-9916
+Tehuacán|MX||1846|-9740
+Magdalena Contreras|MX||1933|-9921
+Campeche|MX||1984|-9052
+Buenavista|MX||1961|-9917
+San Cristóbal de las Casas|MX||1673|-9264
+Jiutepec|MX||1888|-9918
+Cobán|GT||1547|-9037
+Córdoba|MX||1888|-9693
+Ciudad del Carmen|MX||1865|-9183
+Chilpancingo|MX||1755|-9950
+Quetzaltenango|GT||1484|-9152
+Cuautitlán|MX||1967|-9918
+Chicoloapan|MX||1942|-9890
+Chalco|MX||1926|-9890
+Comitán|MX||1624|-9214
+Delegación Cuajimalpa de Morelos|MX||1937|-9929
+Tuxtepec|MX||1809|-9613
+Cuautla|MX||1881|-9896
+Escuintla|GT||1430|-9079
+San Pablo de las Salinas|MX||1967|-9909
+San Martin Texmelucan de Labastida|MX||1928|-9844
+Villa Canales|GT||1448|-9053
+Chichicastenango|GT||1494|-9111
+San Juan Sacatepéquez|GT||1472|-9064
+Petapa|GT||1450|-9056
+Huixquilucan|MX||1936|-9935
+Orizaba|MX||1885|-9710
+Iguala de la Independencia|MX||1834|-9954
+Santa Lucía Cotzumalguapa|GT||1434|-9102
+Minatitlán|MX||1800|-9456
+Yautepec|MX||1888|-9907
+Coatepeque|GT||1470|-9186
+Texcoco de Mora|MX||1951|-9888
+Chinautla|GT||1470|-9050
+Totonicapán|GT||1491|-9136
+Teziutlan|MX||1982|-9736
+Tepexpan|MX||1961|-9894
+Colonia Lindavista|MX||1949|-9912
+Temixco|MX||1885|-9922
+Chimaltenango|GT||1466|-9082
+Amozoc de Mota|MX||1905|-9804
+Malacatán|GT||1491|-9206
+Cárdenas|MX||1800|-9338
+Retalhuleu|GT||1454|-9168
+Heroica Ciudad de Juchitán de Zaragoza|MX||1643|-9502
+Atlixco|MX||1891|-9844
+Paraiso|MX||1840|-9321
+Los Reyes Acaquilpan|MX||1936|-9898
+Tlaxcala|MX||1932|-9824
+Salina Cruz|MX||1618|-9519
+Tepeji del Río de Ocampo|MX||1991|-9934
+Santa Catarina Pinula|GT||1457|-9050
+San José Pinula|GT||1455|-9041
+Huehuetenango|GT||1532|-9147
+Santa Cruz del Quiché|GT||1503|-9115
+Mazatenango|GT||1453|-9150
+Fuentes del Valle|MX||1963|-9914
+Amatitlán|GT||1448|-9063
+Santa María Chimalhuacán|MX||1942|-9895
+San Mateo Atenco|MX||1927|-9953
+Santo Domingo Tehuantepec|MX||1632|-9524
+Santa Cruz Xoxocotlán|MX||1703|-9674
+Palín|GT||1440|-9070
+Tultepec|MX||1968|-9913
+Salamá|GT||1510|-9032
+San Andrés Tuxtla|MX||1845|-9521
+San Salvador Tizatlalli|MX||1926|-9959
+Chicacao|GT||1454|-9133
+Villa Vicente Guerrero|MX||1912|-9817
+Colonia Nativitas|MX||1938|-9914
+Comitancillo|GT||1509|-9175
+Fraijanes|GT||1447|-9044
+San Pedro Ayampuc|GT||1478|-9045
+Patzún|GT||1468|-9101
+San Francisco El Alto|GT||1494|-9144
+San Bernardino Tlaxcalancingo|MX||1903|-9828
+Zinacantepec|MX||1928|-9973
+Santiago Teyahualco|MX||1966|-9912
+Coatepec|MX||1945|-9696
+Ciudad de Huajuapan de León|MX||1781|-9778
+Huamantla|MX||1931|-9793
+Ostuncalco|GT||1487|-9162
+Teoloyucan|MX||1974|-9918
+Acayucan|MX||1795|-9491
+Taxco de Alarcón|MX||1856|-9961
+Pijijiapan|MX||1569|-9321
+Polanco|MX||1943|-9920
+Apizaco|MX||1941|-9814
+Emiliano Zapata|MX||1884|-9918
+Soloma|GT||1566|-9143
+Santa Ana Chiautempan|MX||1931|-9819
+Tierra Blanca|MX||1845|-9636
+Colomba|GT||1471|-9173
+Barberena|GT||1431|-9036
+San Marcos|GT||1496|-9179
+Tlapa de Comonfort|MX||1755|-9858
+Antigua Guatemala|GT||1456|-9073
+Sololá|GT||1477|-9118
+Masagua|GT||1420|-9085
+Chiapa de Corzo|MX||1671|-9301
+San Buenaventura|MX||1930|-9886
+Tizayuca|MX||1984|-9898
+Palenque|MX||1751|-9198
+Izúcar de Matamoros|MX||1860|-9846
+Las Choapas|MX||1791|-9410
+Cintalapa de Figueroa|MX||1668|-9372
+Zacatelco|MX||1922|-9824
+Cantel|GT||1481|-9146
+Ocosingo|MX||1691|-9209
+Comalcalco|MX||1826|-9322
+Cuilapa|GT||1428|-9030
+Loma Bonita|MX||1811|-9588
+Patulul|GT||1442|-9116
+Río Blanco|MX||1883|-9716
+San Pedro Sacatepéquez|GT||1497|-9176
+San Andrés Cholula|MX||1905|-9830
+Nuevo San Carlos|GT||1459|-9169
+Ocozocoautla de Espinosa|MX||1676|-9337
+Melchor Ocampo|MX||1970|-9914
+Tepotzotlán|MX||1972|-9922
+Perote|MX||1956|-9724
+Villaflores|MX||1623|-9327
+Jacaltenango|GT||1567|-9171
+Santa Teresa|MX||1984|-9923
+San Jerónimo Cuatro Vientos|MX||1929|-9884
+Agua Dulce|MX||1814|-9415
+Coyotepec|MX||1978|-9921
+Ciudad Mendoza|MX||1881|-9718
+San Martín Azcatepec|MX||1969|-9897
+Tlapacoyan|MX||1996|-9721
+Tonalá|MX||1609|-9375
+San Pablo Autopan|MX||1936|-9966
+Yepocapa|GT||1450|-9095
+San Miguel Topilejo|MX||1920|-9914
+Tecpán Guatemala|GT||1476|-9099
+San Isidro|MX||1934|-9895
+Zacatlán|MX||1994|-9796
+Ciudad Vieja|GT||1452|-9076
+Santiago Atitlán|GT||1464|-9123
+Calpulalpan|MX||1959|-9857
+Jáltipan de Morelos|MX||1797|-9471
+Tenosique|MX||1747|-9142
+Comalapa|GT||1474|-9089
+Macuspana|MX||1776|-9260
+Huixtla|MX||1514|-9246
+Momostenango|GT||1504|-9141
+Amecameca|MX||1912|-9877
+Huatusco|MX||1915|-9697
+San José Guadalupe Otzacatipan|MX||1934|-9959
+Chilapa de Álvarez|MX||1759|-9918
+Champotón|MX||1934|-9072
+Cosamaloapan|MX||1837|-9580
+Puerto Escondido|MX||1586|-9707
+San Miguel Ajusco|MX||1922|-9920
+Pinotepa Nacional|MX||1634|-9805
+Escárcega|MX||1861|-9075
+Santiago Sacatepéquez|GT||1464|-9068
+San Sebastián|GT||1456|-9165
+Jalpatagua|GT||1414|-9001
+Tecamachalco|MX||1888|-9773
+Fray Bernardino de Sahagún|MX||1977|-9858
+Sumpango|GT||1465|-9073
+Metepec|MX||1926|-9960
+Berriozábal|MX||1680|-9327
+Ajalpan|MX||1838|-9726
+Tultitlán de Mariano Escobedo|MX||1965|-9917
+San Francisco Acuautla|MX||1935|-9886
+Sanctorum|MX||1910|-9825
+Nahualá|GT||1484|-9132
+Catemaco|MX||1842|-9511
+Contla|MX||1933|-9817
+Tepeaca|MX||1897|-9790
+Huimanguillo|MX||1783|-9339
+Moyotzingo|MX||1925|-9840
+Misantla|MX||1993|-9685
+Apan|MX||1971|-9845
+Teapa|MX||1756|-9295
+Río de Teapa|MX||1777|-9290
+Magdalena Atlicpac|MX||1937|-9895
+Isla|MX||1803|-9553
+San Jerónimo|MX||1928|-9959
+Reforma|MX||1786|-9315
+Ixtaczoquitlán|MX||1885|-9706
+Ocoyoacac|MX||1927|-9946
+Acatzingo|MX||1898|-9778
+Valente Diaz|MX||1916|-9622
+Huejotzingo|MX||1916|-9841
+Ixtepec|MX||1656|-9510
+Emiliano Zapata|MX||1934|-9897
+Nanchital de Lázaro Cárdenas del Río|MX||1807|-9441
+Cuautlancingo|MX||1909|-9827
+San Andrés Itzapa|GT||1462|-9084
+San Francisco Cuaxusco|MX||1927|-9962
+Guastatoya|GT||1485|-9007
+Zumpango del Río|MX||1765|-9953
+La Isla|MX||1860|-9615
+Arriaga|MX||1624|-9390
+San Felipe|GT||1462|-9160
+San Antonio Tecómitl|MX||1922|-9899
+San Juan Ixtayopan|MX||1923|-9900
+Ometepec|MX||1669|-9840
+Zaragoza|GT||1465|-9089
+La Gomera|GT||1408|-9105
+Alotenango|GT||1449|-9080
+Miahuatlán de Porfirio Díaz|MX||1633|-9660
+Ciudad Serdán|MX||1899|-9745
+Motozintla|MX||1537|-9225
+Allende|MX||1815|-9439
+Teloloapan|MX||1837|-9987
+San Martín Cuautlalpan|MX||1928|-9883
+Teotihuacán de Arista|MX||1969|-9886
+Nebaj|GT||1541|-9115
+Jesús del Monte|MX||1938|-9929
+Alvarado|MX||1877|-9576
+San Jorge Pueblo Nuevo|MX||1925|-9963
+San Lorenzo Acopilco|MX||1933|-9933
+Cabricán|GT||1507|-9165
+Papalotla|MX||1917|-9820
+Tixtla de Guerrero|MX||1757|-9940
+Frontera|MX||1854|-9265
+Atlacomulco de Fabela|MX||1980|-9988
+Lerma de Villada|MX||1929|-9951
+Tequixquiac|MX||1991|-9914
+San Mateo Otzacatipan|MX||1933|-9960
+San Miguel Coatlinchán|MX||1945|-9887
+San Francisco Zapotitlán|GT||1459|-9152
+Cosoleacaque|MX||1800|-9464
+Nogales|MX||1883|-9716
+Reyes Acozac|MX||1978|-9898
+Playas del Rosario|MX||1785|-9293
+Santa María de Jesús|GT||1449|-9071
+Santa María Atzompa|MX||1710|-9678
+Tenango de Arista|MX||1910|-9959
+Chiconcuac|MX||1956|-9890
+Zacatepec de Hidalgo|MX||1865|-9919
+Fortín de las Flores|MX||1891|-9700
+Patzicía|GT||1463|-9093
+Puente de Ixtla|MX||1861|-9932
+San Pedro Totoltepec|MX||1931|-9957
+Xoxocotla|MX||1869|-9925
+Acajete|MX||1911|-9795
+San Rafael|MX||1921|-9876
+Las Margaritas|MX||1631|-9198
+Capulhuac de Mirafuentes|MX||1919|-9947
+San Lucas Sacatepéquez|GT||1461|-9066
+Xonacatlán|MX||1941|-9953
+San Pablo Jocopilas|GT||1459|-9145
+San Antonio de la Cal|MX||1703|-9670
+Emiliano Zapata|MX||1774|-9177
+Cunduacán|MX||1807|-9317
+Altotonga|MX||1977|-9725
+San Cristóbal Verapaz|GT||1537|-9048
+Banderilla|MX||1959|-9694
+Chignahuapan|MX||1984|-9803
+San Juan Zitlaltepec|MX||1981|-9915
+Salcajá|GT||1488|-9146
+Acatlán de Osorio|MX||1820|-9805
+Xochitepec|MX||1878|-9923
+José Cardel|MX||1937|-9637
+Matías Romero Avendaño|MX||1688|-9504
+Jojutla|MX||1861|-9918
+Guazacapán|GT||1407|-9042
+Las Rosas|MX||1637|-9237
+Santa María Totoltepec|MX||1931|-9959
+Lerdo de Tejada|MX||1863|-9552
+Comalapa|MX||1566|-9214
+Puerto San José|GT||1392|-9082
+Xico|MX||1942|-9701
+Palencia|GT||1467|-9036
+Tlaquiltenango|MX||1863|-9916
+Milpa Alta|MX||1919|-9902
+Altepexi|MX||1837|-9730
+Tiquisate|GT||1428|-9136
+San Andrés Cuexcontitlán|MX||1936|-9962
+Carlos A. Carrillo|MX||1837|-9575
+Tres de Mayo|MX||1887|-9921
+Mapastepec|MX||1543|-9290
+Jocotenango|GT||1458|-9074
+Santa María Ajoloapan|MX||1976|-9896
+Don Antonio|MX||1987|-9893
+Ixtapan de la Sal|MX||1884|-9968
+Santiago Momoxpan|MX||1907|-9827
+Heroica Ciudad de Tlaxiaco|MX||1727|-9768
+Axochiapan|MX||1850|-9875
+Ciudad de Huitzuco|MX||1831|-9933
+Huilango|MX||1968|-9926
+El Asintal|GT||1460|-9173
+Tres Valles|MX||1824|-9614
+San Salvador El Seco|MX||1913|-9764
+Casa Blanca|MX||1904|-9812
+Palmarito Tochapan|MX||1890|-9764
+Santa Bárbara|GT||1444|-9123
+San Salvador Atenco|MX||1955|-9892
+Chisec|GT||1581|-9029
+Tezoyuca|MX||1959|-9891
+La Magdalena Tlaltelulco|MX||1928|-9820
+Yecapixtla|MX||1888|-9886
+Zaragoza|MX||1977|-9756
+Ozumba de Alzate|MX||1904|-9880
+Santa Rosa Treinta|MX||1870|-9918
+Los Reyes de Juárez|MX||1895|-9780
+Suchiapa|MX||1662|-9310
+Yajalón|MX||1717|-9233
+Cacahoatán|MX||1499|-9216
+San Francisco Tlalcilalcalpan|MX||1929|-9977
+La Esperanza|GT||1487|-9156
+San Antonio Acahualco|MX||1927|-9977
+San Pedro Carchá|GT||1548|-9031
+Ampliación San Mateo|MX||1962|-9915
+Teopisca|MX||1654|-9247
+Teolocholco|MX||1924|-9819
+Santa Ana Xalmimilulco|MX||1921|-9838
+Tepatlaxco de Hidalgo|MX||1908|-9797
+Fraccionamiento Ciudad Olmeca|MX||1815|-9455
+Juchitepec|MX||1910|-9888
+San Rafael Tlanalapan|MX||1929|-9847
+Tecámac de Felipe Villanueva|MX||1971|-9897
+Santiago Tlacotepec|MX||1923|-9967
+Sanarate|GT||1479|-9020
+Jalpa de Méndez|MX||1818|-9306
+El Tejar|GT||1465|-9079
+Zinacatepec|MX||1834|-9725
+Tulantongo|MX||1953|-9887
+Libres|MX||1947|-9769
+San Pablo Oztotepec|MX||1919|-9907
+Venustiano Carranza|MX||1634|-9256
+Santiago Tuxtla|MX||1847|-9530
+San Mateo Huitzilzingo|MX||1923|-9893
+Ayutla de los Libres|MX||1696|-9910
+Coscomatepec de Bravo|MX||1907|-9705
+Tepeapulco|MX||1979|-9855
+Tecámac|MX||1971|-9897
+Alborada Jaltenco|MX||1966|-9907
+El Palmar|GT||1465|-9158
+Tetla|MX||1944|-9810
+Rabinal|GT||1509|-9049
+Crucecita|MX||1577|-9614
+San Andrés Xecul|GT||1490|-9148
+Xalatlaco|MX||1918|-9942
+Ocotlán de Morelos|MX||1679|-9668

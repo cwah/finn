@@ -1,0 +1,116 @@
+Kinshasa|CD||-433|1531
+Luanda|AO||-884|1323
+Brazzaville|CG||-427|1528
+Pointe-Noire|CG||-478|1186
+Mulenvos|AO||-887|1333
+Viana|AO||-891|1337
+Kikolo|AO||-878|1333
+Maianga|AO||-885|1324
+Camama|AO||-894|1327
+Golfe|AO||-887|1326
+Calumbo|AO||-915|1342
+Hoji ya Henda|AO||-881|1329
+Cabinda|AO||-556|1219
+Kikwit|CD||-504|1882
+Talatona|AO||-892|1319
+Masina|CD||-438|1539
+Nova Vida|AO||-891|1322
+Malanje|AO||-954|1634
+Kima Kieza|AO||-883|1330
+Matadi|CD||-584|1346
+Cazenga|AO||-884|1328
+Samba|AO||-888|1320
+Ramiros|AO||-906|1305
+Uíge|AO||-761|1506
+Boma|CD||-585|1305
+Vila Flor|AO||-898|1331
+Kilamba|AO||-885|1328
+Soyo|AO||-613|1237
+Bandundu Province|CD||-332|1738
+Zango|AO||-901|1338
+Benfica|AO||-894|1316
+Rangel|AO||-883|1326
+Sambizanga|AO||-879|1328
+N'dalatando|AO||-930|1491
+Panguíla|AO||-869|1345
+Mbanza Kongo|AO||-627|1424
+Cacuaco|AO||-878|1337
+Ingombota|AO||-882|1323
+Mbanza-Ngungu|CD||-526|1486
+Franceville|GA||-163|1358
+Moanda|CD||-593|1237
+Dolisie|CG||-420|1267
+Inkisi|CD||-513|1505
+Nkayi|CG||-418|1329
+Negage|AO||-776|1527
+Cafunfo|AO||-877|1800
+Idiofa|CD||-497|1959
+Bulungu|CD||-454|1860
+Kimpese|CD||-556|1443
+Barra do Dande|AO||-847|1337
+Moanda|GA||-157|1320
+Bailundo|AO||-957|1599
+Inongo|CD||-193|1829
+Gama|AO||-857|1348
+Dondo|AO||-968|1443
+Dondo|AO||-905|1532
+Tshela|CD||-500|1295
+Mangai|CD||-402|1953
+Kenge|CD||-577|1366
+Nioki|CD||-272|1769
+Mushie|CD||-302|1692
+Nzagi|AO||-839|1530
+Kayes|CG||-420|1329
+Kutu|CD||-272|1815
+Dibaya-Lubwe|CD||-416|1986
+Cuango-Luzamba|AO||-915|1804
+Caxito|AO||-858|1366
+Cangandala|AO||-978|1643
+Bolobo|CD||-216|1623
+Lambaréné|GA||-70|1024
+Masi-Manimba|CD||-478|1789
+Kasangulu|CD||-458|1517
+Mouila|GA||-187|1106
+Maquela do Zombo|AO||-606|1511
+Cuímba|AO||-612|1462
+Úcua|AO||-865|1416
+Dungu|CD||-362|1885
+Buco Zau|AO||-477|1255
+Cacuso|AO||-942|1575
+Tchibanga|GA||-293|1098
+Owando|CG||-48|1590
+Cazombo|AO||-873|1537
+Sibiti|CG||-368|1335
+Songo|AO||-735|1485
+Koulamoutou|GA||-114|1246
+Bula Atumba|AO||-867|1480
+Oyam|GA||-20|1068
+N'zeto|AO||-723|1287
+Loutété|CG||-430|1385
+Bouansa|CG||-422|1376
+Gamboma|CG||-188|1586
+Cuilo|AO||-824|1953
+Piri|AO||-853|1444
+Lubalo|AO||-915|1928
+Belize|AO||-465|1277
+Loandjili|CG||-476|1186
+Sanza Pombo|AO||-731|1600
+Mossaka|CG||-122|1680
+Camabatela|AO||-819|1537
+Muxaluando|AO||-812|1429
+Canacassala|AO||-816|1412
+Oyo|CG||-116|1597
+Loudima|CG||-412|1307
+Tombôco|AO||-681|1333
+Kasongo-Lunda|CD||-648|1682
+Golungo Alto|AO||-913|1477
+Lucala|AO||-927|1525
+Gombe|AO||-812|1429
+Mossendjo|CG||-295|1270
+Mouyondzi|CG||-399|1393
+Cambundi|AO||-747|1704
+Mabubas|AO||-852|1369
+Cage Mazumbo|AO||-830|1434
+Pango Aluquém|AO||-871|1446
+Kunda dya Baze|AO||-891|1705
+Djambala|CG||-254|1475

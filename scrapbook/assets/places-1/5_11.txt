@@ -1,0 +1,6 @@
+Chita|RU||5204|11349
+Krasnokamensk|RU||5009|11803
+Borzya|RU||5039|11653
+Aginskoye|RU||5111|11454
+Bodaybo|RU||5785|11420
+Nerchinsk|RU||5198|11659

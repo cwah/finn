@@ -1,0 +1,7 @@
+Saipan|MP||1521|14575
+Dededo Village|GU|DD|1352|14484
+Yigo Village|GU|YG|1354|14489
+Tamuning-Tumon-Harmon Village|GU|TM|1349|14478
+Tamuning|GU|TM|1349|14478
+Mangilao Village|GU|MA|1345|14480
+Hagåtña|GU|AN|1348|14475

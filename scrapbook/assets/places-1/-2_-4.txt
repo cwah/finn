@@ -1,0 +1,163 @@
+Salvador|BR||-1298|-3849
+Aracaju|BR||-1091|-3707
+Feira de Santana|BR||-1227|-3897
+Camaçari|BR||-1270|-3832
+Nossa Senhora do Socorro|BR||-1086|-3713
+Lauro de Freitas|BR||-1289|-3833
+Itabuna|BR||-1479|-3928
+Ilhéus|BR||-1480|-3903
+Porto Seguro|BR||-1645|-3906
+Alagoinhas|BR||-1214|-3842
+Teixeira de Freitas|BR||-1754|-3974
+São Mateus|BR||-1872|-3986
+Eunápolis|BR||-1638|-3958
+Simões Filho|BR||-1278|-3840
+Santo Antônio de Jesus|BR||-1297|-3926
+Itabaiana|BR||-1068|-3743
+Lagarto|BR||-1092|-3765
+São Cristóvão|BR||-1101|-3721
+Valença|BR||-1337|-3907
+Serrinha|BR||-1166|-3901
+Candeias|BR||-1267|-3855
+Dias d'Ávila|BR||-1261|-3830
+Conceição do Coité|BR||-1156|-3928
+Estância|BR||-1127|-3744
+Itamaraju|BR||-1704|-3953
+Euclides da Cunha|BR||-1051|-3902
+Cruz das Almas|BR||-1267|-3910
+Penedo|BR||-1029|-3659
+Santo Amaro|BR||-1255|-3871
+Ipirá|BR||-1216|-3974
+Coruripe|BR||-1013|-3618
+Jaguaquara|BR||-1353|-3997
+Ribeira do Pombal|BR||-1083|-3854
+Santo Estêvão|BR||-1243|-3925
+Tobias Barreto|BR||-1118|-3800
+Tucano|BR||-1096|-3879
+Araci|BR||-1133|-3897
+Catu|BR||-1235|-3838
+Monte Santo|BR||-1044|-3933
+Mata de São João|BR||-1253|-3830
+Maragogipe|BR||-1278|-3892
+São Sebastião do Passé|BR||-1251|-3850
+Nova Viçosa|BR||-1789|-3937
+Vera Cruz|BR||-1296|-3861
+Simão Dias|BR||-1074|-3781
+Mucuri|BR||-1809|-3955
+Barra dos Coqueiros|BR||-1091|-3704
+Rio Real|BR||-1148|-3793
+Ipiaú|BR||-1413|-3974
+Itabaianinha|BR||-1127|-3779
+Inhambupe|BR||-1178|-3835
+Pojuca|BR||-1243|-3833
+São Gonçalo dos Campos|BR||-1243|-3895
+São Francisco do Conde|BR||-1263|-3868
+Entre Rios|BR||-1194|-3808
+Santaluz|BR||-1126|-3937
+Jeremoabo|BR||-1008|-3835
+Esplanada|BR||-1180|-3794
+Cansanção|BR||-1067|-3950
+Nossa Senhora da Glória|BR||-1022|-3742
+Amargosa|BR||-1303|-3960
+Camamu|BR||-1395|-3910
+Conceição do Jacuípe|BR||-1232|-3877
+Prado|BR||-1734|-3922
+Capela|BR||-1050|-3705
+Itaporanga d'Ajuda|BR||-1100|-3731
+Itiúba|BR||-1069|-3985
+Cachoeira|BR||-1260|-3897
+Riachão do Jacuípe|BR||-1181|-3939
+Canavieiras|BR||-1568|-3895
+Cícero Dantas|BR||-1060|-3838
+Itapicuru|BR||-1132|-3823
+Gandu|BR||-1374|-3949
+Muritiba|BR||-1263|-3899
+Santa Cruz Cabrália|BR||-1628|-3902
+Paripiranga|BR||-1069|-3786
+Valente|BR||-1141|-3946
+Ituberá|BR||-1374|-3915
+Itacaré|BR||-1428|-3900
+Nazaré|BR||-1304|-3901
+Olindina|BR||-1137|-3833
+Itabela|BR||-1658|-3955
+Irará|BR||-1205|-3877
+Presidente Tancredo Neves|BR||-1345|-3942
+Quijingue|BR||-1075|-3921
+Conceição da Barra|BR||-1859|-3973
+Ubatã|BR||-1421|-3953
+Nova Soure|BR||-1123|-3848
+Coração de Maria|BR||-1223|-3875
+Propriá|BR||-1021|-3684
+Conde|BR||-1181|-3761
+Queimadas|BR||-1098|-3963
+Nossa Senhora das Dores|BR||-1049|-3719
+Castro Alves|BR||-1277|-3943
+Boquim|BR||-1115|-3762
+Wenceslau Guimarães|BR||-1369|-3948
+Amélia Rodrigues|BR||-1240|-3876
+Laje|BR||-1318|-3942
+Laranjeiras|BR||-1081|-3717
+Umbaúba|BR||-1138|-3766
+Poço Verde|BR||-1071|-3818
+Ibirapitanga|BR||-1416|-3937
+Camacan|BR||-1542|-3950
+Alcobaça|BR||-1752|-3920
+Muritiba|BR||-1292|-3925
+Mutuípe|BR||-1323|-3950
+Carira|BR||-1036|-3770
+Posto da Mata|BR||-1789|-3986
+Aquidabã|BR||-1028|-3702
+Madre de Deus|BR||-1274|-3862
+Ibicaraí|BR||-1486|-3959
+Igreja Nova|BR||-1013|-3666
+Taperoá|BR||-1354|-3910
+Teofilândia|BR||-1148|-3900
+Crisópolis|BR||-1151|-3815
+Santa Bárbara|BR||-1196|-3898
+Conceição da Feira|BR||-1251|-3900
+Maraú|BR||-1410|-3901
+Governador Mangabeira|BR||-1260|-3904
+Uruçuca|BR||-1459|-3928
+Itajuípe|BR||-1468|-3938
+São Felipe|BR||-1285|-3909
+Belmonte|BR||-1586|-3888
+Porto Real do Colégio|BR||-1019|-3684
+Salgado|BR||-1103|-3748
+Ubaíra|BR||-1327|-3966
+Itaparica|BR||-1289|-3868
+Rafael Jambeiro|BR||-1241|-3950
+Sobradinho|BR||-1283|-3910
+Guaratinga|BR||-1658|-3978
+Jaguaripe|BR||-1311|-3890
+Cabaceiras do Paraguaçu|BR||-1254|-3919
+Japaratuba|BR||-1059|-3694
+Una|BR||-1529|-3908
+Riachão do Dantas|BR||-1107|-3772
+Buerarema|BR||-1496|-3930
+Indiaroba|BR||-1152|-3751
+Campo do Brito|BR||-1073|-3749
+Areia Branca|BR||-1076|-3732
+Cristinápolis|BR||-1148|-3776
+Serra Preta|BR||-1216|-3933
+Fátima|BR||-1060|-3822
+Aporá|BR||-1166|-3808
+Cairu|BR||-1349|-3904
+Ubaitaba|BR||-1431|-3932
+Sapeaçu|BR||-1273|-3918
+Cipó|BR||-1110|-3851
+Adustina|BR||-1053|-3810
+Ribeirópolis|BR||-1054|-3742
+Carmópolis|BR||-1065|-3699
+Coaraci|BR||-1464|-3955
+Neópolis|BR||-1032|-3658
+Ibicuí|BR||-1484|-3999
+Piaçabuçu|BR||-1041|-3643
+Sátiro Dias|BR||-1160|-3858
+Conceição do Almeida|BR||-1278|-3917
+Maruim|BR||-1074|-3708
+Coronel João Sá|BR||-1028|-3793
+Teolândia|BR||-1360|-3949
+Barrocas|BR||-1153|-3908
+Acajutiba|BR||-1166|-3802
+Biritinga|BR||-1162|-3880
+Andorinha|BR||-1034|-3984

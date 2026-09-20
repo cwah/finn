@@ -1,0 +1,43 @@
+Manaus|BR||-310|-6002
+Porto Velho|BR||-876|-6390
+Rio Branco|BR||-997|-6781
+Manacapuru|BR||-330|-6062
+Ariquemes|BR||-991|-6304
+Coari|BR||-408|-6314
+Tefé|BR||-337|-6472
+Tabatinga|BR||-423|-6994
+Manicoré|BR||-581|-6130
+Humaitá|BR||-752|-6303
+São Gabriel da Cachoeira|BR||-12|-6709
+Iranduba|BR||-328|-6019
+Leticia|CO||-421|-6994
+Lábrea|BR||-726|-6480
+Sena Madureira|BR||-906|-6867
+Machadinho d'Oeste|BR||-944|-6198
+São Paulo de Olivença|BR||-338|-6887
+Presidente Figueiredo|BR||-203|-6002
+Eirunepé|BR||-666|-6987
+Boca do Acre|BR||-875|-6740
+Careiro|BR||-377|-6037
+Codajás|BR||-384|-6206
+Carauari|BR||-488|-6690
+Barcelos|BR||-97|-6293
+Novo Aripuanã|BR||-512|-6038
+Santa Isabel do Rio Negro|BR||-41|-6502
+Candeias do Jamari|BR||-881|-6370
+Santo Antônio do Içá|BR||-310|-6794
+Beruri|BR||-390|-6137
+Novo Airão|BR||-262|-6094
+Pauini|BR||-771|-6698
+Tonantins|BR||-287|-6780
+Porto Acre|BR||-959|-6753
+Maraã|BR||-185|-6557
+Anori|BR||-377|-6164
+Tapauá|BR||-563|-6318
+Manaquiri|BR||-343|-6046
+Alvarães|BR||-322|-6480
+Alto Paraíso|BR||-972|-6331
+Fonte Boa|BR||-251|-6609
+Canutama|BR||-653|-6438
+Uarini|BR||-299|-6511
+Juruá|BR||-348|-6607

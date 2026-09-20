@@ -1,0 +1,61 @@
+Sanaa|YE||1535|4421
+Aden|YE||1278|4504
+Taiz|YE||1358|4402
+Ibb|YE||1397|4418
+Al Ḩudaydah|YE||1480|4295
+Djibouti|DJ||1159|4315
+Mukalla|YE||1454|4912
+Balbala|DJ||1156|4311
+Najrān|SA||1749|4413
+Khamis Mushait|SA||1830|4273
+Berbera|SO||1044|4501
+Şabyā|SA||1715|4263
+Abha|SA||1822|4251
+Dhamār|YE||1454|4441
+Jizan|SA||1689|4255
+Sabt Alalayah|SA||1958|4196
+‘Amrān|YE||1566|4394
+Bariq|SA||1893|4193
+Bosaso|SO||1128|4918
+Abū ‘Arīsh|SA||1697|4283
+Sayyān|YE||1517|4432
+Zabīd|YE||1420|4332
+Sa'dah|YE||1694|4376
+Baljurashi|SA||1986|4156
+Ali Sabih|DJ||1116|4271
+Samara|ET||1179|4101
+Bājil|YE||1506|4329
+Ḩajjah|YE||1569|4361
+Asaita|ET||1157|4144
+Dhī as Sufāl|YE||1383|4411
+Al Bayda|YE||1399|4557
+Batī|ET||1119|4002
+Ataq|YE||1454|4683
+Dubti|ET||1173|4108
+Logīya|ET||1173|4098
+Bayt al Faqīh|YE||1452|4332
+Ceerigaabo|SO||1062|4737
+Yarīm|YE||1430|4438
+Dikhil|DJ||1110|4237
+Saḩar|YE||1532|4431
+Fayfā’|SA||1728|4314
+Şāmitah|SA||1660|4294
+Ḑamad|SA||1710|4278
+An Nimas|SA||1915|4212
+Laḩij|YE||1306|4488
+Al Mash‘ilīyah|SA||1776|4447
+Arerti|ET||1395|4067
+Sifra|ET||1160|4002
+Mīlē|ET||1142|4076
+Assab|ER||1301|4274
+Ghayl Bā Wazīr|YE||1478|4937
+Zinjibār|YE||1313|4538
+Sarāt ‘Abīdah|SA||1809|4313
+Tadjoura|DJ||1179|4288
+Qandala|SO||1147|4987
+Saylac|SO||1135|4347
+Al Ḩazm|YE||1616|4478
+Arta|DJ||1153|4285
+Ma'rib|YE||1546|4533
+Mocha|YE||1332|4325
+Obock|DJ||1197|4329

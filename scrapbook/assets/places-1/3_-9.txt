@@ -1,0 +1,385 @@
+Jacksonville|US|FL|3033|-8166
+Columbus|US|OH|3996|-8300
+Charlotte|US|NC|3523|-8084
+Indianapolis|US|IN|3977|-8616
+Nashville|US|TN|3617|-8678
+Louisville|US|KY|3825|-8576
+Atlanta|US|GA|3375|-8439
+Lexington|US|KY|3799|-8448
+Lexington-Fayette|US|KY|3805|-8446
+Cincinnati|US|OH|3913|-8451
+Meads|US|KY|3841|-8271
+Winston-Salem|US|NC|3610|-8024
+Huntsville|US|AL|3473|-8659
+Columbus|US|GA|3246|-8499
+Tallahassee|US|FL|3044|-8428
+Birmingham|US|AL|3352|-8680
+Montgomery|US|AL|3237|-8630
+Knoxville|US|TN|3596|-8392
+Mobile|US|AL|3069|-8804
+Chattanooga|US|TN|3505|-8531
+Clarksville|US|TN|3653|-8736
+Murfreesboro|US|TN|3585|-8639
+East Chattanooga|US|TN|3507|-8525
+Savannah|US|GA|3208|-8110
+Columbia|US|SC|3400|-8103
+Dayton|US|OH|3976|-8419
+Athens|US|GA|3396|-8338
+Evansville|US|IN|3797|-8756
+Springfield|US|IL|3980|-8964
+Tuscaloosa|US|AL|3321|-8757
+High Point|US|NC|3596|-8001
+South Fulton|US|GA|3359|-8467
+Sandy Springs|US|GA|3392|-8438
+Asheville|US|NC|3560|-8255
+Roswell|US|GA|3402|-8436
+Macon|US|GA|3284|-8363
+Carmel|US|IN|3998|-8612
+Concord|US|NC|3541|-8058
+Hoover|US|AL|3341|-8681
+Bloomington|US|IN|3917|-8653
+Johns Creek|US|GA|3403|-8420
+Fishers|US|IN|3996|-8601
+Albany|US|GA|3158|-8416
+Gastonia|US|NC|3526|-8119
+Warner Robins|US|GA|3262|-8363
+Decatur|US|IL|3984|-8895
+Franklin|US|TN|3593|-8687
+Gulfport|US|MS|3037|-8909
+Rock Hill|US|SC|3492|-8103
+West Gulfport|US|MS|3040|-8909
+Cordova|US|TN|3516|-8978
+Dothan|US|AL|3122|-8539
+Jackson|US|TN|3561|-8881
+Johnson City|US|TN|3631|-8235
+Greenville|US|SC|3485|-8239
+Alpharetta|US|GA|3408|-8429
+Bowling Green|US|KY|3699|-8644
+Hamilton|US|OH|3940|-8456
+Auburn|US|AL|3261|-8548
+Terre Haute|US|IN|3947|-8741
+Springfield|US|OH|3992|-8381
+Marietta|US|GA|3395|-8455
+Owensboro|US|KY|3777|-8711
+Bartlett|US|TN|3520|-8987
+Smyrna|US|GA|3388|-8451
+Hendersonville|US|TN|3630|-8662
+Valdosta|US|GA|3083|-8328
+Greenwood|US|IN|3961|-8611
+Kettering|US|OH|3969|-8417
+Decatur|US|AL|3461|-8698
+East Pensacola Heights|US|FL|3043|-8718
+Pensacola|US|FL|3042|-8722
+Kingsport|US|TN|3655|-8256
+Huntersville|US|NC|3541|-8084
+Brookhaven|US|GA|3386|-8434
+Stonecrest|US|GA|3371|-8413
+Collierville|US|TN|3504|-8966
+Summerville|US|SC|3302|-8018
+Middletown|US|OH|3952|-8440
+Dunwoody|US|GA|3395|-8433
+Huntington|US|WV|3842|-8245
+Lawrence|US|IN|3984|-8603
+Madison|US|AL|3470|-8675
+Jeffersonville|US|IN|3828|-8574
+Charleston|US|WV|3835|-8163
+Hattiesburg|US|MS|3133|-8929
+Columbus|US|IN|3920|-8592
+Smyrna|US|TN|3598|-8652
+Beavercreek|US|OH|3971|-8406
+Kannapolis|US|NC|3549|-8062
+Biloxi|US|MS|3040|-8889
+Blacksburg|US|VA|3723|-8041
+Cleveland|US|TN|3516|-8488
+Augusta|US|GA|3347|-8197
+Fairfield|US|OH|3935|-8456
+Belleville|US|IL|3852|-8998
+Brentwood|US|TN|3603|-8678
+Covington|US|KY|3908|-8451
+Peachtree Corners|US|GA|3397|-8422
+Sumter|US|SC|3392|-8034
+Goose Creek|US|SC|3298|-8003
+Hilton Head Island|US|SC|3219|-8074
+Hickory|US|NC|3573|-8134
+Florence|US|AL|3480|-8768
+St. Johns|US|FL|3008|-8155
+Lancaster|US|OH|3971|-8260
+Meridian|US|MS|3236|-8870
+Cape Girardeau|US|MO|3731|-8952
+Grove City|US|OH|3988|-8309
+Germantown|US|TN|3509|-8981
+Gainesville|US|GA|3430|-8382
+Panama City|US|FL|3016|-8566
+Huber Heights|US|OH|3984|-8412
+Spartanburg|US|SC|3495|-8193
+Hermitage|US|TN|3620|-8662
+Phenix City|US|AL|3247|-8500
+Milton|US|GA|3413|-8430
+Newnan|US|GA|3338|-8480
+Reynoldsburg|US|OH|3995|-8281
+Mableton|US|GA|3382|-8458
+Hilton Head|US|SC|3222|-8075
+Indian Trail|US|NC|3508|-8067
+Columbia|US|TN|3562|-8704
+New Albany|US|IN|3829|-8582
+Rome|US|GA|3426|-8516
+Gadsden|US|AL|3401|-8601
+Spring Hill|US|TN|3575|-8693
+Olive Branch|US|MS|3496|-8983
+Mooresville|US|NC|3558|-8081
+Richmond|US|IN|3983|-8489
+Martinez|US|GA|3352|-8208
+East Florence|US|AL|3481|-8765
+Tupelo|US|MS|3426|-8870
+East Point|US|GA|3368|-8444
+Prattville|US|AL|3246|-8646
+Ponte Vedra Beach|US|FL|3024|-8139
+Peachtree City|US|GA|3340|-8460
+Upper Arlington|US|OH|3999|-8306
+La Vergne|US|TN|3602|-8658
+Monroe|US|NC|3499|-8055
+Gallatin|US|TN|3639|-8645
+Vestavia Hills|US|AL|3345|-8679
+Salisbury|US|NC|3567|-8047
+Dalton|US|GA|3477|-8497
+Kennesaw|US|GA|3402|-8462
+Richmond|US|KY|3775|-8429
+Fairborn|US|OH|3982|-8402
+Hinesville|US|GA|3185|-8160
+Redan|US|GA|3375|-8413
+Douglasville|US|GA|3375|-8475
+Alabaster|US|AL|3324|-8682
+Mason|US|OH|3936|-8431
+Santa Rosa Beach|US|FL|3040|-8623
+Georgetown|US|KY|3821|-8456
+Florence|US|KY|3900|-8463
+Hopkinsville|US|KY|3687|-8749
+Cookeville|US|TN|3616|-8550
+Mount Juliet|US|TN|3620|-8652
+Navarre|US|FL|3040|-8686
+Brentwood Estates|US|TN|3603|-8678
+Parkersburg|US|WV|3927|-8156
+Lakeside|US|FL|3013|-8177
+Statesboro|US|GA|3245|-8178
+Matthews|US|NC|3512|-8072
+Aiken|US|SC|3356|-8172
+Plainfield|US|IN|3970|-8640
+Lawrenceville|US|GA|3396|-8399
+Lebanon|US|TN|3621|-8629
+Woodstock|US|GA|3410|-8452
+Nicholasville|US|KY|3788|-8457
+Elizabethtown|US|KY|3769|-8586
+LaGrange|US|GA|3304|-8503
+Opelika|US|AL|3265|-8538
+Morristown|US|TN|3621|-8329
+Fruit Cove|US|FL|3011|-8164
+Oak Ridge|US|TN|3601|-8427
+Duluth|US|GA|3400|-8414
+Evans|US|GA|3353|-8213
+O'Fallon|US|IL|3859|-8991
+Ferry Pass|US|FL|3051|-8721
+Henderson|US|KY|3784|-8759
+Maryville|US|TN|3576|-8397
+Frankfort|US|KY|3820|-8487
+Greer|US|SC|3494|-8223
+Chamblee|US|GA|3389|-8430
+Stockbridge|US|GA|3354|-8423
+Cornelius|US|NC|3549|-8086
+Enterprise|US|AL|3132|-8586
+Slidell|US|LA|3028|-8978
+Tucker|US|GA|3385|-8422
+Anderson|US|SC|3450|-8265
+Fleming Island|US|FL|3009|-8172
+Thomasville|US|NC|3588|-8008
+Jeffersontown|US|KY|3819|-8556
+Independence|US|KY|3894|-8454
+Bessemer|US|AL|3340|-8695
+Bristol|US|TN|3660|-8219
+Cantonment|US|FL|3061|-8734
+Carbondale|US|IL|3773|-8922
+Zionsville|US|IN|3995|-8626
+Statesville|US|NC|3578|-8089
+Carrollton|US|GA|3358|-8508
+Xenia|US|OH|3968|-8393
+Ellendale|US|TN|3523|-8983
+Pleasure Ridge Park|US|KY|3815|-8586
+Homewood|US|AL|3347|-8680
+Mint Hill|US|NC|3518|-8065
+Zanesville|US|OH|3994|-8201
+Canton|US|GA|3424|-8449
+Salem|US|VA|3729|-8005
+Starkville|US|MS|3345|-8882
+Mauldin|US|SC|3478|-8231
+Athens|US|OH|3933|-8210
+Brownsburg|US|IN|3984|-8640
+Edwardsville|US|IL|3881|-8995
+Riverside|US|OH|3978|-8412
+Athens|US|AL|3480|-8697
+Cave Spring|US|VA|3723|-8001
+Daphne|US|AL|3060|-8790
+Paducah|US|KY|3708|-8860
+Northport|US|AL|3323|-8758
+Collinsville|US|IL|3867|-8998
+Franklin|US|IN|3948|-8605
+Trotwood|US|OH|3980|-8431
+Centerville|US|OH|3963|-8416
+Kernersville|US|NC|3612|-8007
+Brandon|US|MS|3227|-8999
+McDonough|US|GA|3345|-8415
+Bellview|US|FL|3046|-8731
+Crestview|US|FL|3076|-8657
+Greenwood|US|SC|3420|-8216
+Griffin|US|GA|3325|-8426
+Columbus|US|MS|3350|-8843
+Pooler|US|GA|3212|-8125
+Wright|US|FL|3046|-8664
+Jacksonville Beach|US|FL|3029|-8139
+Candler-McAfee|US|GA|3373|-8427
+Dixiana|US|AL|3374|-8665
+Pelham|US|AL|3329|-8681
+Valley Station|US|KY|3811|-8587
+North Augusta|US|SC|3350|-8197
+Radcliff|US|KY|3784|-8595
+Prichard|US|AL|3074|-8808
+Anniston|US|AL|3366|-8583
+Oxford|US|MS|3437|-8952
+Acworth|US|GA|3407|-8468
+Pascagoula|US|MS|3037|-8856
+Oxford|US|OH|3951|-8475
+Decatur|US|GA|3377|-8430
+Christiansburg|US|VA|3713|-8041
+Farragut|US|TN|3588|-8415
+Clarksville|US|IN|3830|-8576
+Fort Walton Beach|US|FL|3042|-8662
+Brent|US|FL|3047|-8724
+Sugar Hill|US|GA|3411|-8403
+Chillicothe|US|OH|3933|-8298
+Taylors|US|SC|3492|-8230
+Greenfield|US|IN|3979|-8577
+Albertville|US|AL|3427|-8621
+West Pensacola|US|FL|3043|-8728
+Shelbyville|US|TN|3548|-8646
+Fairfield Heights|US|IN|3983|-8638
+Oxford|US|AL|3361|-8583
+Charleston|US|IL|3950|-8818
+Saint Andrews|US|SC|3404|-8110
+Ashland|US|KY|3848|-8264
+Trussville|US|AL|3362|-8661
+East Ridge|US|TN|3501|-8525
+Union City|US|GA|3359|-8454
+Easley|US|SC|3483|-8260
+Simpsonville|US|SC|3474|-8225
+Mountain Brook|US|AL|3350|-8675
+Lebanon|US|OH|3944|-8420
+Wade Hampton|US|SC|3490|-8233
+Ensley|US|FL|3052|-8727
+Portsmouth|US|OH|3873|-8300
+Cartersville|US|GA|3417|-8480
+Oakleaf Plantation|US|FL|3017|-8184
+Shelby|US|NC|3529|-8154
+Lynn Haven|US|FL|3025|-8565
+Lexington|US|SC|3398|-8124
+Pace|US|FL|3060|-8716
+Miamisburg|US|OH|3964|-8429
+Palm Valley|US|FL|3018|-8139
+Newburg|US|KY|3816|-8566
+Norwood|US|OH|3916|-8446
+Clemmons|US|NC|3602|-8038
+Pickerington|US|OH|3988|-8275
+Snellville|US|GA|3386|-8402
+Madisonville|US|KY|3733|-8750
+Selma|US|AL|3241|-8702
+Seymour|US|IN|3896|-8589
+Forest Park|US|GA|3362|-8437
+Lexington|US|NC|3582|-8025
+White Oak|US|OH|3921|-8460
+Shelbyville|US|IN|3952|-8578
+Tullahoma|US|TN|3536|-8621
+Murray|US|KY|3661|-8831
+North Druid Hills|US|GA|3382|-8431
+Milledgeville|US|GA|3308|-8323
+Troy|US|AL|3181|-8597
+Laurel|US|MS|3169|-8913
+Erlanger|US|KY|3902|-8460
+Thomasville|US|GA|3084|-8398
+Fairmont|US|WV|3949|-8014
+Fairhope|US|AL|3052|-8790
+Suwanee|US|GA|3405|-8407
+Whitehall|US|OH|3997|-8289
+Forest Park|US|OH|3929|-8450
+Gautier|US|MS|3039|-8861
+Winchester|US|KY|3799|-8418
+Fern Creek|US|KY|3816|-8559
+Helena|US|AL|3330|-8684
+Springboro|US|OH|3955|-8423
+Boone|US|NC|3622|-8167
+Mattoon|US|IL|3948|-8837
+Vincennes|US|IN|3868|-8753
+Hanahan|US|SC|3292|-8002
+St. Marys|US|GA|3073|-8155
+Lenoir|US|NC|3591|-8154
+Marion|US|IL|3773|-8893
+Ocean Springs|US|MS|3041|-8883
+New Castle|US|IN|3993|-8537
+Saint Matthews|US|KY|3825|-8566
+Radford|US|VA|3713|-8058
+Tillmans Corner|US|AL|3059|-8817
+Foley|US|AL|3041|-8768
+Bristol|US|VA|3660|-8219
+Okolona|US|KY|3814|-8569
+Beckley|US|WV|3778|-8119
+Broad Ripple|US|IN|3987|-8614
+Goodlettsville|US|TN|3632|-8671
+Fayetteville|US|GA|3345|-8445
+Fairview Heights|US|IL|3859|-8999
+Springfield|US|TN|3651|-8688
+Dyersburg|US|TN|3603|-8939
+Bluffton|US|SC|3224|-8086
+Tifton|US|GA|3145|-8351
+North Decatur|US|GA|3379|-8431
+Morganton|US|NC|3575|-8168
+Danville|US|KY|3765|-8477
+Center Point|US|AL|3365|-8668
+Norcross|US|GA|3394|-8421
+Sevierville|US|TN|3587|-8356
+Kingsland|US|GA|3080|-8169
+Avon|US|IN|3976|-8640
+Sikeston|US|MO|3688|-8959
+Fort Thomas|US|KY|3908|-8445
+Calhoun|US|GA|3450|-8495
+Dublin|US|GA|3254|-8290
+Brunswick|US|GA|3115|-8149
+Clarksburg|US|WV|3928|-8034
+Midway|US|FL|3041|-8701
+West Columbia|US|SC|3399|-8107
+Americus|US|GA|3207|-8423
+Albemarle|US|NC|3535|-8020
+Riverdale|US|GA|3357|-8441
+Burlington|US|KY|3903|-8472
+Conyers|US|GA|3367|-8402
+Myrtle Grove|US|FL|3042|-8731
+Shively|US|KY|3820|-8582
+Hueytown|US|AL|3345|-8700
+Talladega|US|AL|3344|-8611
+Long Beach|US|MS|3035|-8915
+Hernando|US|MS|3482|-8999
+Lithia Springs|US|GA|3379|-8466
+Perry|US|GA|3246|-8373
+Jasper|US|IN|3839|-8693
+Winder|US|GA|3399|-8372
+Clemson|US|SC|3468|-8284
+Dickson|US|TN|3608|-8739
+Newport|US|KY|3909|-8450
+Cullman|US|AL|3417|-8684
+Millbrook|US|AL|3248|-8636
+Stallings|US|NC|3509|-8069
+Shelbyville|US|KY|3821|-8522
+Pataskala|US|OH|4000|-8267
+Highview|US|KY|3814|-8562
+Belvedere Park|US|GA|3375|-8427
+Seven Oaks|US|SC|3405|-8115
+Wilmington Island|US|GA|3200|-8097
+East Brainerd|US|TN|3500|-8515
+Vandalia|US|OH|3989|-8420
+Greeneville|US|TN|3616|-8283
+Mount Vernon|US|IL|3832|-8890

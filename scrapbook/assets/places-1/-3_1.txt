@@ -1,0 +1,10 @@
+Windhoek|NA||-2256|1708
+Walvis Bay|NA||-2296|1451
+Swakopmund|NA||-2268|1453
+Rehoboth|NA||-2332|1709
+Otjiwarongo|NA||-2046|1665
+Okahandja|NA||-2198|1690
+Keetmanshoop|NA||-2658|1813
+Gobabis|NA||-2245|1897
+Katutura|NA||-2252|1706
+Lüderitz|NA||-2665|1515

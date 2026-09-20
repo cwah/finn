@@ -1,0 +1,419 @@
+Singapore|SG||129|10385
+Kuala Lumpur|MY||314|10169
+Batam|ID||115|10402
+Pekanbaru|ID||52|10144
+Johor Bahru|MY||147|10376
+Kampung Baru Subang|MY||315|10153
+Petaling Jaya|MY||311|10161
+Ipoh|MY||458|10108
+Shah Alam|MY||309|10153
+Subang Jaya|MY||304|10158
+Bukit Rahman Putra|MY||322|10156
+Pelentong|MY||152|10382
+Malacca|MY||220|10224
+Iskandar Puteri|MY||139|10362
+Kota Bharu|MY||612|10224
+Kuantan|MY||381|10333
+Kota Kuala Muda|MY||559|10037
+Sungai Petani|MY||565|10049
+Selayang Baru Utara|MY||325|10167
+Pasir Gudang|MY||146|10391
+Mukim Pulai|MY||153|10367
+Kampung Larkin Lama|MY||150|10374
+Kota Damansara|MY||315|10158
+Kuala Terengganu|MY||533|10314
+Taman Petaling|MY||320|10165
+Alor Setar|MY||612|10036
+Kampung Kangkar Teberau|MY||153|10375
+Puchong|MY||300|10162
+Seremban|MY||273|10194
+Setapak|MY||321|10173
+Dumai|ID||167|10144
+Kluang|MY||203|10332
+Muar|MY||204|10257
+Ulu Bedok|SG||133|10393
+Bedok New Town|SG||133|10394
+Kapar|MY||313|10138
+Sengkang New Town|SG||139|10389
+Tampines Estate|SG||136|10394
+Jurong Town|SG||133|10372
+Tampines New Town|SG||135|10395
+Woodlands|SG||144|10379
+Batu Caves|MY||324|10168
+Jurong West|SG||135|10372
+Singkawang|ID||91|10898
+Klang|MY||304|10144
+Kajang|MY||299|10179
+Teluk Intan|MY||402|10102
+Kampong Baharu Cheras Batu Sebelas|MY||305|10177
+Pasir Mas|MY||605|10214
+Yishun New Town|SG||143|10383
+Tanjung Pinang|ID||92|10446
+Hougang New Town|SG||136|10389
+Paya Terubong|MY||537|10028
+Cà Mau|VN||918|10515
+Sungai Buloh|MY||321|10156
+Sóc Trăng|VN||960|10597
+Bandar Seri Alam|MY||150|10388
+Taiping|MY||485|10073
+Wangsa Maju|MY||320|10174
+Bukit Mertajam|MY||536|10047
+Sepang|MY||269|10175
+Punggol|SG||141|10391
+Bandar Sunway|MY||307|10161
+Bandar Utama|MY||315|10161
+Bukit Jalil|MY||305|10168
+Rawang|MY||332|10158
+Kuala Kubu Baharu|MY||356|10166
+Hat Yai|TH||701|10048
+Choa Chu Kang New Town|SG||138|10375
+Vĩnh Châu|VN||932|10598
+Kulim|MY||536|10056
+Trà Vinh|VN||995|10634
+Skudai|MY||154|10366
+Ang Mo Kio New Town|SG||138|10384
+George Town|MY||541|10034
+Bukit Batok New Town|SG||136|10376
+Batu Pahat|MY||185|10293
+Sitiawan|MY||422|10070
+Bạc Liêu|VN||929|10573
+Bukit Merah Estate|SG||128|10382
+Bercham|MY||464|10114
+Setia Alam|MY||310|10146
+Bandar Tasik Puteri|MY||329|10147
+Bandar Bukit Raja|MY||309|10143
+Kampung Pasir Gudang Baru|MY||147|10388
+Kampung Sungai Glugur|MY||537|10031
+Giá Rai|VN||923|10546
+Kampong Pasir Ris|SG||138|10393
+Masai|MY||149|10388
+Kampung Sungai Ara|MY||533|10027
+Bukit Panjang New Town|SG||138|10376
+Pasir Puteh|MY||583|10240
+Cheras|MY||311|10173
+Tasek Glugor|MY||548|10050
+Bayan Lepas|MY||530|10026
+Seri Kembangan|MY||303|10172
+Kembangan|SG||132|10391
+Ampang|MY||315|10177
+Titiwangsa|MY||318|10170
+Toa Payoh New Town|SG||134|10385
+Bukit Bintang|MY||315|10171
+Port Dickson|MY||252|10180
+Serangoon|SG||136|10390
+Serangoon New Town|SG||135|10387
+Maran|MY||359|10277
+Geylang|SG||132|10389
+Sembawang Estate|SG||145|10383
+Butterworth|MY||540|10036
+Kuala Krai|MY||553|10220
+Queenstown Estate|SG||129|10380
+Kallang|SG||133|10387
+Perling|MY||148|10368
+Ngã Bảy|VN||981|10582
+Ijok|MY||332|10140
+Sentul|MY||318|10168
+Seri Manjung|MY||420|10067
+Bandar Mahkota Cheras|MY||305|10180
+Taman Melawati|MY||321|10175
+Phong Điền|VN||1000|10567
+Pagoh|MY||215|10277
+Pendang|MY||600|10048
+Bandar Kinrara|MY||305|10164
+Yala|TH||654|10128
+Kuala Nerus|MY||537|10302
+Semenyih|MY||295|10184
+Clementi Housing Estate|SG||132|10376
+Val Dor|MY||525|10049
+Bishan New Town|SG||135|10385
+Ban Mai|TH||720|10055
+Kampung Manjoi|MY||462|10107
+Kepong|MY||321|10164
+Bukit Timah|SG||133|10379
+Damansara Damai|MY||320|10159
+Kampung Sungai Kajang|MY||342|10117
+Cukai|MY||425|10342
+Parit Sulung|MY||198|10288
+Cyberjaya|MY||292|10166
+Ulu Tiram|MY||160|10382
+Taman Senai|MY||160|10364
+Jurong East|SG||133|10374
+Bandar Saujana Utama|MY||321|10148
+Serendah|MY||336|10160
+Duyên Hải|VN||963|10649
+Segamat|MY||251|10282
+Kampung Baru Balakong|MY||303|10175
+Yan Besar|MY||580|10037
+Tanjong Malim|MY||368|10152
+Johor Jaya|MY||154|10381
+Perai|MY||538|10038
+Taman Senawang Indah|MY||269|10199
+Gelang Patah|MY||145|10359
+Kangar|MY||644|10020
+Kulai|MY||166|10360
+Jelutong|MY||539|10032
+Jitra|MY||627|10042
+Kempas|MY||155|10370
+Seremban 2|MY||269|10191
+Long Mỹ|VN||968|10557
+Songkhla|TH||720|10060
+Parit|MY||448|10092
+Kampong Sidam|MY||553|10057
+Setia Tropika|MY||155|10372
+Putra Heights|MY||299|10157
+Ara Damansara|MY||312|10159
+Bukit Indah|MY||148|10366
+Temerluh|MY||345|10242
+Simpang Renggam|MY||182|10331
+Kampong Dungun|MY||322|10132
+Ngã Năm|VN||957|10560
+Simpang Empat|MY||495|10063
+Kota Sambas|ID||136|10930
+Balai Pungut|ID||106|10129
+Trần Văn Thời|VN||908|10498
+Kuala Selangor|MY||335|10125
+Kampung Bukit Baharu|MY||222|10229
+Hulu Langat|MY||311|10181
+Pasir Ris New Town|SG||137|10395
+Bukit Tengah|MY||535|10044
+Xóm Cái Nước|VN||980|10510
+Pemangkat|ID||117|10897
+Pandamaran|MY||301|10142
+Phong Thạnh|VN||932|10535
+Novena|SG||132|10384
+Kota Tinggi|MY||174|10390
+Matilda Estate|SG||140|10390
+Padang Serai|MY||551|10055
+Putrajaya|MY||294|10169
+Sri Petaling|MY||307|10169
+Taman Melati|MY||322|10172
+Kuchai Lama|MY||308|10169
+Bentong Town|MY||352|10191
+Teluk Panglima Garang|MY||291|10147
+Sungai Siput|MY||439|10119
+Tanjung Balai|ID||100|10342
+Bandar Sri Damansara|MY||319|10161
+Banting|MY||281|10150
+Narathiwat|TH||643|10182
+Sungai Raya|ID||70|10890
+Bedong|MY||573|10051
+Marine Parade|SG||130|10391
+Sadao|TH||664|10042
+Batu Gajah|MY||447|10104
+Bangi|MY||290|10178
+Taman Permas Jaya|MY||151|10382
+Elmina|MY||319|10152
+Kampung Perak|MY||387|10259
+Bandar Baharu|MY||513|10050
+Pattani|TH||687|10125
+Phatthalung|TH||762|10008
+Su-ngai Kolok|TH||603|10197
+Ấp Một|VN||984|10554
+Durian Tunggal|MY||231|10228
+Mentakab|MY||349|10235
+Rompin|MY||271|10250
+Taman Greenwood|MY||323|10170
+Pontian Besar|MY||151|10338
+Bentung|MY||353|10190
+Nibong Tebal|MY||517|10048
+Raub|MY||379|10186
+Bukit Gambir|MY||221|10265
+Bangsar|MY||313|10167
+Bandar Tun Hussein Onn|MY||305|10176
+Taman Sri Sinar|MY||319|10165
+Kampong Pangkal Kalong|MY||592|10222
+Lumut|MY||423|10063
+Simei New Town|SG||134|10396
+Keat Hong Village|SG||138|10374
+Kuala Kangsar|MY||477|10093
+Yew Tee|SG||140|10375
+Bandar Country Homes|MY||333|10153
+Kampung Setia|MY||324|10153
+Hưng Mỹ|VN||890|10498
+Klebang Besar|MY||222|10220
+Kampung Baharu Nilai|MY||280|10180
+Padang Rengas|MY||477|10085
+Kampung Alor Mengkudu|MY||609|10039
+Thới Bình|VN||936|10510
+Kampung Ayer Keroh|MY||227|10228
+Taman Tun Dr Ismail|MY||315|10163
+Kaki Bukit Estate|SG||134|10391
+Jawi|MY||522|10049
+Cái Đôi Vàm|VN||886|10481
+Kamunting|MY||488|10073
+Serangoon Garden|SG||136|10386
+Tangkak|MY||227|10255
+Denai Alam|MY||316|10152
+Alam Damai|MY||306|10174
+Bukit Kerinchi|MY||311|10167
+Sungai Lalang|MY||570|10051
+Selama|MY||522|10069
+Dungun|MY||478|10342
+Satun|TH||662|10007
+Peng Siang|SG||138|10374
+Jerantut|MY||394|10236
+Bengkayang|ID||83|10944
+Gerisek|MY||221|10271
+Eunos|SG||132|10390
+Sungkai|MY||400|10132
+Sik|MY||583|10075
+Kangkar|SG||138|10390
+Kawasan Penempatan Ulu Sungai Benut|MY||175|10328
+Kawasan Penempatan Ulu Benut Tiga|MY||175|10328
+Kawasan Penempatan Ulu Benut Lima|MY||174|10332
+Taman Pelangi|MY||243|10268
+Kampung Kerubong|MY||230|10225
+Pekan|MY||348|10340
+Gành Hào|VN||903|10542
+Bahau|MY||281|10240
+Yaring|TH||687|10137
+Kuala Kurau|MY||502|10043
+Taman Seremban Jaya|MY||268|10197
+Gerik|MY||542|10113
+Lahat|MY||454|10104
+Mont Kiara|MY||317|10165
+Chemor|MY||472|10112
+Bakri|MY||204|10265
+Năm Căn|VN||876|10499
+Bidur|MY||412|10128
+Tokai|MY||603|10041
+Taman Universiti|MY||153|10362
+Taman Scientex|MY||151|10392
+Jelebu|SG||138|10376
+Gemas|MY||258|10261
+Betong|TH||577|10107
+Rembau|MY||259|10209
+Boon Lay|SG||131|10369
+Thomson|SG||135|10384
+Kampong Masjid Tanah|MY||235|10212
+Tanah Merah|MY||580|10215
+An Trạch|VN||907|10540
+Hutan Melintang|MY||388|10093
+Yio Chu Kang|SG||139|10385
+Tampin|MY||247|10223
+Ulu Kelang|MY||318|10177
+Sungai Dua|MY||544|10043
+Tapah Road|MY||417|10120
+Parit Buntar|MY||513|10049
+Kubang Semang|MY||540|10046
+Permatang Kuching|MY||546|10038
+Yong Peng|MY||201|10307
+Sungai Besar|MY||367|10099
+MacPherson|SG||133|10388
+Fajar|SG||138|10377
+Lundu|MY||167|10985
+Hong Kah|SG||136|10372
+Bandar Sri Sendayan|MY||267|10187
+Sungai Udang|MY||227|10214
+Taman OUG|MY||307|10168
+Cangkat Jong|MY||399|10112
+SS2|MY||312|10162
+Batu Berendam|MY||225|10225
+Pak Phanang|TH||835|10020
+Bandar Puncak Alam|MY||324|10143
+Taman Desa|MY||311|10169
+Saujana|SG||138|10377
+Jenjarum|MY||287|10149
+Kampung Jelutong Tengah|MY||147|10357
+Teck Whye|SG||138|10375
+Vị Thanh|VN||978|10547
+Kertih|MY||451|10345
+Margaret Drive|SG||130|10381
+Senja|SG||139|10376
+Balik Pulau|MY||535|10024
+Ladang Seri Kundang|MY||329|10152
+Pekan Nenas|MY||151|10351
+Peringat|MY||603|10228
+Tam Giang|VN||880|10518
+Bandar Tun Razak|MY||290|10289
+Kiên Hải|VN||997|10485
+Kampung Tanjung Minyak|MY||227|10220
+Anak Bukit|SG||134|10377
+Bukit Tambun|MY||527|10046
+Batu Arang|MY||332|10147
+Kampung Sedenak|MY||171|10353
+Tanjung Sepat|MY||266|10156
+Ấp Hô Phòng|VN||923|10542
+Batu Kurau|MY||497|10080
+Mersing|MY||243|10384
+Marsiling|SG||143|10377
+Batu Anam|MY||258|10271
+Labis|MY||238|10302
+Kampung Batu Empat|MY||178|10387
+Tanglin|SG||132|10382
+Bandar Baru Salak Tinggi|MY||281|10174
+Kampung Teluk Kumbar|MY||529|10025
+Marang|MY||521|10321
+Kuang|MY||326|10155
+Paka|MY||464|10344
+Bangkit|SG||138|10377
+Bagan Serai|MY||501|10054
+Hulu Yam Lama|MY||345|10164
+Alor Gajah|MY||238|10221
+Bukit Beruntung|MY||342|10156
+Batang Berjuntai|MY||338|10142
+Pelabuhan Klang|MY||300|10139
+Batu Feringgi|MY||547|10025
+Kampung Selang|MY||235|10288
+Kampung Hutan Arau|MY||643|10028
+Tropicana Indah|MY||314|10159
+Desa Petaling|MY||308|10171
+Sungai Simpang|SG||144|10383
+Brickworks Estate|SG||129|10381
+Bandar Putra Kulai|MY||165|10363
+Ranot|TH||778|10032
+Gua Musang|MY||488|10197
+Seminyih|MY||295|10185
+Pokok Sena|MY||617|10052
+Sungai Jawi|MY||520|10049
+Kuala Pilah|MY||274|10225
+Kampung Minyak Beku|MY||180|10290
+Kampung Teluk Air Tawar|MY||548|10038
+Telok Blangah|SG||127|10381
+Kampong Kadok|MY||600|10225
+Kuala Kedah|MY||610|10030
+Kuala Ketil|MY||560|10065
+Kampung Cheng|MY||226|10222
+Kawasan Perindustrian Cheng|MY||226|10223
+Pulai|MY||565|10090
+Kampar|MY||430|10115
+Changloon|MY||643|10043
+Kampung Kupang|MY||564|10085
+Horizon Hills|MY||146|10365
+Relau|MY||533|10028
+Glugor|MY||537|10031
+Merlimau|MY||214|10243
+Seputeh|MY||312|10168
+FELDA Chini|MY||337|10294
+Outram Park|SG||128|10384
+Lunas|MY||543|10053
+Teloi Kanan|MY||572|10066
+Kampung Jeli|MY||570|10183
+Kampung Simpang Renggam|MY||183|10330
+Parit Raja|MY||187|10311
+Bukit Rambai|MY||226|10218
+Bukit Gemuroh|MY||530|10021
+Tak Bai|TH||626|10205
+Kepala Batas|MY||552|10043
+Kampung Bertam Ulu|MY||229|10219
+Wakaf Baharu|MY||612|10220
+Ayer Itam|MY||540|10028
+Paya Lebar|SG||135|10389
+Ra-ngae|TH||630|10173
+Kampung Teluk Kemang|MY||246|10186
+Anak Bukit|MY||618|10038
+Desa Parkcity|MY||319|10163
+Lukut|MY||257|10183
+Kampung Tanjung Karang|MY||342|10118
+Pantai Remis|MY||446|10063
+Padang Besar|MY||638|10030
+Kampung Machap Baru|MY||238|10233
+Gurun|MY||582|10047
+Kampung Ayer Molek|MY||221|10233
+Pengerang|MY||137|10411
+Kuala Lipis|MY||418|10205
+Loyang|SG||138|10397
+Kampong Loyang|SG||138|10396
+Bandar Tenggara|MY||187|10362
+Tiong Bahru Estate|SG||128|10383
+Phú Lộc|VN||943|10574

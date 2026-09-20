@@ -1,0 +1,4 @@
+Petropavlovsk-Kamchatsky|RU||5306|15863
+Magadan|RU||5956|15080
+Yelizovo|RU||5319|15838
+Vilyuchinsk|RU||5293|15841

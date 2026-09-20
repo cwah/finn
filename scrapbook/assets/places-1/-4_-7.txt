@@ -1,0 +1,119 @@
+Córdoba|AR||-3141|-6419
+Rosario|AR||-3295|-6064
+Santa Fe|AR||-3165|-6071
+Bahía Blanca|AR||-3872|-6227
+Paraná|AR||-3173|-6053
+Neuquén|AR||-3895|-6806
+Ciudad de Las Heras|AR||-3285|-6884
+San Luis|AR||-3329|-6632
+Río Cuarto|AR||-3313|-6435
+San Nicolás de los Arroyos|AR||-3333|-6021
+Rawson|AR||-3158|-6854
+San Rafael|AR||-3462|-6833
+Mendoza|AR||-3289|-6885
+San Juan|AR||-3154|-6853
+Santa Rosa|AR||-3662|-6429
+Villa Mercedes|AR||-3368|-6546
+Cipolletti|AR||-3893|-6799
+Villa María|AR||-3241|-6324
+Pergamino|AR||-3389|-6057
+Olavarría|AR||-3689|-6032
+Rafaela|AR||-3125|-6149
+Junín|AR||-3459|-6095
+San Martín|AR||-3308|-6847
+Gobernador Gálvez|AR||-3303|-6064
+Chimbas|AR||-3149|-6853
+General Roca|AR||-3903|-6758
+Venado Tuerto|AR||-3375|-6197
+Villa Carlos Paz|AR||-3142|-6449
+General Pico|AR||-3566|-6376
+Chivilcoy|AR||-3490|-6002
+Punta Alta|AR||-3888|-6208
+Santa Lucía|AR||-3154|-6850
+Santo Tomé|AR||-3166|-6077
+San Francisco|AR||-3142|-6208
+Río Tercero|AR||-3218|-6411
+Plottier|AR||-3897|-6823
+Tres Arroyos|AR||-3838|-6028
+Centenario|AR||-3883|-6813
+Cutral-Có|AR||-3893|-6923
+Chacabuco|AR||-3464|-6047
+Villa Constitución|AR||-3323|-6033
+Nueve de Julio|AR||-3544|-6088
+Pocito|AR||-3168|-6858
+Alta Gracia|AR||-3165|-6443
+Trenque Lauquen|AR||-3597|-6273
+Bragado|AR||-3512|-6049
+Tunuyán|AR||-3358|-6902
+Pehuajó|AR||-3581|-6190
+Jesús María|AR||-3098|-6409
+Cañada de Gómez|AR||-3282|-6140
+Esperanza|AR||-3145|-6093
+General Alvear|AR||-3498|-6770
+Bell Ville|AR||-3263|-6269
+Rivadavia|AR||-3319|-6846
+Salto|AR||-3429|-6025
+Lincoln|AR||-3487|-6153
+Coronel Suárez|AR||-3746|-6193
+Caucete|AR||-3165|-6828
+Granadero Baigorria|AR||-3286|-6072
+Casilda|AR||-3304|-6116
+San Carlos de Bolívar|AR||-3623|-6112
+Villa Regina|AR||-3910|-6708
+Arrecifes|AR||-3406|-6010
+Ramallo|AR||-3349|-6001
+Villa General San Martín|AR||-3144|-6852
+Cruz del Eje|AR||-3073|-6480
+Villa Dolores|AR||-3195|-6519
+Allen|AR||-3898|-6783
+Malargüe|AR||-3548|-6959
+Capitán Bermúdez|AR||-3282|-6072
+Cinco Saltos|AR||-3882|-6806
+Colón|AR||-3390|-6110
+Villa Nueva|AR||-3243|-6325
+Victoria|AR||-3262|-6015
+La Calera|AR||-3135|-6434
+Pérez|AR||-3300|-6077
+Marcos Juárez|AR||-3270|-6211
+Colonia Caroya|AR||-3102|-6406
+Veinticinco de Mayo|AR||-3543|-6017
+General Villegas|AR||-3503|-6301
+Río Segundo|AR||-3165|-6391
+Rojas|AR||-3420|-6073
+San Justo|AR||-3079|-6059
+Villa Allende|AR||-3129|-6430
+Coronel Pringles|AR||-3799|-6135
+Arroyo Seco|AR||-3315|-6051
+Morteros|AR||-3071|-6201
+Albardón|AR||-3144|-6853
+Deán Funes|AR||-3042|-6435
+Laboulaye|AR||-3413|-6339
+Arroyito|AR||-3142|-6305
+Diamante|AR||-3207|-6064
+Carlos Casares|AR||-3562|-6137
+Perdriel|AR||-3307|-6889
+Villa Paula de Sarmiento|AR||-3149|-6854
+Cosquín|AR||-3125|-6447
+Sunchales|AR||-3094|-6156
+Las Varillas|AR||-3187|-6272
+Rodeo del Medio|AR||-3299|-6869
+Pilar|AR||-3168|-6388
+Gálvez|AR||-3203|-6122
+Rufino|AR||-3426|-6271
+Crespo|AR||-3203|-6031
+Firmat|AR||-3346|-6148
+Los Toldos|AR||-3500|-6104
+Villa del Rosario|AR||-3155|-6354
+Toay|AR||-3667|-6438
+Coronda|AR||-3197|-6092
+Tupungato|AR||-3337|-6915
+San Jorge|AR||-3190|-6186
+Río Ceballos|AR||-3117|-6432
+Río Colorado|AR||-3899|-6410
+Pigüé|AR||-3760|-6241
+Embalse|AR||-3221|-6440
+Carcarañá|AR||-3286|-6115
+Unquillo|AR||-3124|-6431
+Catriel|AR||-3788|-6779
+La Falda|AR||-3109|-6448
+General Acha|AR||-3738|-6460

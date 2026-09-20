@@ -1,0 +1,6 @@
+Hermosillo|MX||2909|-11097
+La Paz|MX||2414|-11031
+Heroica Guaymas|MX||2792|-11090
+Empalme|MX||2796|-11081
+Ciudad Constitución|MX||2503|-11166
+Miguel Alemán (La Doce)|MX||2884|-11148

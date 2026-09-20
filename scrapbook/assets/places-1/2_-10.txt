@@ -1,0 +1,131 @@
+Houston|US|TX|2976|-9536
+San Antonio|US|TX|2942|-9849
+Reynosa|MX||2608|-9828
+Heroica Matamoros|MX||2588|-9750
+Nuevo Laredo|MX||2748|-9952
+New Orleans|US|LA|2995|-9008
+Ciudad Victoria|MX||2374|-9914
+Corpus Christi|US|TX|2780|-9740
+Tampico|MX||2229|-9788
+Pachuca de Soto|MX||2012|-9873
+Laredo|US|TX|2751|-9951
+Cypress|US|TX|2997|-9570
+Ciudad Madero|MX||2225|-9784
+Brownsville|US|TX|2590|-9750
+Poza Rica de Hidalgo|MX||2053|-9746
+Pasadena|US|TX|2969|-9521
+Metairie Terrace|US|LA|2998|-9016
+McAllen|US|TX|2620|-9823
+San Juan del Río|MX||2039|-10000
+Metairie|US|LA|2998|-9015
+Ciudad Valles|MX||2200|-9901
+Miramar|MX||2236|-9790
+Pearland|US|TX|2956|-9529
+Tulancingo|MX||2008|-9837
+Alief|US|TX|2971|-9560
+League City|US|TX|2951|-9509
+Ciudad Río Bravo|MX||2599|-9809
+Sugar Land|US|TX|2962|-9563
+Ciudad Mante|MX||2274|-9897
+Túxpam de Rodríguez Cano|MX||2096|-9741
+Edinburg|US|TX|2630|-9816
+Mission|US|TX|2622|-9833
+Pharr|US|TX|2619|-9818
+Baytown|US|TX|2974|-9498
+Missouri City|US|TX|2962|-9554
+New Braunfels|US|TX|2970|-9812
+Linares|MX||2486|-9957
+Cadereyta|MX||2558|-9998
+Victoria|US|TX|2881|-9700
+Montemorelos|MX||2519|-9983
+Kenner|US|LA|2999|-9024
+Atascocita|US|TX|3000|-9518
+Harlingen|US|TX|2619|-9770
+San Marcos|US|TX|2988|-9794
+Martínez de la Torre|MX||2007|-9706
+Altamira|MX||2239|-9794
+Huauchinango|MX||2017|-9805
+Port Arthur|US|TX|2989|-9394
+Papantla de Olarte|MX||2045|-9732
+Rioverde|MX||2193|-9999
+Galveston|US|TX|2930|-9480
+Valle Hermoso|MX||2567|-9781
+Texas City|US|TX|2938|-9490
+Schertz|US|TX|2955|-9827
+Pánuco|MX||2205|-9818
+Huejutla de Reyes|MX||2114|-9842
+Xicotepec de Juárez|MX||2028|-9796
+Weslaco|US|TX|2616|-9799
+Friendswood|US|TX|2953|-9520
+Channelview|US|TX|2978|-9511
+San Juan|US|TX|2619|-9816
+Mission Bend|US|TX|2969|-9566
+Kyle|US|TX|2999|-9788
+Rosenberg|US|TX|2956|-9581
+La Porte|US|TX|2967|-9502
+Ixmiquilpan|MX||2048|-9922
+Houma|US|LA|2960|-9072
+Coatzintla|MX||2049|-9747
+Deer Park|US|TX|2971|-9512
+Cibolo|US|TX|2956|-9823
+Marrero|US|LA|2990|-9010
+Actopan|MX||2027|-9894
+Tantoyuca|MX||2135|-9823
+Tequisquiapan|MX||2052|-9989
+San Fernando|MX||2485|-9815
+Tula de Allende|MX||2006|-9934
+Seguin|US|TX|2957|-9796
+Lake Jackson|US|TX|2903|-9543
+Kingsville|US|TX|2752|-9786
+Alvin|US|TX|2942|-9524
+Mixquiahuala de Juárez|MX||2023|-9921
+Álamo|MX||2091|-9768
+Tamazunchale|MX||2126|-9879
+San Benito|US|TX|2613|-9763
+Ébano|MX||2222|-9838
+Terrytown|US|LA|2991|-9003
+Zacualtipán|MX||2065|-9865
+Cloverleaf|US|TX|2978|-9517
+Cerro Azul|MX||2119|-9774
+Converse|US|TX|2952|-9832
+Canyon Lake|US|TX|2988|-9826
+Harvey|US|LA|2990|-9008
+Naranjos|MX||2135|-9769
+Ciudad Miguel Alemán|MX||2640|-9903
+Universal City|US|TX|2955|-9829
+Dickinson|US|TX|2946|-9505
+Angleton|US|TX|2917|-9543
+Alice|US|TX|2775|-9807
+Bayou Cane|US|LA|2962|-9075
+Alamo|US|TX|2618|-9812
+Fresno|US|TX|2954|-9545
+Cuautepec|MX||2004|-9831
+Bellaire|US|TX|2971|-9546
+Stafford|US|TX|2962|-9556
+Cinco Ranch|US|TX|2974|-9576
+Gretna|US|LA|2991|-9005
+Bay City|US|TX|2898|-9597
+South Houston|US|TX|2966|-9524
+Progreso de Obregón|MX||2025|-9919
+Nederland|US|TX|2997|-9399
+La Providencia Siglo XXI|MX||2006|-9872
+Mercedes|US|TX|2615|-9791
+Donna|US|TX|2617|-9805
+Uvalde|US|TX|2921|-9979
+Estelle|US|LA|2985|-9011
+Tamuín|MX||2201|-9878
+Katy|US|TX|2979|-9582
+Portland|US|TX|2788|-9732
+Santiago Tulantepec|MX||2004|-9836
+Pecan Grove|US|TX|2963|-9573
+La Marque|US|TX|2937|-9497
+Aldine|US|TX|2993|-9538
+Alton|US|TX|2629|-9831
+Groves|US|TX|2995|-9392
+West University Place|US|TX|2972|-9543
+Humble|US|TX|3000|-9526
+Cárdenas|MX||2200|-9964
+Live Oak|US|TX|2957|-9834
+Villa Independencia|MX||2006|-9705
+New Territory|US|TX|2959|-9568
+Alto Lucero|MX||2095|-9744

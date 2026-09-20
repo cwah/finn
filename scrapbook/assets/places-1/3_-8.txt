@@ -1,0 +1,305 @@
+Philadelphia|US|PA|3995|-7516
+Washington|US|DC|3890|-7704
+Baltimore|US|MD|3929|-7661
+Raleigh|US|NC|3577|-7864
+Virginia Beach|US|VA|3685|-7598
+West Raleigh|US|NC|3579|-7866
+Greensboro|US|NC|3607|-7979
+Durham|US|NC|3599|-7890
+Norfolk|US|VA|3685|-7629
+Chesapeake|US|VA|3682|-7627
+Richmond|US|VA|3755|-7746
+Arlington|US|VA|3888|-7710
+Fayetteville|US|NC|3505|-7888
+Newport News|US|VA|3698|-7643
+Cary|US|NC|3579|-7878
+Alexandria|US|VA|3880|-7705
+East Hampton|US|VA|3704|-7633
+Hampton|US|VA|3703|-7635
+Charleston|US|SC|3278|-7993
+Wilmington|US|NC|3424|-7795
+North Charleston|US|SC|3285|-7997
+Roanoke|US|VA|3727|-7994
+Columbia|US|MD|3924|-7684
+Portsmouth Heights|US|VA|3682|-7637
+Portsmouth|US|VA|3684|-7630
+Greenville|US|NC|3561|-7737
+Toms River|US|NJ|3995|-7420
+Suffolk|US|VA|3673|-7658
+Germantown|US|MD|3917|-7727
+Mount Pleasant|US|SC|3279|-7986
+South Suffolk|US|VA|3672|-7659
+Lynchburg|US|VA|3741|-7914
+Camden|US|NJ|3993|-7512
+Silver Spring|US|MD|3899|-7703
+Centreville|US|VA|3884|-7743
+Wilmington|US|DE|3975|-7555
+Cherry Hill|US|NJ|3993|-7503
+Frederick|US|MD|3941|-7741
+Waldorf|US|MD|3862|-7694
+Glen Burnie|US|MD|3916|-7662
+Gaithersburg|US|MD|3914|-7720
+Jacksonville|US|NC|3475|-7743
+Rockville|US|MD|3908|-7715
+Dale City|US|VA|3864|-7731
+Ellicott City|US|MD|3927|-7680
+West Lynchburg|US|VA|3740|-7918
+Dundalk|US|MD|3925|-7652
+Bethesda|US|MD|3898|-7710
+Vineland|US|NJ|3949|-7503
+Chapel Hill|US|NC|3591|-7906
+Reston|US|VA|3897|-7734
+South Vineland|US|NJ|3945|-7503
+Bowie|US|MD|3894|-7673
+Center City|US|PA|3995|-7516
+Rocky Mount|US|NC|3594|-7779
+Towson|US|MD|3940|-7660
+Jackson|US|NJ|3978|-7486
+Downtown DC|US|DC|3889|-7702
+Harrisonburg|US|VA|3845|-7887
+Burlington|US|NC|3610|-7944
+Leesburg|US|VA|3912|-7756
+Havertown|US|PA|3998|-7531
+Wharton|US|PA|3993|-7516
+Whitman|US|PA|3992|-7516
+Wilson|US|NC|3572|-7792
+South Bel Air|US|MD|3953|-7634
+Aspen Hill|US|MD|3908|-7707
+Wheaton|US|MD|3904|-7706
+McLean|US|VA|3893|-7718
+Bel Air South|US|MD|3951|-7632
+Gwynn Oak|US|MD|3933|-7669
+Charlottesville|US|VA|3803|-7848
+Apex|US|NC|3573|-7885
+Tuckahoe|US|VA|3759|-7756
+Potomac|US|MD|3902|-7721
+Severn|US|MD|3914|-7670
+York|US|PA|3996|-7673
+North Bethesda|US|MD|3904|-7712
+Ashburn|US|VA|3904|-7749
+Sicklerville|US|NJ|3972|-7497
+Danville|US|VA|3659|-7940
+Mount Laurel|US|NJ|3993|-7489
+Manassas|US|VA|3875|-7748
+Catonsville|US|MD|3927|-7673
+Lake Ridge|US|VA|3869|-7730
+Burke|US|VA|3879|-7727
+Annandale|US|VA|3883|-7720
+Annapolis|US|MD|3898|-7649
+Hagerstown|US|MD|3964|-7772
+Dover|US|DE|3916|-7552
+Essex|US|MD|3931|-7647
+Atlantic City|US|NJ|3936|-7442
+Florence|US|SC|3420|-7976
+Wake Forest|US|NC|3598|-7851
+Hanover|US|MD|3919|-7672
+Columbia Heights|US|DC|3893|-7703
+Woodlawn|US|MD|3932|-7673
+Severna Park|US|MD|3907|-7655
+Sewell|US|NJ|3977|-7514
+Odenton|US|MD|3908|-7670
+Saint Charles|US|MD|3860|-7694
+Mechanicsville|US|VA|3761|-7737
+Pennsauken|US|NJ|3996|-7506
+Clinton|US|MD|3877|-7690
+Mount Pleasant|US|DC|3893|-7704
+Goldsboro|US|NC|3538|-7799
+Linton Hall|US|VA|3876|-7757
+Oxon Hill-Glassmanor|US|MD|3880|-7697
+Oakton|US|VA|3888|-7730
+Chester|US|PA|3985|-7536
+North Bel Air|US|MD|3954|-7635
+Olney|US|MD|3915|-7707
+Newark|US|DE|3968|-7575
+Oak Hill|US|VA|3893|-7740
+Suitland-Silver Hill|US|MD|3885|-7693
+Chillum|US|MD|3896|-7699
+St. Charles|US|MD|3861|-7692
+Cobbs Creek|US|PA|3995|-7524
+Salisbury|US|MD|3836|-7560
+Petersburg|US|VA|3723|-7740
+Randallstown|US|MD|3937|-7680
+College Park|US|MD|3898|-7694
+Overbrook|US|PA|3999|-7524
+Montgomery Village|US|MD|3918|-7720
+Holly Springs|US|NC|3565|-7883
+Myrtle Beach|US|SC|3369|-7889
+Pikesville|US|MD|3937|-7672
+Parkville|US|MD|3938|-7654
+Morgantown|US|WV|3963|-7996
+Owings Mills|US|MD|3942|-7678
+Bel Air North|US|MD|3955|-7637
+Eldersburg|US|MD|3940|-7695
+Springfield|US|VA|3879|-7719
+New Bern|US|NC|3511|-7704
+Carney|US|MD|3939|-7652
+South Gate|US|MD|3913|-7663
+West Falls Church|US|VA|3886|-7719
+Fort Bragg|US|NC|3514|-7901
+Sanford|US|NC|3548|-7918
+Milford Mill|US|MD|3935|-7677
+West Elkridge|US|MD|3921|-7673
+Perry Hall|US|MD|3941|-7646
+Millville|US|NJ|3940|-7504
+Fredericksburg|US|VA|3830|-7746
+Garner|US|NC|3571|-7861
+Drexel Hill|US|PA|3995|-7529
+Sterling|US|VA|3901|-7743
+Port Richmond|US|PA|3999|-7510
+Crofton|US|MD|3900|-7669
+Winchester|US|VA|3919|-7816
+Laurel|US|MD|3910|-7685
+South Laurel|US|MD|3907|-7685
+Asheboro|US|NC|3571|-7981
+Pennsport|US|PA|3993|-7515
+Reisterstown|US|MD|3947|-7683
+Central 14th Street / Spring Road|US|DC|3894|-7703
+Suitland|US|MD|3885|-7692
+Edgewood|US|MD|3942|-7629
+Lochearn|US|MD|3934|-7672
+Middle River|US|MD|3933|-7644
+Bridgeton|US|NJ|3943|-7523
+Short Pump|US|VA|3765|-7761
+Vincentown|US|NJ|3993|-7475
+Herndon|US|VA|3897|-7739
+Staunton|US|VA|3815|-7907
+North Potomac|US|MD|3908|-7726
+Scaggsville|US|MD|3915|-7690
+Pasadena|US|MD|3912|-7657
+Greenbelt|US|MD|3900|-7688
+South Riding|US|VA|3892|-7750
+Fairfax|US|VA|3885|-7731
+Hunt Valley|US|MD|3950|-7664
+Fuquay-Varina|US|NC|3558|-7880
+Morrisville|US|NC|3582|-7883
+Fort Washington|US|MD|3871|-7702
+Fairland|US|MD|3908|-7696
+Baileys Crossroads|US|VA|3885|-7713
+Ilchester|US|MD|3925|-7676
+Northwest One|US|DC|3890|-7701
+Springfield|US|PA|3993|-7532
+Dupont Circle|US|DC|3891|-7704
+Arnold|US|MD|3903|-7650
+Landover|US|MD|3893|-7690
+Chantilly|US|VA|3889|-7743
+Lincolnia|US|VA|3882|-7714
+West Springfield|US|VA|3877|-7722
+Hopewell|US|VA|3730|-7729
+Foggy Bottom|US|DC|3890|-7706
+Mount Vernon Triangle|US|DC|3890|-7702
+Lumberton|US|NC|3462|-7901
+Rittenhouse|US|PA|3995|-7517
+Waynesboro|US|VA|3807|-7889
+H Street NE|US|DC|3890|-7700
+Kinston|US|NC|3526|-7758
+Pleasant Plains|US|DC|3893|-7702
+Carrboro|US|NC|3591|-7908
+Conway|US|SC|3384|-7905
+Chester|US|VA|3736|-7744
+Woodlawn|US|VA|3872|-7713
+Cockeysville|US|MD|3948|-7664
+Pleasantville|US|NJ|3939|-7452
+NoMa|US|DC|3890|-7701
+Chambersburg|US|PA|3994|-7766
+Bayville|US|NJ|3991|-7415
+Arbutus|US|MD|3925|-7670
+Middletown|US|DE|3945|-7572
+Havelock|US|NC|3488|-7690
+Rose Hill|US|VA|3879|-7711
+Cumberland|US|MD|3965|-7876
+Haddington|US|PA|3997|-7524
+Socastee|US|SC|3368|-7900
+West Chester|US|PA|3996|-7561
+Hartranft|US|PA|3998|-7515
+Kingsessing|US|PA|3994|-7523
+Tysons|US|VA|3892|-7723
+Montclair|US|VA|3861|-7734
+Lake Shore|US|MD|3911|-7648
+Bear|US|DE|3963|-7566
+Green Haven|US|MD|3914|-7655
+Clayton|US|NC|3565|-7846
+Rosedale|US|MD|3932|-7652
+Glassboro|US|NJ|3970|-7511
+Camp Springs|US|MD|3880|-7691
+Maple Shade|US|NJ|3995|-7499
+Petworth|US|DC|3895|-7702
+Capitol Riverfront|US|DC|3888|-7700
+Park View|US|DC|3893|-7702
+Langley Park|US|MD|3899|-7698
+Greater Upper Marlboro|US|MD|3883|-7675
+Westminster|US|MD|3958|-7700
+Lorton|US|VA|3870|-7723
+Hyattsville|US|MD|3896|-7695
+Midlothian|US|VA|3751|-7765
+Meadowbrook|US|VA|3745|-7747
+Ballenger Creek|US|MD|3937|-7744
+Franconia|US|VA|3878|-7715
+Lanham-Seabrook|US|MD|3897|-7685
+Elizabeth City|US|NC|3629|-7625
+Leland|US|NC|3426|-7804
+Colonial Heights|US|VA|3727|-7741
+Calverton|US|MD|3906|-7694
+Oxon Hill|US|MD|3880|-7699
+Takoma Park|US|MD|3898|-7701
+Martinsburg|US|WV|3946|-7796
+Golden Triangle|US|DC|3891|-7704
+Shaw|US|DC|3891|-7702
+Brightwood|US|DC|3896|-7703
+Lindenwold|US|NJ|3982|-7500
+University City|US|PA|3995|-7519
+Culpeper|US|VA|3847|-7800
+White Oak|US|MD|3904|-7699
+Glassmanor|US|MD|3882|-7700
+Idylwood|US|VA|3890|-7721
+Seabrook|US|MD|3897|-7685
+Redland|US|MD|3915|-7714
+Frankford|US|MD|3933|-7654
+Elmwood|US|PA|3992|-7523
+Point Breeze|US|PA|3993|-7518
+Beltsville|US|MD|3903|-7691
+Ferndale|US|MD|3918|-7664
+Laurel|US|VA|3764|-7751
+Easton|US|MD|3877|-7608
+Vienna|US|VA|3890|-7727
+Lower Moyamensing|US|PA|3992|-7516
+Hillcrest Heights|US|MD|3883|-7696
+Bon Air|US|VA|3752|-7756
+Fishtown|US|PA|3997|-7514
+Buckhall|US|VA|3873|-7743
+Sudley|US|VA|3879|-7750
+Hope Mills|US|NC|3497|-7895
+Ocean Acres|US|NJ|3974|-7428
+Wolf Trap|US|VA|3894|-7729
+Maryland City|US|MD|3909|-7682
+Fort Hunt|US|VA|3873|-7706
+Cherry Hill|US|VA|3857|-7727
+Parole|US|MD|3898|-7654
+Adams Morgan|US|DC|3892|-7704
+Lutherville-Timonium|US|MD|3944|-7661
+Hybla Valley|US|VA|3875|-7708
+Elkton|US|MD|3961|-7583
+Strawberry Mansion|US|PA|3998|-7518
+Pinehurst|US|NC|3520|-7947
+Manassas Park|US|VA|3878|-7747
+Highland Springs|US|VA|3755|-7733
+Elkridge|US|MD|3921|-7671
+Aberdeen|US|MD|3951|-7616
+North Myrtle Beach|US|SC|3382|-7868
+Williamstown|US|NJ|3969|-7500
+East Riverdale|US|MD|3896|-7691
+Laurinburg|US|NC|3477|-7946
+Hanover|US|PA|3980|-7698
+Great Falls|US|VA|3900|-7729
+Eden|US|NC|3649|-7977
+Roanoke Rapids|US|NC|3646|-7765
+Henderson|US|NC|3633|-7840
+Damascus|US|MD|3929|-7720
+Kennedy Street|US|DC|3896|-7702
+Merrifield|US|VA|3887|-7723
+Rossville|US|MD|3934|-7648
+Southwest Waterfront|US|DC|3888|-7702
+Cloverly|US|MD|3911|-7700
+Adelphi|US|MD|3900|-7697
+Front Royal|US|VA|3892|-7819
+Capitol Hill|US|DC|3889|-7700
+Williamsburg|US|VA|3727|-7671

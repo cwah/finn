@@ -1,0 +1,20 @@
+Christchurch|NZ||-4353|17263
+Wellington|NZ||-4129|17478
+Dunedin|NZ||-4587|17050
+Lower Hutt|NZ||-4122|17492
+Palmerston North|NZ||-4036|17561
+Porirua|NZ||-4113|17485
+Nelson|NZ||-4127|17328
+Upper Hutt|NZ||-4114|17505
+Rolleston|NZ||-4358|17238
+Paraparaumu|NZ||-4092|17502
+Blenheim|NZ||-4152|17395
+Timaru|NZ||-4440|17125
+Masterton|NZ||-4096|17566
+Ashburton|NZ||-4390|17173
+Wainuiomata|NZ||-4127|17495
+Stoke|NZ||-4132|17323
+Richmond|NZ|TAS|-4133|17318
+Levin|NZ||-4063|17528
+Rangiora|NZ||-4330|17258
+Karori|NZ||-4128|17474

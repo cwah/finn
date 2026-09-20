@@ -1,0 +1,22 @@
+Surgut|RU||6126|7342
+Nizhnevartovsk|RU||6093|7655
+Nefteyugansk|RU||6110|7260
+Noyabrsk|RU||6319|7544
+Novyy Urengoy|RU||6608|7663
+Kogalym|RU||6227|7448
+Megion|RU||6103|7611
+Raduzhny|RU||6210|7747
+Nadym|RU||6553|7252
+Strezhevoy|RU||6073|7759
+Pyt-Yakh|RU||6075|7286
+Langepas|RU||6125|7521
+Muravlenko|RU||6379|7452
+Lyantor|RU||6162|7216
+Poykovskiy|RU||6100|7189
+Fedorovskiy|RU||6161|7371
+Gubkinskiy|RU||6443|7650
+Tarko-Sale|RU||6492|7777
+Izluchinsk|RU||6098|7692
+Pokachi|RU||6172|7537
+Belyy Yar|RU||6126|7324
+Nizhnesortymskiy|RU||6244|7176

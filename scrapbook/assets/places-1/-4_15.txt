@@ -1,0 +1,79 @@
+Sydney|AU||-3387|15121
+Newcastle|AU||-3293|15178
+Central Coast|AU||-3343|15137
+Wollongong|AU||-3442|15089
+Maitland|AU||-3273|15156
+Coffs Harbour|AU||-3030|15311
+Blue Mountains|AU||-3371|15033
+Pittwater|AU||-3367|15130
+Port Macquarie|AU||-3143|15291
+Blacktown|AU||-3377|15092
+Tamworth|AU||-3109|15093
+Castle Hill|AU||-3373|15100
+Auburn|AU||-3385|15103
+Baulkham Hills|AU||-3376|15099
+Bankstown|AU||-3392|15103
+Liverpool|AU||-3392|15093
+Maroubra|AU||-3395|15123
+Parramatta|AU||-3382|15100
+Hurstville|AU||-3397|15110
+Merrylands|AU||-3383|15098
+Randwick|AU||-3391|15125
+Mosman|AU||-3384|15124
+Kellyville|AU||-3371|15095
+Quakers Hill|AU||-3373|15088
+Ryde|AU||-3382|15111
+Marrickville|AU||-3391|15116
+Strathfield|AU||-3388|15108
+Sydney Central Business District|AU||-3386|15121
+Chatswood|AU||-3380|15118
+Campsie|AU||-3391|15110
+Greenacre|AU||-3390|15106
+Carlingford|AU||-3378|15105
+Ashfield|AU||-3389|15112
+Greystanes|AU||-3382|15095
+Epping|AU||-3377|15108
+Cessnock|AU||-3283|15136
+Glenmore Park|AU||-3379|15067
+Hornsby|AU||-3370|15110
+Cabramatta|AU||-3390|15093
+Armidale|AU||-3050|15167
+Dee Why|AU||-3375|15129
+Punchbowl|AU||-3393|15105
+St Clair|AU||-3380|15078
+Lidcombe|AU||-3386|15104
+Bexley|AU||-3395|15112
+Seven Hills|AU||-3378|15093
+Wollongong city centre|AU||-3443|15089
+Cherrybrook|AU||-3372|15105
+Saint Ives|AU||-3373|15116
+Burwood|AU||-3388|15110
+Fairfield|AU||-3387|15095
+Yagoona|AU||-3390|15102
+Westmead|AU||-3380|15099
+Eastwood|AU||-3379|15108
+Cronulla|AU||-3406|15115
+Wahroonga|AU||-3372|15112
+Earlwood|AU||-3392|15113
+Batemans Bay|AU||-3571|15018
+Engadine|AU||-3407|15101
+Lakemba|AU||-3392|15108
+Granville|AU||-3384|15101
+Mount Druitt|AU||-3377|15082
+Kogarah|AU||-3397|15114
+Umina Beach|AU||-3352|15131
+Taree|AU||-3191|15245
+Manly|AU||-3380|15129
+West Pennant Hills|AU||-3375|15105
+Glenwood|AU||-3373|15093
+Muswellbrook|AU||-3226|15089
+Mascot|AU||-3393|15119
+Surry Hills|AU||-3388|15121
+Casula|AU||-3395|15090
+Cranebrook|AU||-3371|15071
+Rockdale|AU||-3395|15113
+Kingsford|AU||-3392|15123
+Coogee|AU||-3392|15126
+Prestons|AU||-3394|15087
+Miranda|AU||-3404|15110
+Kensington|AU||-3392|15122

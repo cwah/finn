@@ -1,0 +1,311 @@
+Havana|CU||2313|-8238
+Mérida|MX||2097|-8962
+Cancún|MX||2117|-8685
+Miami|US|FL|2577|-8019
+Tampa|US|FL|2795|-8246
+Orlando|US|FL|2854|-8138
+St. Petersburg|US|FL|2777|-8268
+Almendares|CU||2311|-8242
+Hialeah|US|FL|2586|-8028
+Diez de Octubre|CU||2309|-8236
+Arroyo Naranjo|CU||2304|-8238
+Mantilla|CU||2307|-8234
+Boyeros|CU||2301|-8240
+Pinar del Río|CU||2242|-8370
+Cienfuegos|CU||2215|-8045
+Fort Lauderdale|US|FL|2612|-8014
+Fontanar|CU||2302|-8241
+Ciudad Camilo Cienfuegos|CU||2316|-8233
+Cape Coral|US|FL|2656|-8195
+Pembroke Pines|US|FL|2600|-8022
+Port Saint Lucie|US|FL|2729|-8035
+San Miguel del Padrón|CU||2310|-8233
+Centro Habana|CU||2313|-8237
+Playa del Carmen|MX||2063|-8708
+Hollywood|US|FL|2601|-8015
+Balcón de la Lisa|CU||2305|-8245
+Matanzas|CU||2304|-8158
+Gainesville|US|FL|2965|-8232
+Plaza de la Revolución|CU||2312|-8239
+Miramar|US|FL|2599|-8023
+Marianao|CU||2307|-8243
+Cerro|CU||2311|-8238
+Coral Springs|US|FL|2627|-8027
+West Palm Beach|US|FL|2672|-8005
+Palm Bay|US|FL|2803|-8059
+Clearwater|US|FL|2797|-8280
+Miami Gardens|US|FL|2594|-8025
+Guanabacoa|CU||2313|-8230
+Vedado|CU||2314|-8239
+Pompano Beach|US|FL|2624|-8012
+Lakeland|US|FL|2804|-8195
+Brandon|US|FL|2794|-8229
+Davie|US|FL|2606|-8023
+Alamar|CU||2316|-8228
+Spring Hill|US|FL|2848|-8253
+Cárdenas|CU||2304|-8121
+La Habana Vieja|CU||2313|-8235
+Boca Raton|US|FL|2636|-8008
+Plantation|US|FL|2613|-8023
+Miami Beach|US|FL|2579|-8013
+Deltona|US|FL|2890|-8126
+Lehigh Acres|US|FL|2663|-8162
+Melbourne|US|FL|2808|-8061
+Sunrise|US|FL|2613|-8011
+Palm Coast|US|FL|2958|-8121
+Largo|US|FL|2791|-8279
+Homestead|US|FL|2547|-8048
+Kendall|US|FL|2568|-8032
+Deerfield Beach|US|FL|2632|-8010
+Town 'n' Country|US|FL|2801|-8258
+Alafaya|US|FL|2856|-8121
+Kanasín|MX||2093|-8956
+Cozumel|MX||2050|-8694
+Doral|US|FL|2582|-8036
+Vedado del Cotorro|CU||2305|-8225
+Fort Myers|US|FL|2662|-8184
+Boynton Beach|US|FL|2653|-8007
+Daytona Beach|US|FL|2921|-8102
+Lauderhill|US|FL|2614|-8021
+Riverview|US|FL|2787|-8233
+Weston|US|FL|2610|-8040
+Güira de Melena|CU|AR|2280|-8251
+Consolación del Sur|CU||2251|-8351
+Kissimmee|US|FL|2830|-8142
+Güines|CU|MA|2284|-8203
+Artemisa|CU|AR|2281|-8276
+Delray Beach|US|FL|2646|-8007
+Tamarac|US|FL|2621|-8025
+Colón|CU||2272|-8090
+Carol City|US|FL|2594|-8025
+Jupiter|US|FL|2693|-8009
+Wellington|US|FL|2666|-8024
+North Miami|US|FL|2589|-8019
+North Port|US|FL|2704|-8224
+Sagua la Grande|CU||2281|-8007
+West Hollywood|US|FL|2602|-8018
+Pine Hills|US|FL|2856|-8145
+Port Orange|US|FL|2914|-8100
+Fountainebleau|US|FL|2577|-8035
+San Cristobal|CU|AR|2272|-8306
+Coconut Creek|US|FL|2625|-8018
+Ocala|US|FL|2919|-8214
+Sanford|US|FL|2880|-8127
+Palm Harbor|US|FL|2808|-8276
+Margate|US|FL|2624|-8021
+Kendale Lakes|US|FL|2571|-8041
+Tamiami|US|FL|2576|-8040
+Sarasota|US|FL|2734|-8253
+San José de las Lajas|CU|MA|2296|-8215
+Bradenton|US|FL|2750|-8257
+Port Charlotte|US|FL|2698|-8209
+Jagüey Grande|CU||2253|-8113
+Allapattah|US|FL|2581|-8022
+Little Havana|US|FL|2577|-8023
+Poinciana|US|FL|2814|-8146
+Palm Beach Gardens|US|FL|2682|-8014
+Corralillo|CU||2298|-8059
+Bonita Springs|US|FL|2634|-8178
+Pinellas Park|US|FL|2784|-8270
+The Villages|US|FL|2893|-8196
+Coral Gables|US|FL|2572|-8027
+The Hammocks|US|FL|2567|-8044
+Flagami|US|FL|2576|-8032
+Valladolid|MX||2069|-8820
+Apopka|US|FL|2868|-8151
+Jovellanos|CU||2280|-8119
+Country Club|US|FL|2595|-8032
+Tizimín|MX||2114|-8815
+Bauta|CU|AR|2298|-8255
+Santo Domingo|CU||2259|-8024
+Cutler Bay|US|FL|2558|-8034
+Titusville|US|FL|2861|-8081
+Fort Pierce|US|FL|2745|-8033
+Regla|CU||2313|-8233
+Oakland Park|US|FL|2617|-8013
+Wesley Chapel|US|FL|2824|-8233
+North Miami Beach|US|FL|2593|-8016
+North Lauderdale|US|FL|2622|-8023
+Ranchuelo|CU||2237|-8015
+Ocoee|US|FL|2857|-8154
+Altamonte Springs|US|FL|2866|-8137
+San Antonio de los Baños|CU|AR|2289|-8251
+University|US|FL|2807|-8244
+Ormond Beach|US|FL|2929|-8106
+Carrollwood Village|US|FL|2807|-8252
+Winter Garden|US|FL|2857|-8159
+Cifuentes|CU||2265|-8005
+Umán|MX||2088|-8975
+Hallandale Beach|US|FL|2598|-8015
+North Fort Myers|US|FL|2667|-8188
+Princeton|US|FL|2554|-8041
+The Acreage|US|FL|2679|-8027
+Cumanayagua|CU||2215|-8020
+Oviedo|US|FL|2867|-8121
+Winter Haven|US|FL|2802|-8173
+Aventura|US|FL|2596|-8014
+Royal Palm Beach|US|FL|2671|-8023
+Lake Worth Beach|US|FL|2662|-8007
+Plant City|US|FL|2802|-8211
+Progreso|MX||2128|-8966
+South Miami Heights|US|FL|2560|-8038
+Dunedin|US|FL|2802|-8277
+Kendall West|US|FL|2571|-8044
+Richmond West|US|FL|2561|-8043
+Valrico|US|FL|2794|-8224
+Cooper City|US|FL|2606|-8027
+Egypt Lake-Leto|US|FL|2802|-8251
+Santiago de las Vegas|CU||2297|-8239
+Saint Cloud|US|FL|2825|-8128
+Lauderdale Lakes|US|FL|2617|-8021
+Winter Springs|US|FL|2870|-8131
+Merritt Island|US|FL|2836|-8069
+West Little River|US|FL|2586|-8024
+Minas de Matahambre|CU||2259|-8395
+Riviera Beach|US|FL|2678|-8006
+Madruga|CU|MA|2291|-8186
+Unión de Reyes|CU||2280|-8154
+Carrollwood|US|FL|2805|-8249
+Golden Glades|US|FL|2591|-8020
+Greenacres City|US|FL|2662|-8013
+Ticul|MX||2040|-8953
+Clermont|US|FL|2855|-8177
+Land O' Lakes|US|FL|2822|-8246
+Dania Beach|US|FL|2605|-8014
+Miami Lakes|US|FL|2591|-8031
+East Lake|US|FL|2811|-8269
+Estero|US|FL|2644|-8181
+DeLand|US|FL|2903|-8130
+Parkland|US|FL|2631|-8024
+Winter Park|US|FL|2860|-8134
+Westchester|US|FL|2575|-8033
+Mariel|CU|AR|2299|-8275
+La Salud|CU|MA|2287|-8242
+Lake Magdalene|US|FL|2807|-8247
+Naranjito|CU||2308|-8238
+Viñales|CU||2262|-8371
+Casselberry|US|FL|2868|-8133
+University Park|US|FL|2575|-8037
+Cutler Ridge|US|FL|2558|-8035
+Pedro Betancourt|CU||2273|-8129
+Leisure City|US|FL|2550|-8043
+Four Corners|US|FL|2833|-8165
+Buenaventura Lakes|US|FL|2834|-8135
+Key West|US|FL|2456|-8178
+Tecax|MX||2021|-8929
+Temple Terrace|US|FL|2804|-8239
+Los Palacios|CU||2259|-8325
+Meadow Woods|US|FL|2839|-8137
+Limonar|CU||2295|-8141
+Guanajay|CU|AR|2293|-8269
+Rockledge|US|FL|2835|-8073
+Hunucmá|MX||2102|-8988
+Cruces|CU||2234|-8027
+Tarpon Springs|US|FL|2815|-8276
+Palmetto Bay|US|FL|2562|-8032
+Coral Terrace|US|FL|2575|-8030
+New Smyrna Beach|US|FL|2903|-8093
+Citrus Park|US|FL|2808|-8257
+Boca Del Mar|US|FL|2635|-8015
+Immokalee|US|FL|2642|-8142
+Perico|CU||2277|-8102
+Keystone|US|FL|2816|-8262
+Sebastian|US|FL|2782|-8047
+Golden Gate|US|FL|2619|-8170
+Hialeah Gardens|US|FL|2587|-8032
+Aguada de Pasajeros|CU||2239|-8085
+Norland|US|FL|2595|-8021
+Bayonet Point|US|FL|2833|-8268
+Eloise|US|FL|2799|-8174
+Calimete|CU||2253|-8091
+Motul|MX||2110|-8928
+Palm City|US|FL|2717|-8027
+Víbora|CU||2309|-8237
+Oxkutzkab|MX||2031|-8942
+Vero Beach South|US|FL|2762|-8041
+Palmira|CU||2224|-8039
+Víbora Park|CU||2308|-8235
+East Naples|US|FL|2614|-8177
+Haines City|US|FL|2811|-8162
+The Crossings|US|FL|2567|-8040
+East Lake-Orient Park|US|FL|2798|-8238
+Bloomingdale|US|FL|2789|-8224
+Oak Ridge|US|FL|2847|-8142
+Lajas|CU||2241|-8029
+Holiday|US|FL|2819|-8274
+Palm Springs|US|FL|2664|-8010
+Venice|US|FL|2710|-8245
+South Bradenton|US|FL|2746|-8258
+Sunny Isles Beach|US|FL|2595|-8012
+Greater Northdale|US|FL|2811|-8253
+Northdale|US|FL|2809|-8251
+Wekiwa Springs|US|FL|2870|-8143
+Leesburg|US|FL|2881|-8188
+West and East Lealman|US|FL|2782|-8269
+Westchase|US|FL|2806|-8261
+Edgewater|US|FL|2899|-8090
+Naples|US|FL|2614|-8180
+Palm River-Clair Mel|US|FL|2792|-8238
+Sweetwater|US|FL|2576|-8037
+West Melbourne|US|FL|2807|-8065
+Lake Worth Corridor|US|FL|2662|-8010
+Cojímar|CU||2316|-8230
+Nueva Gerona|CU||2189|-8281
+Jaruco|CU|MA|2304|-8201
+Coconut Grove|US|FL|2571|-8026
+Varadero|CU||2316|-8124
+DeBary|US|FL|2888|-8131
+Eustis|US|FL|2885|-8169
+Lealman|US|FL|2782|-8268
+Bahía Honda|CU|AR|2290|-8316
+Peto|MX||2013|-8892
+Ives Estates|US|FL|2596|-8018
+Pinecrest|US|FL|2567|-8031
+Lutz|US|FL|2815|-8246
+Sun City Center|US|FL|2772|-8235
+Rodas|CU||2234|-8056
+Marion Oaks|US|FL|2901|-8218
+Jasmine Estates|US|FL|2829|-8269
+Bartow|US|FL|2790|-8184
+Santa Cruz del Norte|CU|MA|2315|-8192
+Punta Gorda Isles|US|FL|2692|-8208
+Belle Glade|US|FL|2668|-8067
+Tulum|MX||2021|-8746
+Florida Ridge|US|FL|2758|-8039
+Seminole|US|FL|2784|-8279
+Punta Gorda|US|FL|2693|-8205
+Bejucal|CU|MA|2293|-8239
+Cutler|US|FL|2562|-8031
+Ojus|US|FL|2595|-8015
+Chichén-Itzá|MX||2067|-8857
+Cocoa|US|FL|2839|-8074
+Marco Island|US|FL|2594|-8172
+Maitland|US|FL|2863|-8136
+Safety Harbor|US|FL|2799|-8269
+Ruskin|US|FL|2772|-8243
+Glenvar Heights|US|FL|2571|-8033
+San Carlos Park|US|FL|2647|-8180
+Chalmette|US|LA|2994|-8997
+Abreus|CU||2228|-8057
+Sandalfoot Cove|US|FL|2634|-8019
+Opa-locka|US|FL|2590|-8025
+Guane|CU||2220|-8409
+Pinewood|US|FL|2587|-8022
+Stuart|US|FL|2720|-8025
+Sunset|US|FL|2571|-8035
+Vero Beach|US|FL|2764|-8040
+Bayshore Gardens|US|FL|2743|-8259
+Izamal|MX||2093|-8902
+Lake Mary|US|FL|2876|-8132
+Country Walk|US|FL|2563|-8043
+Southchase|US|FL|2839|-8138
+New Port Richey|US|FL|2824|-8272
+Lake Wales|US|FL|2790|-8159
+Tavares|US|FL|2880|-8173
+Lake Butler|US|FL|2850|-8154
+Iona|US|FL|2652|-8196
+Brownsville|US|FL|2582|-8024
+Alquízar|CU|AR|2280|-8258
+West Park|US|FL|2598|-8020
+Three Lakes|US|FL|2564|-8040
+Auburndale|US|FL|2807|-8179

@@ -1,0 +1,118 @@
+Santiago|CL||-3346|-7065
+Puente Alto|CL||-3361|-7058
+Maipú|CL||-3351|-7077
+Viña del Mar|CL||-3302|-7155
+Valparaíso|CL||-3304|-7163
+Ñuñoa|CL||-3345|-7058
+San Bernardo|CL||-3359|-7070
+Peñalolén|CL||-3347|-7053
+Temuco|CL||-3874|-7260
+Concepción|CL||-3683|-7305
+Rancagua|CL||-3417|-7074
+Quilicura|CL||-3337|-7071
+La Pintana|CL||-3358|-7063
+Talca|CL||-3542|-7165
+Talcahuano|CL||-3672|-7312
+Chillán|CL||-3661|-7210
+Renca|CL||-3340|-7071
+Colina|CL||-3320|-7067
+Valdivia|CL||-3981|-7325
+Villa Mercedes|CL||-3740|-7198
+Quilpué|CL||-3305|-7144
+Los Ángeles|CL||-3747|-7235
+San Pedro de la Paz|CL||-3684|-7310
+Coronel|CL||-3703|-7314
+Lo Prado|CL||-3344|-7073
+Curicó|CL||-3498|-7124
+Lampa|CL||-3329|-7088
+Villa Alemana|CL||-3305|-7137
+San Antonio|CL||-3359|-7161
+Hualpén|CL||-3679|-7310
+Peñaflor|CL||-3361|-7088
+Chiguayante|CL||-3693|-7303
+Ovalle|CL||-3060|-7120
+Padre Las Casas|CL||-3876|-7260
+Paine|CL||-3381|-7074
+Linares|CL||-3585|-7159
+Quillota|CL||-3288|-7125
+Buin|CL||-3373|-7074
+Padre Hurtado|CL||-3357|-7081
+Melipilla|CL||-3369|-7122
+Los Andes|CL||-3283|-7060
+San Felipe|CL||-3275|-7073
+Talagante|CL||-3366|-7093
+Tomé|CL||-3662|-7296
+La Calera|CL||-3279|-7120
+Villarrica|CL||-3929|-7223
+Hacienda La Calera|CL||-3278|-7122
+Lota|CL||-3709|-7316
+Limache|CL||-3301|-7126
+Penco|CL||-3674|-7300
+Angol|CL||-3780|-7272
+San Vicente de Tagua Tagua|CL||-3444|-7108
+Machalí|CL||-3418|-7065
+Concón|CL||-3292|-7152
+Constitución|CL||-3533|-7241
+Molina|CL||-3511|-7128
+San Javier|CL||-3560|-7173
+San Clemente|CL||-3554|-7149
+Placilla|CL||-3311|-7157
+Cauquenes|CL||-3597|-7232
+Rengo|CL||-3441|-7086
+Labranza|CL||-3877|-7275
+Santa Cruz|CL||-3464|-7137
+Lautaro|CL||-3853|-7244
+Chimbarongo|CL||-3471|-7104
+Panguipulli|CL||-3964|-7233
+Victoria|CL||-3823|-7233
+La Ligua|CL||-3245|-7123
+Curanilahue|CL||-3748|-7334
+Cañete|CL||-3780|-7338
+Zapala|AR||-3890|-7007
+San Carlos|CL||-3642|-7196
+Las Animas|CL||-3981|-7322
+Nueva Imperial|CL||-3874|-7295
+Chillán Viejo|CL||-3662|-7213
+Longaví|CL||-3596|-7168
+Vicuña|CL||-3004|-7071
+Cabrero|CL||-3703|-7240
+Mulchén|CL||-3772|-7224
+Pucón|CL||-3928|-7195
+Parral|CL||-3614|-7183
+Nacimiento|CL||-3750|-7267
+El Monte|CL||-3368|-7098
+Coihueco|CL||-3663|-7183
+Arauco|CL||-3725|-7332
+Casablanca|CL||-3332|-7140
+Carahue|CL||-3871|-7316
+Hualqui|CL||-3697|-7294
+Collipulli|CL||-3795|-7243
+Graneros|CL||-3407|-7073
+Illapel|CL||-3163|-7117
+Llaillay|CL||-3284|-7096
+San Vicente|CL||-3443|-7108
+Vilcún|CL||-3867|-7223
+Freire|CL||-3895|-7263
+Lebu|CL||-3761|-7365
+Quintero|CL||-3279|-7153
+Pitrufquén|CL||-3899|-7264
+Loncoche|CL||-3937|-7263
+Cañete|CL||-3780|-7340
+Los Álamos|CL||-3763|-7346
+Cabildo|CL||-3243|-7107
+Curacaví|CL||-3340|-7113
+Los Vilos|CL||-3191|-7150
+Cartagena|CL||-3355|-7161
+Colbún|CL||-3569|-7141
+Sagrada Familia|CL||-3500|-7138
+Quillón|CL||-3675|-7247
+La Cruz|CL||-3283|-7123
+Traiguén|CL||-3825|-7267
+San Esteban|CL||-3280|-7058
+El Quisco|CL||-3340|-7169
+Batuco|CL||-3323|-7081
+Chicureo|CL||-3328|-7065
+Coelemu|CL||-3649|-7270
+Cunco|CL||-3893|-7203
+Teodoro Schmidt|CL||-3899|-7309
+Putaendo|CL||-3263|-7072

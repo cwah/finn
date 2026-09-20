@@ -1,0 +1,34 @@
+Jaffna|LK||967|8001
+Kandy|LK||729|8063
+Trincomalee|LK||858|8123
+Kalmunai|LK||741|8183
+Galle|LK||605|8021
+Point Pedro|LK||982|8023
+Batticaloa|LK||771|8169
+Ambalantota|LK||612|8102
+Valvedditturai|LK||982|8017
+Matara|LK||595|8054
+Dambulla|LK||786|8065
+Anuradhapura|LK||831|8041
+Vavuniya|LK||875|8050
+Beliatta|LK||605|8073
+Ambalangoda|LK||624|8005
+Ratnapura|LK||669|8040
+Badulla|LK||698|8106
+Pottuvil|LK||688|8183
+Devinuwara|LK||593|8059
+Ampara|LK||730|8168
+Matale|LK||747|8062
+Homagama|LK||684|8000
+Mullaittivu|LK||927|8082
+Kurunegala|LK||748|8037
+Nuwara Eliya|LK||697|8078
+Gampola|LK||716|8057
+Eravur Town|LK||778|8160
+Hanwella Ihala|LK||690|8009
+Weligama|LK||598|8043
+Vakarai|LK||813|8143
+Kataragama|LK||641|8133
+Hambantota|LK||612|8112
+Kegalle|LK||725|8034
+Hatton|LK||689|8060

@@ -1,0 +1,37 @@
+Auckland|NZ||-3685|17476
+Manukau City|NZ||-3699|17488
+North Shore|NZ||-3680|17475
+Hamilton|NZ||-3778|17528
+Tauranga|NZ||-3769|17617
+New Plymouth|NZ||-3907|17408
+Hastings|NZ||-3964|17685
+Napier|NZ||-3949|17691
+Rotorua|NZ||-3814|17625
+Papatoetoe|NZ||-3697|17484
+Whangarei|NZ||-3573|17432
+Whanganui|NZ||-3993|17505
+Manurewa|NZ||-3702|17488
+Gisborne|NZ||-3865|17800
+Papakura|NZ||-3706|17494
+Mangere East|NZ||-3697|17482
+Remuera|NZ||-3688|17480
+Taupo|NZ||-3868|17608
+Avondale|NZ||-3688|17470
+Otara|NZ||-3695|17487
+New Lynn|NZ||-3691|17469
+Mangere|NZ||-3697|17480
+Massey East|NZ||-3683|17462
+Massey|NZ||-3684|17461
+Pukekohe East|NZ||-3720|17495
+Epsom|NZ||-3689|17477
+Henderson|NZ||-3688|17462
+Whakatane|NZ||-3796|17699
+Otahuhu|NZ||-3694|17484
+Te Atatu South|NZ||-3686|17465
+Lincoln|NZ||-3686|17462
+Takanini|NZ||-3704|17493
+Mount Eden|NZ||-3688|17476
+Titirangi|NZ||-3694|17466
+Hamilton East|NZ||-3779|17529
+Te Atatu Peninsula|NZ||-3684|17465
+Cambridge|NZ||-3788|17544

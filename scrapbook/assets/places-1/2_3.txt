@@ -1,0 +1,115 @@
+Jeddah|SA||2149|3919
+Makkah|SA||2143|3983
+Madinah|SA||2447|3961
+Sulţānah|SA||2449|3959
+Suez|EG||2997|3253
+Tabuk|SA||2840|3657
+Assiut|EG||2718|3118
+Al Fayyum|EG||2931|3084
+Esna|EG||2529|3255
+Luxor|EG||2570|3264
+Kom Ombo|EG||2448|3295
+Aswān|EG||2409|3290
+6th of October City|EG||2982|3105
+Minya|EG||2809|3076
+Banī Suwayf|EG||2907|3110
+Sohag|EG||2656|3169
+Qina|EG||2616|3273
+Ḩalwān|EG||2984|3130
+Mallawī|EG||2773|3084
+Hurghada|EG||2726|3381
+Yanbu|SA||2409|3806
+Al Ḩawāmidīyah|EG||2990|3125
+Akhmīm|EG||2656|3175
+Girga|EG||2634|3189
+Samālūţ|EG||2831|3071
+Būsh|EG||2915|3113
+Ţahţā|EG||2677|3150
+Sinnūris|EG||2941|3087
+Maghāghah|EG||2865|3084
+Manfalūţ|EG||2731|3097
+Banī Mazār|EG||2849|3081
+Al Fashn|EG||2882|3090
+Abnūb|EG||2727|3115
+Abū Tīj|EG||2705|3132
+Dayrūţ|EG||2756|3081
+Ţimā|EG||2691|3143
+Al Qūşīyah|EG||2744|3082
+Aqaba|JO||2953|3501
+Bibā|EG||2892|3099
+Al Minshāh|EG||2648|3180
+Al Badrashayn|EG||2985|3127
+Abū Qurqāş|EG||2793|3084
+Abū an Numrus|EG||2995|3120
+Ibshawāy|EG||2936|3068
+Qūş|EG||2592|3276
+Al Khārjah|EG||2545|3055
+Al-Khārijah|EG||2525|3055
+Maţāy|EG||2842|3078
+Edfu|EG||2498|3288
+Armant|EG||2562|3254
+Juhaynah|EG||2667|3150
+Iţsā|EG||2924|3079
+Ţāmiyah|EG||2948|3096
+Rābigh|SA||2280|3903
+Farshūţ|EG||2606|3216
+Al Ghanāyim|EG||2688|3133
+Ihnāsyā al Madīnah|EG||2909|3094
+Al Balyanā|EG||2624|3200
+Sumusţā al Waqf|EG||2892|3085
+Dishnā|EG||2612|3247
+Ihnāsīyah|EG||2909|3102
+Darāw|EG||2441|3292
+Aş Şaff|EG||2956|3128
+Dayr Mawās|EG||2764|3085
+Nag Hammâdi|EG||2605|3224
+Al Wāsiţah|EG||2934|3121
+Al Badārī|EG||2699|3142
+As Sāḩil|EG||2706|3134
+Al Marāghah|EG||2670|3160
+Safaga|EG||2675|3394
+Eilat|IL||2956|3495
+Zaafarana|EG||2911|3266
+Banī ‘Ubayd|EG||2795|3078
+Al ‘Ayyāţ|EG||2962|3126
+Al ‘Ayn as Sukhnah|EG||2959|3234
+Ain Sukhna|EG||2960|3232
+Ras Gharib|EG||2836|3308
+Aţ Ţārif|EG||2574|3264
+Sharm el-Sheikh|EG||2792|3433
+El-Tor|EG||2824|3362
+Dār as Salām|EG||2628|3206
+Taymā’|SA||2762|3854
+Sumusţā as Sulţānī|EG||2892|3085
+Al Waqf|EG||2609|3242
+Sāqultah|EG||2666|3167
+Umluj|SA||2502|3727
+Al Başalīyah Baḩrī|EG||2515|3272
+Al-`Ula|SA||2661|3792
+Banī Suwayf al Jadīdah|EG||2903|3111
+Ţūd|EG||2558|3253
+Şidfā|EG||2697|3138
+New Bani Sewif City|EG||2904|3112
+Badr Ḩunayn|SA||2378|3879
+Hala'ib|EG||2222|3665
+Thuwal|SA||2228|3911
+Aţfīḩ|EG||2941|3125
+Naqādah|EG||2590|3272
+Al Wajh|SA||2623|3646
+Al ‘Idwah|EG||2870|3077
+Ḩaql|SA||2929|3495
+Al Quşayr|EG||2611|3428
+Qifţ|EG||2600|3282
+Yūsuf aṣ-Ṣiddīq|EG||2938|3056
+Al Bayāḑīyah|EG||2566|3264
+An Nāşirīyah|EG||2721|3120
+Al Jumūm|SA||2162|3970
+Duba|SA||2735|3569
+As Sibā‘īyah|EG||2519|3268
+Jarājūs|EG||2587|3276
+Khulayş|SA||2216|3932
+Az Zaynīyah Qiblī|EG||2575|3268
+Abū Ţisht|EG||2612|3210
+Al-Minyā al-Jadīdah|EG||2809|3081
+Ar Radīsīyah Qiblī|EG||2491|3289
+Wadi Halfa|SD||2180|3137

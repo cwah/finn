@@ -1,0 +1,744 @@
+Berlin|DE||5252|1341
+Stockholm|SE||5933|1807
+Prague|CZ||5009|1442
+Copenhagen|DK||5568|1257
+Oslo|NO||5991|1075
+Kraków|PL||5006|1994
+Wrocław|PL||5110|1703
+Łódź|PL||5177|1947
+Gothenburg|SE||5771|1197
+Dresden|DE||5105|1374
+Poznań|PL||5241|1693
+Leipzig|DE||5134|1237
+Gdańsk|PL||5435|1865
+Wandsbek|DE||5358|1008
+Szczecin|PL||5343|1455
+Malmö|SE||5561|1300
+Bydgoszcz|PL||5312|1801
+Hamburg-Mitte|DE||5355|1002
+Marienthal|DE||5357|1008
+Katowice|PL||5026|1902
+Århus|DK||5616|1021
+Gdynia|PL||5452|1853
+Kiel|DE||5432|1013
+Częstochowa|PL||5080|1912
+Chemnitz|DE||5084|1293
+Braunschweig|DE||5227|1053
+Magdeburg|DE||5213|1163
+Halle (Saale)|DE||5148|1198
+Sosnowiec|PL||5029|1910
+Neue Neustadt|DE||5215|1163
+Erfurt|DE||5098|1104
+Lübeck|DE||5387|1069
+Gliwice|PL||5030|1868
+Rostock|DE||5409|1214
+Toruń|PL||5301|1860
+Zabrze|PL||5032|1879
+Bytom|PL||5035|1893
+Potsdam|DE||5240|1307
+Odense|DK||5540|1039
+Uppsala|SE||5986|1764
+Linköping|SE||5841|1562
+Neukölln|DE||5248|1343
+Örebro|SE||5927|1521
+Kreuzberg|DE||5250|1340
+Prenzlauer Berg|DE||5254|1342
+Ruda Śląska|PL||5026|1886
+Rybnik|PL||5010|1854
+Sollentuna|SE||5943|1795
+Tychy|PL||5014|1897
+Charlottenburg|DE||5252|1328
+Västerås|SE||5962|1655
+Opole|PL||5067|1793
+Elbląg|PL||5415|1941
+Płock|PL||5255|1971
+Wałbrzych|PL||5077|1628
+Södermalm|SE||5931|1808
+Wolfsburg|DE||5242|1078
+Schöneberg|DE||5250|1334
+Włocławek|PL||5265|1907
+Bergedorf|DE||5348|1023
+Zielona Góra|PL||5194|1551
+Friedrichshain|DE||5252|1345
+Dąbrowa Górnicza|PL||5033|1920
+Gorzów Wielkopolski|PL||5273|1523
+Chorzów|PL||5031|1897
+Jönköping|SE||5778|1416
+Marzahn|DE||5255|1357
+Kalisz|PL||5176|1809
+Koszalin|PL||5419|1617
+Legnica|PL||5121|1616
+Drammen|NO||5974|1020
+Salzgitter|DE||5216|1042
+Jena|DE||5093|1159
+Gera|DE||5088|1208
+Helsingborg|SE||5605|1269
+Liberec|CZ||5077|1506
+Mitte|DE||5252|1340
+Wilmersdorf|DE||5248|1332
+Śródmieście|PL||5111|1708
+Zwickau|DE||5073|1249
+Słupsk|PL||5446|1703
+Schwerin|DE||5363|1141
+Jaworzno|PL||5021|1927
+Psie Pole|PL||5115|1704
+Frederiksberg|DK||5568|1253
+Gesundbrunnen|DE||5255|1339
+Norrköping|SE||5859|1618
+Grudziądz|PL||5348|1875
+Rahlstedt|DE||5360|1016
+Hradec Králové|CZ||5021|1583
+Ústí nad Labem|CZ||5066|1403
+Huddinge|SE||5924|1798
+Lillestrøm|NO||5996|1105
+Pardubice|CZ||5004|1578
+Lund|SE||5571|1319
+Lichterfelde|DE||5243|1331
+Wedding|DE||5255|1336
+Cottbus|DE||5176|1433
+Hellersdorf|DE||5253|1361
+Reinickendorf|DE||5256|1334
+Fredrikstad|NO||5922|1093
+Konin|PL||5222|1825
+Moabit|DE||5253|1334
+Piotrków Trybunalski|PL||5141|1970
+Inowrocław|PL||5280|1826
+Lubin|PL||5140|1620
+Jelenia Góra|PL||5090|1573
+Piła|PL||5315|1674
+Haninge|SE||5917|1814
+Siemianowice Śląskie|PL||5033|1903
+Ostrów Wielkopolski|PL||5166|1781
+Steglitz|DE||5246|1333
+Mysłowice|PL||5021|1917
+Bromma|SE||5934|1794
+Borås|SE||5772|1294
+Växjö|SE||5688|1481
+Lüneburg|DE||5325|1042
+Stargard|PL||5334|1505
+Billstedt|DE||5355|1013
+Celle|DE||5262|1008
+Södertälje|SE||5920|1763
+Pabianice|PL||5166|1935
+Halmstad|SE||5667|1286
+Gniezno|PL||5253|1758
+Fordon|PL||5315|1817
+Kladno|CZ||5015|1410
+Kungsholmen|SE||5933|1804
+Neubrandenburg|DE||5356|1326
+Dessau|DE||5184|1225
+Eskilstuna|SE||5937|1651
+Köpenick|DE||5245|1357
+Solna|SE||5936|1800
+Karlskrona|SE||5616|1559
+Plauen|DE||5050|1214
+Kędzierzyn-Koźle|PL||5035|1823
+Głogów|PL||5166|1608
+Pankow|DE||5257|1340
+Wrzeszcz|PL||5438|1861
+Weimar|DE||5098|1133
+Sandefjord|NO||5913|1022
+Leszno|PL||5184|1657
+Most|CZ||5050|1364
+Żory|PL||5005|1870
+Bełchatów|PL||5137|1936
+Randers|DK||5646|1004
+Asker|NO||5983|1044
+Tempelhof|DE||5247|1340
+Karlstad|SE||5938|1350
+Tarnowskie Góry|PL||5045|1886
+Stodůlky|CZ||5005|1432
+Świdnica|PL||5084|1649
+Tczew|PL||5409|1878
+Brandenburg an der Havel|DE||5242|1255
+Piekary Śląskie|PL||5038|1893
+Berlin Köpenick|DE||5244|1358
+Mölndal|SE||5766|1201
+Sarpsborg|NO||5928|1111
+Stralsund|DE||5431|1308
+Racibórz|PL||5009|1822
+Vasastaden|SE||5935|1803
+Žižkov|CZ||5008|1445
+Będzin|PL||5033|1913
+Täby|SE||5944|1807
+Zgierz|PL||5186|1941
+Görlitz|DE||5116|1499
+Frankfurt (Oder)|DE||5235|1455
+Neu-Hohenschönhausen|DE||5257|1351
+Winterhude|DE||5359|1001
+Świętochłowice|PL||5030|1892
+Friedrichsfelde|DE||5251|1351
+Tønsberg|NO||5927|1041
+Wolfenbüttel|DE||5216|1054
+Zehlendorf|DE||5243|1325
+Schweinfurt|DE||5005|1022
+Hvidovre|DK||5564|1248
+Klinteby Frihed|DK||5520|1160
+Avedøre|DK||5563|1246
+Zawiercie|PL||5049|1942
+Wilhelmsburg|DE||5349|1001
+Mariendorf|DE||5244|1338
+Universitäts- und Hansestadt Greifswald|DE||5409|1340
+Lichtenrade|DE||5240|1341
+Roskilde|DK||5564|1208
+Teplice|CZ||5064|1382
+Alt-Hohenschönhausen|DE||5255|1350
+Chodov|CZ||5004|1450
+Treptow|DE||5249|1344
+Peine|DE||5232|1024
+Moss|NO||5943|1066
+Wodzisław Śląski|PL||5000|1847
+Hof|DE||5031|1191
+Královské Vinohrady|CZ||5007|1444
+Trollhättan|SE||5828|1229
+Kutno|PL||5223|1936
+Mladá Boleslav|CZ||5041|1490
+Weißensee|DE||5256|1347
+Hørsholm|DK||5588|1250
+Greve|DK||5558|1230
+Nysa|PL||5047|1733
+Starogard Gdański|PL||5396|1853
+Wejherowo|PL||5461|1824
+Gotha|DE||5095|1070
+Chomutov|CZ||5046|1342
+Děčín|CZ||5078|1421
+Staaken|DE||5254|1315
+Langenhorn|DE||5367|1002
+Jablonec nad Nisou|CZ||5072|1517
+Valby|DK||5567|1251
+Gohlis|DE||5137|1237
+Karlovy Vary|CZ||5023|1287
+Wismar|DE||5389|1146
+Rumia|PL||5457|1839
+Radomsko|PL||5107|1944
+Halle-Neustadt|DE||5148|1192
+Zduńska Wola|PL||5160|1894
+Sieradz|PL||5160|1873
+Kołobrzeg|PL||5418|1558
+Næstved|DK||5523|1176
+Rejon placu Świętego Macieja|PL||5112|1704
+Nordhausen|DE||5150|1080
+Freiberg|DE||5091|1334
+Goslar|DE||5190|1043
+Lankwitz|DE||5244|1335
+Suhl|DE||5061|1069
+Gifhorn|DE||5248|1055
+Britz|DE||5244|1343
+Rudow|DE||5242|1349
+Lidingö|SE||5937|1813
+Eberswalde|DE||5283|1382
+Bautzen|DE||5118|1443
+Coburg|DE||5026|1096
+Lichtenberg|DE||5251|1350
+Westend|DE||5252|1328
+Świnoujście|PL||5391|1425
+Tumba|SE||5920|1783
+Oranienburg|DE||5275|1325
+Eisenach|DE||5098|1032
+Bolesławiec|PL||5126|1557
+Rødovre|DK||5568|1245
+Wilhelmstadt|DE||5252|1319
+Nowa Sól|PL||5180|1572
+Pirna|DE||5096|1394
+Barmbek-Nord|DE||5361|1004
+Buckow|DE||5242|1344
+Märkisches Viertel|DE||5260|1336
+Charlottenlund|DK||5575|1257
+Ballerup|DK||5573|1236
+Chrzanów|PL||5014|1940
+Kristianstad|SE||5603|1415
+Knurów|PL||5022|1865
+Halberstadt|DE||5190|1106
+Spandau|DE||5255|1320
+Freital|DE||5100|1365
+Ilmenau|DE||5068|1092
+Mikołów|PL||5017|1890
+Chojnice|PL||5370|1756
+Nyköping|SE||5875|1701
+Żary|PL||5164|1514
+Falkenhagener Feld|DE||5255|1317
+Altenburg|DE||5099|1244
+Szczecinek|PL||5371|1670
+Kalmar|SE||5666|1636
+Leuben|DE||5101|1382
+Køge|DK||5546|1218
+Brzeg|PL||5086|1747
+Mühlhausen|DE||5121|1045
+Hamm|DE||5355|1006
+Weißenfels|DE||5120|1197
+Horn|DE||5355|1009
+Olkusz|PL||5028|1957
+Stendal|DE||5261|1186
+Gropiusstadt|DE||5243|1346
+Staré Strašnice|CZ||5008|1451
+Holešovice|CZ||5010|1445
+Kwidzyn|PL||5372|1893
+Falkensee|DE||5256|1309
+Vanløse|DK||5568|1249
+Oleśnica|PL||5121|1739
+Skövde|SE||5839|1385
+Vršovice|CZ||5007|1446
+Tegel|DE||5258|1329
+Malbork|PL||5404|1903
+Bitterfeld-Wolfen|DE||5162|1232
+Upplands Väsby|SE||5952|1791
+Östermalm|SE||5934|1808
+Česká Lípa|CZ||5069|1454
+Libeň|CZ||5011|1447
+Barmbek-Süd|DE||5358|1004
+Farmsen-Berne|DE||5361|1012
+Hillerød|DK||5593|1230
+Taastrup|DK||5565|1230
+Záběhlice|CZ||5006|1450
+Lębork|PL||5454|1775
+Nusle|CZ||5006|1444
+Sopot|PL||5444|1856
+Helsingør|DK||5604|1261
+Uelzen|DE||5296|1057
+Smíchov|CZ||5007|1440
+Bernau bei Berlin|DE||5268|1359
+Uddevalla|SE||5835|1194
+Merseburg|DE||5135|1199
+Baltiysk|RU||5465|1991
+Sundbyberg|SE||5936|1797
+Police|PL||5355|1457
+Czeladź|PL||5032|1908
+Varberg|SE||5711|1225
+Oświęcim|PL||5003|1921
+Dzierżoniów|PL||5073|1665
+Fennpfuhl|DE||5253|1347
+Schwedt (Oder)|DE||5306|1428
+Modřany|CZ||5001|1441
+Fürstenwalde|DE||5236|1406
+Ostróda|PL||5370|1996
+Kolín|CZ||5003|1520
+Myszków|PL||5058|1932
+Zgorzelec|PL||5115|1501
+Oława|PL||5095|1729
+Radebeul|DE||5111|1366
+Cheb|CZ||5008|1237
+Winsen|DE||5336|1021
+Åkersberga|SE||5948|1830
+Iława|PL||5360|1957
+Königs Wusterhausen|DE||5230|1363
+Danderyd|SE||5940|1802
+Marienfelde|DE||5242|1337
+Landskrona|SE||5587|1283
+Wernigerode|DE||5184|1078
+Bernburg|DE||5179|1174
+Eisenhüttenstadt|DE||5215|1465
+Niederschönhausen|DE||5258|1340
+Vallentuna|SE||5953|1808
+Neuruppin|DE||5293|1280
+Slagelse|DK||5540|1135
+Karłowice-Różanka|PL||5114|1704
+Viby|DK||5612|1015
+Hakenfelde|DE||5256|1321
+Pilczyce-Kozanów-Popowice Północne|PL||5113|1698
+Güstrow|DE||5380|1217
+Ołbin|PL||5112|1705
+Burgdorf|DE||5245|1001
+Motala|SE||5854|1504
+Hoyerswerda|DE||5144|1424
+Chełm|PL||5434|1862
+Schönebeck|DE||5202|1173
+Śrem|PL||5209|1702
+Ahrensburg|DE||5368|1024
+Wittenberg|DE||5187|1265
+Albertslund|DK||5566|1236
+Ujeścisko-Łostowice|PL||5432|1860
+Łowicz|PL||5211|1995
+Mahlsdorf|DE||5251|1361
+Naumburg|DE||5115|1181
+Holbæk|DK||5572|1171
+Psie Pole Zawidawie|PL||5115|1711
+Altglienicke|DE||5241|1354
+Turek|PL||5202|1850
+Geesthacht|DE||5344|1037
+Riesa|DE||5131|1329
+Trutnov|CZ||5056|1591
+Trelleborg|SE||5538|1316
+Majorna|SE||5769|1192
+Bielawa|PL||5069|1662
+Krotoszyn|PL||5170|1744
+Blankenfelde-Mahlow|DE||5234|1341
+Swarzędz|PL||5241|1709
+Senftenberg|DE||5153|1400
+Grzegórzki|PL||5006|1997
+Biesdorf|DE||5251|1355
+Czerwionka-Leszczyny|PL||5015|1868
+Köthen|DE||5175|1197
+Września|PL||5233|1757
+Partille|SE||5774|1211
+Meissen|DE||5116|1347
+Zeitz|DE||5105|1214
+Karlshorst|DE||5248|1353
+Saalfeld|DE||5065|1137
+Friedenau|DE||5247|1333
+Kulmbach|DE||5010|1145
+Grimma|DE||5123|1272
+Karlskoga|SE||5933|1452
+Krč|CZ||5004|1445
+Brodnica|PL||5326|1940
+Svendborg|DK||5506|1061
+Horten|NO||5942|1048
+Piecki-Migowo|PL||5436|1858
+Rathenow|DE||5261|1234
+Nové Město|CZ||5008|1442
+Märsta|SE||5962|1785
+Kobylisy|CZ||5012|1445
+Rejon placu Grunwaldzkiego|PL||5112|1706
+Lerum|SE||5777|1227
+Strausberg|DE||5258|1389
+Luboń|PL||5235|1689
+Alingsås|SE||5793|1253
+Indre By|DK||5568|1257
+Hennigsdorf|DE||5264|1320
+Kluczbork|PL||5097|1822
+Wałcz|PL||5328|1647
+Delitzsch|DE||5153|1234
+Allerød|DK||5587|1236
+Świecie|PL||5341|1845
+Żagań|PL||5162|1531
+Kłodzko|PL||5043|1666
+Rummelsburg|DE||5250|1349
+Arnstadt|DE||5084|1095
+Wągrowiec|PL||5281|1720
+Aschersleben|DE||5176|1146
+Jarocin|PL||5197|1750
+Helmstedt|DE||5223|1101
+Markkleeberg|DE||5128|1237
+Zittau|DE||5090|1481
+Reinbek|DE||5352|1025
+Wolfen|DE||5166|1227
+Nacka|SE||5931|1816
+Burg bei Magdeburg|DE||5227|1185
+Blasewitz|DE||5105|1380
+Rudolstadt|DE||5072|1134
+Apolda|DE||5103|1152
+Nowa Ruda|PL||5058|1650
+Wittenau|DE||5259|1332
+Gądów-Popowice Południowe|PL||5113|1697
+Litoměřice|CZ||5053|1413
+Białogard|PL||5401|1599
+Przymorze Wielkie|PL||5441|1860
+Osiedle Powstańców Śląskich|PL||5109|1702
+Bad Oldesloe|DE||5381|1037
+Ludwigsfelde|DE||5230|1325
+Greiz|DE||5066|1220
+Poppenbüttel|DE||5366|1008
+Kungälv|SE||5787|1198
+Falkenberg|SE||5691|1249
+Kościan|PL||5209|1665
+Boo|SE||5933|1828
+Jakobsberg|SE||5942|1784
+Sonneberg|DE||5036|1117
+Jawor|PL||5105|1619
+Döbeln|DE||5112|1311
+Lubliniec|PL||5067|1868
+Limbach-Oberfrohna|DE||5086|1276
+Oberschöneweide|DE||5246|1352
+Pruszcz Gdański|PL||5426|1864
+Lobeda|DE||5090|1160
+Koło|PL||5220|1864
+Hlubočepy|CZ||5004|1440
+Visby|SE||5764|1830
+Dejvice|CZ||5010|1439
+Środmieście|PL||5435|1866
+Sangerhausen|DE||5147|1130
+Prudnik|PL||5032|1757
+Kościerzyna|PL||5412|1798
+Katrineholm|SE||5900|1621
+Ängelholm|SE||5624|1286
+Świebodzice|PL||5086|1632
+Staßfurt|DE||5185|1159
+Nadodrze|PL||5113|1703
+Quedlinburg|DE||5179|1115
+Sasel|DE||5365|1011
+Glostrup|DK||5567|1240
+Vänersborg|SE||5838|1232
+Larvik|NO||5905|1004
+Trångsund|SE||5923|1813
+Annaberg-Buchholz|DE||5058|1301
+Björlanda|SE||5777|1183
+Ringsted|DK||5544|1179
+Lidköping|SE||5851|1316
+Bad Harzburg|DE||5188|1056
+Duderstadt|DE||5151|1026
+Forst|DE||5174|1464
+Schmargendorf|DE||5248|1329
+Frederikshavn|DK||5744|1054
+Drzetowo-Grabowo|PL||5345|1458
+Enköping|SE||5964|1708
+Reichenbach/Vogtland|DE||5062|1230
+Eisleben Lutherstadt|DE||5153|1155
+Goleniów|PL||5356|1483
+Černý Most|CZ||5010|1458
+Řepy|CZ||5007|1430
+Werder|DE||5238|1293
+Coswig|DE||5113|1358
+Krnov|CZ||5009|1770
+Neustrelitz|DE||5336|1307
+Litvínov|CZ||5060|1362
+Lubań|PL||5112|1529
+Eilbek|DE||5357|1005
+Háje|CZ||5004|1453
+Łaziska Górne|PL||5015|1884
+Halden|NO||5912|1139
+Seesen|DE||5189|1018
+Sokolov|CZ||5018|1264
+Hohen Neuendorf|DE||5268|1328
+Rydułtowy|PL||5006|1842
+Sondershausen|DE||5137|1087
+Gajowice|PL||5110|1700
+Świebodzin|PL||5225|1553
+Środa Wielkopolska|PL||5223|1728
+Kamienna Góra|PL||5078|1603
+Letňany|CZ||5013|1452
+Wrzeszcz Dolny|PL||5438|1861
+Wieluń|PL||5122|1857
+Luckenwalde|DE||5209|1317
+Guben|DE||5195|1471
+Gorbitz|DE||5105|1366
+Meiningen|DE||5057|1042
+Polkowice|PL||5150|1607
+Lusan|DE||5084|1207
+Huskvarna|SE||5779|1430
+Waren|DE||5352|1268
+Französisch Buchholz|DE||5260|1343
+Glauchau|DE||5082|1254
+Michle|CZ||5005|1446
+Rawicz|PL||5161|1686
+Auerbach|DE||5051|1240
+Lichtenfels|DE||5015|1106
+Bad Kissingen|DE||5020|1008
+Gryfino|PL||5325|1449
+Náchod|CZ||5042|1616
+Birkerød|DK||5585|1243
+Krzyki-Partynice|PL||5106|1700
+Löbtau|DE||5104|1369
+Eschwege|DE||5118|1005
+Västervik|SE||5776|1664
+Zerbst|DE||5197|1209
+Klotzsche|DE||5111|1377
+Hansestadt Salzwedel|DE||5285|1115
+Brandýs nad Labem-Stará Boleslav|CZ||5019|1466
+Prenzlau|DE||5332|1386
+Sömmerda|DE||5116|1112
+Wrzeszcz Górny|PL||5438|1860
+Gustavsberg|SE||5933|1839
+Gostyń|PL||5188|1701
+Loschwitz|DE||5105|1381
+Volksdorf|DE||5365|1018
+Rejon ulicy Traugutta|PL||5110|1705
+Ozorków|PL||5196|1929
+Chełmno|PL||5335|1843
+Werdau|DE||5074|1238
+Przedmieście Oławskie|PL||5110|1705
+Farum|DK||5581|1236
+Mělník|CZ||5035|1447
+Haldensleben I|DE||5229|1141
+Aleksandrów Łódzki|PL||5182|1930
+Strzelce Opolskie|PL||5051|1830
+Adlershof|DE||5244|1355
+Wittenberge|DE||5300|1175
+Karlshamn|SE||5617|1486
+Brøndbyvester|DK||5565|1241
+Limhamn|SE||5558|1295
+Stenløse|DK||5577|1220
+Nykøbing Falster|DK||5477|1187
+Johannisthal|DE||5245|1351
+Biskupin-Sępolno-Dąbie-Bartoszowice|PL||5111|1709
+Wandlitz|DE||5274|1346
+Orunia Górna-Gdańsk Południe|PL||5432|1862
+Chodzież|PL||5300|1692
+Bad Schwartau|DE||5392|1070
+Bieruń|PL||5009|1909
+Nakło nad Notecią|PL||5314|1760
+Schmalkalden|DE||5072|1044
+Kröpeliner-Tor-Vorstadt|DE||5409|1212
+Teltow|DE||5240|1326
+Ishøj|DK||5562|1235
+Charlottenburg-Nord|DE||5253|1329
+Kaulsdorf|DE||5252|1359
+Norrtälje|SE||5976|1870
+Rinkeby|SE||5939|1793
+Steilshoop|DE||5361|1006
+Hässleholm|SE||5616|1377
+Karlebo|DK||5592|1241
+Hostivař|CZ||5005|1452
+Parchim|DE||5343|1185
+Gaj|PL||5108|1704
+Jirkov|CZ||5050|1345
+Värnamo|SE||5719|1404
+Osiedle Kosmonautów|PL||5113|1696
+Pyskowice|PL||5040|1863
+Friedrichshagen|DE||5245|1362
+Hässelby Villastad|SE||5938|1781
+Lauchhammer|DE||5149|1377
+Žatec|CZ||5033|1355
+Gostynin|PL||5243|1946
+Finsterwalde|DE||5163|1371
+Baumschulenweg|DE||5247|1349
+Sierpc|PL||5286|1967
+Oschersleben|DE||5203|1123
+Trzebinia|PL||5016|1947
+Karow|DE||5261|1348
+Borna|DE||5112|1250
+Ystad|SE||5543|1382
+Torgau|DE||5156|1300
+Huby|PL||5109|1704
+Kungsbacka|SE||5749|1208
+Radeberg|DE||5111|1391
+Międzyrzecz|PL||5244|1558
+Eslöv|SE||5584|1330
+Szamotuły|PL||5261|1658
+Łask|PL||5159|1913
+Kristinehamn|SE||5931|1411
+Aue|DE||5059|1271
+Szczepin|PL||5112|1701
+Schkeuditz|DE||5140|1222
+Mölln|DE||5362|1069
+Orzesze|PL||5016|1878
+Złotów|PL||5336|1704
+Löbau|DE||5110|1467
+Braniewo|PL||5438|1982
+Köping|SE||5951|1599
+Konstantynów Łódzki|PL||5175|1933
+Oskarshamn|SE||5726|1645
+Krapkowice|PL||5048|1797
+Crimmitschau|DE||5082|1239
+Kronach|DE||5024|1133
+Marktredwitz|DE||5000|1209
+Großenhain|DE||5129|1353
+Reda|PL||5461|1835
+Heiligensee|DE||5261|1325
+Äußere Neustadt|DE||5107|1376
+Kadaň|CZ||5038|1327
+Louny|CZ||5036|1380
+Sulechów|PL||5208|1563
+Gamla Uppsala|SE||5990|1763
+Hedehusene|DK||5565|1220
+Oborniki|PL||5265|1681
+Kleinmachnow|DE||5241|1323
+Vordingborg|DK||5501|1191
+Libiąż|PL||5010|1932
+Kostrzyn nad Odrą|PL||5259|1465
+Braník|CZ||5003|1442
+Munster|DE||5299|1009
+Nässjö|SE||5765|1470
+Pleszew|PL||5190|1779
+Templin|DE||5312|1350
+Mölnlycke|SE||5766|1212
+Słubice|PL||5235|1456
+Nyborg|DK||5531|1079
+Radlin|PL||5005|1848
+Vysočany|CZ||5011|1452
+Kralupy nad Vltavou|CZ||5024|1431
+Hummelsbüttel|DE||5365|1004
+Wittstock|DE||5316|1248
+Solrød Strand|DK||5553|1222
+Meerane|DE||5085|1246
+Slaný|CZ||5023|1409
+Heilbad Heiligenstadt|DE||5138|1014
+Falköping|SE||5817|1355
+Radzionków|PL||5040|1890
+Zossen|DE||5222|1345
+Selb|DE||5017|1213
+Elmschenhagen|DE||5429|1019
+Tensta|SE||5939|1790
+Dulsberg|DE||5358|1006
+Eutin|DE||5414|1061
+Kamenz|DE||5127|1409
+Dahlem|DE||5246|1329
+Trzcianka|PL||5304|1646
+Råsunda|SE||5937|1800
+Prosek|CZ||5012|1451
+Frederikssund|DK||5584|1207
+Årsta|SE||5930|1805
+Schneeberg|DE||5059|1264
+Lillerød|DK||5587|1235
+Hermsdorf|DE||5261|1331
+Boguszów-Gorce|PL||5076|1620
+Bytów|PL||5417|1749
+Gryfice|PL||5392|1520
+Bad Langensalza|DE||5111|1065
+Marienberg|DE||5065|1316
+Nowogard|PL||5367|1512
+Frohnau|DE||5263|1329
+Heidenau|DE||5097|1387
+Kumla|SE||5913|1514
+Gubin|PL||5195|1473
+Mittweida|DE||5099|1298
+Nauen|DE||5261|1287
+Rypin|PL||5307|1941
+Stockelsdorf|DE||5389|1065
+Hohenstein-Ernstthal|DE||5080|1271
+Eilenburg|DE||5146|1263
+Vallensbæk|DK||5562|1239
+Haselhorst|DE||5254|1324
+Bogatynia|PL||5091|1496
+Bohnice|CZ||5013|1442
+Königslutter am Elm|DE||5225|1082
+Bad Salzungen|DE||5081|1024
+Namysłów|PL||5108|1772
+Kladow|DE||5245|1314
+Lędziny|PL||5014|1913
+Neratovice|CZ||5026|1452
+Ustka|PL||5458|1686
+Vechelde|DE||5226|1036
+Kalundborg|DK||5568|1109
+Glinde|DE||5354|1021
+Neuenhagen|DE||5253|1369
+Košíře|CZ||5007|1436
+Mariestad|SE||5871|1382
+Strzegom|PL||5096|1635
+Jičín|CZ||5044|1535
+Bad Segeberg|DE||5394|1031
+Świerczewo|PL||5343|1451
+Osowa|PL||5443|1847
+Oschatz|DE||5130|1311
+Tullinge|SE||5920|1790
+Blankenburg|DE||5179|1096
+Hettstedt|DE||5165|1151
+Neustadt in Holstein|DE||5411|1081
+Västra Frölunda|SE||5765|1193
+Ratekau|DE||5395|1073
+Kozanów|PL||5114|1697
+Nymburk|CZ||5019|1504
+Ljungby|SE||5683|1394
+Lubnjow|DE||5186|1395
+Preetz|DE||5424|1028
+Różanka-Polanka|PL||5114|1702
+Choszczno|PL||5317|1542
+Świdwin|PL||5377|1578
+Střížkov|CZ||5013|1449
+Rakovník|CZ||5010|1373
+Zeulenroda-Triebes|DE||5065|1198
+Tilst|DK||5619|1011
+Ostrov|CZ||5031|1294
+Złotoryja|PL||5113|1592
+Łęczyca|PL||5206|1920
+Schwarzenberg|DE||5054|1279
+Angermünde|DE||5301|1400
+Bad Neustadt an der Saale|DE||5032|1021
+Chełmża|PL||5318|1860
+Staffanstorp|SE||5564|1321
+Clausthal-Zellerfeld|DE||5181|1034
+Jelcz Laskowice|PL||5102|1732
+Ribnitz-Damgarten|DE||5424|1246
+Dvůr Králové nad Labem|CZ||5043|1581
+Jelcz|PL||5102|1732
+Horní Měcholupy|CZ||5005|1457
+Wurzen|DE||5137|1274
+Poděbrady|CZ||5014|1512
+Alsterdorf|DE||5361|1001
+Virum|DK||5579|1245
+Nowy Tomyśl|PL||5232|1613
+Solec Kujawski|PL||5308|1823
+Głuchołazy|PL||5032|1738
+Głowno|PL||5196|1972
+Kinna|SE||5751|1269
+Ząbkowice Śląskie|PL||5059|1681
+Weißwasser|DE||5150|1464
+Kartuzy|PL||5433|1820

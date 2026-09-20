@@ -1,0 +1,159 @@
+Yangon|MM||1681|9616
+Nay Pyi Taw|MM||1974|9613
+Hlaingthaya|MM||1685|9607
+Mawlamyine|MM||1649|9763
+Insein|MM||1689|9610
+Bago|MM||1734|9648
+Pathein|MM||1678|9473
+Kyaukpyu|MM||1943|9355
+Myeik|MM||1244|9860
+Lampang|TH||1829|9949
+Dawei|MM||1408|9819
+Mingaladon|MM||1692|9610
+Pyay|MM||1882|9522
+Hinthada|MM||1765|9546
+Thandwe|MM||1847|9437
+Kyauktan|MM||1664|9633
+Mingala Tangnyunt|MM||1679|9617
+Chiang Mai|TH||1879|9898
+Hua Hin|TH||1257|9996
+Thaton|MM||1692|9737
+Ban I Chang|TH||1371|9990
+Ann|MM||1980|9405
+Port Blair|IN||1167|9275
+Kyimyindine|MM||1681|9612
+Set Ka Lay|MM||1681|9611
+Taungoo|MM||1894|9643
+San Chaung|MM||1710|9610
+Thayetmyo|MM||1932|9518
+Pyinmana|MM||1974|9621
+Ratchaburi|TH||1354|9982
+Nyaunglebin|MM||1795|9672
+Sangyoung|MM||1681|9613
+Mudon|MM||1626|9772
+Taikkyi|MM||1731|9596
+Nong Prue|TH||1461|9946
+Chiang Rai|TH||1991|9983
+Thanhlyin|MM||1678|9625
+Dawbon|MM||1652|9560
+Thanlyin|MM||1677|9625
+Bogale|MM||1629|9540
+Gwa|MM||1759|9458
+Kanchanaburi|TH||1400|9955
+Kamphaeng Phet|TH||1648|9952
+Myaungmya|MM||1660|9492
+Kanbe|MM||1671|9600
+Ban Pong|TH||1382|9988
+Myaydo|MM||1937|9522
+Thanbyuzayat|MM||1597|9773
+Chumphon|TH||1050|9918
+Tharyarwady|MM||1765|9579
+Tha Maka|TH||1390|9977
+Thongwa|MM||1676|9652
+Kyaiklat|MM||1645|9572
+Manaung|MM||1885|9373
+Hpa-An|MM||1689|9763
+Cha-am|TH||1280|9997
+Kyaikto|MM||1731|9701
+Martaban|MM||1653|9762
+Kawkareik|MM||1656|9824
+Kyaikkami|MM||1608|9756
+Pran Buri|TH||1238|9990
+Pyapon|MM||1629|9568
+Phetchaburi|TH||1311|9994
+Twante|MM||1671|9593
+Myawaddy|MM||1669|9851
+Mae Sot|TH||1672|9857
+Nyaung|MM||1683|9609
+Lamphun|TH||1858|9901
+Diglipur|IN||1327|9300
+Wakema|MM||1660|9518
+Tha Yang|TH||1296|9991
+Maubin|MM||1673|9565
+Thin Gan Kyun Gyi|MM||1696|9616
+Myanaung|MM||1829|9532
+Oke Kan|MM||1685|9607
+Ahlone|MM||1679|9613
+Pazundaung|MM||1680|9617
+Pyu|MM||1848|9644
+Kayan|MM||1691|9656
+Ban Na|TH||1702|9973
+Nyaungdon|MM||1704|9564
+Shwenatha|MM||1699|9616
+Letpandan|MM||1779|9575
+Rangat|IN||1251|9292
+Hlegu|MM||1710|9622
+Daik-u|MM||1780|9667
+Thanatpin|MM||1729|9658
+Sukhothai|TH||1701|9982
+Paungde|MM||1849|9551
+Botataung|MM||1677|9617
+Photharam|TH||1369|9985
+Ye|MM||1525|9786
+Mawlamyinegyunn|MM||1638|9526
+Prachuap Khiri Khan|TH||1182|9978
+San Kamphaeng|TH||1874|9912
+Kyauktaga|MM||1749|9698
+Ywar Ma West|MM||1690|9609
+Lewe|MM||1964|9611
+Pauk Kone|MM||1695|9615
+Labutta|MM||1615|9476
+Bang Phae|TH||1369|9993
+Paung|MM||1662|9746
+Shwe Lin Ban|MM||1690|9607
+Kungyangon|MM||1644|9602
+Payathonzu|MM||1532|9839
+Taungup|MM||1886|9424
+Tha Muang|TH||1396|9964
+Pyan Lel Nay Yar Cha Htar Ye|MM||1697|9613
+Hmaw Bi|MM||1664|9762
+Si Satchanalai|TH||1752|9976
+Zee Kone|MM||1695|9610
+Shwegyin|MM||1792|9688
+Yedashe|MM||1916|9635
+Tak|TH||1687|9913
+Pawgan|MM||1691|9610
+Kyonpyaw|MM||1730|9520
+Māyābandar|IN||1291|9290
+Dok Kham Tai|TH||1916|9999
+Min Ga Lar Don Zay|MM||1692|9612
+Kyeintali|MM||1801|9449
+Damnoen Saduak|TH||1352|9995
+Ah Lel|MM||1692|9606
+Waw|MM||1748|9668
+Sinngu|MM||1691|9610
+Da Nyin Kone|MM||1693|9609
+Kone Ta La Paung|MM||1701|9615
+Zalun|MM||1748|9556
+Khanu Woralaksaburi|TH||1606|9986
+Phayao|TH||1919|9988
+Saw Bwar Gyi Kone|MM||1689|9613
+Ingabu|MM||1781|9527
+Sawankhalok|TH||1732|9983
+Sam Roi Yot|TH||1227|9987
+Taung Thu Kone|MM||1690|9611
+Kui Buri|TH||1208|9985
+Myenigon|MM||1681|9614
+Aung San|MM||1692|9610
+Khao Yoi|TH||1324|9982
+Myo Thit Ka|MM||1687|9610
+Thoen|TH||1761|9922
+Ban Tak|TH||1704|9908
+Hang Dong|TH||1869|9892
+Okpo|MM||1697|9609
+San Pa Tong|TH||1863|9890
+Lat Yao|TH||1575|9979
+Mae Ramat|TH||1698|9852
+Loikaw|MM||1968|9721
+Bo Phloi|TH||1433|9951
+Thap Than|TH||1546|9989
+Ywar Ma East|MM||1690|9610
+Kyo Kone East|MM||1689|9611
+Shan Chaung|MM||1686|9609
+Pa Sang|TH||1853|9894
+Kan Nar Middle|MM||1688|9610
+Pèkon|MM||1987|9701
+Zigon|MM||1834|9562
+Chom Bueng|TH||1362|9959
+Bang Saphan|TH||1121|9951
+Setsan|MM||1681|9611

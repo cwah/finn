@@ -1,0 +1,9 @@
+Wenchang|CN||1955|11080
+Wanning|CN||1880|11038
+Qionghai|CN||1924|11046
+Jinjiang|CN||1974|11001
+Santa Cruz|PH||1577|11991
+Masinloc|PH||1554|11995
+El Nido|PH||1119|11940
+Iba|PH||1533|11998
+Roxas|PH||1032|11935

@@ -1,0 +1,7 @@
+Bergen|NO||6039|532
+Ålesund|NO||6247|615
+Åsane|NO||6047|532
+Nesttun|NO||6032|535
+Ytrebygda|NO||6031|528
+Kristiansund|NO||6311|773
+Molde|NO||6274|716

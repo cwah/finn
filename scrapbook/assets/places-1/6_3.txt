@@ -1,0 +1,35 @@
+Murmansk|RU||6897|3310
+Petrozavodsk|RU||6178|3435
+Severodvinsk|RU||6456|3983
+Akademicheskoe|RU||6001|3039
+Ozerki|RU||6004|3031
+Svetlanovskiy|RU||6000|3033
+Komendantsky aerodrom|RU||6000|3028
+Grazhdanka|RU||6002|3042
+Parnas|RU||6007|3035
+Sosnovka|RU||6002|3035
+Apatity|RU||6758|3341
+Severomorsk|RU||6907|3341
+Untolovo|RU||6001|3021
+Monchegorsk|RU||6794|3287
+Vsevolozhsk|RU||6002|3067
+Sertolovo|RU||6014|3020
+Yagry|RU||6459|3981
+Kolomyagi|RU||6002|3028
+Kandalaksha|RU||6715|3241
+Kondopoga|RU||6220|3427
+Segezha|RU||6375|3432
+Kostomuksha|RU||6457|3058
+Kirovsk|RU||6761|3367
+Olenegorsk|RU||6814|3325
+Onega|RU||6391|3810
+Lodeynoye Pole|RU||6073|3356
+Sortavala|RU||6171|3071
+Podporozh’ye|RU||6091|3416
+Kovdor|RU||6757|3048
+Priozërsk|RU||6104|3014
+Zapolyarnyy|RU||6943|3081
+Polyarnyy|RU||6920|3344
+Medvezh’yegorsk|RU||6291|3446
+Nikel|RU||6941|3022
+Polyarnyye Zori|RU||6737|3250

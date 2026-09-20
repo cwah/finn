@@ -1,0 +1,449 @@
+Madrid|ES||4042|-370
+Zaragoza|ES||4166|-88
+Bilbao|ES||4326|-293
+Nantes|FR||4722|-155
+Valladolid|ES||4166|-472
+Vigo|ES||4223|-872
+Gijón|ES||4354|-566
+Bordeaux|FR||4484|-58
+Gasteiz / Vitoria|ES||4285|-267
+Latina|ES||4039|-375
+Carabanchel|ES||4039|-372
+Porto|PT||4115|-861
+A Coruña|ES||4337|-840
+Puente de Vallecas|ES||4039|-366
+Fuencarral|ES||4050|-368
+Ciudad Lineal|ES||4045|-365
+Rennes|FR||4811|-167
+Fuencarral-El Pardo|ES||4050|-373
+Oviedo|ES||4336|-584
+Pamplona|ES||4282|-164
+Móstoles|ES||4032|-386
+Alcalá de Henares|ES||4048|-336
+Braga|PT||4155|-842
+Fuenlabrada|ES||4028|-379
+Leganés|ES||4033|-376
+Getafe|ES||4031|-373
+Donostia / San Sebastián|ES||4331|-197
+Burgos|ES||4234|-370
+Santander|ES||4347|-380
+Alcorcón|ES||4035|-382
+Angers|FR||4747|-55
+Hortaleza|ES||4047|-364
+San Blas-Canillejas|ES||4044|-362
+Tetuán de las Victorias|ES||4046|-370
+Logroño|ES||4247|-245
+Madrid Centro|ES||4042|-370
+Arganzuela|ES||4040|-370
+Salamanca|ES||4043|-368
+Chamberí|ES||4043|-370
+Brest|FR||4839|-449
+Salamanca|ES||4097|-566
+Usera|ES||4039|-370
+Coimbra|PT||4021|-842
+Chamartín|ES||4046|-368
+Villaverde|ES||4035|-370
+Retiro|ES||4041|-368
+León|ES||4260|-557
+Torrejón de Ardoz|ES||4046|-347
+Moncloa-Aravaca|ES||4044|-373
+Alcobendas|ES||4055|-364
+Parla|ES||4024|-377
+Caen|FR||4919|-36
+Delicias|ES||4165|-91
+Ourense|ES||4234|-786
+Moratalaz|ES||4041|-365
+Viseu|PT||4066|-791
+Barakaldo|ES||4330|-299
+Santiago de Compostela|ES||4288|-855
+Lugo|ES||4301|-756
+Las Rozas de Madrid|ES||4049|-387
+Guadalajara|ES||4063|-316
+Pontevedra|ES||4243|-864
+Pau|FR||4331|-36
+Algorta|ES||4335|-301
+Pozuelo de Alarcón|ES||4043|-381
+Coslada|ES||4042|-356
+Aveiro|PT||4065|-865
+Getxo|ES||4336|-301
+Avilés|ES||4355|-592
+Palencia|ES||4201|-452
+La Rochelle|FR||4616|-115
+San Sebastián de los Reyes|ES||4056|-363
+Valdemoro|ES||4019|-368
+Vila Nova de Gaia|PT||4112|-861
+Mérignac|FR||4484|-65
+Valdefuentes|ES||4049|-364
+Ponferrada|ES||4255|-660
+Rivas-Vaciamadrid|ES||4033|-351
+Majadahonda|ES||4047|-387
+Saint-Nazaire|FR||4728|-222
+Ferrol|ES||4348|-823
+Aluche|ES||4039|-376
+Vicálvaro|ES||4040|-360
+Villa de Vallecas|ES||4037|-360
+Valverde|ES||4050|-368
+Quimper|FR||4800|-410
+Collado-Villalba|ES||4064|-400
+Pueblo Nuevo|ES||4043|-364
+Irun|ES||4334|-179
+Zamora|ES||4151|-574
+Gamonal|ES||4236|-367
+Santutxu|ES||4325|-292
+La Roche-sur-Yon|FR||4667|-143
+Lorient|FR||4775|-337
+Felgueiras|PT||4137|-819
+Pessac|FR||4481|-63
+Ávila|ES||4066|-470
+Torrelavega|ES||4335|-405
+Cuenca|ES||4007|-213
+Niort|FR||4632|-46
+Aranjuez|ES||4003|-360
+Vannes|FR||4766|-276
+Huesca|ES||4214|-41
+Vallecas|ES||4038|-362
+Cholet|FR||4706|-88
+Saint-Brieuc|FR||4852|-277
+Boadilla del Monte|ES||4040|-388
+Pinar del Rey|ES||4047|-365
+Segovia|ES||4095|-412
+Arganda|ES||4030|-344
+Las Águilas|ES||4038|-377
+Saint-Malo|FR||4865|-201
+Laval|FR||4807|-77
+Ventas|ES||4042|-365
+Rio Tinto|PT||4118|-856
+Buenavista|ES||4037|-375
+Numancia|ES||4040|-366
+Vista Alegre|ES||4038|-375
+Santurtzi|ES||4333|-303
+Saint-Herblain|FR||4721|-165
+Figueira da Foz|PT||4015|-886
+Embajadores|ES||4041|-370
+Paranhos|PT||4117|-860
+Portugalete|ES||4332|-302
+Pilar|ES||4048|-371
+San Diego|ES||4039|-367
+Ponte de Lima|PT||4177|-858
+Lavapiés|ES||4041|-370
+Bayonne|FR||4349|-147
+Peña Grande|ES||4047|-372
+Mieres|ES||4325|-577
+Colmenar Viejo|ES||4066|-377
+Pinto|ES||4024|-370
+Barajas de Madrid|ES||4047|-358
+Puerta del Angel|ES||4041|-373
+Palomeras Sureste|ES||4039|-364
+Basauri|ES||4324|-289
+Talence|FR||4481|-59
+Guindalera|ES||4044|-367
+Tres Cantos|ES||4060|-371
+Santo António dos Olivais|PT||4022|-841
+Anglet|FR||4349|-152
+Guimarães|PT||4144|-830
+Palomeras Bajas|ES||4038|-366
+Casco Histórico de Vallecas|ES||4035|-362
+San Isidro|ES||4040|-373
+Plasencia|ES||4003|-609
+Guarda|PT||4054|-727
+Sama|ES||4330|-568
+Canillas|ES||4046|-364
+San Fernando de Henares|ES||4042|-353
+Ermesinde|PT||4122|-855
+Miranda de Ebro|ES||4269|-295
+Rezé|FR||4719|-157
+Soria|ES||4176|-247
+Errenteria|ES||4331|-190
+Santo Ovídio|PT||4111|-860
+Los Rosales|ES||4036|-369
+Narón|ES||4350|-819
+Vilagarcía de Arousa|ES||4260|-876
+Puerta Bonita|ES||4038|-374
+Lucero|ES||4040|-375
+Maia|PT||4124|-862
+Teruel|ES||4035|-111
+Mont-de-Marsan|FR||4389|-50
+Viana do Castelo|PT||4169|-883
+Acacias|ES||4040|-371
+Prosperidad|ES||4044|-367
+Mirasierra|ES||4050|-372
+Oleiros|ES||4333|-832
+Casco Histórico de Vicálvaro|ES||4039|-357
+Entrevías|ES||4038|-367
+Bragança|PT||4181|-676
+Los Angeles|ES||4036|-370
+Cuatro Caminos|ES||4045|-370
+Tudela|ES||4206|-160
+Azuqueca de Henares|ES||4057|-327
+Esposende|PT||4154|-878
+Afurada de Baixo|PT||4114|-865
+Opañel|ES||4039|-372
+Saumur|FR||4726|-8
+Biarritz|FR||4348|-156
+Aranda de Duero|ES||4167|-369
+Pacífico|ES||4040|-368
+Bairro Novo|PT||4154|-841
+Espinho|PT||4101|-864
+Universidad|ES||4043|-371
+La Paz|ES||4048|-370
+Castro-Urdiales|ES||4338|-322
+Galapagar|ES||4058|-400
+Abrantes|ES||4038|-373
+Hispanoamérica|ES||4046|-368
+Arroyomolinos|ES||4027|-392
+Carballo|ES||4321|-869
+Leioa|ES||4333|-299
+San Andrés del Rabanedo|ES||4261|-562
+Rosas|ES||4043|-359
+Valdezarza|ES||4047|-372
+Villenave-d'Ornon|FR||4478|-57
+Camargo|ES||4341|-388
+Oliver-Valdefierro|ES||4164|-93
+Culleredo|ES||4329|-839
+Pinar de Chamartín|ES||4048|-367
+Arteixo|ES||4330|-851
+Saint-Médard-en-Jalles|FR||4490|-72
+Campanhã|PT||4116|-857
+Saintes|FR||4575|-63
+Goya|ES||4043|-367
+Rochefort|FR||4594|-97
+Bellas Vistas|ES||4045|-371
+Saint-Sébastien-sur-Loire|FR||4721|-150
+Galdakao|ES||4323|-284
+Redondela|ES||4228|-861
+Aldoar|PT||4117|-867
+Canillejas|ES||4045|-361
+Póvoa de Varzim|PT||4138|-876
+Senhora da Hora|PT||4119|-865
+Portazgo|ES||4039|-365
+Simancas|ES||4044|-363
+Delicias|ES||4040|-369
+Sequeira|PT||4055|-723
+Durango|ES||4317|-263
+Matosinhos|PT||4118|-869
+Saint Helier|JE||4919|-210
+Gondomar|PT||4114|-853
+Águas Santas|PT||4121|-858
+Vila do Conde|PT||4135|-875
+Villaviciosa de Odón|ES||4036|-390
+Ribeira|ES||4274|-844
+Sestao|ES||4331|-301
+Aravaca|ES||4046|-378
+Eibar|ES||4318|-247
+El Viso|ES||4045|-368
+La Teste-de-Buch|FR||4463|-115
+Rios Rosas|ES||4044|-370
+Santa Uxía de Ribeira|ES||4255|-899
+Cherbourg|FR||4964|-162
+Moscardó|ES||4039|-371
+Valdeacederas|ES||4047|-370
+Canidelo|PT||4112|-865
+Marroquina|ES||4041|-364
+Marín|ES||4239|-870
+São Mamede de Infesta|PT||4119|-861
+Almozara|ES||4166|-90
+Cangas do Morrazo|ES||4226|-878
+Berruguete|ES||4046|-370
+Quintana|ES||4044|-365
+Arcos|ES||4042|-362
+Orvault|FR||4727|-162
+Palos de Moguer|ES||4040|-369
+Argüelles|ES||4043|-372
+Iturrama|ES||4281|-166
+Calahorra|ES||4231|-197
+Trafalgar|ES||4043|-370
+Nueva España|ES||4046|-368
+Oliveira do Douro|PT||4112|-858
+Gradignan|FR||4477|-61
+Lanester|FR||4776|-334
+Erandio|ES||4330|-297
+Hérouville-Saint-Clair|FR||4921|-31
+Libourne|FR||4491|-24
+Le Bouscat|FR||4486|-60
+Arapiles|ES||4043|-371
+Fânzeres|PT||4117|-853
+Santa Eugenia|ES||4038|-361
+Fougères|FR||4835|-120
+San Fermín|ES||4037|-369
+Bègles|FR||4481|-55
+Palacio|ES||4042|-371
+Cambre|ES||4329|-835
+Ponteareas|ES||4217|-850
+Orcasitas|ES||4037|-371
+Almenara|ES||4047|-369
+Bomfim|PT||4115|-859
+Gaztambide|ES||4043|-371
+Vertou|FR||4717|-147
+Arcos de Valdevez|PT||4185|-842
+Almendrales|ES||4038|-370
+Comillas|ES||4039|-371
+Estrella|ES||4041|-367
+Lormont|FR||4488|-52
+Zarautz|ES||4328|-217
+Primer Ensanche|ES||4281|-165
+Segundo Ensanche|ES||4281|-164
+Mejorada del Campo|ES||4039|-348
+Cenon|FR||4486|-53
+Imperial|ES||4041|-372
+Valadares|PT||4109|-863
+Dax|FR||4371|-105
+Lordelo do Ouro|PT||4115|-865
+Ciempozuelos|ES||4016|-362
+São João da Madeira|PT||4090|-849
+Arrasate / Mondragón|ES||4306|-249
+Costillares|ES||4048|-367
+Torrelodones|ES||4058|-393
+Laguna de Duero|ES||4158|-472
+Saint-Lô|FR||4912|-109
+Bougado|PT||4134|-855
+Navalcarnero|ES||4029|-401
+Medina del Campo|ES||4131|-491
+Ibiza|ES||4042|-367
+Lannion|FR||4873|-346
+Concarneau|FR||4788|-392
+Eysines|FR||4488|-65
+Valongo|PT||4119|-850
+Butarque|ES||4034|-368
+Illescas|ES||4012|-385
+Vilar|PT||4063|-863
+Arouca|PT||4093|-824
+La Felguera|ES||4331|-569
+Lista|ES||4043|-368
+Concepción|ES||4044|-365
+Fuente del Berro|ES||4042|-366
+Cognac|FR||4570|-33
+Bressuire|FR||4684|-49
+Trofa|PT||4134|-856
+A Estrada|ES||4269|-849
+Ploemeur|FR||4774|-343
+Castillejos|ES||4046|-369
+Baião|PT||4116|-803
+Hernani|ES||4327|-198
+Algete|ES||4060|-350
+Lalín|ES||4266|-811
+Barañáin|ES||4281|-168
+Calatayud|ES||4135|-164
+Montecanal|ES||4163|-94
+Natahoyo|ES||4354|-568
+Vallehermoso|ES||4044|-371
+Paredes|PT||4120|-833
+Chopera|ES||4039|-370
+Campamento|ES||4039|-380
+Monção|PT||4208|-848
+Alameda de Osuna|ES||4045|-359
+Monforte de Lemos|ES||4252|-751
+Legazpi|ES||4039|-369
+Couëron|FR||4721|-172
+Almagro|ES||4043|-369
+Custoias|PT||4111|-732
+Gujan-Mestras|FR||4464|-107
+Benavente|ES||4200|-568
+Barcelos|PT||4153|-862
+El Goloso|ES||4055|-370
+Royan|FR||4563|-103
+Moaña|ES||4228|-874
+São Tiago de Custoias|PT||4120|-863
+Pedroso|PT||4141|-875
+Challans|FR||4685|-188
+Vilar de Andorinho|PT||4111|-859
+Burlata|ES||4283|-162
+Boiro|ES||4265|-888
+Équeurdreville-Hainneville|FR||4965|-165
+Adelfas|ES||4040|-367
+La Flèche|FR||4770|-8
+Ciudad Jardín|ES||4045|-367
+La Chapelle-sur-Erdre|FR||4730|-155
+Ovar|PT||4086|-863
+San Pascual|ES||4044|-365
+Laudio / Llodio|ES||4314|-296
+Tourlaville|FR||4964|-157
+San Martín de la Vega|ES||4021|-357
+Argentan|FR||4874|-2
+Justicia|ES||4042|-370
+El Astillero|ES||4340|-382
+Humanes de Madrid|ES||4025|-383
+Carquefou|FR||4730|-149
+Tolosa|ES||4313|-208
+Cestas|FR||4474|-68
+Nigrán|ES||4214|-881
+Leça da Palmeira|PT||4119|-870
+Cármenes|ES||4040|-374
+San Lorenzo de El Escorial|ES||4059|-415
+Pradolongo|ES||4038|-371
+Oria|ES||4326|-202
+Amorebieta|ES||4322|-273
+Teo|ES||4280|-855
+Lasarte|ES||4327|-202
+La Baule-Escoublac|FR||4729|-236
+Utebo|ES||4171|-100
+Covilhã|PT||4028|-751
+Chaves|PT||4174|-747
+Morlaix|FR||4858|-383
+Porriño|ES||4216|-862
+Valdebernardo|ES||4040|-362
+Flers|FR||4874|-57
+Rejas|ES||4045|-357
+Fontarrón|ES||4040|-365
+Ejea de los Caballeros|ES||4213|-114
+Media Legua|ES||4041|-366
+San Cristobal|ES||4034|-369
+Vitré|FR||4812|-121
+Tui|ES||4205|-864
+Ílhavo|PT||4060|-867
+Sanxenxo|ES||4240|-881
+Ermitagaña|ES||4281|-166
+São Paulo de Frades|PT||4025|-839
+Eiras|PT||4025|-842
+Condeixa-a-Nova|PT||4011|-850
+Castilla|ES||4047|-368
+Poio|ES||4245|-869
+Villaquilambre|ES||4265|-556
+São Pedro da Cova|PT||4114|-850
+Vila Real|PT||4130|-774
+Octeville|FR||4963|-164
+Bermeo|ES||4342|-272
+Castellana|ES||4043|-368
+Vinateros|ES||4041|-364
+Fafe|PT||4145|-817
+Bouguenais|FR||4718|-162
+Villanueva de la Cañada|ES||4045|-400
+Pontivy|FR||4807|-297
+Cabeceiras de Basto|PT||4151|-799
+Blanquefort|FR||4491|-64
+Douarnenez|FR||4810|-433
+Guérande|FR||4733|-243
+Floirac|FR||4483|-53
+Saint Peter Port|GG||4946|-254
+Hondarribia|ES||4337|-180
+Alcañiz|ES||4105|-13
+Feira|PT||4093|-854
+Ciudad Universitaria|ES||4046|-374
+Fontenay-le-Comte|FR||4647|-81
+Ermua|ES||4319|-250
+Gernika-Lumo|ES||4332|-268
+Viveiro|ES||4366|-759
+Seseña|ES||4010|-370
+Cesson-Sévigné|FR||4812|-160
+Mungia|ES||4335|-285
+Les Sables-d'Olonne|FR||4650|-178
+Leça do Bailio|PT||4121|-863
+Landerneau|FR||4845|-425
+Pasaia|ES||4333|-193
+Bayeux|FR||4928|-70
+Corvera de Asturias|ES||4354|-589
+Baguim do Monte|PT||4119|-854
+El Escorial|ES||4058|-413
+Lourdes|FR||4309|-5
+Vermoim|PT||4124|-861
+Les Herbiers|FR||4687|-102
+Tarancón|ES||4001|-301
+Mayenne|FR||4830|-61
+Recoletos|ES||4042|-369
+Apostol Santiago|ES||4048|-366
+São Martinho do Bispo|PT||4021|-846
+Ribeira de Frades|PT||4021|-848
+Alfena|PT||4124|-852
+Niño Jesús|ES||4041|-367
+Villanueva del Pardillo|ES||4049|-396
+Piovera|ES||4046|-364
+Béjar|ES||4039|-576

@@ -1,0 +1,38 @@
+San José|CR||993|-8408
+David|PA||843|-8243
+Limón|CR||999|-8304
+San Francisco|CR||999|-8413
+Santiago de Veraguas|PA||810|-8098
+Paraíso|CR||984|-8387
+Puntarenas|CR||998|-8484
+San Isidro|CR||937|-8370
+Curridabat|CR||991|-8404
+San Vicente|CR||996|-8405
+San Vicente de Moravia|CR||996|-8405
+Purral|CR||996|-8403
+Turrialba|CR||990|-8368
+San Miguel|CR||987|-8406
+San Pedro|CR||993|-8405
+San Rafael Abajo|CR||983|-8429
+Ipís|CR||997|-8402
+Cartago|CR||986|-8392
+Chacarita|CR||998|-8478
+San Juan|CR||996|-8408
+Guadalupe|CR||995|-8406
+Aserrí|CR||986|-8409
+San Rafael|CR||993|-8414
+San Felipe|CR||990|-8411
+Patarrá|CR||988|-8404
+Tejar|CR||974|-8423
+Heredia|CR||1000|-8412
+San Pablo|CR||1000|-8410
+Calle Blancos|CR||995|-8407
+Changuinola|PA||943|-8252
+La Concepción|PA||852|-8262
+Pedregal|PA||838|-8243
+San Diego|CR||990|-8400
+Penonomé|PA||852|-8036
+Colima|CR||996|-8408
+Esparza|CR||999|-8467
+San Juan de Dios|CR||988|-8408
+San Rafael Arriba|CR||988|-8407

@@ -1,0 +1,572 @@
+Cairo|EG||3006|3125
+Giza|EG||3001|3121
+Ankara|TR||3992|3285
+Gaziantep|TR||3706|3738
+Aleppo|SY||3620|3716
+Beirut|LB||3389|3550
+Adana|TR||3699|3533
+Damascus|SY||3351|3629
+Kayseri|TR||3873|3549
+Konya|TR||3787|3248
+Antalya|TR||3691|3070
+Amman|JO||3196|3595
+Ra’s Bayrūt|LB||3390|3548
+Shubrā al Khaymah|EG||3013|3125
+Jerusalem|IL||3177|3522
+Eskişehir|TR||3978|3052
+Zarqa|JO||3207|3609
+Çankaya|TR||3992|3286
+Port Said|EG||3127|3230
+Homs|SY||3472|3673
+Malatya|TR||3835|3832
+Latakia|SY||3553|3579
+Madīnat an Naşr|EG||3007|3130
+Al Mansurah|EG||3104|3138
+Al Maḩallah al Kubrá|EG||3097|3117
+Tanta|EG||3079|3100
+Irbid|JO||3256|3585
+Mersin|TR||3681|3464
+Ar Raqqah|SY||3595|3901
+Al Khuşūş|EG||3015|3132
+Ḩamāh|SY||3513|3676
+Ţarţūs|SY||3489|3589
+Muratpaşa|TR||3689|3076
+Şanlıurfa|TR||3717|3879
+Elazığ|TR||3867|3922
+Tel Aviv|IL||3208|3478
+Zagazig|EG||3059|3150
+Ismailia|EG||3060|3227
+East Jerusalem|PS|WE|3178|3523
+Gaza|PS|GZ|3150|3447
+West Jerusalem|IL||3178|3522
+Antakya|TR||3621|3616
+Kahramanmaraş|TR||3758|3693
+Alanya|TR||3654|3200
+Tarsus|TR||3692|3489
+Ḩadā’iq al Qubbah|EG||3009|3128
+Aksaray|TR||3837|3403
+Damanhur|EG||3103|3047
+New Cairo|EG||3003|3147
+Al Qāhirah al Jadīdah|EG||3004|3144
+Damietta|EG||3142|3181
+Rosetta|EG||3140|3042
+Batikent|TR||3997|3273
+Adıyaman|TR||3776|3828
+Haifa|IL||3281|3500
+Russeifa|JO||3202|3605
+Shibīn al Kawm|EG||3055|3101
+Az-Zuhūr|EG||3127|3226
+Sivas|TR||3975|3702
+Rishon LeTsiyyon|IL||3197|3479
+Petaẖ Tiqva|IL||3209|3489
+Afyonkarahisar|TR||3876|3054
+İskenderun|TR||3659|3617
+Ḩayy Khildā|JO||3199|3584
+Al ‘Āshir min Ramaḑān|EG||3030|3175
+Tripoli|LB||3443|3584
+Netanya|IL||3233|3486
+Ashdod|IL||3179|3465
+Bnei Brak|IL||3208|3483
+Osmaniye|TR||3707|3625
+Nicosia|CY||3517|3335
+Arīsh|EG||3113|3380
+H̱olon|IL||3201|3478
+Kafr ash Shaykh|EG||3111|3094
+Kırıkkale|TR||3985|3351
+Beersheba|IL||3125|3479
+Khuraybat as Sūq|JO||3188|3592
+Bilbeis|EG||3042|3156
+Banhā|EG||3046|3118
+Wādī as Sīr|JO||3195|3582
+Idkū|EG||3131|3030
+Karaman|TR||3718|3322
+Siverek|TR||3776|3932
+Khān Yūnis|PS|GZ|3134|3431
+Isparta|TR||3776|3055
+Ramat Gan|IL||3208|3481
+Jabālyā|PS|GZ|3153|3448
+Gölbaşı|TR||3979|3281
+Sidon|LB||3356|3537
+Al Maţarīyah|EG||3118|3203
+Hebron|PS|WE|3153|3509
+Qalyub|EG||3018|3121
+Ereğli|TR||3751|3405
+Ar Ramthā|JO||3256|3601
+Abū Kabīr|EG||3073|3167
+Viranşehir|TR||3722|3976
+Limassol|CY||3468|3304
+Mīt Ghamr|EG||3072|3126
+Ṣuwayliḥ|JO||3202|3584
+Erzincan|TR||3974|3949
+Kırşehir|TR||3915|3416
+Reẖovot|IL||3189|3481
+Disūq|EG||3113|3065
+Aḍ-Ḍawāḥy|EG||3124|3228
+Ashkelon|IL||3167|3457
+Al-'Ubūr|EG||3023|3148
+Kirdāsah|EG||3003|3111
+Bilqās|EG||3121|3136
+Tyre|LB||3327|3519
+Silifke|TR||3638|3393
+Al Bāb|SY||3637|3752
+Nablus|PS|WE|3222|3525
+Aley|LB||3381|3560
+Bat Yam|IL||3202|3475
+Idlib|SY||3593|3663
+Kafr ad Dawwār|EG||3113|3013
+Al Manzalah|EG||3116|3194
+Rafaḩ|PS|GZ|3130|3424
+Munūf|EG||3047|3093
+‘Ajlūn|JO||3233|3575
+Bet Shemesh|IL||3173|3499
+Ashmūn|EG||3030|3098
+As Sinbillāwayn|EG||3088|3146
+Samandağ|TR||3608|3598
+Nabatîyé et Tahta|LB||3338|3548
+Fāqūs|EG||3073|3180
+Ţalkhā|EG||3105|3138
+Dūmā|SY||3357|3640
+Zefta|EG||3071|3124
+Kilis|TR||3672|3712
+Kfar Saba|IL||3217|3491
+Arsuz|TR||3641|3589
+As Salţ|JO||3204|3573
+Qurayyat|SA||3133|3734
+Suruç|TR||3698|3843
+Dikirnis|EG||3109|3159
+Jaffa|IL||3205|3475
+al-Yarmūk|SY||3347|3630
+Jaramānā|SY||3349|3635
+Al Jammālīyah|EG||3118|3186
+Manbij|SY||3653|3795
+Minyā al Qamḩ|EG||3052|3135
+Manavgat|TR||3679|3144
+Habboûch|LB||3341|3548
+Dar‘ā|SY||3262|3610
+Kâhta|TR||3779|3862
+Herzliya|IL||3217|3483
+Hadera|IL||3244|3490
+Jounieh|LB||3398|3562
+Ceyhan|TR||3702|3582
+Ash-Shaykh Zāyid|EG||3002|3100
+Burdur|TR||3772|3029
+As Salamīyah|SY||3501|3705
+Al Qurayn|EG||3062|3174
+Awsīm|EG||3012|3114
+Fuwwah|EG||3120|3055
+Modi‘in Makkabbim Re‘ut|IL||3189|3502
+Polatlı|TR||3958|3214
+El Shorouk|EG||3014|3162
+Niğde|TR||3797|3468
+Biyalā|EG||3117|3122
+Kozan|TR||3746|3582
+Samannūd|EG||3096|3124
+Yozgat|TR||3982|3480
+Al-Tabqa|SY||3584|3855
+Rukban|JO||3331|3870
+Al-Manākh|EG||3127|3228
+Akçapınar|TR||3895|3894
+Al Qanāţir al Khayrīyah|EG||3019|3114
+Kafr az Zayyāt|EG||3082|3082
+Ḩawsh ‘Īsá|EG||3091|3029
+Marj Al Hamam|JO||3190|3585
+Minyat an Naşr|EG||3113|3164
+Mādabā|JO||3172|3579
+Nizip|TR||3701|3779
+Al Khānkah|EG||3021|3137
+Būr Fu’ād|EG||3124|3232
+Diyarb Najm|EG||3075|3144
+Elbistan|TR||3821|3720
+Sirs al Layyānah|EG||3044|3097
+Zahlé|LB||3385|3590
+Ītāy al Bārūd|EG||3089|3067
+Nazareth|IL||3270|3530
+Lod|IL||3195|3489
+Modiin Ilit|IL||3193|3504
+Ramla|IL||3193|3486
+Shirbīn|EG||3120|3152
+Ash Shuhadā’|EG||3060|3090
+Mashtūl as Sūq|EG||3036|3138
+Nevşehir|TR||3862|3471
+Ra'anana|IL||3218|3487
+Basyūn|EG||3094|3081
+Hihyā|EG||3067|3159
+Shibīn al Qanāţir|EG||3031|3132
+Belek|TR||3686|3107
+Rosh Ha‘Ayin|IL||3210|3495
+Talā|EG||3068|3094
+Larnaca|CY||3492|3363
+Dārayyā|SY||3346|3623
+Madīnat as Sādāt|EG||3037|3051
+Al Qanāyāt|EG||3062|3146
+Kadirli|TR||3737|3610
+Ad Dilinjāt|EG||3083|3054
+Stróvolos|CY||3515|3333
+Abū al Maţāmīr|EG||3091|3017
+I‘zāz|SY||3659|3705
+Ţurayf|SA||3167|3866
+Jablah|SY||3536|3593
+Quwaysinā|EG||3056|3116
+Akşehir|TR||3836|3142
+As Safīrah|SY||3608|3737
+Hod HaSharon|IL||3216|3489
+Al Bājūr|EG||3043|3104
+Sorgun|TR||3981|3519
+Kiryat Gat|IL||3161|3476
+Abū Ḩummuş|EG||3109|3031
+Kırıkhan|TR||3650|3636
+Givatayim|IL||3207|3481
+Al Burj|EG||3158|3098
+Dayr al Balaḩ|PS|GZ|3142|3435
+Aş Şāliḩīyah al Jadīdah|EG||3063|3194
+Nabarūh|EG||3110|3130
+As-Suwayda|SY||3271|3657
+Qiryat Ata|IL||3281|3511
+Al Ḩāmūl|EG||3131|3115
+Nahariyya|IL||3301|3510
+Anamur|TR||3608|3284
+Mafraq|JO||3234|3621
+Reyhanlı|TR||3627|3657
+Bayt Lāhyā|PS|GZ|3155|3450
+Battir|PS|WE|3170|3512
+Dörtyol|TR||3684|3623
+Umm el Faḥm|IL||3252|3515
+Bolvadin|TR||3871|3105
+Kawm Ḩamādah|EG||3076|3070
+At Tall|SY||3361|3631
+Bozüyük|TR||3991|3004
+Dumyāţ al Jadīdah|EG||3143|3168
+Al Ibrāhīmīyah|EG||3072|3156
+Ar Rastan|SY||3493|3673
+‘Izbat ‘Alī as Sayyid|EG||3116|3015
+Muadamiyat al-Sham|SY||3346|3620
+Ergani|TR||3827|3975
+Ţūkh|EG||3035|3120
+Būlāq Abū al ‘Ilā|EG||3006|3123
+Acre|IL||3293|3508
+Balţīm|EG||3156|3109
+Kabbasin|SY||3643|3757
+Seydişehir|TR||3742|3185
+Tadmur|SY||3456|3828
+Az̧ Z̧ulayl|JO||3212|3628
+Birkat as Sab‘|EG||3063|3108
+Babīlā|SY||3347|3633
+Al Ḩusaynīyah|EG||3086|3192
+Ness Ziona|IL||3193|3480
+Ma'an|JO||3020|3573
+Aarsâl|LB||3418|3642
+Ghazieh|LB||3352|3537
+‘Ayn al ‘Arab|SY||3689|3835
+Keskin|TR||3967|3361
+Karapınar|TR||3772|3355
+Mut|TR||3664|3344
+An Nabk|SY||3402|3673
+Khān Shaykhūn|SY||3544|3665
+El‘ad|IL||3205|3496
+‘Afrīn|SY||3651|3687
+Qillīn|EG||3105|3085
+Mīt Salsīl|EG||3117|3180
+Yavné|IL||3188|3474
+Ramat HaSharon|IL||3215|3484
+Kafr al Baţţīkh|EG||3140|3174
+Nawá|SY||3289|3604
+Kulu|TR||3910|3308
+Aga|EG||3094|3129
+At Tall al Kabīr|EG||3054|3179
+Al Jubayhah|JO||3201|3590
+Erdemli|TR||3660|3431
+Karmi’el|IL||3291|3530
+As Sanţah|EG||3075|3113
+Çumra|TR||3757|3277
+Kafranbel|SY||3561|3656
+Aş Şalāḩāt|EG||3100|3163
+Kireçocağı|TR||3705|3523
+Afula|IL||3261|3529
+Kafr al Kurdī|EG||3117|3177
+Pardés H̱anna Karkur|IL||3247|3498
+Tiberias|IL||3279|3553
+Sīdī Sālim|EG||3127|3079
+Kafr Şaqr|EG||3079|3163
+Ar Raḩmānīyah|EG||3110|3064
+Beyşehir|TR||3768|3172
+Birecik|TR||3703|3798
+Rafaḩ|EG||3128|3424
+Ţūlkarm|PS|WE|3231|3503
+Şereflikoçhisar|TR||3894|3354
+Eṭ Ṭaiyiba|IL||3227|3501
+Qiryat Bialik|IL||3283|3509
+Muţūbas|EG||3129|3052
+Ramallah|PS|WE|3190|3520
+Netivot|IL||3142|3459
+Naẕerat ‘Illit|IL||3271|3532
+Fāraskūr|EG||3133|3172
+Qiryat Motsqin|IL||3284|3508
+Qalqīlyah|PS|WE|3219|3497
+Abū Ḩammād|EG||3054|3168
+Sandıklı|TR||3846|3027
+Famagusta|CY||3512|3394
+‘Irbīn|SY||3354|3637
+Shefar‘am|IL||3281|3517
+Besni|TR||3769|3786
+Yaţţā|PS|WE|3145|3509
+Shubrākhīt|EG||3103|3071
+Madīnat Wādī an Naţrūn|EG||3038|3035
+Al Quşayr|SY||3451|3658
+Turaif|SA||3167|3866
+Yabrūd|SY||3397|3666
+Saḩāb|JO||3187|3600
+Ţubarjal|SA||3050|3822
+Káto Lakatámeia|CY||3512|3333
+Kiryat Ono|IL||3206|3486
+Qiryat Yam|IL||3285|3507
+Afşin|TR||3825|3691
+Cimin|TR||3971|3970
+Jisr ash Shughūr|SY||3581|3632
+Yalvaç|TR||3830|3118
+Bāniyās|SY||3518|3595
+Tallbīsah|SY||3484|3673
+Ma‘ale Adummim|PS|WE|3178|3530
+Al Bīrah|PS|WE|3191|3522
+Abū Qīr|EG||3131|3006
+‘Izbat al Burj|EG||3151|3184
+Bayt Ḩānūn|PS|GZ|3154|3454
+Ḩarastā|SY||3356|3637
+Serik|TR||3692|3110
+Talas|TR||3869|3555
+Or Yehuda|IL||3203|3486
+Qahā|EG||3028|3121
+Dimona|IL||3107|3503
+Al Qunayţirah|SY||3313|3582
+An Nuşayrāt|PS|GZ|3145|3439
+Safed|IL||3296|3550
+Old City|PS|WE|3178|3523
+Paphos|CY||3478|3242
+Develi|TR||3839|3549
+Dinar|TR||3806|3017
+Yerköy|TR||3964|3447
+Tunceli|TR||3910|3954
+Fāyīd|EG||3031|3231
+Shu‘fāţ|PS|WE|3182|3523
+Al Burayj|PS|GZ|3144|3440
+Janīn|PS|WE|3246|3530
+Tādif|SY||3635|3753
+Ofaqim|IL||3131|3462
+Al Maḩmūdīyah|EG||3118|3052
+Göksun|TR||3802|3650
+Saraqib|SY||3586|3681
+Çay|TR||3859|3103
+Badr|EG||3014|3172
+Awlād Şaqr|EG||3093|3170
+Şarkîkaraağaç|TR||3808|3137
+Abu Suweir-el-Mahatta|EG||3057|3211
+Bor|TR||3789|3456
+Ḩayy al Quwaysimah|JO||3191|3595
+Jayrūd|SY||3381|3674
+Maşyāf|SY||3507|3634
+Ma‘arratmişrīn|SY||3601|3667
+Etlik|TR||3998|3282
+Akçakale|TR||3671|3895
+Quţūr|EG||3097|3096
+Maḩallat Damanah|EG||3107|3150
+İmamoğlu|TR||3727|3566
+Al Qanţarah|EG||3086|3231
+Al Qaryatayn|SY||3423|3724
+Sakhnīn|IL||3287|3530
+Salqīn|SY||3614|3645
+Banī Suhaylā|PS|GZ|3134|3432
+Ţafas|SY||3274|3607
+Ar-Rawḍah|EG||3132|3176
+Ortaköy|TR||3874|3404
+Şān al Ḩajar al Qiblīyah|EG||3097|3187
+Kafr Shukr|EG||3055|3124
+Baalbek|LB||3401|3622
+Gedera|IL||3181|3478
+Şūrān|SY||3529|3675
+Şaḩnāyā|SY||3343|3623
+İncirli|TR||3998|3284
+Binnish|SY||3596|3671
+Beykonak|TR||3633|3030
+Jāsim|SY||3299|3606
+Chmistâr|LB||3396|3602
+Burj Islām|SY||3567|3580
+Bāqa el Gharbīya|IL||3242|3504
+Tallkalakh|SY||3467|3626
+Az Zabadānī|SY||3372|3610
+Dā‘il|SY||3275|3613
+Yehud-Monosson|IL||3203|3488
+As Sarw|EG||3124|3165
+Ţayyibat al Imām|SY||3527|3671
+Bucak|TR||3746|3060
+Inkhil|SY||3302|3613
+Bethlehem|PS|WE|3170|3520
+Dayr Ḩāfir|SY||3616|3771
+Oba|TR||3655|3206
+Giv'at Shmuel|IL||3208|3485
+Kaman|TR||3936|3372
+Bozyazı|TR||3611|3296
+Sīdī Ghāzī|EG||3121|3105
+Badr|EG||3058|3071
+Gölbaşı|TR||3778|3764
+Arad|IL||3126|3521
+Tirat Karmel|IL||3276|3497
+Şāfītā|SY||3482|3612
+Be’er Ya‘aqov|IL||3194|3484
+Sderot|IL||3152|3460
+Az̧ Z̧āhirīyah|PS|WE|3141|3497
+Ilgın|TR||3828|3191
+Hıdırbey|TR||3621|3613
+Jarash|JO||3228|3590
+Bayt Ḩanīnā|PS|WE|3183|3523
+Az Zarqā|EG||3121|3164
+Ash Shaykh Zuwayd|EG||3122|3411
+Kyrenia|CY||3534|3332
+Eṭ Ṭīra|IL||3223|3495
+Bi’r al ‘Abd|EG||3102|3301
+Erzin|TR||3695|3620
+Altınşehir|TR||3774|3823
+Shaykh Miskīn|SY||3283|3616
+Tamra|IL||3285|3520
+Aş Şanamayn|SY||3307|3618
+Migdal Ha‘Emeq|IL||3268|3524
+Tall Rif‘at|SY||3647|3709
+Yehud|IL||3203|3489
+‘Aţārūt|PS|WE|3187|3522
+Batabo|SY||3613|3674
+Nubl|SY||3638|3699
+Aţ Ţafīlah|JO||3084|3560
+Elmadağ|TR||3992|3323
+Qiryat Mal’akhi|IL||3173|3475
+Surif City|PS|WE|3165|3506
+Ganei Tikva|IL||3206|3487
+Yahyalı|TR||3810|3536
+Qiryat HaYovel|IL||3177|3517
+Daliyat al Karmel|IL||3269|3505
+Jarābulus|SY||3682|3801
+En Nâqoûra|LB||3312|3514
+‘Ara-‘Ar‘ara|IL||3250|3509
+Ar Rām wa Ḑāḩiyat al Barīd|PS|WE|3185|3523
+Kfar Yona|IL||3232|3494
+Al Qaşşāşīn|EG||3056|3193
+Ar Riyāḑ|EG||3124|3095
+Mahmutlar|TR||3649|3209
+Nesher|IL||3277|3504
+Mórfou|CY||3520|3299
+Mevasseret Tsiyyon|IL||3180|3515
+Gan Yavne|IL||3179|3471
+Pazarcık|TR||3749|3730
+Kafr Qāsim|IL||3211|3498
+Şarkışla|TR||3935|3641
+Yoqne‘am ‘Illit|IL||3265|3509
+Al Ḩirāk|SY||3275|3631
+Al Kiswah|SY||3336|3624
+Ḩalfāyā|SY||3526|3661
+An Nūbārīyah|EG||3067|3007
+Káto Polemídia|CY||3470|3299
+Zikhron Ya‘aqov|IL||3257|3495
+Yakınca|TR||3831|3824
+Akdağmadeni|TR||3966|3588
+Kovancılar|TR||3872|3986
+Maghār|IL||3289|3541
+Aradíppou|CY||3495|3359
+‘Izrā|JO||3116|3569
+Kafr Kannā|IL||3275|3534
+Qīr Moāv|JO||3118|3570
+Munsha‘at Abū ‘Umar|EG||3091|3202
+Qiryat Shmona|IL||3321|3557
+Kadima Zoran|IL||3228|3492
+Kafr Takhārīm|SY||3612|3652
+El Hermel|LB||3439|3638
+Ad Dānā|SY||3621|3677
+Kafr Zaytā|SY||3537|3660
+maalot Tarshīhā|IL||3302|3527
+Kafr Lāhā|SY||3489|3650
+Karak City|JO||3116|3576
+H̱ura|IL||3130|3494
+Aglantziá|CY||3515|3340
+Bozova|TR||3736|3853
+Cikcilli|TR||3655|3203
+Hacılar|TR||3865|3545
+Judeida Makr|IL||3293|3516
+Kuseifa|IL||3125|3509
+Ḩalḩūl|PS|WE|3158|3510
+Çermik|TR||3814|3944
+Dūrā|PS|WE|3151|3503
+Byblos|LB||3412|3565
+Shoham|IL||3200|3495
+Qārah|SY||3416|3674
+Ariel|IL|WE|3211|3518
+Égkomi|CY||3516|3388
+Mīt Abū Ghālib|EG||3129|3168
+Korkuteli|TR||3706|3020
+Timayy al Imdīd|EG||3094|3153
+Darende|TR||3855|3751
+Protaras|CY||3501|3406
+Tel Sheva‘|IL||3125|3486
+Kafr Mandā|IL||3281|3526
+Belen|TR||3649|3619
+Hadim|TR||3699|3246
+Emirdağ|TR||3902|3115
+Judita|JO||3241|3571
+Bsharri|LB||3425|3601
+Banī Na‘īm|PS|WE|3152|3516
+Jericho|PS|WE|3187|3545
+Rahat|IL||3140|3476
+Al Qarārah|PS|GZ|3137|3434
+As Samū‘|PS|WE|3140|3507
+Manshīyat al Qanāţir|EG||3018|3111
+Qabāţīyah|PS|WE|3241|3528
+Kafr Qari‘|IL||3251|3505
+Or Akiva|IL||3251|3492
+Al Fuḩayş|JO||3200|3578
+Yāfā|IL||3269|3528
+Idhnā|PS|WE|3156|3497
+Zākīyah|SY||3333|3616
+Qaţanā|SY||3344|3608
+Narlıca|TR||3624|3621
+Aydūn|JO||3251|3586
+Gazipaşa|TR||3627|3232
+Umm as Summāq|JO||3189|3585
+‘Abasān al Kabīrah|PS|GZ|3132|3434
+Qiryat Tiv‘on|IL||3271|3513
+Kafr Sa‘d|EG||3136|3168
+Konaklı|TR||3659|3190
+Kurayyimah|JO||3228|3560
+Sa‘īr|PS|WE|3158|3514
+Māḩiş|JO||3199|3577
+Yumurtalık|TR||3677|3579
+‘Ar‘ara BaNegev|IL||3116|3502
+‘Anjarah|JO||3231|3575
+Maharda|SY||3525|3657
+Denizciler|TR||3664|3621
+Al ‘Ayzarīyah|PS|WE|3177|3527
+Germasógeia|CY||3472|3308
+Kemer|TR||3660|3056
+Yirkā|IL||3295|3521
+Balāţah|PS|WE|3221|3529
+Hilvan|TR||3759|3896
+Ermenek|TR||3664|3289
+Gemerek|TR||3918|3607
+Qalansuwa|IL||3228|3498
+Eğirdir|TR||3787|3085
+Bet She’an|IL||3250|3550
+Serinyol|TR||3636|3621
+Az Zuwāydah|PS|GZ|3144|3438
+Ürgüp|TR||3863|3491
+Mucur|TR||3906|3438
+Bayt Jālā|PS|WE|3172|3519
+Al Yāmūn|PS|WE|3249|3523
+Al Quţayfah|SY||3374|3660
+Baskil|TR||3857|3882
+Senirkent|TR||3810|3055
+Binyamina-Giv‘at ‘Ada|IL||3252|3494
+Binyamina-Giv'at Ada|IL||3252|3495
+Ar Rayna|IL||3272|3532
+Ţūbās|PS|WE|3232|3537
+Çağlayancerit|TR||3775|3729
+Giv`at H̱ananya|IL||3177|3523
+Majd el Kurūm|IL||3292|3525
+Kestel|TR||3651|3208
+Kadınhanı|TR||3824|3221
+Yeşilova|TR||3816|3626
+Safi|JO||3104|3547
+Taşucu|TR||3632|3388

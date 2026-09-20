@@ -111,6 +111,17 @@
         <div id="composeDatePicks" class="compose-date-picks" hidden></div>
       </label>
 
+      <label class="compose-field">
+        <span class="compose-label">Where was this?</span>
+        <input id="composeLocation" type="text" maxlength="120"
+               placeholder="Somewhere worth remembering" autocomplete="off" />
+        <!-- Said out loud for the same reason the date is: a field that fills itself in is
+             otherwise indistinguishable from one that has gone wrong. -->
+        <p id="composeLocationNote" class="compose-note" hidden></p>
+        <!-- Offered, never applied — the same bargain as the dates above. -->
+        <div id="composeLocationPicks" class="compose-date-picks" hidden></div>
+      </label>
+
       <label class="compose-toggle">
         <input id="composeMilestone" type="checkbox" />
         <span>Mark as a milestone</span>

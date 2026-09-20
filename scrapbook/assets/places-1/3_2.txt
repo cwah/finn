@@ -1,0 +1,178 @@
+Alexandria|EG||3120|2992
+İzmir|TR||3841|2714
+Benghazi|LY||3211|2007
+Athens|GR||3798|2373
+Karabağlar|TR||3838|2713
+Bornova|TR||3848|2724
+Uşak|TR||3867|2941
+Karşıyaka|TR||3846|2711
+Konak|TR||3840|2710
+Denizli|TR||3777|2909
+Merkezefendi|TR||3781|2904
+Manisa|TR||3861|2743
+Balıkesir|TR||3965|2789
+Çiğli|TR||3850|2707
+Kütahya|TR||3942|2998
+Marsá Maţrūḩ|EG||3135|2724
+Pátra|GR||3825|2174
+Piraeus|GR||3794|2365
+Aydın|TR||3785|2784
+Lárisa|GR||3963|2242
+Tobruk|LY||3209|2395
+Peristéri|GR||3802|2369
+Irákleion|GR||3533|2514
+Ajdabiya|LY||3076|2023
+Al Bayḑā’|LY||3276|2176
+Nazilli|TR||3792|2832
+Salihli|TR||3848|2815
+Turgutlu|TR||3850|2770
+Darnah|LY||3277|2264
+Kallithéa|GR||3795|2370
+Acharnés|GR||3808|2373
+Soma|TR||3919|2761
+Muğla|TR||3722|2837
+Níkaia|GR||3797|2365
+Glyfáda|GR||3786|2376
+Volos|GR||3937|2295
+Al Marj|LY||3249|2083
+Ílion|GR||3803|2370
+Akhisar|TR||3892|2784
+Ilioúpoli|GR||3793|2377
+Keratsíni|GR||3796|2362
+Khalándrion|GR||3802|2380
+Néa Smýrni|GR||3795|2371
+Maroúsi|GR||3805|2380
+Agios Dimitrios|GR||3793|2373
+Zográfos|GR||3798|2377
+Ayvalık|TR||3932|2669
+Aigáleo|GR||3798|2368
+Söke|TR||3775|2741
+Ödemiş|TR||3823|2797
+Néa Ionía|GR||3804|2376
+Ioánnina|GR||3966|2085
+Palaió Fáliro|GR||3793|2370
+Korydallós|GR||3798|2365
+Kuşadası|TR||3786|2726
+Urla|TR||3832|2676
+Tríkala|GR||3955|2177
+Výronas|GR||3796|2375
+Fethiye|TR||3664|2913
+Agía Paraskeví|GR||3802|2383
+Galátsi|GR||3802|2375
+Chalkída|GR||3846|2360
+Petroúpolis|GR||3804|2368
+Bergama|TR||3912|2718
+Rhodes|GR||3644|2822
+Kalamata|GR||3704|2211
+Chaniá|GR||3551|2403
+Menemen|TR||3861|2707
+Tavşanlı|TR||3954|2950
+Lamía|GR||3890|2243
+Torbalı|TR||3818|2734
+Irákleio|GR||3805|2377
+Fylí|GR||3810|2367
+Alaşehir|TR||3835|2852
+Kifisiá|GR||3807|2381
+Tire|TR||3809|2774
+Agrínio|GR||3862|2141
+Burj al ‘Arab al Jadīdah|EG||3089|2958
+Chaïdári|GR||3801|2367
+Aliağa|TR||3880|2697
+Milas|TR||3732|2778
+Álimos|GR||3791|2372
+Edremit|TR||3960|2702
+Bodrum|TR||3704|2743
+Sīdī Barānī|EG||3161|2593
+Burhaniye|TR||3950|2697
+Simav|TR||3909|2898
+Ágioi Anárgyroi|GR||3803|2372
+Argyroúpoli|GR||3791|2375
+Marmaris|TR||3685|2827
+Áno Liósia|GR||3808|2370
+Çeşme|TR||3833|2631
+Kardítsa|GR||3936|2192
+Al Abyār|LY||3219|2060
+Rethymno|GR||3537|2448
+Thívai|GR||3833|2332
+Néa Ionía|GR||3938|2293
+Kula|TR||3855|2865
+Cholargós|GR||3800|2380
+Vrilissia|GR||3803|2383
+Kemalpaşa|TR||3843|2742
+Asprópyrgos|GR||3806|2359
+Kórinthos|GR||3794|2295
+Gérakas|GR||3802|2386
+Metamórfosi|GR||3807|2376
+Bostanlı|TR||3846|2710
+Şemikler|TR||3847|2710
+Shahhat|LY||3280|2187
+Kamaterón|GR||3806|2371
+Selçuk|TR||3795|2737
+Ataşehir|TR||3849|2706
+Foça|TR||3867|2676
+Voúla|GR||3784|2378
+Mytilene|GR||3911|2656
+El Dabaa|EG||3103|2844
+Trípoli|GR||3751|2238
+Agía Varvára|GR||3799|2366
+Kaisarianí|GR||3796|2377
+Didim|TR||3738|2726
+Néa Filadélfeia|GR||3803|2374
+Moskháton|GR||3795|2368
+Pérama|GR||3797|2357
+Salamína|GR||3796|2350
+Elefsína|GR||3804|2354
+Susurluk|TR||3991|2816
+Al Qubbah|LY||3276|2224
+Chios|GR||3837|2614
+Emet|TR||3934|2926
+Mégara|GR||3799|2334
+Dhafní|GR||3795|2373
+Melíssia|GR||3805|2383
+Sarandë|AL||3988|2000
+Burj al ‘Arab|EG||3090|2955
+Pýrgos|GR||3768|2144
+Árgos|GR||3763|2273
+Gediz|TR||3899|2939
+Menderes|TR||3825|2713
+Artémida|GR||3797|2400
+Árta|GR||3916|2099
+Kırkağaç|TR||3911|2767
+Küçükçiğli|TR||3851|2706
+Livadeiá|GR||3844|2288
+Demirci|TR||3905|2866
+Péfki|GR||3806|2379
+Çine|TR||3761|2806
+Az Zuwaytīnah|LY||3095|2012
+Evka-Üç|TR||3847|2725
+Aígio|GR||3825|2208
+Qaryat Sulūq|LY||3167|2025
+An-Najaylah|EG||3141|2658
+Ortaca|TR||3684|2876
+Seferihisar|TR||3820|2684
+Dalaman|TR||3677|2880
+Kos|GR||3689|2729
+Koropí|GR||3790|2387
+Balatçık|TR||3852|2705
+Yatağan|TR||3734|2814
+Sarayköy|TR||3792|2893
+Néa Erythraía|GR||3809|2382
+İncirliova|TR||3785|2772
+Al Ḩammām|EG||3085|2939
+Néa Mákri|GR||3809|2398
+Dursunbey|TR||3959|2863
+Préveza|GR||3896|2075
+Serinhisar|TR||3758|2927
+Banaz|TR||3874|2975
+Bayındır|TR||3822|2765
+Amaliáda|GR||3780|2135
+Vári|GR||3783|2380
+Ellinikó|GR||3789|2374
+Elmalı|TR||3674|2992
+As Sallūm|EG||3155|2516
+Turgutreis|TR||3702|2727
+Sparta|GR||3707|2243
+Sarigerme|TR||3672|2870
+Ezine|TR||3979|2634
+Agios Ioannis Rentis|GR||3796|2367
+Bigadiç|TR||3939|2813

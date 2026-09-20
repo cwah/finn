@@ -1,0 +1,28 @@
+Port Louis|MU||-2016|5750
+Saint-Denis|RE|RE|-2088|5545
+Vacoas|MU||-2030|5748
+Beau Bassin-Rose Hill|MU||-2023|5747
+Saint-Paul|RE|RE|-2101|5527
+Saint-Pierre|RE|RE|-2134|5548
+Le Tampon|RE|RE|-2128|5552
+Curepipe|MU||-2032|5753
+Quatre Bornes|MU||-2026|5748
+Saint-André|RE|RE|-2096|5565
+Saint-Louis|RE|RE|-2129|5541
+Saint-Joseph|RE|RE|-2138|5562
+Saint-Benoît|RE|RE|-2104|5572
+La Possession|RE|RE|-2093|5533
+Saint-Leu|RE|RE|-2117|5529
+Sainte-Marie|RE|RE|-2090|5555
+Le Port|RE|RE|-2094|5529
+Piton Saint-Leu|RE|RE|-2122|5532
+Triolet|MU||-2006|5755
+Sainte-Suzanne|RE|RE|-2091|5561
+Goodlands|MU||-2004|5765
+Bel Air Rivière Sèche|MU||-2026|5775
+Bambous|MU||-2026|5741
+Centre de Flacq|MU||-2019|5771
+Mahébourg|MU||-2041|5770
+Saint Pierre|MU||-2022|5753
+Le Hochet|MU||-2014|5753
+Baie du Tombeau|MU||-2012|5749

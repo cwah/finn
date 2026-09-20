@@ -1,0 +1,27 @@
+Nukus|UZ||4246|5961
+Atyrau|KZ||4710|5188
+Daşoguz|TM||4184|5997
+Aktau|KZ||4366|5117
+Zhanaozen|KZ||4334|5286
+Türkmenbaşy|TM||4002|5296
+Qŭnghirot|UZ||4304|5884
+Xo‘jayli Shahri|UZ||4241|5945
+Oltinko‘l|UZ||4307|5890
+Qulsary|KZ||4695|5402
+Maştağa|AZ||4053|5001
+Boldumsaz|TM||4213|5967
+Köneürgenç|TM||4233|5915
+Yylanly|TM||4183|5965
+Hövsan|AZ||4037|5009
+Mangistau|KZ||4369|5132
+Kandyagash|KZ||4947|5742
+Shalqar|KZ||4783|5962
+Görogly|TM||4165|5992
+Buzovna|AZ||4052|5011
+Biny Selo|AZ||4045|5009
+Oýrat|TM||4195|5991
+Balykshi|KZ||4707|5187
+Embi|KZ||4883|5815
+Gubadag|TM||4208|5995
+Yeni Suraxanı|AZ||4043|5004
+Mardakan|AZ||4049|5014

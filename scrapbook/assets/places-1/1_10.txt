@@ -1,0 +1,488 @@
+Ho Chi Minh City|VN||1082|10663
+Bangkok|TH||1375|10050
+Phnom Penh|KH||1156|10492
+Cần Thơ|VN||1004|10579
+Huế|VN||1646|10760
+Da Nang|VN||1607|10822
+Biên Hòa|VN||1094|10682
+Sanya|CN||1825|10951
+Thanh Hóa|VN||1980|10577
+Takeo|KH||1099|10478
+Vientiane|LA||1797|10260
+Vinh|VN||1867|10569
+Thuận An|VN||1092|10671
+Nha Trang|VN||1225|10919
+Chợ Lớn|VN||1075|10665
+Bình Thạnh|VN||1081|10671
+Thủ Đức|VN||1085|10677
+Qui Nhon|VN||1378|10922
+Vũng Tàu|VN||1035|10708
+Dĩ An|VN||1091|10677
+Rạch Giá|VN||1001|10508
+Basuo|CN||1910|10867
+Buôn Ma Thuột|VN||1267|10804
+Quận Mười|VN||1077|10667
+Samut Prakan|TH||1360|10060
+Thủ Dầu Một|VN||1098|10665
+Bến Cát|VN||1115|10660
+Quận Mười Một|VN||1076|10664
+An Nhơn|VN||1389|10911
+Nghi Sơn|VN||1933|10582
+Phu Quoc|VN||1022|10397
+Phú Mỹ|VN||1063|10707
+Long Xuyên|VN||1039|10544
+Quảng Ngãi|VN||1512|10879
+Quận Sáu|VN||1075|10665
+Mỹ Tho|VN||1036|10636
+Hà Tĩnh|VN||1834|10591
+Ðà Lạt|VN||1195|10844
+Nada|CN||1952|10958
+Mueang Nonthaburi|TH||1386|10051
+Xuân Lộc|VN||1093|10723
+Thành Phố Bà Rịa|VN||1050|10717
+Ninh Hòa|VN||1249|10912
+Phan Thiết|VN||1093|10810
+Điện Bàn|VN||1589|10825
+Quận Ba|VN||1077|10669
+Chon Buri|TH||1336|10098
+Tân An|VN||1054|10641
+Sa Dec|VN||1029|10576
+Cao Lãnh|VN||1046|10563
+Phan Rang-Tháp Chàm|VN||1156|10899
+Kon Tum|VN||1435|10801
+Thanh Khê|VN||1607|10819
+Quận Bốn|VN||1077|10671
+Phra Pradaeng|TH||1366|10053
+Bang Khae|TH||1369|10041
+Pak Kret|TH||1391|10050
+Sai Mai|TH||1392|10065
+Quận Năm|VN||1076|10667
+Phú Quốc|VN||1029|10401
+Si Racha|TH||1317|10093
+Tân Châu|VN||1080|10524
+Latkrabang|TH||1373|10075
+Long Khánh|VN||1093|10725
+Watthana|TH||1373|10059
+Bảo Lộc|VN||1155|10781
+Khlong Sam Wa|TH||1387|10074
+Đồng Xoài|VN||1153|10688
+Bang Khun Thian|TH||1366|10043
+Tam Kỳ|VN||1557|10847
+Ðông Hà|VN||1682|10710
+Lat Krabang|TH||1372|10078
+Trảng Bàng|VN||1103|10636
+Đưc Trọng|VN||1174|10837
+Chatuchak|TH||1383|10056
+Ban Khlong Prawet|TH||1372|10068
+La Gi|VN||1066|10777
+Thốt Nốt|VN||1027|10553
+Chom Thong|TH||1368|10048
+Nong Chok|TH||1386|10086
+Tuy Hòa|VN||1310|10932
+Đức Phổ|VN||1481|10896
+Cần Giuộc|VN||1061|10667
+Kỳ Anh|VN||1806|10630
+Nong Khaem|TH||1371|10035
+Bang Kapi|TH||1377|10065
+Hòa Thành|VN||1129|10613
+Cam Ranh|VN||1192|10916
+Bueng Kum|TH||1379|10067
+Huyện Lâm Hà|VN||1182|10821
+Tịnh Biên|VN||1060|10494
+Cai Lậy|VN||1040|10612
+Kabin Buri|TH||1395|10172
+Siem Reap|KH||1336|10386
+Vĩnh Long|VN||1025|10597
+Tây Ninh|VN||1131|10610
+Đồng Hới|VN||1747|10662
+Quận Đức Thịnh|VN||1031|10574
+Hải Châu|VN||1592|10813
+Udon Thani|TH||1742|10279
+Din Daeng|TH||1379|10057
+Sầm Sơn|VN||1973|10590
+Ô Môn|VN||1011|10562
+Buôn Hồ|VN||1295|10830
+Nakhon Ratchasima|TH||1497|10210
+Savannakhet|LA||1657|10476
+Bang Sue|TH||1381|10053
+Ban Samae Dam|TH||1359|10039
+Bến Tre|VN||1024|10638
+Ubon Ratchathani|TH||1524|10485
+Lat Phrao|TH||1380|10061
+Phasi Charoen|TH||1371|10044
+Chơn Thành|VN||1143|10664
+Thon Buri|TH||1372|10049
+Hòa Cường|VN||1604|10818
+Battambang|KH||1310|10320
+Khlong Luang|TH||1406|10065
+Nakhon Pathom|TH||1382|10004
+Bangkok Noi|TH||1376|10048
+Cờ Đỏ|VN||1009|10543
+Thung Khru|TH||1363|10051
+Pattaya|TH||1293|10088
+Suan Luang|TH||1373|10065
+Phong Điền|VN||1658|10736
+Wang Thonglang|TH||1379|10061
+Khon Kaen|TH||1645|10283
+Pleiku|VN||1398|10800
+Bình Thủy|VN||1007|10574
+Hoàng Mai|VN||1927|10572
+Wuzhishan|CN||1878|10950
+Gò Vấp|VN||1082|10668
+Lak Si|TH||1389|10058
+Thới Lai|VN||1007|10556
+Khlong Toei|TH||1371|10058
+Dusit|TH||1378|10052
+Yên Vinh|VN||1867|10567
+Rayong|TH||1268|10126
+Ba Đồn|VN||1775|10642
+Taling Chan|TH||1378|10046
+Bang Bon|TH||1366|10040
+Hồng Ngự|VN||1080|10535
+Si Maha Phot|TH||1397|10151
+Hà Tiên|VN||1038|10449
+Chanthaburi|TH||1261|10210
+Bang Rak|TH||1373|10052
+Paoy Paet|KH||1366|10256
+Vĩnh Thạnh|VN||1022|10540
+Gò Công|VN||1037|10667
+Tha Raeng|TH||1387|10065
+Bang Na|TH||1367|10064
+Hương Thủy|VN||1642|10764
+Bình Minh|VN||1007|10582
+Anusawari|TH||1389|10061
+Sông Cầu|VN||1346|10922
+Bang Phlat|TH||1379|10050
+Thakhèk|LA||1741|10483
+Phra Khanong|TH||1370|10060
+Saphan Sung|TH||1377|10068
+Tân Bình|VN||1080|10666
+Khan Na Yao|TH||1383|10068
+Laem Chabang|TH||1309|10088
+Sơn Trà|VN||1606|10823
+Rat Burana|TH||1368|10051
+Cái Răng|VN||1000|10575
+Gia Nghĩa|VN||1200|10769
+Sathon|TH||1371|10053
+Dacheng|CN||1951|10939
+An Hải|VN||1607|10823
+Nakhon Sawan|TH||1570|10014
+An Khê|VN||1395|10865
+Yan Nawa|TH||1370|10054
+Lai Vung|VN||1026|10559
+Sathorn|TH||1375|10052
+Bang Sue subdistrict|TH||1381|10053
+Cẩm Lệ|VN||1602|10820
+Bang Kruai|TH||1380|10047
+Huai Khwang|TH||1378|10058
+Pakse|LA||1512|10580
+Khlong Chan|TH||1378|10065
+Sandu|CN||1979|10922
+Yaxing|CN||1945|10926
+Dangkao|KH||1151|10489
+Thawi Watthana|TH||1378|10038
+Sakon Nakhon|TH||1716|10415
+Kampong Chhnang|KH||1225|10467
+Củ Chi|VN||1097|10649
+Khlong San|TH||1373|10051
+Sihanoukville|KH||1061|10353
+Ratchathewi|TH||1376|10053
+Krathum Baen|TH||1365|10026
+Hương Trà|VN||1653|10748
+Bangkok Yai|TH||1372|10048
+Châu Đốc|VN||1070|10512
+Phaya Thai|TH||1378|10054
+Núi Thành|VN||1543|10866
+Khlong Kum|TH||1379|10068
+Huamak|TH||1376|10065
+Saraburi|TH||1453|10092
+Xinzhou|CN||1971|10931
+Thái Hòa|VN||1892|10497
+Sattahip|TH||1267|10090
+Lingao|CN||1991|10969
+Preaek Prasab|KH||1235|10604
+Nong Khai|TH||1788|10274
+Samut Sakhon|TH||1355|10027
+Phitsanulok|TH||1682|10026
+Kampong Cham|KH||1199|10546
+Ban Tha Kham|TH||1364|10044
+Ban Lam Luk Ka|TH||1398|10078
+Bang Khae Nuea|TH||1371|10039
+Prachantakham|TH||1406|10152
+Baimajing|CN||1971|10922
+Chaiyaphum|TH||1581|10203
+Uttaradit|TH||1763|10009
+Lop Buri|TH||1480|10065
+Trảng Bom|VN||1095|10701
+Na Di|TH||1412|10178
+Phra Phutthabat|TH||1473|10080
+Anlong Veaeng|KH||1423|10408
+Châu Phong|VN||1072|10513
+Klaeng|TH||1278|10165
+Cần Giờ|VN||1041|10695
+Kalasin|TH||1643|10351
+Luang Prabang|LA||1989|10215
+Suphan Buri|TH||1447|10012
+Pathum Wan|TH||1374|10052
+Wat Tha Phra|TH||1373|10048
+Tân Uyên|VN||1108|10679
+Pursat|KH||1254|10392
+Ban Lak Song|TH||1369|10040
+Ta Khmau|KH||1148|10495
+Thị Trấn Phước Bửu|VN||1053|10740
+Maha Sarakham|TH||1618|10330
+Phra Nakhon|TH||1377|10050
+Pom Prap Sattru Phai|TH||1376|10051
+Phra Nakhon Si Ayutthaya|TH||1435|10058
+Phetchabun|TH||1642|10116
+Cần Đước|VN||1051|10660
+Mui Ne|VN||1093|10828
+Chachoengsao|TH||1369|10107
+Dongcheng|CN||1971|10946
+Thị Trấn Ngải Giao|VN||1065|10725
+Pak Chong|TH||1471|10142
+Chong Nonsi|TH||1369|10055
+Bangkok Riverside|TH||1375|10052
+Phú Khương|VN||1128|10613
+Surin|TH||1488|10349
+Chum Phae|TH||1654|10210
+Si Sa Ket|TH||1511|10433
+Thị Trấn Sao Vàng|VN||1989|10546
+Phumĭ Yoŭl Toŭng|KH||1128|10474
+Phumĭ Véal Srê|KH||1098|10478
+Bavet|KH||1106|10614
+Hoàn Lão|VN||1758|10653
+Warin Chamrap|TH||1519|10486
+Wong Sawang|TH||1382|10052
+Ban Phaeo|TH||1359|10011
+Yinggen|CN||1904|10984
+Bang Bua Thong|TH||1392|10042
+Lat Yao|TH||1385|10056
+Nong Khae|TH||1434|10087
+Mukdahan|TH||1655|10472
+Mutang|CN||1981|10935
+Bang Phai|TH||1371|10039
+Bang Lamung|TH||1305|10093
+Óc Eo|VN||1024|10516
+Roi Et|TH||1606|10365
+Wichian Buri|TH||1566|10111
+Khao Saming|TH||1235|10243
+Khwaeng Bang Khae|TH||1369|10040
+Phrae|TH||1815|10014
+Ban Sang|TH||1400|10122
+Khetsamsenok|TH||1379|10058
+Khlong Yai|TH||1178|10289
+Chan Kasem|TH||1382|10058
+Muang Phônsavan|LA||1945|10319
+Sam Phran|TH||1373|10022
+Hồng Lĩnh|VN||1853|10571
+Kantharalak|TH||1464|10465
+Quán Hàu|VN||1740|10664
+Ban Ang Sila|TH||1334|10093
+Kep|KH||1048|10432
+Dương Minh Châu|VN||1138|10623
+Bang Khlo|TH||1370|10051
+Phichit|TH||1644|10035
+Det Udom|TH||1491|10508
+Ban Phai|TH||1606|10273
+Tha Bo|TH||1785|10258
+Loei|TH||1749|10173
+Xã Long Hải|VN||1039|10724
+Samut Songkhram|TH||1341|10000
+A Yun Pa|VN||1340|10844
+Amnat Charoen|TH||1586|10463
+Haitou|CN||1951|10895
+Nakhon Phanom|TH||1741|10478
+Nong Bua Lamphu|TH||1720|10244
+Ấp Long Thạnh|VN||1076|10527
+Đông Phú|VN||1567|10822
+Kandoeng|KH||1129|10484
+Hàm Ninh|VN||1018|10405
+Chomphon|TH||1380|10056
+Kampong Speu|KH||1145|10452
+Baocheng|CN||1864|10970
+Koh Kong|KH||1162|10298
+Thị Trấn Lam Sơn|VN||1990|10541
+Prey Veng|KH||1149|10533
+Hoi An|VN||1588|10834
+Prachin Buri|TH||1405|10137
+Xóm Mỹ Xuân|VN||1062|10707
+Ban Khlong Bang Phran|TH||1366|10039
+Bang Khun Si|TH||1375|10047
+Zhonghe|CN||1974|10934
+Cô Tô|VN||1035|10502
+Ban Khlong Bang Sao Thong|TH||1364|10083
+Na Klang|TH||1731|10219
+Ban Aranyik|TH||1683|10028
+Sam Sen Nai|TH||1378|10055
+Kaeng Khoi|TH||1459|10100
+Cam Lộ|VN||1681|10699
+Suong|KH||1191|10566
+Tu Bông|VN||1277|10930
+Smach Mean Chey|KH||1155|10304
+Ban Phan Don|TH||1714|10297
+Ban Chang Lo|TH||1375|10048
+Kaeng Khro|TH||1611|10226
+Amphoe Sikhiu|TH||1490|10171
+Sa Kaeo|TH||1381|10207
+Bang Bo District|TH||1358|10082
+Kiến An|VN||1057|10537
+Buri Ram|TH||1499|10310
+Ban Chang|TH||1272|10106
+Ban Bang Kadi|TH||1400|10055
+Guangcun|CN||1964|10935
+Nong Phai|TH||1599|10106
+Chorakhe Bua|TH||1384|10061
+Long Thành|VN||1079|10695
+Quảng Phú|VN||1282|10808
+Ban Talat Bueng|TH||1307|10100
+Inner Huai Khwang|TH||1378|10058
+Núi Sập|VN||1026|10527
+Bang Pakong|TH||1354|10099
+Khánh Hòa|VN||1068|10517
+Phú Quý|VN||1052|10893
+Chai Badan|TH||1520|10113
+Phumĭ Véal Tônsay|KH||1170|10458
+Prachin Buri Town|TH||1405|10137
+Ban Xénô|LA||1668|10499
+Phước An|VN||1271|10830
+Stung Treng|KH||1353|10597
+Vang Vieng|LA||1892|10245
+Boeng Kak Pir|KH||1157|10489
+Bangbontai|TH||1365|10037
+Bang Yi Khan|TH||1376|10049
+Kut Chap|TH||1743|10257
+Nan|TH||1878|10078
+Pathum Thani|TH||1401|10053
+Kim Liên|VN||1888|10532
+Tbeng Meanchey|KH||1381|10498
+Wangwu|CN||1966|10929
+Bang O|TH||1384|10046
+Samphanthawong|TH||1374|10051
+Ban Khlong Bang Bon|TH||1364|10038
+Mỹ Lại|VN||1519|10889
+Mỹ Khê|VN||1515|10890
+Svay Rieng|KH||1109|10580
+Lanyang|CN||1946|10966
+Buôn Trấp|VN||1248|10803
+Nanfeng|CN||1941|10955
+Ban Bueng|TH||1331|10111
+Kamalasai|TH||1634|10358
+thị xã Quảng Trị|VN||1675|10718
+Chok Chai|TH||1473|10217
+Sisophon|KH||1359|10297
+Chrang Chamreh Muoy|KH||1163|10489
+Dar|KH||1179|10609
+Tràm Chim|VN||1067|10556
+Bang Kho Laem|TH||1369|10050
+Bang Kho Laem subdistrict|TH||1369|10050
+Kampot|KH||1061|10418
+Bang Bon Nuea|TH||1365|10036
+Tha Mai|TH||1262|10200
+Uthai Thani|TH||1538|10002
+Lý Sơn|VN||1537|10912
+Ấp Phước Tĩnh|VN||1040|10718
+Pakxan|LA||1839|10366
+Nang Rong|TH||1464|10279
+Khwaeng Bang Plat|TH||1379|10049
+Phanat Nikhom|TH||1345|10118
+Taphan Hin|TH||1622|10042
+Chatuchak subdistrict|TH||1383|10056
+Phumĭ Tnaôt|KH||1295|10457
+Ban Nong Wua So|TH||1727|10322
+Yasothon|TH||1579|10415
+Diễn Thành|VN||1898|10560
+Trat|TH||1224|10252
+Nakhon Nayok|TH||1420|10121
+Ban Laongam|LA||1547|10617
+Heqing|CN||1953|10963
+Ea Drăng|VN||1320|10821
+Kuchinarai|TH||1654|10405
+Bang Pa-in|TH||1423|10058
+Sena Nikhom|TH||1384|10058
+Aranyaprathet|TH||1369|10250
+Thị Trấn Đất Đỏ|VN||1049|10727
+Sekong|LA||1535|10672
+Sing Buri|TH||1489|10040
+Kratié|KH||1249|10602
+Kampong Thom|KH||1271|10489
+Thambon Na Mueang|TH||1406|10137
+Phibun Mangsahan|TH||1524|10523
+Arun Amarin|TH||1377|10048
+Ban Khlong Bang Ramat|TH||1377|10043
+Ban Dung|TH||1770|10326
+Phak Hai|TH||1446|10037
+Nam Som|TH||1777|10219
+Lumphat|KH||1349|10698
+Wiset Chaichan|TH||1460|10034
+Tha Ruea|TH||1457|10073
+Nghèn|VN||1845|10578
+Si Mahosot|TH||1389|10141
+Bang Krathum|TH||1658|10030
+Phan Thong|TH||1347|10109
+Samraong|KH||1418|10352
+Khon Buri|TH||1453|10225
+Kaset Wisai|TH||1566|10358
+Ban Bang Bamru|TH||1378|10048
+Non Sung|TH||1518|10226
+Borikhan|LA||1856|10373
+Long Diền|VN||1048|10722
+Bang Len|TH||1402|10017
+Pailin|KH||1285|10261
+Paipu|CN||1964|10916
+Chon Daen|TH||1619|10086
+Ban Phe|TH||1263|10144
+Ban Selaphum|TH||1602|10395
+Eman|CN||1986|10926
+Lom Sak|TH||1678|10124
+Nhà Bè|VN||1070|10674
+Laem Ngop|TH||1217|10239
+Phu Khiao|TH||1638|10213
+Mémót|KH||1183|10618
+Den Chai|TH||1798|10005
+Nong Kung Si|TH||1665|10330
+Banlung|KH||1374|10699
+Bến Thủy|VN||1865|10570
+Kaset Sombun|TH||1628|10195
+Bang Rakam|TH||1676|10012
+Bua Yai|TH||1559|10243
+Sawang Daen Din|TH||1748|10346
+Bản Na Hỷ|VN||1956|10453
+Bang Ban|TH||1437|10049
+Seka|TH||1793|10396
+Phum Ânlŭng Vĭl|KH||1308|10324
+Snuol|KH||1207|10642
+Wang Nam Yen|TH||1350|10218
+Đại Lộc|VN||1588|10812
+Yeang|KH||1355|10361
+Phumĭ Âmpĭl Leu|KH||1201|10543
+Phu Kradueng|TH||1688|10188
+Laem Sing|TH||1248|10207
+Phanom Sarakham|TH||1375|10135
+Đinh Văn|VN||1179|10824
+Ea Pốc|VN||1278|10807
+Ângk Tasaôm|KH||1101|10467
+Ban Mo|TH||1462|10073
+Wang Noi|TH||1423|10072
+Makkasan|TH||1375|10054
+Warichaphum|TH||1729|10364
+Wang Saphung|TH||1730|10177
+Ban Kèngkok|LA||1644|10520
+Bang Mun Nak|TH||1603|10038
+Khánh Hải|VN||1159|10904
+Dan Khun Thot|TH||1521|10177
+Prakhon Chai|TH||1461|10312
+Thap Khlo|TH||1616|10060
+Chai Nat|TH||1519|10012
+Phước Hòa|VN||1210|10712
+Ban Phra|TH||1409|10139
+Ban Huai Thalaeng|TH||1498|10265
+Ou Bei Choan|KH||1377|10274
+Ấp Bình Châu|VN||1055|10755
+Ea T’ling|VN||1259|10790
+Bang Racham|TH||1489|10032
+Bà Nà|VN||1598|10798
+Phon Charoen|TH||1803|10317
+Khao Wong|TH||1670|10409
+Erawan|TH||1730|10195
+Nakhon Luang|TH||1446|10061

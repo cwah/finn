@@ -1,0 +1,90 @@
+Tri-Cities|US|WA|4625|-11920
+Boise|US|ID|4361|-11620
+Spokane|US|WA|4766|-11743
+Salt Lake City|US|UT|4076|-11189
+Kelowna|CA||4988|-11949
+West Valley City|US|UT|4069|-11200
+Provo|US|UT|4023|-11166
+West Jordan|US|UT|4061|-11194
+Lethbridge|CA||4970|-11282
+Spokane Valley|US|WA|4767|-11724
+Orem|US|UT|4030|-11169
+Meridian|US|ID|4361|-11639
+Nampa|US|ID|4354|-11656
+Sandy Hills|US|UT|4058|-11185
+Sandy|US|UT|4059|-11188
+Ogden|US|UT|4122|-11197
+Kennewick|US|WA|4621|-11914
+Layton|US|UT|4106|-11197
+Missoula|US|MT|4687|-11399
+Pasco|US|WA|4624|-11910
+South Jordan|US|UT|4056|-11193
+Millcreek|US|UT|4069|-11188
+Taylorsville|US|UT|4067|-11194
+Great Falls|US|MT|4750|-11130
+Idaho Falls|US|ID|4347|-11203
+Lehi|US|UT|4039|-11185
+Pocatello|US|ID|4287|-11245
+Richland|US|WA|4629|-11928
+Caldwell|US|ID|4366|-11669
+Logan|US|UT|4174|-11183
+Murray|US|UT|4067|-11189
+Coeur d'Alene|US|ID|4768|-11678
+Twin Falls|US|ID|4256|-11446
+Draper|US|UT|4052|-11186
+Bountiful|US|UT|4089|-11188
+Bozeman|US|MT|4568|-11104
+Riverton|US|UT|4052|-11194
+Okanagan Mission|CA||4982|-11948
+Pleasant Grove|US|UT|4036|-11174
+Roy|US|UT|4116|-11203
+Spanish Fork|US|UT|4011|-11165
+South Jordan Heights|US|UT|4056|-11195
+Kearns|US|UT|4066|-11200
+Rutland|CA||4990|-11939
+Cottonwood Heights|US|UT|4062|-11181
+Butte|US|MT|4600|-11253
+Penticton|CA||4948|-11959
+Tooele|US|UT|4053|-11230
+Pullman|US|WA|4673|-11718
+Midvale|US|UT|4061|-11190
+Lewiston|US|ID|4642|-11702
+Springville|US|UT|4017|-11161
+Walla Walla|US|WA|4606|-11834
+Helena|US|MT|4659|-11204
+Lewiston Orchards|US|ID|4638|-11698
+Holladay|US|UT|4067|-11182
+Herriman|US|UT|4051|-11203
+Clearfield|US|UT|4111|-11203
+Kaysville|US|UT|4104|-11194
+Post Falls|US|ID|4772|-11695
+Eagle Foothills|US|ID|4374|-11639
+West Kelowna|CA||4986|-11958
+American Fork|US|UT|4038|-11180
+Rexburg|US|ID|4383|-11179
+Syracuse|US|UT|4109|-11206
+Eagle Mountain|US|UT|4031|-11201
+Magna|US|UT|4071|-11210
+Opportunity|US|WA|4765|-11724
+Saratoga Springs|US|UT|4035|-11190
+Moscow|US|ID|4673|-11700
+South Salt Lake|US|UT|4072|-11189
+Eagle|US|ID|4370|-11635
+Farmington|US|UT|4098|-11189
+Moses Lake|US|WA|4713|-11928
+Kalispell|US|MT|4820|-11431
+Clinton|US|UT|4114|-11205
+Conda|US|ID|4273|-11153
+East Millcreek|US|UT|4070|-11181
+Elko|US|NV|4083|-11576
+Cranbrook|CA||4950|-11577
+North Salt Lake|US|UT|4085|-11191
+Payson|US|UT|4004|-11173
+Brigham City|US|UT|4151|-11202
+North Ogden|US|UT|4131|-11196
+Highland|US|UT|4043|-11179
+Kuna|US|ID|4349|-11642
+Hermiston|US|OR|4584|-11929
+South Ogden|US|UT|4119|-11197
+Pendleton|US|OR|4567|-11879
+Centerville|US|UT|4092|-11187

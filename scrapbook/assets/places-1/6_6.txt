@@ -1,0 +1,12 @@
+Khanty-Mansiysk|RU||6100|6903
+Vorkuta|RU||6751|6407
+Nyagan|RU||6214|6539
+Salekhard|RU||6653|6661
+Uray|RU||6013|6479
+Inta|RU||6603|6017
+Yugorsk|RU||6131|6333
+Labytnangi|RU||6666|6642
+Sovetskiy|RU||6136|6358
+Beloyarskiy|RU||6371|6667
+Ivdel’|RU||6069|6042
+Vorgashor|RU||6758|6379

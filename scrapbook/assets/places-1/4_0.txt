@@ -1,0 +1,1207 @@
+Paris|FR||4885|235
+Barcelona|ES||4139|216
+Milan|IT||4546|919
+Marseille|FR||4330|538
+Turin|IT||4507|769
+Stuttgart|DE||4878|918
+Genoa|IT||4440|894
+Lyon|FR||4575|485
+Toulouse|FR||4360|144
+Zürich|CH|ZH|4737|855
+Nice|FR||4370|727
+Marne La Vallée|FR||4884|264
+Mannheim|DE||4949|847
+Karlsruhe|DE||4901|840
+Strasbourg|FR||4858|775
+Eixample|ES||4139|216
+L'Hospitalet de Llobregat|ES||4136|210
+Montpellier|FR||4361|388
+Freiburg|DE||4800|785
+Sant Martí|ES||4142|220
+Paris 15 Vaugirard|FR||4884|230
+Mainz|DE||4998|828
+Terrassa|ES||4157|202
+Badalona|ES||4145|225
+Sabadell|ES||4154|211
+Geneva|CH|GE|4620|615
+Reims|FR||4927|403
+Le Havre|FR||4949|11
+Paris 20 Ménilmontant|FR||4886|240
+Cergy-Pontoise|FR||4904|208
+Paris 18 Buttes-Montmartre|FR||4889|234
+Sants-Montjuïc|ES||4137|215
+Saarbrücken|DE||4923|701
+Quarto Oggiaro|IT||4551|914
+Paris 13 Gobelins|FR||4883|236
+Paris 19 Buttes-Chaumont|FR||4888|238
+Paris 13e Arrondissement|FR||4883|236
+Basel|CH|BS|4756|757
+Saint-Étienne|FR||4543|439
+Toulon|FR||4312|593
+Horta-Guinardó|ES||4142|217
+Darmstadt|DE||4987|865
+Nou Barris|ES||4144|218
+Ludwigshafen am Rhein|DE||4948|845
+Dijon|FR||4731|501
+Paris 16 Passy|FR||4886|228
+Paris 17 Batignolles-Monceau|FR||4888|232
+Grenoble|FR||4518|571
+Nîmes|FR||4384|436
+Sarrià-Sant Gervasi|ES||4140|214
+Clermont-Ferrand|FR||4578|309
+Aix-en-Provence|FR||4353|545
+Saint-Quentin-en-Yvelines|FR||4877|202
+Le Mans|FR||4800|20
+Paris 11e Arrondissement|FR||4886|238
+Heidelberg|DE||4941|869
+Amiens|FR||4990|230
+Sant Andreu|ES||4144|219
+Tours|FR||4739|70
+Tarragona|ES||4112|125
+Circoiscrizione II|IT||4505|764
+Limoges|FR||4583|125
+Lleida|ES||4162|62
+Paris 12e Arrondissement|FR||4884|244
+Lausanne|CH|VD|4652|663
+Paris 11 Popincourt|FR||4886|238
+Paris 12 Reuilly|FR||4884|239
+Paris 14 Observatoire|FR||4883|233
+Circoiscrizione VIII|IT||4504|767
+Würzburg|DE||4979|995
+Villeurbanne|FR||4577|488
+Circoiscrizione III|IT||4506|763
+Besançon|FR||4725|602
+Mataró|ES||4154|244
+Circoiscrizione V|IT||4510|766
+Monza|IT||4558|927
+Metz|FR||4912|617
+Bern|CH|BE|4695|745
+Gràcia|ES||4140|216
+Bergamo|IT||4570|967
+Heilbronn|DE||4914|922
+Ulm|DE||4840|999
+Pforzheim|DE||4888|870
+Santa Coloma de Gramenet|ES||4145|221
+Orléans|FR||4790|190
+Rouen|FR||4944|110
+Reutlingen|DE||4849|920
+Winterthur|CH|ZH|4751|872
+Mulhouse|FR||4775|733
+Montreuil|FR||4886|244
+Perpignan|FR||4270|290
+Boulogne-Billancourt|FR||4884|224
+Circoiscrizione VI|IT||4510|770
+Nancy|FR||4868|618
+Piacenza|IT||4505|969
+Reus|ES||4116|111
+Lyon 03|FR||4576|485
+Ciutat Vella|ES||4138|217
+Novara|IT||4545|862
+Argenteuil|FR||4895|225
+Girona|ES||4198|282
+Trier|DE||4976|664
+Circoiscrizione IV|IT||4508|763
+Kaiserslautern|DE||4944|777
+Saint-Denis|FR||4894|235
+La Spezia|IT||4410|982
+Esslingen|DE||4874|930
+Tübingen|DE||4852|905
+Alessandria|IT||4491|861
+Sassari|IT||4073|856
+Avignon|FR||4395|481
+Circoiscrizione VII|IT||4508|770
+Marseille 13|FR||4332|541
+Ludwigsburg|DE||4890|919
+Cornellà de Llobregat|ES||4135|208
+Asnières-sur-Seine|FR||4892|228
+Nanterre|FR||4889|221
+Lyon 08|FR||4574|487
+Poitiers|FR||4658|34
+Versailles|FR||4880|213
+Courbevoie|FR||4890|226
+Créteil|FR||4879|247
+Como|IT||4581|908
+Paris 10 Entrepôt|FR||4887|236
+Paris 10e Arrondissement|FR||4888|236
+Busto Arsizio|IT||4561|885
+Lyon 07|FR||4575|484
+Sant Boi de Llobregat|ES||4134|204
+Colombes|FR||4892|225
+Les Corts|ES||4139|213
+Sesto San Giovanni|IT||4553|923
+Villingen-Schwenningen|DE||4806|849
+Luzern|CH|LU|4705|831
+Konstanz|DE||4766|918
+Worms|DE||4963|836
+Vitry-sur-Seine|FR||4879|240
+Aulnay-sous-Bois|FR||4894|249
+Varese|IT||4582|883
+Sant Cugat del Vallès|ES||4147|209
+Marseille 08|FR||4327|538
+Circoiscrizione I|IT||4507|769
+Marseille 15|FR||4337|535
+Marseille 09|FR||4325|541
+Champigny-sur-Marne|FR||4882|249
+Luxembourg|LU|LU|4961|613
+Rueil-Malmaison|FR||4888|219
+Antibes|FR||4358|712
+Manresa|ES||4173|182
+Cinisello Balsamo|IT||4556|921
+Sankt Gallen|CH|SG|4742|937
+Gare|FR||4883|238
+Saint-Maur-des-Fossés|FR||4879|249
+Cannes|FR||4355|701
+Asti|IT||4490|821
+Béziers|FR||4334|321
+Rubí|ES||4149|203
+Aubervilliers|FR||4892|238
+Aschaffenburg|DE||4998|915
+Bourges|FR||4708|240
+Castelldefels|ES||4128|197
+Viladecans|ES||4131|201
+Vilanova i la Geltrú|ES||4122|173
+Pavia|IT||4519|916
+Colmar|FR||4808|736
+Maison Blanche|FR||4883|235
+Valence|FR||4493|491
+El Prat de Llobregat|ES||4133|209
+Lugano|CH|TI|4601|896
+Drancy|FR||4893|245
+Noisy-le-Grand|FR||4885|256
+La Seyne-sur-Mer|FR||4310|588
+Levallois-Perret|FR||4889|229
+Marseille 14|FR||4334|538
+Picpus|FR||4884|240
+Chambéry|FR||4557|592
+Issy-les-Moulineaux|FR||4882|228
+Savona|IT||4431|848
+Sindelfingen|DE||4870|902
+Neuilly-sur-Seine|FR||4888|227
+Schwäbisch Gmünd|DE||4880|980
+Granollers|ES||4161|229
+Troyes|FR||4830|409
+Olbia|IT||4092|950
+Juan-les-Pins|FR||4357|711
+Antony|FR||4875|230
+Rüsselsheim am Main|DE||4999|842
+Offenburg|DE||4847|794
+Cerdanyola del Vallès|ES||4149|214
+Marseille 12|FR||4330|544
+Friedrichshafen|DE||4766|948
+Göppingen|DE||4870|965
+Sarcelles|FR||4900|238
+Vigevano|IT||4531|885
+Ivry-sur-Seine|FR||4882|238
+Évreux|FR||4902|115
+la Nova Esquerra de l'Eixample|ES||4138|215
+Legnano|IT||4560|892
+Vénissieux|FR||4570|489
+Cergy|FR||4904|208
+Clichy|FR||4890|231
+Paris 09 Opéra|FR||4887|234
+Baden-Baden|DE||4876|824
+Barri de Sant Andreu|ES||4144|219
+Marseille 11|FR||4329|544
+Moncalieri|IT||4500|768
+Cuneo|IT||4439|755
+Saint-Quentin|FR||4985|329
+Paris 05 Panthéon|FR||4884|235
+Biel/Bienne|CH|BE|4714|725
+Pozzo Strada|IT||4507|763
+Belfort|FR||4764|685
+Ajaccio|FR||4192|874
+Zürich (Kreis 11)|CH|ZH|4742|852
+Neustadt an der Weinstraße|DE||4935|814
+Sartrouville|FR||4895|219
+Maisons-Alfort|FR||4881|244
+Meaux|FR||4896|288
+Blois|FR||4759|133
+Brive-la-Gaillarde|FR||4516|153
+Arles|FR||4368|463
+Beauvais|FR||4943|208
+Châteauroux|FR||4681|169
+Fréjus|FR||4343|674
+Waiblingen|DE||4883|932
+Pantin|FR||4889|241
+Lyon 06|FR||4577|485
+Mollet del Vallès|ES||4154|221
+Montauban|FR||4402|135
+Charleville-Mézières|FR||4977|472
+Albi|FR||4393|215
+Tarbes|FR||4323|7
+Fontenay-sous-Bois|FR||4885|248
+Lyon 09|FR||4577|480
+Évry|FR||4863|244
+Sagrada Família|ES||4140|217
+Clamart|FR||4880|227
+Marseille 10|FR||4328|542
+Châlons-en-Champagne|FR||4895|437
+la Vila de Gràcia|ES||4140|216
+Narbonne|FR||4318|300
+Lahr|DE||4834|787
+Hyères|FR||4312|613
+Gallarate|IT||4566|879
+Barriera di Milano|IT||4509|769
+Speyer|DE||4932|843
+Barriera di Lanzo|IT||4511|765
+Neunkirchen|DE||4934|718
+Lingotto|IT||4503|765
+Lyon 05|FR||4576|483
+Carcassonne|FR||4322|235
+Leonberg|DE||4880|902
+Angoulême|FR||4565|15
+Dornbirn|AT||4741|974
+Annecy|FR||4591|613
+Ravensburg|DE||4778|961
+Rivoli|IT||4507|751
+Bondy|FR||4890|249
+Le Blanc-Mesnil|FR||4894|246
+Villejuif|FR||4879|236
+Paris 07 Palais-Bourbon|FR||4886|232
+Rastatt|DE||4886|821
+Bruchsal|DE||4912|860
+Nichelino|IT||4500|765
+Singen|DE||4776|884
+Grasse|FR||4366|693
+Stuttgart-Ost|DE||4878|921
+Settimo Torinese|IT||4514|777
+Frankenthal|DE||4953|835
+Sevran|FR||4894|253
+Castres|FR||4361|224
+Chalon-sur-Saône|FR||4678|485
+Marseille 04|FR||4330|540
+Rho|IT||4553|904
+Sant Gervasi - Galvany|ES||4140|214
+Sanremo|IT||4382|778
+Lörrach|DE||4761|766
+Albstadt|DE||4822|903
+Chelles|FR||4888|259
+Cagnes-sur-Mer|FR||4366|715
+Parella|IT||4508|763
+Lecco|IT||4586|940
+Collegno|IT||4508|757
+Barri de les Corts|ES||4139|213
+Figueres|ES||4227|296
+Esplugues de Llobregat|ES||4138|209
+Böblingen|DE||4868|901
+Paderno Dugnano|IT||4557|916
+Épinay-sur-Seine|FR||4895|232
+Zürich (Kreis 3)|CH|ZH|4736|850
+Gavà|ES||4131|200
+Vincennes|FR||4885|244
+Vercelli|IT||4532|842
+Roquette|FR||4886|238
+Cologno Monzese|IT||4553|928
+Martigues|FR||4341|506
+el Raval|ES||4138|217
+Filadelfia|IT||4502|764
+Marseille 03|FR||4330|538
+Bourg-en-Bresse|FR||4621|523
+Monte Rosello|IT||4074|857
+Bobigny|FR||4891|245
+Montluçon|FR||4634|260
+Zürich (Kreis 9)|CH|ZH|4738|848
+Aubagne|FR||4329|557
+Suresnes|FR||4887|223
+Meudon|FR||4881|224
+Homburg|DE||4933|734
+Marseille 05|FR||4330|540
+Istres|FR||4351|499
+Thionville|FR||4936|616
+Mantes-la-Jolie|FR||4899|172
+Compiègne|FR||4942|283
+Nevers|FR||4699|316
+Fellbach|DE||4881|928
+Chartres|FR||4845|149
+Llefià|ES||4144|222
+Thun|CH|BE|4675|762
+Dreta de l'Eixample|ES||4140|217
+Pirmasens|DE||4920|761
+Bietigheim-Bissingen|DE||4894|912
+Filderstadt|DE||4866|922
+Marseille 06|FR||4329|538
+Le Cannet|FR||4358|702
+Weinheim|DE||4955|867
+Bellinzona|CH|TI|4619|902
+Bad Kreuznach|DE||4984|787
+Biella|IT||4556|806
+Sant Feliu de Llobregat|ES||4138|205
+Caluire-et-Cuire|FR||4579|485
+Seregno|IT||4565|921
+Rottenburg|DE||4848|894
+Gap|FR||4456|608
+Alès|FR||4412|408
+Imperia|IT||4389|804
+Gennevilliers|FR||4893|230
+Desio|IT||4562|920
+l'Antiga Esquerra de l'Eixample|ES||4139|216
+Köniz|CH|BE|4692|741
+Schorndorf|DE||4881|953
+Saint-Priest|FR||4570|494
+Rosny-sous-Bois|FR||4887|250
+Landau in der Pfalz|DE||4920|812
+Auxerre|FR||4780|357
+Salon-de-Provence|FR||4364|509
+Mirafiori Nord|IT||4504|763
+Leinfelden-Echterdingen|DE||4869|917
+Saint-Germain-en-Laye|FR||4890|209
+Bensheim|DE||4968|862
+Bastia|FR||4270|945
+Völklingen|DE||4925|686
+Marseille 01|FR||4330|538
+Poble Sec|ES||4137|216
+Sants|ES||4137|214
+Lodi|IT||4531|950
+Sète|FR||4340|369
+Puteaux|FR||4888|224
+Corbeil-Essonnes|FR||4861|249
+Paris 06 Luxembourg|FR||4885|233
+Nürtingen|DE||4863|934
+Kirchheim unter Teck|DE||4865|945
+Blanes|ES||4167|279
+Cantù|IT||4574|913
+Garges-lès-Gonesse|FR||4897|240
+Vic|ES||4193|225
+Roanne|FR||4604|407
+Rozzano|IT||4538|916
+Savigny-sur-Orge|FR||4868|235
+Kehl|DE||4857|782
+Livry-Gargan|FR||4892|254
+Épinal|FR||4818|645
+Saint-Ouen|FR||4891|233
+Montigny-le-Bretonneux|FR||4877|203
+Noisy-le-Sec|FR||4889|246
+Melun|FR||4855|265
+Igualada|ES||4158|162
+Bagneux|FR||4880|231
+Backnang|DE||4895|944
+Langen|DE||4999|867
+Massy|FR||4873|228
+Haguenau|FR||4882|779
+Montrouge|FR||4882|231
+Sankt Ingbert|DE||4928|712
+Vitrolles|FR||4346|525
+Ettlingen|DE||4894|841
+Draguignan|FR||4354|646
+Voghera|IT||4499|901
+Vilafranca del Penedès|ES||4135|170
+Fribourg|CH|FR|4680|715
+Ripollet|ES||4150|216
+el Camp de l'Arpa del Clot|ES||4141|218
+Saarlouis|DE||4931|675
+Sant Antoni|ES||4138|216
+Gagny|FR||4888|253
+Saronno|IT||4563|904
+Saint-Chamond|FR||4548|451
+La Chaux-de-Fonds|CH|NE|4710|683
+Bron|FR||4574|491
+Vaulx-en-Velin|FR||4579|493
+Joué-lès-Tours|FR||4735|67
+Lissone|IT||4561|924
+Lloret de Mar|ES||4170|285
+Alfortville|FR||4881|242
+La Courneuve|FR||4893|240
+Châtellerault|FR||4682|55
+Villepinte|FR||4896|253
+Sinsheim|DE||4925|888
+Cesano Maderno|IT||4563|915
+Chieri|IT||4501|782
+Grugliasco|IT||4507|758
+Sant Adrià de Besòs|ES||4143|222
+Esch-sur-Alzette|LU|ES|4950|598
+Schaffhausen|CH|SH|4770|863
+Schwäbisch Hall|DE||4911|974
+Poissy|FR||4893|205
+Conflans-Sainte-Honorine|FR||4900|210
+Sainte-Marguerite|FR||4885|239
+Bel-Air|FR||4884|240
+Zürich (Kreis 10)|CH|ZH|4741|850
+el Guinardó|ES||4142|217
+Plaisir|FR||4882|195
+Lyon 04|FR||4578|483
+Cenisia|IT||4507|765
+Marseille 07|FR||4328|536
+Nuoro|IT||4032|933
+Marignane|FR||4342|521
+El Vendrell|ES||4122|153
+Dieppe|FR||4992|108
+Montélimar|FR||4455|475
+Tremblay-en-France|FR||4895|257
+San Salvario|IT||4505|768
+Choisy-le-Roi|FR||4877|242
+Saint-Martin-d'Hères|FR||4518|576
+Mâcon|FR||4631|483
+Chur|CH|GR|4685|953
+Paris 08 Élysée|FR||4888|232
+Aosta|IT||4574|732
+Bollate|IT||4555|912
+Zweibrücken|DE||4925|737
+Tortosa|ES||4081|52
+Romans-sur-Isère|FR||4505|507
+Saint-Raphaël|FR||4342|677
+Tuttlingen|DE||4798|882
+Pontault-Combault|FR||4880|261
+Six-Fours-les-Plages|FR||4309|582
+Rapperswil|CH|SG|4723|882
+Périgueux|FR||4519|71
+Aurillac|FR||4493|244
+Uster|CH|ZH|4735|872
+Sitten|CH|VS|4623|736
+Rheinfelden|DE||4756|779
+Neuilly-sur-Marne|FR||4885|255
+Balingen|DE||4828|885
+Agen|FR||4420|62
+el Camp d'en Grassot i Gràcia Nova|ES||4141|217
+Franconville|FR||4898|223
+Alghero|IT||4056|832
+Pioltello|IT||4550|933
+Herrenberg|DE||4860|887
+el Poblenou|ES||4140|220
+Kornwestheim|DE||4886|919
+Zürich (Kreis 7)|CH|ZH|4737|858
+Sainte-Geneviève-des-Bois|FR||4865|232
+Mirafiori Sud|IT||4502|762
+Corsico|IT||4543|911
+Ostfildern|DE||4873|925
+Venaria Reale|IT||4513|763
+Olot|ES||4218|249
+Bagnolet|FR||4887|242
+Neuchâtel|CH|NE|4699|693
+Montcada i Reixac|ES||4148|218
+Feldkirch|AT||4724|960
+Borgo San Paolo|IT||4506|764
+Casale Monferrato|IT||4513|845
+La Ciotat|FR||4317|560
+Échirolles|FR||4515|571
+Brugherio|IT||4555|930
+Villefranche-sur-Saône|FR||4599|472
+Monaco|MC||4374|742
+Abbiategrasso|IT||4540|892
+Mörfelden-Walldorf|DE||4999|858
+Châtenay-Malabry|FR||4877|227
+Viernheim|DE||4954|858
+Stains|FR||4895|238
+San Donato|IT||4508|766
+Cambrils|ES||4107|106
+Lampertheim|DE||4960|847
+Châtillon|FR||4880|229
+Biberach an der Riß|DE||4809|979
+Vienne|FR||4553|487
+Schiltigheim|FR||4861|775
+Weil am Rhein|DE||4759|762
+Paris 03 Temple|FR||4886|236
+Les Mureaux|FR||4899|191
+Limbiate|IT||4560|913
+Sant Joan Despí|ES||4137|206
+Le Perreux-sur-Marne|FR||4885|250
+Guyancourt|FR||4877|207
+Palaiseau|FR||4872|225
+Saint-Dizier|FR||4864|495
+Creil|FR||4926|248
+Vandœuvre-lès-Nancy|FR||4866|617
+Radolfzell|DE||4774|897
+Fort Pienc|ES||4139|218
+Thonon-les-Bains|FR||4637|648
+Crema|IT||4536|968
+El Carmel|ES||4142|216
+Colomiers|FR||4361|133
+Lyon 02|FR||4575|483
+Folie Méricourt|FR||4887|237
+Nogent-sur-Marne|FR||4884|248
+Athis-Mons|FR||4871|239
+Barberà del Vallès|ES||4152|212
+Viry-Châtillon|FR||4867|239
+Houilles|FR||4892|219
+Merzig|DE||4944|664
+Soissons|FR||4938|332
+Verbania|IT||4592|855
+Dreux|FR||4874|137
+San Giuliano Milanese|IT||4539|929
+Emmen|CH|LU|4708|827
+Charenton-le-Pont|FR||4882|241
+Villeneuve-Saint-Georges|FR||4873|245
+Pinerolo|IT||4489|733
+Élancourt|FR||4878|196
+Saint-Ambroise|FR||4886|238
+Alençon|FR||4843|9
+Salt|ES||4197|279
+Sotteville-lès-Rouen|FR||4941|109
+Zug|CH|ZG|4717|852
+Orange|FR||4414|481
+la Marina de Port|ES||4136|214
+Pontoise|FR||4905|210
+Bretten|DE||4904|871
+Villiers-sur-Marne|FR||4883|255
+Yverdon-les-Bains|CH|VD|4678|664
+Chatou|FR||4889|216
+Vernier|CH|GE|4622|608
+Goussainville|FR||4901|247
+Zürich (Kreis 6)|CH|ZH|4739|854
+Winnenden|DE||4888|940
+Vierzon|FR||4722|207
+Bregenz|AT||4750|975
+Thiais|FR||4876|240
+Carpentras|FR||4406|505
+L'Haÿ-les-Roses|FR||4878|234
+Santa Rita|IT||4505|764
+Menton|FR||4378|750
+Lyon 01|FR||4577|483
+Gaggenau|DE||4880|833
+Saint-Laurent-du-Var|FR||4367|719
+Malakoff|FR||4882|230
+Draveil|FR||4868|241
+el Putxet i el Farró|ES||4141|214
+Saint-Leu|FR||4673|450
+la Verneda i la Pau|ES||4142|220
+Vanchiglia|IT||4507|770
+Zürich (Kreis 2)|CH|ZH|4734|852
+Ciutadella|ES||4000|384
+Idar-Oberstein|DE||4971|731
+Le Chesnay|FR||4882|212
+Tournefeuille|FR||4359|132
+Cernusco sul Naviglio|IT||4553|933
+Clichy-sous-Bois|FR||4891|255
+Chinatown|IT||4548|918
+Chaumont|FR||4811|514
+Saint-Étienne-du-Rouvray|FR||4938|110
+Meyzieu|FR||4577|500
+Pallanza-Intra-Suna|IT||4594|857
+Yerres|FR||4872|249
+Montbéliard|FR||4751|680
+Saint-Cloud|FR||4885|220
+Vaihingen an der Enz|DE||4894|896
+La Sagrera|ES||4142|219
+Sens|FR||4820|328
+Laon|FR||4956|363
+Geislingen an der Steige|DE||4862|983
+Bühl|DE||4870|814
+Trappes|FR||4877|202
+Sant Pere de Ribes|ES||4126|177
+San Donato Milanese|IT||4541|927
+Rodez|FR||4435|257
+Bergerac|FR||4485|48
+Zürich (Kreis 9) / Altstetten|CH|ZH|4739|849
+Segrate|IT||4549|930
+Annemasse|FR||4619|624
+Vinaròs|ES||4047|48
+La Garde|FR||4312|601
+Zürich (Kreis 12)|CH|ZH|4740|858
+Ermont|FR||4899|226
+Rillieux-la-Pape|FR||4582|490
+Stuttgart Feuerbach|DE||4881|916
+Villemomble|FR||4888|250
+Pierrefitte-sur-Seine|FR||4897|236
+Sant Vicenç dels Horts|ES||4139|201
+Le Kremlin-Bicêtre|FR||4881|236
+Martorell|ES||4147|193
+Champs-sur-Marne|FR||4885|260
+Ehingen|DE||4828|973
+Wiesloch|DE||4930|870
+Sitges|ES||4124|181
+Aix-les-Bains|FR||4569|591
+Bezons|FR||4892|221
+Premià de Mar|ES||4149|237
+Emmendingen|DE||4812|785
+Paris 04 Hôtel-de-Ville|FR||4886|235
+Lancy|CH|GE|4619|611
+Vallauris|FR||4358|705
+Zürich (Kreis 4) / Aussersihl|CH|ZH|4738|852
+Taverny|FR||4903|222
+Illkirch-Graffenstaden|FR||4853|772
+Leimen|DE||4935|869
+Épernay|FR||4904|396
+Wangen|DE||4769|983
+Villiers-le-Bel|FR||4901|240
+Vichy|FR||4613|343
+Rapallo|IT||4435|923
+el Clot|ES||4141|219
+Hôpital Saint-Louis|FR||4888|237
+Sankt Wendel|DE||4947|717
+Sannois|FR||4897|225
+Mühlacker|DE||4895|884
+Salou|ES||4108|114
+Gonesse|FR||4899|245
+Achern|DE||4863|808
+Vigneux-sur-Seine|FR||4870|241
+Cavaillon|FR||4383|504
+Rambouillet|FR||4864|183
+Pineda de Mar|ES||4163|269
+Benicarló|ES||4042|43
+Horta|ES||4144|216
+Lunel|FR||4368|414
+Weiterstadt|DE||4990|859
+Chiavari|IT||4432|932
+Remseck am Neckar|DE||4887|927
+Cachan|FR||4880|234
+Le Grand-Quevilly|FR||4940|105
+Nizza Millefonti|IT||4503|767
+Neckarsulm|DE||4919|923
+Sant Andreu de la Barca|ES||4145|197
+La Garenne-Colombes|FR||4890|225
+Montigny-lès-Metz|FR||4910|615
+Parabiago|IT||4556|895
+Bingen am Rhein|DE||4997|790
+Quinze-Vingts|FR||4885|237
+Arlon|BE|WAL|4968|582
+Sant Martí de Provençals|ES||4142|220
+Weinstadt-Endersbach|DE||4881|936
+la Prosperitat|ES||4144|218
+Romano Banco|IT||4542|911
+Stuttgart Mühlhausen|DE||4884|923
+Vanves|FR||4882|229
+Vernon|FR||4909|146
+Montreux|CH|VD|4643|691
+Garbagnate Milanese|IT||4557|908
+Novi Ligure|IT||4476|879
+Savigny-le-Temple|FR||4857|258
+Giussano|IT||4570|921
+Dole|FR||4709|549
+Villeneuve-sur-Lot|FR||4441|70
+Les Ulis|FR||4868|217
+Marseille 02|FR||4330|537
+La Bonanova|ES||4141|213
+Bresso|IT||4554|919
+Oyonnax|FR||4626|566
+Horb am Neckar|DE||4844|869
+Frauenfeld|CH|TG|4756|890
+Oullins|FR||4571|481
+Le Creusot|FR||4681|442
+el Baix Guinardó|ES||4141|217
+Vilapicina i la Torre Llobeta|ES||4143|217
+Rottweil|DE||4817|863
+Heppenheim an der Bergstrasse|DE||4964|863
+Pfungstadt|DE||4981|860
+Griesheim|DE||4986|857
+Herblay-sur-Seine|FR||4899|217
+Mosbach|DE||4935|915
+Valls|ES||4129|125
+Ris-Orangis|FR||4865|241
+Santa Perpètua de Mogoda|ES||4153|218
+Sucy-en-Brie|FR||4877|253
+Lainate|IT||4557|903
+Kriens|CH|LU|4703|829
+Lucento|IT||4511|766
+Ingelheim am Rhein|DE||4997|806
+Grigny|FR||4865|239
+Treviglio|IT||4552|959
+Alba|IT||4470|803
+Wertheim|DE||4976|951
+Sarrià|ES||4140|212
+Fresnes|FR||4876|232
+Romainville|FR||4889|243
+Wetzikon|CH|ZH|4733|880
+Fontenay-aux-Roses|FR||4879|229
+Décines-Charpieu|FR||4577|496
+Saint-Dié-des-Vosges|FR||4828|695
+Porta|ES||4143|218
+Nieder-Ingelheim|DE||4998|807
+Fontaine|FR||4519|569
+Lindau|DE||4755|968
+Auch|FR||4365|59
+Lisieux|FR||4915|23
+Barri Gòtic|ES||4138|218
+Sarreguemines|FR||4911|707
+Torcy|FR||4885|265
+Sants - Badal|ES||4137|213
+Brétigny-sur-Orge|FR||4861|231
+Muret|FR||4346|133
+Bois-Colombes|FR||4892|227
+Calafell|ES||4120|157
+Blagnac|FR||4364|139
+Miramas|FR||4359|500
+Beaune|FR||4702|484
+Ditzingen|DE||4883|907
+Ventimiglia|IT||4379|761
+Eaubonne|FR||4900|228
+Brunoy|FR||4869|249
+Bra|IT||4470|785
+Molins de Rei|ES||4142|202
+la Maternitat i Sant Ramon|ES||4138|212
+Castellar del Vallès|ES||4162|208
+Wil|CH|SG|4746|905
+Villeparisis|FR||4894|261
+Freudenstadt|DE||4847|841
+Montfermeil|FR||4890|258
+Weingarten|DE||4781|964
+Calw|DE||4871|874
+Sèvres|FR||4882|222
+Groß-Gerau|DE||4992|848
+Ivrea|IT||4547|788
+Seriate|IT||4569|972
+Gif-sur-Yvette|FR||4868|213
+Bulle|CH|FR|4662|706
+Cesano Boscone|IT||4544|909
+El Masnou|ES||4148|232
+Cahors|FR||4445|144
+Millau|FR||4410|308
+Olesa de Montserrat|ES||4154|189
+el Besòs i el Maresme|ES||4141|222
+Muggiò|IT||4559|923
+Riedstadt|DE||4983|850
+La Valette-du-Var|FR||4314|598
+Moulins|FR||4656|333
+Mont-Saint-Aignan|FR||4946|109
+Chivasso|IT||4519|789
+Étampes|FR||4844|216
+Carmagnola|IT||4485|772
+Agde|FR||4331|348
+Saint-Ouen-l'Aumône|FR||4904|212
+Nagold|DE||4855|872
+Dalmine|IT||4565|961
+Sant Pere, Santa Caterina i La Ribera|ES||4138|218
+Montgeron|FR||4871|245
+Lustenau|AT||4743|966
+Maisons-Laffitte|FR||4895|215
+Öhringen|DE||4920|951
+Tortona|IT||4490|886
+Seveso|IT||4565|914
+Vimercate|IT||4562|937
+Le Puy-en-Velay|FR||4504|389
+Le Petit-Quevilly|FR||4941|106
+Meda|IT||4566|915
+Horgen|CH|ZH|4726|860
+Mariano Comense|IT||4570|918
+Olivet|FR||4786|190
+Schwetzingen|DE||4938|858
+Magenta|IT||4546|888
+Ozoir-la-Ferrière|FR||4877|267
+Le Plessis-Robinson|FR||4879|227
+Bad Mergentheim|DE||4949|977
+Waldshut-Tiengen|DE||4762|822
+Palafrugell|ES||4192|316
+Eislingen|DE||4870|971
+Combs-la-Ville|FR||4866|257
+Nova Milanese|IT||4559|920
+Frontignan|FR||4345|376
+Voiron|FR||4536|559
+Metzingen|DE||4854|928
+Navas|ES||4142|219
+Le Mée-sur-Seine|FR||4853|263
+Villeneuve-la-Garenne|FR||4894|231
+Fécamp|FR||4976|37
+Kreuzlingen|CH|TG|4765|918
+Sant Feliu de Guíxols|ES||4178|303
+Cormeilles-en-Parisis|FR||4897|220
+Sainte-Foy-lès-Lyon|FR||4573|480
+Mondovì|IT||4440|782
+Esparreguera|ES||4154|187
+Orbassano|IT||4501|754
+Verdun|FR||4916|538
+Vélizy-Villacoublay|FR||4878|219
+Achères|FR||4896|207
+Porto Torres|IT||4083|841
+Donaueschingen|DE||4796|850
+Lunéville|FR||4859|649
+Deuil-la-Barre|FR||4898|233
+Opfikon|CH|ZH|4743|858
+La Celle-Saint-Cloud|FR||4885|215
+Dillingen|DE||4936|673
+Annecy-le-Vieux|FR||4592|614
+Sceaux|FR||4878|229
+Überlingen|DE||4777|917
+Aarau|CH|AG|4739|804
+Allauch|FR||4334|548
+Madonna di Campagna|IT||4510|766
+Forbach|FR||4919|689
+Manosque|FR||4383|579
+Saint-Mandé|FR||4884|242
+Groß-Umstadt|DE||4987|893
+Amposta|ES||4071|58
+Plaine du Var|FR||4368|720
+Cassano Magnago|IT||4567|883
+Eppingen|DE||4914|891
+Montmorency|FR||4899|234
+Porte Saint-Martin|FR||4887|236
+Gardanne|FR||4345|547
+Les Lilas|FR||4888|242
+Fleury-les-Aubrais|FR||4793|192
+Dammarie-les-Lys|FR||4852|265
+Püttlingen|DE||4929|689
+Zürich (Kreis 3) / Sihlfeld|CH|ZH|4737|851
+Germersheim|DE||4921|837
+Roissy-en-Brie|FR||4879|265
+Renens|CH|VD|4654|659
+Dietikon|CH|ZH|4740|840
+Saint-Genis-Laval|FR||4570|479
+Saint-Louis|FR||4759|756
+Vila-seca|ES||4111|115
+Saint-Michel-sur-Orge|FR||4863|231
+Haßloch|DE||4936|826
+Longjumeau|FR||4869|229
+Vilassar de Mar|ES||4151|239
+Vauréal|FR||4903|203
+Lons-le-Saunier|FR||4668|556
+Lagny-sur-Marne|FR||4887|272
+Manlleu|ES||4200|228
+Sedan|FR||4970|494
+Senago|IT||4558|913
+Hockenheim|DE||4932|855
+Bad Rappenau|DE||4924|910
+Baar|CH|ZG|4720|853
+Orly|FR||4875|239
+Bülach|CH|ZH|4752|854
+Sarzana|IT||4411|996
+Andorra la Vella|AD||4251|152
+Borgomanero|IT||4570|846
+Rheinstetten|DE||4897|831
+Oberkirch|DE||4853|808
+Saint-Vincent de Paul|FR||4888|236
+Pontarlier|FR||4690|636
+Provenals del Poblenou|ES||4141|220
+Chamalières|FR||4577|307
+Centro|IT||4507|768
+Meylan|FR||4521|578
+Montceau-les-Mines|FR||4667|437
+Blieskastel|DE||4924|726
+Waghäusel|DE||4925|851
+Waldkirch|DE||4810|796
+Riom|FR||4589|311
+Chevilly-Larue|FR||4876|235
+Cornaredo|IT||4550|903
+Croulebarbe|FR||4881|235
+Zürich (Kreis 6) / Unterstrass|CH|ZH|4740|854
+Cormano|IT||4555|916
+Mössingen|DE||4841|905
+Heusweiler|DE||4934|693
+Trezzano sul Naviglio|IT||4542|906
+Aurora|IT||4508|769
+Riehen|CH|BS|4758|765
+La Defense|FR||4889|224
+Sainte-Marguerite|FR||4326|540
+Romorantin-Lanthenay|FR||4737|175
+Mantes-la-Ville|FR||4897|170
+Pertuis|FR||4369|550
+Morsang-sur-Orge|FR||4866|235
+Vesoul|FR||4763|614
+Vevey|CH|VD|4646|684
+Dübendorf|CH|ZH|4740|862
+Saint-Jean-de-Braye|FR||4791|198
+Les Pennes-Mirabeau|FR||4341|531
+Paris 02 Bourse|FR||4887|234
+Bad Waldsee|DE||4792|975
+Cluses|FR||4606|657
+Meyrin|CH|GE|4623|608
+Bourg-lès-Valence|FR||4495|489
+Novate Milanese|IT||4553|914
+Villefontaine|FR||4561|515
+Saint-Gratien|FR||4897|229
+Les Pavillons-sous-Bois|FR||4891|251
+Fontainebleau|FR||4841|270
+Nogent-sur-Oise|FR||4927|247
+Bagnols-sur-Cèze|FR||4416|462
+Banyoles|ES||4212|277
+Lebach|DE||4941|691
+Écully|FR||4577|478
+Trecate|IT||4543|874
+Hechingen|DE||4835|896
+Schopfheim|DE||4765|782
+Cran-Gevrier|FR||4590|610
+Carouge|CH|GE|4618|614
+Baden|CH|AG|4747|831
+Weil der Stadt|DE||4875|887
+Roses|ES||4226|318
+Mandelieu-la-Napoule|FR||4355|694
+Vendôme|FR||4779|107
+Louviers|FR||4922|117
+Reinach|CH|BL|4750|759
+Schifferstadt|DE||4938|838
+Sondrio|IT||4617|987
+Sanary-sur-Mer|FR||4312|580
+Senlis|FR||4921|259
+Arese|IT||4555|908
+Albertville|FR||4567|639
+Limeil-Brévannes|FR||4874|249
+Jouy-le-Moutier|FR||4901|204
+Eselsberg|DE||4841|995
+Marmande|FR||4450|17
+Gerlingen|DE||4880|906
+Laupheim|DE||4823|988
+Maurepas|FR||4876|193
+Porta Palazzo|IT||4508|768
+Digne-les-Bains|FR||4409|623
+Gorgonzola|IT||4553|941
+Mougins|FR||4360|700
+Sélestat|FR||4826|745
+Garches|FR||4884|218
+Cusano|IT||4555|918
+Chilly-Mazarin|FR||4871|232
+Bourg-la-Reine|FR||4878|232
+Cournon-d'Auvergne|FR||4574|320
+Fossano|IT||4455|772
+Saint-Roch|FR||4371|729
+Chaville|FR||4881|219
+Calella|ES||4161|265
+Neuilly-Plaisance|FR||4886|251
+Bonneuil-sur-Marne|FR||4877|248
+Schwalbach|DE||4930|682
+Bad Dürkheim|DE||4946|817
+Sorgues|FR||4401|487
+Vence|FR||4372|711
+Saint-Barthélémy|FR||4333|540
+Le Plessis-Trévise|FR||4881|257
+Bar-le-Duc|FR||4877|516
+Sachsenheim|DE||4896|906
+Seynod|FR||4589|609
+Schramberg|DE||4822|839
+Mitry-Mory|FR||4898|262
+Limay|FR||4900|174
+Konz|DE||4970|658
+San Mauro Torinese|IT||4510|777
+La Bordeta|ES||4137|214
+Plaisance-du-Touch|FR||4357|130
+Brera|IT||4547|919
+Illingen|DE||4937|705
+Malgrat de Mar|ES||4165|274
+Wadgassen|DE||4927|678
+Sant Quirze del Vallès|ES||4153|208
+Annonay|FR||4524|467
+Olten|CH|SO|4735|790
+Crocetta|IT||4506|767
+Mauguio|FR||4362|401
+Chennevières-sur-Marne|FR||4880|254
+Martigny-Ville|CH|VS|4610|707
+Vanchiglietta|IT||4507|772
+Autun|FR||4695|430
+Saint-Avold|FR||4910|670
+Pfullingen|DE||4846|923
+Alzey|DE||4975|812
+Buchen in Odenwald|DE||4952|932
+Givors|FR||4559|477
+Wettingen|CH|AG|4747|833
+Allschwil|CH|BL|4755|754
+Joinville-le-Pont|FR||4883|247
+Tettnang|DE||4767|959
+Müllheim|DE||4781|763
+Korntal|DE||4883|912
+Eppelborn|DE||4940|697
+Benicàssim|ES||4005|7
+Melzo|IT||4550|942
+Dudelange|LU|ES|4948|609
+Castelnau-le-Lez|FR||4364|390
+Palazzolo sull'Oglio|IT||4560|989
+Zürich (Kreis 11) / Oerlikon|CH|ZH|4741|854
+Bad Saulgau|DE||4802|950
+Montigny-lès-Cormeilles|FR||4898|220
+La Crau|FR||4315|607
+Firminy|FR||4539|429
+Palamós|ES||4185|313
+Wittlich|DE||4999|689
+Zürich (Kreis 11) / Seebach|CH|ZH|4742|855
+Reinheim|DE||4983|884
+Acqui Terme|IT||4468|847
+Arheilgen|DE||4991|866
+Orsay|FR||4870|219
+Bexbach|DE||4935|726
+La Pomme|FR||4329|544
+Le Pré-Saint-Gervais|FR||4889|240
+Lucé|FR||4844|146
+Domodossola|IT||4612|829
+Monthey|CH|VS|4625|695
+Les Clayes-sous-Bois|FR||4882|199
+Gartenstadt|DE||4946|840
+Salpêtrière|FR||4884|236
+Babenhausen|DE||4997|895
+Toul|FR||4868|589
+Jona|CH|SG|4723|884
+Parets del Vallès|ES||4157|223
+Marseille 16|FR||4336|533
+Schmelz|DE||4943|685
+Villeneuve-le-Roi|FR||4874|240
+Romano di Lombardia|IT||4552|975
+Mazargues|FR||4325|540
+Saint-Jean-de-la-Ruelle|FR||4791|186
+Adriano|IT||4551|925
+Montargis|FR||4800|273
+Renningen|DE||4877|894
+Ciriè|IT||4523|760
+Soisy-sous-Montmorency|FR||4899|230
+Bischheim|FR||4862|775
+Marly-le-Roi|FR||4887|208
+Lattes|FR||4357|390
+Saint-Cyr-sur-Loire|FR||4740|67
+Fos-sur-Mer|FR||4344|494
+Arcueil|FR||4880|233
+Vilaseca|ES||4206|226
+La Pineda|ES||4108|118
+Valenza|IT||4501|864
+Onex|CH|GE|4618|610
+Lingolsheim|FR||4856|768
+Michelstadt|DE||4968|900
+Wörth am Rhein|DE||4905|826
+Cassano d'Adda|IT||4553|952
+Vitry-le-François|FR||4872|458
+Zürich (Kreis 11) / Affoltern|CH|ZH|4742|851
+Elbeuf|FR||4929|100
+Berga|ES||4210|185
+Tradate|IT||4571|891
+Zürich (Kreis 10) / Höngg|CH|ZH|4740|850
+Albenga|IT||4405|822
+Vimodrone|IT||4551|929
+Gossau|CH|SG|4742|925
+Monzón|ES||4191|19
+Nerviano|IT||4555|898
+Pamiers|FR||4312|161
+Montereau-Fault-Yonne|FR||4838|295
+Polo Nord|IT||4505|765
+Tulle|FR||4527|177
+L'Isle-sur-la-Sorgue|FR||4392|505
+Sestri Levante|IT||4427|940
+Muttenz|CH|BL|4752|765
+Barbastro|ES||4204|13
+Tassin-la-Demi-Lune|FR||4575|479
+Piossasco|IT||4499|746
+Caldes de Montbui|ES||4163|217
+Sant Celoni|ES||4169|249
+Stockach|DE||4785|901
+Balaguer|ES||4179|81
+Savigliano|IT||4465|766
+Nyon|CH|VD|4638|624
+Sierre|CH|VS|4629|754
+Verneuil-sur-Seine|FR||4897|196
+Verrières-le-Buisson|FR||4875|227
+Solothurn|CH|SO|4721|754
+Le Vésinet|FR||4889|213
+Sallanches|FR||4594|663
+Cham|CH|ZG|4718|846
+Melegnano|IT||4536|932
+Montivilliers|FR||4955|19
+Arcore|IT||4563|932
+Domont|FR||4903|233
+Losheim|DE||4951|675
+Alpignano|IT||4509|752
+Cardedeu|ES||4164|236
+Sigmaringen|DE||4809|923
+Le Camas|FR||4329|539
+Bad Säckingen|DE||4755|795
+Bareggio|IT||4548|900
+Osny|FR||4907|206
+Bovisio-Masciago|IT||4561|915
+Tàrrega|ES||4165|114
+Saluzzo|IT||4465|749
+Le Pecq|FR||4889|210
+Las Tres Torres|ES||4140|213
+Zürich (Kreis 9) / Albisrieden|CH|ZH|4737|849
+Wadern|DE||4954|689
+Erba|IT||4581|923
+Burgdorf|CH|BE|4706|763
+Seeheim-Jugenheim|DE||4976|865
+Caronno Pertusella|IT||4560|905
+Sulzbach|DE||4930|706
+Saint-Cyr-l'École|FR||4880|207
+Oberwinterthur (Kreis 2)|CH|ZH|4752|877
+Großostheim|DE||4992|908
+Laxou|FR||4868|615
+Hohenems|AT||4736|969
+Kloten|CH|ZH|4745|858
+Pully|CH|VD|4651|666
+Moissy-Cramayel|FR||4863|260
+Baiersbronn|DE||4850|838
+Saran|FR||4795|188
+Bry-sur-Marne|FR||4884|252
+Stadt Winterthur (Kreis 1)|CH|ZH|4749|872
+Le Pontet|FR||4396|486
+Montbrison|FR||4561|407
+Viroflay|FR||4880|216
+Lohr am Main|DE||4999|957
+Littau|CH|LU|4705|826
+Saint-Loup|FR||4328|543
+Saint-Leu-la-Forêt|FR||4902|225
+Zürich (Kreis 2) / Wollishofen|CH|ZH|4734|853
+Saint-Fons|FR||4571|485
+Ginsheim-Gustavsburg|DE||4997|835
+Canovelles|ES||4162|228
+Petershausen-West|DE||4767|918
+Monte-Carlo|MC||4374|743
+Saint-Avertin|FR||4736|74
+Châteaudun|FR||4807|134
+Quartiere Otto|IT||4549|914
+Issoire|FR||4554|325
+Beckingen|DE||4940|670
+Gien|FR||4769|263
+Hostafrancs|ES||4138|214
+Gentilly|FR||4881|234
+Château-Thierry|FR||4905|340
+Port-de-Bouc|FR||4341|498
+Grenchen|CH|SO|4719|740
+Ebersbach an der Fils|DE||4872|952
+Unterkrozingen|DE||4792|769
+Saint-Égrève|FR||4523|568
+Villers-lès-Nancy|FR||4867|615
+Brie-Comte-Robert|FR||4869|261
+Boissy-Saint-Léger|FR||4875|251
+Einsiedeln|CH|SZ|4713|875
+les Escaldes|AD||4251|153
+Guéret|FR||4617|187
+Locarno|CH|TI|4617|880
+Sant Just Desvern|ES||4138|207
+Chenôve|FR||4729|500
+Schiffweiler|DE||4937|713
+Salsomaggiore Terme|IT||4482|999
+Wittenheim|FR||4781|733
+Herisau|CH|AR|4739|928
+Canteleu|FR||4944|102
+Wendlingen am Neckar|DE||4867|938
+Zürich (Kreis 10) / Wipkingen|CH|ZH|4740|853
+Steffisburg|CH|BE|4678|763
+Morges|CH|VD|4651|650
+Galliate|IT||4548|870
+Crépy-en-Valois|FR||4923|289
+Yutz|FR||4936|619
+Riegelsberg|DE||4930|693
+Klingenstein|DE||4842|991
+les Roquetes|ES||4145|218
+Eberbach|DE||4947|899
+Marbach am Neckar|DE||4894|926
+Audincourt|FR||4748|685
+Vallcarca|ES||4141|214
+el Turó de la Peira|ES||4143|217
+Balma|FR||4361|150
+Chiari|IT||4554|993
+Zürich (Kreis 8)|CH|ZH|4735|856
+Lognes|FR||4884|263
+Sant Carles de la Ràpita|ES||4062|60
+Montornès del Vallès|ES||4154|227
+Hayange|FR||4933|606
+Les Moulins|FR||4368|720
+Tergnier|FR||4966|330
+Malnate|IT||4579|888
+Carrières-sous-Poissy|FR||4895|204
+Illzach|FR||4777|735
+Seen (Kreis 3)|CH|ZH|4748|877
+Pont-à-Mousson|FR||4891|606
+Carate Brianza|IT||4568|924
+Cugnaux|FR||4354|134
+Éragny|FR||4902|210
+Carugate|IT||4555|934
+Ober-Ramstadt|DE||4983|875
+Piera|ES||4152|175
+Noisiel|FR||4885|262
+Bürstadt|DE||4964|846
+Tordera|ES||4170|272
+Arenys de Mar|ES||4158|255
+La Blancarde|FR||4330|541
+Saint-Pierre-des-Corps|FR||4739|75
+Lauda-Königshofen|DE||4957|971
+Coulommiers|FR||4881|308
+Karlstadt|DE||4996|977
+Torredembarra|ES||4115|140
+Montesson|FR||4891|214
+Freiberg am Neckar|DE||4893|920
+Adliswil|CH|ZH|4731|852
+Saint-Maximin-la-Sainte-Baume|FR||4345|586
+la Barceloneta|ES||4138|219
+Eggenstein-Leopoldshafen|DE||4909|840
+Schwyz|CH|SZ|4702|865
+Les Olives|FR||4332|546
+Dieburg|DE||4990|885
+la Guineueta|ES||4144|217
+Noyon|FR||4958|300
+Paris 01 Louvre|FR||4886|234
+Bludenz|AT||4715|982
+Brackenheim|DE||4908|907
+Künzelsau|DE||4928|968
+Porte Saint-Denis|FR||4887|235
+Trossingen|DE||4808|864
+Brignoles|FR||4341|606
+Avon|FR||4840|272
+Vaduz|LI||4714|952

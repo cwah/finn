@@ -1,0 +1,345 @@
+Asunción|PY||-2529|-5765
+Campo Grande|BR||-2044|-5465
+Londrina|BR||-2331|-5116
+Caxias do Sul|BR||-2917|-5118
+Maringá|BR||-2343|-5194
+Cascavel|BR||-2496|-5346
+Corrientes|AR||-2747|-5883
+Canoas|BR||-2992|-5118
+Posadas|AR||-2739|-5592
+Ciudad del Este|PY||-2550|-5465
+Foz do Iguaçu|BR||-2555|-5459
+Ponta Grossa|BR||-2510|-5016
+Resistencia|AR||-2746|-5899
+Chapecó|BR||-2710|-5262
+Santa Maria|BR||-2968|-5381
+Gravataí|BR||-2994|-5099
+Dourados|BR||-2222|-5481
+Novo Hamburgo|BR||-2968|-5113
+Presidente Prudente|BR||-2213|-5139
+San Lorenzo|PY||-2534|-5751
+Formosa|AR||-2618|-5817
+Passo Fundo|BR||-2826|-5241
+São Leopoldo|BR||-2976|-5115
+Araçatuba|BR||-2121|-5043
+Capiatá|PY||-2536|-5745
+Guarapuava|BR||-2539|-5147
+Lages|BR||-2782|-5033
+Ituzaingó|AR||-2759|-5669
+Toledo|BR||-2471|-5374
+Três Lagoas|BR||-2079|-5170
+Cachoeirinha|BR||-2995|-5109
+Santa Cruz do Sul|BR||-2972|-5243
+Apucarana|BR||-2355|-5146
+Sapucaia do Sul|BR||-2982|-5115
+Bento Gonçalves|BR||-2917|-5152
+Lambaré|PY||-2535|-5761
+Arapongas|BR||-2342|-5142
+Birigui|BR||-2129|-5034
+Umuarama|BR||-2377|-5332
+Uruguaiana|BR||-2975|-5709
+Fernando de la Mora|PY||-2534|-5752
+Sarandi|BR||-2344|-5187
+Cambé|BR||-2328|-5128
+Assis|BR||-2266|-5041
+Campo Mourão|BR||-2404|-5238
+Francisco Beltrão|BR||-2608|-5306
+Ponta Porã|BR||-2254|-5573
+Limpio|PY||-2517|-5749
+Erechim|BR||-2763|-5228
+Paranavaí|BR||-2307|-5247
+Nemby|PY||-2539|-5754
+Lajeado|BR||-2947|-5196
+Reconquista|AR||-2915|-5965
+Ijuí|BR||-2839|-5391
+Pato Branco|BR||-2623|-5267
+Cianorte|BR||-2366|-5260
+Telêmaco Borba|BR||-2432|-5062
+Caçador|BR||-2678|-5102
+Santo Ângelo|BR||-2830|-5426
+Santa Rosa|BR||-2787|-5448
+Esteio|BR||-2986|-5118
+Rolândia|BR||-2331|-5137
+Sapiranga|BR||-2964|-5101
+Concórdia|BR||-2723|-5203
+Pedro Juan Caballero|PY||-2255|-5574
+Encarnación|PY||-2733|-5587
+Alegrete|BR||-2978|-5579
+Mariano Roque Alonso|PY||-2521|-5753
+Castro|BR||-2479|-5001
+Fernandópolis|BR||-2028|-5025
+Farroupilha|BR||-2922|-5135
+Goya|AR||-2914|-5926
+Venâncio Aires|BR||-2961|-5219
+Tupã|BR||-2193|-5051
+Itauguá|PY||-2539|-5735
+Montenegro|BR||-2969|-5146
+Vacaria|BR||-2851|-5093
+Villa Elisa|PY||-2537|-5759
+Capão da Canoa|BR||-2975|-5001
+Campo Bom|BR||-2968|-5105
+Carazinho|BR||-2828|-5279
+Penápolis|BR||-2142|-5008
+São Borja|BR||-2866|-5600
+Irati|BR||-2547|-5065
+Cruz Alta|BR||-2864|-5361
+União da Vitória|BR||-2623|-5109
+Taquara|BR||-2965|-5078
+Villa Hayes|PY||-2509|-5753
+Andradina|BR||-2090|-5138
+Caacupé|PY||-2539|-5714
+Oberá|AR||-2749|-5512
+San Antonio|PY||-2542|-5755
+Naviraí|BR||-2306|-5419
+Videira|BR||-2701|-5115
+Canoinhas|BR||-2618|-5039
+Caaguazú|PY||-2547|-5602
+Presidente Franco|PY||-2556|-5461
+Eldorado|AR||-2640|-5462
+Marechal Cândido Rondon|BR||-2456|-5406
+Tramandaí|BR||-2998|-5013
+Parobé|BR||-2963|-5083
+Palmas|BR||-2648|-5199
+Xanxerê|BR||-2688|-5240
+Ibiporã|BR||-2327|-5105
+Coronel Oviedo|PY||-2545|-5644
+Barranqueras|AR||-2748|-5894
+Estância Velha|BR||-2965|-5117
+Prudentópolis|BR||-2521|-5098
+Santiago|BR||-2919|-5487
+Jales|BR||-2027|-5055
+Nova Andradina|BR||-2223|-5334
+Aquidauana|BR||-2047|-5579
+Concepción|PY||-2340|-5743
+Maracaju|BR||-2161|-5517
+Cornélio Procópio|BR||-2318|-5065
+San Lorenzo|AR||-2813|-5877
+Osório|BR||-2989|-5027
+Sidrolândia|BR||-2093|-5496
+São Mateus do Sul|BR||-2587|-5038
+Medianeira|BR||-2530|-5409
+Dracena|BR||-2148|-5153
+Canela|BR||-2936|-5081
+Dois Vizinhos|BR||-2573|-5306
+Marau|BR||-2845|-5220
+Santo Antônio da Platina|BR||-2330|-5008
+São Miguel d'Oeste|BR||-2673|-5352
+Panambi|BR||-2829|-5350
+Paso de los Libres|AR||-2971|-5709
+Santo Antônio da Patrulha|BR||-2982|-5052
+Paiçandu|BR||-2346|-5205
+Villarrica|PY||-2575|-5644
+Paraguaçu Paulista|BR||-2241|-5058
+Gramado|BR||-2938|-5087
+Curitibanos|BR||-2728|-5058
+Presidente Epitácio|BR||-2176|-5212
+Amambai|BR||-2310|-5523
+Doctor Juan Eulogio Estigarribia|PY||-2537|-5570
+San Vicente|AR||-2662|-5413
+Rio Brilhante|BR||-2180|-5455
+Villeta|PY||-2551|-5757
+Campos Novos|BR||-2740|-5122
+Fraiburgo|BR||-2703|-5092
+Curuzú Cuatiá|AR||-2979|-5805
+Marialva|BR||-2348|-5179
+Itaqui|BR||-2913|-5655
+Adamantina|BR||-2169|-5107
+Porto União|BR||-2624|-5108
+Garibaldi|BR||-2926|-5153
+Presidente Venceslau|BR||-2188|-5184
+Charqueadas|BR||-2995|-5163
+Santa Fé do Sul|BR||-2021|-5093
+Rio Pardo|BR||-2999|-5238
+Mandaguari|BR||-2352|-5168
+Palmeira|BR||-2543|-5001
+Portão|BR||-2970|-5124
+Assis Chateaubriand|BR||-2442|-5352
+Guaíra|BR||-2408|-5425
+São Luiz Gonzaga|BR||-2841|-5496
+Palmeira das Missões|BR||-2790|-5331
+Imbituva|BR||-2523|-5060
+Pilar|PY||-2686|-5831
+Igrejinha|BR||-2957|-5079
+Teutônia|BR||-2945|-5181
+Pinhão|BR||-2570|-5166
+Estrela|BR||-2950|-5197
+Laranjeiras do Sul|BR||-2541|-5242
+Palotina|BR||-2428|-5384
+Puerto Iguazú|AR||-2560|-5457
+Ivaiporã|BR||-2425|-5168
+Xaxim|BR||-2696|-5253
+General José de San Martín|AR||-2654|-5934
+Ibaiti|BR||-2385|-5019
+Frederico Westphalen|BR||-2736|-5339
+Mandaguaçu|BR||-2335|-5210
+Yby Yaú|PY||-2297|-5654
+Bandeirantes|BR||-2311|-5037
+Osvaldo Cruz|BR||-2180|-5088
+Flores da Cunha|BR||-2903|-5118
+Guararapes|BR||-2126|-5064
+Quedas do Iguaçu|BR||-2545|-5290
+Dois Irmãos|BR||-2958|-5109
+Mercedes|AR||-2918|-5808
+Caarapó|BR||-2263|-5482
+Carlos Barbosa|BR||-2930|-5150
+Apóstoles|AR||-2791|-5575
+Joaçaba|BR||-2718|-5150
+Pitanga|BR||-2476|-5176
+Soledade|BR||-2882|-5251
+Triunfo|BR||-2994|-5172
+Cândido Mota|BR||-2275|-5039
+San Vicente|AR||-2700|-5448
+Nova Santa Rita|BR||-2985|-5128
+Candelária|BR||-2967|-5279
+Garupá|AR||-2748|-5583
+Gobernador Virasora|AR||-2805|-5603
+Santo Antônio do Sudoeste|BR||-2607|-5373
+Rancharia|BR||-2223|-5089
+Goioerê|BR||-2418|-5303
+Álvares Machado|BR||-2208|-5147
+Miranda|BR||-2024|-5638
+Mirandópolis|BR||-2113|-5110
+Aparecida do Taboado|BR||-2009|-5109
+Lagoa Vermelha|BR||-2821|-5153
+Nova Prata|BR||-2878|-5161
+São Miguel do Iguaçu|BR||-2535|-5424
+Leandro N. Alem|AR||-2760|-5532
+Reserva|BR||-2465|-5085
+Imbé|BR||-2998|-5013
+Ilha Solteira|BR||-2043|-5134
+Santa Helena|BR||-2486|-5433
+Fontana|AR||-2742|-5904
+Vera Cruz|BR||-2972|-5250
+Nova Esperança|BR||-2318|-5220
+Veranópolis|BR||-2894|-5155
+Astorga|BR||-2323|-5167
+Maravilha|BR||-2676|-5317
+Três Passos|BR||-2746|-5393
+Pirapozinho|BR||-2228|-5150
+Guaporé|BR||-2885|-5189
+Taquari|BR||-2980|-5186
+Três de Maio|BR||-2777|-5424
+Jardín América|AR||-2704|-5523
+Martinópolis|BR||-2215|-5117
+São Lourenço do Oeste|BR||-2636|-5285
+Sarandi|BR||-2794|-5292
+Ubiratã|BR||-2455|-5299
+Ivoti|BR||-2959|-5116
+Tapejara|BR||-2807|-5201
+São Sebastião do Caí|BR||-2959|-5138
+Três Coroas|BR||-2952|-5078
+São Jerônimo|BR||-2996|-5172
+Santa Terezinha de Itaipu|BR||-2544|-5440
+Valparaíso|BR||-2123|-5087
+Estrela|BR||-2806|-5094
+Colorado|BR||-2284|-5197
+Itaporã|BR||-2208|-5479
+Anastácio|BR||-2048|-5581
+Pereira Barreto|BR||-2064|-5111
+Caazapá|PY||-2620|-5637
+Jardim|BR||-2148|-5614
+Cruzeiro do Oeste|BR||-2378|-5307
+Carambeí|BR||-2495|-5012
+San Pedro|AR||-2662|-5411
+Bonito|BR||-2112|-5648
+Avellaneda|AR||-2912|-5966
+Capinzal|BR||-2734|-5161
+Nova Petrópolis|BR||-2938|-5111
+Loanda|BR||-2292|-5314
+Cambará|BR||-2305|-5007
+Ribas do Rio Pardo|BR||-2044|-5376
+Bataguassu|BR||-2171|-5242
+Encantado|BR||-2924|-5187
+Campo Verde|BR||-2042|-5407
+Santo Tomé|AR||-2855|-5604
+Montecarlo|AR||-2657|-5476
+Teodoro Sampaio|BR||-2253|-5217
+Pinhalzinho|BR||-2685|-5299
+Ortigueira|BR||-2421|-5095
+Arroio do Meio|BR||-2940|-5194
+São Francisco de Paula|BR||-2945|-5058
+Nova Alvorada do Sul|BR||-2147|-5438
+Herval dOeste|BR||-2719|-5149
+Bela Vista|BR||-2211|-5653
+Ibirubá|BR||-2863|-5309
+Bastos|BR||-2192|-5073
+Rolante|BR||-2965|-5058
+Jandaia do Sul|BR||-2360|-5164
+São Marcos|BR||-2897|-5107
+Fátima do Sul|BR||-2237|-5451
+Tibagi|BR||-2451|-5041
+Coronel Vivida|BR||-2598|-5257
+Junqueirópolis|BR||-2151|-5143
+Pompéia|BR||-2211|-5017
+Regente Feijó|BR||-2222|-5130
+Nova Hartz|BR||-2958|-5090
+Lucélia|BR||-2172|-5102
+Tupanciretã|BR||-2908|-5384
+Castilho|BR||-2087|-5149
+Andirá|BR||-2305|-5023
+Três Barras|BR||-2611|-5032
+Ampére|BR||-2592|-5347
+Palmital|BR||-2279|-5022
+El Soberbio|AR||-2730|-5420
+Itaquiraí|BR||-2347|-5418
+Horizontina|BR||-2763|-5431
+Chopinzinho|BR||-2586|-5252
+Papanduva|BR||-2637|-5014
+Capanema|BR||-2567|-5381
+Pirané|AR||-2573|-5911
+Villa Ocampo|AR||-2849|-5935
+Altônia|BR||-2387|-5390
+Cruz Machado|BR||-2602|-5135
+Seara|BR||-2715|-5231
+Itá|PY||-2550|-5737
+Cafelândia|BR||-2462|-5332
+Saladas|AR||-2826|-5862
+Júlio de Castilhos|BR||-2923|-5368
+São Francisco de Assis|BR||-2955|-5513
+Terra Roxa|BR||-2416|-5410
+Matelândia|BR||-2524|-5398
+Santo Anastácio|BR||-2198|-5165
+Não-Me-Toque|BR||-2846|-5282
+Terenos|BR||-2044|-5486
+Puerto Rico|AR||-2681|-5502
+Rosana|BR||-2258|-5306
+Abelardo Luz|BR||-2656|-5233
+Otacílio Costa|BR||-2748|-5012
+Buritama|BR||-2107|-5015
+Terra Boa|BR||-2377|-5244
+Corbélia|BR||-2480|-5331
+Serafina Corrêa|BR||-2871|-5194
+Realeza|BR||-2577|-5353
+Terra Rica|BR||-2273|-5262
+Água Clara|BR||-2045|-5288
+Mangueirinha|BR||-2594|-5218
+Itapiranga|BR||-2717|-5371
+Getúlio Vargas|BR||-2789|-5223
+San Juan Bautista|PY||-2667|-5714
+Xangri-lá|BR||-2980|-5004
+Loma Plata|PY||-2238|-5984
+Clevelândia|BR||-2640|-5235
+Sertanópolis|BR||-2306|-5104
+Bituruna|BR||-2616|-5155
+Faxinal|BR||-2400|-5132
+Tapejara|BR||-2373|-5287
+Sananduva|BR||-2795|-5181
+Agudo|BR||-2965|-5324
+Giruá|BR||-2803|-5435
+Mirante do Paranapanema|BR||-2229|-5191
+Tupi Paulista|BR||-2138|-5157
+Iporã|BR||-2400|-5370
+Correia Pinto|BR||-2758|-5036
+Palmitos|BR||-2707|-5316
+Espumoso|BR||-2872|-5285
+Puerto Esperanza|AR||-2602|-5461
+São Pedro do Sul|BR||-2962|-5418
+Santa Cecília|BR||-2696|-5043
+Colonia Wanda|AR||-2597|-5456
+Bela Vista do Paraíso|BR||-2300|-5119
+San Luis del Palmar|AR||-2751|-5856
+Rio Azul|BR||-2573|-5080
+Santo Cristo|BR||-2782|-5466
+Salto do Lontra|BR||-2578|-5331
+Tamarana|BR||-2372|-5110
+Dionísio Cerqueira|BR||-2626|-5364

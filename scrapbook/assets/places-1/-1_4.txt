@@ -1,0 +1,7 @@
+Kismayo|SO||-36|4255
+Malindi|KE||-322|4012
+Kaambooni|SO||-164|4159
+Masalani|KE||-169|4017
+Watamu|KE||-335|4002
+Lamu|KE||-227|4090
+Hola|KE||-148|4003

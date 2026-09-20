@@ -1,0 +1,104 @@
+Quito|EC||-23|-7852
+Guayaquil|EC||-220|-7989
+Trujillo|PE||-812|-7903
+Cuenca|EC||-290|-7900
+Chiclayo|PE||-677|-7985
+Santo Domingo de los Colorados|EC||-25|-7918
+Ambato|EC||-125|-7862
+Iquitos|PE||-375|-7325
+Pucallpa|PE||-838|-7455
+Chimbote|PE||-908|-7859
+Eloy Alfaro|EC||-217|-7984
+Machala|EC||-326|-7996
+Loja|EC||-399|-7920
+Riobamba|EC||-167|-7866
+Quevedo|EC||-103|-7946
+Latacunga|EC||-93|-7862
+Cajamarca|PE||-716|-7850
+Huánuco|PE||-993|-7624
+Daule|EC||-186|-7998
+Milagro|EC||-213|-7959
+Huaraz|PE||-953|-7753
+Cruzeiro do Sul|BR||-763|-7268
+San Juan|PE||-378|-7328
+Babahoyo|EC||-180|-7952
+San Fernando|PE||-840|-7454
+Belen|PE||-376|-7325
+Tingo María|PE||-930|-7600
+Jaén|PE||-571|-7881
+Moyobamba|PE||-603|-7697
+El Empalme|EC||-104|-7964
+Puerto Francisco de Orellana|EC||-45|-7700
+Centenario|PE||-952|-7753
+Pasaje|EC||-333|-7981
+Benjamin Constant|BR||-438|-7003
+Lambayeque|PE||-670|-7991
+Picsi|PE||-672|-7977
+Tarauacá|BR||-816|-7077
+Chepén|PE||-722|-7942
+Yurimaguas|PE||-590|-7612
+Santa Rosa|EC||-346|-7996
+Balzar|EC||-137|-7991
+Saña|PE||-692|-7958
+Ventanas|EC||-144|-7946
+Juanjuí|PE||-718|-7673
+La Troncal|EC||-242|-7934
+Feijó|BR||-817|-7035
+Azogues|EC||-274|-7885
+Ferreñafe|PE||-664|-7979
+Naranjito|EC||-217|-7946
+Vinces|EC||-156|-7975
+Chocope|PE||-779|-7922
+El Triunfo|EC||-193|-7997
+Naranjal|EC||-268|-7962
+Chachapoyas|PE||-623|-7787
+Ipixuna|BR||-705|-7169
+Pacasmayo|PE||-740|-7957
+Tocache|PE||-819|-7652
+Pomasqui|EC||-5|-7845
+Yaguachi Nuevo|EC||-210|-7969
+La Peca|PE||-561|-7844
+Guabo|EC||-324|-7983
+Machachi|EC||-51|-7857
+Monsefú|PE||-687|-7987
+Guadalupe|PE||-725|-7948
+Requena|PE||-506|-7385
+Rioja|PE||-606|-7717
+La Banda|PE||-649|-7634
+Puyo|EC||-149|-7800
+Laredo|PE||-809|-7896
+Samborondón|EC||-196|-7973
+Macas|EC||-231|-7812
+Moche|PE||-817|-7901
+Guaranda|EC||-159|-7900
+Santiago de Cao|PE||-796|-7924
+Huamachuco|PE||-780|-7807
+Paiján|PE||-773|-7930
+Contamana|PE||-733|-7502
+Virú|PE||-842|-7875
+Bagua Grande|PE||-576|-7844
+Boca Suno|EC||-70|-7714
+Puerto Leguízamo|CO||-19|-7478
+Marechal Thaumaturgo|BR||-894|-7279
+Mâncio Lima|BR||-761|-7290
+Valencia|EC||-95|-7936
+Catamayo|EC||-399|-7936
+Aguaytía|PE||-904|-7551
+Uchiza|PE||-846|-7646
+Tena|EC||-100|-7781
+Gualaceo|EC||-289|-7878
+Piñas|EC||-368|-7968
+Guajará|BR||-755|-7258
+Cariamanga|EC||-433|-7956
+Pelileo|EC||-133|-7855
+La Maná|EC||-94|-7923
+San Pedro de Lloc|PE||-743|-7950
+Pujilí|EC||-96|-7870
+Chongoyape|PE||-664|-7939
+Atalaia do Norte|BR||-437|-7019
+Pimentel|PE||-684|-7993
+Montalvo|EC||-179|-7929
+Zamora|EC||-406|-7895
+Pátapo|PE||-673|-7964
+Bellavista|PE||-706|-7659
+Coishco|PE||-902|-7862

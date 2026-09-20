@@ -1,0 +1,881 @@
+Rome|IT||4189|1251
+Budapest|HU||4750|1904
+Vienna|AT||4821|1637
+Munich|DE||4814|1158
+Pest|HU||4750|1908
+Naples|IT||4085|1427
+Sarajevo|BA||4385|1836
+Zagreb|HR||4581|1598
+Nuremberg|DE||4945|1108
+Buda|HU||4750|1903
+Bratislava|SK||4815|1711
+Tirana|AL||4133|1982
+Brno|CZ||4920|1661
+Bologna|IT||4449|1134
+Florence|IT||4378|1125
+Bari|IT||4112|1687
+Graz|AT||4707|1544
+Augsburg|DE||4837|1090
+Ostrava|CZ||4983|1828
+Ljubljana|SI||4605|1451
+Verona|IT||4544|1099
+Podgorica|ME||4244|1926
+Banja Luka|BA||4478|1721
+Novi Sad|RS|VO|4525|1984
+Linz|AT||4831|1429
+Trieste|IT||4565|1378
+Padua|IT||4541|1189
+Favoriten|AT||4816|1638
+Brescia|IT||4554|1021
+Taranto|IT||4046|1725
+Parma|IT||4480|1033
+Durrës|AL||4132|1945
+Prato|IT||4388|1110
+Pilsen|CZ||4975|1338
+Donaustadt|AT||4823|1646
+Modena|IT||4465|1093
+Bielsko-Biala|PL||4982|1905
+Reggio nell'Emilia|IT||4470|1063
+Zenica|BA||4420|1790
+Floridsdorf|AT||4825|1640
+Salzburg|AT||4780|1304
+Livorno|IT||4354|1033
+Regensburg|DE||4902|1210
+Split|HR||4351|1644
+Rimini|IT||4406|1257
+Mestre|IT||4549|1225
+Pécs|HU||4608|1823
+Tuzla|BA||4454|1867
+Budapest XI. kerület|HU||4748|1904
+Foggia|IT||4146|1555
+Innsbruck|AT||4726|1139
+Fürth|DE||4948|1099
+Ferrara|IT||4484|1162
+Zugló|HU||4752|1911
+Acilia-Castel Fusano-Ostia Antica|IT||4176|1233
+Győr|HU||4768|1764
+Salerno|IT||4068|1479
+Budapest III. kerület|HU||4754|1905
+Trento|IT||4607|1112
+Ingolstadt|DE||4877|1142
+Perugia|IT||4311|1239
+Pescara|IT||4246|1420
+Forlì|IT||4422|1204
+Vlorë|AL||4047|1948
+Budapest XIII. kerület|HU||4753|1908
+Petržalka|SK||4812|1713
+Vicenza|IT||4555|1155
+Terni|IT||4256|1264
+Pisa|IT||4371|1040
+Kecskemét|HU||4691|1969
+Rijeka|HR||4533|1444
+Bolzano|IT||4649|1134
+Ottakring|AT||4822|1630
+Mostar|BA||4334|1781
+Erlangen|DE||4959|1101
+Székesfehérvár|HU||4719|1841
+Simmering|AT||4818|1643
+Arezzo|IT||4346|1188
+Újpest|HU||4757|1908
+Klagenfurt am Wörthersee|AT||4662|1431
+Udine|IT||4607|1324
+Subotica|RS|VO|4610|1967
+Andria|IT||4123|1630
+Olomouc|CZ||4960|1725
+Landstraße|AT||4820|1639
+Budapest IV. kerület|HU||4756|1909
+Penzing|AT||4820|1627
+Meidling|AT||4817|1633
+Cesena|IT||4414|1224
+Maribor|SI||4656|1565
+Jastrzębie Zdrój|PL||4996|1857
+Shkodër|AL||4207|1951
+České Budějovice|CZ||4897|1447
+Barletta|IT||4131|1628
+Budapest XVIII. kerület|HU||4744|1918
+Ancona|IT||4361|1351
+Guidonia Montecelio|IT||4199|1272
+Budapest II. kerület|HU||4752|1902
+Campo di Marte|IT||4378|1128
+Brindisi|IT||4063|1794
+Brigittenau|AT||4824|1638
+Brno střed|CZ||4919|1661
+Nitra|SK||4831|1808
+Treviso|IT||4567|1224
+Torre del Greco|IT||4079|1437
+Lido di Ostia|IT||4173|1228
+Havířov|CZ||4978|1844
+Budapest VIII. kerület|HU||4749|1907
+Lucca|IT||4384|1050
+Pozzuoli|IT||4084|1410
+Žilina|SK||4922|1874
+Ravenna|IT||4441|1220
+Fiumicino|IT||4177|1224
+Lecce|IT||4035|1817
+Giugliano in Campania|IT||4093|1420
+Budapest XV. kerület|HU||4756|1912
+Kőbánya|HU||4748|1914
+Budapest XVII. kerület|HU||4748|1925
+Szombathely|HU||4723|1662
+Bogenhausen|DE||4815|1162
+Pesaro|IT||4391|1292
+Józsefváros|HU||4749|1907
+Fuorigrotta|IT||4083|1420
+Fünfhaus|AT||4820|1632
+Budapest XXI. kerület|HU||4742|1907
+Latina|IT||4147|1290
+Bihać|BA||4482|1587
+Osijek|HR||4555|1869
+Döbling|AT||4825|1633
+Aprilia|IT||4159|1265
+Banská Bystrica|SK||4874|1915
+Casoria|IT||4091|1429
+Pistoia|IT||4393|1092
+Zlín|CZ||4923|1767
+Bayreuth|DE||4995|1158
+Caserta|IT||4107|1433
+Landshut|DE||4853|1216
+Ilidža|BA||4383|1831
+Cremona|IT||4513|1002
+Carpi|IT||4478|1088
+Altamura|IT||4083|1655
+Bamberg|DE||4990|1090
+Imola|IT||4436|1171
+San Carlo All'Arena|IT||4087|1426
+Budapest XVI. kerület|HU||4751|1917
+Arenella|IT||4086|1422
+Zadar|HR||4412|1523
+Aalen|DE||4884|1009
+Castellammare di Stabia|IT||4070|1449
+Tatabánya|HU||4759|1838
+Massa|IT||4404|1014
+Afragola|IT||4092|1431
+Kaposvár|HU||4637|1780
+Užice|RS|SE|4386|1985
+Budapest XX. kerület|HU||4744|1910
+Lushnjë|AL||4094|1970
+Trnava|SK||4838|1759
+Érd|HU||4739|1891
+Sopron|HU||4769|1659
+Berat|AL||4071|1995
+Viareggio|IT||4387|1025
+Angyalföld|HU||4755|1908
+Erzsébetváros|HU||4750|1907
+Zalaegerszeg|HU||4684|1684
+Budapest XIX. kerület|HU||4745|1915
+Kispest|HU||4745|1914
+Kempten (Allgäu)|DE||4773|1031
+Valjevo|RS|SE|4428|1990
+Fier-Çifçi|AL||4072|1957
+Fano|IT||4384|1302
+Grosseto|IT||4276|1111
+Matera|IT||4067|1660
+Rosenheim|DE||4786|1212
+Acerra|IT||4094|1437
+Molfetta|IT||4120|1660
+Ferencváros|HU||4748|1909
+Villach|AT||4661|1386
+Pestlőrinc|HU||4743|1922
+Carrara|IT||4408|1010
+Benevento|IT||4113|1478
+Trenčín|SK||4889|1804
+Nikšić|ME||4277|1894
+Pianura|IT||4086|1417
+Hernals|AT||4823|1631
+Manfredonia|IT||4163|1592
+Veszprém|HU||4709|1791
+Foligno|IT||4295|1270
+Budapest XII. kerület|HU||4749|1901
+Potenza|IT||4064|1581
+Fier|AL||4073|1956
+Bisceglie|IT||4124|1650
+Sesvete|HR||4583|1612
+Šabac|RS|SE|4475|1969
+Opava|CZ||4994|1790
+Margareten|AT||4819|1635
+Eisenzicken|AT||4728|1626
+Teramo|IT||4266|1370
+Hietzing|AT||4819|1630
+Cerignola|IT||4127|1590
+Trani|IT||4128|1641
+Siena|IT||4332|1133
+Portici|IT||4082|1434
+Frýdek-Místek|CZ||4968|1835
+Ercolano|IT||4081|1435
+Kelenföld|HU||4747|1903
+Montesilvano|IT||4251|1415
+Cava Dè Tirreni|IT||4070|1471
+Aversa|IT||4097|1421
+Velletri|IT||4169|1278
+Ponticelli|IT||4085|1433
+Pula|HR||4487|1385
+San Severo|IT||4169|1538
+Secondigliano|IT||4090|1427
+Bitonto|IT||4111|1669
+Währing|AT||4823|1634
+Neu-Ulm|DE||4839|1001
+Venice|IT||4544|1233
+Krujë|AL||4151|1979
+Martin|SK||4907|1892
+Aspern|AT||4822|1648
+Passau|DE||4857|1343
+Budapest XXII. kerület|HU||4743|1904
+Rovigo|IT||4507|1179
+Jihlava|CZ||4940|1559
+Dunaújváros|HU||4696|1894
+Heidenheim an der Brenz|DE||4868|1015
+Marano di Napoli|IT||4090|1419
+Pordenone|IT||4596|1266
+Nettuno|IT||4146|1266
+Campobasso|IT||4156|1467
+Scafati|IT||4076|1454
+Karviná|CZ||4985|1854
+Sombor|RS|VO|4577|1911
+Avellino|IT||4091|1479
+San Lorenzo|IT||4086|1426
+Civitavecchia|IT||4209|1180
+Nagykanizsa|HU||4645|1699
+Viterbo|IT||4242|1211
+Battipaglia|IT||4061|1498
+Chioggia|IT||4522|1228
+Corato|IT||4115|1641
+Staré Mesto|SK||4815|1709
+San Benedetto del Tronto|IT||4296|1388
+Casalnuovo di Napoli|IT||4091|1434
+Sesto Fiorentino|IT||4383|1120
+Nocera Inferiore|IT||4075|1465
+San Giorgio a Cremano|IT||4083|1434
+Anzio|IT||4145|1262
+Soccavo|IT||4085|1419
+Slavonski Brod|HR||4516|1802
+Scandicci|IT||4375|1119
+Wiener Neustadt|AT||4780|1623
+Vomero|IT||4084|1423
+Amberg|DE||4944|1186
+Straubing|DE||4888|1257
+Lukavac|BA||4454|1853
+Frosinone|IT||4164|1334
+Chieti|IT||4235|1416
+Memmingen|DE||4798|1019
+Marino|IT||4177|1266
+Arcella|IT||4542|1189
+Prievidza|SK||4877|1863
+Torre Annunziata|IT||4075|1445
+Prostějov|CZ||4947|1711
+Freising|DE||4840|1175
+Weiden|DE||4968|1216
+Kaufbeuren|DE||4788|1062
+Civitanova Marche|IT||4330|1372
+Gravina in Puglia|IT||4082|1642
+Budapest VI. kerület|HU||4750|1907
+Karlovac|HR||4549|1555
+San Donà di Piave|IT||4563|1257
+Ascoli Piceno|IT||4285|1357
+Faenza|IT||4429|1188
+Alsergrund|AT||4822|1636
+Vasto|IT||4211|1471
+Bugojno|BA||4406|1745
+Capannori|IT||4384|1057
+Merano|IT||4667|1116
+Germering|DE||4813|1138
+Chiaia|IT||4083|1423
+Cascina|IT||4368|1055
+Přerov|CZ||4946|1745
+Marcianise|IT||4103|1430
+Zvolen|SK||4857|1915
+Fondi|IT||4136|1343
+Dachau|DE||4826|1143
+Neumarkt in der Oberpfalz|DE||4928|1146
+Cegléd|HU||4717|1980
+Mantua|IT||4516|1080
+Sremska Mitrovica|RS|VO|4498|1961
+Rieti|IT||4240|1286
+Brčko|BA|BRC|4487|1882
+Pomigliano d'Arco|IT||4091|1438
+Schwabach|DE||4933|1102
+Rákospalota|HU||4756|1912
+Steyr|AT||4804|1442
+Ciampino|IT||4180|1260
+Bassano del Grappa|IT||4577|1173
+Celje|SI||4623|1526
+Kranj|SI||4624|1436
+Avezzano|IT||4203|1343
+Monopoli|IT||4095|1730
+Baja|HU||4618|1895
+Bijeljina|BA||4476|1921
+Martina Franca|IT||4070|1734
+Quarto|IT||4088|1414
+Považská Bystrica|SK||4912|1842
+Monterotondo|IT||4205|1262
+Centar|HR||4581|1598
+Jesi|IT||4352|1324
+Melito di Napoli|IT||4092|1423
+Sassuolo|IT||4454|1078
+Újlipótváros|HU||4752|1905
+Nové Zámky|SK||4799|1816
+Barra|IT||4084|1432
+Modugno|IT||4108|1678
+Prijedor|BA||4498|1671
+Újpalota|HU||4754|1914
+Varaždin|HR||4630|1634
+Pesterzsébet|HU||4743|1912
+Crailsheim|DE||4913|1007
+Pasing|DE||4814|1146
+Karlova Ves|SK||4815|1706
+Cieszyn|PL||4975|1863
+Dúbravka|SK||4819|1704
+Znojmo|CZ||4886|1605
+Vác|HU||4778|1914
+Hötting|AT||4727|1137
+Arzano|IT||4091|1427
+Lanciano|IT||4223|1439
+Czechowice-Dziedzice|PL||4991|1900
+Salgótarján|HU||4810|1980
+Caivano|IT||4096|1431
+Maddaloni|IT||4104|1438
+Třebíč|CZ||4921|1588
+Gorizia|IT||4594|1362
+Empoli|IT||4372|1095
+Tábor|CZ||4941|1466
+Formigine|IT||4457|1085
+Mugnano di Napoli|IT||4091|1421
+Ladispoli|IT||4195|1208
+Szekszárd|HU||4635|1871
+Rovereto|IT||4589|1104
+Piombino|IT||4293|1053
+Középső-Ferencváros|HU||4747|1908
+Óbuda|HU||4755|1903
+Casalecchio di Reno|IT||4448|1127
+Schio|IT||4571|1136
+L'Aquila|IT||4235|1340
+Sant'Antimo|IT||4094|1423
+Fürstenfeldbruck|DE||4818|1125
+Třinec|CZ||4968|1867
+Erding|DE||4831|1191
+Francavilla Fontana|IT||4053|1759
+Trebinje|BA||4271|1834
+Avvocata|IT||4085|1424
+Pápa|HU||4733|1747
+Gyöngyös|HU||4778|1993
+Jakomini|AT||4705|1545
+Mira Taglio|IT||4543|1213
+Campi Bisenzio|IT||4382|1113
+Pagani|IT||4074|1461
+Příbram|CZ||4969|1401
+Riccione|IT||4400|1266
+Casal Palocco|IT||4175|1235
+Pradl|AT||4727|1142
+Somma Vesuviana|IT||4087|1444
+Gödöllő|HU||4760|1936
+Komárno|SK||4812|1832
+Komárno|SK||4776|1812
+Ruma|RS|VO|4501|1982
+Lucera|IT||4151|1534
+Żywiec|PL||4969|1919
+Ansbach|DE||4930|1059
+Santa Maria Capua Vetere|IT||4108|1425
+Kiskunfélegyháza|HU||4671|1984
+Angri|IT||4074|1457
+Neubau|AT||4820|1635
+Ajka|HU||4710|1756
+Mariahilf|AT||4820|1635
+Grottaglie|IT||4054|1744
+Lend|AT||4708|1542
+Travnik|BA||4423|1767
+Šibenik|HR||4373|1589
+Deggendorf|DE||4884|1296
+Kuçovë|AL||4080|1992
+Termoli|IT||4200|1499
+Písek|CZ||4931|1415
+Terracina|IT||4129|1324
+Senigallia|IT||4372|1321
+Massafra|IT||4059|1712
+Macerata|IT||4330|1345
+Conegliano|IT||4589|1230
+Levice|SK||4822|1861
+Stella|IT||4086|1425
+Forchheim|DE||4972|1106
+Mosonmagyaróvár|HU||4787|1727
+Dunakeszi|HU||4764|1914
+Liptovský Mikuláš|SK||4908|1962
+Rosignano Marittimo|IT||4341|1047
+Velika Gorica|HR||4571|1608
+Kavajë|AL||4119|1956
+Dlhé diely|SK||4815|1705
+Friedberg|DE||4836|1098
+Marigliano|IT||4092|1446
+Canosa di Puglia|IT||4122|1607
+Infernetto|IT||4173|1236
+Frattamaggiore|IT||4094|1428
+San Paolo|IT||4112|1679
+Nardò|IT||4018|1803
+Bačka Palanka|RS|VO|4525|1940
+Gries|AT||4706|1542
+Kiskunhalas|HU||4643|1948
+Monterusciello|IT||4087|1408
+Gragnano|IT||4069|1452
+Alsórákos|HU||4753|1912
+Sarno|IT||4081|1462
+Esztergom|HU||4779|1874
+Šumperk|CZ||4997|1697
+Cervia|IT||4426|1235
+Mondragone|IT||4111|1389
+Marghera|IT||4545|1222
+Formia|IT||4126|1361
+Unterschleißheim|DE||4828|1158
+Neuburg an der Donau|DE||4873|1119
+Schwandorf in Bayern|DE||4933|1211
+Vinkovci|HR||4529|1880
+Kroměříž|CZ||4930|1739
+Königsbrunn|DE||4828|1089
+Sisak|HR||4547|1638
+Piscinola|IT||4089|1423
+Jászberény|HU||4750|1992
+Manduria|IT||4040|1764
+Orlová|CZ||4985|1843
+Cisterna di Latina|IT||4159|1283
+Zakopane|PL||4930|1995
+Doboj|BA||4473|1809
+Casal de' Pazzi|IT||4193|1257
+San Giovanni Rotondo|IT||4171|1573
+Landsberg am Lech|DE||4805|1088
+Komló|HU||4619|1826
+Dubrovnik|HR||4264|1811
+San Giuseppe Vesuviano|IT||4084|1450
+Piešťany|SK||4859|1783
+Boscoreale|IT||4077|1448
+Triggiano|IT||4107|1693
+Budafok|HU||4742|1904
+Camaiore|IT||4394|1030
+Monfalcone|IT||4580|1353
+Albano Laziale|IT||4173|1266
+Ružomberok|SK||4907|1931
+Montebelluna|IT||4578|1205
+Nový Jičín|CZ||4959|1801
+Mesagne|IT||4056|1781
+Lauf an der Pegnitz|DE||4951|1128
+San Miniato Basso|IT||4369|1084
+Baden|AT||4801|1623
+Budapest V. kerület|HU||4750|1905
+Eboli|IT||4062|1506
+Garmisch-Partenkirchen|DE||4749|1110
+Falconara Marittima|IT||4363|1340
+Vrbas|RS|VO|4557|1964
+Scandiano|IT||4460|1070
+Óhegy|HU||4748|1915
+Terlizzi|IT||4113|1655
+Břeclav|CZ||4876|1688
+Koper|SI||4555|1373
+Český Těšín|CZ||4975|1863
+Zirndorf|DE||4944|1095
+Bacoli|IT||4080|1407
+Castelfranco Veneto|IT||4567|1193
+Traun|AT||4822|1424
+Pszczyna|PL||4998|1895
+Lučenec|SK||4833|1967
+Budaörs|HU||4746|1896
+Roth|DE||4925|1109
+Villaricca|IT||4092|1419
+Belluno|IT||4614|1222
+Wolfsberg|AT||4684|1484
+Ellwangen|DE||4896|1013
+Marina di Carrara|IT||4404|1004
+Vsetín|CZ||4934|1800
+Rákoskeresztúr|HU||4747|1926
+Santeramo in Colle|IT||4079|1676
+Szigetszentmiklós|HU||4734|1904
+Uherské Hradiště|CZ||4907|1746
+Vittorio Veneto|IT||4598|1230
+Geidorf|AT||4708|1544
+Orta di Atella|IT||4096|1427
+Naphegy|HU||4749|1903
+Budapest I. kerület|HU||4750|1904
+Mola di Bari|IT||4106|1709
+Waldkraiburg|DE||4821|1240
+Bystrc|CZ||4923|1653
+Líšeň|CZ||4921|1669
+Josefstadt|AT||4821|1635
+Novo Mesto|SI||4580|1517
+Pezinok|SK||4829|1727
+Bjelovar|HR||4590|1685
+Velenje|SI||4636|1511
+Herzogenaurach|DE||4957|1089
+Spinaceto|IT||4178|1244
+Královo Pole|CZ||4923|1659
+Gioia del Colle|IT||4080|1692
+Ostuni|IT||4073|1758
+Nola|IT||4093|1453
+Topoľčany|SK||4856|1817
+Olching|DE||4820|1133
+Starnberg|DE||4800|1134
+Ruvo di Puglia|IT||4112|1648
+Pompei|IT||4075|1450
+Miano|IT||4089|1425
+San Giovanni a Teduccio|IT||4084|1431
+Sora|IT||4172|1361
+Qualiano|IT||4092|1415
+Lumezzane|IT||4565|1026
+Spinea-Orgnano|IT||4549|1216
+Putignano|IT||4085|1712
+Poggioreale|IT||4087|1429
+Skawina|PL||4998|1983
+Chrudim|CZ||4995|1580
+Szentendre|HU||4767|1908
+Nagykőrös|HU||4703|1978
+Copertino|IT||4027|1805
+Podunajské Biskupice|SK||4813|1721
+Nocera Superiore|IT||4074|1467
+Ottaviano|IT||4085|1448
+Chiaiano|IT||4088|1421
+Weilheim|DE||4784|1115
+Scampia|IT||4090|1424
+Havlíčkův Brod|CZ||4961|1558
+Geretsried|DE||4786|1148
+Hodonín|CZ||4885|1713
+Bagnoli|IT||4081|1417
+Fabriano|IT||4334|1290
+San Sebastiano|IT||4565|1026
+Tata|HU||4765|1832
+Pfaffenhofen an der Ilm|DE||4853|1150
+Rákosszentmihály|HU||4752|1916
+Montecalvario|IT||4084|1425
+Starý Bohumín|CZ||4992|1834
+Siófok|HU||4690|1806
+Klatovy|CZ||4940|1330
+Volla|IT||4087|1434
+Neusäß|DE||4839|1083
+Posillipo|IT||4081|1420
+Dunajská Streda|SK||4799|1761
+Patos Fshat|AL||4064|1965
+Desenzano del Garda|IT||4547|1054
+Conversano|IT||4097|1711
+Čadca|SK||4944|1879
+Carbonara di Bari|IT||4107|1687
+Fasano|IT||4084|1736
+Valašské Meziříčí|CZ||4947|1797
+Valdagno|IT||4564|1130
+Chieti Scalo|IT||4236|1414
+Città di Castello|IT||4347|1224
+Massarosa|IT||4387|1034
+Vignola|IT||4448|1101
+Leutkirch|DE||4783|1002
+San Lazzaro|IT||4447|1141
+Pomezia|IT||4167|1250
+Strakonice|CZ||4926|1390
+Senden|DE||4832|1004
+Koprivnica|HR||4616|1683
+Vukovar|HR||4535|1900
+Porto Sant'Elpidio|IT||4325|1376
+Tivoli|IT||4196|1280
+Cecina|IT||4331|1052
+Mogliano Veneto|IT||4556|1224
+Noicattaro|IT||4103|1699
+Andrychów|PL||4985|1934
+Fidenza|IT||4487|1006
+Gyál|HU||4738|1922
+Dubnica nad Váhom|SK||4896|1817
+Sankt Pölten|AT||4821|1564
+Castel Volturno|IT||4103|1394
+Kutná Hora|CZ||4995|1527
+Beroun|CZ||4996|1407
+Cazin|BA||4497|1594
+Monor|HU||4735|1945
+Poggibonsi|IT||4347|1115
+Legnago|IT||4519|1130
+Cardito|IT||4095|1430
+Kitzingen|DE||4974|1015
+Várpalota|HU||4720|1814
+Sonthofen|DE||4752|1028
+Lugo|IT||4442|1191
+Esquilino|IT||4190|1251
+Arzignano|IT||4552|1133
+Kopřivnice|CZ||4960|1814
+Traunreut|DE||4796|1259
+Essling|AT||4821|1652
+Follonica|IT||4293|1076
+San Nicola la Strada|IT||4105|1433
+Thiene|IT||4571|1148
+Francavilla al Mare|IT||4242|1428
+Sulmona|IT||4205|1393
+Cassino|IT||4149|1383
+Aichach|DE||4846|1113
+Vaterstetten|DE||4811|1177
+Solin|HR||4354|1649
+Guidonia|IT||4199|1272
+Unterhaching|DE||4807|1162
+Tor Lupara|IT||4200|1262
+Montecchio Maggiore-Alte Ceccato|IT||4550|1141
+Dombóvár|HU||4638|1814
+Partizánske|SK||4863|1838
+Colleferro|IT||4173|1300
+Sant'Anastasia|IT||4087|1440
+Vrakuňa|SK||4814|1721
+Palo del Colle|IT||4106|1670
+Giardinetti-Tor Vergata|IT||4185|1262
+Vyškov|CZ||4928|1700
+Paks|HU||4662|1886
+Casal di Principe|IT||4101|1413
+Genzano di Roma|IT||4171|1269
+Mödling|AT||4809|1629
+Acquaviva delle Fonti|IT||4090|1684
+Eggenberg|AT||4707|1540
+Giulianova|IT||4275|1397
+Žďár nad Sázavou|CZ||4956|1594
+Budapest XXIII. kerület|HU||4740|1911
+Jindřichův Hradec|CZ||4914|1500
+Nördlingen|DE||4885|1049
+Sankt Peter|AT||4663|1434
+Bohumín|CZ||4990|1836
+Oroszlány|HU||4749|1831
+Gersthofen|DE||4842|1087
+Šaľa|SK||4815|1788
+Hatvan|HU||4767|1968
+Marina di Ardea-Tor San Lorenzo|IT||4155|1254
+Giengen an der Brenz|DE||4862|1024
+Senec|SK||4822|1740
+Rrashbull|AL||4132|1951
+San Giovanni Lupatoto|IT||4538|1104
+Frascati|IT||4181|1268
+Viadana|IT||4494|1052
+Sankt Martin|AT||4662|1428
+Lavinio|IT||4150|1259
+Gaeta|IT||4121|1357
+Blansko|CZ||4936|1664
+Hlohovec|SK||4843|1780
+Mátyásföld|HU||4751|1921
+Brezno|SK||4880|1964
+Rosignano Solvay-Castiglioncello|IT||4339|1044
+Lágymányos|HU||4747|1906
+Günzburg|DE||4846|1028
+Keszthely|HU||4677|1724
+Galatina|IT||4017|1817
+Herceg Novi|ME||4245|1854
+Pontedera|IT||4366|1063
+Loznica|RS|SE|4453|1924
+Pljevlja|ME||4336|1936
+Poggiomarino|IT||4080|1454
+Žabovřesky|CZ||4921|1657
+Sulzbach-Rosenberg|DE||4950|1175
+Casarano|IT||4001|1816
+Puchheim|DE||4815|1135
+Senica|SK||4868|1737
+Velika Kladuša|BA||4518|1581
+Vecsés|HU||4741|1929
+Sabaudia|IT||4130|1303
+Nové Mesto nad Váhom|SK||4876|1783
+Spoleto|IT||4274|1274
+Kęty|PL||4988|1922
+Wadowice|PL||4988|1949
+Gauting|DE||4807|1138
+Ottobrunn bei München|DE||4806|1166
+Giovinazzo|IT||4118|1667
+Gallipoli|IT||4006|1799
+Gröbenzell|DE||4820|1137
+Marina di Massa|IT||4400|1011
+Andritz|AT||4711|1542
+Cesenatico|IT||4420|1240
+Židenice|CZ||4920|1665
+Pietrasanta|IT||4396|1023
+Sant'Antonio Abate|IT||4072|1454
+Dingolfing|DE||4864|1249
+Komárom|HU||4774|1812
+Malacky|SK||4844|1702
+Zaprešić|HR||4586|1581
+Dillingen an der Donau|DE||4858|1050
+Mohács|HU||4599|1869
+Lezhë|AL||4178|1964
+Montevarchi|IT||4353|1157
+Monselice|IT||4524|1175
+Casavatore|IT||4090|1428
+Ischia|IT||4074|1395
+Castiglione delle Stiviere|IT||4539|1049
+Csepel-Csillagtelep|HU||4741|1906
+Marktoberdorf|DE||4778|1062
+Traunstein|DE||4787|1264
+San Ferdinando|IT||4083|1425
+Casamassima|IT||4096|1692
+Donauwörth|DE||4872|1078
+Weißenburg in Bayern|DE||4903|1097
+Apatin|RS|VO|4567|1898
+Burghausen|DE||4817|1283
+Neufahrn bei Freising|DE||4832|1166
+Ansfelden|AT||4821|1429
+Kalocsa|HU||4653|1897
+Abano Terme|IT||4536|1179
+Ischia Porto|IT||4074|1395
+Cento|IT||4473|1129
+Grottaferrata|IT||4179|1267
+Wilten|AT||4726|1139
+Veresegyház|HU||4765|1930
+Fermo|IT||4316|1372
+Futog|RS|VO|4524|1971
+Budva|ME||4229|1884
+Ptuj|SI||4642|1587
+Montecatini-Terme|IT||4388|1077
+Kolbermoor|DE||4785|1207
+Karlsfeld|DE||4823|1148
+Hranice|CZ||4955|1773
+Visoko|BA||4399|1818
+Grumo Nevano|IT||4094|1426
+Fushë-Krujë|AL||4148|1972
+Bastia umbra|IT||4306|1255
+Cercola|IT||4086|1436
+Taufkirchen|DE||4805|1162
+Arpino|IT||4089|1432
+Myślenice|PL||4983|1994
+Rutigliano|IT||4101|1701
+Bad Aibling|DE||4786|1201
+Dolný Kubín|SK||4921|1930
+Garching|DE||4825|1165
+Goražde|BA||4367|1898
+Bellaria-Igea Marina|IT||4414|1247
+Mühldorf|DE||4825|1252
+San Vito dei Normanni|IT||4066|1771
+Tapolca|HU||4688|1744
+Százhalombatta|HU||4733|1894
+Haar|DE||4811|1173
+Montemurlo|IT||4393|1104
+Ariccia|IT||4172|1267
+Portogruaro|IT||4578|1284
+Bad Tölz|DE||4776|1156
+Mirandola|IT||4489|1107
+Moosburg|DE||4847|1194
+San Bonifacio|IT||4540|1127
+Agropoli|IT||4035|1499
+Riva del Garda|IT||4589|1084
+Paolo VI|IT||4052|1727
+San Pietro a Patierno|IT||4089|1429
+Castelfranco Emilia|IT||4459|1105
+Říčany|CZ||4999|1465
+Cham|DE||4923|1266
+Oberasbach|DE||4942|1096
+Fornacelle|IT||4392|1104
+Otrokovice|CZ||4921|1754
+Rožnov pod Radhoštěm|CZ||4946|1814
+Torvaianica|IT||4162|1246
+Wolfratshausen|DE||4791|1142
+Devínska Nová Ves|SK||4821|1698
+Terzigno|IT||4080|1449
+San Salvo|IT||4204|1473
+Ardea|IT||4161|1254
+Trentola-Ducenta|IT||4098|1417
+Mentana|IT||4204|1264
+Benešov|CZ||4978|1469
+Púchov|SK||4912|1833
+Dunaharaszti|HU||4735|1910
+Este|IT||4522|1166
+Torremaggiore|IT||4169|1529
+Žiar nad Hronom|SK||4859|1885
+Isernia|IT||4160|1423
+Samobor|HR||4580|1572
+Bad Reichenhall|DE||4773|1288
+San Miniato|IT||4368|1085
+Đakovo|HR||4531|1841
+Požega|HR||4534|1769
+Gilching|DE||4811|1129
+Wels|AT||4817|1403
+Pendino|IT||4085|1426
+Malafede|IT||4177|1238
+Saalfelden am Steinernen Meer|AT||4743|1285
+Holzkirchen|DE||4788|1170
+Fót|HU||4762|1919
+Adelfia|IT||4100|1687
+Vilshofen|DE||4863|1319
+Bobingen|DE||4827|1083
+Orta Nova|IT||4133|1571
+Sacile|IT||4595|1250
+Colle di Val d'Elsa|IT||4342|1113
+Osimo|IT||4349|1348
+Dabas|HU||4719|1931
+Peqin|AL||4105|1975
+Suzzara|IT||4499|1074
+San Felice A Cancello|IT||4102|1449
+Roseto degli Abruzzi|IT||4267|1401
+Ceglie Messapica|IT||4065|1752
+Illertissen|DE||4822|1010
+Tolentino|IT||4321|1329
+Bánovce nad Bebravou|SK||4872|1826
+Gunzenhausen|DE||4912|1076
+Albignasego|IT||4535|1187
+Innere Stadt|AT||4821|1637
+Wendelstein|DE||4935|1115
+Ghedi|IT||4540|1028
+Stockerau|AT||4838|1622
+Uherský Brod|CZ||4903|1765
+Fiorano|IT||4454|1081
+Casal Bertone|IT||4190|1253
+Straßgang|AT||4703|1540
+Minturno|IT||4126|1375
+Pelhřimov|CZ||4943|1522
+Cattolica|IT||4396|1274
+Bačka Topola|RS|VO|4582|1963
+Ginosa|IT||4058|1676
+Schrobenhausen|DE||4856|1126
+Valenzano|IT||4104|1688
+Penzberg|DE||4775|1138
+Svitavy|CZ||4976|1647
+Sezze|IT||4150|1306
+Castel Maggiore|IT||4458|1136
+San Giovanni Valdarno|IT||4357|1153
+Patos|AL||4068|1962
+Forio|IT||4074|1386
+Zola Predosa|IT||4449|1122
+Cordenons|IT||4598|1270
+Konjic|BA||4365|1796
+Csepel-Királyerdő|HU||4740|1909
+Freilassing|DE||4784|1298
+Sava|IT||4040|1755
+Villafranca di Verona|IT||4535|1084
+Cerveteri|IT||4199|1209
+Göd|HU||4768|1913
+Bressanone|IT||4672|1166
+Bar|ME||4209|1910
+Sankt Leonhard|AT||4707|1546
+Bruckmühl|DE||4788|1191
+San Nicandro Garganico|IT||4184|1557
+San Giovanni in Persiceto|IT||4464|1118
+Oderzo|IT||4578|1249
+Gračanica|BA||4470|1831
+Kelheim|DE||4892|1189
+Lido|IT||4541|1237
+Handlová|SK||4873|1876
+Wetzelsdorf|AT||4705|1540
+Gradačac|BA||4488|1843
+Ustroń|PL||4972|1880
+Klosterneuburg|AT||4831|1633
+Füssen|DE||4757|1070
+Correggio|IT||4477|1078
+Amstetten|AT||4812|1487
+Porto San Giorgio|IT||4318|1379
+Frattaminore|IT||4096|1427
+Skalica|SK||4884|1723
+Capua|IT||4111|1421
+Bijelo Polje|ME||4304|1975
+Palagiano|IT||4058|1704
+Noci|IT||4079|1713
+Todi|IT||4278|1241
+Sárvár|HU||4725|1694
+Altdorf bei Nürnberg|DE||4939|1136
+Sashalom|HU||4752|1917
+Galanta|SK||4819|1773
+Lancenigo-Villorba|IT||4571|1226
+Brusciano|IT||4092|1442
+Telfs|AT||4731|1107
+Sereď|SK||4829|1773
+Bosanska Krupa|BA||4488|1615
+Sankt Peter|AT||4705|1547
+Bussolengo|IT||4547|1085
+Trbovlje|SI||4615|1505
+Mirano|IT||4549|1211
+Cetinje|ME||4239|1891
+Villanova|IT||4196|1276
+Kiskőrös|HU||4662|1929
+Čakovec|HR||4638|1643
+Eppan|IT||4646|1126
+Vicaria|IT||4086|1427
+Perchtoldsdorf|AT||4812|1627
+Rocca di Papa|IT||4177|1270
+Montichiari|IT||4541|1040
+San Marino|SM||4394|1245
+Vatican City|VA||4190|1245
+Liberpolis|HR||4577|1888

@@ -36,6 +36,14 @@ routerUse((e) => {
     e.response.header().set('Content-Type', 'application/manifest+json');
   }
 
+  // The place list. Versioned in its own path — places-1 — so it can be cached hard and
+  // replaced by writing places-2 rather than by hoping a browser notices. A third of a
+  // megabyte of towns that never change should be fetched once per device, ever.
+  if (path.startsWith('/assets/places-')) {
+    e.response.header().set('Cache-Control', 'private, max-age=31536000, immutable');
+    return e.next();
+  }
+
   // Photos and video. Immutable by construction, so a year is not optimistic.
   if (path.startsWith('/api/files/')) {
     e.response.header().set('Cache-Control', 'private, max-age=31536000, immutable');

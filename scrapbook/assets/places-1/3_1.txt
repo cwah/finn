@@ -1,0 +1,218 @@
+Tripoli|LY||3289|1319
+Tunis|TN||3682|1017
+Palermo|IT||3812|1336
+Misratah|LY||3238|1509
+Catania|IT||3749|1507
+Sfax|TN||3474|1076
+Sousse|TN||3583|1064
+Messina|IT||3819|1555
+Zliten|LY||3247|1457
+Al Khums|LY||3265|1426
+Az Zāwīyah|LY||3276|1273
+Zawiya|LY||3275|1273
+Reggio Calabria|IT||3811|1566
+Sukrah|TN||3688|1025
+Janzūr|LY||3282|1302
+Kairouan|TN||3568|1010
+Al Ajaylat|LY||3276|1238
+Sīdī Ḥusayn|TN||3676|1012
+Sakiet ed Daier|TN||3479|1081
+Siracusa|IT||3708|1529
+El Mourouj|TN||3671|1021
+Aryanah|TN||3686|1019
+Gabès|TN||3388|1010
+Sirte|LY||3121|1659
+Hammamet|TN||3640|1062
+Al Jumayl|LY||3285|1206
+Qaşr Bin Ghashīr|LY||3268|1318
+Tājūrā’|LY||3288|1335
+Sakiet ez Zit|TN||3480|1076
+Rawad|TN||3689|1019
+Monastir|TN||3578|1083
+La Marsa|TN||3688|1032
+Msaken|TN||3573|1058
+Houmt Souk|TN||3388|1086
+Ben Arous|TN||3675|1022
+Le Kram|TN||3684|1032
+Ben Gardane|TN||3314|1122
+Ettadhamen|TN||3683|1011
+Şabrātah|LY||3279|1249
+Douar Hicher|TN||3683|1009
+Al Ḩurshah|LY||3276|1267
+Zarzis|TN||3350|1111
+Catanzaro|IT||3888|1660
+Marsala|IT||3780|1244
+Şurmān|LY||3276|1257
+Gela|IT||3707|1424
+Ragusa|IT||3693|1472
+Msalātah|LY||3258|1404
+Radès|TN||3677|1027
+Le Bardo|TN||3681|1013
+Medenine|TN||3335|1051
+Lamezia Terme|IT||3896|1631
+Nabeul|TN||3646|1074
+Trapani|IT||3802|1254
+Tataouine|TN||3293|1045
+La Mohammedia|TN||3667|1016
+Oued Lill|TN||3683|1004
+Korba|TN||3658|1086
+Crotone|IT||3908|1713
+Skanes|TN||3577|1079
+Cosenza|IT||3930|1625
+El Mgarsa|TN||3382|1099
+Kelaa Kebira|TN||3587|1054
+Kélibia|TN||3685|1109
+Moknine|TN||3563|1090
+Caltanissetta|IT||3749|1406
+Douane|TN||3645|1076
+Mnihla|TN||3685|1011
+As Sawānī|LY||3272|1307
+Ksar Hellal|TN||3565|1089
+Djemmal|TN||3562|1076
+Modica|IT||3686|1476
+Bagheria|IT||3808|1351
+Tarhuna|LY||3244|1363
+Al ‘Azīzīyah|LY||3253|1302
+Mahdia|TN||3550|1106
+Mazara del Vallo|IT||3766|1259
+Vittoria|IT||3695|1453
+Qaşr al Qarabūllī|LY||3275|1371
+Acireale|IT||3761|1517
+Paternò|IT||3757|1490
+Bani Walid|LY||3175|1398
+La Goulette|TN||3682|1031
+Misterbianco|IT||3752|1501
+Fouchana|TN||3670|1017
+Soliman|TN||3670|1049
+Alcamo|IT||3798|1296
+Zouila|TN||3550|1106
+Kalaa Srira|TN||3582|1056
+Hammam-Lif|TN||3673|1034
+El Ain|TN||3480|1078
+Hammam Sousse|TN||3586|1060
+Dar Chabanne|TN||3647|1075
+Teboulba|TN||3564|1097
+Gremda|TN||3479|1072
+Sciacca|IT||3751|1308
+Boumhel El Bassatine|TN||3673|1023
+Corfu|GR||3962|1992
+Nicastro|IT||3897|1631
+Menzel Temime|TN||3678|1099
+Caltagirone|IT||3724|1452
+Ksour Essaf|TN||3542|1099
+Licata|IT||3710|1394
+Gharyan|LY||3217|1302
+Carini|IT||3813|1318
+Ez Zahra|TN||3675|1031
+Barcellona Pozzo di Gotto|IT||3815|1521
+Adrano|IT||3766|1483
+Zuwarah|LY||3293|1208
+La Sebala du Mornag|TN||3668|1029
+Sidi Abid|TN||3470|1070
+Zintan|LY||3193|1225
+Canicattì|IT||3736|1385
+Agrigento|IT||3731|1358
+Mascalucia|IT||3757|1505
+Favara|IT||3732|1366
+San Pawl il-Baħar|MT||3595|1442
+Manouba|TN||3681|1010
+Midoun|TN||3381|1099
+Borj Cedria|TN||3670|1039
+Milazzo|IT||3822|1524
+Castelvetrano|IT||3768|1279
+Sīdī Bin Zīnah|LY||3289|1199
+Rass el Djebel|TN||3722|1013
+Al Burayqah|LY||3041|1957
+Augusta|IT||3724|1522
+Partinico|IT||3805|1312
+Avola|IT||3691|1514
+Nālūt|LY||3187|1098
+Rhennouch|TN||3394|1006
+Al Aşābi‘ah|LY||3203|1287
+Grombalia|TN||3660|1050
+Akouda|TN||3587|1057
+Niscemi|IT||3715|1439
+Den Den|TN||3681|1011
+Gravina di Catania|IT||3756|1506
+Dar el Haj Taïeb|TN||3478|1074
+Comiso|IT||3695|1461
+Mégrine|TN||3677|1024
+Az Zahrā’|LY||3268|1287
+Aci Catena|IT||3761|1514
+Birkirkara|MT||3590|1446
+Ajim|TN||3373|1076
+Carthage|TN||3686|1033
+Giarre|IT||3772|1518
+Takelsa|TN||3678|1063
+Lentini|IT||3729|1500
+Casa Santa|IT||3803|1255
+Rossano Stazione|IT||3960|1663
+Ouerdanine|TN||3569|1068
+Mosta|MT||3591|1443
+Biancavilla|IT||3764|1487
+La Mornaghia|TN||3676|1002
+Enna|IT||3757|1427
+Termini Imerese|IT||3798|1370
+Quattromiglia|IT||3934|1624
+Yafran|LY||3206|1253
+Palma di Montechiaro|IT||3719|1377
+Sliema|MT||3591|1450
+Chebba|TN||3524|1112
+Floridia|IT||3708|1515
+San Cataldo|IT||3748|1399
+San Giovanni la Punta|IT||3758|1509
+Monreale|IT||3808|1329
+Beni Khiar|TN||3647|1078
+El Jem|TN||3530|1072
+Sahline|TN||3575|1071
+Zaouiet Sousse|TN||3579|1063
+Zaghouan|TN||3640|1014
+An Nāşirīyah|LY||3263|1287
+Bekalta|TN||3562|1099
+Pachino|IT||3672|1509
+Castrovillari|IT||3982|1620
+Sambiase|IT||3897|1628
+Rosolini|IT||3682|1495
+Vibo Valentia|IT||3868|1610
+Misilmeri|IT||3803|1345
+Bronte|IT||3779|1483
+Villabate|IT||3808|1344
+Maatmeur|TN||3575|1069
+Gioia Tauro|IT||3843|1590
+Palmi|IT||3836|1585
+Mennzel Bou Zelfa|TN||3668|1058
+Noto|IT||3689|1507
+El Alia|TN||3717|1003
+Ouardenine|TN||3571|1067
+Galaat el Andeless|TN||3706|1012
+Pozzallo|IT||3673|1485
+Piazza Armerina|IT||3738|1437
+Ribera|IT||3750|1327
+Aci Castello|IT||3756|1515
+Mareth|TN||3362|1029
+San Giovanni in Fiore|IT||3925|1670
+Qarqūzah|LY||3275|1284
+Ezzouhour|TN||3579|1058
+Chenini Nahal|TN||3387|1006
+Al-'Alūaṣ|LY||3271|1397
+Teboulbou|TN||3385|1011
+Zeramedine|TN||3558|1073
+Qormi|MT||3588|1447
+Mizdah|LY||3145|1299
+Qaşr Khiyār|LY||3270|1385
+Scordia|IT||3730|1484
+Porto Empedocle|IT||3729|1352
+Belpasso|IT||3759|1498
+Palagonia|IT||3733|1474
+Scicli|IT||3679|1470
+Bembla et Mnara|TN||3570|1080
+Mahires|TN||3453|1050
+Siderno|IT||3827|1630
+Żabbar|MT||3588|1454
+Bin Jawwād|LY||3080|1808
+Kellabine|TN||3471|1121
+Beni Khalled|TN||3665|1059
+Corigliano Scalo|IT||3963|1651
+Al Qawāsim|LY||3218|1306
+Ar Rayāyinah|LY||3203|1236
+Valletta|MT||3590|1451

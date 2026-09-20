@@ -1,0 +1,46 @@
+Honolulu|US|HI|2131|-15786
+East Honolulu|US|HI|2129|-15772
+Pearl City|US|HI|2140|-15798
+Waiau-Pacific Palisades|US|HI|2140|-15795
+Makakilo / Kapolei / Honokai Hale|US|HI|2134|-15810
+Kalihi-Palama|US|HI|2133|-15788
+Joint Base Pearl Harbor Hickam|US|HI|2135|-15795
+Aliamanu / Salt Lakes / Foster Village|US|HI|2136|-15792
+Kailua|US|HI|2140|-15774
+Waipahu|US|HI|2139|-15801
+ʻEwa Gentry-West Loch|US|HI|2135|-15803
+Kaneohe|US|HI|2140|-15780
+Makiki / Lower Punchbowl / Tantalus|US|HI|2132|-15783
+Hawai‘i Kai|US|HI|2130|-15770
+Airport|US|HI|2134|-15793
+McCully - Moiliili|US|HI|2129|-15783
+Mililani Town|US|HI|2145|-15802
+Kahului|US|HI|2089|-15647
+Liliha - Kapalama|US|HI|2134|-15785
+Mō‘ili‘ili|US|HI|2129|-15783
+Manoa|US|HI|2132|-15780
+‘Ewa Gentry|US|HI|2134|-15803
+Wahiawā-Whitmore|US|HI|2151|-15803
+ʻEwa Beach-Iroquois Point|US|HI|2132|-15799
+Mililani Mauka|US|HI|2148|-15799
+Makakilo-Makaīwa Hills-Kunia|US|HI|2137|-15807
+Kīhei|US|HI|2076|-15645
+Kaimukī|US|HI|2128|-15780
+Kalihi Valley|US|HI|2136|-15784
+Schofield-Wheeler|US|HI|2148|-15805
+Waikīkī|US|HI|2129|-15784
+Diamond Head / Kapahulu / Saint Louis Heights|US|HI|2128|-15781
+Niu Valley|US|HI|2128|-15774
+Ala Moana - Kakaʻako|US|HI|2130|-15786
+Makakilo|US|HI|2135|-15809
+Mililani Mauka / Launani Valley|US|HI|2148|-15799
+Wahiawā|US|HI|2150|-15802
+‘Ewa Beach|US|HI|2132|-15801
+Schofield Barracks|US|HI|2150|-15807
+Nuuanu - Punchbowl|US|HI|2134|-15783
+Kuliouou - Kalani Iki|US|HI|2130|-15774
+Koolauloa|US|HI|2161|-15793
+Kapolei Villages|US|HI|2134|-15807
+Makakilo City|US|HI|2135|-15809
+Wailuku|US|HI|2089|-15651
+Kapolei|US|HI|2134|-15806

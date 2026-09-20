@@ -1,0 +1,267 @@
+Addis Ababa|ET||902|3875
+Kakamega|KE||28|3475
+Kampala|UG|C|32|3258
+Nansana|UG|C|36|3253
+Eldoret|KE||52|3527
+Kira|UG|C|40|3263
+Nazrēt|ET||855|3927
+Juba|SS||485|3158
+Awasa|ET|SI|706|3848
+Bunamwaya|UG|C|25|3256
+Bunia|CD||156|3025
+Kyengera|UG|C|30|3250
+Yei|SS||409|3068
+Jimma|ET||767|3683
+Shashamane|ET||720|3860
+Kasangati|UG|C|44|3260
+Bishoftu|ET||875|3898
+Sodo|ET||686|3776
+Arba Minch|ET||603|3755
+Mukono|UG|C|35|3276
+Hosa’ina|ET||755|3785
+Njeru|UG|C|44|3318
+Gulu|UG|N|277|3230
+Kitale|KE||102|3501
+Malakal|SS||953|3166
+Dīla|ET||642|3832
+Nek’emtē|ET||908|3655
+Katabi|UG|C|8|3247
+Debre Birhan|ET||968|3953
+Āsela|ET||795|3913
+Kajansi|UG|C|22|3253
+Lugazi|UG|C|37|3294
+Hoima|UG|W|143|3135
+Mubende|UG|C|56|3139
+Lira|UG|N|225|3290
+Kasese|UG|W|18|3008
+Khwisero|KE||17|3459
+Mbale|UG|E|108|3418
+Masindi|UG|W|167|3172
+Mityana|UG|C|42|3202
+Entebbe|UG|C|6|3248
+Sebeta|ET||892|3862
+Burayu|ET||904|3866
+Hāgere Hiywet|ET||898|3785
+Arsi Negele|ET||735|3867
+Gambēla|ET||825|3458
+Jinja|UG|E|44|3320
+Ziway|ET||793|3872
+Butajīra|ET||812|3837
+Wakiso|UG|C|40|3246
+Gununo|ET||692|3765
+Āreka|ET||707|3770
+Lodwar|KE||312|3560
+Yirga ‘Alem|ET|SI|675|3842
+Meru|KE||5|3766
+Isiolo|KE||35|3758
+Waliso|ET||853|3797
+Welk’īt’ē|ET||828|3778
+Kotido|UG|N|298|3413
+Mek’ī|ET||815|3882
+Negēlē|ET||532|3958
+Nanyuki|KE||1|3707
+Arua|UG|N|302|3091
+K’olīto|ET||732|3808
+Busia|KE||46|3411
+Ciro|ET||783|3823
+Bungoma|KE||56|3456
+Kamuli|UG|E|95|3312
+Apac|UG|N|198|3254
+Tēpī|ET|SW|720|3545
+Goba|ET||702|3998
+Duramē|ET||723|3788
+Iganga|UG|E|61|3347
+Bodītī|ET||697|3787
+Busia|UG|E|47|3409
+Koboko|UG|N|341|3096
+Gimbi|ET||917|3583
+Mīzan Teferī|ET|SW|700|3559
+Mojo|ET||859|3912
+Dembī Dolo|ET||853|3480
+Felege Neway|ET||630|3688
+Soroti|UG|E|171|3361
+Fort Portal|UG|W|66|3027
+Mbale|KE||8|3472
+Metu|ET||830|3558
+Wendo|ET|SI|660|3842
+Hagere Maryam|ET||563|3824
+Fichē|ET||980|3873
+Kitgum|UG|N|328|3289
+Kimilili|KE||79|3472
+Bonga|ET|SW|729|3624
+Kapenguria|KE||124|3511
+Jinka|ET||565|3665
+Āgaro|ET||785|3665
+Kapchorwa|UG|E|140|3445
+Rwamwanja Refugee Camp|UG|W|35|3065
+Habaswein|KE||102|3949
+Ch’iko|ET|SI|658|3833
+Mpigi|UG|C|22|3231
+Luwero|UG|C|85|3247
+Pajok|SS||387|3248
+Tororo|UG|E|69|3418
+Genet|ET||907|3850
+Hadero|ET||720|3767
+Moyale|KE||353|3906
+Kibre Mengist|ET||588|3898
+Yumbe|UG|N|347|3125
+Shakiso|ET||576|3891
+Bugembe|UG|E|48|3324
+Aru|CD||286|3084
+Mumias|KE||33|3449
+Mangbwalu|CD||194|3004
+Kumi|UG|E|146|3394
+Dodola|ET||698|3918
+Āsasa|ET||710|3920
+Webuye|KE||60|3477
+Pallisa|UG|E|114|3371
+Kasanje|UG|C|15|3240
+Iten|KE||67|3551
+Kapsabet|KE||20|3510
+Shonē|ET||713|3795
+Djugu|CD||192|3050
+Nebbi|UG|N|248|3109
+Gebre Guracha|ET||980|3840
+Lugulu|KE||39|3430
+Yirga Ch’efē|ET||617|3820
+Bedelē|ET||846|3635
+Robit|ET||999|3990
+Nejo|ET||950|3550
+Shinshicho|ET||721|3778
+Nyahururu|KE||4|3636
+Gīnch’ī|ET||903|3815
+Paidha|UG|N|242|3099
+Adjumani|UG|N|338|3179
+Bek’ojī|ET||753|3925
+Buyale|UG|W|193|3212
+Yabēlo|ET||488|3808
+Marsabit|KE||233|3799
+Bugiri|UG|E|57|3374
+Kakira|UG|E|51|3329
+Gīdolē|ET||565|3737
+Badessa|ET||688|3794
+Bako|ET||578|3657
+Nakaloke|UG|E|115|3415
+Siaya|KE||6|3429
+Busesa|UG|E|63|3360
+Bale Hawassa|ET||692|3753
+Leku|ET|SI|687|3844
+Welench’ītī|ET||867|3943
+Maralal|KE||110|3670
+Shambu|ET||957|3710
+Īteya|ET||813|3923
+Dayē|ET||988|3827
+Wobulenzi|UG|C|73|3251
+Dēra|ET||840|3885
+Guder|ET||897|3776
+Mairo Inya|KE||3|3641
+Insēno|ET||807|3847
+Abomsa|ET||998|3998
+Tulu Bolo|ET||867|3822
+Kayunga|UG|C|70|3289
+Buyende|UG|E|115|3316
+Bombo|UG|C|57|3252
+Komtikas|ET|SW|696|3556
+Kyegegwa|UG|W|50|3104
+Wonji|ET||845|3922
+Mendī|ET||980|3510
+Budaka|UG|E|100|3393
+Pakwach|UG|N|246|3150
+Kyenjojo|UG|W|63|3062
+Makutano|KE||126|3510
+Gutin|ET||957|3664
+Wacha|ET|SW|715|3582
+Kakiri|UG|C|42|3239
+Kagadi|UG|W|94|3081
+Kofelē|ET||707|3878
+Gasuba|ET||672|3757
+Huruta|ET||815|3935
+Ch’ench’a|ET||625|3757
+Muhorro|UG|W|92|3075
+Kyaka II Refugee Camp|UG|W|37|3111
+Bukuya|UG|C|68|3182
+Bor|SS||621|3156
+Waka|ET|SW|707|3717
+Bambesi|ET||975|3473
+Sendafa|ET||915|3902
+Worabe|ET||785|3819
+Dimtu|ET||693|3813
+Sagurē|ET||775|3915
+Kabarnet|KE||49|3574
+Bedēsa|ET||683|3808
+Kasozi|UG|W|2|3050
+Abim|UG|N|270|3368
+Tarch’a Sodo|ET|SW|715|3717
+Buwenge|UG|E|65|3317
+Butaleja|UG|E|91|3395
+Anaka|UG|N|260|3195
+Kamwenge|UG|W|19|3045
+Kyangwali Refugee Camp|UG|W|119|3078
+‘Alem T’ēna|ET||830|3895
+Dokolo|UG|N|190|3318
+Metahāra|ET||890|3992
+Gēdo|ET||902|3745
+Gobēsa|ET||762|3950
+Opit|UG|N|261|3248
+Kele|ET||608|3803
+Kakuma|KE||371|3486
+Sheno|ET||933|3929
+Kachīsī|ET||960|3783
+Gīmbīcho|ET||745|3763
+Wenago|ET||632|3827
+Namutumba|UG|E|84|3369
+Namasuba|UG|C|69|3242
+Kiboga|UG|C|92|3177
+Bundibugyo|UG|W|71|3006
+Maua|KE||23|3794
+Mena|ET||642|3985
+Namayumba|UG|C|53|3225
+Kigumba|UG|W|181|3201
+Āyana|ET||988|3662
+Damboya|ET||735|3795
+Eldama Ravine|KE||5|3573
+Sīrē|ET||832|3948
+Kiziba|UG|C|51|3235
+Kuyera|ET||730|3865
+Ādīs ‘Alem|ET||903|3840
+Mayuge|UG|E|46|3348
+Malaba|UG|E|64|3426
+Suntu|ET||810|3695
+Kercha|ET||578|3841
+Lwakyomba|UG|W|112|3140
+Kaliro|UG|E|89|3350
+Torit|SS||441|3257
+Magamaga|UG|E|52|3335
+Buhimba|UG|W|135|3131
+Sironko|UG|E|123|3425
+Budadiri|UG|E|115|3433
+Moyo|UG|N|366|3172
+Butemba|UG|C|116|3161
+Rwiimi|UG|W|38|3023
+Buikwe|UG|C|34|3301
+Katoke|UG|W|76|3068
+Kikube|UG|W|136|3122
+Kireka|UG|C|35|3265
+Leer|SS||830|3014
+Ngora|UG|E|143|3378
+Butunduzi|UG|W|55|3085
+Tebela|ET||671|3777
+Garba Tula|KE||53|3852
+Namavundu|UG|E|36|3382
+Wenjī|ET||845|3928
+Kasanda|UG|C|56|3180
+Busolwe|UG|E|85|3393
+Gombe|UG|C|20|3209
+Kiryandongo Refugee Camp|UG|W|194|3217
+Kiminini|KE||89|3492
+Bukomero|UG|C|70|3203
+Moi‘s Bridge|KE||87|3512
+Moroto|UG|N|253|3467
+Kyarusozi|UG|W|78|3053
+Buhesi|UG|W|58|3021
+Manafwa|UG|E|95|3427
+Kakumiro|UG|W|78|3132
+Busembatia|UG|E|78|3362
+Kasambya|UG|C|43|3123
+Malaba|KE||64|3428
+Shanto|ET||702|3786

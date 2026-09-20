@@ -15,9 +15,6 @@ Shipped when it lands. No ceremony beyond that.
 - [ ] **Time based posts.** Optionally use time in addition to date.
       Prepopulate from the earliest photo corresponding to the date
       selected. Make selecting this optional.
-- [ ] **Location.** Use photo metadata to infer location. Also allow 
-      users to manually set location. Have location preselected and 
-      enabled by default.
 - [ ] **Paused motion photos.** When you pause a motion photo, reset
       to the main frame.
 - [ ] **Download the cropped image.** Right-click → Save Image currently saves the
@@ -84,6 +81,19 @@ Shipped when it lands. No ceremony beyond that.
 
 ## Shipped
 
+- [x] **Location, at city level, inferred from the photographs.** EXIF coordinates are read
+      on the device, turned into the nearest town, and offered under the date — filled in
+      when the media agree, offered as chips when they do not, and always editable. Shown
+      beside the date on the card.
+      NO GEOCODING SERVICE. The towns are carried instead: 34,000 of them from GeoNames,
+      cut into ten-degree tiles so a lookup fetches its own corner of the world — 26 KB for
+      New York rather than the 838 KB whole. The list is imported dynamically, so a family
+      looking at their timeline never fetches any of it, and the tiles are versioned in
+      their path so they can be cached for a year.
+      Coordinates are never stored. The post keeps "Brooklyn, NY", which is what a
+      scrapbook wants; keeping the exact spot a baby was photographed is more than is
+      needed for any of this.
+      Place data from GeoNames (geonames.org), CC BY 4.0.
 - [x] **Gesture based swipes**, with the photo following the finger. The viewer is a track
       of three panes now — the photo and the one either side — so there is something to
       follow the swipe WITH; a threshold plus a transition afterwards is what this

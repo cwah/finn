@@ -1,0 +1,323 @@
+Baghdad|IQ||3334|4440
+Al Mawşil al Jadīdah|IQ||3633|4311
+Diyarbakır|TR||3791|4022
+Mosul|IQ||3634|4312
+Erbil|IQ||3619|4401
+Tabriz|IR||3808|4629
+Basrah|IQ||3051|4778
+Karbala|IQ||3262|4402
+Sadr City|IQ||3339|4446
+Kirkuk|IQ||3547|4439
+Abū Ghurayb|IQ||3331|4418
+Sulaymaniyah|IQ||3556|4543
+Ahvaz|IR||3132|4868
+Erzurum|TR||3991|4128
+Kermanshah|IR||3431|4706
+Rasht|IR||3728|4959
+Orūmīyeh|IR||3755|4508
+Nasiriyah|IQ||3106|4626
+Hamadān|IR||3480|4851
+Van|TR||3849|4338
+Arāk|IR||3409|4970
+Najaf|IQ||3203|4435
+Al Hillah|IQ||3246|4442
+Batman|TR||3789|4113
+Al Ḩasakah|SY||3650|4075
+Ardabīl|IR||3825|4829
+Abū al-Kahṣīb|IQ||3044|4788
+Zanjan|IR||3668|4850
+Al Maḩmūdīyah|IQ||3306|4437
+Sanandaj|IR||3531|4700
+Dihok|IQ||3687|4299
+Khorramshahr|IR||3044|4818
+Khorramabad|IR||3349|4836
+Al ‘Amārah|IQ||3184|4714
+Al Diwaniyah|IQ||3199|4493
+Al-Kut|IQ||3251|4582
+Deir ez-Zor|SY||3534|4014
+Dezful|IR||3238|4841
+Marāgheh|IR||3739|4624
+Al Madīnah|IQ||3096|4727
+Borūjerd|IR||3390|4875
+Kelar|IQ||3463|4532
+Abadan|IR||3034|4830
+Ramadi|IQ||3342|4331
+Khūy|IR||3855|4495
+Būkān|IR||3652|4621
+Al Fallūjah|IQ||3335|4379
+Al Qāmishlī|SY||3705|4123
+Ash Shaţrah|IQ||3141|4617
+Khānaqīn|IQ||3435|4539
+Bayjī|IQ||3493|4349
+Malāyer|IR||3430|4882
+Piranshahr|IR||3670|4514
+Mahābād|IR||3676|4572
+Saqqez|IR||3625|4627
+Bandar-e Māhshahr|IR||3056|4919
+Ash Sharqāt|IQ||3552|4323
+Sāmarrā’|IQ||3420|4389
+Al Miqdādīyah|IQ||3398|4494
+As Samawah|IQ||3133|4529
+Baqubah|IQ||3375|4461
+Sumayl|IQ||3686|4285
+Simele|IQ||3686|4285
+Kızıltepe|TR||3719|4058
+Arar|SA||3098|4104
+Xebat|IQ||3628|4367
+Khasnahzān|IQ||3620|4414
+Īlām|IR||3364|4642
+Qeładizê|IQ||3618|4513
+Al Hindīyah|IQ||3254|4422
+Marīvān|IR||3552|4618
+Andīmeshk|IR||3246|4835
+Mīāndoāb|IR||3697|4611
+Al Qurnah|IQ||3102|4743
+Cizre|TR||3733|4218
+Baḥarkah|IQ||3632|4404
+Mardin|TR||3731|4074
+Bingöl|TR||3888|4049
+Sīnah|IQ||3681|4304
+Ağrı|TR||3971|4304
+Marand|IR||3843|4577
+Az Zubayr|IQ||3039|4770
+Dorūd|IR||3349|4906
+Ţūz Khūrmātū|IQ||3489|4463
+Īz̄eh|IR||3183|4987
+Bandar-e Anzalī|IR||3747|4946
+Silopi|TR||3724|4246
+Rānyah|IQ||3626|4488
+Siirt|TR||3793|4194
+Bāneh|IR||3600|4589
+Qal‘at Sukkar|IQ||3186|4607
+An Nu‘mānīyah|IQ||3256|4541
+Kufa|IQ||3205|4444
+Abu Gharaq|IQ||3253|4434
+Umm Qaşr|IQ||3004|4792
+Mīāneh|IR||3742|4772
+'Ākra|IQ||3673|4388
+Pārsābād|IR||3965|4792
+Shūshtar|IR||3205|4885
+Al-Musayab|IQ||3278|4429
+Iğdır|TR||3992|4404
+Ahar|IR||3848|4707
+Nāḩiyat al Iskandarīyah|IQ||3289|4435
+Masjed Soleymān|IR||3194|4930
+Naxçıvan|AZ||3921|4541
+Zaxo|IQ||3715|4269
+Al-Qāsim|IQ||3230|4468
+Al Hārithah|IQ||3058|4776
+Erciş|TR||3903|4336
+Soran|IQ||3666|4454
+Eslāmābād-e Gharb|IR||3411|4653
+Lankaran|AZ||3875|4885
+Alīgūdarz|IR||3340|4969
+Kūhdasht|IR||3353|4761
+Nusaybin|TR||3707|4121
+Qorveh|IR||3517|4781
+Patnos|TR||3922|4286
+Lerik|AZ||3877|4841
+Muş|TR||3873|4148
+Sahand|IR||3795|4611
+Salmās|IR||3820|4477
+Naqadeh|IR||3696|4539
+Bonāb|IR||3734|4606
+Hajiawa|IQ||3624|4479
+Bandar-e Emam Khomeyni|IR||3044|4910
+Al Ḩayy|IQ||3217|4604
+Hakkâri|TR||3757|4374
+Aş Şuwayrah|IQ||3293|4478
+Shūsh|IR||3219|4824
+Midyat|TR||3742|4134
+Nahāvand|IR||3419|4837
+Bismil|TR||3785|4066
+Rāmhormoz|IR||3128|4960
+Meshgīn Shahr|IR||3840|4768
+Al Qā’im|IQ||3439|4099
+Tatvan|TR||3849|4228
+Yüksekova|TR||3757|4429
+Tākestān|IR||3607|4970
+Şirvan|AZ||3994|4893
+Doğubayazıt|TR||3955|4408
+Khāliş|IQ||3381|4453
+Abhar|IR||3615|4922
+Şırnak|TR||3751|4245
+Omīdīyeh|IR||3076|4970
+Silvan|TR||3814|4101
+Nūrābād|IR||3407|4797
+Ahlat|TR||3875|4248
+Ash Shāmīyah|IQ||3196|4460
+Harsīn|IR||3427|4759
+Ālbū Kamāl|SY||3445|4092
+Halabja|IQ||3518|4599
+Kāmyārān|IR||3480|4694
+Kūt-e ‘Abdollāh|IR||3124|4866
+Asadābād|IR||3478|4812
+Eqbālīyeh|IR||3623|4992
+Derbendîxan|IQ||3511|4569
+Al Mayādīn|SY||3502|4045
+Javānrūd|IR||3481|4649
+Bitlis|TR||3840|4211
+Adilcevaz|TR||3880|4273
+Takāb|IR||3640|4711
+Sūsangerd|IR||3156|4819
+Kangāvar|IR||3450|4797
+Khalkhāl|IR||3762|4853
+Oshnavīyeh|IR||3704|4510
+Khorramdarreh|IR||3621|4920
+Tūyserkān|IR||3455|4844
+Bījār|IR||3587|4761
+Al-Hamdaniya|IQ||3627|4338
+Shelādiz|IQ||3703|4378
+Aznā|IR||3346|4946
+Aznā|IR||3361|4893
+Ar Rumaythah|IQ||3153|4520
+Şowme‘eh Sarā|IR||3730|4932
+Maku|IR||3929|4446
+Sardasht|IR||3616|4548
+Dehlorān|IR||3269|4727
+Sarpol-e Z̄ahāb|IR||3446|4586
+Hashtpar|IR||3780|4891
+Sarāb|IR||3794|4754
+Koysinceq|IQ||3608|4463
+Āstāneh-ye Ashrafīyeh|IR||3726|4994
+Āz̄arshahr|IR||3776|4598
+Al ‘Azīzīyah|IQ||3291|4506
+Dêrelûk Devera Nihêliya|IQ||3706|4365
+Sonqor|IR||3478|4760
+Jamjamāl|IQ||3553|4483
+Tikrīt|IQ||3462|4368
+Poldasht|IR||3935|4507
+Balad|IQ||3401|4415
+Shādegān|IR||3065|4866
+Shāhīn Dezh|IR||3668|4657
+Qal‘at Şāliḩ|IQ||3153|4729
+Āstārā|IR||3843|4887
+Pīrmām|IQ||3639|4420
+Sinjār|IQ||3632|4188
+Aghdam|AZ||3999|4693
+Salyan|AZ||3960|4898
+Sheybān|IR||3141|4879
+Jalilabad|AZ||3921|4849
+Fūman|IR||3722|4931
+Saddat al Hindīyah|IQ||3272|4428
+‘Afak|IQ||3206|4525
+Şaḩneh|IR||3448|4769
+Hınıs|TR||3936|4169
+Qīdar|IR||3611|4859
+Hādīshahr|IR||3885|4566
+Imishli|AZ||3987|4806
+Dīvāndarreh|IR||3591|4702
+Chamrān|IR||3071|4916
+Kapan|AM||3921|4641
+Shaqlāwah|IQ||3640|4433
+Ḩarir|IQ||3655|4435
+Kurtalan|TR||3793|4168
+Yeşilli|TR||3734|4082
+Hīt|IQ||3364|4283
+Ceylanpınar|TR||3685|4005
+Bulanık|TR||3909|4227
+Eyvān|IR||3383|4631
+Al Maḩāwīl|IQ||3266|4441
+Ḩadīthah|IQ||3414|4238
+Nahiyat Ghammas|IQ||3174|4462
+Kifrī|IQ||3469|4496
+Shūrash|IQ||3552|4484
+Mandalī|IQ||3375|4556
+Sardrūd|IR||3803|4615
+Karakoçan|TR||3895|4003
+Karahrūd|IR||3406|4964
+Ajab Shīr|IR||3748|4589
+Kozluk|TR||3819|4148
+Hajīn|SY||3470|4083
+Hendījān|IR||3024|4971
+Germī|IR||3902|4808
+Bahār|IR||3491|4844
+Batifa|IQ||3717|4301
+Aleshtar|IR||3386|4826
+Malekān|IR||3714|4610
+Baynjiwayn|IQ||3562|4595
+‘Anah|IQ||3437|4198
+‘Āmūdā|SY||3710|4093
+Qarah Ẕīā’ od Dīn|IR||3889|4503
+Kulp|TR||3850|4101
+Ad Dujayl|IQ||3385|4423
+Poldokhtar|IR||3315|4771
+Bāgh-e Malek|IR||3152|4989
+Al Mālikīyah|SY||3718|4214
+Malazgirt|TR||3915|4254
+Güroymak|TR||3858|4202
+Pāveh|IR||3504|4636
+Al-'Alam|IQ||3471|4370
+Subaykhān|SY||3485|4060
+Showţ|IR||3922|4477
+Fuzuli|AZ||3960|4715
+Rāmshīr|IR||3089|4941
+Darreh Shahr|IR||3314|4738
+Pasinler|TR||3998|4167
+Ravānsar|IR||3472|4665
+Gotvand|IR||3225|4881
+Ābdānān|IR||3299|4742
+Tallkayf|IQ||3649|4312
+Al Mishkhāb|IQ||3180|4449
+‘Aqrah|IQ||3676|4389
+İdil|TR||3733|4189
+Ṟuwandiz|IQ||3661|4452
+Şafwān|IQ||3012|4772
+Artashat|AM||3995|4455
+Nāḩiyat ash Shināfīyah|IQ||3158|4465
+Genç|TR||3875|4055
+Ar Ruţbah|IQ||3304|4029
+Shabestar|IR||3818|4570
+Ḥamīdiyeh|IR||3148|4843
+Maḩmūdābād Nemūneh|IR||3629|4990
+Khosrowshahr|IR||3795|4605
+Tāzah Khūrmātū|IQ||3530|4433
+Aghajari|IR||3070|4983
+Bostānābād|IR||3785|4684
+Nāḩiyat al Fuhūd|IQ||3097|4672
+Ad Darbāsīyah|SY||3707|4065
+Habhab|IQ||3378|4451
+Shāzand|IR||3393|4941
+Khomām|IR||3739|4966
+Dargeçit|TR||3755|4172
+Hashtrūd|IR||3748|4705
+Karaçoban|TR||3934|4210
+Mahājerān|IR||3405|4943
+Saatlı|AZ||3993|4837
+Sīāhkal|IR||3715|4987
+Khalīfān|IQ||3661|4440
+‘Anat al Qadīmah|IQ||3447|4194
+‘Alī al Gharbī|IQ||3246|4669
+Reẕvānshahr|IR||3755|4914
+Hoveyzeh|IR||3146|4807
+Shusha|AZ||3976|4675
+Kabūdarāhang|IR||3521|4872
+Şemdinli|TR||3731|4457
+Varto|TR||3917|4145
+Neftçala|AZ||3938|4925
+Qaşr-e Shīrīn|IR||3452|4558
+Lālī|IR||3233|4909
+Oskū|IR||3792|4612
+Pushkino|AZ||3946|4854
+Diyadin|TR||3954|4367
+Māsāl|IR||3736|4913
+Seyah Cheshmeh|IR||3907|4438
+‘Eyn-e Do|IR||3135|4860
+Ararat|AM||3985|4469
+Goris|AM||3951|4634
+Bağlar Mahallesi|TR||3993|4404
+Pādegān-e Manjīl|IR||3674|4942
+Əhmədbəyli|AZ||3988|4839
+Nehram|AZ||3912|4546
+Īlkhchī|IR||3794|4598
+Lice|TR||3846|4064
+Haftkel|IR||3145|4953
+Manjīl|IR||3674|4940
+Beylagan|AZ||3978|4762
+Çat|TR||3961|4097
+Aşkale|TR||3992|4070
+Veys|IR||3149|4888
+Solhan|TR||3897|4105
+Hizan|TR||3822|4242
+Shāl|IR||3590|4977
+Astara|AZ||3846|4887

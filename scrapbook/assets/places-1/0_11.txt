@@ -1,0 +1,72 @@
+Kota Kinabalu|MY||597|11607
+Sandakan|MY||584|11812
+Kuching|MY||155|11033
+Tawau|MY||424|11789
+Miri|MY||440|11399
+Tarakan|ID||331|11759
+Puerto Princesa|PH||974|11874
+Sibu|MY||230|11182
+Bontang|ID||13|11749
+Bintulu|MY||317|11303
+Lahad Datu|MY||502|11833
+Labuan|MY||528|11525
+Marudi|MY||418|11432
+Sintang|ID||7|11150
+Putatan|MY||593|11606
+Donggongon|MY||591|11610
+Keningau|MY||534|11616
+Brookes Point|PH||877|11784
+Tanjung Selor|ID||284|11737
+Nunukan|ID||414|11765
+Bandar Seri Begawan|BN||489|11494
+Semporna|MY||448|11861
+Jose Rizal|PH||888|11750
+Serian|MY||117|11057
+Bandar Labuan|MY||528|11525
+Bau|MY||142|11015
+Niah|MY||386|11372
+Sri Aman|MY||125|11145
+Sarikei|MY||212|11152
+Sengkurong|BN||488|11483
+Mentiri|BN||497|11502
+Sipitang|MY||508|11555
+Limbang|MY||475|11501
+Betong|MY||140|11152
+Petagas|MY||591|11605
+Sibu Jaya|MY||224|11197
+Mukah|MY||289|11209
+Kapit|MY||200|11293
+Kudat|MY||689|11682
+Tatau|MY||288|11285
+Bandar Nabawan|MY||504|11643
+Kuala Belait|BN||458|11423
+Sebauh|MY||312|11327
+Tambunan|MY||572|11640
+Mapun|PH||697|11851
+Beluru|MY||398|11410
+Narra|PH||927|11840
+Siburan|MY||137|11040
+Bongao|PH||503|11977
+Lawas|MY||486|11541
+Malinau|ID||359|11662
+Tebedu|MY||103|11036
+Kanowit|MY||210|11215
+Kuala Penyu|MY||557|11560
+Simunjan|MY||138|11075
+Belaga|MY||270|11378
+Dalat|MY||267|11208
+Maradong|MY||208|11162
+Selangau|MY||252|11233
+Daro|MY||252|11143
+Ranau|MY||595|11666
+Papar|MY||573|11593
+Tutong|BN||480|11465
+Saratok|MY||173|11133
+Serasa|BN||502|11506
+Sitangkai|PH||466|11940
+Liang|BN||468|11450
+Beaufort|MY||535|11575
+Kinarut|MY||582|11605
+Pakan|MY||188|11168
+Julau|MY||202|11192
+Engkilili|MY||114|11167

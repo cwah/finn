@@ -1,0 +1,132 @@
+Khartoum|SD||1555|3253
+Omdurman|SD||1564|3248
+Khartoum North|SD||1565|3253
+Asmara|ER||1534|3893
+Port Sudan|SD||1962|3722
+Gonder|ET||1260|3747
+Mek'ele|ET||1350|3948
+Kassala|SD||1545|3640
+El Obeid|SD||1318|3022
+Al Qadarif|SD||1403|3538
+Bahir Dar|ET||1159|3739
+Kosti|SD||1316|3266
+Wad Medani|SD||1440|3352
+Dessie|ET||1113|3963
+Singa|SD||1315|3393
+Ad-Damazin|SD||1179|3436
+Debre Mark’os|ET||1035|3773
+Rabak|SD||1318|3274
+Kombolcha|ET||1108|3974
+Sennar|SD||1357|3357
+Al Manāqil|SD||1425|3299
+Debre Tabor|ET||1185|3802
+Ādīgrat|ET||1428|3946
+Atbara|SD||1770|3399
+Weldiya|ET||1183|3959
+Ad-Damir|SD||1760|3397
+Inda Silasē|ET||1410|3828
+Aksum|ET||1412|3872
+Ad Douiem|SD||1400|3231
+Adwa|ET||1416|3890
+Keren|ER||1578|3845
+Alamata|ET||1242|3956
+Āsosa|ET||1007|3453
+Wik’ro|ET||1380|3960
+Shendi|SD||1669|3343
+New Halfa|SD||1533|3560
+Mot’a|ET||1108|3787
+Er Roseires|SD||1187|3439
+Finote Selam|ET||1070|3727
+Umm Ruwaba|SD||1291|3122
+Dongola|SD||1918|3048
+Kobo|ET||1003|3985
+Dangila|ET||1127|3683
+Chagni|ET||1096|3650
+Sek’ot’a|ET||1263|3903
+Maych’ew|ET||1279|3954
+Werota|ET||1192|3770
+Injibara|ET||1100|3692
+Al Hasaheisa|SD||1475|3330
+Abu Jibeha|SD||1146|3123
+Debark’|ET||1316|3790
+Himora|ER||1430|3661
+Burē|ET||1070|3707
+Nefas Mewch’a|ET||1173|3847
+Kemisē|ET||1072|3987
+Ādēt|ET||1127|3748
+Khashm al Qirbah|SD||1497|3592
+Suakin|SD||1911|3733
+Mer’āwī|ET||1142|3717
+Dolo|ET||1350|3964
+T’īs Isat|ET||1148|3758
+Lalibela|ET||1203|3905
+Tokār|SD||1843|3773
+Ar Rahad|SD||1272|3065
+Bichena|ET||1045|3820
+Mersa|ET||1167|3965
+Ādīs Zemen|ET||1212|3778
+Sheraro|ET||1440|3793
+Af’abet|ER||1619|3869
+Sinkat|SD||1884|3684
+Korem|ET||1251|3952
+Ābīy Ādī|ET||1356|3897
+Āykel|ET||1255|3707
+As Sūkī|SD||1332|3388
+Tandaltī|SD||1302|3187
+Jubayt|SD||1895|3683
+Al-Fāw|SD||1411|3409
+Al Ḩawātah|SD||1342|3463
+Dembech’a|ET||1055|3748
+Mehoni|ET||1280|3964
+Maiurno|SD||1342|3367
+Hāyk’|ET||1130|3968
+Rufā‘a|SD||1476|3337
+Dabat|ET||1298|3776
+Tikil Dingay|ET||1298|3704
+Mertule Maryam|ET||1083|3827
+K’ola Diba|ET||1242|3733
+Amba Giorgis|ET||1277|3762
+May Cadera|ET||1407|3657
+Ibnat|ET||1213|3805
+Al-Quṭaynah|SD||1473|3227
+Gurbetē|ET||1136|3695
+Filakit|ET||1167|3880
+Āt’aye|ET||1035|3994
+Kināna|SD||1404|3317
+Berber|SD||1802|3398
+Maksenyit|ET||1238|3755
+Metemma|ET||1295|3616
+Ad-Dindar|SD||1333|3409
+Idaga Hamus|ET||1419|3956
+Abala|ET||1423|3700
+Mehal Mēda|ET||1031|3966
+Gimja Bēt Maryam|ET||1085|3688
+Ginja Bet|ET||1085|3689
+Harbu|ET||1092|3979
+Ābderafī|ET||1373|3645
+Mambuk|ET||1128|3622
+Shendi|ET||1064|3695
+‘Alem Ketema|ET||1008|3903
+Wegeda|ET||1122|3836
+Massawa|ER||1561|3947
+Intich’o|ET||1428|3915
+Adebaye|ET||1420|3676
+Al Jazeera Aba|SD||1332|3261
+Indabaguna|ET||1395|3818
+Dibate|ET||1065|3622
+Al-Fashaqah|SD||1440|3587
+Lumamē|ET||1025|3793
+Robīt|ET||1202|3963
+Were Īlu|ET||1059|3944
+Tīlīlī|ET||1085|3702
+Umm Shawkah|SD||1332|3377
+Ādīs K’idamē|ET||1108|3688
+Doka|SD||1352|3577
+Kuraymah|SD||1855|3185
+El Bauga|SD||1826|3391
+Al Qiţena|SD||1486|3237
+Mendefera|ER||1489|3882
+Al Hilāliyya|SD||1494|3323
+Bārah|SD||1370|3037
+Barentu|ER||1511|3759
+Ad Dindar|SD||1320|3417

@@ -1,0 +1,147 @@
+Maracaibo|VE||1064|-7161
+Port-au-Prince|HT||1854|-7234
+Barranquilla|CO||1097|-7478
+Santiago de los Caballeros|DO||1945|-7069
+Kingston|JM||1800|-7679
+Cartagena|CO||1040|-7549
+New Kingston|JM||1801|-7678
+Carrefour|HT||1853|-7240
+Santa Marta|CO||1124|-7419
+Valledupar|CO||1047|-7325
+Delmas|HT||1854|-7230
+Pétionville|HT||1851|-7229
+Cabimas|VE||1040|-7145
+Soledad|CO||1092|-7476
+Port-de-Paix|HT||1994|-7283
+Saint-Marc|HT||1911|-7270
+Cité Soleil|HT||1858|-7234
+Ciudad Ojeda|VE||1020|-7131
+Croix-des-Bouquets|HT||1858|-7223
+Riohacha|CO||1154|-7291
+Dessalines|HT||1926|-7252
+Maicao|CO||1138|-7224
+San Cristóbal|DO||1842|-7011
+Puerto Plata|DO||1979|-7069
+Spanish Town|JM||1799|-7696
+Punto Fijo|VE||1169|-7020
+Jacmel|HT||1824|-7254
+Cap-Haïtien|HT||1976|-7220
+Léogâne|HT||1851|-7263
+Machiques|VE||1006|-7255
+Arcahaie|HT||1877|-7251
+Malambo|CO||1086|-7477
+Les Cayes|HT||1819|-7375
+San Francisco de Macorís|DO||1929|-7025
+Carora|VE||1017|-7008
+La Concepción|VE||1062|-7184
+Tigwav|HT||1843|-7287
+Punta Cardón|VE||1166|-7022
+Portmore|JM||1797|-7689
+La Vega|DO||1922|-7053
+Sabanalarga|CO||1063|-7492
+Los Puertos de Altagracia|VE||1071|-7152
+Jérémie|HT||1865|-7412
+Saint-Michel de l'Atalaye|HT||1937|-7233
+Concepción|VE||1041|-7169
+Miragoâne|HT||1845|-7309
+Ciénaga|CO||1101|-7425
+Gonaïves|HT||1945|-7269
+Montego Bay|JM||1847|-7792
+La Villa del Rosario|VE||1033|-7231
+Santa Cruz de Barahona|DO||1821|-7110
+Bonao|DO||1894|-7041
+San Juan de la Maguana|DO||1881|-7123
+Santa Cruz de Mara|VE||1079|-7169
+Baranoa|CO||1079|-7492
+Bajos de Haina|DO||1842|-7003
+Baní|DO||1828|-7033
+Moca|DO||1939|-7052
+Fundación|CO||1052|-7419
+Azua|DO||1845|-7073
+Turbaco|CO||1033|-7541
+San Rafael|VE||1096|-7173
+Thomazeau|HT||1865|-7209
+Agustín Codazzi|CO||1004|-7324
+Arjona|CO||1025|-7534
+Grangwav|HT||1843|-7277
+Verrettes|HT||1905|-7247
+Mao|DO||1955|-7108
+Mandeville|JM||1804|-7751
+Salcedo|DO||1938|-7042
+May Pen|JM||1796|-7725
+Lagunillas|VE||1013|-7126
+Kenscoff|HT||1845|-7228
+Esperanza|DO||1958|-7098
+Aracataca|CO||1059|-7419
+Cotuí|DO||1905|-7015
+San Juan del Cesar|CO||1077|-7300
+Villa Altagracia|DO||1867|-7017
+Barrancas|CO||1096|-7279
+Saint-Raphaël|HT||1944|-7220
+San Pablo|CO||1005|-7527
+Sabanagrande|CO||1079|-7476
+Ti Port-de-Paix|HT||1993|-7283
+Puebloviejo|CO||1099|-7428
+Sitionuevo|CO||1078|-7472
+Villa Bisonó|DO||1956|-7088
+Pivijay|CO||1046|-7462
+Lenbe|HT||1971|-7240
+Fonseca|CO||1089|-7285
+Santa Rita|VE||1054|-7151
+Oranjestad|AW||1252|-7003
+Jarabacoa|DO||1912|-7064
+Constanza|DO||1891|-7074
+Pilón|CU||1991|-7732
+Santo Tomás|CO||1076|-7475
+El Copey|CO||1015|-7396
+Dabajuro|VE||1102|-7068
+Luruaco|CO||1062|-7515
+Palmar de Varela|CO||1074|-7475
+Albania|CO||1116|-7259
+Ocho Rios|JM||1841|-7710
+Ariguaní|CO||1025|-7400
+Puerto Colombia|CO||1099|-7495
+Mahates|CO||1023|-7519
+Old Harbour|JM||1794|-7711
+Gressier|HT||1854|-7253
+Repelón|CO||1050|-7512
+Santa Cruz de los Taques|VE||1182|-7026
+Hatonuevo|CO||1107|-7277
+Noord|AW||1257|-7003
+Tía Juana|VE||1026|-7136
+Ponedera|CO||1064|-7475
+Tamboril|DO||1949|-7061
+Judibana|VE||1176|-7018
+Campo de la Cruz|CO||1038|-7488
+Las Matas de Farfán|DO||1887|-7152
+Tanki Leendert|AW||1254|-7002
+Terrier Rouge|HT||1964|-7195
+San José de Ocoa|DO||1855|-7051
+Linstead|JM||1814|-7703
+Río Grande|DO||1967|-7077
+Galapa|CO||1090|-7489
+Polonuevo|CO||1078|-7485
+El Retén|CO||1061|-7427
+Manatí|CO||1045|-7496
+Mene de Mauroa|VE||1068|-7104
+Monte Llano|DO||1973|-7060
+Juan de Acosta|CO||1083|-7503
+Villanueva|CO||1061|-7298
+Neiba|DO||1849|-7142
+Hinche|HT||1914|-7201
+Half Way Tree|JM||1801|-7680
+San Diego|CO||1033|-7318
+Santa Rosa|CO||1044|-7537
+Fond Parisien|HT||1851|-7198
+Chivolo|CO||1003|-7462
+Chiquinquirá|VE||1044|-7165
+Barrett Town|JM||1851|-7780
+Grand Gosier|HT||1819|-7192
+San Fernando de Monte Cristi|DO||1985|-7165
+Savanna-la-Mar|JM||1822|-7813
+San Estanislao|CO||1040|-7515
+Dajabón|DO||1955|-7171
+San Ignacio de Sabaneta|DO||1948|-7134
+Santa Lucía|CO||1032|-7496
+Candelaria|CO||1046|-7488
+Désarmes|HT||1899|-7239

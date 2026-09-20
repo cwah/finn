@@ -1,0 +1,74 @@
+Tashkent|UZ||4126|6922
+Shymkent|KZ||4231|6960
+Kyzylorda|KZ||4485|6551
+Yunusobod|UZ||4137|6928
+Chilanzar|UZ||4128|6918
+Turkistan|KZ||4329|6826
+Khujand|TJ||4028|6962
+Jizzax|UZ||4013|6783
+Chirchiq|UZ||4147|6958
+Urganch|UZ||4155|6063
+Navoiy|UZ||4008|6538
+Olmaliq|UZ||4084|6960
+Xiva|UZ||4139|6036
+Sergeli|UZ||4120|6922
+Zhezqazghan|KZ||4779|6771
+Bekobod|UZ||4022|6927
+Guliston|UZ||4050|6878
+Baikonur|KZ||4562|6332
+Satpayev|KZ||4790|6754
+Beruniy|UZ||4169|6075
+Yangiyŭl|UZ||4111|6905
+Parkent|UZ||4129|6968
+Kentau|KZ||4352|6850
+Tŭytepa|UZ||4103|6936
+Gurlan|UZ||4184|6039
+Qayroqqum|TJ||4027|6980
+Novyy Turtkul’|UZ||4155|6102
+Yangiyer|UZ||4028|6882
+G’ijduvon Shahri|UZ||4010|6468
+Ohangaron|UZ||4091|6964
+Buston|TJ||4023|6969
+Dashtobod|UZ||4013|6849
+Zhetysay|KZ||4078|6833
+Arys|KZ||4243|6881
+Novokazalinsk|KZ||4585|6215
+Piskent|UZ||4090|6935
+Zhangatas|KZ||4356|6973
+Manghit|UZ||4212|6006
+Aral|KZ||4680|6166
+Nurota|UZ||4056|6569
+Bektemir|UZ||4121|6933
+Shiyeli|KZ||4417|6673
+Sirdaryo|UZ||4084|6866
+Qibray|UZ||4139|6946
+Iskandar|UZ||4155|6970
+Shovot|UZ||4166|6029
+Uchkuduk|UZ||4105|6278
+Shofirkon Shahri|UZ||4012|6450
+Salor|UZ||4138|6935
+Aksu|KZ||4242|6983
+Shardara|KZ||4126|6797
+Saryaghash|KZ||4146|6917
+Gagarin Shahri|UZ||4066|6817
+Zafar|UZ||4098|6890
+Payshamba Shahri|UZ||4001|6623
+G’allaorol Shahri|UZ||4003|6759
+Abay|KZ||4135|6895
+Chinoz|UZ||4094|6876
+G‘azalkent|UZ||4156|6977
+Paxtakor Shahri|UZ||4031|6796
+Zhangaqorghan|KZ||4391|6725
+Lenger|KZ||4218|6989
+Gazojak|TM||4119|6140
+Zhosaly|KZ||4549|6408
+Bo‘ka|UZ||4081|6919
+Do’stlik Shahri|UZ||4053|6803
+Vobkent Shahri|UZ||4000|6450
+Qo’shko’pir|UZ||4153|6035
+Hazorasp|UZ||4132|6107
+Istiqlol|TJ||4057|6964
+Yangirabot|UZ||4003|6596
+Druzhba|UZ||4122|6131
+Tasbuget|KZ||4477|6555
+Proletar|TJ||4017|6950

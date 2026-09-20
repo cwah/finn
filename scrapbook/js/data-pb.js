@@ -201,6 +201,7 @@ function toPost(rec, photos) {
     createdAt: rec.created,
     author: author ? { id: author.id, name: author.name || author.email } : null,
     caption: rec.caption || null,
+    location: rec.location || null,
     milestone: rec.isMilestone
       ? { isMilestone: true, title: rec.milestoneTitle || 'Milestone' }
       : null,
@@ -324,6 +325,7 @@ export async function createPost(draft, author) {
   const rec = await pb.create('posts', {
     memoryDate: draft.memoryDate,
     caption: draft.caption || '',
+    location: draft.location || '',
     isMilestone: Boolean(draft.milestone),
     milestoneTitle: draft.milestone?.title || '',
     author: author.id,
@@ -386,6 +388,7 @@ function postBody(draft) {
   return {
     memoryDate: draft.memoryDate,
     caption: draft.caption || '',
+    location: draft.location || '',
     isMilestone: Boolean(draft.milestone),
     milestoneTitle: draft.milestone?.title || '',
   };

@@ -1,0 +1,143 @@
+Winnipeg|CA||4988|-9715
+Omaha|US|NE|4126|-9594
+Minneapolis|US|MN|4498|-9326
+Saint Paul|US|MN|4494|-9309
+Lincoln|US|NE|4080|-9667
+Des Moines|US|IA|4160|-9361
+Sioux Falls|US|SD|4354|-9673
+Cedar Rapids|US|IA|4201|-9164
+Fargo|US|ND|4688|-9679
+Rochester|US|MN|4402|-9247
+Davenport|US|IA|4152|-9058
+Bloomington|US|MN|4484|-9330
+Duluth|US|MN|4678|-9211
+Sioux City|US|IA|4250|-9640
+Brooklyn Park|US|MN|4509|-9336
+Plymouth|US|MN|4501|-9346
+Iowa City|US|IA|4166|-9153
+Waterloo|US|IA|4249|-9234
+Maple Grove|US|MN|4507|-9346
+Woodbury|US|MN|4492|-9296
+Eau Claire|US|WI|4481|-9150
+Eagan|US|MN|4480|-9317
+Saint Cloud|US|MN|4556|-9416
+Fort Garry South|CA||4979|-9716
+Ames|US|IA|4203|-9362
+West Des Moines|US|IA|4158|-9371
+Eden Prairie|US|MN|4485|-9347
+Council Bluffs|US|IA|4126|-9586
+West Coon Rapids|US|MN|4516|-9335
+Coon Rapids|US|MN|4512|-9329
+Blaine|US|MN|4516|-9323
+Burnsville|US|MN|4477|-9328
+Lakeville|US|MN|4465|-9324
+Dubuque|US|IA|4250|-9066
+Grand Forks|US|ND|4793|-9703
+Ankeny|US|IA|4173|-9361
+Bellevue|US|NE|4114|-9589
+La Crosse|US|WI|4380|-9124
+Minnetonka|US|MN|4491|-9350
+Grand Island|US|NE|4093|-9834
+Apple Valley|US|MN|4473|-9322
+North La Crosse|US|WI|4385|-9125
+Edina|US|MN|4489|-9335
+Minnetonka Mills|US|MN|4494|-9344
+Brandon|CA||4985|-9995
+Saint Louis Park|US|MN|4495|-9335
+Urbandale|US|IA|4163|-9371
+Moline|US|IL|4151|-9052
+Moorhead|US|MN|4687|-9677
+Cedar Falls|US|IA|4253|-9245
+Mankato|US|MN|4416|-9401
+Maplewood|US|MN|4495|-9300
+Shakopee|US|MN|4480|-9353
+Rock Island|US|IL|4151|-9058
+Marion|US|IA|4203|-9160
+Richfield|US|MN|4488|-9328
+Cottage Grove|US|MN|4483|-9294
+Roseville|US|MN|4501|-9316
+Bettendorf|US|IA|4152|-9052
+Inver Grove Heights|US|MN|4485|-9304
+West Fargo|US|ND|4687|-9690
+Kearney|US|NE|4070|-9908
+Andover|US|MN|4523|-9329
+Galesburg|US|IL|4095|-9037
+Brooklyn Center|US|MN|4508|-9333
+Savage|US|MN|4478|-9334
+Longfellow Community|US|MN|4494|-9323
+Aberdeen|US|SD|4546|-9849
+Oakdale|US|MN|4496|-9296
+St. James-Assiniboia East|CA||4989|-9723
+Fridley|US|MN|4509|-9326
+Marshalltown|US|IA|4205|-9291
+Mason City|US|IA|4315|-9320
+Winona|US|MN|4405|-9164
+Superior|US|WI|4672|-9210
+Shoreview|US|MN|4508|-9315
+Fremont|US|NE|4143|-9650
+Clinton|US|IA|4184|-9019
+Ramsey|US|MN|4526|-9345
+Owatonna|US|MN|4408|-9323
+Burlington|US|IA|4081|-9111
+Chanhassen|US|MN|4486|-9353
+Prior Lake|US|MN|4471|-9342
+White Bear Lake|US|MN|4508|-9301
+Chaska|US|MN|4479|-9360
+Hastings|US|NE|4059|-9839
+Fort Dodge|US|IA|4250|-9417
+Ottumwa|US|IA|4102|-9241
+Austin|US|MN|4367|-9297
+Norfolk|US|NE|4203|-9742
+Muscatine|US|IA|4142|-9104
+Elk River|US|MN|4530|-9357
+Champlin|US|MN|4519|-9340
+Brookings|US|SD|4431|-9680
+Faribault|US|MN|4429|-9327
+Rosemount|US|MN|4474|-9313
+Crystal|US|MN|4503|-9336
+Columbus|US|NE|4143|-9737
+Farmington|US|MN|4464|-9314
+Hastings|US|MN|4474|-9285
+New Brighton|US|MN|4507|-9320
+Watertown|US|SD|4490|-9712
+East Moline|US|IL|4150|-9044
+Golden Valley|US|MN|4501|-9335
+Lino Lakes|US|MN|4516|-9309
+New Hope|US|MN|4504|-9339
+Johnston|US|IA|4167|-9370
+Coralville|US|IA|4168|-9158
+Northfield|US|MN|4446|-9316
+South Saint Paul|US|MN|4489|-9303
+Columbia Heights|US|MN|4504|-9326
+Willmar|US|MN|4512|-9504
+Forest Lake|US|MN|4528|-9299
+West Saint Paul|US|MN|4492|-9310
+Papillion|US|NE|4115|-9604
+Waukee|US|IA|4161|-9389
+Stillwater|US|MN|4506|-9281
+Marshfield|US|WI|4467|-9017
+Macomb|US|IL|4046|-9067
+Onalaska|US|WI|4388|-9124
+Albert Lea|US|MN|4365|-9337
+Hopkins|US|MN|4492|-9346
+Kirksville|US|MO|4019|-9258
+Anoka|US|MN|4520|-9339
+Altoona|US|IA|4164|-9346
+La Vista|US|NE|4118|-9603
+Sartell|US|MN|4562|-9421
+Red Wing|US|MN|4456|-9253
+Saint Michael|US|MN|4521|-9366
+Menomonie|US|WI|4488|-9192
+Hibbing|US|MN|4743|-9294
+Ham Lake|US|MN|4525|-9325
+Buffalo|US|MN|4517|-9387
+North Liberty|US|IA|4175|-9160
+Steinbach|CA||4953|-9668
+Mitchell|US|SD|4371|-9803
+Otsego|US|MN|4527|-9359
+Indianola|US|IA|4136|-9356
+Clive|US|IA|4160|-9372
+Jamestown|US|ND|4691|-9871
+River Falls|US|WI|4486|-9262
+Newton|US|IA|4170|-9305
+Kenora|CA||4977|-9449

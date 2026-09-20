@@ -1,0 +1,142 @@
+Melbourne|AU||-3781|14496
+Canberra|AU||-3528|14913
+Geelong|AU||-3815|14436
+City of Port Phillip|AU||-3783|14494
+Ballarat|AU||-3757|14385
+Bendigo|AU||-3676|14428
+Tuggeranong|AU||-3542|14907
+Point Cook|AU||-3791|14475
+Craigieburn|AU||-3760|14495
+Melbourne City Centre|AU||-3782|14497
+Tarneit|AU||-3784|14466
+Pakenham|AU||-3807|14547
+Reservoir|AU||-3772|14500
+Berwick|AU||-3803|14535
+Werribee|AU||-3790|14467
+Dubbo|AU||-3224|14860
+Glen Waverley|AU||-3788|14516
+Orange|AU||-3328|14910
+Wodonga|AU||-3612|14689
+Sunbury|AU||-3758|14473
+St Albans|AU||-3774|14480
+Frankston|AU||-3814|14512
+Hoppers Crossing|AU||-3788|14470
+Truganina|AU||-3782|14475
+Bathurst|AU||-3342|14958
+Mount Waverley|AU||-3788|14513
+Saint Albans|AU||-3773|14480
+Mildura|AU||-3419|14216
+Frankston East|AU||-3813|14513
+Preston|AU||-3775|14502
+Rowville|AU||-3793|14523
+Epping|AU||-3765|14503
+Warrnambool|AU||-3838|14249
+Shepparton|AU||-3638|14540
+Doncaster East|AU||-3779|14515
+Noble Park|AU||-3797|14517
+Narre Warren South|AU||-3804|14529
+Bentleigh East|AU||-3792|14505
+Dandenong|AU||-3798|14520
+Keysborough|AU||-3799|14517
+Wangaratta|AU||-3636|14632
+Mill Park|AU||-3767|14507
+Richmond|AU||-3782|14500
+Bundoora|AU||-3770|14506
+Narre Warren|AU||-3803|14530
+Ferntree Gully|AU||-3788|14530
+Doreen|AU||-3760|14515
+Traralgon|AU||-3820|14654
+Coburg|AU||-3775|14497
+Croydon|AU||-3780|14528
+Glen Iris|AU||-3787|14507
+Hampton Park|AU||-3803|14525
+Mornington|AU||-3822|14504
+Mount Gambier|AU||-3783|14078
+Northcote|AU||-3777|14500
+South Yarra|AU||-3784|14499
+Doncaster|AU||-3779|14512
+South Morang|AU||-3765|14510
+Brunswick|AU||-3777|14497
+Bacchus Marsh|AU||-3767|14444
+Cranbourne North|AU||-3808|14530
+Cranbourne East|AU||-3812|14530
+Goulburn|AU||-3475|14972
+Kew|AU||-3781|14503
+Caroline Springs|AU||-3774|14474
+Endeavour Hills|AU||-3798|14526
+Wollert|AU||-3758|14503
+Roxburgh Park|AU||-3763|14493
+Cheltenham|AU||-3797|14505
+Glenroy|AU||-3770|14493
+Boronia|AU||-3787|14528
+Mernda|AU||-3760|14510
+Brighton|AU||-3791|14500
+Lalor|AU||-3767|14502
+Mooroolbark|AU||-3778|14532
+Southbank|AU||-3782|14496
+Dandenong North|AU||-3797|14521
+Hawthorn|AU||-3782|14504
+Malvern East|AU||-3787|14504
+Springvale|AU||-3795|14515
+Langwarrin|AU||-3817|14517
+Carrum Downs|AU||-3810|14517
+Camberwell|AU||-3784|14507
+Balwyn North|AU||-3779|14509
+Cranbourne|AU||-3811|14528
+Greenvale|AU||-3763|14487
+Essendon|AU||-3775|14491
+Hawthorn South|AU||-3783|14504
+Glenferrie|AU||-3783|14505
+Greensborough|AU||-3770|14510
+Wantirna South|AU||-3788|14522
+Wheelers Hill|AU||-3790|14518
+Griffith|AU||-3429|14605
+Wyndham Vale|AU||-3789|14462
+Thomastown|AU||-3768|14502
+Cranbourne West|AU||-3810|14527
+Mulgrave|AU||-3793|14518
+Warragul|AU||-3816|14593
+Mount Martha|AU||-3827|14502
+Saint Kilda|AU||-3787|14498
+Ringwood|AU||-3782|14523
+Thornbury|AU||-3776|14501
+Clayton|AU||-3792|14512
+Eltham|AU||-3773|14515
+Frankston South|AU||-3817|14514
+Mount Eliza|AU||-3818|14508
+Sunshine West|AU||-3779|14482
+Torquay|AU||-3833|14433
+Officer|AU||-3806|14541
+Altona Meadows|AU||-3788|14478
+Highton|AU||-3817|14431
+Pascoe Vale|AU||-3773|14493
+Deer Park|AU||-3777|14477
+Bentleigh|AU||-3792|14504
+Carnegie|AU||-3789|14506
+Bairnsdale|AU||-3782|14761
+Port Melbourne|AU||-3784|14494
+Broken Hill|AU||-3197|14145
+Lilydale|AU||-3775|14535
+Hillside|AU||-3769|14474
+Seaford|AU||-3810|14513
+Footscray|AU||-3780|14490
+Horsham|AU||-3671|14220
+Templestowe|AU||-3775|14515
+Caulfield North|AU||-3787|14502
+Mitcham|AU||-3782|14520
+Brighton East|AU||-3790|14502
+Moonee Ponds|AU||-3777|14492
+Carlton|AU||-3780|14497
+Lara|AU||-3802|14441
+Yarraville|AU||-3782|14490
+Docklands|AU||-3781|14495
+Taylors Hill|AU||-3771|14475
+North Melbourne|AU||-3780|14495
+Corio|AU||-3808|14438
+Ascot Vale|AU||-3778|14492
+Taylors Lakes|AU||-3770|14479
+Elwood|AU||-3788|14498
+Burwood|AU||-3785|14512
+Keilor East|AU||-3773|14487
+Echuca|AU||-3614|14475
+Wallan|AU||-3742|14498

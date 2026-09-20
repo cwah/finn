@@ -1,0 +1,35 @@
+Hohhot|CN||4081|11165
+Datong|CN||4009|11329
+Chengde|CN||4095|11796
+Zhangjiakou|CN||4078|11487
+Lingyuan|CN||4124|11940
+Ulanqab|CN||4099|11313
+Donghe|CN||4057|11002
+Xuanhua|CN||4061|11506
+Xilinhot|CN||4394|11607
+Hulunbuir|CN||4921|11976
+Chifeng|CN||4227|11896
+Jining|CN||4103|11311
+Xilin Hot|CN||4397|11603
+Hailar|CN||4920|11970
+Shanhaiguan|CN||4000|11975
+Wūdān|CN||4293|11902
+Shunyi|CN||4012|11665
+Jalai Nur|CN||4945|11770
+Salaqi|CN||4054|11051
+Changping|CN||4022|11623
+Beichengqu|CN||4044|11315
+Shiguai|CN||4071|11029
+Pingzhuang|CN||4204|11929
+Yebaishou|CN||4140|11964
+Mujiayingzi|CN||4212|11878
+Manzhouli|CN||4960|11743
+Songlingcun|CN||4029|11827
+Choibalsan|MN||4807|11453
+Wenquan|CN||4718|11995
+Linxi|CN||4352|11803
+Undurkhaan|MN||4732|11066
+Saynshand|MN||4488|11012
+Lingquan|CN||4941|11768
+Baruun-Urt|MN||4668|11328
+Erenhot|CN||4365|11198

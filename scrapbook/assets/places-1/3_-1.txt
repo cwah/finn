@@ -1,0 +1,547 @@
+Casablanca|MA||3359|-761
+Rabat|MA||3401|-683
+Fes|MA||3403|-500
+Tangier|MA||3577|-580
+Marrakesh|MA||3163|-800
+Salé|MA||3405|-680
+Valencia|ES||3947|-38
+Oran|DZ||3570|-64
+Agadir|MA||3042|-960
+Sevilla|ES||3738|-597
+Málaga|ES||3672|-442
+Meknes|MA||3389|-555
+Oujda|MA||3468|-191
+Lisbon|PT||3873|-915
+Murcia|ES||3799|-113
+Kenitra|MA||3426|-658
+Tétouan|MA||3558|-537
+Al Hoceïma|MA||3525|-394
+Alicante|ES||3835|-48
+Temara|MA||3393|-691
+Safi|MA||3230|-924
+Córdoba|ES||3789|-477
+Elche|ES||3826|-70
+Granada|ES||3719|-361
+Mohammedia|MA||3369|-738
+Khouribga|MA||3288|-691
+Cartagena|ES||3760|-98
+Jerez de la Frontera|ES||3669|-614
+El Jadida|MA||3326|-851
+Beni Mellal|MA||3234|-635
+Sidi Bel Abbes|DZ||3519|-63
+Salé Al Jadida|MA||3400|-674
+Almería|ES||3684|-246
+Ait Melloul|MA||3034|-950
+Castelló de la Plana|ES||3999|-5
+Amadora|PT||3875|-923
+Nador|MA||3517|-293
+Tlemcen|DZ||3488|-132
+Albacete|ES||3899|-186
+Dar Bouazza|MA||3352|-782
+Béchar|DZ||3162|-222
+Taza|MA||3421|-401
+Marbella|ES||3652|-489
+Fès al Bali|MA||3407|-495
+Settat|MA||3300|-762
+Badajoz|ES||3888|-697
+Berrechid|MA||3327|-759
+Huelva|ES||3727|-694
+Khemisset|MA||3382|-607
+Inezgane|MA||3036|-954
+Ksar El Kebir|MA||3500|-590
+Larache|MA||3519|-616
+Leiria|PT||3974|-881
+Khenifra|MA||3293|-566
+Dos Hermanas|ES||3728|-592
+Algeciras|ES||3613|-545
+Berkane|MA||3492|-232
+Setúbal|PT||3852|-889
+Cadiz|ES||3653|-629
+Jaén|ES||3777|-379
+Taourirt|MA||3441|-290
+Bouskoura|MA||3345|-765
+Al Fqih Ben Çalah|MA||3250|-669
+Dchira El Jihadia|MA||3037|-955
+Oued Zem|MA||3286|-657
+El Kelaa des Srarhna|MA||3205|-741
+Queluz|PT||3876|-925
+Sidi Slimane|MA||3426|-593
+Orihuela|ES||3808|-94
+Errachidia|MA||3193|-443
+Guercif|MA||3423|-335
+Oulad Teïma|MA||3039|-921
+Ben Guerir|MA||3224|-795
+Cáceres|ES||3948|-637
+Ouislane|MA||3391|-549
+San Fernando|ES||3648|-620
+Roquetas de Mar|ES||3676|-261
+Tiflet|MA||3389|-631
+Cacém|PT||3877|-930
+Lorca|ES||3767|-170
+Lqoliaa|MA||3030|-947
+Talavera de la Reina|ES||3996|-483
+El Puerto de Santa María|ES||3659|-623
+Taroudant|MA||3047|-888
+Maghnia|DZ||3485|-173
+Sefrou|MA||3383|-483
+Toledo|ES||3986|-402
+Melilla|ES|ML|3529|-294
+Essaouira|MA||3151|-977
+El Ejido|ES||3678|-281
+Fnidek|MA||3585|-536
+Chiclana de la Frontera|ES||3642|-614
+Ceuta|ES|CE|3589|-532
+Sidi Kacem|MA||3422|-571
+Torrevieja|ES||3798|-68
+Mijas|ES||3660|-464
+Torrent|ES||3944|-47
+Ouarzazate|MA||3092|-689
+Souk El Arbaa|MA||3468|-600
+Ciudad Real|ES||3899|-393
+Vélez-Málaga|ES||3678|-410
+Youssoufia|MA||3225|-853
+Gandia|ES||3897|-18
+Ifrane|MA||3353|-511
+Fuengirola|ES||3654|-462
+Aïn Temouchent|DZ||3530|-114
+Lahraouyine|MA||3354|-753
+Benidorm|ES||3854|-13
+Faro|PT||3702|-793
+Martil|MA||3562|-528
+Alcalá de Guadaira|ES||3734|-584
+Aïn Harrouda|MA||3364|-745
+Sanlúcar de Barrameda|ES||3678|-635
+Bir el Djir|DZ||3572|-55
+Campiña|ES||3822|-298
+Estepona|ES||3643|-515
+Algueirão|PT||3880|-934
+Loures|PT||3883|-917
+Sagunto|ES||3968|-27
+Souq Sebt Oulad Nemma|MA||3230|-670
+Torremolinos|ES||3662|-450
+Skhirate|MA||3385|-703
+Ouezzane|MA||3480|-558
+Mecheria|DZ||3354|-28
+La Línea de la Concepción|ES||3617|-535
+Molina de Segura|ES||3805|-121
+Paterna|ES||3950|-44
+Grao de Murviedro|ES||3964|-24
+Benslimane|MA||3362|-712
+Beni Enzar|MA||3526|-293
+Alcoy|ES||3871|-47
+Mdiq|MA||3568|-533
+Sig|DZ||3553|-19
+Sidi Bennour|MA||3265|-843
+Motril|ES||3675|-352
+Midelt|MA||3269|-475
+Mérida|ES||3892|-634
+Azrou|MA||3343|-522
+Benalmádena|ES||3660|-457
+Arzew|DZ||3585|-32
+Linares|ES||3810|-364
+San Vicent del Raspeig|ES||3840|-53
+Tirhanimîne|MA||3524|-395
+My Drarga|MA||3038|-947
+Dakhla|MA||3041|-955
+Elda|ES||3848|-79
+Rio de Mouro|PT||3877|-933
+Odivelas|PT||3879|-918
+Ain El Aouda|MA||3380|-679
+Assi Bou Nif|DZ||3569|-50
+Évora|PT||3857|-790
+Ben Jerrar|MA||3026|-950
+Utrera|ES||3719|-578
+Amora|PT||3863|-912
+Corroios|PT||3864|-915
+Mansoûra|DZ||3486|-134
+Ad Darwa|MA||3337|-754
+Al Aaroui|MA||3501|-301
+Puertollano|ES||3869|-411
+Kasba Tadla|MA||3260|-627
+En Nedjma|DZ||3565|-57
+Barreiro|PT||3866|-907
+Bejaâd|MA||3277|-639
+Sidi Taibi|MA||3419|-668
+Vila-real|ES||3994|-10
+Monsanto|PT||3946|-871
+Jerada|MA||3431|-216
+Aïn Sefra|DZ||3275|-58
+Chefchaouen|MA||3517|-526
+São Domingos de Rana|PT||3870|-934
+Mrirt|MA||3316|-557
+Lumiar|PT||3877|-916
+Mislata|ES||3948|-42
+Tinghir|MA||3151|-553
+Mairena del Aljarafe|ES||3734|-606
+El Aïoun|MA||3458|-251
+Antequera|ES||3702|-456
+Azemmour|MA||3329|-834
+Alzira|ES||3915|-43
+Souq Larb’a al Gharb|MA||3469|-600
+Zagora|MA||3033|-584
+Olival|PT||3877|-925
+Ait Ourir|MA||3157|-766
+Lucena|ES||3741|-449
+Azilal|MA||3196|-657
+Sidi Yahia El Gharb|MA||3430|-630
+Tine Biougra|MA||3021|-938
+Sesimbra|PT||3844|-910
+Alcantarilla|ES||3797|-122
+Taounate|MA||3454|-464
+Bouznika|MA||3379|-716
+Puerto Real|ES||3653|-619
+Had Soualem|MA||3342|-785
+Imzouren|MA||3515|-385
+Écija|ES||3754|-508
+Beni Saf|DZ||3530|-138
+Zaïo|MA||3494|-273
+Es Senia|DZ||3565|-62
+Rincón de la Victoria|ES||3672|-428
+Aourir|MA||3049|-964
+El Hajeb|MA||3369|-537
+Portimão|PT||3714|-854
+Burjassot|ES||3951|-41
+Ontinyent|ES||3882|-61
+Damaia|PT||3875|-921
+Aïn el Bya|DZ||3580|-30
+Zeghanghane|MA||3516|-300
+Andújar|ES||3804|-405
+Don Benito|ES||3896|-586
+Cidade Universitária|PT||3875|-916
+Benfica|PT||3875|-920
+Ronda|ES||3674|-517
+Los Palacios y Villafranca|ES||3716|-592
+Chetouane|DZ||3492|-130
+Cascais|PT||3870|-942
+’Aïn el Turk|DZ||3574|-77
+Ben Ahmed|MA||3307|-724
+Tomelloso|ES||3916|-302
+La Rinconada|ES||3749|-598
+Tit Mellil|MA||3356|-749
+Torre-Pacheco|ES||3774|-95
+Sidi ech Chahmi|DZ||3566|-52
+Marvila|PT||3874|-910
+Villena|ES||3864|-87
+Mazarrón|ES||3760|-131
+Alhaurín de la Torre|ES||3666|-456
+Yecla|ES||3861|-111
+Oeiras|PT||3869|-931
+San Pedro Alcántara|ES||3649|-499
+Cieza|ES||3824|-142
+Beja|PT||3801|-786
+Úbeda|ES||3801|-337
+Burriana|ES||3989|-8
+Águilas|ES||3741|-158
+Mechraa Bel Ksiri|MA||3457|-596
+Asilah|MA||3547|-603
+Almada|PT||3868|-916
+Tabount|MA||3090|-692
+Villajoyosa|ES||3851|-23
+Olivais|PT||3877|-911
+Lagos|PT||3710|-867
+Castelo Branco|PT||3982|-749
+Almendralejo|ES||3868|-641
+Alcabideche|PT||3873|-941
+Laâttaouia|MA||3184|-731
+Sidi Slimane Echcharaa|MA||3491|-235
+Gdyel|DZ||3578|-43
+Sebdou|DZ||3464|-133
+Demnate|MA||3173|-701
+Arfoud|MA||3144|-423
+Remchi|DZ||3506|-143
+Alvalade|PT||3875|-914
+Santa Pola|ES||3819|-57
+Bouarfa|MA||3253|-196
+Aldaia|ES||3947|-46
+San Javier|ES||3781|-84
+Souk et Tnine Jorf el Mellah|MA||3449|-551
+Mehdya|MA||3426|-667
+Arcos de la Frontera|ES||3675|-581
+Valdepeñas|ES||3876|-338
+Hellín|ES||3851|-170
+Aïn Taoujdat|MA||3394|-521
+Tamesna|MA||3382|-692
+Alcázar de San Juan|ES||3939|-321
+Coria del Río|ES||3729|-605
+Oadar Temsia|MA||3037|-941
+Manises|ES||3949|-46
+Chichaoua|MA||3154|-876
+Tahla|MA||3405|-442
+Puente-Genil|ES||3739|-477
+Arrentela|PT||3862|-910
+Montijo|PT||3871|-897
+Xirivella|ES||3947|-43
+Atamaría|ES||3760|-81
+Charneca de Caparica|PT||3862|-919
+Xàtiva|ES||3899|-52
+Santarém|PT||3923|-869
+Alaquàs|ES||3946|-46
+San Roque|ES||3621|-538
+Olhão|PT||3703|-784
+Totana|ES||3777|-150
+Crevillente|ES||3825|-81
+Marinha Grande|PT||3975|-893
+Sueca|ES||3920|-31
+Póvoa de Santa Iria|PT||3886|-906
+Rota|ES||3662|-636
+Sabaa Aiyoun|MA||3390|-537
+Carmona|ES||3747|-565
+Camas|ES||3740|-603
+Ghazaouet|DZ||3510|-186
+Oliva|ES||3892|-12
+Rich|MA||3226|-450
+Massamá|PT||3875|-928
+Missour|MA||3305|-399
+Sfizef|DZ||3523|-24
+El Campello|ES||3843|-40
+Morón de la Frontera|ES||3712|-545
+Nedroma|DZ||3501|-175
+Zawyat ech Cheïkh|MA||3264|-592
+Almuñécar|ES||3673|-369
+Bouknadel|MA||3412|-674
+Bou Hanifia el Hamamat|DZ||3531|-5
+Aïn Attig|MA||3389|-697
+Tamansourt|MA||3176|-811
+Caldas da Rainha|PT||3940|-914
+Algemesí|ES||3919|-44
+Novelda|ES||3838|-77
+Alfornelos|PT||3876|-921
+Catarroja|ES||3940|-40
+Villarrobledo|ES||3927|-260
+Gibraltar|GI||3614|-535
+Echemmaia Est|MA||3208|-862
+Oulad Barhil|MA||3064|-847
+Níjar|ES||3697|-221
+Hennaya|DZ||3495|-137
+Lebrija|ES||3692|-608
+Caravaca|ES||3811|-186
+El Amria|DZ||3552|-102
+Bir Jdid|MA||3337|-799
+Sintra|PT||3880|-938
+Bou Tlelis|DZ||3557|-90
+Oulad Ayad|MA||3220|-680
+Zawyat an Nwaçer|MA||3338|-762
+Paço de Arcos|PT||3870|-929
+Hammam Bou Hadjar|DZ||3538|-97
+Lepe|ES||3725|-720
+Almassora|ES||3995|-6
+Gueznaia|MA||3570|-589
+Villanueva de la Serena|ES||3898|-580
+Almonte|ES||3726|-652
+Jumilla|ES||3848|-132
+Quinta Do Conde|PT||3857|-904
+Quart de Poblet|ES||3948|-44
+Ouled Mimoun|DZ||3490|-103
+Onda|ES||3996|-26
+Martos|ES||3772|-397
+Almansa|ES||3887|-110
+Mediouna|MA||3345|-752
+Torres Vedras|PT||3909|-926
+Quarteira|PT||3707|-810
+Adra|ES||3675|-302
+Moulay Ali Cherif|MA||3128|-427
+Alboraya|ES||3950|-35
+Cullera|ES||3917|-25
+Ibi|ES||3863|-57
+Altea|ES||3860|-5
+San Pedro del Pinatar|ES||3784|-79
+Estoril|PT||3871|-940
+Carnaxide|PT||3873|-925
+Porto de Mós|PT||3709|-868
+Selouane|MA||3507|-294
+Sidi Abdelli|DZ||3507|-114
+Paiporta|ES||3943|-42
+Los Barrios|ES||3618|-549
+Pinhal Novo|PT||3863|-891
+Monte Estoril|PT||3871|-941
+El Palmar|ES||3794|-116
+Baza|ES||3749|-277
+Alhaurín el Grande|ES||3664|-469
+Sete Rios|PT||3874|-916
+Pontinha|PT||3877|-920
+Montilla|ES||3759|-464
+São Jorge de Arroios|PT||3873|-914
+Azla|MA||3555|-524
+Llíria|ES||3963|-60
+Vícar|ES||3683|-264
+Alcalá la Real|ES||3746|-392
+El Gara|MA||3328|-723
+Tomares|ES||3737|-605
+Imi-n-Tanout|MA||3117|-885
+Priego de Córdoba|ES||3744|-420
+Barbate|ES||3619|-592
+Sidi Rahal|MA||3348|-794
+Mutxamel|ES||3842|-45
+Moscavide e Portela|PT||3878|-910
+New Fes|MA||3405|-501
+Conil de la Frontera|ES||3628|-609
+Parque das Nações|PT||3877|-910
+Portalegre|PT||3929|-743
+Ras el Ma|MA||3397|-510
+Setti Fatma|MA||3123|-768
+Campo De Ourique|PT||3872|-917
+Ribarroja del Turia|ES||3955|-57
+Torre del Mar|ES||3674|-409
+Sant Joan d'Alacant|ES||3840|-44
+Moncada|ES||3955|-40
+Lavradio|PT||3867|-905
+Coín|ES||3666|-476
+El Ksiba|MA||3257|-602
+Nerja|ES||3675|-387
+Carcaixent|ES||3912|-45
+El Mansouria|MA||3375|-730
+Loja|ES||3717|-415
+Ahfir|MA||3495|-210
+Azambuja|PT||3907|-887
+Pilar de la Horadada|ES||3787|-79
+Armilla|ES||3714|-363
+Cabra|ES||3747|-444
+Isla Cristina|ES||3720|-732
+Cártama|ES||3671|-463
+Bensekrane|DZ||3507|-122
+Caparica|PT||3866|-920
+Areeiro|PT||3874|-914
+Palma del Río|ES||3770|-528
+Las Torres de Cotillas|ES||3803|-124
+Belas|PT||3878|-926
+l'Alfàs del Pi|ES||3858|-10
+Al Brouj|MA||3250|-719
+Laranjeiro|PT||3866|-915
+Baena|ES||3762|-432
+Linda-a-Velha|PT||3871|-924
+Imouzzer Kandar|MA||3373|-501
+Ayamonte|ES||3721|-741
+Alfafar|ES||3942|-38
+Douar Toulal|MA||3388|-560
+Maracena|ES||3721|-363
+Falagueira|PT||3876|-923
+San Juan de Aznalfarache|ES||3736|-604
+Bétera|ES||3959|-46
+Almoradí|ES||3811|-79
+Rojales|ES||3809|-73
+Mairena del Alcor|ES||3737|-575
+Karia Ba Mohamed|MA||3437|-521
+Laranjeiro|PT||3707|-781
+Reçani|MA||3128|-427
+La Pobla de Vallbona|ES||3960|-55
+Carcavelos|PT||3869|-932
+Alcântara|PT||3870|-917
+Sebt Gzoula|MA||3211|-908
+Requena|ES||3949|-110
+Aspe|ES||3835|-77
+Mers el Kebir|DZ||3573|-71
+Camarate|PT||3880|-913
+Bni Bouayach|MA||3511|-384
+Entroncamento|PT||3947|-847
+Alhama de Murcia|ES||3785|-143
+Beni Mester|DZ||3487|-142
+Picassent|ES||3936|-46
+Marchena|ES||3733|-542
+Beni Yakhlef|MA||3368|-734
+Moguer|ES||3728|-684
+El Arahal|ES||3726|-555
+Piedade|PT||3867|-916
+El Malah|DZ||3539|-109
+Chipiona|ES||3674|-644
+Lora del Río|ES||3766|-553
+Algés|PT||3870|-923
+El Viso del Alcor|ES||3739|-572
+Manzanares|ES||3900|-337
+Tomar|PT||3960|-841
+Puçol|ES||3962|-30
+Oulmes|MA||3343|-600
+Aoulouz|MA||3067|-818
+Zubia|ES||3712|-358
+Silla|ES||3936|-41
+São João da Talha|PT||3882|-910
+Azeitão|PT||3852|-901
+Bailén|ES||3810|-378
+Guadix|ES||3730|-314
+Asni|MA||3125|-798
+Bormujos|ES||3737|-607
+Santa Iria da Azóia|PT||3884|-910
+Daimiel|ES||3907|-361
+Kelaat Mgouna|MA||3125|-613
+Méchouar-Kasba|MA||3160|-799
+Vila Franca de Xira|PT||3896|-899
+Ribat Al Khayr|MA||3382|-441
+Archena|ES||3812|-130
+Tavernes de la Valldigna|ES||3907|-27
+Agouraï|MA||3363|-558
+Tarifa|ES||3601|-561
+Tamallalt|MA||3182|-751
+L'Eliana|ES||3957|-53
+Carnide|PT||3877|-918
+Aljaraque|ES||3727|-702
+Loulé|PT||3714|-802
+Goulmima|MA||3169|-495
+Callosa de Segura|ES||3812|-88
+Cartaya|ES||3728|-715
+Outat Oulad Al Haj|MA||3334|-370
+la Nucia|ES||3861|-13
+Osuna|ES||3724|-510
+Moita|PT||3865|-899
+Aïn Beni Mathar|MA||3401|-203
+Arroyo de la Miel|ES||3660|-454
+La Unión|ES||3762|-88
+Sacavém|PT||3879|-911
+Pozoblanco|ES||3838|-485
+Huercal-Overa|ES||3739|-194
+Ramada|PT||3880|-919
+Boujniba|MA||3290|-677
+Pombal|PT||3992|-863
+Mers El Kheir|MA||3386|-693
+Sidi Allal El Bahraoui|MA||3401|-653
+Quelfes|PT||3706|-782
+Navalmoral de la Mata|ES||3989|-554
+Lalla Mimouna|MA||3485|-607
+Parede|PT||3869|-935
+Castilleja de la Cuesta|ES||3739|-605
+Boumia|MA||3272|-510
+Albolote|ES||3723|-366
+Alfragide|PT||3873|-922
+Ubrique|ES||3668|-545
+Mula|ES||3804|-149
+Palmela|PT||3857|-890
+Torrox|ES||3676|-395
+El Harhoura|MA||3394|-693
+’Aïn el Berd|DZ||3536|-51
+Belém|PT||3870|-919
+Zafra|ES||3843|-642
+Midar|MA||3494|-353
+Las Cabezas de San Juan|ES||3698|-594
+Las Gabias|ES||3714|-367
+Guardamar del Segura|ES||3809|-66
+La Algaba|ES||3746|-601
+Baeza|ES||3799|-347
+Montijo|ES||3891|-662
+Driouch|MA||3498|-338
+Vialonga|PT||3887|-908
+Buraca|PT||3873|-920
+La Roda|ES||3921|-216
+Barrio de Peral|ES||3763|-99
+Albufeira|PT||3709|-825
+Alcobaça|PT||3955|-898
+Amizmiz|MA||3122|-823
+Los Alcázares|ES||3774|-85
+Peniche|PT||3936|-938
+Ait Yazza|MA||3050|-880
+Ben Taieb|MA||3504|-345
+Carlet|ES||3923|-52
+La Solana|ES||3894|-324
+Campo Grande|PT||3875|-917
+Oulad Tayeb|MA||3395|-500
+Aguelmous|MA||3316|-585
+Albal|ES||3940|-42
+Santafé|ES||3719|-372
+Atarfe|ES||3722|-369
+Santomera|ES||3806|-105
+Miguelturra|ES||3896|-389
+Benetússer|ES||3942|-40
+La Carolina|ES||3828|-362
+Massamagrell|ES||3957|-33
+Tavira|PT||3713|-765
+Berja|ES||3685|-295
+Cehegín|ES||3809|-180
+Campo de Criptana|ES||3940|-312
+Torres Novas|PT||3948|-854

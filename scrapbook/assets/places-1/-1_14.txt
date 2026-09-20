@@ -1,0 +1,14 @@
+Jayapura|ID||-253|14072
+Port Moresby|PG||-948|14715
+Merauke|ID|PS|-850|14041
+Lae|PG||-672|14700
+Abepura|ID||-260|14063
+Sentani|ID||-257|14051
+Mount Hagen|PG||-586|14423
+Popondetta|PG||-877|14823
+Madang|PG||-522|14579
+Mendi|PG||-615|14366
+Goroka|PG||-608|14539
+Wewak|PG||-355|14363
+Bulolo|PG||-720|14664
+Daru|PG||-908|14321

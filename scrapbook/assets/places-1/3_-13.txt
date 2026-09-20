@@ -1,0 +1,157 @@
+San Jose|US|CA|3734|-12189
+San Francisco|US|CA|3777|-12242
+Sacramento|US|CA|3858|-12149
+Oakland|US|CA|3780|-12227
+Stockton|US|CA|3796|-12129
+Fremont|US|CA|3755|-12199
+Modesto|US|CA|3764|-12100
+Santa Rosa|US|CA|3844|-12271
+Elk Grove|US|CA|3841|-12137
+Hayward|US|CA|3767|-12208
+Salinas|US|CA|3668|-12166
+Sunnyvale|US|CA|3737|-12204
+Roseville|US|CA|3875|-12129
+Concord|US|CA|3798|-12203
+Santa Clara|US|CA|3735|-12196
+Vallejo|US|CA|3810|-12226
+Chico|US|CA|3973|-12184
+Berkeley|US|CA|3787|-12227
+Fairfield|US|CA|3825|-12204
+Antioch|US|CA|3800|-12181
+Richmond|US|CA|3794|-12235
+Daly City|US|CA|3771|-12246
+Santa Maria|US|CA|3495|-12044
+San Mateo|US|CA|3756|-12233
+Chinatown|US|CA|3780|-12241
+Vacaville|US|CA|3836|-12199
+Arden-Arcade|US|CA|3860|-12138
+San Leandro|US|CA|3772|-12216
+Livermore|US|CA|3768|-12177
+Tracy|US|CA|3774|-12143
+Citrus Heights|US|CA|3871|-12128
+Redwood City|US|CA|3749|-12224
+Merced|US|CA|3730|-12048
+Mountain View|US|CA|3739|-12208
+Napa|US|CA|3830|-12229
+Pleasanton|US|CA|3766|-12187
+Alameda|US|CA|3777|-12226
+Milpitas|US|CA|3743|-12191
+Folsom|US|CA|3868|-12118
+San Ramon|US|CA|3778|-12198
+Manteca|US|CA|3780|-12122
+Union City|US|CA|3760|-12202
+Turlock|US|CA|3749|-12085
+Rancho Cordova|US|CA|3859|-12130
+Pittsburg|US|CA|3803|-12188
+Walnut Creek|US|CA|3791|-12206
+Davis|US|CA|3854|-12174
+South San Francisco|US|CA|3765|-12241
+Yuba City|US|CA|3914|-12162
+Palo Alto|US|CA|3744|-12214
+Lodi|US|CA|3813|-12127
+Santa Cruz|US|CA|3697|-12203
+Madera|US|CA|3696|-12006
+Carmichael|US|CA|3862|-12133
+Castro Valley|US|CA|3769|-12209
+Rocklin|US|CA|3879|-12124
+Cupertino|US|CA|3732|-12203
+Petaluma|US|CA|3823|-12264
+San Rafael|US|CA|3797|-12253
+Brentwood|US|CA|3793|-12170
+Woodland|US|CA|3868|-12177
+Dublin|US|CA|3770|-12194
+Novato|US|CA|3811|-12257
+Watsonville|US|CA|3691|-12176
+Gilroy|US|CA|3701|-12157
+West Sacramento|US|CA|3858|-12153
+Lincoln|US|CA|3889|-12129
+Ceres|US|CA|3759|-12096
+Florin|US|CA|3850|-12141
+San Luis Obispo|US|CA|3528|-12066
+Mission District|US|CA|3776|-12242
+Laguna|US|CA|3842|-12142
+Antelope|US|CA|3871|-12133
+Newark|US|CA|3753|-12204
+Danville|US|CA|3782|-12200
+Lompoc|US|CA|3464|-12046
+San Bruno|US|CA|3763|-12241
+Morgan Hill|US|CA|3713|-12165
+North Highlands|US|CA|3869|-12137
+Rohnert Park|US|CA|3834|-12270
+El Dorado Hills|US|CA|3869|-12108
+Campbell|US|CA|3729|-12195
+Oakley|US|CA|3800|-12171
+Pacifica|US|CA|3761|-12249
+Martinez|US|CA|3802|-12213
+Hollister|US|CA|3685|-12140
+Los Banos|US|CA|3706|-12085
+Bayview-Hunters Point|US|CA|3773|-12238
+Pleasant Hill|US|CA|3795|-12206
+Orangevale|US|CA|3868|-12123
+Foster City|US|CA|3756|-12227
+Menlo Park|US|CA|3745|-12218
+Foothill Farms|US|CA|3868|-12135
+Seaside|US|CA|3661|-12185
+Saratoga|US|CA|3726|-12202
+Fair Oaks|US|CA|3864|-12127
+Los Gatos|US|CA|3723|-12197
+Los Altos|US|CA|3739|-12211
+Burlingame|US|CA|3758|-12237
+San Pablo|US|CA|3796|-12235
+San Carlos|US|CA|3751|-12226
+Atascadero|US|CA|3549|-12067
+East Palo Alto|US|CA|3747|-12214
+Atwater|US|CA|3735|-12061
+Orcutt|US|CA|3487|-12044
+Monterey|US|CA|3660|-12189
+Benicia|US|CA|3805|-12216
+Suisun|US|CA|3824|-12204
+Windsor|US|CA|3855|-12282
+Belmont|US|CA|3752|-12228
+Paso Robles|US|CA|3563|-12069
+Agua Caliente|US|CA|3832|-12249
+Paradise|US|CA|3976|-12162
+Lafayette|US|CA|3789|-12212
+Hercules|US|CA|3802|-12229
+Galt|US|CA|3825|-12130
+Soledad|US|CA|3642|-12133
+Vineyard|US|CA|3846|-12135
+Riverbank|US|CA|3774|-12094
+El Cerrito|US|CA|3792|-12231
+San Lorenzo|US|CA|3767|-12213
+Noe Valley|US|CA|3775|-12243
+Millbrae|US|CA|3760|-12239
+Rosemont|US|CA|3855|-12136
+Visitacion Valley|US|CA|3772|-12240
+Oakdale|US|CA|3777|-12085
+Ashland|US|CA|3769|-12211
+Bay Point|US|CA|3803|-12196
+Patterson|US|CA|3747|-12113
+Marina|US|CA|3668|-12180
+Lathrop|US|CA|3782|-12128
+American Canyon|US|CA|3817|-12226
+Granite Bay|US|CA|3876|-12116
+Albany|US|CA|3789|-12230
+Dixon|US|CA|3845|-12182
+Orinda|US|CA|3788|-12218
+Pinole|US|CA|3800|-12230
+Chowchilla|US|CA|3712|-12026
+Cameron Park|US|CA|3867|-12099
+Arroyo Grande|US|CA|3512|-12059
+Linda|US|CA|3913|-12155
+Prunedale|US|CA|3678|-12167
+Moraga|US|CA|3783|-12213
+Greenfield|US|CA|3632|-12124
+Live Oak|US|CA|3698|-12198
+Parkside|US|CA|3774|-12249
+Nipomo|US|CA|3504|-12048
+Coalinga|US|CA|3614|-12036
+Truckee|US|CA|3933|-12018
+Oroville|US|CA|3951|-12156
+Ukiah|US|CA|3915|-12321
+Pacific Grove|US|CA|3662|-12192
+Alum Rock|US|CA|3737|-12183
+South Yuba City|US|CA|3912|-12164
+Clearlake|US|CA|3896|-12263
+Ripon|US|CA|3774|-12112
+Rio Linda|US|CA|3869|-12145

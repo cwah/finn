@@ -1,0 +1,466 @@
+Moscow|RU||5575|3762
+Saint Petersburg|RU||5994|3031
+Kyiv|UA||5045|3052
+Voronezh|RU||5167|3919
+Yaroslavl|RU||5763|3987
+Ryazan’|RU||5463|3970
+Lipetsk|RU||5259|3955
+Kalininskiy|RU||6000|3039
+Homyel'|BY||5243|3098
+Tula|RU||5420|3762
+Kursk|RU||5173|3618
+Bryansk|RU||5327|3432
+Tver|RU||5686|3590
+Saltivka|UA||5002|3635
+Desna|UA||5052|3068
+Vitebsk|BY||5519|3020
+Dniprovskyi|UA||5045|3060
+Mahilyow|BY||5391|3034
+Belgorod|RU||5060|3658
+Darnytsya|UA||5042|3070
+Kaluga|RU||5453|3627
+Krasnogvargeisky|RU||5997|3048
+Smolensk|RU||5478|3205
+Cherepovets|RU||5913|3790
+Vologda|RU||5922|3988
+Orël|RU||5297|3608
+Chernihiv|UA||5151|3129
+Sumy|UA||5092|3480
+Mar’ino|RU||5565|3772
+Vyhurivshchyna-Troyeshchyna|UA||5051|3060
+Khimki|RU||5590|3743
+Obolon|UA||5051|3051
+Staryy Oskol|RU||5130|3785
+Velikiy Novgorod|RU||5852|3127
+Shevchenkivskyi|UA||5002|3622
+Shevchenkivskyi|UA||5046|3047
+Rybinsk|RU||5805|3884
+Vykhino-Zhulebino|RU||5570|3781
+Zelenograd|RU||5598|3718
+Centralniy|RU||5993|3036
+Vasyl'evsky Ostrov|RU||5994|3025
+Severnyy|RU||5594|3755
+Kyivskyi|UA||5004|3629
+Yasenevo|RU||5561|3752
+Borshchahivka|UA||5043|3039
+Desnyanskyi|UA||5151|3132
+Novozavodskyi|UA||5149|3126
+Podolsk|RU||5542|3755
+Lyublino|RU||5568|3776
+Mytishchi|RU||5591|3773
+Khoroshëvo-Mnevniki|RU||5578|3747
+Bibirevo|RU||5588|3760
+Gol’yanovo|RU||5582|3781
+Admiralteisky|RU||5992|3030
+Lyubertsy|RU||5568|3789
+Strogino|RU||5582|3741
+Zarichnyi|UA||5090|3481
+Balashikha|RU||5579|3795
+Zhulebino|RU||5570|3785
+Kolomna|RU||5507|3878
+Kuntsevo|RU||5574|3740
+Elektrostal’|RU||5579|3846
+Biryulëvo|RU||5559|3768
+Orekhovo-Borisovo|RU||5561|3773
+Novyye Kuz’minki|RU||5570|3775
+Kuz’minki|RU||5570|3780
+Kovpakivskyi|UA||5093|3479
+Chertanovo Yuzhnoye|RU||5559|3760
+Zheleznodorozhnyy|RU||5574|3802
+Korolev|RU||5591|3783
+Kolpino|RU||5975|3059
+Odintsovo|RU||5567|3728
+Novomoskovsk|RU||5401|3829
+Petrogradka|RU||5997|3031
+Ramenki|RU||5570|3750
+Zyablikovo|RU||5562|3777
+Serpukhov|RU||5492|3742
+Orekhovo-Borisovo Severnoye|RU||5562|3768
+Ivanovskoye|RU||5577|3783
+Mykilska Borshchahivka|UA||5043|3037
+Tyoply Stan|RU||5562|3749
+Tsaritsyno|RU||5563|3765
+Veshnyaki|RU||5572|3782
+Presnenskiy|RU||5576|3756
+Zyuzino|RU||5566|3757
+Solntsevo|RU||5564|3738
+Orekhovo-Zuyevo|RU||5581|3899
+Troparëvo|RU||5566|3748
+Taganskiy|RU||5573|3767
+Noginsk|RU||5586|3845
+Yelets|RU||5261|3851
+Novo-Peredelkino|RU||5565|3734
+Ochakovo-Matveyevskoye|RU||5568|3745
+Shchyolkovo|RU||5592|3797
+Brovary|UA||5051|3079
+Sergiyev Posad|RU||5631|3814
+Obninsk|RU||5511|3661
+Cherëmushki|RU||5566|3756
+Pozniaky|UA||5040|3062
+Izmaylovo|RU||5580|3778
+Velikiye Luki|RU||5634|3054
+Bogorodskoye|RU||5581|3772
+Pushkino|RU||5599|3783
+Shchukino|RU||5580|3745
+Brateyevo|RU||5564|3776
+Orsha|BY||5451|3040
+Ryazanskiy|RU||5573|3777
+Novyye Cherëmushki|RU||5570|3758
+Pechersk|UA||5044|3052
+Oleksiyivka|UA||5005|3619
+Tekstil’shchiki|RU||5570|3774
+Zheleznogorsk|RU||5234|3536
+Zhukovsky|RU||5560|3812
+Ramenskoye|RU||5556|3824
+Novogireyevo|RU||5575|3782
+Vostochnoe Degunino|RU||5588|3756
+Kharkivskyi Masyv|UA||5041|3066
+Krasnogorsk|RU||5582|3733
+Pushkin|RU||5971|3040
+Yaroslavskiy|RU||5588|3772
+Lefortovo|RU||5577|3770
+Gatchina|RU||5958|3013
+Biryulëvo Zapadnoye|RU||5559|3765
+Kholodna Hora|UA||5000|3618
+Lisovyi Masyv|UA||5047|3063
+Gubkin|RU||5128|3754
+Lianozovo|RU||5590|3759
+Babushkin|RU||5587|3773
+Obruchevo|RU||5566|3752
+Yegor’yevsk|RU||5538|3904
+Konotop|UA||5123|3320
+Voskresenka|UA||5048|3060
+Klin|RU||5633|3673
+Fili|RU||5575|3749
+Reutov|RU||5576|3786
+Alekseyevka|RU||5563|3780
+Voskresensk|RU||5531|3869
+Zhlobin|BY||5289|3002
+Nagornyy|RU||5565|3762
+Chekhov|RU||5515|3746
+Chokolivka|UA||5042|3045
+Shostka|UA||5186|3347
+Dachnoye|RU||5984|3026
+Naro-Fominsk|RU||5539|3673
+Finlyandskiy|RU||5997|3036
+Nyvky|UA||5046|3041
+Vidradnyi|UA||5043|3042
+Darnytskyi Masyv|UA||5044|3063
+Dolgoprudnyy|RU||5595|3750
+Dorogomilovo|RU||5574|3755
+Nizhyn|UA||5105|3189
+Aleksin|RU||5450|3707
+Klintsy|RU||5276|3224
+Irpin|UA||5052|3024
+Rechytsa|BY||5236|3039
+Rossosh’|RU||5112|3851
+Boryspil|UA||5035|3095
+Aleksandrov|RU||5640|3871
+Kotlovka|RU||5566|3760
+Rzhev|RU||5626|3433
+Holosiyiv|UA||5034|3055
+Shulyavka|UA||5045|3045
+Tikhvin|RU||5964|3353
+Rossosh’|RU||5020|3957
+gorod Solnetchnogorsk|RU||5619|3698
+Lobnya|RU||5603|3747
+Dmitrov|RU||5634|3752
+Stupino|RU||5490|3807
+Shchëkino|RU||5401|3751
+Dubna|RU||5674|3719
+Pavlovskiy Posad|RU||5578|3865
+Sviblovo|RU||5585|3763
+Ostankinskiy|RU||5583|3762
+Solnechnogorsk|RU||5618|3697
+Uzlovaya|RU||5398|3816
+Vynohradar|UA||5051|3042
+Sokol’niki|RU||5580|3767
+Sokol|RU||5580|3752
+Roslavl’|RU||5395|3286
+Borovichi|RU||5839|3392
+Chernaya Rechka|RU||5999|3030
+Kirishi|RU||5947|3204
+Liski|RU||5098|3950
+Vyaz’ma|RU||5521|3430
+Klimovsk|RU||5536|3753
+Rybatskoye|RU||5984|3050
+Uritsk|RU||5984|3018
+Zamoskvorech’ye|RU||5573|3763
+Pokrovskoye-Streshnëvo|RU||5581|3746
+Kupchino|RU||5986|3039
+Altuf’yevskiy|RU||5588|3758
+Domodedovo|RU||5544|3775
+Vyshniy Volochëk|RU||5759|3457
+Fryazevo|RU||5573|3846
+Svyatoshyn|UA||5046|3035
+Yartsevo|RU||5506|3270
+Pryluky|UA||5060|3238
+Fryazino|RU||5596|3805
+Kimry|RU||5687|3736
+Levoberezhnyy|RU||5586|3747
+Vidnoye|RU||5555|3771
+Ivanteyevka|RU||5597|3792
+Lytkarino|RU||5558|3791
+Pivdenna Borshchahivka|UA||5041|3040
+Novovladykino|RU||5585|3758
+Vatutino|RU||5588|3769
+Vagonoremont|RU||5590|3755
+Semënovskoye|RU||5568|3755
+Novokuz’minki|RU||5572|3778
+Novokhovrino|RU||5587|3750
+Nikol’skoye|RU||5568|3748
+Likhobory|RU||5585|3757
+Kozhukhovo|RU||5571|3768
+Kozeyevo|RU||5587|3762
+Metrogorodok|RU||5581|3779
+Nova Zabudova|UA||5043|3052
+Torzhok|RU||5704|3496
+Sosnovaya Polyana|RU||5984|3015
+Mtsensk|RU||5328|3658
+Gryazi|RU||5250|3994
+Okhtyrka|UA||5031|3489
+Dzerzhinsky|RU||5563|3786
+Livny|RU||5242|3760
+Kurchatov|RU||5165|3569
+Safonovo|RU||5511|3324
+Berezniaky|UA||5043|3060
+Kol’chugino|RU||5630|3938
+Nova Darnytsya|UA||5042|3066
+Volkhov|RU||5992|3234
+Obukhovo|RU||5984|3045
+Syrets|UA||5048|3044
+Yefremov|RU||5314|3812
+Shebekino|RU||5041|3693
+Pivnichna Saltivka|UA||5005|3636
+Avtovo|RU||5987|3027
+Lubny|UA||5001|3300
+Krasnoye Selo|RU||5974|3009
+Tutayev|RU||5787|3953
+Vyshneve|UA||5039|3037
+Novozybkov|RU||5254|3194
+Bucha|UA||5055|3021
+Konakovo|RU||5670|3677
+Stare Misto|UA||5045|3053
+Lyudinovo|RU||5387|3445
+Dzerzhinskiy|RU||5563|3784
+Pereslavl’-Zalesskiy|RU||5674|3886
+Bilychi|UA||5047|3035
+Tosno|RU||5954|3088
+Kashira|RU||5485|3818
+Telychka|UA||5040|3057
+Alexeyevka|RU||5063|3869
+Gorod Shebekino|RU||5042|3692
+Pivnichni Osokorky|UA||5039|3061
+Kirov|RU||5407|3430
+Sampsonievskiy|RU||5998|3034
+Romny|UA||5074|3350
+Uglich|RU||5752|3832
+Pivnichno-Brovarskyi Masyv|UA||5046|3062
+Troitsk|RU||5548|3731
+Novovoronezh|RU||5132|3922
+Protvino|RU||5487|3722
+Vasylkiv|UA||5018|3031
+Rostokino|RU||5583|3767
+Priorka|UA||5051|3046
+Valuyki|RU||5020|3812
+Karavayevi Dachi|UA||5043|3044
+Vyshhorodskyi Masyv|UA||5051|3045
+Staraya Derevnya|RU||5999|3024
+Teremky|UA||5037|3046
+Ostrogozhsk|RU||5087|3908
+Boyarka|UA||5032|3030
+Staraya Russa|RU||5800|3136
+Oleksandrivska Slobidka|UA||5042|3048
+Krasnoznamensk|RU||5560|3705
+Istra|RU||5592|3687
+Vyshhorod|UA||5058|3049
+Minskyi Masyv|UA||5052|3046
+Maloyaroslavets|RU||5501|3647
+Yubileyny|RU||5593|3783
+Solomyanka|UA||5043|3045
+Desnogorsk|RU||5415|3328
+Lukhovitsy|RU||5498|3904
+Udomlya|RU||5788|3501
+Drozhzhino|RU||5552|3759
+Donskoy|RU||5397|3833
+Kimovsk|RU||5397|3854
+Hlukhiv|UA||5168|3392
+Nakhabino|RU||5585|3718
+Mozhaysk|RU||5550|3603
+Obukhiv|UA||5012|3063
+Rahachow|BY||5309|3005
+Lukyanivka|UA||5047|3048
+Likino-Dulevo|RU||5571|3895
+Rostov Veliky|RU||5719|3941
+Kirzhach|RU||5615|3886
+Bogoroditsk|RU||5377|3812
+Balabanovo|RU||5518|3666
+Shatura|RU||5557|3953
+Vostryakovo|RU||5567|3745
+Vorob’yovo|RU||5572|3753
+Annino|RU||5558|3760
+Petrovskaya|RU||5555|3778
+Nikulino|RU||5567|3747
+Mikhalkovo|RU||5568|3743
+Matveyevskoye|RU||5571|3748
+Luzhniki|RU||5572|3755
+Leonovo|RU||5585|3765
+Leninskiye Gory|RU||5570|3757
+Kuskovo|RU||5574|3780
+Kur’yanovo|RU||5566|3770
+Kudrovo|RU||5990|3051
+Kolomenskoye|RU||5567|3768
+Davydkovo|RU||5572|3747
+Amin’yevo|RU||5570|3747
+Annino|RU||5558|3726
+Zagor’ye|RU||5558|3767
+Masany|UA||5153|3123
+Kapotnya|RU||5564|3779
+Demiyivka|UA||5040|3052
+Unecha|RU||5284|3269
+Gagarin|RU||5555|3500
+Horki|BY||5429|3099
+Novobilychi|UA||5048|3035
+Tomilino|RU||5566|3795
+Bezhetsk|RU||5778|3670
+Shcherbinka|RU||5550|3756
+Rusanivka|UA||5044|3060
+Dedovsk|RU||5587|3712
+Zarya|RU||5576|3810
+Rayduzhnyi Masyv|UA||5049|3059
+Metallostroy|RU||5980|3055
+Pereiaslav|UA||5007|3145
+Semiluki|RU||5168|3903
+Livoberezhnyi Masyv|UA||5046|3059
+Kubinka|RU||5558|3670
+Ozëry|RU||5486|3855
+Stara Darnytsya|UA||5043|3063
+Podil|UA||5047|3052
+Sofiivska Borschahivka|UA||5041|3036
+Tatarka|UA||5047|3049
+Krasnoarmeysk|RU||5610|3813
+Kireyevsk|RU||5393|3792
+Nelidovo|RU||5623|3277
+Yushkovo|RU||5556|3697
+Bologoye|RU||5789|3405
+Volokolamsk|RU||5603|3597
+Dyat’kovo|RU||5360|3434
+Mostytskyi Masyv|UA||5050|3044
+Kirovsk|RU||5988|3100
+Zaraysk|RU||5476|3888
+Slavutych|UA||5152|3072
+Skopin|RU||5382|3955
+Krolevets|UA||5155|3338
+Lebedyn|UA||5058|3448
+Teremky-II|UA||5038|3045
+Kurenivka|UA||5049|3047
+L’govskiy|RU||5163|3528
+Hadyach|UA||5037|3400
+Kabanovo|RU||5575|3894
+Krychaw|BY||5372|3171
+Lebedyan’|RU||5302|3914
+Dankov|RU||5325|3914
+Gorelovo|RU||5977|3013
+Novaya Usman’|RU||5164|3941
+Losino-Petrovskiy|RU||5587|3819
+Staraya Kupavna|RU||5581|3818
+Pikalëvo|RU||5952|3417
+Roshal’|RU||5567|3987
+Otradnoye|RU||5978|3082
+Bilohorodka|UA||5039|3023
+Sheksna|RU||5921|3851
+Suvorov|RU||5412|3650
+Novy Oskol|RU||5076|3786
+Khot'kovo|RU||5626|3800
+Novomichurinsk|RU||5404|3975
+Elektrogorsk|RU||5588|3879
+Chernogolovka|RU||5600|3836
+Saperna Slobidka|UA||5040|3053
+Pushchino|RU||5483|3761
+Zavety Il’icha|RU||5604|3785
+Slobodka|RU||5587|3758
+Setun’|RU||5572|3742
+Rublëvo|RU||5579|3735
+Novaya Derevnya|RU||5999|3029
+Kastanayevo|RU||5572|3750
+Elektrougli|RU||5572|3821
+Bol’shaya Setun’|RU||5572|3742
+Andreyevskoye|RU||5555|3793
+Vnukovo|RU||5561|3730
+Krestovskiy ostrov|RU||5997|3026
+Zhuravlivka|UA||5001|3627
+Usman’|RU||5204|3973
+Yur’yev-Pol’skiy|RU||5650|3968
+Monino|RU||5584|3819
+Karachev|RU||5312|3498
+Zhukovka|RU||5353|3373
+Ostashkov|RU||5715|3311
+Trostyanets|UA||5048|3497
+Kozel’sk|RU||5404|3577
+Nikol’skoye|RU||5970|3078
+Shchigry|RU||5188|3691
+Kurovskoye|RU||5558|3892
+Rybnoye|RU||5473|3951
+Yahotyn|UA||5028|3176
+Skhodnya|RU||5595|3730
+Bronnitsy|RU||5542|3826
+Stroitel|RU||5079|3648
+Valday|RU||5798|3325
+Starodub|RU||5259|3276
+Hostomel|UA||5057|3027
+Malakhovka|RU||5565|3802
+Kotel’niki|RU||5565|3786
+Beloozyorskiy|RU||5546|3844
+Vitryani Hory|UA||5051|3044
+Sel’tso|RU||5337|3410
+Lypky|UA||5044|3053
+Yasnogorsk|RU||5448|3770
+Otradnoye|RU||5587|3760
+Klov|UA||5043|3054
+Dobrush|BY||5241|3131
+Kosaya Gora|RU||5412|3754
+Bohodukhiv|UA||5016|3552
+Aprelevka|RU||5555|3708
+Kotsyubynske|UA||5049|3033
+Darnytsya Car Repair Plant Microdistrict|UA||5045|3068
+Vovchansk|UA||5029|3694
+Chudovo|RU||5912|3168
+Boksitogorsk|RU||5948|3385
+Kommunar|RU||5962|3039
+Gavrilov-Yam|RU||5730|3985
+Derhachi|UA||5011|3612
+Ryl’sk|RU||5157|3468
+Nyzhnya Telychka|UA||5039|3057
+Pridonskoy|RU||5168|3907
+Bakhmach|UA||5118|3283
+Tuchkovo|RU||5560|3647
+Plavsk|RU||5371|3729
+Lakinsk|RU||5602|3995
+Kashin|RU||5736|3761
+Severo-Zadonsk|RU||5403|3840
+Vostryakovo|RU||5540|3781
+Zvenigorod|RU||5573|3686
+Bykhov|BY||5352|3023
+Berezan|UA||5031|3147
+Svyatopetrivske|UA||5038|3032
+Trubchevsk|RU||5258|3377
+Sukhinichi|RU||5410|3534
+Kybalchych|UA||5049|3060
+Pavlovsk|RU||5968|3043
+Golitsyno|RU||5561|3698
+Pestovo|RU||5859|3580
+Pokrov|RU||5592|3917
+Petushki|RU||5593|3946
+Venëv|RU||5435|3826
+Karabanovo|RU||5631|3870
+Bilopillia|UA||5115|3431
+Razumnoye|RU||5053|3668
+Shushary|RU||5981|3038
+Bortnychi|UA||5038|3070
+Strunino|RU||5637|3858
+Moskovskiy|RU||5560|3736
+Belëv|RU||5381|3613
+Sofrino|RU||5615|3793
+Chernyanka|RU||5094|3782
+Novhorod-Siverskyi|UA||5201|3326
+Pochep|RU||5293|3345

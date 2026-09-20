@@ -1,0 +1,199 @@
+Santiago de Querétaro|MX||2059|-10039
+León de los Aldama|MX||2112|-10168
+Zapopan|MX||2072|-10339
+Guadalajara|MX||2068|-10335
+Monterrey|MX||2568|-10032
+Chihuahua|MX||2864|-10609
+Culiacán|MX||2480|-10739
+Torreón|MX||2554|-10342
+San Luis Potosí|MX||2215|-10097
+Aguascalientes|MX||2188|-10228
+Saltillo|MX||2543|-10098
+Guadalupe|MX||2568|-10026
+Tlaquepaque|MX||2064|-10329
+Victoria de Durango|MX||2402|-10466
+Ciudad Apodaca|MX||2578|-10019
+Ciudad General Escobedo|MX||2580|-10032
+San Nicolás de los Garza|MX||2574|-10030
+Tonalá|MX||2062|-10324
+Mazatlán|MX||2322|-10642
+Irapuato|MX||2067|-10136
+Celaya|MX||2052|-10081
+Tepic|MX||2151|-10489
+Soledad de Graciano Sánchez|MX||2219|-10094
+Ciudad Obregón|MX||2749|-10994
+Ciudad Benito Juárez|MX||2565|-10009
+Santa Catarina|MX||2567|-10046
+Gómez Palacio|MX||2557|-10350
+Los Mochis|MX||2579|-10900
+Puerto Vallarta|MX||2062|-10523
+Ciudad Acuña|MX||2932|-10095
+Monclova|MX||2691|-10142
+Cabo San Lucas|MX||2289|-10991
+San Miguel de Allende|MX||2092|-10074
+Guadalupe|MX||2275|-10252
+Cuauhtémoc|MX||2841|-10687
+Salamanca|MX||2057|-10120
+Piedras Negras|MX||2870|-10052
+Ciudad Delicias|MX||2819|-10547
+Fresnillo|MX||2317|-10287
+San José del Cabo|MX||2305|-10970
+San Pedro Garza García|MX||2566|-10040
+Zacatecas|MX||2277|-10258
+Navojoa|MX||2707|-10944
+Hidalgo del Parral|MX||2693|-10567
+Lagos de Moreno|MX||2136|-10193
+García|MX||2580|-10059
+Tepatitlán de Morelos|MX||2082|-10276
+Hacienda Santa Fe|MX||2052|-10338
+Ocotlán|MX||2035|-10277
+La Piedad de Cabadas|MX||2034|-10202
+Lerdo|MX||2554|-10352
+Matehuala|MX||2365|-10064
+Silao de la Victoria|MX||2094|-10143
+Guamúchil|MX||2546|-10808
+Guanajuato|MX||2102|-10126
+El Pueblito|MX||2054|-10044
+Guasave|MX||2557|-10847
+San Francisco del Rincón|MX||2102|-10186
+Frontera|MX||2693|-10145
+Cadereyta Jiménez|MX||2559|-10000
+Valle de Santiago|MX||2039|-10119
+Dolores Hidalgo|MX||2116|-10093
+Ramos Arizpe|MX||2554|-10095
+Sahuayo de Morelos|MX||2006|-10272
+San Francisco Tesistán|MX||2080|-10348
+Cortazar|MX||2048|-10096
+Acámbaro|MX||2003|-10072
+Sabinas|MX||2786|-10112
+Jardines de la Silla|MX||2563|-10019
+Matamoros|MX||2553|-10323
+Arandas|MX||2071|-10235
+Uriangato|MX||2014|-10118
+San Luis de la Paz|MX||2130|-10051
+San Pedro|MX||2576|-10298
+San Juan de los Lagos|MX||2125|-10233
+Colonia del Sol|MX||2291|-10993
+Purísima de Bustos|MX||2103|-10188
+Moroleón|MX||2013|-10119
+Jerez de García Salinas|MX||2265|-10299
+Jesús María|MX||2196|-10234
+Juventino Rosas|MX||2064|-10100
+San Pedro|MX||2543|-10322
+Santa Rosalía de Camargo|MX||2768|-10517
+Pénjamo|MX||2043|-10172
+San José del Castillo|MX||2051|-10324
+Esperanza|MX||2758|-10993
+Nueva Rosita|MX||2794|-10122
+Salvatierra|MX||2022|-10088
+Santiago|MX||2543|-10015
+Ameca|MX||2055|-10405
+Del Rio|US|TX|2936|-10090
+Xalisco|MX||2144|-10490
+Tala|MX||2065|-10370
+La Barca|MX||2029|-10254
+Ciudad Melchor Múzquiz|MX||2788|-10152
+Fraccionamiento Real Palmas|MX||2590|-10016
+José Mariano Jiménez|MX||2713|-10492
+Parras de la Fuente|MX||2544|-10218
+Ciudad Sabinas Hidalgo|MX||2650|-10018
+Río Grande|MX||2383|-10303
+Víctor Rosales|MX||2295|-10270
+Zapotlanejo|MX||2062|-10307
+Centro Familiar la Soledad|MX||2114|-10175
+Ciudad Fernández|MX||2194|-10001
+Escuinapa de Hidalgo|MX||2283|-10578
+Puruándiro|MX||2009|-10152
+Huatabampo|MX||2683|-10964
+San Agustín|MX||2055|-10347
+Tlajomulco de Zúñiga|MX||2047|-10345
+Coyula|MX||2066|-10323
+Marfil|MX||2100|-10129
+Cocula|MX||2037|-10382
+Tequila|MX||2088|-10384
+Navolato|MX||2477|-10770
+Ixtapa|MX||2072|-10521
+Eagle Pass|US|TX|2871|-10050
+Pabellón de Arteaga|MX||2215|-10228
+San Felipe|MX||2148|-10122
+San Sebastián el Grande|MX||2053|-10343
+Nuevo México|MX||2076|-10344
+Ojinaga|MX||2957|-10454
+Apaseo el Alto|MX||2046|-10062
+Rincón de Romos|MX||2223|-10232
+Gabriel Leyva Solano|MX||2566|-10864
+Abasolo|MX||2045|-10153
+Villagrán|MX||2051|-10100
+Atotonilco el Alto|MX||2055|-10251
+Francisco I. Madero|MX||2577|-10327
+Las Pintitas|MX||2056|-10330
+Santiago Papasquiaro|MX||2504|-10542
+Apaseo el Grande|MX||2055|-10069
+Ciudad de Allende|MX||2528|-10002
+Yuriria|MX||2021|-10113
+Encarnación de Díaz|MX||2153|-10224
+Costa Rica|MX||2459|-10739
+Jalostotitlán|MX||2117|-10246
+Loreto|MX||2227|-10199
+El Salto|MX||2378|-10536
+Licenciado Benito Juárez|MX||2466|-10754
+San Miguel el Alto|MX||2103|-10240
+Yurécuaro|MX||2034|-10228
+Teocaltiche|MX||2143|-10257
+Comonfort|MX||2072|-10076
+Castaños|MX||2679|-10143
+Juan José Ríos|MX||2576|-10882
+San José Iturbide|MX||2100|-10039
+Ixtlán del Río|MX||2104|-10437
+Las Pintas de Arriba|MX||2058|-10332
+Manuel Ojinaga|MX||2956|-10442
+Pedro Meoqui|MX||2827|-10548
+El Salto|MX||2033|-10450
+San José del Valle|MX||2076|-10523
+Nava|MX||2842|-10077
+Tuxpan|MX||2194|-10530
+Sombrerete|MX||2363|-10364
+El Salto|MX||2052|-10318
+Chapala|MX||2029|-10319
+Romita|MX||2087|-10152
+Allende|MX||2834|-10085
+San Buenaventura|MX||2706|-10155
+Jaral del Progreso|MX||2037|-10106
+Santa Anita|MX||2055|-10344
+Mezcales|MX||2073|-10528
+Calvillo|MX||2185|-10272
+La Ermita|MX||2115|-10173
+Lomas del Sur|MX||2049|-10342
+Pueblo Nuevo|MX||2338|-10537
+Acaponeta|MX||2249|-10536
+Jocotepec|MX||2029|-10343
+Juan Aldama|MX||2884|-10591
+Santa Rosa Jáuregui|MX||2074|-10045
+San José de los Olvera|MX||2055|-10042
+Parque Industrial Ciudad Mitras|MX||2579|-10045
+Mitras Poniente|MX||2578|-10043
+Santiago Ixcuintla|MX||2181|-10521
+Zacoalco de Torres|MX||2023|-10357
+San José del Quince|MX||2054|-10328
+Compostela|MX||2124|-10490
+Jamay|MX||2029|-10271
+Palaú|MX||2789|-10142
+Salinas de Hidalgo|MX||2263|-10171
+Anáhuac|MX||2724|-10013
+Nochistlán de Mejía|MX||2136|-10285
+Hidalgo|MX||2597|-10045
+Guadalupe Victoria|MX||2445|-10412
+Tlaltenango de Sánchez Román|MX||2178|-10330
+Magdalena|MX||2091|-10398
+Medina|MX||2115|-10162
+Bucerías|MX||2076|-10534
+San Francisco de los Romo|MX||2207|-10227
+El Rosario|MX||2299|-10585
+Vicente Guerrero|MX||2373|-10398
+La Cruz|MX||2392|-10689
+Venceremos|MX||2055|-10040
+Ahualulco de Mercado|MX||2070|-10397
+Madera|MX||2919|-10814
+Juan Aldama|MX||2429|-10339
+Villa Hidalgo|MX||2168|-10259
+Ciénega de Flores|MX||2595|-10017

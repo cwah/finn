@@ -1,0 +1,52 @@
+Las Palmas de Gran Canaria|ES||2810|-1542
+Santa Cruz de Tenerife|ES||2847|-1625
+Laayoune|EH||2714|-1319
+La Laguna|ES||2849|-1632
+Nouadhibou|MR||2094|-1704
+Guelmim|MA||2899|-1006
+Telde|ES||2799|-1542
+Dakhla|EH|CE|2368|-1596
+Centro|ES||2813|-1543
+Tan-Tan|MA||2844|-1110
+Arona|ES||2810|-1668
+Santa Lucía|ES||2791|-1554
+Arrecife|ES||2896|-1355
+Zouérat|MR||2274|-1247
+San Bartolomé de Tirajana|ES||2792|-1557
+Adeje|ES||2812|-1673
+Boujdour|EH||2613|-1449
+Smara|MA||2674|-1167
+La Orotava|ES||2839|-1652
+Granadilla de Abona|ES||2812|-1658
+Los Realejos|ES||2838|-1658
+Arucas|ES||2812|-1552
+Maspalomas|ES||2776|-1559
+Realejo Alto|ES||2838|-1659
+Puerto del Rosario|ES||2850|-1386
+Puerto de la Cruz|ES||2842|-1655
+Atar|MR||2052|-1305
+Puerto del Carmen|ES||2892|-1367
+Ingenio|ES||2792|-1543
+Agüimes|ES||2791|-1545
+El Marsa|EH||2710|-1342
+La Oliva|ES||2861|-1393
+Candelaria|ES||2835|-1637
+Gáldar|ES||2815|-1565
+Icod de los Vinos|ES||2837|-1671
+Sidi Ifni|MA||2938|-1017
+Tacoronte|ES||2848|-1641
+Carrizal|ES||2791|-1541
+Mogán|ES||2788|-1573
+Pájara|ES||2835|-1411
+Guía de Isora|ES||2821|-1678
+Los Llanos de Aridane|ES||2866|-1792
+Tías|ES||2896|-1365
+San Isidro|ES||2808|-1656
+Teguise|ES||2906|-1356
+San Bartolomé|ES||2900|-1361
+Santa Brígida|ES||2803|-1550
+Güimar|ES||2831|-1641
+Playa del Ingles|ES||2776|-1558
+Yaiza|ES||2896|-1377
+San Miguel De Abona|ES||2810|-1662
+Santa Cruz de la Palma|ES||2868|-1776

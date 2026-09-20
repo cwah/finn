@@ -1,0 +1,807 @@
+London|GB|ENG|5151|-13
+Birmingham|GB|ENG|5248|-190
+Dublin|IE|L|5333|-625
+Glasgow|GB|SCT|5587|-426
+Manchester|GB|ENG|5348|-224
+Sheffield|GB|ENG|5338|-147
+Leeds|GB|ENG|5380|-155
+Edinburgh|GB|SCT|5595|-320
+Liverpool|GB|ENG|5341|-298
+Bristol|GB|ENG|5146|-260
+Cardiff|GB|WLS|5148|-318
+Leicester|GB|ENG|5264|-113
+Bradford|GB|ENG|5379|-175
+Belfast|GB|NIR|5460|-593
+Coventry|GB|ENG|5241|-151
+Brent|GB|ENG|5155|-30
+Birkenhead|GB|ENG|5339|-301
+Nottingham|GB|ENG|5295|-115
+Islington|GB|ENG|5154|-10
+Reading|GB|ENG|5146|-97
+Kingston upon Hull|GB|ENG|5374|-34
+Preston|GB|ENG|5376|-270
+South Dublin|IE|L|5329|-634
+Swansea|GB|WLS|5162|-394
+Newcastle upon Tyne|GB|ENG|5497|-161
+Brighton|GB|ENG|5083|-14
+Derby|GB|ENG|5292|-148
+Southampton|GB|ENG|5090|-140
+Wolverhampton|GB|ENG|5259|-212
+Plymouth|GB|ENG|5037|-414
+Stoke-on-Trent|GB|ENG|5300|-219
+Milton Keynes|GB|ENG|5204|-76
+City of Westminster|GB|ENG|5150|-14
+Northampton|GB|ENG|5225|-88
+Oldham|GB|ENG|5354|-212
+Luton|GB|ENG|5188|-42
+Cork|IE|M|5190|-847
+Archway|GB|ENG|5157|-13
+Portsmouth|GB|ENG|5080|-109
+Swindon|GB|ENG|5156|-178
+Dudley|GB|ENG|5250|-208
+Aberdeen|GB|SCT|5714|-210
+Sutton|GB|ENG|5135|-20
+St Helens|GB|ENG|5345|-273
+Wigan|GB|ENG|5354|-264
+Croydon|GB|ENG|5138|-10
+Warrington|GB|ENG|5339|-258
+Walsall|GB|ENG|5259|-198
+Mansfield|GB|ENG|5313|-120
+Sunderland|GB|ENG|5490|-138
+Slough|GB|ENG|5151|-60
+Bournemouth|GB|ENG|5072|-188
+Peterborough|GB|ENG|5257|-25
+Oxford|GB|ENG|5175|-126
+Newport|GB|WLS|5159|-300
+Enfield Town|GB|ENG|5165|-8
+York|GB|ENG|5396|-108
+Telford|GB|ENG|5268|-245
+Poole|GB|ENG|5071|-198
+Burnley|GB|ENG|5380|-223
+Harrow|GB|ENG|5158|-33
+Huddersfield|GB|ENG|5365|-178
+Dundee|GB|SCT|5647|-297
+Blackburn|GB|ENG|5375|-248
+Blackpool|GB|ENG|5382|-305
+Middlesbrough|GB|ENG|5458|-123
+Bolton|GB|ENG|5358|-243
+Stockport|GB|ENG|5341|-216
+High Wycombe|GB|ENG|5163|-75
+Gloucester|GB|ENG|5187|-224
+Exeter|GB|ENG|5072|-353
+Tottenham|GB|ENG|5160|-7
+Salford|GB|ENG|5349|-229
+Newcastle under Lyme|GB|ENG|5300|-223
+Solihull|GB|ENG|5241|-178
+Watford|GB|ENG|5166|-40
+Crawley|GB|ENG|5111|-18
+Burton upon Trent|GB|ENG|5281|-164
+Cheltenham|GB|ENG|5190|-208
+Rotherham|GB|ENG|5343|-136
+Worthing|GB|ENG|5082|-38
+Doncaster|GB|ENG|5352|-113
+Chesterfield|GB|ENG|5325|-142
+Mendip|GB|ENG|5124|-263
+Sutton Coldfield|GB|ENG|5257|-182
+Wakefield|GB|ENG|5368|-150
+Walthamstow|GB|ENG|5159|-2
+Basingstoke|GB|ENG|5126|-109
+Bedford|GB|ENG|5213|-47
+Woking|GB|ENG|5132|-56
+Lincoln|GB|ENG|5323|-54
+West Bromwich|GB|ENG|5252|-199
+Limerick|IE|M|5266|-862
+Worcester|GB|ENG|5219|-222
+Bath|GB|ENG|5138|-236
+Rochdale|GB|ENG|5362|-216
+Hemel Hempstead|GB|ENG|5175|-45
+Hayes|GB|ENG|5152|-42
+High Peak|GB|ENG|5337|-185
+Darlington|GB|ENG|5452|-155
+Stevenage|GB|ENG|5190|-20
+Southport|GB|ENG|5365|-301
+Chester|GB|ENG|5319|-289
+Wembley|GB|ENG|5155|-30
+Harrogate|GB|ENG|5399|-154
+Hartlepool|GB|ENG|5469|-121
+Nuneaton|GB|ENG|5252|-147
+Redditch|GB|ENG|5231|-195
+Fulham|GB|ENG|5148|-20
+Londonderry County Borough|GB|NIR|5500|-731
+Grimsby|GB|ENG|5357|-8
+Cannock|GB|ENG|5269|-203
+Galway|IE|C|5327|-905
+St Albans|GB|ENG|5175|-33
+South Shields|GB|ENG|5500|-143
+Derry|GB|NIR|5500|-731
+Weston-super-Mare|GB|ENG|5135|-298
+Halifax|GB|ENG|5372|-185
+Edmonton|GB|ENG|5163|-6
+Tamworth|GB|ENG|5263|-170
+Gosport|GB|ENG|5080|-113
+Scunthorpe|GB|ENG|5358|-65
+Tallaght|IE|L|5329|-637
+Stockton-on-Tees|GB|ENG|5457|-132
+Carlisle|GB|ENG|5490|-294
+Southall|GB|ENG|5151|-37
+Rugby|GB|ENG|5237|-126
+Gateshead|GB|ENG|5496|-160
+Lisburn|GB|NIR|5452|-604
+Paisley|GB|SCT|5583|-443
+Putney|GB|ENG|5146|-22
+Shrewsbury|GB|ENG|5271|-275
+Fylde|GB|ENG|5383|-292
+Crewe|GB|ENG|5310|-244
+Bracknell|GB|ENG|5141|-75
+Battersea|GB|ENG|5147|-16
+East Kilbride|GB|SCT|5576|-418
+Hove|GB|ENG|5083|-17
+Aylesbury|GB|ENG|5182|-81
+Canary Wharf|GB|ENG|5151|-2
+Purley|GB|ENG|5134|-11
+Guildford|GB|ENG|5124|-57
+Peckham|GB|ENG|5147|-7
+Barnsley|GB|ENG|5355|-148
+Maidenhead|GB|ENG|5152|-72
+Stafford|GB|ENG|5281|-212
+Uxbridge|GB|ENG|5155|-48
+Rhondda|GB|WLS|5166|-345
+Wimbledon|GB|ENG|5142|-21
+Corby|GB|ENG|5250|-69
+Stamford Hill|GB|ENG|5157|-7
+Paignton|GB|ENG|5044|-357
+Rossendale|GB|ENG|5368|-228
+Washington|GB|ENG|5490|-152
+Brixton|GB|ENG|5147|-11
+Hounslow|GB|ENG|5147|-36
+Finchley|GB|ENG|5160|-20
+Wrexham|GB|WLS|5305|-299
+Ellesmere Port Town|GB|ENG|5328|-290
+Torquay|GB|ENG|5046|-353
+Cricklewood|GB|ENG|5156|-22
+Loughborough|GB|ENG|5277|-120
+Taunton|GB|ENG|5101|-310
+Waterlooville|GB|ENG|5088|-103
+Bognor Regis|GB|ENG|5078|-68
+Newtownabbey|GB|NIR|5466|-591
+Buckley|GB|WLS|5317|-308
+Mitcham|GB|ENG|5140|-17
+Feltham|GB|ENG|5145|-41
+Sale|GB|ENG|5343|-232
+Tonypandy|GB|WLS|5162|-346
+Acton|GB|ENG|5151|-28
+Scarborough|GB|ENG|5428|-40
+Widnes|GB|ENG|5336|-273
+Runcorn|GB|ENG|5334|-273
+Bury|GB|ENG|5360|-230
+Dewsbury|GB|ENG|5369|-163
+Bangor|GB|NIR|5466|-567
+Beckenham|GB|ENG|5141|-3
+Farnborough|GB|ENG|5129|-76
+Tynemouth|GB|ENG|5502|-143
+Hereford|GB|ENG|5206|-271
+Stroud|GB|ENG|5175|-220
+Halesowen|GB|ENG|5245|-205
+Waterford|IE|M|5226|-711
+Chelsea|GB|ENG|5149|-17
+Craigavon|GB|NIR|5445|-639
+Wallasey|GB|ENG|5342|-306
+Littlehampton|GB|ENG|5081|-54
+Streatham|GB|ENG|5143|-13
+Bootle|GB|ENG|5347|-302
+Bebington|GB|ENG|5335|-302
+Kidderminster|GB|ENG|5239|-225
+Morley|GB|ENG|5374|-160
+Stourbridge|GB|ENG|5246|-214
+Livingston|GB|SCT|5590|-352
+Castlereagh|GB|NIR|5457|-588
+Kettering|GB|ENG|5240|-73
+Wellingborough|GB|ENG|5230|-69
+Barrow in Furness|GB|ENG|5411|-323
+South Croydon|GB|ENG|5136|-9
+Dunfermline|GB|SCT|5607|-346
+Huyton|GB|ENG|5341|-284
+Barry|GB|WLS|5140|-328
+Meikle Earnock|GB|SCT|5575|-403
+Hamilton|GB|SCT|5577|-403
+Macclesfield|GB|ENG|5326|-213
+Eastleigh|GB|ENG|5097|-135
+Smethwick|GB|ENG|5249|-197
+Weymouth|GB|ENG|5061|-246
+Esher|GB|ENG|5137|-37
+Dunstable|GB|ENG|5189|-52
+Morecambe|GB|ENG|5407|-286
+Redhill|GB|ENG|5124|-17
+Welwyn Garden City|GB|ENG|5180|-21
+Horsham|GB|ENG|5106|-33
+Staines|GB|ENG|5143|-51
+Royal Leamington Spa|GB|ENG|5229|-152
+Hinckley|GB|ENG|5254|-138
+Cumbernauld|GB|SCT|5595|-399
+Kirkcaldy|GB|SCT|5612|-316
+Bletchley|GB|ENG|5199|-73
+Yeovil|GB|ENG|5094|-263
+Keighley|GB|ENG|5387|-191
+Altrincham|GB|ENG|5339|-235
+Bridgend|GB|WLS|5151|-358
+Llanelli|GB|WLS|5168|-416
+Willenhall|GB|ENG|5259|-206
+Banbury|GB|ENG|5206|-134
+Cwmbran|GB|WLS|5165|-302
+Morden|GB|ENG|5140|-20
+Long Eaton|GB|ENG|5290|-127
+Inverness|GB|SCT|5748|-422
+Durham|GB|ENG|5478|-158
+Northwich|GB|ENG|5326|-252
+Perth|GB|SCT|5640|-343
+Lancaster|GB|ENG|5405|-280
+Tipton|GB|ENG|5253|-207
+Kilmarnock|GB|SCT|5561|-450
+Dumfries|GB|SCT|5507|-361
+Banstead|GB|ENG|5132|-21
+Ayr|GB|SCT|5546|-463
+Neath|GB|WLS|5166|-380
+Winchester|GB|ENG|5107|-132
+Middleton|GB|ENG|5355|-220
+Havant|GB|ENG|5086|-99
+Kirkby|GB|ENG|5348|-289
+Carshalton|GB|ENG|5137|-17
+Boston|GB|ENG|5298|-3
+Castleford|GB|ENG|5373|-136
+Catford|GB|ENG|5144|-2
+Salisbury|GB|ENG|5107|-180
+Worksop|GB|ENG|5330|-112
+Pontefract|GB|ENG|5369|-131
+Grantham|GB|ENG|5291|-64
+Willesden|GB|ENG|5153|-23
+Drogheda|IE|L|5372|-635
+Coatbridge|GB|SCT|5586|-402
+Merthyr Tydfil|GB|WLS|5175|-338
+Great Sankey|GB|ENG|5339|-264
+Cheshunt|GB|ENG|5170|-3
+Ashton-under-Lyne|GB|ENG|5349|-210
+Leigh|GB|ENG|5350|-252
+Leatherhead|GB|ENG|5130|-33
+Newark on Trent|GB|ENG|5307|-82
+Dundalk|IE|L|5400|-642
+Wallsend|GB|ENG|5499|-153
+Leighton Buzzard|GB|ENG|5192|-66
+Lytham St Annes|GB|ENG|5374|-300
+Redruth|GB|ENG|5023|-522
+Andover|GB|ENG|5121|-149
+Fareham|GB|ENG|5085|-118
+Stretford|GB|ENG|5345|-232
+Urmston|GB|ENG|5345|-235
+Coity|GB|WLS|5152|-356
+Newburn|GB|ENG|5499|-174
+Holloway|GB|ENG|5155|-12
+Greenock|GB|SCT|5595|-476
+Bridgwater|GB|ENG|5113|-300
+Hatfield|GB|ENG|5176|-22
+Wokingham|GB|ENG|5141|-84
+Ilkeston|GB|ENG|5297|-131
+Trowbridge|GB|ENG|5132|-221
+Prescot|GB|ENG|5343|-280
+Swords|IE|L|5346|-622
+Kingswood|GB|ENG|5145|-251
+Aldershot|GB|ENG|5125|-76
+Bloxwich|GB|ENG|5262|-200
+Ewell|GB|ENG|5135|-25
+North Shields|GB|ENG|5502|-145
+Shepherds Bush|GB|ENG|5150|-22
+Batley|GB|ENG|5370|-163
+Cleethorpes|GB|ENG|5356|-3
+Skelmersdale|GB|ENG|5355|-277
+Fleet|GB|ENG|5128|-83
+Abingdon|GB|ENG|5167|-128
+Glenrothes|GB|SCT|5620|-317
+Surbiton|GB|ENG|5139|-30
+Whitley Bay|GB|ENG|5504|-145
+Greenford|GB|ENG|5153|-36
+Stirling|GB|SCT|5612|-394
+Arnold|GB|ENG|5300|-113
+Coalville|GB|ENG|5272|-137
+Leyland|GB|ENG|5370|-269
+Chadderton|GB|ENG|5354|-214
+Rushden|GB|ENG|5229|-60
+Yeadon|GB|ENG|5386|-169
+Blyth|GB|ENG|5513|-151
+Eccles|GB|ENG|5348|-233
+Warwick|GB|ENG|5228|-158
+Wigston Magna|GB|ENG|5258|-109
+Redcar|GB|ENG|5462|-106
+Heston|GB|ENG|5148|-38
+Farnham|GB|ENG|5121|-80
+Chester-le-Street|GB|ENG|5486|-157
+Great Malvern|GB|ENG|5211|-233
+Houghton-Le-Spring|GB|ENG|5484|-146
+West Bridgford|GB|ENG|5293|-113
+Newton Abbot|GB|ENG|5053|-361
+Mangotsfield|GB|ENG|5149|-250
+Sutton in Ashfield|GB|ENG|5313|-126
+Airdrie|GB|SCT|5587|-398
+Borehamwood|GB|ENG|5165|-28
+Exmouth|GB|ENG|5062|-340
+Tyldesley|GB|ENG|5351|-247
+Hyde|GB|ENG|5345|-208
+Chippenham|GB|ENG|5146|-212
+Billingham|GB|ENG|5459|-129
+Pontypool|GB|WLS|5170|-304
+Walkden|GB|ENG|5352|-240
+Falkirk|GB|SCT|5600|-379
+Hitchin|GB|ENG|5195|-28
+Briton Ferry|GB|WLS|5163|-382
+Hoddesdon|GB|ENG|5176|-1
+Bridlington|GB|ENG|5408|-19
+Accrington|GB|ENG|5375|-236
+Bentley|GB|ENG|5353|-115
+Bromsgrove|GB|ENG|5234|-206
+Lichfield|GB|ENG|5268|-183
+Swadlincote|GB|ENG|5277|-156
+Felling|GB|ENG|5495|-157
+Chiswick|GB|ENG|5149|-26
+Totton|GB|ENG|5092|-149
+Irvine|GB|SCT|5562|-466
+Letchworth Garden City|GB|ENG|5198|-23
+Chorley|GB|ENG|5365|-262
+Navan|IE|L|5365|-668
+Bicester|GB|ENG|5190|-115
+Haywards Heath|GB|ENG|5100|-10
+Wednesfield|GB|ENG|5260|-209
+Bray|IE|L|5320|-610
+Loughton|GB|ENG|5243|-257
+Cramlington|GB|ENG|5509|-159
+Ebbw Vale|GB|WLS|5178|-321
+Newbury|GB|ENG|5140|-132
+North Watford|GB|ENG|5168|-39
+Portadown|GB|NIR|5442|-644
+Washwood Heath|GB|ENG|5250|-183
+Brighouse|GB|ENG|5370|-178
+Motherwell|GB|SCT|5579|-399
+Darwen|GB|ENG|5370|-246
+Aston|GB|ENG|5250|-188
+Lower Earley|GB|ENG|5143|-92
+Shirley|GB|ENG|5241|-182
+Deeside|GB|WLS|5320|-304
+Falmouth|GB|ENG|5015|-507
+Chichester|GB|ENG|5084|-78
+Barnstaple|GB|ENG|5108|-406
+Windsor|GB|ENG|5148|-60
+Prestwich|GB|ENG|5353|-228
+Epsom|GB|ENG|5133|-27
+Christchurch|GB|ENG|5074|-178
+Stanley|GB|ENG|5487|-170
+Dún Laoghaire|IE|L|5329|-614
+Pontypridd|GB|WLS|5160|-334
+Thornton-Cleveleys|GB|ENG|5387|-302
+Aberdare|GB|WLS|5171|-345
+Bedworth|GB|ENG|5248|-147
+Caerphilly|GB|WLS|5157|-322
+Ruislip|GB|ENG|5157|-42
+Rutherglen|GB|SCT|5583|-421
+Saint Neots|GB|ENG|5222|-27
+Cambuslang|GB|SCT|5581|-416
+Harpenden|GB|ENG|5182|-36
+Burgess Hill|GB|ENG|5096|-13
+Beverley|GB|ENG|5385|-42
+Greenwich|GB|ENG|5148|-1
+Spalding|GB|ENG|5279|-15
+Stratford-upon-Avon|GB|ENG|5219|-171
+Winsford|GB|ENG|5319|-252
+Camberley|GB|ENG|5134|-74
+Wishaw|GB|SCT|5577|-392
+Barnet|GB|ENG|5165|-20
+Radcliffe|GB|ENG|5356|-232
+Hucknall|GB|ENG|5303|-120
+Egham|GB|ENG|5143|-55
+Kidsgrove|GB|ENG|5309|-224
+Jarrow|GB|ENG|5498|-148
+Newtownards|GB|NIR|5459|-569
+Didcot|GB|ENG|5161|-124
+Nelson|GB|ENG|5383|-220
+Colwyn Bay|GB|WLS|5329|-373
+Burntwood|GB|ENG|5268|-193
+Carrickfergus|GB|NIR|5472|-581
+Kendal|GB|ENG|5433|-275
+Consett|GB|ENG|5485|-183
+Witney|GB|ENG|5178|-149
+Heswall|GB|ENG|5333|-310
+Kilburn|GB|ENG|5155|-19
+Cheadle Hulme|GB|ENG|5338|-219
+Ballymena|GB|NIR|5486|-628
+Bideford|GB|ENG|5102|-421
+Shipley|GB|ENG|5383|-177
+Bearsden|GB|SCT|5592|-433
+Wood Green|GB|ENG|5160|-12
+Bushey|GB|ENG|5164|-36
+Newton Mearns|GB|SCT|5577|-433
+Daventry|GB|ENG|5226|-116
+Heywood|GB|ENG|5359|-222
+Brierley Hill|GB|ENG|5248|-212
+Muswell Hill|GB|ENG|5159|-14
+Ennis|IE|M|5284|-899
+Sunbury-on-Thames|GB|ENG|5140|-42
+Newry|GB|NIR|5418|-634
+Melton Mowbray|GB|ENG|5277|-89
+Bow|GB|ENG|5153|-2
+Evesham|GB|ENG|5209|-195
+Ashington|GB|ENG|5518|-156
+Kirkby in Ashfield|GB|ENG|5310|-124
+Burngreave|GB|ENG|5339|-146
+Denton|GB|ENG|5346|-212
+Cleckheaton|GB|ENG|5372|-171
+Ashford|GB|ENG|5143|-46
+Carlow|IE|L|5284|-693
+Longton|GB|ENG|5298|-213
+Maghull|GB|ENG|5352|-294
+Aldridge|GB|ENG|5261|-192
+Douglas|IE|M|5187|-844
+Stalybridge|GB|ENG|5348|-206
+Highbury|GB|ENG|5155|-10
+Acocks Green|GB|ENG|5245|-182
+East Grinstead|GB|ENG|5112|-1
+Flint|GB|WLS|5324|-313
+Newton Aycliffe|GB|ENG|5462|-157
+Ashton in Makerfield|GB|ENG|5348|-265
+Portishead|GB|ENG|5148|-277
+Westhoughton|GB|ENG|5355|-252
+Fleetwood|GB|ENG|5393|-301
+Douglas|IM||5415|-448
+Frome|GB|ENG|5123|-232
+Congleton|GB|ENG|5316|-221
+Rugeley|GB|ENG|5276|-194
+Camden Town|GB|ENG|5154|-14
+Tralee|IE|M|5227|-970
+Bishop Auckland|GB|ENG|5466|-168
+Northolt|GB|ENG|5155|-37
+Rhyl|GB|WLS|5332|-349
+Hertford|GB|ENG|5180|-8
+Wilmslow|GB|ENG|5333|-223
+Staveley|GB|ENG|5327|-135
+Coleraine|GB|NIR|5513|-667
+Farnworth|GB|ENG|5355|-240
+Clydebank|GB|SCT|5590|-441
+New Milton|GB|ENG|5076|-167
+Coulsdon|GB|ENG|5132|-14
+Crowthorne|GB|ENG|5137|-79
+Hawarden|GB|WLS|5318|-303
+Thatcham|GB|ENG|5140|-126
+Saddleworth|GB|ENG|5355|-200
+Rickmansworth|GB|ENG|5164|-48
+Pudsey|GB|ENG|5380|-166
+Rhosllannerchrugog|GB|WLS|5301|-306
+Elgin|GB|SCT|5765|-332
+Isleworth|GB|ENG|5148|-34
+Hindley|GB|ENG|5353|-258
+Chalk Farm|GB|ENG|5154|-15
+Newport|GB|ENG|5070|-129
+Selby|GB|ENG|5378|-107
+Market Harborough|GB|ENG|5248|-92
+Newton-le-Willows|GB|ENG|5345|-260
+Vale of Leven|GB|SCT|5597|-458
+St Austell|GB|ENG|5034|-477
+Renfrew|GB|SCT|5587|-439
+Plymstock|GB|ENG|5036|-409
+Ryde|GB|ENG|5073|-116
+Ormskirk|GB|ENG|5357|-288
+Golborne|GB|ENG|5348|-260
+Gosforth|GB|ENG|5500|-162
+Huntingdon|GB|ENG|5233|-19
+Oadby|GB|ENG|5261|-108
+Droitwich|GB|ENG|5227|-215
+New Malden|GB|ENG|5140|-26
+Ammanford|GB|WLS|5179|-399
+Yate|GB|ENG|5154|-242
+Droylsden|GB|ENG|5348|-215
+Bishopbriggs|GB|SCT|5591|-422
+Arbroath|GB|SCT|5656|-259
+Musselburgh|GB|SCT|5594|-305
+Bathgate|GB|SCT|5590|-364
+Hanworth|GB|ENG|5143|-38
+Whitefield|GB|ENG|5355|-230
+Portlaoise|IE|L|5303|-730
+Lofthouse|GB|ENG|5373|-150
+Penarth|GB|WLS|5144|-317
+Belper|GB|ENG|5302|-148
+Formby|GB|ENG|5356|-307
+Burnham-on-Sea|GB|ENG|5124|-300
+Heanor|GB|ENG|5301|-135
+Chapeltown|GB|ENG|5347|-147
+Truro|GB|ENG|5027|-505
+Rawtenstall|GB|ENG|5370|-228
+Litherland|GB|ENG|5347|-300
+Whitehaven|GB|ENG|5455|-358
+Swinton|GB|ENG|5350|-235
+Athlone|IE|L|5342|-794
+Waltham Abbey|GB|ENG|5169|0
+Royton|GB|ENG|5357|-212
+Walton-on-Thames|GB|ENG|5139|-41
+Wellington|GB|ENG|5270|-252
+Droichead Nua|IE|L|5318|-680
+Godalming|GB|ENG|5119|-61
+Bartley Green|GB|ENG|5244|-200
+An Muileann gCearr|IE|L|5352|-734
+Potters Bar|GB|ENG|5169|-18
+Alfreton|GB|ENG|5310|-138
+Letterkenny|IE|U|5495|-773
+Kenilworth|GB|ENG|5235|-158
+Seaham|GB|ENG|5484|-135
+Thornaby-on-Tees|GB|ENG|5453|-130
+Tiverton|GB|ENG|5090|-349
+Sandyford|IE|L|5327|-623
+Retford|GB|ENG|5332|-94
+Greystones|IE|L|5314|-606
+Atherton|GB|ENG|5352|-249
+Heavitree|GB|ENG|5072|-350
+Berkhamsted|GB|ENG|5176|-57
+Ossett|GB|ENG|5368|-158
+Reigate|GB|ENG|5124|-21
+Rottingdean|GB|ENG|5081|-6
+Amersham|GB|ENG|5167|-62
+Balbriggan|IE|L|5361|-618
+Hadley Wood|GB|ENG|5167|-17
+Kilkenny|IE|L|5265|-725
+Wexford|IE|L|5233|-646
+Richmond|GB|ENG|5146|-31
+Old Trafford|GB|ENG|5346|-229
+Speke|GB|ENG|5334|-284
+Garston|GB|ENG|5333|-290
+Hebburn|GB|ENG|5497|-152
+Darton|GB|ENG|5359|-153
+Workington|GB|ENG|5464|-354
+Horley|GB|ENG|5117|-16
+Cowes|GB|ENG|5076|-130
+Barnes|GB|ENG|5147|-25
+Dukinfield|GB|ENG|5347|-209
+Dronfield|GB|ENG|5330|-148
+Ripley|GB|ENG|5303|-140
+Omagh|GB|NIR|5460|-730
+Clevedon|GB|ENG|5144|-286
+Maesteg|GB|WLS|5161|-366
+Notting Hill|GB|ENG|5151|-21
+Guiseley|GB|ENG|5388|-171
+Bordon|GB|ENG|5111|-86
+Caterham|GB|ENG|5128|-8
+Wallington|GB|ENG|5136|-15
+Goole|GB|ENG|5370|-88
+Sandhurst|GB|ENG|5135|-79
+Naas|IE|L|5322|-667
+Pimlico|GB|ENG|5149|-14
+Chesham|GB|ENG|5170|-60
+Gerrards Cross|GB|ENG|5159|-56
+Sligo|IE|C|5427|-847
+Stamford|GB|ENG|5265|-48
+Stourport-on-Severn|GB|ENG|5234|-228
+Gorseinon|GB|WLS|5167|-404
+Failsworth|GB|ENG|5350|-217
+Nailsea|GB|ENG|5143|-276
+Gainsborough|GB|ENG|5338|-77
+Hythe|GB|ENG|5086|-140
+Camborne|GB|ENG|5021|-530
+Risca|GB|WLS|5161|-310
+Halewood|GB|ENG|5336|-283
+Alloa|GB|SCT|5612|-379
+Tewkesbury|GB|ENG|5199|-216
+Yateley|GB|ENG|5134|-83
+Wednesbury|GB|ENG|5255|-202
+Peterlee|GB|ENG|5476|-134
+Celbridge|IE|L|5334|-654
+Cirencester|GB|ENG|5172|-197
+Newquay|GB|ENG|5042|-507
+Hazel Grove|GB|ENG|5338|-212
+Sandown|GB|ENG|5065|-116
+Colne|GB|ENG|5386|-217
+Chalfont Saint Peter|GB|ENG|5161|-56
+Buxton|GB|ENG|5326|-191
+Ampthill|GB|ENG|5203|-50
+Portslade|GB|ENG|5084|-22
+Kingswinford|GB|ENG|5250|-217
+Hampton|GB|ENG|5141|-37
+Kempston Hardwick|GB|ENG|5209|-50
+Dumbarton|GB|SCT|5594|-457
+Poulton-le-Fylde|GB|ENG|5383|-298
+Brough|GB|ENG|5373|-57
+Kempston|GB|ENG|5212|-50
+Penzance|GB|ENG|5012|-554
+Dinnington|GB|ENG|5337|-120
+Finglas|IE|L|5339|-630
+Bellshill|GB|SCT|5582|-402
+Antrim|GB|NIR|5472|-621
+Soho|GB|ENG|5151|-14
+Kirkintilloch|GB|SCT|5594|-415
+Norris Green|GB|ENG|5345|-292
+Keynsham|GB|ENG|5141|-250
+Earl Shilton|GB|ENG|5258|-132
+Adwick le Street|GB|ENG|5357|-118
+Weybridge|GB|ENG|5137|-46
+Blackwall|GB|ENG|5151|0
+Irlam|GB|ENG|5344|-242
+Chessington|GB|ENG|5136|-30
+Alton|GB|ENG|5115|-97
+Liversedge|GB|ENG|5371|-169
+Leek|GB|ENG|5310|-202
+Melksham|GB|ENG|5137|-214
+Horsforth|GB|ENG|5384|-164
+Clydach|GB|WLS|5168|-390
+Great Wyrley|GB|ENG|5266|-201
+Yarm|GB|ENG|5450|-136
+Shoreham-by-Sea|GB|ENG|5083|-27
+Pinner|GB|ENG|5159|-38
+Prestatyn|GB|WLS|5334|-341
+Peterhead|GB|SCT|5751|-178
+Hook|GB|ENG|5137|-31
+Nether Edge|GB|ENG|5336|-149
+Humberstone|GB|ENG|5265|-109
+South Elmsall|GB|ENG|5360|-128
+Golders Green|GB|ENG|5158|-20
+Mirfield|GB|ENG|5367|-170
+Emsworth|GB|ENG|5085|-94
+Aberystwyth|GB|WLS|5242|-408
+Oswestry|GB|ENG|5286|-305
+Horwich|GB|ENG|5360|-255
+Lancing|GB|ENG|5083|-32
+Kirkdale|GB|ENG|5343|-298
+Ballincollig|IE|M|5188|-858
+Eastwood|GB|ENG|5300|-130
+Peacehaven|GB|ENG|5079|-1
+West Molesey|GB|ENG|5140|-38
+East Molesey|GB|ENG|5140|-35
+Southsea|GB|ENG|5078|-109
+Isle of Lewis|GB|SCT|5822|-639
+Wealdstone|GB|ENG|5160|-34
+Rawmarsh|GB|ENG|5346|-134
+Bedlington|GB|ENG|5513|-159
+Larne|GB|NIR|5485|-582
+Saint Andrews|GB|SCT|5634|-280
+Cluain Meala|IE|M|5236|-770
+Mansfield Woodhouse|GB|ENG|5316|-119
+Bangor|GB|WLS|5323|-413
+Bonnyrigg|GB|SCT|5587|-311
+Marlow|GB|ENG|5157|-77
+Carrigaline|IE|M|5181|-840
+Fulwood|GB|ENG|5335|-155
+Chapel Allerton|GB|ENG|5383|-154
+Heckmondwike|GB|ENG|5371|-168
+Brymbo|GB|WLS|5307|-307
+East Barnet|GB|ENG|5165|-16
+Templeogue|IE|L|5330|-631
+Bingley|GB|ENG|5385|-184
+Dalserf|GB|SCT|5573|-392
+Hedge End|GB|ENG|5091|-130
+Sandbach|GB|ENG|5315|-236
+New Mills|GB|ENG|5337|-200
+Ascot|GB|ENG|5141|-67
+Barrhead|GB|SCT|5580|-439
+Manchester City Centre|GB|ENG|5348|-225
+Glossop|GB|ENG|5344|-195
+Spennymoor|GB|ENG|5470|-160
+Dorking|GB|ENG|5123|-33
+Amersham on the Hill|GB|ENG|5167|-61
+Moreton|GB|ENG|5340|-312
+Biddulph|GB|ENG|5312|-218
+Bishopstoke|GB|ENG|5097|-133
+Ferndown|GB|ENG|5081|-190
+Bethnal Green|GB|ENG|5153|-6
+Ware|GB|ENG|5181|-3
+Maltby|GB|ENG|5342|-120
+Bayswater|GB|ENG|5151|-18
+Warminster|GB|ENG|5120|-218
+Louth|GB|ENG|5337|0
+Gelligaer|GB|WLS|5166|-326
+Sleaford|GB|ENG|5300|-41
+Haydock|GB|ENG|5347|-268
+Rathfarnham|IE|L|5330|-628
+Mountsorrel|GB|ENG|5272|-115
+Thorne|GB|ENG|5361|-96
+Haslemere|GB|ENG|5109|-71
+Calne|GB|ENG|5144|-201
+Evington|GB|ENG|5260|-107
+Maynooth|IE|L|5338|-659
+Friern Barnet|GB|ENG|5161|-16
+Nantwich|GB|ENG|5307|-252
+Bramhall|GB|ENG|5336|-217
+Glen Parva|GB|ENG|5259|-117
+Harlesden|GB|ENG|5154|-25
+Romsey|GB|ENG|5099|-150
+Primrose Place|GB|ENG|5256|-11
+Brockley|GB|ENG|5146|-4
+Blantyre|GB|SCT|5580|-409
+Ramsbottom|GB|ENG|5365|-232
+Bredbury|GB|ENG|5342|-212
+Heysham|GB|ENG|5404|-289
+Westbury|GB|ENG|5126|-219
+Guisborough|GB|ENG|5453|-106
+Wath upon Dearne|GB|ENG|5350|-135
+Bodmin|GB|ENG|5047|-472
+Hayling Island|GB|ENG|5078|-97
+Dorchester|GB|ENG|5072|-243
+Braunstone|GB|ENG|5262|-118
+Devizes|GB|ENG|5135|-199
+Northallerton|GB|ENG|5434|-143
+Saint Ives|GB|ENG|5233|-8
+South Ruislip|GB|ENG|5156|-41
+High Blantyre|GB|SCT|5578|-410
+Cobham|GB|ENG|5133|-41
+Hale|GB|ENG|5338|-233
+Penrith|GB|ENG|5467|-276
+Brixham|GB|ENG|5039|-352
+Whickham|GB|ENG|5495|-168
+Biggleswade|GB|ENG|5209|-26
+Malahide|IE|L|5345|-615
+Kensington|GB|ENG|5341|-295
+South Norwood|GB|ENG|5140|-7
+Blanchardstown|IE|L|5339|-638
+Cowley|GB|ENG|5173|-121
+Harringay|GB|ENG|5158|-10
+Norbury|GB|ENG|5142|-12
+Enfield Lock|GB|ENG|5167|-3
+Nigg|GB|SCT|5712|-209
+Fazakerley|GB|ENG|5346|-293
+Ripon|GB|ENG|5414|-153
+Tooting|GB|ENG|5143|-16
+Stepney|GB|ENG|5152|-4
+Banbridge|GB|NIR|5435|-628
+Penicuik|GB|SCT|5583|-323
+Roehampton|GB|ENG|5145|-24
+Grangemouth|GB|SCT|5601|-372
+Kilwinning|GB|SCT|5565|-471
+Ryton|GB|ENG|5262|-235
+Upper Norwood|GB|ENG|5142|-9
+Worcester Park|GB|ENG|5138|-24
+Viewpark|GB|SCT|5583|-406
+Longsight|GB|ENG|5346|-220
+Basford|GB|ENG|5297|-118
+Limehouse|GB|ENG|5151|-3
+Broxburn|GB|SCT|5593|-347
+Seven Sisters|GB|ENG|5158|-8
+Chertsey|GB|ENG|5139|-51
+Kippax|GB|ENG|5377|-137
+Ealing Common|GB|ENG|5151|-30
+Conisbrough|GB|ENG|5348|-123
+Johnstone|GB|SCT|5583|-452
+Carmarthen|GB|WLS|5186|-431
+Hoyland Nether|GB|ENG|5350|-145
+Tadley|GB|ENG|5135|-113
+Royston|GB|ENG|5205|-2
+Fort William|GB|SCT|5682|-511
+New Cross|GB|ENG|5148|-4
+Hunts Cross|GB|ENG|5336|-287
+Baildon|GB|ENG|5385|-179
+Carterton|GB|ENG|5176|-159
+Porthcawl|GB|WLS|5148|-370
+Ponders End|GB|ENG|5164|-5
+Hale|GB|ENG|5123|-79
+Elland|GB|ENG|5369|-184
+Perry Vale|GB|ENG|5144|-4
+Belle Vale|GB|ENG|5339|-286
+Queenstown|GB|ENG|5148|-15
+Tullamore|IE|L|5327|-749
+Old Swan|GB|ENG|5341|-291
+Saltash|GB|ENG|5041|-423
+Earlsfield|GB|ENG|5144|-19
+Wimborne Minster|GB|ENG|5078|-198
+Allerton|GB|ENG|5337|-289
+Erskine|GB|SCT|5590|-445
+Wombwell|GB|ENG|5352|-140
+Furzedown|GB|ENG|5142|-15
+Leixlip|IE|L|5337|-650
+South Hayling|GB|ENG|5079|-98
+Blackwood|GB|WLS|5167|-321
+Stapleford|GB|ENG|5292|-127
+Llandudno|GB|WLS|5332|-383
+Latchmere|GB|ENG|5147|-17
+Neston|GB|ENG|5141|-220
+Donaghmede|IE|L|5340|-616
+Lucan|IE|L|5336|-645
+Haslingden|GB|ENG|5370|-232
+West Ealing|GB|ENG|5151|-32
+Palmers Green|GB|ENG|5162|-11
+Totteridge|GB|ENG|5163|-20
+Blaydon-on-Tyne|GB|ENG|5496|-171
+Sinfin|GB|ENG|5288|-149
+Shadwell|GB|ENG|5151|-6
+Mexborough|GB|ENG|5349|-129
+Newport Pagnell|GB|ENG|5209|-72
+Neston|GB|ENG|5328|-305
+Tottenham Hale|GB|ENG|5159|-6
+Larkhall|GB|SCT|5573|-397

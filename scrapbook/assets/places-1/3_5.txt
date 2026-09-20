@@ -1,0 +1,230 @@
+Tehran|IR||3569|5142
+Mashhad|IR||3630|5961
+Isfahan|IR||3265|5167
+Karaj|IR||3583|5099
+Ashgabat|TM|S|3795|5838
+Qom|IR||3464|5088
+Kerman|IR||3028|5708
+Yazd|IR||3190|5437
+Eslamshahr|IR||3555|5124
+Qazvin|IR||3627|5000
+Shahrīār|IR||3566|5106
+Qods|IR||3572|5111
+Kashan|IR||3398|5143
+Kāshān|IR||3400|5144
+Khomeynī Shahr|IR||3269|5154
+Marāgheh|IR||3583|5963
+Sari|IR||3656|5306
+Qarchak|IR||3543|5158
+Gorgān|IR||3684|5444
+Sabzevar|IR||3621|5768
+Golestān|IR||3552|5118
+Āmol|IR||3647|5235
+Pākdasht|IR||3548|5168
+Najafābād|IR||3263|5137
+Varāmīn|IR||3532|5165
+Neyshābūr|IR||3621|5880
+Sāveh|IR||3502|5036
+Naz̧arābād|IR||3595|5061
+Qā’em Shahr|IR||3647|5287
+Bābol|IR||3655|5268
+Nasīm Shahr|IR||3557|5116
+Nasimshahr|IR||3557|5116
+Bīrjand|IR||3287|5922
+Bojnūrd|IR||3747|5733
+Fardīs|IR||3576|5100
+Shāhīn Shahr|IR||3286|5155
+Shahrud|IR||3642|5498
+Gonbad-e Kāvūs|IR||3725|5517
+Rafsanjān|IR||3041|5599
+Kamālshahr|IR||3586|5087
+Torbat-e Ḩeydarīyeh|IR||3527|5922
+Shahreẕā|IR||3201|5186
+Kāshmar|IR||3524|5847
+Shahr-e Kord|IR||3233|5086
+Semnan|IR||3558|5339
+Behbahān|IR||3060|5024
+Moḩammad Shahr|IR||3576|5092
+Shahre Jadide Andisheh|IR||3568|5102
+Andīsheh|IR||3575|5128
+Pardīs|IR||3575|5181
+Qūchān|IR||3711|5851
+Chālūs|IR||3666|5142
+Bahārestān|IR||3249|5177
+Robāţ Karīm|IR||3548|5108
+Lāhījān|IR||3720|5001
+Shahrak-e Pardīsān|IR||3456|5080
+Parand|IR||3547|5098
+Yasuj|IR||3067|5159
+Dogonbadan|IR||3036|5080
+Behshahr|IR||3669|5355
+Moḩammadīyeh|IR||3622|5018
+Alvand|IR||3619|5006
+Fūlād Shahr|IR||3249|5140
+Balkanabat|TM||3951|5437
+Tajrīsh|IR||3580|5143
+Mehestan|IR||3599|5075
+Bāghestān|IR||3565|5113
+Shīrvān|IR||3740|5793
+Būmahen|IR||3573|5187
+Khomeyn|IR||3364|5008
+Mobārakeh|IR||3235|5150
+Langarūd|IR||3720|5015
+Dāmghān|IR||3617|5434
+Ārān Bīdgol|IR||3406|5148
+Bāqershahr|IR||3553|5140
+Māhdāsht|IR||3573|5081
+Meshkīn Dasht|IR||3575|5094
+Nekā|IR||3665|5330
+Ābyek|IR||3604|5053
+Esfarāyen|IR||3708|5751
+Abadeh|IR||3116|5265
+Zarand|IR||3081|5656
+Golpāyegān|IR||3345|5029
+Ardakān|IR||3231|5402
+Ṣāleḥīeh|IR||3551|5119
+Borūjen|IR||3197|5129
+Nūrābād|IR||3011|5152
+Dehdasht|IR||3079|5057
+Malārd|IR||3567|5098
+Zarrīn Shahr|IR||3239|5138
+Hashtgerd|IR||3596|5068
+Ābyek|IR||3607|5055
+Şabbāshahr|IR||3558|5111
+Bandar-e Torkaman|IR||3690|5407
+Chenārān|IR||3665|5912
+Pīshvā|IR||3531|5173
+'Alī Ābād-e Katūl|IR||3691|5487
+Meybod|IR||3225|5402
+Shahr-e Bābak|IR||3012|5512
+Tabas|IR||3360|5692
+Chahār Dangeh|IR||3560|5131
+Falāvarjān|IR||3256|5151
+Īstgāh-e Rāh Āhan-e Garmsār|IR||3523|5231
+Rehnān|IR||3268|5160
+Chahārbāgh|IR||3584|5085
+Garmsār|IR||3522|5234
+Gyzylarbat|TM||3898|5628
+Bābolsar|IR||3670|5265
+Āzādshahr|IR||3709|5517
+Rūdsar|IR||3714|5029
+Bāfq|IR||3160|5540
+Eqlīd|IR||3090|5270
+Naţanz|IR||3351|5192
+Ḩasanābād|IR||3537|5123
+Gonābād|IR||3435|5868
+Maḩallāt|IR||3391|5045
+Qā’en|IR||3373|5918
+Lordegān|IR||3151|5083
+Rāvar|IR||3127|5681
+Nowshahr|IR||3665|5150
+Kord Kūy|IR||3679|5411
+Abadan|TM||3805|5820
+Bäherden|TM||3844|5743
+Kahrīzak|IR||3535|5184
+Kahrīzak|IR||3552|5136
+Tonekābon|IR||3682|5087
+Dorcheh Pīāz|IR||3262|5156
+Golbahār|IR||3657|5919
+Dargaz|IR||3744|5911
+Eqbālīyeh|IR||3530|5154
+Qīāmdasht|IR||3552|5165
+Rāmsar|IR||3692|5065
+Āq Qalā|IR||3701|5446
+Mahrīz|IR||3158|5444
+Ferdowsīyeh|IR||3560|5106
+Fereydūn Kenār|IR||3668|5252
+Kalāleh|IR||3738|5549
+Dowlatābād|IR||3280|5170
+Delījān|IR||3399|5068
+Gökdepe|TM||3816|5796
+Kaka|TM||3735|5961
+Vaḩīdīyeh|IR||3571|5147
+Vaḩīdīyeh|IR||3561|5103
+Jūybār|IR||3664|5291
+Ṣafādasht|IR||3569|5085
+Farrokh Shahr|IR||3227|5098
+Maḩmūdābād|IR||3663|5226
+Gumdag|TM||3920|5459
+Fārsān|IR||3226|5056
+Amīr Kolā|IR||3660|5267
+Mīnūdasht|IR||3723|5537
+Eshtehārd|IR||3573|5037
+Pāsārgād|IR||3020|5318
+Shahrak-e Qods|IR||3576|5138
+Qahderījān|IR||3258|5145
+Khowrzūq|IR||3278|5165
+Damāvand|IR||3572|5207
+Ferdows|IR||3402|5817
+Änew|TM||3789|5852
+Nasirshahr|IR||3549|5114
+Nasir Abaad|IR||3561|5116
+Rūdehen|IR||3573|5191
+Bardaskan|IR||3526|5797
+Abarkūh|IR||3113|5328
+Nā’īn|IR||3286|5309
+Nūr|IR||3657|5202
+Semīrom|IR||3142|5157
+Şafāshahr|IR||3061|5320
+Shahrak-e Ţāleqānī|IR||3084|5020
+Bandar-e Deylam|IR||3005|5016
+Kelīshād va Sūdarjān|IR||3255|5153
+Shāhedshahr|IR||3557|5108
+Goldasht|IR||3263|5144
+Āshkhāneh|IR||3756|5692
+Bereket|TM||3924|5552
+Gaz-e Borkhar|IR||3280|5162
+Gālīkesh|IR||3727|5543
+Mojtame‘-e Maskūnī-ye Nāmjū|IR||3547|5172
+Garmdarreh|IR||3575|5107
+Khānsār|IR||3322|5031
+Māmūnīyeh|IR||3530|5050
+Tīrān|IR||3270|5115
+Ferūnābād|IR||3552|5162
+Shahrak-e ‘Alā’īn|IR||3558|5146
+Hafshejān|IR||3223|5079
+Galūgāh|IR||3673|5381
+Mahdishahr|IR||3571|5335
+Ţorqabeh|IR||3631|5937
+Bandar-e Gaz|IR||3677|5395
+Katālem va Sādāt Shahr|IR||3689|5070
+Sharīfābād|IR||3621|5015
+Dārān|IR||3299|5041
+Surian|IR||3046|5365
+Abrīsham|IR||3256|5157
+Līkak|IR||3089|5009
+Jājarm|IR||3695|5638
+Fāẕelābād|IR||3690|5475
+Māhān|IR||3006|5729
+Gomīshān|IR||3707|5408
+Ashkez̄ar|IR||3200|5421
+Sedeh Lanjān|IR||3238|5132
+Dīzīcheh|IR||3239|5151
+Varnāmkhvāst|IR||3236|5138
+Taft|IR||3174|5420
+Gämi|TM|S|3791|5847
+Lavāsān|IR||3582|5164
+Mādavān|IR||3072|5154
+Bīdestān|IR||3623|5012
+Dehāqān|IR||3194|5165
+Dastgerd|IR||3280|5166
+Ovrīn|IR||3555|5113
+Fīrūzkūh|IR||3576|5277
+Khabarābād|IR||3554|5115
+Sīmīn Shahr|IR||3701|5423
+Sa‘ādat Shahr|IR||3008|5313
+Tafresh|IR||3469|5002
+Sa‘īdābād|IR||3567|5119
+Zīr Āb|IR||3618|5297
+Shahrak-e Mohandesī-ye Zerā‘ī|IR||3577|5096
+Ardestān|IR||3338|5237
+Chamgordān|IR||3239|5134
+Anār|IR||3087|5527
+Morteẕá Gerd|IR||3560|5135
+Amlash|IR||3710|5019
+Magtymguly|TM||3844|5628
+Boshrūyeh|IR||3387|5743
+Malekābād|IR||3582|5082
+Charām|IR||3076|5075
+Gorjī-ye Soflá|IR||3636|5966
+Jebel|TM||3963|5424

@@ -1,0 +1,136 @@
+Karachi|PK||2486|6701
+Hyderabad|PK||2540|6838
+Sukkur|PK||2770|6886
+Zahedan|IR||2950|6086
+Tando Bago|PK||2479|6897
+Tando Allahyar|PK||2546|6872
+Larkana|PK||2756|6821
+Nawabshah|PK||2624|6840
+Sinjhoro|PK||2603|6881
+Malir Cantonment|PK||2494|6721
+Mirpur Khas|PK||2553|6901
+Kunri|PK||2518|6957
+Digri|PK||2516|6911
+Jacobabad|PK||2828|6844
+Khuzdar|PK||2781|6661
+Shikarpur|PK||2796|6864
+Dadu|PK||2673|6778
+Talhar|PK||2488|6881
+Hub|PK||2503|6689
+Garhi Khairo|PK||2806|6798
+Khairpur Mir’s|PK||2753|6876
+Tando Adam|PK||2577|6866
+Arif Wala|PK||2632|6630
+Porbandar|IN||2164|6961
+Bhuj|IN||2325|6967
+Umarkot|PK||2536|6974
+Moro|PK||2666|6800
+Manjhand|PK||2591|6824
+Iranshahr|IR||2720|6068
+Daur|PK||2646|6832
+Dokri|PK||2737|6810
+Shahdad Kot|PK||2785|6791
+Ghotki|PK||2800|6932
+Badin|PK||2466|6884
+Tando Muhammad Khan|PK||2512|6854
+Shahdadpur|PK||2593|6862
+Dera Murad Jamali|PK||2855|6822
+Kotri|PK||2537|6831
+Pano Aqil|PK||2786|6911
+Qubo Saeed Khan|PK||2787|6771
+Kandhkot|PK||2825|6918
+Gambat|PK||2735|6852
+Rohri|PK||2769|6890
+Daharki|PK||2805|6970
+Thul|PK||2824|6878
+Ratodero|PK||2780|6829
+Kambar|PK||2759|6800
+Turbat|PK||2600|6305
+Mirpur Mathelo|PK||2802|6955
+Sakrand|PK||2614|6827
+Tando Jam|PK||2543|6853
+Hala|PK||2581|6842
+Gwadar|PK||2512|6233
+Khāsh|IR||2822|6122
+Usta Muhammad|PK||2818|6804
+Sibi|PK||2954|6788
+Okha|IN||2247|6907
+Sanghar|PK||2605|6895
+Sarāvān|IR||2737|6233
+Pir Jo Goth|PK||2759|6862
+Mithi|PK||2474|6980
+Māndvi|IN||2283|6935
+Ubauro|PK||2816|6973
+Matli|PK||2504|6866
+Nushki|PK||2955|6602
+Chhaya|IN||2163|6963
+Chabahar|IR||2529|6064
+Rānāvāv|IN||2169|6974
+Mach|PK||2986|6733
+Kandiaro|PK||2706|6821
+Thatta|PK||2475|6792
+Pasni|PK||2526|6347
+Konārak|IR||2536|6040
+Khambhāliya|IN||2221|6965
+Sehwan|PK||2642|6786
+Washuk|PK||2773|6481
+Karachi University Employees Co-operative Housing Society|PK||2496|6712
+Khairpur|PK||2806|6970
+Chak|PK||2786|6883
+Dwārka|IN||2224|6897
+New Badah|PK||2734|6803
+Qaşr-e Qand|IR||2625|6075
+Mehrabpur|PK||2811|6803
+Ranipur|PK||2729|6851
+Kashmor|PK||2843|6958
+Naudero|PK||2767|6836
+Salāya|IN||2231|6960
+Setharja Old|PK||2721|6847
+Madhapar|IN||2324|6970
+Kharan|PK||2858|6542
+Nok Kundi|PK||2883|6275
+Mehar|PK||2718|6782
+Khairpur Nathan Shah|PK||2709|6773
+Ghauspur|PK||2814|6908
+Bela|PK||2623|6631
+Mastung|PK||2980|6685
+Sikka|IN||2243|6984
+Nasirabad|PK||2738|6792
+Sita Road|PK||2703|6785
+Kalat|PK||2903|6659
+Kot Diji|PK||2734|6871
+Jiwani|PK||2505|6175
+Mian Sahib|PK||2815|6864
+Khanpur Mahar|PK||2784|6941
+Hingorja|PK||2721|6842
+Bhānvad|IN||2193|6978
+Naukot|PK||2486|6940
+Shahpur Chakar|PK||2615|6865
+Chhor|PK||2551|6978
+Pad Idan|PK||2677|6830
+Mundra|IN||2284|6972
+Dhoro Naro|PK||2550|6957
+Raval|IN||2192|6948
+Gharo|PK||2474|6759
+Pakistan Employees Cooperative Housing Society|PK||2487|6706
+Jhol|PK||2596|6889
+Bhit Shah|PK||2581|6849
+Matiari|PK||2560|6845
+Warah|PK||2745|6780
+Chuhar Jamali|PK||2439|6799
+Taftan|PK||2895|6159
+Dera Bugti|PK||2904|6916
+Jālq|IR||2760|6271
+Tharu Shah|PK||2694|6812
+Naushahro Firoz|PK||2684|6812
+Gadani|PK||2512|6673
+Dadhar|PK||2947|6765
+Nīkshahr|IR||2623|6021
+Bhan|PK||2656|6772
+Kutiyāna|IN||2162|6998
+Goth Radhan|PK||2720|6795
+Khapat|IN||2165|6961
+Uthal|PK||2581|6662
+Johi|PK||2669|6761
+Pīshīn|IR||2608|6175
+Lālpur|IN||2219|6996

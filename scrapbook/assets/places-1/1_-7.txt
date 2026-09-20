@@ -1,0 +1,183 @@
+Caracas|VE||1049|-6688
+Santo Domingo|DO||1847|-6989
+Valencia|VE||1016|-6800
+Barquisimeto|VE||1006|-6936
+Barcelona|VE||1014|-6469
+Santo Domingo Oeste|DO||1850|-7000
+Santo Domingo Este|DO||1849|-6985
+Maracay|VE||1025|-6759
+San Juan|PR||1847|-6611
+Cumaná|VE||1046|-6418
+Puerto La Cruz|VE||1021|-6463
+Petare|VE||1048|-6681
+Turmero|VE||1023|-6747
+Santa Teresa del Tuy|VE||1023|-6666
+Los Teques|VE||1035|-6704
+Guarenas|VE||1047|-6662
+Coro|VE||1141|-6968
+Baruta|VE||1043|-6688
+Guatire|VE||1047|-6654
+San Pedro de Macorís|DO||1845|-6931
+Porlamar|VE||1096|-6387
+La Romana|DO||1842|-6897
+San Felipe|VE||1034|-6874
+Bayamón|PR||1840|-6616
+Guacara|VE||1023|-6788
+Cúa|VE||1016|-6688
+Lander|VE||1018|-6670
+Bella Vista|DO||1846|-6995
+Puerto Cabello|VE||1047|-6801
+Carolina|PR||1838|-6596
+Carúpano|VE||1067|-6325
+Ocumare del Tuy|VE||1012|-6678
+El Limón|VE||1031|-6763
+Ponce|PR||1801|-6662
+Charallave|VE||1024|-6686
+Palo Negro|VE||1017|-6754
+La Victoria|VE||1023|-6733
+Willemstad|CW||1212|-6889
+Salvaleón de Higüey|DO||1862|-6871
+Cagua|VE||1019|-6746
+Mariara|VE||1030|-6772
+Yaritagua|VE||1008|-6912
+Catia La Mar|VE||1061|-6703
+Cabudare|VE||1003|-6926
+Los Rastrojos|VE||1003|-6924
+Punta Cana|DO||1858|-6840
+Villa de Cura|VE||1004|-6749
+San Juan Bautista|VE||1101|-6394
+Fort-de-France|MQ|MQ|1460|-6107
+Arecibo|PR||1847|-6672
+Caguas|PR||1823|-6605
+Guaynabo|PR||1836|-6611
+Güigüe|VE||1008|-6778
+El Cafetal|VE||1047|-6683
+Trujillo Alto|PR||1835|-6601
+Mayagüez|PR||1820|-6714
+Chivacoa|VE||1016|-6889
+San Joaquín|VE||1026|-6779
+Tacarigua|VE||1009|-6792
+Morón|VE||1049|-6820
+Chaguanas|TT|CHA|1052|-6142
+Pampatar|VE||1100|-6379
+Chacao|VE||1050|-6685
+San Antonio de Los Altos|VE||1039|-6695
+Los Dos Caminos|VE||1049|-6683
+El Hatillo|VE||1042|-6683
+Cristo Rey|DO||1850|-6993
+La Dolorita|VE||1049|-6679
+Mon Repos|TT||1028|-6145
+San Fernando|TT||1028|-6147
+Nirgua|VE||1015|-6856
+Les Abymes|GP|GP|1627|-6151
+Cocorote|VE||1032|-6878
+Maiquetía|VE||1059|-6696
+Caucagüito|VE||1049|-6674
+Saint John’s|AG||1712|-6184
+Saint Croix|VI||1773|-6475
+San Mateo|VE||1021|-6742
+Villa Francisca|DO||1848|-6989
+Port of Spain|TT||1067|-6152
+Lecherías|VE||1019|-6469
+Boca Chica|DO||1845|-6960
+Caripito|VE||1011|-6310
+Las Tejerías|VE||1025|-6717
+Cariaco|VE||1050|-6355
+Higuerote|VE||1048|-6610
+Carrizal|VE||1035|-6699
+Le Lamentin|MQ|MQ|1461|-6100
+Güiria|VE||1058|-6230
+Duaca|VE||1029|-6916
+Guayacanes|DO||1842|-6946
+Caraballeda|VE||1061|-6685
+Puerto Píritu|VE||1006|-6504
+Hato Mayor del Rey|DO||1877|-6926
+Rio Claro|TT||1031|-6118
+Aroa|VE||1044|-6889
+La Asunción|VE||1103|-6386
+Arima|TT||1064|-6128
+La Guardia|VE||1100|-6402
+La Vela de Coro|VE||1146|-6957
+Bejuma|VE||1017|-6826
+Tucacas|VE||1079|-6833
+Nagua|DO||1938|-6985
+Miranda|VE||1015|-6839
+Fajardo|PR||1833|-6565
+Punta de Piedras|VE||1090|-6410
+Caucagua|VE||1028|-6638
+Puerto Cumarebo|VE||1149|-6935
+Mamporal|VE||1037|-6613
+Baie-Mahault|GP|GP|1627|-6159
+Levittown|PR||1845|-6618
+Montalbán|VE||1021|-6833
+Vega Baja|PR||1844|-6639
+Le Gosier|GP|GP|1621|-6149
+Villa Consuelo|DO||1848|-6990
+Juan Griego|VE||1108|-6397
+Cataño|PR||1844|-6612
+Urachiche|VE||1016|-6901
+Marabella|TT||1031|-6145
+Cumanacoa|VE||1025|-6392
+Diego Martin|TT|DMN|1072|-6157
+La Guaira|VE||1060|-6693
+Gros Islet|LC||1407|-6095
+Petit-Bourg|GP|GP|1619|-6159
+Guama|VE||1027|-6882
+Kingstown|VC||1316|-6123
+Sabana de Parra|VE||1012|-6904
+Calliaqua|VC||1313|-6119
+Le Robert|MQ|MQ|1468|-6094
+Araya|VE||1058|-6426
+Santa Cruz de El Seibo|DO||1876|-6904
+Sainte-Anne|GP|GP|1623|-6138
+Río Chico|VE||1032|-6598
+Le Moule|GP|GP|1633|-6135
+San José de Barlovento|VE||1030|-6599
+Barceloneta|PR||1845|-6654
+Boraure|VE||1025|-6877
+Guayama|PR||1798|-6611
+Bayaguana|DO||1875|-6964
+Laventille|TT|SJL|1065|-6150
+Bandariba|CW||1209|-6883
+Casanay|VE||1050|-6342
+Humacao|PR||1815|-6583
+Sainte-Marie|MQ|MQ|1478|-6099
+Yauco|PR||1803|-6685
+Sainte-Rose|GP|GP|1633|-6170
+Castries|LC||1400|-6101
+Charlotte Amalie|VI||1834|-6493
+Capesterre-Belle-Eau|GP|GP|1604|-6156
+Le François|MQ|MQ|1462|-6090
+Santa Ana|VE||1107|-6392
+Point Fortin|TT|PTF|1017|-6168
+Ciudad Nueva|DO||1847|-6989
+Pueblo Nuevo|VE||1195|-6992
+Cayey|PR||1811|-6617
+Tunapuna|TT|TUP|1065|-6139
+Quisqueya|DO||1856|-6941
+Candelaria|PR||1840|-6621
+Ducos|MQ|MQ|1458|-6097
+Scarborough|TT||1118|-6074
+Saint-Joseph|MQ|MQ|1467|-6104
+Sabana Grande de Boyá|DO||1894|-6979
+Roseau|DM||1530|-6139
+Manatí|PR||1843|-6649
+Aguadilla|PR||1843|-6715
+Sangre Grande|TT|SGE|1059|-6113
+Yumare|VE||1060|-6867
+Monte Plata|DO||1881|-6978
+Santa Cruz|AW||1251|-6998
+Pointe-à-Pitre|GP|GP|1624|-6153
+Paradise|TT|TUP|1065|-6136
+La Trinité|MQ|MQ|1474|-6096
+Basseterre|KN||1730|-6272
+Basse-Terre|GP|GP|1600|-6173
+Kralendijk|BQ|BO|1215|-6827
+Road Town|VG||1843|-6462
+Saint George's|GD||1205|-6175
+Gustavia|BL||1790|-6285
+Marigot|MF||1807|-6308
+The Valley|AI||1822|-6306
+Philipsburg|SX||1803|-6305
+Brades|MS||1679|-6221
+Plymouth|MS||1671|-6221

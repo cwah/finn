@@ -1,0 +1,65 @@
+Lubango|AO||-1492|1349
+Huambo|AO||-1278|1574
+Benguela|AO||-1258|1340
+Lobito|AO||-1236|1354
+Cuíto|AO||-1238|1693
+Luena|AO||-1178|1992
+Mossamedes|AO||-1520|1215
+Menongue|AO|CBG|-1466|1769
+Navegantes|AO||-1259|1339
+Sumbe|AO||-1121|1384
+Bocoio|AO||-1247|1414
+Caála|AO||-1285|1556
+Ondjiva|AO||-1707|1573
+Catchiungo|AO||-1257|1623
+Gabela|AO||-1085|1438
+Balombo|AO||-1235|1477
+Baía Farta|AO||-1260|1320
+Catumbela|AO||-1243|1355
+Longonjo|AO||-1291|1525
+Porto Amboim|AO||-1073|1377
+Cubal|AO||-1304|1425
+Cela|AO||-1142|1512
+Quissecula|AO||-1139|1509
+Ecunna|AO||-1268|1551
+Matala|AO||-1473|1503
+Rundu|NA||-1792|1977
+Cahama|AO||-1629|1431
+Luquembo|AO||-1074|1772
+Camucuio|AO||-1411|1324
+Ganda|AO||-1302|1464
+Camacupa|AO||-1202|1748
+Andulo|AO||-1149|1670
+Ucu Seles|AO||-1141|1431
+Tômbua|AO||-1580|1184
+Calulo|AO||-1000|1490
+Oshakati|NA||-1779|1570
+Virei|AO||-1573|1295
+Alto Hama|AO||-1223|1555
+Humbe|AO||-1669|1490
+Xangongo|AO||-1674|1497
+Mussende|AO||-1051|1602
+Chindumbo|AO||-1195|1447
+Caluquembe|AO||-1387|1443
+Santa Clara|AO||-1019|1543
+Catabola|AO||-1215|1728
+Quibala|AO||-1073|1498
+Ondangwa|NA||-1791|1598
+Chinguar|AO||-1256|1634
+Dombe Grande|AO||-1295|1310
+Chitembo|AO||-1355|1663
+Grootfontein|NA||-1957|1810
+Ongwediva|NA||-1777|1577
+Quipungo|AO||-1482|1454
+Helao Nafidi|NA||-1739|1589
+Tsumeb|NA||-1925|1771
+Ucuma|AO||-1296|1506
+Mungo|AO||-1183|1624
+Conda|AO||-1111|1434
+Capunda|AO||-1113|1447
+Cuemba|AO||-1215|1808
+Cubal do Lumbo|AO||-1231|1413
+Nharêa|AO||-1148|1696
+Cambundi Catembo|AO||-1008|1755
+Cambundi|AO||-1089|1776
+Londuimbali|AO||-1224|1532

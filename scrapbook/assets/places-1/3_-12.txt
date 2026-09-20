@@ -1,0 +1,389 @@
+Los Angeles|US|CA|3405|-11824
+Tijuana|MX||3250|-11700
+Phoenix|US|AZ|3345|-11207
+San Diego|US|CA|3272|-11716
+Mexicali|MX||3263|-11545
+Las Vegas|US|NV|3617|-11514
+Tucson|US|AZ|3222|-11093
+Fresno|US|CA|3675|-11977
+Long Beach|US|CA|3377|-11819
+Mesa|US|AZ|3342|-11182
+Ensenada|MX||3187|-11660
+Bakersfield|US|CA|3537|-11902
+Anaheim|US|CA|3384|-11791
+Riverside|US|CA|3395|-11740
+Santa Ana|US|CA|3375|-11787
+Henderson|US|NV|3604|-11498
+Chula Vista|US|CA|3264|-11708
+Nogales|MX||3131|-11094
+Reno|US|NV|3953|-11981
+Chandler|US|AZ|3331|-11184
+Irvine|US|CA|3367|-11782
+Gilbert|US|AZ|3335|-11179
+Glendale|US|AZ|3354|-11219
+Scottsdale|US|AZ|3351|-11190
+North Las Vegas|US|NV|3620|-11512
+Paradise|US|NV|3610|-11515
+San Bernardino|US|CA|3411|-11729
+Fontana|US|CA|3409|-11744
+Maryvale|US|AZ|3350|-11218
+Oxnard|US|CA|3420|-11918
+Moreno Valley|US|CA|3394|-11723
+Huntington Beach|US|CA|3366|-11800
+Glendale|US|CA|3414|-11826
+Peoria|US|AZ|3358|-11224
+Sunrise Manor|US|NV|3621|-11507
+Santa Clarita|US|CA|3439|-11854
+Spring Valley|US|NV|3611|-11524
+San Luis Río Colorado|MX||3246|-11477
+Tempe|US|AZ|3341|-11191
+Oceanside|US|CA|3320|-11738
+Garden Grove|US|CA|3377|-11794
+Rancho Cucamonga|US|CA|3411|-11759
+Ontario|US|CA|3406|-11765
+Hollywood|US|CA|3410|-11833
+Deer Valley|US|AZ|3368|-11213
+Corona|US|CA|3388|-11757
+Lancaster|US|CA|3470|-11814
+Tempe Junction|US|AZ|3341|-11194
+Palmdale|US|CA|3458|-11812
+Pomona|US|CA|3406|-11775
+Escondido|US|CA|3312|-11709
+Valencia|US|CA|3444|-11861
+Torrance|US|CA|3384|-11834
+Surprise|US|AZ|3363|-11233
+Pasadena|US|CA|3415|-11814
+Orange|US|CA|3379|-11785
+Fullerton|US|CA|3387|-11793
+Van Nuys|US|CA|3419|-11845
+Visalia|US|CA|3633|-11929
+Thousand Oaks|US|CA|3417|-11884
+Alhambra|US|AZ|3350|-11213
+Simi Valley|US|CA|3427|-11878
+East Los Angeles|US|CA|3402|-11817
+Koreatown|US|CA|3406|-11830
+Victorville|US|CA|3454|-11729
+El Monte|US|CA|3407|-11803
+Carlsbad|US|CA|3316|-11735
+Downey|US|CA|3394|-11813
+Costa Mesa|US|CA|3364|-11792
+Inglewood|US|CA|3396|-11835
+Temecula|US|CA|3349|-11715
+Murrieta|US|CA|3355|-11721
+West Covina|US|CA|3407|-11794
+Enterprise|US|NV|3603|-11524
+Norwalk|US|CA|3390|-11808
+Burbank|US|CA|3418|-11831
+Universal City|US|CA|3414|-11835
+Clovis|US|CA|3683|-11970
+El Cajon|US|CA|3279|-11696
+Rialto|US|CA|3411|-11737
+Vista|US|CA|3320|-11724
+Rosarito|MX||3236|-11705
+Compton|US|CA|3390|-11822
+Mission Viejo|US|CA|3360|-11767
+Ventura|US|CA|3428|-11929
+South Gate|US|CA|3395|-11821
+Sparks|US|NV|3953|-11975
+Yuma|US|AZ|3273|-11462
+Hesperia|US|CA|3443|-11730
+Carson|US|CA|3383|-11828
+Santa Monica|US|CA|3402|-11849
+San Marcos|US|CA|3314|-11717
+Boyle Heights|US|CA|3403|-11821
+Westminster|US|CA|3376|-11801
+Santa Barbara|US|CA|3442|-11970
+Hawthorne|US|CA|3392|-11835
+Indio|US|CA|3372|-11622
+Whittier|US|CA|3398|-11803
+Menifee|US|CA|3373|-11715
+Newport Beach|US|CA|3362|-11793
+Chino|US|CA|3401|-11769
+Alhambra|US|CA|3410|-11813
+Hemet|US|CA|3375|-11697
+San Pedro|US|CA|3374|-11829
+Ahwatukee Foothills|US|AZ|3334|-11198
+Buena Park|US|CA|3387|-11800
+Mid-City|US|CA|3404|-11836
+Lake Forest|US|CA|3365|-11769
+Lakewood|US|CA|3385|-11813
+San Tan Valley|US|AZ|3319|-11153
+Avondale|US|AZ|3344|-11235
+Tustin|US|CA|3375|-11783
+Sylmar|US|CA|3431|-11845
+Goodyear|US|AZ|3344|-11236
+Bellflower|US|CA|3388|-11812
+Chino Hills|US|CA|3399|-11776
+Baldwin Park|US|CA|3409|-11796
+Upland|US|CA|3410|-11765
+Perris|US|CA|3378|-11723
+Saint George|US|UT|3710|-11358
+Apple Valley|US|CA|3450|-11719
+Lynwood|US|CA|3393|-11821
+Redlands|US|CA|3406|-11718
+Flagstaff|US|AZ|3520|-11165
+Mira Mesa|US|CA|3292|-11714
+Woodland Hills|US|CA|3417|-11861
+Northridge|US|CA|3423|-11854
+Redondo Beach|US|CA|3385|-11839
+Yorba Linda|US|CA|3389|-11781
+Camarillo|US|CA|3422|-11904
+Casas Adobes|US|AZ|3232|-11100
+Laguna Niguel|US|CA|3352|-11771
+San Clemente|US|CA|3343|-11761
+Reseda|US|CA|3420|-11854
+Tecate|MX||3257|-11663
+North Hollywood|US|CA|3417|-11838
+Pico Rivera|US|CA|3398|-11810
+Montebello|US|CA|3401|-11811
+Florence-Graham|US|CA|3397|-11824
+Encinitas|US|CA|3304|-11729
+Puerto Peñasco|MX||3132|-11354
+Tulare|US|CA|3621|-11935
+La Habra|US|CA|3393|-11795
+Lake Elsinore|US|CA|3367|-11733
+Monterey Park|US|CA|3406|-11812
+National City|US|CA|3268|-11710
+Canoga Park|US|CA|3420|-11860
+Gardena|US|CA|3389|-11831
+La Mesa|US|CA|3277|-11702
+Rancho Penasquitos|US|CA|3296|-11712
+Valley Glen|US|CA|3419|-11842
+Heroica Caborca|MX||3072|-11216
+Canyon Country|US|CA|3442|-11847
+Huntington Park|US|CA|3398|-11823
+Eastvale|US|CA|3396|-11756
+Carson City|US|NV|3916|-11977
+Arcadia|US|CA|3414|-11804
+Central City|US|AZ|3344|-11206
+Santee|US|CA|3284|-11697
+South Whittier|US|CA|3395|-11804
+Fountain Valley|US|CA|3371|-11795
+North Hills|US|CA|3424|-11848
+Diamond Bar|US|CA|3403|-11781
+Porterville|US|CA|3607|-11902
+Hanford|US|CA|3633|-11965
+Paramount|US|CA|3389|-11816
+Rosemead|US|CA|3408|-11807
+Highland|US|CA|3413|-11721
+Colton|US|CA|3407|-11731
+Encanto|US|AZ|3348|-11208
+Hacienda Heights|US|CA|3399|-11797
+Cathedral City|US|CA|3378|-11647
+Lake Havasu City|US|AZ|3448|-11432
+Yucaipa|US|CA|3403|-11704
+Delano|US|CA|3577|-11925
+Sherman Oaks|US|CA|3415|-11845
+Placentia|US|CA|3387|-11787
+Glendora|US|CA|3414|-11787
+Wilmington|US|CA|3378|-11826
+Palm Desert|US|CA|3372|-11638
+Casa Grande|US|AZ|3288|-11176
+Buckeye|US|AZ|3337|-11258
+Catalina Foothills|US|AZ|3230|-11092
+Aliso Viejo|US|CA|3357|-11773
+Poway|US|CA|3296|-11704
+Cerritos|US|CA|3386|-11806
+Azusa|US|CA|3413|-11791
+La Mirada|US|CA|3392|-11801
+Rancho Santa Margarita|US|CA|3364|-11760
+Cypress|US|CA|3382|-11804
+Rowland Heights|US|CA|3398|-11791
+Covina|US|CA|3409|-11789
+Maricopa|US|AZ|3306|-11205
+Vermont Square|US|CA|3400|-11830
+Palm Springs|US|CA|3383|-11655
+Winnetka|US|CA|3421|-11857
+San Jacinto|US|CA|3378|-11696
+Oro Valley|US|AZ|3239|-11097
+Coachella|US|CA|3368|-11617
+Encino|US|CA|3416|-11850
+El Centro|US|CA|3279|-11556
+Echo Park|US|CA|3408|-11826
+Beaumont|US|CA|3393|-11698
+Sierra Vista|US|AZ|3155|-11030
+Bell Gardens|US|CA|3397|-11815
+La Jolla|US|CA|3285|-11727
+Altadena|US|CA|3419|-11813
+Rancho Palos Verdes|US|CA|3374|-11839
+Prescott Valley|US|AZ|3461|-11232
+Brea|US|CA|3392|-11790
+Prescott|US|AZ|3454|-11247
+West Hills|US|CA|3420|-11864
+Marana|US|AZ|3244|-11123
+Chatsworth|US|CA|3426|-11860
+Venice|US|CA|3399|-11846
+La Puente|US|CA|3402|-11795
+La Quinta|US|CA|3366|-11631
+San Gabriel|US|CA|3410|-11811
+Calexico|US|CA|3268|-11550
+Sawtelle|US|CA|3404|-11845
+Culver City|US|CA|3402|-11840
+Bullhead City|US|AZ|3515|-11457
+Stanton|US|CA|3380|-11799
+Montclair|US|CA|3408|-11769
+Whitney|US|NV|3610|-11504
+Apache Junction|US|AZ|3342|-11155
+Sun City|US|AZ|3360|-11227
+Monrovia|US|CA|3415|-11800
+San Juan Capistrano|US|CA|3350|-11766
+Pahrump|US|NV|3621|-11598
+Temple City|US|CA|3411|-11806
+Claremont|US|CA|3410|-11772
+West Hollywood|US|CA|3409|-11836
+Bell|US|CA|3398|-11819
+Moorpark|US|CA|3429|-11888
+Willowbrook|US|CA|3392|-11826
+Manhattan Beach|US|CA|3388|-11841
+Wildomar|US|CA|3360|-11728
+Beverly Hills|US|CA|3407|-11840
+San Dimas|US|CA|3411|-11781
+Queen Creek|US|AZ|3325|-11163
+Rubidoux|US|CA|3400|-11741
+Pórticos de San Antonio|MX||3244|-11703
+Dana Point|US|CA|3347|-11770
+La Presa|US|CA|3271|-11700
+Studio City|US|CA|3415|-11840
+El Mirage|US|AZ|3361|-11232
+Lawndale|US|CA|3389|-11835
+Brentwood|US|CA|3405|-11847
+Adelanto|US|CA|3458|-11741
+Silver Lake|US|CA|3409|-11827
+Oildale|US|CA|3542|-11902
+La Verne|US|CA|3410|-11777
+Westmont|US|CA|3394|-11830
+Laguna Hills|US|CA|3361|-11771
+Cananea|MX||3098|-11030
+San Luis|US|AZ|3249|-11478
+Florence|US|AZ|3303|-11139
+Banning|US|CA|3393|-11688
+Goleta|US|CA|3444|-11983
+Santa Paula|US|CA|3435|-11906
+Fallbrook|US|CA|3338|-11725
+Walnut|US|CA|3402|-11787
+Cedar City|US|UT|3768|-11306
+Santa Isabel|MX||3263|-11557
+Kingman|US|AZ|3519|-11405
+Ridgecrest|US|CA|3562|-11767
+Desert Hot Springs|US|CA|3396|-11650
+Spring Valley|US|CA|3274|-11700
+Winchester|US|NV|3613|-11512
+Maywood|US|CA|3399|-11819
+Drexel Heights|US|AZ|3214|-11103
+Imperial Beach|US|CA|3258|-11711
+La Joya|MX||3244|-11700
+Lemon Grove|US|CA|3274|-11703
+Magdalena de Kino|MX||3063|-11096
+Tujunga|US|CA|3425|-11829
+Norco|US|CA|3393|-11755
+Wasco|US|CA|3559|-11934
+Fortuna Foothills|US|AZ|3266|-11441
+South Pasadena|US|CA|3412|-11815
+Twentynine Palms|US|CA|3414|-11605
+Brawley|US|CA|3298|-11553
+Sahuarita|US|AZ|3196|-11096
+Lemoore|US|CA|3630|-11978
+Reedley|US|CA|3660|-11945
+West Whittier-Los Nietos|US|CA|3398|-11807
+Woodbridge|US|CA|3368|-11779
+Sanger|US|CA|3671|-11956
+San Fernando|US|CA|3428|-11844
+North Tustin|US|CA|3376|-11779
+Coronado|US|CA|3269|-11718
+Seal Beach|US|CA|3374|-11810
+Sun City West|US|AZ|3366|-11234
+Selma|US|CA|3657|-11961
+Cudahy|US|CA|3396|-11819
+Washington|US|UT|3713|-11351
+Barstow Heights|US|CA|3487|-11706
+Summerlin South|US|NV|3612|-11533
+Loma Linda|US|CA|3405|-11726
+Fountain Hills|US|AZ|3361|-11172
+Bloomington|US|CA|3407|-11740
+Dinuba|US|CA|3654|-11939
+Barstow|US|CA|3490|-11702
+Laguna Beach|US|CA|3354|-11778
+Pacific Palisades|US|CA|3405|-11853
+Isla Vista|US|CA|3441|-11986
+Calabasas|US|CA|3416|-11864
+Westpark|US|CA|3369|-11781
+Ladera Ranch|US|CA|3357|-11764
+Rodolfo Sánchez Taboada|MX||3172|-11657
+Valinda|US|CA|3405|-11794
+Lennox|US|CA|3394|-11835
+West Puente Valley|US|CA|3405|-11797
+Corcoran|US|CA|3610|-11956
+Port Hueneme|US|CA|3415|-11920
+Northwood|US|CA|3371|-11776
+Duarte|US|CA|3414|-11798
+Jurupa Valley|US|CA|3399|-11752
+South Lake Tahoe|US|CA|3893|-11998
+Anthem|US|AZ|3387|-11215
+West Carson|US|CA|3382|-11829
+Yucca Valley|US|CA|3411|-11643
+Tustin Legacy|US|CA|3370|-11783
+Green Valley|US|AZ|3185|-11099
+Rancho San Diego|US|CA|3275|-11694
+Agoura Hills|US|CA|3414|-11877
+South El Monte|US|CA|3405|-11805
+Arvin|US|CA|3521|-11883
+Lomita|US|CA|3379|-11832
+Lakeside|US|CA|3286|-11692
+Winter Gardens|US|CA|3283|-11693
+South San Jose Hills|US|CA|3401|-11790
+Agoura|US|CA|3414|-11874
+Terrazas del Valle|MX||3249|-11683
+Ramona|US|CA|3304|-11687
+Nogales|US|AZ|3134|-11093
+La Cañada Flintridge|US|CA|3420|-11819
+Glen Avon|US|CA|3401|-11748
+Hermosa Beach|US|CA|3386|-11840
+La Crescenta-Montrose|US|CA|3423|-11824
+Sun City|US|CA|3371|-11720
+Fernley|US|NV|3961|-11925
+Sun Valley|US|NV|3960|-11978
+Blythe|US|CA|3361|-11460
+Castaic|US|CA|3449|-11862
+Rio Rico|US|AZ|3147|-11098
+Stonegate|US|CA|3371|-11774
+Casa de Oro-Mount Helix|US|CA|3276|-11697
+Mead Valley|US|CA|3383|-11730
+Shafter|US|CA|3550|-11927
+Villa del Prado 2da Sección|MX||3242|-11697
+Rosamond|US|CA|3486|-11816
+Rancho Mirage|US|CA|3374|-11641
+Santa Fe Springs|US|CA|3395|-11809
+Stevenson Ranch|US|CA|3439|-11857
+Mesquite|US|NV|3681|-11407
+East Hemet|US|CA|3374|-11694
+Ciudad Guadalupe Victoria|MX||3229|-11510
+Imperial|US|CA|3285|-11557
+Eloy|US|AZ|3276|-11155
+El Segundo|US|CA|3392|-11842
+Artesia|US|CA|3387|-11808
+Tanque Verde|US|AZ|3225|-11074
+San Felipe|MX||3103|-11484
+Flowing Wells|US|AZ|3229|-11101
+Laguna Woods|US|CA|3361|-11773
+Lázaro Cárdenas|MX||3053|-11593
+El Camino Real|US|CA|3370|-11778
+Walnut Park|US|CA|3397|-11823
+Vincent|US|CA|3450|-11812
+Vincent|US|CA|3410|-11792
+La Palma|US|CA|3385|-11805
+UC Irvine|US|CA|3364|-11784
+Boulder City|US|NV|3598|-11483
+Fillmore|US|CA|3440|-11892
+Hurricane|US|UT|3718|-11329
+Las Delicias|MX||3241|-11694
+Atwater Village|US|CA|3412|-11826
+Avocado Heights|US|CA|3404|-11799
+Bostonia|US|CA|3281|-11694
+Payson|US|AZ|3423|-11133
+Sunland|US|CA|3427|-11830
+Puebla|MX||3257|-11535
+Parlier|US|CA|3661|-11953
+East Rancho Dominguez|US|CA|3390|-11820
+Lamont|US|CA|3526|-11891
+Spanish Springs|US|NV|3965|-11971
+Somerton|US|AZ|3260|-11471

@@ -1,0 +1,32 @@
+Halifax|CA||4464|-6358
+Sydney|CA||4614|-6018
+Dartmouth|CA||4467|-6358
+Moncton|CA||4609|-6480
+Saint John|CA||4527|-6606
+Fredericton|CA||4595|-6667
+Lower Sackville|CA||4478|-6368
+Rimouski|CA||4845|-6852
+Charlottetown|CA||4623|-6313
+Bangor|US|ME|4480|-6877
+Fredericton Northside|CA||4598|-6664
+Dieppe|CA||4608|-6469
+Downtown Halifax|CA||4465|-6358
+Halifax West End|CA||4465|-6362
+Baie-Comeau|CA||4922|-6815
+Bedford|CA||4473|-6367
+Riverview|CA||4605|-6482
+Woodlawn|CA||4468|-6353
+Halifax South End|CA||4463|-6358
+Cole Harbour|CA||4467|-6348
+Augusta|US|ME|4431|-6978
+Quispamsis|CA||4542|-6595
+New Glasgow|CA||4558|-6265
+Rivière-du-Loup|CA||4783|-6954
+Miramichi|CA||4703|-6550
+Edmundston|CA||4737|-6833
+Clayton Park West|CA||4466|-6367
+Armdale|CA||4464|-6363
+Lutes Mountain|CA||4614|-6491
+Waterville|US|ME|4455|-6963
+Saint John West|CA||4526|-6608
+Brunswick|US|ME|4391|-6997

@@ -1,0 +1,165 @@
+Buenos Aires|AR||-3461|-5838
+Porto Alegre|BR||-3003|-5123
+Montevideo|UY||-3490|-5619
+Mar del Plata|AR||-3800|-5756
+Avellaneda|AR||-3466|-5837
+Pelotas|BR||-3177|-5234
+Merlo|AR||-3467|-5873
+Quilmes|AR||-3472|-5825
+Palermo|AR||-3459|-5843
+Laferrere|AR||-3475|-5858
+Viamão|BR||-3008|-5102
+José C. Paz|AR||-3452|-5877
+Lanús|AR||-3471|-5839
+Rio Grande|BR||-3203|-5210
+La Plata|AR||-3492|-5795
+Alvorada|BR||-3000|-5108
+Berazategui|AR||-3477|-5821
+San Miguel|AR||-3454|-5871
+Balvanera|AR||-3461|-5840
+Moreno|AR||-3463|-5879
+Concordia|AR||-3139|-5802
+Belgrano|AR||-3456|-5846
+Isidro Casanova|AR||-3470|-5859
+Bagé|BR||-3133|-5411
+Tandil|AR||-3733|-5914
+Ezeiza|AR||-3485|-5852
+Salto|UY||-3139|-5796
+Villa Lugano|AR||-3468|-5847
+Lomas de Zamora|AR||-3476|-5840
+Castelar|AR||-3465|-5864
+San Justo|AR||-3468|-5856
+Maldonado|UY||-3490|-5495
+Morón|AR||-3465|-5862
+Zárate|AR||-3410|-5902
+Burzaco|AR||-3483|-5840
+Guaíba|BR||-3011|-5132
+Luján|AR||-3457|-5911
+San Vicente|AR||-3502|-5842
+Berisso|AR||-3487|-5788
+Campana|AR||-3416|-5896
+Monte Chingolo|AR||-3473|-5835
+Rivera|UY||-3091|-5555
+Mar del Tuyú|AR||-3657|-5669
+Paysandú|UY||-3232|-5808
+Remedios de Escalada de San Martín|AR||-3473|-5840
+Pilar|AR||-3446|-5891
+Cachoeira do Sul|BR||-3004|-5289
+Bella Vista|AR||-3457|-5869
+Gualeguaychú|AR||-3301|-5852
+Barracas|AR||-3465|-5838
+Sant'Ana do Livramento|BR||-3089|-5553
+Necochea|AR||-3855|-5874
+Don Torcuato|AR||-3449|-5863
+Las Piedras|UY||-3473|-5622
+Concepción del Uruguay|AR||-3248|-5823
+Camaquã|BR||-3085|-5181
+Azul|AR||-3678|-5986
+Ensenada|AR||-3486|-5791
+Mercedes|AR||-3465|-5943
+Banfield|AR||-3475|-5839
+Sarandí|AR||-3468|-5835
+Tacuarembó|UY||-3172|-5598
+Hurlingham|AR||-3459|-5863
+El Palomar|AR||-3462|-5860
+São Gabriel|BR||-3034|-5432
+Colón|AR||-3222|-5814
+Colegiales|AR||-3457|-5845
+Canguçu|BR||-3140|-5268
+Melo|UY||-3237|-5416
+Los Polvorines|AR||-3450|-5871
+Boedo|AR||-3463|-5842
+San Pedro|AR||-3368|-5967
+San Isidro|AR||-3447|-5852
+Balcarce|AR||-3785|-5826
+Artigas|UY||-3040|-5647
+Mercedes|UY||-3325|-5803
+São Lourenço do Sul|BR||-3137|-5198
+Villa de Mayo|AR||-3451|-5868
+General Pacheco|AR||-3445|-5864
+Nogoyá|AR||-3239|-5979
+Eldorado do Sul|BR||-3008|-5162
+Cañuelas|AR||-3505|-5876
+Tortuguitas|AR||-3448|-5875
+Valentín Alsina|AR||-3467|-5841
+Durazno|UY||-3338|-5652
+Chascomús|AR||-3558|-5801
+Rosário do Sul|BR||-3026|-5491
+Pinamar|AR||-3711|-5687
+Minas|UY||-3438|-5524
+Retiro|AR||-3458|-5838
+Ingeniero Pablo Nogués|AR||-3448|-5871
+San Antonio de Padua|AR||-3466|-5870
+Haedo|AR||-3464|-5859
+Santos Lugares|AR||-3460|-5854
+Dom Pedrito|BR||-3098|-5467
+Florida|UY||-3410|-5621
+San José de Mayo|UY||-3434|-5671
+Lobos|AR||-3519|-5910
+Baradero|AR||-3381|-5950
+Miramar|AR||-3827|-5784
+Villa Santa Rita|AR||-3461|-5848
+Caçapava do Sul|BR||-3051|-5348
+Pontevedra|AR||-3475|-5870
+Gualeguay|AR||-3314|-5931
+Colonia del Sacramento|UY||-3446|-5784
+Villaguay|AR||-3187|-5903
+Barros Blancos|UY||-3475|-5600
+Tigre|AR||-3443|-5858
+Chajarí|AR||-3075|-5798
+Saladillo|AR||-3564|-5978
+Dolores|AR||-3632|-5768
+Santa Vitória do Palmar|BR||-3352|-5337
+Adrogué|AR||-3480|-5838
+Tristán Suárez|AR||-3489|-5857
+São José do Norte|BR||-3201|-5204
+San Carlos|UY||-3479|-5492
+Muñiz|AR||-3456|-5871
+Rocha|UY||-3448|-5433
+Jaguarão|BR||-3257|-5338
+Esquina|AR||-3001|-5953
+Fray Bentos|UY||-3312|-5831
+Encruzilhada do Sul|BR||-3054|-5252
+Treinta y Tres|UY||-3323|-5439
+Mar de Ajó|AR||-3673|-5668
+Capão do Leão|BR||-3176|-5248
+Las Flores|AR||-3601|-5910
+La Paz|AR||-3074|-5965
+Monte Caseros|AR||-3025|-5764
+Coronel Brandsen|AR||-3517|-5824
+La Unión|AR||-3488|-5854
+Canelones|UY||-3452|-5628
+Pando|UY||-3472|-5596
+Villa Gesell|AR||-3726|-5697
+San Antonio de Areco|AR||-3425|-5947
+Trinidad|UY||-3352|-5690
+Quaraí|BR||-3039|-5645
+Villa Ortúzar|AR||-3458|-5847
+San Miguel del Monte|AR||-3544|-5881
+General Juan Madariaga|AR||-3700|-5714
+Butiá|BR||-3012|-5196
+La Paz|UY||-3476|-5623
+General Belgrano|AR||-3577|-5849
+Ayacucho|AR||-3715|-5849
+Santa Elena|AR||-3094|-5979
+Carmelo|UY||-3400|-5828
+Delta del Tigre|UY||-3476|-5636
+Arroio Grande|BR||-3224|-5309
+Piratini|BR||-3145|-5310
+Villa Sarmiento|AR||-3463|-5857
+Dolores|UY||-3353|-5822
+Cidreira|BR||-3018|-5021
+São Sepé|BR||-3016|-5357
+Young|UY||-3270|-5763
+Navarro|AR||-3501|-5928
+Santa Clara del Mar|AR||-3783|-5751
+Santa Lucía|UY||-3445|-5639
+Federal|AR||-3096|-5878
+Progreso|UY||-3467|-5622
+Carmen de Areco|AR||-3438|-5982
+Benito Juárez|AR||-3767|-5981
+San Javier|AR||-3058|-5993
+Dom Feliciano|BR||-3070|-5211
+Paso de Carrasco|UY||-3486|-5605
+Magdalena|AR||-3508|-5751
+Santa Teresita|AR||-3654|-5669

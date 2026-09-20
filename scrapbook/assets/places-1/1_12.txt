@@ -1,0 +1,397 @@
+Quezon City|PH|NCR|1465|12105
+Caloocan|PH|NCR|1465|12097
+Manila|PH|NCR|1460|12098
+Taguig|PH|NCR|1452|12108
+Cebu City|PH||1032|12389
+Antipolo|PH||1463|12112
+Pasig City|PH|NCR|1459|12106
+Valenzuela|PH|NCR|1470|12097
+Paranaque City|PH|NCR|1448|12102
+Las Piñas|PH|NCR|1445|12098
+Calamba|PH||1421|12117
+Muntinlupa|PH||1439|12105
+Makati City|PH|NCR|1455|12103
+Lapu-Lapu City|PH||1031|12395
+Angeles City|PH||1515|12058
+Imus|PH||1443|12094
+Iloilo|PH||1070|12256
+Marikina City|PH|NCR|1465|12111
+Mandaluyong City|PH|NCR|1458|12104
+Bacolod City|PH||1067|12295
+Mansilingan|PH||1063|12298
+Dasmariñas|PH||1433|12094
+Mandaluyong|PH|NCR|1458|12104
+Pasay|PH|NCR|1454|12100
+Tarlac City|PH||1548|12060
+Malabon|PH|NCR|1467|12094
+San Jose del Monte|PH||1481|12105
+Bacoor|PH||1446|12094
+San Pedro|PH||1436|12105
+Cabanatuan City|PH||1549|12097
+Mandaue City|PH||1032|12392
+Cabuyao|PH||1427|12113
+San Pablo|PH||1407|12133
+Biñan|PH||1434|12108
+Santol|PH||1516|12057
+Cainta|PH||1458|12112
+Baguio|PH||1642|12059
+Malolos|PH||1484|12081
+Bagong Silang|PH|NCR|1478|12104
+Tacloban|PH||1124|12500
+San Fernando|PH||1503|12068
+Navotas|PH|NCR|1467|12095
+Ormoc|PH||1101|12461
+Batangas|PH||1376|12106
+Taytay|PH||1456|12113
+Lucena|PH||1393|12162
+Meycauayan|PH||1474|12096
+Olongapo|PH||1483|12028
+Binangonan|PH||1446|12119
+Santa Rosa|PH||1431|12111
+Commonwealth|PH|NCR|1470|12108
+Lipa City|PH||1394|12116
+Toledo|PH||1038|12364
+Bago City|PH||1053|12283
+Panalanoy|PH||1125|12501
+Mabalacat City|PH||1522|12057
+Sorsogon|PH||1297|12399
+Roxas City|PH||1159|12275
+Legaspi|PH||1314|12374
+Concepcion|PH||1533|12066
+Naga|PH||1362|12318
+Dagupan|PH||1604|12033
+Tuguegarao|PH||1762|12172
+Ilagan|PH||1715|12189
+Pandi|PH||1486|12096
+Capas|PH||1533|12059
+Mariveles|PH||1443|12049
+Guyong|PH||1484|12098
+Urdaneta|PH||1598|12057
+San Jose|PH||1235|12107
+La Trinidad|PH||1645|12059
+Norzagaray|PH||1491|12105
+Naga|PH||1021|12376
+Candelaria|PH||1393|12142
+Baliuag|PH||1495|12090
+Angono|PH||1453|12115
+Rodriguez|PH||1476|12120
+San Mateo|PH||1470|12112
+San Juan|PH|NCR|1460|12103
+Talisay|PH||1024|12385
+Bulaon|PH||1508|12066
+Gapan|PH||1531|12095
+Bayambang|PH||1581|12046
+Cadiz|PH||1095|12329
+Rosario|PH||1363|12122
+Pulong Santa Cruz|PH||1427|12108
+Santa Cruz|PH|NCR|1460|12098
+Poblacion|PH|NCR|1438|12102
+Hagonoy|PH||1483|12073
+Tabuk|PH||1747|12147
+Tabuk|PH||1741|12128
+Calumpit|PH||1492|12077
+Apalit|PH||1495|12077
+Plaridel|PH||1489|12086
+Silang|PH||1422|12097
+Guiguinto|PH||1483|12088
+Himamaylan|PH||1010|12287
+Los Baños|PH||1417|12124
+Cavite City|PH||1448|12090
+Tayabas|PH||1403|12159
+Iriga City|PH||1343|12341
+Carmona|PH||1431|12106
+Laoag|PH||1820|12060
+Pulilan|PH||1490|12085
+Talisay|PH||1074|12297
+Santiago|PH||1669|12155
+Santa Cruz|PH||1428|12142
+Catbalogan|PH||1178|12489
+Bagong Silangan|PH|NCR|1471|12111
+Paniqui|PH||1567|12058
+Tanza|PH|NCR|1468|12094
+Putatan|PH|NCR|1440|12105
+Calasiao|PH||1601|12036
+Bocaue|PH||1480|12093
+Catarman|PH||1250|12464
+Escalante|PH||1084|12350
+General Trias|PH||1439|12088
+Daanbantayan|PH||1125|12401
+Kalibo|PH||1171|12236
+Banco Filipino Homes|PH|NCR|1443|12102
+Sablayan|PH||1283|12077
+Calauan|PH||1415|12132
+Polangui|PH||1329|12349
+Calabanga|PH||1371|12321
+Mangaldan|PH||1607|12040
+Arayat|PH||1515|12077
+Tagaytay|PH||1410|12093
+Bantayan|PH||1117|12372
+Victorias|PH||1090|12307
+Muñoz|PH||1572|12090
+Binonga|PH||1077|12298
+Marilao|PH||1476|12095
+Bulacan|PH||1479|12088
+San Fernando|PH||1662|12032
+Pagbilao|PH||1397|12170
+Limay|PH||1456|12060
+Bustos|PH||1496|12092
+Paco|PH|NCR|1459|12099
+Bamban|PH||1527|12057
+Daet|PH||1411|12296
+Bauang|PH||1653|12033
+Bagong Barrio|PH|NCR|1467|12099
+Virac|PH||1358|12424
+Alicia|PH||1678|12170
+Kawit|PH||1444|12090
+Balanga|PH||1468|12054
+Port Area|PH|NCR|1459|12097
+Sagay|PH||1094|12342
+La Paz|PH||1544|12073
+Solana|PH||1765|12169
+Borongan|PH||1161|12543
+Danao|PH||1052|12403
+Mauban|PH||1419|12173
+Indang|PH||1420|12088
+Bongabon|PH||1563|12114
+San Leonardo|PH||1536|12096
+Calauag|PH||1396|12229
+Magalang|PH||1522|12066
+Libon|PH||1330|12344
+Tanauan|PH||1409|12115
+Aparri|PH||1836|12164
+Calbayog City|PH||1207|12460
+Angat|PH||1493|12103
+La Carlota|PH||1042|12292
+Subic|PH||1488|12023
+Rosales|PH||1589|12063
+Dinalupihan|PH||1488|12045
+Calapan|PH||1341|12118
+San Ildefonso|PH||1508|12094
+San Miguel|PH||1514|12098
+Villasis|PH||1590|12059
+Oas|PH||1326|12350
+Talavera|PH||1559|12092
+Enrique B. Magalona|PH||1088|12298
+Pateros|PH|NCR|1454|12107
+Orion|PH||1462|12058
+Nasugbu|PH||1407|12063
+Tinongan|PH||1022|12304
+Minglanilla|PH||1024|12380
+Tunasan|PH||1438|12105
+Gubat|PH||1292|12412
+Ualog|PH||1057|12339
+Cogan|PH||1059|12402
+Bambang|PH||1639|12111
+Tanay|PH||1450|12128
+Obando|PH||1471|12094
+Balagtas|PH||1482|12087
+Itogon|PH||1636|12068
+Manaoag|PH||1604|12049
+Paombong|PH||1483|12079
+Tabaco|PH||1336|12373
+Cupang|PH|NCR|1443|12104
+Santo Tomas|PH||1411|12114
+Batac City|PH||1806|12056
+Lingayen|PH||1602|12023
+Lubao|PH||1494|12060
+Naic|PH||1432|12077
+Estancia|PH||1146|12315
+Burauen|PH||1098|12489
+Sibonga|PH||1002|12362
+Mercedes|PH||1411|12301
+Zaragoza|PH||1545|12080
+Patuto|PH||1412|12097
+Victoria|PH||1318|12128
+Cardona|PH||1449|12123
+Balayan|PH||1394|12073
+Cabiao|PH||1525|12085
+Morong|PH||1452|12124
+Liloan|PH||1040|12400
+Consolacion|PH||1038|12396
+Vigan|PH||1757|12039
+Inabanga|PH||1003|12407
+Bangued|PH||1761|12064
+Bayombong|PH||1648|12115
+Masbate|PH||1237|12362
+Upper Bicutan|PH|NCR|1450|12105
+Candaba|PH||1510|12083
+Santa Ana|PH||1510|12077
+Noveleta|PH||1443|12088
+Vinzons|PH||1417|12291
+Sariaya|PH||1396|12153
+Orani|PH||1480|12054
+Canlaon|PH||1039|12322
+Amadeo|PH||1417|12092
+Binmaley|PH||1603|12027
+Mexico|PH||1506|12072
+Pinamalayan|PH||1305|12146
+Passi|PH||1111|12264
+Maragondon|PH||1427|12074
+Masantol|PH||1490|12071
+Malilipot|PH||1332|12374
+Gerona|PH||1561|12060
+Samal|PH||1477|12054
+Carcar|PH||1011|12364
+Mamatid|PH||1423|12116
+Taal|PH||1388|12092
+Jaen|PH||1533|12092
+Camiling|PH||1569|12041
+Hinigaran|PH||1027|12285
+San Pascual|PH||1381|12102
+Pantubig|PH||1497|12095
+Talipapa|PH|NCR|1469|12103
+Papaya|PH||1532|12084
+San Antonio|PH||1495|12009
+Binalbagan|PH||1019|12286
+Bayanan|PH|NCR|1441|12105
+Calaca|PH||1393|12081
+Del Pilar|PH||1504|12070
+Pandan|PH||1174|12210
+Bantay|PH||1758|12039
+Mendez-Nuñez|PH||1413|12091
+Ramon|PH||1678|12154
+Solano|PH||1652|12118
+Bel Air|PH|NCR|1456|12103
+Tagudin|PH||1694|12044
+San Jose|PH||1335|12355
+Abucay|PH||1473|12053
+Jalajala|PH||1435|12132
+Teresa|PH||1456|12122
+Pila|PH||1423|12136
+Manapla|PH||1096|12312
+San Nicolas|PH||1817|12060
+Aliaga|PH||1550|12084
+Baclaran|PH||1453|12099
+Hermosa|PH||1483|12051
+Bauan|PH||1379|12101
+Bay|PH||1418|12129
+Jetafe|PH||1015|12415
+San Luis|PH||1504|12079
+Dupax Del Norte|PH||1631|12111
+General Tinio|PH||1535|12105
+Guimba|PH||1566|12077
+Quiapo|PH|NCR|1460|12098
+San Narciso|PH||1501|12008
+Alaminos|PH||1406|12125
+Lucban|PH||1411|12156
+Aglipay|PH||1649|12164
+Paraiso|PH||1088|12336
+Pililla|PH||1449|12131
+Lumbang|PH||1430|12146
+Buhi|PH||1343|12352
+Malvar|PH||1404|12116
+Aringay|PH||1639|12035
+Bagong Pagasa|PH|NCR|1466|12103
+Atimonan|PH||1400|12192
+Cordova|PH||1024|12394
+San Simon|PH||1500|12078
+Agoo|PH||1608|12010
+Pandacaqui|PH||1517|12065
+Bulan|PH||1267|12388
+Majayjay|PH||1415|12147
+Burgos|PH||1573|12057
+Santa Maria|PH||1695|12044
+Peñaranda|PH||1535|12100
+Pulupandan|PH||1052|12280
+Castillejos|PH||1493|12020
+Paete|PH||1436|12148
+Catanauan|PH||1359|12232
+San Jose|PH||1018|12557
+Sanchez-Mira|PH||1856|12123
+San Antonio|PH||1531|12086
+Rizal|PH||1571|12111
+Telabastagan|PH||1512|12061
+Maao|PH||1049|12299
+Lopez|PH||1388|12226
+Nabua|PH||1341|12337
+Concepcion Ibaba|PH||1392|12146
+Pangil|PH||1440|12147
+Cabagan|PH||1743|12177
+Ayala Alabang|PH|NCR|1441|12102
+Talisay|PH||1409|12102
+Baggabag B|PH||1651|12119
+Manibaug Pasig|PH||1510|12056
+Nagcarlan|PH||1414|12142
+Victoria|PH||1423|12133
+La Castellana|PH||1032|12302
+Pio|PH||1505|12052
+General Emilio Aguinaldo|PH||1418|12080
+Mamburao|PH||1322|12060
+Palayan City|PH||1554|12108
+San Fernando|PH||1016|12371
+Bogo|PH||1105|12401
+Bontoc|PH||1709|12098
+Culion|PH||1189|12002
+Pinamungahan|PH||1027|12358
+Mansalay|PH||1252|12144
+Botolan|PH||1529|12002
+Guihulñgan|PH||1012|12327
+Apas|PH||1034|12390
+Gumaca|PH||1392|12210
+Bignay Uno|PH||1386|12149
+Balamban|PH||1050|12372
+Guiset East|PH||1607|12068
+Loma de Gato|PH||1479|12100
+Malanday|PH||1471|12113
+Porac|PH||1507|12054
+Cuenca|PH||1390|12105
+Inopacan|PH||1050|12474
+Jose Pañganiban|PH||1429|12269
+Dupax del Sur|PH||1628|12109
+Sasmuan|PH||1494|12062
+Goa|PH||1370|12349
+Irosin|PH||1270|12403
+Binondo|PH|NCR|1460|12097
+Taloc|PH||1057|12290
+Baras|PH||1452|12127
+Sampaloc|PH||1454|12136
+Ternate|PH||1429|12072
+Pacol|PH||1045|12282
+Suay|PH||1005|12284
+Baao|PH||1345|12337
+San Francisco|PH||1536|12084
+Malabanban Norte|PH||1395|12143
+Laur|PH||1559|12118
+Lagawe|PH||1680|12112
+Malanday|PH||1472|12096
+Sumag|PH||1060|12292
+Compostela|PH||1046|12401
+San Marcelino|PH||1497|12016
+San Miguel|PH||1544|12060
+Quezon|PH||1555|12081
+General Mamerto Natividad|PH||1560|12105
+Maasin|PH||1013|12484
+Labo|PH||1415|12283
+Del Remedio|PH||1409|12131
+Pilar|PH||1466|12057
+Baybay|PH||1068|12480
+Palo|PH||1116|12499
+Esperanza|PH||1174|12404
+Carigara|PH||1130|12468
+Murcia|PH||1061|12304
+Bato|PH||1335|12337
+Tiwi|PH||1346|12368
+Laoang|PH||1257|12501
+Roxas|PH||1712|12162
+Tanauan|PH||1111|12502
+Zumarraga|PH||1164|12484
+San Mateo|PH||1688|12159
+Aurora|PH||1335|12252
+Morong|PH||1468|12027
+San Vicente|PH||1529|12065
+Calatagan|PH||1383|12063
+Novaliches Proper|PH|NCR|1472|12105
+Isabela|PH||1020|12299
+Mankayan|PH||1686|12078
+Abuyog|PH||1075|12501
+Calumpang|PH|NCR|1462|12109
+Diadi|PH||1673|12136
+Santa Barbara|PH||1600|12040
+Santa Cruz|PH||1491|12057
+Romblon|PH||1258|12227
+Tagas|PH||1317|12372
+Lilio|PH||1413|12144
+Magarao|PH||1366|12319
+Domalanoan|PH||1600|12021
+Ramos|PH||1567|12064
+Babo-Pangulo|PH||1508|12052

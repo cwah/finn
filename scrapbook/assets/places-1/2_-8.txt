@@ -1,0 +1,73 @@
+Santiago de Cuba|CU||2002|-7582
+Camagüey|CU||2138|-7792
+Holguín|CU||2089|-7626
+Guantánamo|CU||2014|-7521
+Santa Clara|CU||2241|-7997
+Nassau|BS||2506|-7734
+Las Tunas|CU||2096|-7695
+Bayamo|CU||2037|-7664
+Ciego de Ávila|CU||2184|-7876
+Manzanillo|CU||2034|-7712
+Sancti Spíritus|CU||2193|-7944
+Palma Soriano|CU||2021|-7599
+Moa|CU||2066|-7495
+Puerto Padre|CU||2120|-7660
+Contramaestre|CU||2030|-7624
+San Luis|CU||2019|-7585
+Morón|CU||2211|-7863
+Florida|CU||2153|-7823
+Trinidad|CU||2180|-7998
+Placetas|CU||2231|-7965
+Nuevitas|CU||2154|-7726
+Banes|CU||2096|-7572
+Bartolomé Masó|CU||2017|-7694
+Jesús Menéndez|CU||2116|-7648
+Jobabo|CU||2091|-7728
+Baracoa|CU||2035|-7450
+Lucaya|BS||2653|-7867
+Cabaiguán|CU||2208|-7950
+San Germán|CU||2060|-7613
+Cacocum|CU||2074|-7633
+Yaguajay|CU||2233|-7924
+Manicaragua|CU||2215|-7998
+Amancio|CU||2083|-7758
+Jiguaní|CU||2037|-7643
+Guáimaro|CU||2105|-7735
+Caibarién|CU||2252|-7947
+Condado|CU||2188|-7984
+Camajuaní|CU||2248|-7975
+Santa Cruz del Sur|CU||2072|-7800
+Remedios|CU||2249|-7955
+Vertientes|CU||2126|-7815
+Ciro Redondo|CU||2202|-7870
+Yara|CU||2027|-7695
+Maisí|CU||2025|-7415
+Gibara|CU||2111|-7613
+Freeport|BS||2653|-7870
+Cueto|CU||2065|-7593
+Encrucijada|CU||2262|-7986
+Río Guayabal de Yateras|CU||2037|-7502
+Campechuela|CU||2023|-7728
+Chambas|CU||2219|-7891
+Providenciales|TC||2178|-7225
+Río Cauto|CU||2056|-7692
+Jimaguayú|CU||2124|-7783
+Cauto Cristo|CU||2056|-7647
+Minas|CU||2149|-7761
+Esmeralda|CU||2185|-7812
+Colombia|CU||2099|-7743
+Fomento|CU||2210|-7972
+Florencia|CU||2215|-7897
+Jatibonico|CU||2194|-7917
+Niquero|CU||2005|-7758
+Guisa|CU||2026|-7654
+Sagua de Tánamo|CU||2058|-7524
+Primero de Enero|CU||2195|-7843
+Jobabo|CU||2097|-7630
+Killarney|BS||2505|-7742
+La Sierpe|CU||2177|-7927
+Sibanicú|CU||2124|-7753
+Media Luna|CU||2014|-7744
+Venezuela|CU||2174|-7879
+Baraguá|CU||2168|-7863
+Cockburn Town|TC||2146|-7114

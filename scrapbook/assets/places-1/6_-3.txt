@@ -1,0 +1,5 @@
+Reykjavík|IS||6414|-2190
+Kópavogur|IS||6411|-2191
+Hafnarfjörður|IS||6407|-2194
+Reykjanesbær|IS||6400|-2256
+Keflavík|IS||6400|-2256

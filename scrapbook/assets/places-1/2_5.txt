@@ -1,0 +1,193 @@
+Dubai|AE||2508|5531
+Abu Dhabi|AE||2445|5440
+Sharjah|AE||2533|5541
+Dammam|SA||2643|5010
+Shiraz|IR||2961|5253
+Al Ain City|AE||2419|5576
+Muscat|OM||2358|5841
+Ajman|AE||2540|5548
+Seeb|OM||2367|5819
+Dayrah|AE||2527|5530
+Bawshar|OM||2358|5840
+Bandar Abbas|IR||2719|5628
+Ras Al Khaimah|AE||2579|5594
+Doha|QA||2529|5153
+Ar Rayyān|QA||2529|5142
+Thuqbah|SA||2626|5020
+Musaffah|AE||2436|5448
+Jebel Ali|AE||2500|5511
+Sirjan|IR||2945|5568
+Lusail|QA||2542|5151
+Business Bay|AE||2519|5527
+Al Muharraq|BH||2626|5061
+Khobar|SA||2628|5021
+Bushehr|IR||2897|5084
+‘Ibrī|OM||2323|5652
+Dubai Investments Park|AE||2501|5516
+Marvdasht|IR||2987|5280
+Manama|BH||2623|5059
+Jahrom|IR||2850|5356
+Şaḩam|OM||2417|5689
+Madīnat Ḩamad|BH||2612|5051
+Jīroft|IR||2868|5774
+Shahr-e Ṣadrā|IR||2980|5250
+International City|AE||2516|5541
+Dubai Marina|AE||2509|5515
+Rustaq|OM||2339|5742
+Fujairah|AE||2512|5634
+Al Majaz|AE||2532|5539
+Ar Rifā‘|BH||2613|5056
+Kāzerūn|IR||2962|5165
+Borāzjān|IR||2927|5122
+Warīsān|AE||2517|5541
+Sohar|OM||2435|5671
+As Suwayq|OM||2385|5744
+Dhahran|SA||2629|5011
+Bam|IR||2911|5836
+Al Qaţīf|SA||2657|5001
+Fasā|IR||2894|5365
+Mīnāb|IR||2713|5709
+Dubai Silicon Oasis|AE||2512|5539
+Ar Rumaylah|AE||2540|5543
+Khalifah A City|AE||2443|5460
+Tārūt|SA||2657|5004
+Mohammed Bin Zayed City|AE||2435|5455
+Hawr al ‘Anz|AE||2528|5534
+Reef Al Fujairah City|AE||2514|5625
+Barkā’|OM||2368|5789
+Samā’il|OM||2330|5795
+Bani Yas City|AE||2431|5463
+Dubai Festival City|AE||2522|5536
+Al Maţār al ‘Atīq|QA||2525|5156
+Al Karama|AE||2524|5530
+Al Buraymī|OM||2425|5579
+Sitrah|BH||2615|5062
+Nizwá|OM||2293|5753
+Sur|OM||2257|5953
+Dārāb|IR||2875|5454
+Sayhāt|SA||2648|5005
+Jidd Ḩafş|BH||2622|5055
+Al Manşūrah|QA||2527|5153
+Dār Kulayb|BH||2607|5050
+Fīrūzābād|IR||2884|5257
+Zayed City|AE||2365|5371
+Qurayyāt|OM||2326|5892
+Ras Tanura|SA||2671|5007
+Lār|IR||2768|5434
+Al Shamkhah City|AE||2439|5471
+Mirdif|AE||2522|5541
+Bandar-e Kangān|IR||2783|5206
+Ābādeh|IR||2883|5317
+Al Warqaa|AE||2519|5542
+Umm Al Quwain City|AE||2556|5556
+Az̧ Z̧a‘āyin|QA||2558|5148
+Bahlā’|OM||2298|5730
+Al Sajaah|AE||2532|5563
+Lahbab|AE||2504|5559
+Nāyf|AE||2527|5530
+Bandar-e Genāveh|IR||2958|5052
+Kahnūj|IR||2794|5770
+Ţarīf Kalbā|AE||2507|5633
+Al Khābūrah|OM||2397|5709
+Al Muteena|AE||2527|5532
+Al Qusais 1|AE||2528|5537
+Shināş|OM||2474|5647
+Sufālat Samā’il|OM||2332|5802
+Makū|IR||2785|5242
+Neyrīz|IR||2920|5433
+Madīnat Khalīfah|QA||2532|5148
+An Najmah|QA||2527|5154
+Mankhūl|AE||2525|5529
+Raḩīmah|SA||2671|5006
+As Saţwah|AE||2522|5527
+Khūrmūj|IR||2865|5138
+Khawr Fakkān|AE||2533|5634
+Kīsh|IR||2656|5402
+Al ‘Unayzah|QA||2534|5151
+Umm Ghuwaylīnah|QA||2559|5115
+Jumayrā|AE||2521|5525
+Ar Rāshidīyah|AE||2522|5539
+Madīnat ‘Īsá|BH||2617|5055
+Kalbā|AE||2505|5635
+Estahbān|IR||2913|5404
+Izkī|OM||2293|5777
+Rūdān|IR||2744|5719
+As Sadd|QA||2529|5150
+Dubai International Financial Centre|AE||2521|5528
+Bāft|IR||2923|5660
+Gerāsh|IR||2767|5414
+Farīj Kulayb|QA||2531|5149
+Farīj al Amīr|QA||2529|5147
+Zarqān|IR||2977|5272
+Kavār|IR||2921|5269
+Jam|IR||2783|5233
+Bandar-e Lengeh|IR||2656|5488
+Dibba Al-Fujairah|AE||2559|5626
+Umm Şalāl Muḩammad|QA||2542|5141
+Lamerd|IR||2733|5318
+Mu‘aydhir Rawḑat Rāshid|QA||2526|5140
+As Sulţah al Jadīdah|QA||2526|5151
+Al Ḩamīdīyah|AE||2540|5553
+Qā’emīyeh|IR||2985|5159
+Al Wakrah|QA||2517|5160
+Dibba Al-Hisn|AE||2562|5627
+Liwá|OM||2453|5656
+Al Furjan|AE||2503|5515
+The Palm Jumeirah|AE||2512|5514
+Ibrā’|OM||2269|5853
+Bardsīr|IR||2992|5657
+Ar Ruways|AE||2411|5273
+Qeshm|IR||2695|5627
+Bandar-e Deyr|IR||2784|5194
+Dubai Internet City|AE||2510|5516
+Ḩājjīābād|IR||2831|5590
+‘Ālī Shahr|IR||2893|5107
+Baravāt|IR||2907|5840
+Ath Thumāmah Sab‘ah wa Arba‘ūn|QA||2524|5156
+Ath Thumāmah Sittah wa Arba‘ūn|QA||2523|5154
+Ath Thumāmah Khamsūn|QA||2522|5155
+Al Wasl|AE||2520|5526
+Ḩājjīābād|IR||2836|5442
+Al Waheda|AE||2529|5534
+Bidbid|OM||2341|5813
+Farrāshband|IR||2886|5209
+Adh Dhayd|AE||2529|5588
+Najafshahr|IR||2939|5572
+‘Inak|SA||2652|5003
+Qīr|IR||2848|5303
+Evaz|IR||2776|5400
+Nu‘ayjah|QA||2525|5153
+Al Murar al Qadīm|AE||2528|5531
+Halwan|AE||2535|5542
+Khonj|IR||2789|5343
+Bandar-e Kong|IR||2660|5494
+Al Ghānim|QA||2528|5154
+Al Khawr|QA||2568|5151
+Āb Pakhsh|IR||2936|5107
+Nakhl-e Taqī|IR||2750|5259
+Al Bada'a|AE||2522|5527
+Choghādak|IR||2899|5104
+Bur Dubai|AE||2526|5530
+Badīyah|OM||2245|5880
+Kherāmeh|IR||2950|5331
+Sarvestān|IR||2927|5322
+‘Anbarābād|IR||2848|5785
+Pārsiān|IR||2721|5304
+Abū Hayl|AE||2528|5533
+Al Jurf|AE||2542|5551
+Khasab|OM||2618|5625
+Arsanjān|IR||2991|5331
+Al Mizhar First|AE||2525|5544
+Adam|OM||2238|5753
+Umm Lakhbā|QA||2534|5147
+Jask|IR||2565|5778
+Yanqul|OM||2359|5654
+Umm Suqaym|AE||2515|5521
+Al Safa|AE||2517|5523
+Manūjān|IR||2740|5750
+Al Hilāl al Gharbīyah|QA||2526|5153
+Al Hilāl ash Sharqīyah|QA||2526|5155
+Ḩattā|AE||2480|5613
+Bandar-e Khamīr|IR||2695|5559
+Ahram|IR||2888|5127
+Maşīrah|OM||2065|5887

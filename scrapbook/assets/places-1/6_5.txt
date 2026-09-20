@@ -1,0 +1,11 @@
+Syktyvkar|RU||6166|5082
+Ukhta|RU||6357|5369
+Ezhva|RU||6181|5073
+Pechora|RU||6515|5722
+Usinsk|RU||6601|5753
+Severoural’sk|RU||6015|5995
+Sosnogorsk|RU||6360|5389
+Narian-Mar|RU||6767|5310
+Krasnovishersk|RU||6041|5708
+Nar'yan-Mar|RU||6764|5300
+Yemva|RU||6259|5086

@@ -1,0 +1,21 @@
+Perth|AU||-3195|11586
+Mandurah|AU||-3253|11572
+Bunbury|AU||-3333|11564
+Baldivis|AU||-3233|11583
+Albany|AU||-3503|11788
+Canning Vale|AU||-3206|11592
+Kwinana|AU||-3223|11578
+Busselton|AU||-3365|11535
+Ellenbrook|AU||-3177|11597
+Dianella|AU||-3189|11587
+Thornlie|AU||-3206|11596
+Morley|AU||-3189|11591
+Gosnells|AU||-3208|11601
+Willetton|AU||-3205|11589
+Byford|AU||-3222|11601
+Ballajura|AU||-3184|11590
+Scarborough|AU||-3190|11576
+Australind|AU||-3328|11572
+Duncraig|AU||-3183|11578
+Landsdale|AU||-3181|11587
+Rockingham|AU||-3228|11573

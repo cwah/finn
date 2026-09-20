@@ -1,0 +1,74 @@
+Cuiabá|BR||-1560|-5610
+Várzea Grande|BR||-1565|-5613
+Rondonópolis|BR||-1647|-5464
+Rio Verde|BR||-1780|-5093
+Sinop|BR||-1186|-5550
+Sorriso|BR||-1255|-5571
+Tangará da Serra|BR||-1462|-5749
+Jataí|BR||-1788|-5172
+Corumbá|BR||-1901|-5765
+Lucas do Rio Verde|BR||-1307|-5591
+Cáceres|BR||-1607|-5768
+Mineiros|BR||-1757|-5255
+Barra do Garças|BR||-1589|-5226
+Nova Mutum|BR||-1383|-5608
+Pontes e Lacerda|BR||-1523|-5934
+Campo Verde|BR||-1555|-5517
+Paranaíba|BR||-1968|-5119
+Juína|BR||-1142|-5875
+Santa Helena de Goiás|BR||-1781|-5060
+Iturama|BR||-1973|-5020
+Campo Novo do Parecis|BR||-1368|-5789
+Iporá|BR||-1644|-5112
+Juara|BR||-1126|-5752
+São Luís de Montes Belos|BR||-1652|-5037
+Colíder|BR||-1082|-5545
+Peixoto de Azevedo|BR||-1022|-5498
+Poconé|BR||-1626|-5662
+Coxim|BR||-1851|-5476
+Confresa|BR||-1064|-5157
+Sapezal|BR||-1354|-5882
+Chapadão do Sul|BR||-1879|-5262
+São Gabriel do Oeste|BR||-1940|-5457
+Barra do Bugres|BR||-1507|-5718
+Jaciara|BR||-1597|-5497
+Lucas|BR||-1633|-5593
+Lambari d'Oeste|BR||-1532|-5800
+Mirassol d'Oeste|BR||-1568|-5809
+Água Boa|BR||-1405|-5216
+Costa Rica|BR||-1854|-5313
+Canarana|BR||-1355|-5227
+Poxoréu|BR||-1584|-5439
+Paranatinga|BR||-1443|-5405
+Aripuanã|BR||-1018|-5945
+Diamantino|BR||-1441|-5645
+Goiás|BR||-1593|-5014
+Quirinópolis|BR||-1845|-5045
+Acreúna|BR||-1740|-5038
+São Miguel do Araguaia|BR||-1328|-5016
+Ladário|BR||-1900|-5760
+Matupá|BR||-1017|-5493
+Cassilândia|BR||-1911|-5173
+São Simão|BR||-1899|-5054
+Santa Vitória|BR||-1884|-5012
+Nova Xavantina|BR||-1466|-5236
+Aragarças|BR||-1590|-5225
+Vila Rica|BR||-1001|-5112
+Rio Verde de Mato Grosso|BR||-1892|-5484
+Chapada dos Guimarães|BR||-1546|-5575
+Caiapônia|BR||-1696|-5181
+Pedra Preta|BR||-1662|-5447
+Comodoro|BR||-1366|-5979
+Jussara|BR||-1586|-5087
+Querência|BR||-1260|-5220
+São José dos Quatro Marcos|BR||-1562|-5818
+Alto Araguaia|BR||-1731|-5322
+Brasnorte|BR||-1212|-5800
+Vila Bela da Santíssima Trindade|BR||-1501|-5995
+Santo Antônio do Leverger|BR||-1587|-5608
+Nova Olímpia|BR||-1480|-5729
+Mozarlândia|BR||-1474|-5057
+Nobres|BR||-1472|-5633
+Campinápolis|BR||-1454|-5280
+Tapurah|BR||-1274|-5651
+Rosário Oeste|BR||-1484|-5643

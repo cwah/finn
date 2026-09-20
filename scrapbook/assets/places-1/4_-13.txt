@@ -1,0 +1,227 @@
+Seattle|US|WA|4761|-12233
+Vancouver|CA||4925|-12312
+Portland|US|OR|4552|-12268
+Surrey|CA||4911|-12283
+Victoria|CA||4844|-12335
+Burnaby|CA||4927|-12295
+Tacoma|US|WA|4725|-12244
+Richmond|CA||4917|-12314
+Vancouver|US|WA|4564|-12266
+Eugene|US|OR|4405|-12309
+Salem|US|OR|4494|-12304
+Newton|CA||4913|-12285
+Coquitlam|CA||4928|-12278
+Abbotsford|CA||4906|-12225
+Bellevue|US|WA|4761|-12220
+Langley|CA||4910|-12266
+Kent|US|WA|4738|-12223
+Saanich|CA||4855|-12337
+Gresham|US|OR|4550|-12243
+Everett|US|WA|4798|-12220
+Whalley|CA||4918|-12287
+Hillsboro|US|OR|4552|-12299
+Delta|CA||4909|-12305
+Chilliwack|CA||4917|-12195
+Renton|US|WA|4748|-12222
+Beaverton|US|OR|4549|-12280
+Federal Way|US|WA|4732|-12231
+Yakima|US|WA|4660|-12051
+Redding|US|CA|4059|-12239
+Nanaimo|CA||4917|-12394
+North Vancouver|CA||4932|-12307
+Kirkland|US|WA|4768|-12221
+Bend|US|OR|4406|-12132
+Bellingham|US|WA|4876|-12249
+Maple Ridge|CA||4922|-12260
+East Hastings|CA||4927|-12306
+Medford|US|OR|4233|-12288
+New Westminster|CA||4921|-12291
+South Surrey|CA||4905|-12279
+Auburn|US|WA|4731|-12223
+Cloverdale|CA||4911|-12273
+Marysville|US|WA|4805|-12218
+Fleetwood|CA||4917|-12280
+Guildford|CA||4919|-12280
+Brighouse-City Centre|CA||4917|-12313
+Downtown Vancouver|CA||4928|-12312
+Springfield|US|OR|4405|-12302
+North Delta|CA||4917|-12292
+Redmond|US|WA|4767|-12212
+Lakewood|US|WA|4717|-12252
+Port Coquitlam|CA||4927|-12277
+Corvallis|US|OR|4456|-12326
+Olympia|US|WA|4704|-12290
+Shoreline|US|WA|4776|-12234
+South Hill|US|WA|4714|-12227
+Metrotown|CA||4922|-12300
+Sammamish|US|WA|4764|-12208
+Albany|US|OR|4464|-12311
+Renfrew-Collingwood|CA||4924|-12304
+Tigard|US|OR|4543|-12277
+Burien|US|WA|4747|-12235
+Aloha|US|OR|4549|-12287
+Kensington-Cedar Cottage|CA||4925|-12307
+West End|CA||4928|-12313
+Langford|CA||4845|-12350
+Lacey|US|WA|4703|-12282
+Victoria-Downtown|CA||4843|-12336
+City of Sammamish|US|WA|4760|-12204
+West Vancouver|CA||4933|-12316
+Kitsilano|CA||4927|-12317
+Bothell|US|WA|4776|-12221
+Mission|CA||4913|-12230
+Edmonds|US|WA|4781|-12238
+Strawberry Hill|CA||4913|-12288
+Puyallup|US|WA|4719|-12229
+Bremerton|US|WA|4757|-12263
+Lake Oswego|US|OR|4542|-12267
+Keizer|US|OR|4499|-12303
+Grants Pass|US|OR|4244|-12333
+Lynnwood|US|WA|4782|-12232
+Longview|US|WA|4614|-12294
+Sunset|CA||4922|-12310
+Issaquah|US|WA|4753|-12203
+Oregon City|US|OR|4536|-12261
+Parkland|US|WA|4716|-12243
+Hastings-Sunrise|CA||4928|-12303
+Mount Vernon|US|WA|4842|-12233
+West Lake Sammamish|US|WA|4758|-12210
+McMinnville|US|OR|4521|-12320
+Wenatchee|US|WA|4742|-12031
+Fairview|CA||4926|-12313
+Surrey City Centre|CA||4919|-12285
+Mount Pleasant|CA||4927|-12310
+Mt Pleasant|CA||4926|-12310
+University Place|US|WA|4724|-12255
+Chilliwack-Downtown|CA||4916|-12196
+Willoughby|CA||4913|-12268
+Des Moines|US|WA|4740|-12232
+Victoria-Fraserview|CA||4922|-12307
+Lake Stevens|US|WA|4802|-12206
+East Hill-Meridian|US|WA|4741|-12217
+North Cowichan|CA||4884|-12369
+Killarney|CA||4923|-12304
+Grandview-Woodlands|CA||4928|-12307
+Redmond|US|OR|4427|-12117
+Courtenay|CA||4969|-12499
+SeaTac|US|WA|4745|-12229
+Marpole|CA||4921|-12313
+Port Moody|CA||4928|-12282
+Spanaway|US|WA|4710|-12243
+Tualatin|US|OR|4538|-12276
+Eureka|US|CA|4080|-12416
+West Linn|US|OR|4537|-12261
+North Creek|US|WA|4782|-12218
+Maple Valley|US|WA|4739|-12205
+Walnut Grove|CA||4916|-12264
+Coquitlam West|CA||4926|-12288
+Steveston|CA||4913|-12318
+Woodburn|US|OR|4514|-12286
+Mercer Island|US|WA|4757|-12222
+Fraser Heights|CA||4920|-12278
+South Granville|CA||4926|-12314
+Forest Grove|US|OR|4552|-12311
+Coquitlam Town Centre|CA||4928|-12280
+Chinatown|CA||4928|-12311
+Bainbridge Island|US|WA|4763|-12252
+Squamish|CA||4970|-12316
+White Rock|CA||4902|-12280
+Graham|US|WA|4705|-12229
+Broadmoor|CA||4915|-12313
+Ladner|CA||4909|-12308
+Picnic Point-North Lynnwood|US|WA|4786|-12229
+Cariboo|CA||4925|-12288
+Newberg|US|OR|4530|-12297
+Wilsonville|US|OR|4530|-12277
+Inglewood-Finn Hill|US|WA|4772|-12223
+Oak Harbor|US|WA|4829|-12264
+Vedder Crossing|CA||4910|-12197
+Riley Park|CA||4924|-12309
+Cottage Lake|US|WA|4774|-12208
+Edmonds|CA||4921|-12294
+Duncan|CA||4878|-12370
+Roseburg|US|OR|4322|-12334
+Kenmore|US|WA|4776|-12224
+Camas|US|WA|4559|-12240
+Tsawwassen|CA||4902|-12308
+Klamath Falls|US|OR|4222|-12178
+Gordon Head|CA||4848|-12332
+Dunbar-Southlands|CA||4924|-12319
+Mukilteo|US|WA|4794|-12230
+Townline|CA||4906|-12236
+West Lake Stevens|US|WA|4799|-12210
+Haney|CA||4922|-12260
+Mountlake Terrace|US|WA|4779|-12231
+Silver Firs|US|WA|4787|-12216
+Ashland|US|OR|4219|-12271
+Milwaukie|US|OR|4545|-12264
+Port Alberni|CA||4924|-12480
+Bethany|US|OR|4556|-12287
+Renfrew Heights|CA||4925|-12303
+Lents|US|OR|4548|-12257
+Eastmont|US|WA|4790|-12218
+Mill Creek|US|WA|4786|-12220
+Tukwila|US|WA|4747|-12226
+Hayesville|US|OR|4499|-12298
+Bonney Lake|US|WA|4718|-12219
+Westwood Plateau|CA||4930|-12279
+Lower Lonsdale|CA||4931|-12307
+Salmon Creek|US|WA|4571|-12265
+Maywood|CA||4922|-12301
+Orchards|US|WA|4567|-12256
+Port Angeles|US|WA|4812|-12343
+Hazel Dell|US|WA|4567|-12266
+Battle Ground|US|WA|4578|-12253
+Sherwood|US|OR|4536|-12284
+Altamont|US|OR|4221|-12174
+Silverdale|US|WA|4764|-12269
+Covington|US|WA|4736|-12212
+Tumwater|US|WA|4701|-12291
+Fairwood|US|WA|4745|-12216
+Ellensburg|US|WA|4700|-12055
+Columbia City|US|WA|4756|-12228
+Arlington|US|WA|4820|-12213
+Union Hill-Novelty Hill|US|WA|4768|-12203
+Frederickson|US|WA|4710|-12236
+Pitt Meadows|CA||4922|-12269
+Happy Valley|US|OR|4545|-12253
+Central Lonsdale|CA||4933|-12307
+Downtown Eastside|CA||4928|-12309
+Carey|CA||4847|-12339
+Five Corners|US|WA|4568|-12258
+Anacortes|US|WA|4851|-12261
+Monroe|US|WA|4786|-12197
+Blundell|CA||4916|-12316
+Oak Bay|CA||4845|-12330
+Central Point|US|OR|4238|-12292
+Arcata|US|CA|4087|-12408
+Esquimalt|CA||4844|-12341
+Central Saanich|CA||4857|-12342
+Canby|US|OR|4526|-12269
+Bayside|US|CA|4084|-12406
+University Endowment Lands|CA||4926|-12324
+Colwood|CA||4843|-12349
+Centralia|US|WA|4672|-12295
+Troutdale|US|OR|4554|-12239
+Oak Grove|US|OR|4542|-12264
+Bothell West|US|WA|4781|-12224
+Sunnyside|US|WA|4632|-12001
+Lebanon|US|OR|4454|-12291
+Aberdeen|US|WA|4698|-12382
+Coos Bay|US|OR|4337|-12422
+Seafair|CA||4915|-12318
+Four Corners|US|OR|4493|-12298
+Maillardville|CA||4924|-12287
+Mill Creek East|US|WA|4784|-12219
+Bryn Mawr-Skyway|US|WA|4749|-12224
+Central Coquitlam|CA||4926|-12284
+Martha Lake|US|WA|4785|-12224
+The Dalles|US|OR|4559|-12118
+Lougheed|CA||4925|-12289
+Arbutus Ridge|CA||4925|-12317
+Washougal|US|WA|4558|-12235
+Dallas|US|OR|4492|-12332
+Susanville|US|CA|4042|-12065
+McKinleyville|US|CA|4095|-12410
+Sooke|CA||4837|-12373
+Harewood|CA||4915|-12395

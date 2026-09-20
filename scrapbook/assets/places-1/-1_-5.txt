@@ -1,0 +1,305 @@
+Belém|BR||-146|-4850
+São Luís|BR||-253|-4430
+Teresina|BR||-509|-4280
+Ananindeua|BR||-137|-4837
+Petrolina|BR||-940|-4050
+Parauapebas|BR||-607|-4990
+Marabá|BR||-538|-4913
+Imperatriz|BR||-553|-4749
+São José de Ribamar|BR||-256|-4406
+Juazeiro|BR||-941|-4050
+Sobral|BR||-369|-4035
+Castanhal|BR||-129|-4793
+Araguaína|BR||-719|-4821
+Timon|BR||-509|-4284
+Parnaíba|BR||-290|-4178
+Caxias|BR||-486|-4336
+Abaetetuba|BR||-172|-4888
+Paço do Lumiar|BR||-253|-4411
+Barcarena|BR||-151|-4863
+Cametá|BR||-224|-4950
+Bragança|BR||-105|-4677
+Marituba|BR||-136|-4834
+Tucuruí|BR||-377|-4968
+Codó|BR||-446|-4389
+Açailândia|BR||-495|-4750
+Bacabal|BR||-423|-4478
+Balsas|BR||-753|-4604
+Paragominas|BR||-300|-4735
+Araripina|BR||-758|-4050
+Barra do Corda|BR||-551|-4524
+Santa Inês|BR||-367|-4538
+Pinheiro|BR||-252|-4508
+Moju|BR||-188|-4877
+Picos|BR||-708|-4147
+Chapadinha|BR||-374|-4336
+Tianguá|BR||-373|-4099
+Crateús|BR||-518|-4067
+Tailândia|BR||-295|-4895
+Casa Nova|BR||-917|-4098
+Santa Isabel do Pará|BR||-130|-4816
+Capanema|BR||-120|-4718
+Grajaú|BR||-582|-4614
+Itapecuru Mirim|BR||-339|-4436
+Ouricuri|BR||-788|-4008
+Tomé-Açu|BR||-242|-4815
+Breu Branco|BR||-400|-4951
+Ipixuna do Pará|BR||-256|-4750
+Barreirinhas|BR||-276|-4283
+Coroatá|BR||-413|-4412
+Igarapé Miri|BR||-198|-4896
+Camocim|BR||-290|-4084
+Piripiri|BR||-427|-4178
+Benevides|BR||-136|-4824
+Acaraú|BR||-289|-4012
+Dom Eliseu|BR||-428|-4750
+Floriano|BR||-677|-4302
+Viçosa do Ceará|BR||-356|-4109
+Novo Repartimento|BR||-433|-4980
+Jacundá|BR||-445|-4912
+São Miguel do Guamá|BR||-163|-4748
+Tutóia|BR||-276|-4227
+Tauá|BR||-600|-4029
+Acará|BR||-196|-4820
+Viseu|BR||-120|-4614
+Santa Luzia|BR||-396|-4566
+Vargem Grande|BR||-354|-4392
+Capitão Poço|BR||-175|-4706
+Buriticupu|BR||-432|-4645
+Granja|BR||-312|-4083
+Itupiranga|BR||-513|-4933
+Rondon do Pará|BR||-478|-4807
+Viana|BR||-322|-4500
+Vigia|BR||-86|-4814
+Coelho Neto|BR||-426|-4301
+Baião|BR||-279|-4967
+Conceição do Araguaia|BR||-826|-4927
+Barras|BR||-424|-4229
+São Benedito|BR||-405|-4086
+Altos|BR||-504|-4246
+Campo Maior|BR||-483|-4217
+Augusto Corrêa|BR||-102|-4664
+União|BR||-459|-4286
+São Bento|BR||-270|-4482
+Presidente Dutra|BR||-529|-4449
+Xinguara|BR||-710|-4994
+Salinópolis|BR||-62|-4735
+Lago da Pedra|BR||-456|-4513
+Santa Quitéria|BR||-433|-4016
+Rosário|BR||-294|-4425
+Santa Helena|BR||-223|-4530
+Guaraciaba do Norte|BR||-417|-4075
+Tuntum|BR||-526|-4465
+Amarante do Maranhão|BR||-557|-4674
+Colinas|BR||-603|-4425
+Curuçá|BR||-73|-4785
+Ipu|BR||-432|-4071
+Goianésia do Pará|BR||-384|-4910
+Esperantina|BR||-390|-4223
+Muaná|BR||-153|-4922
+Zé Doca|BR||-327|-4566
+Remanso|BR||-962|-4208
+José de Freitas|BR||-476|-4258
+Araioses|BR||-289|-4190
+São Raimundo Nonato|BR||-902|-4270
+São Mateus do Maranhão|BR||-404|-4448
+Sento Sé|BR||-975|-4189
+Canaã dos Carajás|BR||-652|-4985
+Ulianópolis|BR||-374|-4749
+Pedro II|BR||-442|-4146
+Massapê|BR||-352|-4034
+Turiaçu|BR||-166|-4537
+Oeiras|BR||-703|-4213
+Pedreiras|BR||-457|-4459
+Santa Rita|BR||-314|-4433
+Ipueiras|BR||-454|-4072
+Brejo|BR||-368|-4275
+Colinas do Tocantins|BR||-806|-4848
+Igarapé-Açu|BR||-113|-4762
+Ubajara|BR||-385|-4092
+Parnarama|BR||-568|-4309
+Curralinho|BR||-181|-4980
+São Domingos do Maranhão|BR||-558|-4439
+Mãe do Rio|BR||-205|-4755
+Matões|BR||-552|-4320
+Eldorado dos Carajás|BR||-610|-4936
+Miguel Alves|BR||-417|-4290
+Concórdia do Pará|BR||-200|-4795
+Urbano Santos|BR||-321|-4340
+Estreito|BR||-656|-4744
+Araguatins|BR||-565|-4811
+Bom Jardim|BR||-354|-4561
+Vitória do Mearim|BR||-346|-4487
+Oeiras do Pará|BR||-200|-4985
+Bela Cruz|BR||-305|-4017
+Santana do Acaraú|BR||-346|-4021
+Irituia|BR||-177|-4744
+Penalva|BR||-329|-4517
+Nova Russas|BR||-471|-4056
+Trindade|BR||-776|-4027
+São Domingos do Capim|BR||-167|-4777
+Alto Alegre do Pindaré|BR||-367|-4585
+Santo Antônio do Tauá|BR||-115|-4813
+Aurora do Pará|BR||-213|-4756
+Turilândia|BR||-222|-4531
+Cururupu|BR||-183|-4487
+Ponta de Pedras|BR||-139|-4887
+Vitorino Freire|BR||-429|-4525
+Parambu|BR||-621|-4069
+Pindaré-Mirim|BR||-361|-4534
+Tracuateua|BR||-108|-4690
+Raposa|BR||-242|-4410
+Buriti|BR||-394|-4292
+Ipubi|BR||-765|-4015
+Campo Alegre de Lourdes|BR||-952|-4301
+Luís Correia|BR||-288|-4167
+Arari|BR||-345|-4478
+Anajás|BR||-99|-4994
+Bujaru|BR||-152|-4804
+Limoeiro do Ajuru|BR||-190|-4938
+São João dos Inhamuns|BR||-600|-4028
+Timbiras|BR||-426|-4394
+Humberto de Campos|BR||-260|-4346
+Piracuruca|BR||-393|-4171
+Bom Jesus das Selvas|BR||-448|-4685
+Marapanim|BR||-72|-4770
+Cocal|BR||-347|-4156
+Monção|BR||-349|-4525
+Novo Oriente|BR||-553|-4077
+Campos Sales|BR||-707|-4038
+Icatu|BR||-278|-4407
+Mocajuba|BR||-258|-4951
+São Sebastião da Boa Vista|BR||-171|-4953
+São Bernardo|BR||-336|-4242
+Batalha|BR||-403|-4208
+Tamboril|BR||-483|-4032
+Garrafão do Norte|BR||-193|-4705
+São João dos Patos|BR||-650|-4370
+Maracanã|BR||-77|-4745
+Marco|BR||-312|-4015
+Santa Quitéria do Maranhão|BR||-350|-4256
+Guaraí|BR||-883|-4851
+Soure|BR||-72|-4852
+Arame|BR||-489|-4600
+Luzilândia|BR||-346|-4237
+Bom Jesus|BR||-907|-4436
+Anajatuba|BR||-326|-4462
+Santa Maria do Pará|BR||-135|-4758
+Lagoa Grande|BR||-900|-4027
+João Lisboa|BR||-545|-4740
+São Geraldo do Araguaia|BR||-640|-4856
+Pedro do Rosário|BR||-297|-4535
+Santa Luzia do Paruá|BR||-254|-4578
+Carutapera|BR||-121|-4602
+Forquilha|BR||-380|-4026
+Carolina|BR||-734|-4746
+Salvaterra|BR||-75|-4852
+Porto Franco|BR||-634|-4740
+Cachoeira do Arari|BR||-101|-4896
+Alto Alegre do Maranhão|BR||-421|-4445
+Independência|BR||-540|-4031
+Ibiapina|BR||-392|-4089
+Chaves|BR||-16|-4999
+Miranda do Norte|BR||-357|-4458
+Aldeias Altas|BR||-463|-4347
+São João de Pirabas|BR||-77|-4718
+Coreaú|BR||-355|-4066
+Sobradinho|BR||-947|-4080
+Governador Nunes Freire|BR||-213|-4589
+Dom Pedro|BR||-504|-4444
+Santa Luzia|BR||-764|-4722
+Tocantinópolis|BR||-633|-4742
+Morrinhos|BR||-323|-4012
+Itinga do Maranhão|BR||-445|-4753
+Trizidela do Vale|BR||-457|-4462
+Buriti Bravo|BR||-584|-4383
+São Vicente Ferrer|BR||-289|-4488
+Cantanhede|BR||-363|-4438
+Matinha|BR||-310|-4503
+Pio XII|BR||-383|-4515
+Santa Maria das Barreiras|BR||-887|-4971
+Várzea Alegre|BR||-535|-4038
+Uruçuí|BR||-723|-4456
+Maracaçumé|BR||-204|-4596
+São João do Piauí|BR||-836|-4225
+Bequimão|BR||-245|-4478
+São Domingos do Araguaia|BR||-554|-4873
+Santa Bárbara do Pará|BR||-122|-4829
+Mirador|BR||-637|-4436
+Valença do Piauí|BR||-641|-4175
+São João Batista|BR||-296|-4481
+Paulistana|BR||-814|-4115
+Floresta do Araguaia|BR||-755|-4971
+Peritoró|BR||-438|-4433
+Nova Esperança do Piriá|BR||-227|-4697
+Paulo Ramos|BR||-445|-4524
+Riachão|BR||-736|-4662
+Quiterianópolis|BR||-584|-4070
+Jijoca de Jericoacoara|BR||-290|-4045
+Hidrolândia|BR||-441|-4040
+Cândido Mendes|BR||-145|-4573
+Santa Luzia do Pará|BR||-152|-4690
+Araripe|BR||-721|-4014
+Palmeirândia|BR||-265|-4490
+Castelo do Piauí|BR||-532|-4155
+Buriti dos Lopes|BR||-318|-4187
+Cachoeira do Piriá|BR||-176|-4654
+Afrânio|BR||-852|-4100
+Canto do Buriti|BR||-811|-4294
+Jaicós|BR||-736|-4114
+Barão de Grajaú|BR||-676|-4302
+São Raimundo das Mangabeiras|BR||-702|-4548
+Pastos Bons|BR||-660|-4408
+São Benedito do Rio Preto|BR||-333|-4353
+Bacuri|BR||-173|-4514
+Morros|BR||-286|-4404
+Alcântara|BR||-240|-4442
+Governador Edison Lobão|BR||-575|-4736
+Reriutaba|BR||-414|-4058
+Esperantinópolis|BR||-488|-4488
+Paraibano|BR||-643|-4398
+São Luís Gonzaga do Maranhão|BR||-438|-4467
+Croatá|BR||-442|-4090
+São Caetano de Odivelas|BR||-75|-4802
+Varjota|BR||-419|-4048
+Regeneração|BR||-623|-4269
+Ourém|BR||-155|-4711
+Miracema do Tocantins|BR||-957|-4839
+Olho d’Água das Cunhãs|BR||-414|-4512
+Dormentes|BR||-845|-4077
+Curionópolis|BR||-610|-4960
+Formosa da Serra Negra|BR||-644|-4619
+Pirapemas|BR||-373|-4422
+Estreito|BR||-578|-4325
+São Miguel do Tapuio|BR||-550|-4132
+Cariré|BR||-395|-4047
+Pio IX|BR||-684|-4061
+Água Branca|BR||-589|-4264
+Apicum-Açu|BR||-153|-4508
+Presidente Sarney|BR||-259|-4536
+Matões do Norte|BR||-363|-4456
+Amarante|BR||-624|-4285
+Passagem Franca|BR||-618|-4378
+Carnaubal|BR||-417|-4094
+Poção de Pedras|BR||-475|-4494
+Monsenhor Tabosa|BR||-479|-4006
+Bom Jesus do Tocantins|BR||-505|-4861
+Ipueiras|BR||-703|-4045
+Mata Roma|BR||-362|-4311
+Jenipapo dos Vieiras|BR||-537|-4564
+Sítio Novo|BR||-588|-4670
+Paulino Neves|BR||-272|-4253
+Bacabeira|BR||-297|-4432
+São João do Soter|BR||-511|-4381
+Nova Ipixuna|BR||-492|-4908
+Salitre|BR||-728|-4046
+Bonito|BR||-136|-4731
+Maranhãozinho|BR||-224|-4586
+Cajari|BR||-332|-4501
+Demerval Lobão|BR||-536|-4268
+Centro Novo do Maranhão|BR||-214|-4612
+Fortuna|BR||-573|-4416
+Nova Timboteua|BR||-121|-4739
+Primeira Cruz|BR||-251|-4344
+Inhuma|BR||-667|-4171
+Meruoca|BR||-354|-4046

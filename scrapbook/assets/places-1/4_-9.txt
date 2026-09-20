@@ -1,0 +1,485 @@
+Chicago|US|IL|4185|-8765
+Detroit|US|MI|4233|-8305
+Milwaukee|US|WI|4304|-8791
+London|CA||4298|-8123
+Cleveland|US|OH|4150|-8170
+Madison|US|WI|4307|-8940
+Toledo|US|OH|4166|-8356
+Fort Wayne|US|IN|4113|-8513
+Kitchener|CA||4343|-8051
+Windsor|CA||4230|-8302
+Aurora|US|IL|4176|-8832
+Akron|US|OH|4108|-8152
+Grand Rapids|US|MI|4296|-8567
+Greater Sudbury|CA||4649|-8099
+Rockford|US|IL|4227|-8909
+Joliet|US|IL|4153|-8808
+Naperville|US|IL|4179|-8815
+Guelph|CA||4355|-8026
+Warren|US|MI|4249|-8301
+Sterling Heights|US|MI|4258|-8303
+Cambridge|CA||4336|-8031
+Ann Arbor|US|MI|4228|-8374
+Peoria|US|IL|4069|-8959
+North Peoria|US|IL|4072|-8958
+Lansing|US|MI|4273|-8456
+Elgin|US|IL|4204|-8828
+Thunder Bay|CA||4838|-8925
+Green Bay|US|WI|4452|-8802
+Waterloo|CA||4347|-8052
+Brantford|CA||4313|-8027
+South Bend|US|IN|4168|-8625
+Kenosha|US|WI|4258|-8782
+Clinton Township|US|MI|4259|-8292
+Erie|US|PA|4213|-8009
+Flint|US|MI|4301|-8369
+Dearborn|US|MI|4232|-8318
+Livonia|US|MI|4237|-8335
+Waukegan|US|IL|4236|-8784
+Canton|US|MI|4231|-8348
+West Town|US|IL|4189|-8767
+Champaign|US|IL|4012|-8824
+Near North Side|US|IL|4190|-8763
+Cicero|US|IL|4185|-8775
+Troy|US|MI|4261|-8315
+Westland|US|MI|4232|-8340
+Farmington Hills|US|MI|4249|-8338
+Parma|US|OH|4140|-8172
+Belmont Cragin|US|IL|4193|-8777
+Bloomington|US|IL|4048|-8899
+Racine|US|WI|4273|-8778
+Hammond|US|IN|4158|-8750
+Gary|US|IN|4159|-8735
+Kalamazoo|US|MI|4229|-8559
+Arlington Heights|US|IL|4209|-8798
+Waterford|US|MI|4269|-8341
+Evanston|US|IL|4204|-8769
+Wyoming|US|MI|4291|-8571
+Schaumburg|US|IL|4203|-8808
+Bolingbrook|US|IL|4170|-8807
+Appleton|US|WI|4426|-8842
+Shelby|US|MI|4267|-8303
+South Lawndale|US|IL|4184|-8771
+Logan Square|US|IL|4192|-8770
+Rochester Hills|US|MI|4266|-8315
+Southfield|US|MI|4247|-8322
+West Ridge|US|IL|4200|-8769
+Sarnia|CA||4298|-8240
+Sault Ste. Marie|CA||4652|-8433
+Waukesha|US|WI|4301|-8823
+Canton|US|OH|4080|-8138
+Lafayette|US|IN|4042|-8688
+Muncie|US|IN|4019|-8539
+Palatine|US|IL|4211|-8803
+Lincoln Park|US|IL|4192|-8765
+Oshkosh|US|WI|4402|-8854
+Portage Park|US|IL|4196|-8777
+Skokie|US|IL|4203|-8773
+West Bloomfield Township|US|MI|4257|-8338
+Youngstown|US|OH|4110|-8065
+Janesville|US|WI|4268|-8902
+Lorain|US|OH|4145|-8218
+Taylor|US|MI|4224|-8327
+Norfolk County|CA||4283|-8038
+West Allis|US|WI|4302|-8801
+Pontiac|US|MI|4264|-8329
+Saint Clair Shores|US|MI|4250|-8289
+Noblesville|US|IN|4005|-8601
+Royal Oak|US|MI|4249|-8314
+Novi|US|MI|4248|-8348
+Des Plaines|US|IL|4203|-8788
+Orland Park|US|IL|4163|-8785
+Kokomo|US|IN|4049|-8613
+Tinley Park|US|IL|4157|-8778
+Oak Lawn|US|IL|4171|-8776
+Irving Park|US|IL|4195|-8774
+Berwyn|US|IL|4185|-8779
+Dearborn Heights|US|MI|4234|-8327
+Chicago Lawn|US|IL|4178|-8770
+Anderson|US|IN|4011|-8568
+Uptown|US|IL|4197|-8765
+Edgewater|US|IL|4198|-8766
+Mount Prospect|US|IL|4207|-8794
+Rogers Park|US|IL|4201|-8767
+Normal|US|IL|4051|-8899
+Elyria|US|OH|4137|-8211
+Wheaton|US|IL|4187|-8811
+Elkhart|US|IN|4168|-8598
+Oak Park|US|IL|4189|-8778
+Hoffman Estates|US|IL|4204|-8808
+Albany Park|US|IL|4197|-8772
+Battle Creek|US|MI|4232|-8518
+South Shore|US|IL|4176|-8758
+Kentwood|US|MI|4287|-8564
+Lakewood|US|OH|4148|-8180
+Redford|US|MI|4238|-8330
+Downers Grove|US|IL|4181|-8801
+Saginaw|US|MI|4342|-8395
+Cuyahoga Falls|US|OH|4113|-8148
+Sheboygan|US|WI|4375|-8771
+East Lansing|US|MI|4274|-8448
+Mishawaka|US|IN|4166|-8616
+Portage|US|MI|4220|-8558
+Newark|US|OH|4006|-8240
+Euclid|US|OH|4159|-8153
+Roseville|US|MI|4250|-8294
+Wauwatosa|US|WI|4305|-8801
+Glenview|US|IL|4207|-8779
+Mentor|US|OH|4167|-8134
+Mansfield|US|OH|4076|-8252
+Elmhurst|US|IL|4190|-8794
+Auburn Gresham|US|IL|4174|-8765
+West Lafayette|US|IN|4043|-8691
+Dublin|US|OH|4010|-8311
+Cleveland Heights|US|OH|4152|-8156
+Strongsville|US|OH|4131|-8184
+Brighton Park|US|IL|4182|-8770
+Lombard|US|IL|4188|-8801
+Chatham|CA||4241|-8218
+DeKalb|US|IL|4193|-8875
+Fond du Lac|US|WI|4378|-8844
+Ashburn|US|IL|4175|-8771
+Plainfield|US|IL|4163|-8820
+Urbana|US|IL|4011|-8821
+Midland|US|MI|4362|-8425
+Timmins|CA||4847|-8133
+Bartlett|US|IL|4200|-8819
+Buffalo Grove|US|IL|4215|-8796
+Gage Park|US|IL|4180|-8770
+Findlay|US|OH|4104|-8365
+New City|US|IL|4181|-8766
+Lincoln Square|US|IL|4198|-8769
+Streamwood|US|IL|4203|-8818
+Crystal Lake|US|IL|4224|-8832
+Woodstock|CA||4313|-8075
+Carol Stream|US|IL|4191|-8813
+Warren|US|OH|4124|-8082
+New Berlin|US|WI|4298|-8811
+Avondale|US|IL|4194|-8771
+Romeoville|US|IL|4165|-8809
+Wausau|US|WI|4496|-8963
+St. Thomas|CA||4277|-8118
+Carpentersville|US|IL|4212|-8826
+Muskegon|US|MI|4323|-8625
+Westerville|US|OH|4013|-8293
+Hanover Park|US|IL|4200|-8815
+Wheeling|US|IL|4214|-8793
+Brookfield|US|WI|4306|-8811
+Delaware|US|OH|4030|-8307
+Lima|US|OH|4074|-8411
+Park Ridge|US|IL|4201|-8784
+Greenfield|US|WI|4296|-8801
+Addison|US|IL|4193|-8799
+Calumet City|US|IL|4162|-8753
+Lincoln Park|US|MI|4225|-8318
+Beloit|US|WI|4251|-8903
+Portage|US|IN|4158|-8718
+Westfield|US|IN|4004|-8613
+Marion|US|OH|4059|-8313
+Franklin|US|WI|4289|-8804
+Menomonee Falls|US|WI|4318|-8812
+Leamington|CA||4205|-8260
+Boardman|US|OH|4102|-8066
+North Lawndale|US|IL|4186|-8772
+Oak Creek|US|WI|4289|-8786
+Merrillville|US|IN|4148|-8733
+Stow|US|OH|4116|-8144
+Brunswick|US|OH|4124|-8184
+North Center|US|IL|4195|-8768
+Gahanna|US|OH|4002|-8288
+Brant|CA||4313|-8035
+Lower West Side|US|IL|4185|-8767
+Collinwood|US|OH|4156|-8157
+Glendale Heights|US|IL|4191|-8806
+Oswego|US|IL|4168|-8835
+Bay City|US|MI|4359|-8389
+Bridgeport|US|IL|4184|-8765
+Holland|US|MI|4279|-8611
+Northbrook|US|IL|4213|-8783
+Hilliard|US|OH|4003|-8316
+Chicago Loop|US|IL|4188|-8763
+Woodridge|US|IL|4175|-8805
+Elk Grove Village|US|IL|4200|-8797
+Pekin|US|IL|4057|-8964
+Jackson|US|MI|4225|-8440
+Manitowoc|US|WI|4409|-8766
+Goshen|US|IN|4158|-8583
+St. Charles|US|IL|4191|-8831
+West Lawn|US|IL|4177|-8772
+Mount Lebanon|US|PA|4036|-8005
+LaSalle|CA||4224|-8306
+Eastpointe|US|MI|4247|-8296
+Valparaiso|US|IN|4147|-8706
+North Ridgeville|US|OH|4139|-8202
+Westlake|US|OH|4146|-8192
+Sun Prairie|US|WI|4318|-8921
+Greater Grand Crossing|US|IL|4176|-8761
+Massillon|US|OH|4080|-8152
+West Englewood|US|IL|4178|-8767
+Bethel Park|US|PA|4033|-8004
+Danville|US|IL|4012|-8763
+North Olmsted|US|OH|4142|-8192
+West Bend|US|WI|4343|-8818
+Mundelein|US|IL|4226|-8800
+Stratford|CA||4337|-8095
+Michigan City|US|IN|4171|-8690
+Chatham|US|IL|4174|-8761
+Bowling Green|US|OH|4137|-8365
+Gurnee|US|IL|4237|-8790
+Orangeville|CA||4392|-8010
+Algonquin|US|IL|4217|-8829
+Granger|US|IN|4175|-8611
+North Royalton|US|OH|4131|-8172
+Chicago Heights|US|IL|4151|-8764
+Madison Heights|US|MI|4249|-8311
+Niles|US|IL|4202|-8780
+Kent|US|OH|4115|-8136
+Oak Park|US|MI|4246|-8318
+Highland Park|US|IL|4218|-8780
+Austintown|US|OH|4110|-8076
+North Chicago|US|IL|4233|-8784
+Port Huron|US|MI|4297|-8242
+Southgate|US|MI|4221|-8319
+Burbank|US|IL|4173|-8778
+Marion|US|IN|4056|-8566
+Lake in the Hills|US|IL|4218|-8833
+Crown Point|US|IN|4142|-8737
+Schererville|US|IN|4148|-8745
+Burton|US|MI|4300|-8362
+East Chicago|US|IN|4164|-8745
+Hobart|US|IN|4153|-8726
+Lansing|US|IL|4156|-8754
+Glen Ellyn|US|IL|4188|-8807
+Cranberry Township|US|PA|4068|-8011
+Garfield Heights|US|OH|4142|-8161
+South Chicago|US|IL|4174|-8755
+Oak Forest|US|IL|4160|-8774
+Fitchburg|US|WI|4296|-8947
+Round Lake Beach|US|IL|4237|-8809
+Wheeling|US|WV|4006|-8072
+Shaker Heights|US|OH|4147|-8154
+West Chicago|US|IL|4188|-8820
+Allen Park|US|MI|4226|-8321
+Wilmette|US|IL|4207|-8772
+Garden City|US|MI|4233|-8333
+Hyde Park|US|IL|4179|-8759
+Wooster|US|OH|4081|-8194
+Kankakee|US|IL|4112|-8786
+McHenry|US|IL|4233|-8827
+Stevens Point|US|WI|4452|-8957
+Batavia|US|IL|4185|-8831
+Medina|US|OH|4114|-8186
+Vernon Hills|US|IL|4222|-8798
+Mount Pleasant|US|WI|4270|-8786
+Barberton|US|OH|4101|-8161
+Englewood|US|IL|4178|-8765
+Mount Pleasant|US|MI|4360|-8477
+Huntley|US|IL|4217|-8843
+Green|US|OH|4095|-8148
+Forest Hills|US|MI|4296|-8549
+New Lenox|US|IL|4151|-8797
+Neenah|US|WI|4419|-8846
+Troy|US|OH|4004|-8420
+Melrose Park|US|IL|4190|-8786
+Sandusky|US|OH|4145|-8271
+Harvey|US|IL|4161|-8765
+Woodstock|US|IL|4231|-8845
+Lockport|US|IL|4159|-8806
+Wyandotte|US|MI|4221|-8315
+Belvidere|US|IL|4226|-8884
+Saginaw Township North|US|MI|4346|-8401
+Westmont|US|IL|4180|-8798
+Elmwood Park|US|IL|4192|-8781
+Muskego|US|WI|4291|-8814
+De Pere|US|WI|4445|-8806
+Caledonia|US|WI|4281|-8792
+Inkster|US|MI|4229|-8331
+Walker|US|MI|4300|-8577
+Freeport|US|IL|4230|-8962
+Homer Glen|US|IL|4160|-8794
+Norton Shores|US|MI|4317|-8626
+Rolling Meadows|US|IL|4208|-8801
+Woodlawn|US|IL|4178|-8760
+Zion|US|IL|4245|-8783
+Maywood|US|IL|4188|-8784
+Holt|US|MI|4264|-8452
+Waverly|US|MI|4274|-8462
+Strathroy|CA||4296|-8162
+Watertown|US|WI|4319|-8873
+Blue Island|US|IL|4166|-8768
+Glenville|US|OH|4153|-8162
+Loves Park|US|IL|4232|-8906
+Avon Lake|US|OH|4151|-8203
+Morton Grove|US|IL|4204|-8778
+Romulus|US|MI|4222|-8340
+Tecumseh|CA||4232|-8288
+Dolton|US|IL|4164|-8761
+Mequon|US|WI|4322|-8803
+East Peoria|US|IL|4067|-8958
+Solon|US|OH|4139|-8144
+Roselle|US|IL|4198|-8808
+Munster|US|IN|4156|-8751
+Lisle|US|IL|4180|-8807
+Highland|US|IN|4155|-8745
+Machesney Park|US|IL|4235|-8904
+Morgan Park|US|IL|4169|-8767
+Marysville|US|OH|4024|-8337
+Auburn Hills|US|MI|4269|-8323
+Maple Heights|US|OH|4142|-8157
+Willoughby|US|OH|4164|-8141
+Wasco|US|IL|4194|-8840
+Avon|US|OH|4145|-8204
+Hudson|US|OH|4124|-8144
+Near South Side|US|IL|4186|-8762
+New Castle|US|PA|4100|-8035
+Grand Boulevard|US|IL|4181|-8762
+South Elgin|US|IL|4199|-8829
+Darien|US|IL|4175|-8797
+Bloomingdale|US|IL|4196|-8808
+Kingsville|CA||4210|-8273
+Alliance|US|OH|4092|-8111
+South Holland|US|IL|4160|-8761
+Hamtramck|US|MI|4239|-8305
+Villa Park|US|IL|4189|-8799
+Park Forest|US|IL|4149|-8767
+La Porte|US|IN|4161|-8671
+Wadsworth|US|OH|4103|-8173
+Geneva|US|IL|4189|-8831
+South Euclid|US|OH|4152|-8152
+Collingwood|CA||4448|-8022
+Perrysburg|US|OH|4156|-8363
+Okemos|US|MI|4272|-8443
+Owen Sound|CA||4457|-8094
+Marquette|US|MI|4654|-8740
+South Milwaukee|US|WI|4291|-8786
+Crest Hill|US|IL|4155|-8810
+Grayslake|US|IL|4234|-8804
+Sidney|US|OH|4028|-8416
+Birmingham|US|MI|4255|-8321
+Piqua|US|OH|4014|-8424
+Fergus|CA||4371|-8038
+Pleasant Prairie|US|WI|4255|-8793
+Adrian|US|MI|4190|-8404
+Wasaga Beach|CA||4452|-8002
+East Garfield Park|US|IL|4188|-8770
+Libertyville|US|IL|4228|-8795
+Rocky River|US|OH|4148|-8184
+Douglas|US|IL|4183|-8762
+Ashland|US|OH|4087|-8232
+Parma Heights|US|OH|4139|-8176
+Ferndale|US|MI|4246|-8313
+Oregon|US|OH|4164|-8349
+Monroe|US|MI|4192|-8340
+Lake Zurich|US|IL|4220|-8809
+Germantown|US|WI|4323|-8811
+Ypsilanti|US|MI|4224|-8361
+Mokena|US|IL|4153|-8789
+Evergreen Park|US|IL|4172|-8770
+Painesville|US|OH|4172|-8125
+Montgomery|US|IL|4173|-8835
+Weirton Heights|US|WV|4041|-8054
+Lake Forest|US|IL|4226|-8784
+Homewood|US|IL|4156|-8767
+Alsip|US|IL|4167|-8774
+Bellwood|US|IL|4188|-8788
+Howard|US|WI|4454|-8809
+Broadview Heights|US|OH|4131|-8169
+Upper Saint Clair|US|PA|4034|-8008
+Haslett|US|MI|4275|-8440
+West Elsdon|US|IL|4179|-8772
+Matteson|US|IL|4150|-8771
+Weirton|US|WV|4042|-8059
+Deerfield|US|IL|4217|-8784
+Middleton|US|WI|4310|-8950
+Sylvania|US|OH|4172|-8371
+Brookfield|US|IL|4182|-8785
+Berea|US|OH|4137|-8185
+Twinsburg|US|OH|4131|-8144
+Mayfield Heights|US|OH|4152|-8146
+Brook Park|US|OH|4140|-8180
+Mount Greenwood|US|IL|4170|-8771
+Frankfort|US|IL|4150|-8785
+Niles|US|OH|4118|-8077
+Tillsonburg|CA||4286|-8073
+Bourbonnais|US|IL|4115|-8789
+Goodings Grove|US|IL|4163|-8793
+Round Lake|US|IL|4235|-8809
+Yorkville|US|IL|4164|-8845
+Hespeler|CA||4343|-8032
+Bensenville|US|IL|4196|-8794
+Trenton|US|MI|4214|-8318
+Ashtabula|US|OH|4187|-8079
+Cudahy|US|WI|4296|-8786
+Ottawa|US|IL|4135|-8884
+Franklin Park|US|IL|4194|-8787
+Eastlake|US|OH|4165|-8145
+Steubenville|US|OH|4037|-8063
+Clark-Fulton|US|OH|4146|-8171
+Cary|US|IL|4221|-8824
+Wisconsin Rapids|US|WI|4438|-8982
+Logansport|US|IN|4075|-8636
+West Garfield Park|US|IL|4188|-8773
+Sycamore|US|IL|4199|-8869
+Tiffin|US|OH|4111|-8318
+Hinsdale|US|IL|4180|-8794
+Kenwood|US|IL|4181|-8760
+Allendale|US|MI|4297|-8595
+Fiddlesticks|CA||4339|-8029
+Menasha|US|WI|4420|-8845
+Palos Hills|US|IL|4170|-8782
+Tallmadge|US|OH|4110|-8144
+New Philadelphia|US|OH|4049|-8145
+North Aurora|US|IL|4181|-8833
+Valley East|CA||4664|-8100
+North Canton|US|OH|4088|-8140
+Detroit-Shoreway|US|OH|4148|-8173
+East Cleveland|US|OH|4153|-8158
+Ashwaubenon|US|WI|4448|-8807
+Huntington|US|IN|4088|-8550
+Wayne|US|MI|4228|-8339
+Norwalk|US|OH|4124|-8262
+Country Club Hills|US|IL|4157|-8772
+Lemont|US|IL|4167|-8800
+Defiance|US|OH|4128|-8436
+Shorewood|US|IL|4152|-8820
+Mount Vernon|US|OH|4039|-8249
+Westchester|US|IL|4185|-8788
+Washington|US|IL|4070|-8941
+Hazel Park|US|MI|4246|-8310
+Beaver Dam|US|WI|4346|-8884
+Jenison|US|MI|4291|-8579
+Bridgeview|US|IL|4175|-8780
+Fairview Park|US|OH|4144|-8186
+Mount Clemens|US|MI|4260|-8288
+Prospect Heights|US|IL|4210|-8794
+Griffith|US|IN|4153|-8742
+Oconomowoc|US|WI|4311|-8850
+Hough|US|OH|4151|-8164
+Streetsboro|US|OH|4124|-8135
+Morton|US|IL|4061|-8946
+Fremont|US|OH|4135|-8312
+Frankfort|US|IN|4028|-8651
+Dyer|US|IN|4149|-8752
+Hermitage|US|PA|4123|-8045
+Crawfordsville|US|IN|4004|-8687
+Grandville|US|MI|4291|-8576
+Lebanon|US|IN|4005|-8647
+Kaukauna|US|WI|4428|-8827
+Aurora|US|OH|4132|-8135
+Grosse Pointe Woods|US|MI|4244|-8291
+Avon Center|US|OH|4146|-8202
+La Grange|US|IL|4181|-8787
+New Haven|US|IN|4107|-8501
+Middleburg Heights|US|OH|4136|-8181
+Bradley|US|IL|4114|-8786
+McKinley Park|US|IL|4183|-8767
+Forest Heights|CA||4342|-8052
+Bay Village|US|OH|4148|-8192
+Christopher-Champlain|CA||4335|-8030
+Dixon|US|IL|4184|-8948
+Bellevue|US|WI|4444|-8792
+Berkley|US|MI|4250|-8318
+Vanier|CA||4343|-8045
+Traverse City|US|MI|4476|-8562
+Weston|US|WI|4489|-8955
+Sterling|US|IL|4179|-8970

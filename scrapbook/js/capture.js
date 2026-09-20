@@ -26,6 +26,7 @@ import { forDisplay, previewUrl } from './downscale.js';
 import { estimateSeconds } from './video-encode.js';
 import { prepareForUpload } from './prepare-upload.js';
 import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
+import { exifLocation, distinctPlaces, agreedPlace, placeLabel } from './media-place.js';
 import { openPhotoEditor } from './photo-editor.js';
 import { dateLabel } from './age.js';
 
@@ -209,6 +210,7 @@ async function readItem(entry) {
       // needs something to play and this is the only thing there is.
       videoFile: entry.video,
       takenOn: await takenOn(entry.video),
+      takenAt: null,   // a clip's coordinates are in a box this does not read
       duration,
       trimStart: 0,
       // Longer than the cap is accepted and opened at the first stretch of it, so the
@@ -260,6 +262,7 @@ async function readItem(entry) {
     // has had its clip split off by now, and the halves are new Blobs with no name and no
     // modification time of their own.
     takenOn: await takenOn(entry.still),
+    takenAt: await takenAt(entry.still),
   };
   if (!video) return item;
 
@@ -308,6 +311,30 @@ function localDay(ms) {
  *
  * @returns {Promise<string|null>} YYYY-MM-DD
  */
+/**
+ * Where a still was taken, as the name of a town.
+ *
+ * Only for photographs: a clip's coordinates live in a box this does not read, and a video
+ * is rarely the only thing in a post anyway.
+ *
+ * The place list is imported HERE rather than at the top of the module, on purpose. It is
+ * a third of a megabyte of towns cut into tiles, and a family looking at their timeline
+ * should never fetch any of it — this line is the only thing that asks for it, and only
+ * when a photograph actually carries coordinates.
+ */
+async function takenAt(file) {
+  if (!file || (file.type || '').startsWith('video/')) return null;
+  try {
+    const head = new Uint8Array(await file.slice(0, 256 * 1024).arrayBuffer());
+    const where = exifLocation(head);
+    if (!where) return null;
+    const { placeFor } = await import('./places.js');
+    return placeFor(where.lat, where.lon);
+  } catch {
+    return null;   // unreadable, or the list could not be fetched: simply unknown
+  }
+}
+
 async function takenOn(file) {
   if (!file) return null;
   const isVideo = (file.type || '').startsWith('video/');
@@ -387,6 +414,11 @@ export function initCapture({ author, canPost = true }, handlers) {
   const date = document.getElementById('composeDate');
   const dateNote = document.getElementById('composeDateNote');
   const clipNote = document.getElementById('composeClipNote');
+  const location = document.getElementById('composeLocation');
+  const locationNote = document.getElementById('composeLocationNote');
+  const locationPicks = document.getElementById('composeLocationPicks');
+  // A place typed or tapped by a parent is final, exactly as a date is.
+  let placeChosenByHand = false;
   // Only the label, never renderThumbs: progress ticks many times a second and rebuilding
   // the strip on each would be its own stall.
   paintEncoding = () => {
@@ -508,6 +540,7 @@ export function initCapture({ author, canPost = true }, handlers) {
           // last photo goes.
           applyInferredDate();
           applyClipNotice();
+          applyInferredPlace();
           syncSaveState();
         });
 
@@ -594,6 +627,47 @@ export function initCapture({ author, canPost = true }, handlers) {
     const notices = mediaNotices(pending);
     clipNote.textContent = notices.join(' ');
     clipNote.hidden = notices.length === 0;
+  }
+
+  /**
+   * Fill in where the photographs say this happened.
+   *
+   * The same bargain as the date: when the media agree, the field is filled and says so;
+   * when they disagree there is no right answer, so the places are OFFERED as chips and
+   * the field is left alone. A parent's own words always win.
+   */
+  function applyInferredPlace() {
+    if (editing) return;   // an existing post already has its place decided
+
+    const places = pending.map((p) => p.takenAt).filter(Boolean);
+    const agreed = agreedPlace(places);
+    const distinct = distinctPlaces(places);
+
+    if (!placeChosenByHand) location.value = agreed ? placeLabel(agreed) : '';
+
+    const settled = Boolean(agreed) && !placeChosenByHand;
+    locationNote.textContent = settled
+      ? 'Place taken from the photos you added — change it if it\u2019s wrong.'
+      : '';
+    locationNote.hidden = !settled;
+
+    // Offered only when they disagree; a chip repeating what the field already says would
+    // invite a pointless tap.
+    const offer = distinct.length > 1 ? distinct : [];
+    locationPicks.replaceChildren(...offer.map((place) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'date-pick';
+      chip.textContent = placeLabel(place);
+      chip.addEventListener('click', () => {
+        location.value = placeLabel(place);
+        placeChosenByHand = true;
+        locationNote.hidden = true;
+        [...locationPicks.children].forEach((n) => n.classList.toggle('is-on', n === chip));
+      });
+      return chip;
+    }));
+    locationPicks.hidden = offer.length === 0;
   }
 
   function applyInferredDate() {
@@ -720,6 +794,11 @@ export function initCapture({ author, canPost = true }, handlers) {
     datePicks.hidden = true;
     dateNote.hidden = true;
     clipNote.hidden = true;
+    location.value = post?.location || '';
+    locationNote.hidden = true;
+    locationPicks.replaceChildren();
+    locationPicks.hidden = true;
+    placeChosenByHand = Boolean(post?.location);
     date.value = post?.memoryDate || todayISO();
     date.max = todayISO(); // a memory can't have happened tomorrow
     isMilestone.checked = Boolean(post?.milestone);
@@ -843,6 +922,7 @@ export function initCapture({ author, canPost = true }, handlers) {
     renderThumbs();
     applyInferredDate();
     applyClipNotice();
+    applyInferredPlace();
     syncSaveState();
 
     if (lost.length) {
@@ -860,6 +940,13 @@ export function initCapture({ author, canPost = true }, handlers) {
     dateChosenByHand = true;
     dateNote.hidden = true;
     markChosen();
+  });
+
+  location.addEventListener('input', () => {
+    placeChosenByHand = true;
+    locationNote.hidden = true;
+    // The chips stay, so a wrong tap costs one more tap — the same as the dates.
+    [...locationPicks.children].forEach((n) => n.classList.remove('is-on'));
   });
 
   isMilestone.addEventListener('change', () => {
@@ -999,6 +1086,7 @@ export function initCapture({ author, canPost = true }, handlers) {
     const draft = {
       memoryDate: date.value || todayISO(),
       caption: caption.value.trim() || null,
+      location: location.value.trim() || null,
       milestone: isMilestone.checked
         ? { isMilestone: true, title: milestoneName || 'Milestone' }
         : null,

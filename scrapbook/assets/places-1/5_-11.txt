@@ -1,0 +1,16 @@
+Saskatoon|CA||5213|-10667
+Regina|CA||5045|-10462
+Nutana Sector|CA||5210|-10664
+Confederation|CA||5214|-10670
+University Heights|CA||5214|-10658
+Lakewood|CA||5211|-10659
+Core Neighbourhoods|CA||5213|-10667
+Prince Albert|CA||5320|-10577
+Lawson|CA||5216|-10664
+Moose Jaw|CA||5040|-10553
+Arcola East|CA||5043|-10454
+North Battleford|CA||5278|-10830
+Dewdney East|CA||5045|-10455
+Swift Current|CA||5028|-10780
+Stonebridge|CA||5208|-10662
+Yorkton|CA||5122|-10247

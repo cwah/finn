@@ -1,0 +1,75 @@
+Ciudad Juárez|MX||3172|-10646
+Denver|US|CO|3974|-10498
+El Paso|US|TX|3176|-10649
+Albuquerque|US|NM|3508|-10665
+Colorado Springs|US|CO|3883|-10482
+Aurora|US|CO|3973|-10483
+Lubbock|US|TX|3358|-10186
+Amarillo|US|TX|3522|-10183
+Lakewood|US|CO|3970|-10508
+Thornton|US|CO|3987|-10497
+Midland|US|TX|3200|-10208
+Westminster|US|CO|3984|-10504
+Arvada|US|CO|3980|-10509
+Odessa|US|TX|3185|-10237
+Centennial|US|CO|3958|-10488
+Pueblo|US|CO|3825|-10461
+Las Cruces|US|NM|3231|-10678
+San Angelo|US|TX|3146|-10044
+Highlands Ranch|US|CO|3955|-10497
+Rio Rancho|US|NM|3523|-10666
+Enchanted Hills|US|NM|3534|-10659
+Santa Fe|US|NM|3569|-10594
+Agua Prieta|MX||3132|-10954
+Broomfield|US|CO|3992|-10509
+Grand Junction|US|CO|3906|-10855
+Castle Rock|US|CO|3937|-10486
+Nuevo Casas Grandes|MX||3042|-10791
+Commerce City|US|CO|3981|-10493
+Parker|US|CO|3952|-10476
+Roswell|US|NM|3339|-10452
+Littleton|US|CO|3961|-10502
+Farmington|US|NM|3673|-10822
+Southglenn|US|CO|3959|-10495
+South Valley|US|NM|3501|-10668
+Clovis|US|NM|3440|-10321
+Northglenn|US|CO|3989|-10499
+Hobbs|US|NM|3270|-10314
+Brighton|US|CO|3999|-10482
+Dakota Ridge|US|CO|3962|-10514
+Socorro|US|TX|3165|-10630
+Englewood|US|CO|3965|-10499
+Security-Widefield|US|CO|3875|-10471
+Ken Caryl|US|CO|3958|-10511
+Wheat Ridge|US|CO|3977|-10508
+Alamogordo|US|NM|3290|-10596
+Pueblo West|US|CO|3835|-10472
+Carlsbad|US|NM|3242|-10423
+Big Spring|US|TX|3225|-10148
+Socorro Mission Number 1 Colonia|US|TX|3164|-10629
+Dodge City|US|KS|3775|-10002
+Fountain|US|CO|3868|-10470
+Lafayette|US|CO|3999|-10509
+Garden City|US|KS|3797|-10087
+Castlewood|US|CO|3958|-10490
+Columbine|US|CO|3959|-10507
+Gallup|US|NM|3553|-10874
+West Odessa|US|TX|3184|-10250
+Plainview|US|TX|3418|-10171
+Liberal|US|KS|3704|-10092
+Louisville|US|CO|3998|-10513
+Golden|US|CO|3976|-10522
+Clifton|US|CO|3909|-10845
+Horizon City|US|TX|3169|-10621
+Montrose|US|CO|3848|-10788
+Sherrelwood|US|CO|3984|-10500
+Pampa|US|TX|3554|-10096
+Durango|US|CO|3728|-10788
+Douglas|US|AZ|3134|-10955
+Cañon City|US|CO|3844|-10524
+Cimarron Hills|US|CO|3886|-10470
+Sunland Park|US|NM|3180|-10658
+Greenwood Village|US|CO|3962|-10495
+Los Lunas|US|NM|3481|-10673
+Hereford|US|TX|3482|-10240
+Dumas|US|TX|3587|-10197

@@ -1,0 +1,4 @@
+Hobart|AU||-4288|14733
+Launceston|AU||-4144|14713
+Devonport|AU||-4118|14635
+Burnie|AU||-4106|14590

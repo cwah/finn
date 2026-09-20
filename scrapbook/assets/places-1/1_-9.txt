@@ -1,0 +1,172 @@
+Managua|NI||1213|-8625
+Tegucigalpa|HN||1408|-8721
+San Pedro Sula|HN||1551|-8803
+San Salvador|SV||1369|-8919
+Soyapango|SV||1371|-8914
+San Miguel|SV||1348|-8818
+Danlí|HN||1403|-8658
+La Ceiba|HN||1576|-8678
+La Ceiba|HN||1577|-8683
+Santa Ana|SV||1399|-8956
+Chetumal|MX||1852|-8830
+Mejicanos|SV||1372|-8919
+Jalapa|GT||1464|-8999
+Jutiapa|GT||1428|-8989
+León|NI||1244|-8688
+Puerto Cortez|HN||1583|-8793
+Catacamas|HN||1485|-8589
+Choloma|HN||1561|-8795
+Masaya|NI||1197|-8610
+Siguatepeque|HN||1460|-8783
+Chinandega|NI||1263|-8713
+Santa Tecla|SV||1368|-8928
+Olanchito|HN||1548|-8657
+Apopa|SV||1381|-8918
+Tocoa|HN||1568|-8600
+Chiquimula|GT||1480|-8955
+Matagalpa|NI||1293|-8592
+El Progreso|HN||1540|-8780
+Puerto Barrios|GT||1573|-8860
+Santa Cruz de Yojoa|HN||1498|-8789
+Estelí|NI||1309|-8636
+Granada|NI||1193|-8595
+Ciudad Choluteca|HN||1331|-8718
+Panzos|GT||1540|-8964
+Delgado|SV||1372|-8917
+Belize City|BZ||1750|-8820
+San Pedro de Copán|HN||1462|-8887
+Mateare|NI||1224|-8643
+Zacapa|GT||1497|-8953
+Sonsonate|SV||1372|-8972
+Comayagua|HN||1446|-8764
+San Andrés|CO||1258|-8170
+Omoa|HN||1578|-8804
+Jinotega|NI||1309|-8600
+San Marcos|SV||1366|-8918
+El Viejo|NI||1266|-8717
+Nueva Guinea|NI||1169|-8446
+Usulután|SV||1334|-8844
+El Negrito|HN||1532|-8770
+Tipitapa|NI||1220|-8610
+Juigalpa|NI||1211|-8537
+Ciudad Sandino|NI||1216|-8634
+Cojutepeque|SV||1372|-8893
+Asunción Mita|GT||1433|-8971
+Sonaguera|HN||1563|-8633
+Quimistán|HN||1535|-8841
+Alajuela|CR||1002|-8421
+La Lima|HN||1543|-8792
+Liberia|CR||1064|-8544
+Bluefields|NI||1201|-8376
+Cuscatancingo|SV||1373|-8918
+Teupasenti|HN||1422|-8670
+San Vicente|SV||1364|-8878
+Zacatecoluca|SV||1351|-8887
+San Martín|SV||1378|-8892
+Ilopango|SV||1370|-8911
+Lepaera|HN||1478|-8859
+Diriamba|NI||1186|-8624
+Macuelizo|HN||1531|-8854
+Victoria|HN||1494|-8739
+Ahuachapán|SV||1392|-8984
+Ocotal|NI||1363|-8647
+Sabá|HN||1547|-8625
+Antiguo Cuscatlán|SV||1366|-8925
+Juticalpa|HN||1466|-8622
+Puerto Cabezas|NI||1404|-8339
+Chichigalpa|NI||1257|-8703
+Villa de San Antonio|HN||1433|-8761
+Chalchuapa|SV||1399|-8968
+Villanueva|HN||1531|-8799
+San José|CR||1095|-8514
+San Benito|GT||1692|-8992
+Dulce Nombre de Culmí|HN||1510|-8553
+El Rosario|HN||1458|-8773
+Rivas|NI||1144|-8583
+San Rafael del Sur|NI||1185|-8644
+Jinotepe|NI||1185|-8620
+George Town|KY||1929|-8137
+Tela|HN||1577|-8747
+Boaco|NI||1247|-8566
+Quezaltepeque|SV||1383|-8927
+Santa Rosa de Copán|HN||1477|-8878
+Quesada|CR||1033|-8443
+Potrerillos|HN||1523|-8796
+La Unión|SV||1334|-8784
+La Iguala|HN||1462|-8847
+Nagarote|NI||1227|-8656
+Mercedes Norte|CR||1001|-8413
+Felipe Carrillo Puerto|MX||1958|-8805
+Ayutuxtepeque|SV||1374|-8920
+Arizona|HN||1563|-8732
+San Francisco de Yojoa|HN||1501|-8797
+San Luis Jilotepeque|GT||1465|-8972
+Marcovia|HN||1329|-8731
+San Luis|HN||1513|-8844
+Jalapa|NI||1392|-8612
+Sabanagrande|HN||1381|-8726
+La Paz Centro|NI||1234|-8668
+San Marcos|NI||1191|-8620
+San Antonio de Cortés|HN||1512|-8804
+Acajutla|SV||1359|-8983
+Gualaco|HN||1503|-8607
+San Lorenzo|HN||1342|-8745
+Yamaranguila|HN||1428|-8824
+Santa Rita|HN||1520|-8788
+Masatepe|NI||1191|-8614
+Aguilares|SV||1396|-8919
+San Ignacio|BZ||1716|-8907
+Iriona|HN||1597|-8509
+Esquías|HN||1474|-8737
+Langue|HN||1362|-8765
+Nandaime|NI||1176|-8605
+Esquipulas|GT||1457|-8935
+El Estor|GT||1553|-8933
+Flores|GT||1692|-8990
+Rama|NI||1216|-8422
+Sensuntepeque|SV||1388|-8863
+Cofradía|HN||1540|-8815
+Somoto|NI||1348|-8658
+Cañas|CR||1043|-8510
+Azacualpa|HN||1471|-8809
+Yorito|HN||1507|-8728
+Chalatenango|SV||1404|-8894
+Gualán|GT||1512|-8936
+Izalco|SV||1374|-8967
+Corinto|NI||1248|-8717
+Corquín|HN||1457|-8887
+Metapán|SV||1433|-8945
+San Rafael Oriente|SV||1338|-8835
+Guápiles|CR||1022|-8378
+Puerto El Triunfo|SV||1328|-8855
+Morales|GT||1547|-8884
+San José de Colinas|HN||1504|-8830
+El Paraíso|HN||1387|-8655
+Colomoncagua|HN||1395|-8828
+Siquirres|CR||1010|-8351
+Sulaco|HN||1492|-8727
+Lívingston|GT||1583|-8875
+Atima|HN||1493|-8849
+La Paz|HN||1432|-8768
+San Pedro|BZ||1792|-8797
+Poptún|GT||1633|-8942
+Morocelí|HN||1412|-8687
+Río Blanco|NI||1293|-8522
+La Libertad|SV||1349|-8932
+Cucuyagua|HN||1465|-8887
+Camoapa|NI||1238|-8551
+El Crucero|NI||1199|-8631
+San Francisco|SV||1369|-8810
+San Juan de Flores|HN||1427|-8703
+Siuna|NI||1373|-8478
+Belén Gualcho|HN||1448|-8880
+Yoro|HN||1514|-8713
+Erandique|HN||1424|-8846
+Sonzacate|SV||1373|-8971
+Somotillo|NI||1304|-8691
+West Bay|KY||1938|-8139
+Nicoya|CR||1015|-8545
+Orange Walk|BZ||1808|-8856
+Santa Bárbara|HN||1492|-8824
+Santiago de María|SV||1348|-8847
+Belmopan|BZ||1725|-8876

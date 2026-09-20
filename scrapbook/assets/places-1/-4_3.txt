@@ -1,0 +1,6 @@
+Port Shepstone|ZA||-3074|3045
+Margate|ZA||-3086|3037
+Scottburgh|ZA||-3029|3075
+eMkhomazi|ZA||-3021|3080
+eMuziwezinto|ZA||-3031|3066
+Ga-Malakhe|ZA||-3081|3033

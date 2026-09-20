@@ -1,0 +1,347 @@
+Bogotá|CO||461|-7408
+Cali|CO||343|-7652
+Medellín|CO||624|-7557
+Kennedy|CO||462|-7415
+Cúcuta|CO||791|-7250
+Soacha|CO||458|-7422
+Bucaramanga|CO||712|-7312
+Ibagué|CO||444|-7520
+Montería|CO||875|-7588
+Pereira|CO||481|-7569
+Manizales|CO||507|-7551
+Buenaventura|CO||358|-7700
+Panama City|PA||899|-7952
+Barinas|VE||862|-7023
+Bello|CO||634|-7556
+Pasto|CO||121|-7728
+Neiva|CO||293|-7528
+Villavicencio|CO||413|-7363
+San Miguelito|PA||905|-7947
+Popayán|CO||244|-7661
+Palmira|CO||353|-7630
+Armenia|CO||454|-7567
+Mérida|VE||858|-7117
+San Cristóbal|VE||777|-7224
+Alto Barinas|VE||859|-7023
+Itagüí|CO||618|-7560
+Sincelejo|CO||930|-7539
+Floridablanca|CO||706|-7309
+Valera|VE||932|-7060
+Buenaventura|CO||388|-7703
+Tuluá|CO||408|-7620
+Ibarra|EC||35|-7812
+Esmeraldas|EC||96|-7965
+Dosquebradas|CO||484|-7567
+Barrancabermeja|CO||707|-7385
+Tunja|CO||554|-7336
+Yopal|CO||534|-7239
+Florencia|CO||162|-7560
+Piedecuesta|CO||699|-7305
+Envigado|CO||618|-7559
+El Vigía|VE||861|-7166
+Facatativá|CO||481|-7435
+Táriba|VE||782|-7222
+Pitalito|CO||185|-7605
+Madrid|CO||473|-7426
+Cartago|CO||475|-7591
+Zipaquirá|CO||502|-7400
+Quibdó|CO||569|-7666
+Rionegro|CO||616|-7537
+Mosquera|CO||471|-7423
+San Carlos del Zulia|VE||900|-7193
+Chía|CO||486|-7406
+Magangué|CO||924|-7475
+Ejido|VE||855|-7124
+Funza|CO||472|-7421
+Guadalajara de Buga|CO||390|-7630
+Sogamoso|CO||571|-7293
+Girón|CO||707|-7317
+Girardot City|CO||430|-7481
+Ocaña|CO||824|-7336
+Juan Díaz|PA||904|-7944
+Santander de Quilichao|CO||301|-7648
+Aguachica|CO||831|-7362
+Cereté|CO||888|-7579
+Rubio|VE||770|-7236
+Duitama|CO||582|-7303
+Montelíbano|CO||798|-7542
+Fusagasugá|CO||434|-7436
+Tumaco|CO||179|-7879
+Tulcán|EC||81|-7772
+Apartadó|CO||788|-7663
+Chigorodó|CO||767|-7668
+Arauca|CO||708|-7076
+Sabaneta|CO||615|-7562
+Caldas|CO||609|-7564
+La Dorada|CO||545|-7466
+San Timoteo|VE||979|-7107
+Calarcá|CO||453|-7564
+Colón|PA||936|-7990
+Ipiales|CO||83|-7764
+Arraiján|PA||894|-7964
+Socopó|VE||823|-7082
+Yumbo|CO||358|-7649
+Trujillo|VE||937|-7044
+Planeta Rica|CO||841|-7559
+Las Cumbres|PA||909|-7954
+Boconó|VE||925|-7025
+Granada|CO||355|-7371
+Chinchiná|CO||498|-7560
+San Antonio del Táchira|VE||781|-7244
+Villa del Rosario|CO||783|-7247
+Guasdualito|VE||724|-7073
+Colón|VE||803|-7226
+La Fría|VE||822|-7225
+La Chorrera|PA||888|-7978
+San Marcos|CO||866|-7513
+Mene Grande|VE||985|-7093
+Pampán|VE||945|-7048
+Sahagún|CO||895|-7544
+Los Patios|CO||784|-7250
+Caucasia|CO||799|-7519
+Santa Rosa de Cabal|CO||487|-7562
+Orito|CO||67|-7687
+Marinilla|CO||617|-7534
+Ureña|VE||792|-7244
+Mocoa|CO||115|-7665
+Espinal|CO||415|-7488
+Ayapel|CO||831|-7514
+San Josecito|VE||766|-7222
+El Banco|CO||900|-7398
+Cajicá|CO||492|-7403
+Barbosa|CO||644|-7533
+Pamplona|CO||738|-7265
+San José del Guaviare|CO||257|-7264
+Ciudad Bolivia|VE||835|-7057
+Pedregal|PA||907|-7943
+Barinitas|VE||876|-7041
+El Bagre|CO||760|-7481
+Puerto Berrío|CO||649|-7440
+Cimitarra|CO||631|-7395
+Tocumen|PA||909|-7938
+Chinú|CO||911|-7540
+Turbo|CO||809|-7673
+Carmen de Viboral|CO||608|-7534
+La Estrella|CO||616|-7564
+Copacabana|CO||635|-7551
+Samaniego|CO||134|-7760
+Plato|CO||979|-7478
+Tovar|VE||833|-7175
+Palmira|VE||784|-7223
+El Carmen de Bolívar|CO||972|-7512
+Florida|CO||332|-7623
+Puerto Tejada|CO||323|-7642
+San Gil|CO||656|-7314
+Santa Bárbara|VE||781|-7118
+Chiquinquirá|CO||562|-7382
+Jamundí|CO||326|-7654
+Pradera|CO||342|-7624
+Piendamo|CO||264|-7653
+Sevilla|CO||427|-7593
+Miranda|CO||325|-7623
+Rosa Zarate|EC||33|-7947
+Montenegro|CO||457|-7575
+Guaduas|CO||507|-7459
+Pueblo Nuevo El Chivo|VE||896|-7161
+La Unión|CO||453|-7610
+Acacías|CO||399|-7376
+Lorica|CO||924|-7581
+Bosconia|CO||997|-7389
+Capacho Nuevo|VE||782|-7231
+Túquerres|CO||109|-7762
+Segovia|CO||708|-7470
+Corozal|CO||932|-7529
+Líbano|CO||492|-7506
+El Cerrito|CO||369|-7631
+Santa Rosa de Osos|CO||665|-7546
+Patía|CO||207|-7705
+Bosconia|CO||486|-7398
+La Grita|VE||813|-7198
+Payandé|CO||430|-7510
+Parque Lefevre|PA||902|-7948
+Belalcázar|CO||265|-7597
+La Ceja|CO||603|-7543
+Gigante|CO||239|-7555
+Pampanito|VE||941|-7050
+Santa Ana|VE||764|-7228
+Quimbaya|CO||462|-7576
+Villamaría|CO||505|-7551
+Sabana de Mendoza|VE||943|-7077
+Curumaní|CO||920|-7354
+Paz de Ariporo|CO||588|-7189
+San Antero|CO||937|-7576
+Caja Seca|VE||914|-7107
+San Juan Nepomuceno|CO||995|-7508
+Quinchía|CO||534|-7573
+Corinto|CO||317|-7626
+Puerto Rico|CO||191|-7516
+Sonsón|CO||571|-7531
+Chilibre|PA||915|-7962
+San Sebastián de Mariquita|CO||520|-7489
+Anserma|CO||533|-7579
+San Onofre|CO||974|-7553
+Caicedonia|CO||433|-7583
+Otavalo|EC||23|-7826
+Villanueva|CO||528|-7197
+Puerto Wilches|CO||735|-7390
+Mompós|CO||924|-7443
+San Luis de Sincé|CO||924|-7515
+San Pedro de Urabá|CO||828|-7638
+Guamo|CO||403|-7497
+Chimichagua|CO||926|-7381
+Socorro|CO||647|-7326
+Mitú|CO||126|-7024
+Puerto Asís|CO||51|-7650
+Morales|CO||275|-7663
+Cativá|PA||936|-7983
+Purificación|CO||386|-7493
+Garzón|CO||220|-7563
+Flandes|CO||429|-7482
+Tame|CO||646|-7174
+Zarzal|CO||440|-7607
+El Charco|CO||248|-7811
+Lagunillas|VE||850|-7139
+Honda|CO||521|-7474
+Sabana de Torres|CO||739|-7350
+Roldanillo|CO||441|-7615
+Santiago de Tolú|CO||952|-7558
+Puerto Boyacá|CO||598|-7459
+Circasia|CO||462|-7564
+La Tebaida|CO||445|-7579
+Chiriguaná|CO||936|-7360
+La Mesa|CO||527|-7392
+Río Abajo|PA||902|-7949
+Cayambe|EC||4|-7815
+Supía|CO||545|-7565
+Tierralta|CO||817|-7606
+Encontrados|VE||906|-7223
+El Zulia|CO||793|-7260
+Melgar|CO||420|-7464
+La Virginia|CO||490|-7588
+Anaime|CO||440|-7544
+Motatán|VE||939|-7059
+Coloncito|VE||833|-7209
+Guamal|CO||914|-7422
+Isnos|CO||194|-7624
+Casigua El Cubo|VE||875|-7252
+Barrancas|VE||877|-7011
+Nueva Loja|EC||9|-7690
+Zaragoza|CO||749|-7487
+Nechí|CO||809|-7478
+Nuevo Belén|PA||909|-7939
+Tucaní|VE||897|-7127
+Candelaria|CO||341|-7635
+Ituango|CO||717|-7576
+San Jacinto|CO||983|-7512
+Tabay|VE||863|-7108
+San Carlos|CO||880|-7570
+María la Baja|CO||998|-7530
+Ciudad Bolívar|CO||585|-7603
+Pinillos|CO||892|-7447
+Santa Fe de Antioquia|CO||656|-7583
+Sucre|CO||881|-7472
+Sibaté|CO||449|-7426
+Rivera|CO||278|-7526
+Dabeiba|CO||700|-7627
+Campoalegre|CO||268|-7532
+Natagaima|CO||362|-7509
+Yarumal|CO||696|-7542
+San Martín|CO||370|-7370
+Tauramena|CO||502|-7275
+Timbiquí|CO||277|-7767
+Planadas|CO||320|-7565
+Belén de Umbría|CO||520|-7587
+La Jagua de Ibirico|CO||956|-7333
+Santa Cruz de Mora|VE||840|-7164
+Sampués|CO||918|-7538
+Moniquirá|CO||588|-7357
+La Unión|CO||597|-7536
+Aguadas|CO||561|-7546
+Ancón|PA||896|-7955
+Retiro|CO||606|-7550
+Villeta|CO||501|-7447
+Carepa|CO||776|-7665
+Silvania|CO||440|-7439
+Michelena|VE||796|-7224
+Neira|CO||517|-7552
+Villa de San Diego de Ubaté|CO||531|-7382
+Becerril|CO||970|-7328
+Cota|CO||481|-7410
+Rovira|CO||424|-7524
+San Martín|CO||800|-7351
+Barbosa|CO||593|-7362
+Alcalde Díaz|PA||912|-7956
+Galeras|CO||916|-7505
+San Lorenzo de Esmeraldas|EC||129|-7884
+Frontino|CO||677|-7613
+Bailadores|VE||825|-7183
+Timotes|VE||898|-7074
+Tolú Viejo|CO||945|-7544
+San Juan de Urabá|CO||876|-7653
+Chaparral|CO||372|-7548
+Buesaco|CO||138|-7716
+Nueva Bolivia|VE||914|-7109
+Málaga|CO||670|-7273
+Suárez|CO||295|-7670
+Guacarí|CO||376|-7633
+Vélez|CO||601|-7367
+Padua|CO||513|-7514
+La Plata|CO||239|-7589
+El Dividive|VE||948|-7073
+Rioblanco|CO||353|-7565
+Riosucio|CO||542|-7570
+Balboa|CO||204|-7722
+Urrao|CO||632|-7613
+Fredonia|CO||593|-7567
+Villa Rica|CO||251|-7685
+Morales|CO||828|-7387
+Pizarro|CO||495|-7736
+Astrea|CO||950|-7398
+El Chorrillo|PA||895|-7955
+San Benito Abad|CO||893|-7503
+Andalucía|CO||417|-7617
+Escuque|VE||930|-7067
+Salamina|CO||541|-7549
+San Vicente|CO||629|-7533
+La Cabima|PA||912|-7953
+Tiquisio|CO||856|-7426
+El Doncello|CO||168|-7528
+Santuario|CO||614|-7526
+Fresno|CO||515|-7504
+El Carmen de Chucurí|CO||670|-7351
+Ciénaga de Oro|CO||887|-7562
+Restrepo|CO||426|-7356
+Abejorral|CO||579|-7543
+Yondó|CO||701|-7391
+Nueva Granada|CO||980|-7439
+Atuntaqui|EC||33|-7822
+Obispos|VE||861|-7010
+Puerto Triunfo|CO||587|-7464
+Lérida|CO||486|-7491
+Veracruz|PA||889|-7962
+La Azulita|VE||871|-7144
+Tadó|CO||526|-7656
+Pailitas|CO||896|-7362
+Pacho|CO||513|-7416
+Puerto López|CO||410|-7296
+San Lorenzo|CO||150|-7722
+Manzanares|CO||525|-7515
+Pupiales|CO||87|-7764
+Andes|CO||566|-7588
+Curundú|PA||897|-7955
+Puerto Santander|CO||836|-7241
+Momil|CO||924|-7567
+Cotorra|CO||904|-7579
+Tarqui|CO||211|-7582
+Concordia|CO||605|-7591
+Guadalupe|CO||202|-7576
+Salgar|CO||597|-7597
+Darien|CO||393|-7648
+Aguazul|CO||517|-7255
+Sabanitas|PA||935|-7981
+Marsella|CO||494|-7574
+Tocancipá|CO||497|-7391
+Simití|CO||796|-7394
+Betulia|CO||611|-7598
+La Unión|CO||160|-7713
+Puerto Salgar|CO||546|-7465

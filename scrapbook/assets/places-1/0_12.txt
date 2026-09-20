@@ -1,0 +1,135 @@
+Davao|PH||707|12561
+Budta|PH||720|12444
+Malingao|PH||716|12448
+Zamboanga|PH||691|12207
+Cagayan de Oro|PH||848|12465
+General Santos|PH||611|12517
+Manado|ID||148|12485
+Cotabato|PH||722|12425
+Iligan|PH||823|12424
+Iligan City|PH||825|12440
+Butuan|PH||895|12554
+Mantampay|PH||817|12422
+Marawi City|PH||800|12428
+Libertad|PH||894|12550
+Toli-Toli|ID||104|12082
+Magugpo Poblacion|PH||745|12580
+Bitung|ID||144|12513
+NIA Valencia|PH||791|12509
+Panabo|PH||731|12568
+Kabankalan|PH||998|12281
+Ternate|ID||79|12738
+Pagadian|PH||783|12344
+Gorontalo|ID||54|12306
+Koronadal|PH||650|12485
+Gingoog|PH||883|12510
+Muricay|PH||783|12348
+Bayawan|PH||936|12280
+Sultan Kudarat|PH||723|12426
+Kotamobagu|ID||74|12431
+Malita|PH||642|12561
+Manolo Fortich|PH||837|12486
+Midsayap|PH||719|12453
+Tacurong|PH||669|12468
+Dinaig|PH||717|12421
+Digos|PH||675|12536
+Quezon|PH||773|12510
+Dumaguete|PH||931|12331
+Bayugan|PH||876|12577
+Maramag|PH||776|12501
+Mati|PH||696|12622
+Isulan|PH||663|12460
+Jolo|PH||605|12100
+Bislig|PH||822|12632
+Monkayo|PH||782|12605
+Dipolog|PH||857|12333
+Ozamiz City|PH||815|12384
+Banga|PH||642|12478
+Surallah|PH||638|12475
+Prosperidad|PH||858|12590
+Alabel|PH||610|12529
+Bais|PH||959|12312
+Surigao|PH||979|12550
+Dapitan|PH||866|12342
+Maco|PH||736|12586
+Tagbilaran City|PH||966|12385
+Tanjay|PH||952|12316
+Malapatan|PH||597|12529
+Lambayong|PH||652|12504
+San Francisco|PH||854|12595
+Kidapawan|PH||701|12509
+Tupi|PH||633|12495
+Sipalay|PH||975|12240
+Don Carlos|PH||768|12500
+Oroquieta|PH||849|12380
+Buenavista|PH||898|12541
+Mariano|PH||883|12512
+Lupon|PH||690|12601
+City of Isabela|PH||670|12197
+Polomolok|PH||622|12506
+Malaybalay|PH||816|12513
+Buluan|PH||672|12480
+Bañga|PH||642|12478
+Magsaysay|PH||677|12518
+Impasugong|PH||831|12500
+Kalamansig|PH||655|12405
+Maluñgun|PH||628|12528
+Siocon|PH||771|12214
+Bunawan|PH||817|12599
+Tubod|PH||806|12379
+Norala|PH||652|12466
+Bugo|PH||851|12476
+Parang|PH||737|12427
+Hinatuan|PH||837|12633
+Samal|PH||707|12571
+Recodo|PH||695|12196
+Compostela|PH||767|12609
+Balulang|PH||845|12463
+Tagbina|PH||845|12617
+Sultan sa Barongis|PH||680|12464
+Tahuna|ID||361|12549
+Tobelo|ID||173|12801
+Tondano|ID||131|12491
+Jagna|PH||965|12437
+Kabacan|PH||711|12483
+Airmadidi|ID||143|12498
+Maluso|PH||654|12188
+General Salipada K. Pendatun|PH||683|12472
+Cabadbaran|PH||912|12554
+Pagaluñgan|PH||714|12438
+Tagoloan|PH||854|12475
+Tangub|PH||806|12375
+Tandag|PH||908|12620
+Bah-Bah|PH||861|12591
+Sibulan|PH||936|12328
+Tomohon|ID||132|12480
+Sofifi|ID||74|12756
+Santa Catalina|PH||933|12286
+Glan|PH||582|12520
+Al-Barka|PH||649|12218
+Daruba|ID||205|12829
+Asia|PH||955|12252
+Lake Sebu|PH||622|12471
+Bansalan|PH||679|12521
+Molave|PH||808|12349
+New Corella|PH||759|12582
+Manay|PH||722|12654
+Danao|PH||955|12376
+Talitay|PH||703|12470
+Ipil|PH||778|12259
+Nunungan|PH||782|12396
+San Mariano|PH||750|12600
+Veruela|PH||807|12596
+Wao|PH||768|12467
+Laguilayan|PH||667|12452
+Maganoy|PH||686|12444
+Mahayag|PH||812|12345
+Santa Maria|PH||655|12547
+Nabunturan|PH||761|12597
+Cabayangan|PH||741|12573
+Jasaan|PH||865|12476
+Loboc|PH||964|12403
+Trento|PH||805|12606
+Talacogon|PH||846|12578
+Boroon|PH||818|12418
+Dologon|PH||784|12504

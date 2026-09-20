@@ -1,0 +1,65 @@
+Ciudad Guayana|VE||835|-6264
+Maturín|VE||975|-6318
+Boa Vista|BR||282|-6067
+Ciudad Bolívar|VE||812|-6355
+San Fernando de Apure|VE||789|-6747
+El Tigre|VE||889|-6425
+Acarigua|VE||955|-6920
+Araure|VE||958|-6924
+Calabozo|VE||892|-6743
+San Juan de los Morros|VE||991|-6735
+Valle de La Pascua|VE||922|-6601
+Anaco|VE||943|-6446
+Puerto Ayacucho|VE||566|-6758
+San Carlos|VE||966|-6859
+Tinaquillo|VE||992|-6830
+Upata|VE||802|-6241
+Guanare|VE||904|-6973
+Tucupita|VE||906|-6205
+San José de Guanipa|VE||889|-6417
+Biruaca|VE||784|-6752
+El Tocuyo|VE||979|-6979
+Zaraza|VE||935|-6532
+Cantaura|VE||931|-6436
+Altagracia de Orituco|VE||986|-6638
+Caicara del Orinoco|VE||764|-6617
+Punta de Mata|VE||969|-6361
+Villa Bruzual|VE||933|-6912
+Ciudad Piar|VE||745|-6332
+Quíbor|VE||993|-6962
+Achaguas|VE||778|-6822
+Píritu|VE||937|-6921
+Tucupido|VE||927|-6577
+Pariaguán|VE||884|-6471
+Sabaneta|VE||875|-6993
+Tinaco|VE||970|-6843
+Tumeremo|VE||730|-6150
+Guanarito|VE||870|-6921
+Temblador|VE||901|-6264
+Sanare|VE||975|-6965
+Aragua de Barcelona|VE||946|-6483
+Ospino|VE||930|-6945
+Rorainópolis|BR||95|-6042
+El Sombrero|VE||939|-6706
+Santa Elena de Uairén|VE||460|-6111
+Soledad|VE||816|-6357
+Guasipati|VE||748|-6190
+Elorza|VE||706|-6950
+Cumaribo|CO||445|-6980
+Caicara|VE||982|-6361
+Clarines|VE||994|-6517
+Alto Alegre|BR||290|-6150
+Caracaraí|BR||182|-6113
+Puerto Carreño|CO||619|-6748
+Camaguán|VE||811|-6761
+Las Vegas|VE||954|-6863
+Barrancas|VE||870|-6220
+Pacaraima|BR||443|-6115
+Cantá|BR||261|-6060
+La Paragua|VE||683|-6333
+El Pao|VE||964|-6813
+Mucajaí|BR||244|-6091
+Boconoito|VE||885|-6998
+Chaguaramas|VE||934|-6625
+San Rafael de Onoto|VE||968|-6897
+El Dorado|VE||672|-6164

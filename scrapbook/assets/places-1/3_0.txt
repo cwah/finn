@@ -1,0 +1,315 @@
+Algiers|DZ||3673|309
+Constantine|DZ||3636|661
+Palma|ES||3957|265
+Annaba|DZ||3690|777
+Blida|DZ||3647|283
+Batna|DZ||3556|617
+Bab Ezzouar|DZ||3673|318
+Djelfa|DZ||3467|326
+Sétif|DZ||3619|541
+Biskra|DZ||3485|573
+Tébessa|DZ||3540|812
+El Oued|DZ||3336|686
+Skikda|DZ||3688|691
+Tiaret|DZ||3537|132
+Chlef|DZ||3617|133
+Béjaïa|DZ||3676|508
+Ouargla|DZ||3195|533
+Mostaganem|DZ||3593|9
+Bordj Bou Arreridj|DZ||3607|476
+El Achir|DZ||3606|463
+Souk Ahras|DZ||3629|795
+Cagliari|IT||3923|912
+Médéa|DZ||3626|275
+El Eulma|DZ||3615|569
+Touggourt|DZ|TG|3311|607
+Ghardaïa|DZ||3249|367
+Saïda|DZ||3483|15
+Bizerte|TN||3727|987
+Laghouat|DZ||3380|287
+M'Sila|DZ||3571|454
+Jijel|DZ||3682|576
+Relizane|DZ||3574|56
+Bordj el Kiffan|DZ||3675|319
+Guelma|DZ||3646|743
+Rouiba|DZ||3674|328
+Aïn Beïda|DZ||3580|739
+Khenchela|DZ||3544|714
+Bou Saâda|DZ||3521|417
+Mascara|DZ||3540|14
+Baraki|DZ||3667|310
+Tizi Ouzou|DZ||3671|405
+Barika|DZ||3539|537
+Aïn Oussera|DZ||3545|291
+Messaad|DZ||3415|350
+Gafsa|TN||3442|878
+Aflou|DZ||3411|210
+Beni Mered|DZ||3652|286
+El Khroub|DZ||3626|669
+El Bayadh|DZ||3368|102
+Kasserine|TN||3517|884
+Hamma Bouziane|DZ||3641|660
+Rouissat|DZ||3192|535
+Khemis Miliana|DZ||3626|222
+Hassi Bahbah|DZ||3507|303
+Feriana|TN||3495|857
+Birkhadem|DZ||3671|305
+Sougueur|DZ||3519|150
+Bir el Ater|DZ||3474|806
+Bouïra|DZ||3637|390
+Oum el Bouaghi|DZ||3588|711
+Sidi Aïssa|DZ||3589|377
+Quartu Sant'Elena|IT||3923|925
+Besbes|DZ||3670|785
+Cheria|DZ||3527|775
+Tissemsilt|DZ||3561|181
+Aïn M’Lila|DZ||3604|657
+Ali Mendjeli|DZ||3625|657
+Mila|DZ||3645|626
+Mohammadia|DZ||3559|7
+Kolea|DZ||3664|277
+Béja|TN||3673|918
+District of Taher|DZ||3677|590
+Ech Chettia|DZ||3620|126
+Ksar el Boukhari|DZ||3589|275
+Menzel Bourguiba|TN||3715|979
+Guerara|DZ||3279|450
+Ouled Djellal|DZ|OD|3443|506
+Larbaâ|DZ||3656|315
+El Menia|DZ|EM|3058|288
+Boufarik|DZ||3657|291
+Boudouaou|DZ||3673|341
+Berrouaghia|DZ||3614|291
+Aïn Touta|DZ||3538|590
+Oued Rhiou|DZ||3596|92
+Aïn Defla|DZ||3626|197
+Drean|DZ||3668|775
+Reghaïa|DZ||3674|334
+Boghni|DZ||3654|395
+Chelghoum el Aïd|DZ||3616|617
+El Kef|TN||3617|870
+Bordj el Bahri|DZ||3679|325
+Calvià|ES||3957|251
+Ksar Chellala|DZ||3521|232
+Jendouba|TN||3650|878
+Aïn Oulmene|DZ||3592|530
+Tolga|DZ||3472|538
+Ibiza|ES||3891|143
+Frenda|DZ||3507|105
+Aïn Fakroun|DZ||3597|687
+Guemar|DZ||3349|680
+Merouana|DZ||3563|591
+Sidi Bouzid|TN||3504|948
+Ouenza|DZ||3595|813
+El Hamma|TN||3389|980
+Khemis el Khechna|DZ||3665|333
+Douéra|DZ||3667|294
+El Milia|DZ||3675|627
+Sedrata|DZ||3613|753
+Sidi Amar|DZ||3682|772
+Jedeïda|TN||3683|992
+Râs el Oued|DZ||3594|503
+Bordj Menaïel|DZ||3674|372
+Oued Fodda|DZ||3619|153
+Hassi Messaoud|DZ||3168|607
+Boû Arfa|DZ||3646|281
+Sour el Ghozlane|DZ||3615|369
+Miliana|DZ||3631|222
+Lakhdaria|DZ||3656|359
+Manacor|ES||3957|321
+Tadjenanet|DZ||3612|599
+Denia|ES||3884|11
+Tazoult-Lambese|DZ||3548|626
+Draa el Mizan|DZ||3654|383
+Timizart|DZ||3680|427
+Tebesbest|DZ|TG|3312|608
+Bou Ismaïl|DZ||3664|269
+Meftah|DZ||3662|322
+Souma|DZ||3652|291
+Ouled Moussa|DZ||3668|337
+Rouached|DZ||3646|604
+Héliopolis|DZ||3650|744
+Tighenif|DZ||3542|33
+El Hadjira|DZ||3261|551
+Metlili Chaamba|DZ||3227|363
+El Abiodh Sidi Cheikh|DZ||3289|55
+El Meghaïer|DZ|MG|3395|592
+Metlaoui|TN||3432|840
+Sidi Khaled|DZ|OD|3439|499
+Bougara|DZ||3654|308
+Akbou|DZ||3646|453
+’Aïn Azel|DZ||3582|551
+Tozeur|TN||3392|813
+Dar el Beïda|DZ||3671|321
+Debila|DZ||3352|695
+Marratxí|ES||3962|273
+Arris|DZ||3526|635
+M’Daourouch|DZ||3608|782
+’Aïn Deheb|DZ||3484|155
+Llucmajor|ES||3949|289
+El Kala|DZ||3690|844
+El Affroun|DZ||3647|263
+Djamaa|DZ|MG|3353|599
+Makouda|DZ||3679|406
+’Aïn Merane|DZ||3616|97
+Cherchell|DZ||3660|219
+Douz|TN||3347|902
+Râs el Aïoun|DZ||3567|565
+Bordj Ghdir|DZ||3590|490
+Beni Tamou|DZ||3654|282
+Hadjout|DZ||3651|241
+Azzaba|DZ||3674|711
+El Ksar|TN||3440|880
+Beni Douala|DZ||3662|408
+Aïn Taya|DZ||3679|329
+El Attaf|DZ||3622|167
+El Arrouch|DZ||3665|684
+El Aouinet|DZ||3587|789
+’Aïn el Melh|DZ||3484|416
+Kaïs|DZ||3549|692
+Tamalous|DZ||3684|664
+Aïn Bessem|DZ||3629|367
+Mateur|TN||3704|967
+Aïn Smara|DZ||3627|650
+Djidiouia|DZ||3593|83
+Barbacha|DZ||3657|497
+Bougaa|DZ||3633|509
+’Aïn el Bell|DZ||3434|322
+el hed|DZ||3665|477
+Megarine|DZ|TG|3319|609
+Oristano|IT||3990|859
+Mehdia daira de meghila|DZ||3543|176
+Santa Eulària des Riu|ES||3898|153
+Siliana|TN||3608|937
+’Aïn Benian|DZ||3680|292
+Freha|DZ||3675|432
+Sidi Moussa|DZ||3661|309
+Dahmani|TN||3594|883
+L’Arbaa Naït Irathen|DZ||3663|420
+Aïn Kercha|DZ||3592|670
+Oued Sly|DZ||3610|120
+Robbah|DZ||3328|691
+Bouinan|DZ||3653|299
+Berriane|DZ||3283|377
+Meskiana|DZ||3563|767
+Lardjem|DZ||3575|155
+Rais Hamidou|DZ||3682|301
+Tebourba|TN||3683|984
+El Idrissia|DZ||3445|253
+Sidi Amrane|DZ|MG|3350|601
+Ahmed Bel Hadj|DZ||3680|761
+Mekla|DZ||3668|426
+Sidi Okba|DZ||3475|590
+’Aïn Abid|DZ||3623|694
+N’Gaous|DZ||3556|561
+Draa Ben Khedda|DZ||3673|396
+Collo|DZ||3701|656
+Inca|ES||3972|291
+Ténès|DZ||3651|131
+Maó|ES||3989|427
+Ouled Haddaj|DZ||3671|334
+Boumerdas|DZ||3677|348
+Zighout Youcef|DZ||3653|671
+Ain el Hadjel|DZ||3567|388
+Boukadir|DZ||3607|113
+Mouzaïa|DZ||3647|269
+Grarem|DZ||3652|633
+Hammamet|DZ||3545|795
+Ben Mehidi|DZ||3677|791
+’Aïn el Hammam|DZ||3656|431
+Javea|ES||3878|17
+Tizi Gheniff|DZ||3659|377
+Cheraga|DZ||3677|296
+Charef|DZ||3462|280
+Theniet el Had|DZ||3587|203
+Ouled Slama Fouaga|DZ||3655|311
+Ammi Moussa|DZ||3587|111
+Oued Zenati|DZ||3632|716
+El Abadia|DZ||3627|169
+Kerkera|DZ||3693|659
+Ar Rudayyif|TN||3438|816
+Feidh el Botma|DZ||3450|377
+Birine|DZ||3564|322
+Dar Chioukh|DZ||3490|349
+Sidi Akkacha|DZ||3646|130
+Azazga|DZ||3674|437
+Dellys|DZ||3692|391
+Kebili|TN||3370|897
+Tirmitine|DZ||3665|398
+Telerghma|DZ||3612|635
+Fedj M’Zala|DZ||3641|594
+Maâtkas|DZ||3660|398
+Chellalat el Adhaouara|DZ||3594|342
+El Hadjar|DZ||3680|774
+El Kseur|DZ||3668|486
+Amizour|DZ||3664|490
+Didouche Mourad|DZ||3645|664
+Melouza|DZ||3598|419
+Aïn Arnat|DZ||3619|531
+Assemini|IT||3929|900
+Reguiba|DZ||3356|670
+Sidi Mérouane|DZ||3652|626
+El Fahs|TN||3637|991
+Medjez el Bab|TN||3665|961
+Abou el Hassan|DZ||3642|120
+Arhribs|DZ||3679|431
+Sbeitla|TN||3523|912
+Salah Bey|DZ||3585|529
+Calp|ES||3864|4
+Selargius|IT||3926|916
+Chiffa|DZ||3646|274
+Zeribet el Oued|DZ||3468|651
+Boumahra Ahmed|DZ||3646|751
+Oued el Abtal|DZ||3546|69
+Nefta|TN||3387|788
+Iglesias|IT||3931|854
+Tizi-n-Tleta|DZ||3655|406
+Mazouna|DZ||3612|90
+Menzel Jemil|TN||3724|991
+Mansourah|DZ||3609|445
+Sant Antoni de Portmany|ES||3898|130
+Zemoura|DZ||3572|76
+Feraoun|DZ||3656|485
+Carbonia|IT||3916|852
+Chemini|DZ||3660|462
+Moularès|TN||3449|827
+Tinja|TN||3716|976
+Oued el Alleug|DZ||3656|279
+Tabursuq|TN||3646|925
+Taïbet|DZ|TG|3309|639
+Tadmaït|DZ||3674|390
+Métouia|TN||3396|1000
+Boudjima|DZ||3680|415
+Chorfa|DZ||3637|433
+Monserrato|IT||3926|914
+Chebli|DZ||3658|301
+Seddouk|DZ||3655|469
+Alcúdia|ES||3985|312
+Bordj Zemoura|DZ||3627|486
+Tabarka|TN||3695|876
+Ghardimaou|TN||3645|844
+Chabet el Ameur|DZ||3664|369
+Tajerouine|TN||3589|855
+Berrahal|DZ||3684|745
+Brezina|DZ||3310|126
+Menzel Abderhaman|TN||3724|986
+Douar Tindja|TN||3717|975
+Babor|DZ||3649|554
+Beni Amrane|DZ||3667|359
+Felanitx|ES||3947|315
+Thala|TN||3557|867
+Sestu|IT||3930|909
+Son Rapinya|ES||3959|262
+Tizi Rached|DZ||3667|419
+Zeralda|DZ||3671|284
+Arbatache|DZ||3664|337
+Pollença|ES||3988|302
+Saoula|DZ||3670|302
+Bou Hadjar|DZ||3650|811
+Thenia|DZ||3673|356
+El Grao|ES||3997|1
+Sinnai|IT||3930|920
+Naciria|DZ||3675|383
+Tipasa|DZ||3659|245
+Sant Agustí|ES||3955|260
+Ighram|DZ||3646|451

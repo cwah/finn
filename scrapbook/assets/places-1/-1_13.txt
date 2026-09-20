@@ -1,0 +1,16 @@
+Sorong|ID|PD|-88|13126
+Timika|ID|PT|-461|13668
+Manokwari|ID||-86|13406
+Nabire|ID|PT|-336|13550
+Tual|ID||-563|13275
+Wamena|ID|PE|-410|13895
+Dobo|ID||-576|13423
+Biak|ID||-118|13608
+Mulia|ID|PT|-371|13799
+Bintuni|ID||-211|13352
+Agats|ID|PS|-555|13814
+Waisai|ID|PD|-24|13051
+Tiom|ID|PE|-392|13845
+Teminabuan|ID|PD|-144|13201
+Fakfak|ID||-292|13230
+Ransiki|ID||-151|13417

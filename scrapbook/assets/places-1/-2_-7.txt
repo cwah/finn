@@ -1,0 +1,60 @@
+La Paz|BO||-1650|-6815
+Santa Cruz de la Sierra|BO||-1779|-6318
+Cochabamba|BO||-1738|-6616
+Sucre|BO||-1903|-6526
+Oruro|BO||-1797|-6709
+Sacaba|BO||-1740|-6604
+Quillacollo|BO||-1739|-6628
+Potosí|BO||-1958|-6575
+Ji Paraná|BR||-1089|-6195
+Vilhena|BR||-1274|-6015
+Riberalta|BO||-1101|-6605
+Montero|BO||-1734|-6325
+Viacha|BO||-1665|-6830
+Cacoal|BR||-1144|-6145
+Puerto Maldonado|PE||-1259|-6920
+Trinidad|BO||-1483|-6490
+Tiquipaya|BO||-1734|-6622
+Vinto|BO||-1739|-6632
+Rolim de Moura|BR||-1180|-6180
+Colcapirhua|BO||-1739|-6624
+Jaru|BR||-1044|-6247
+Sipe Sipe|BO||-1745|-6636
+Guajará Mirim|BR||-1078|-6534
+Caranavi|BO||-1583|-6757
+Buritis|BR||-1021|-6383
+Tambopata|PE||-1267|-6936
+Rolim de Moura do Guaporé|BR||-1308|-6228
+Pimenta Bueno|BR||-1167|-6119
+Guayaramerín|BO||-1083|-6536
+Ouro Preto do Oeste|BR||-1075|-6222
+Nova Mamoré|BR||-1040|-6533
+Mizque|BO||-1794|-6534
+La Rinconada|PE||-1463|-6945
+Espigão dOeste|BR||-1152|-6101
+Llallagua|BO||-1842|-6658
+Brasiléia|BR||-1102|-6875
+Cobija|BO||-1103|-6877
+San Borja|BO||-1485|-6675
+San Ignacio de Velasco|BO||-1638|-6096
+Senador Guiomard|BR||-1015|-6774
+Ilave|PE||-1608|-6967
+Warnes|BO||-1752|-6317
+São Miguel do Guaporé|BR||-1169|-6271
+Alta Floresta d'Oeste|BR||-1197|-6195
+Achocalla|BO||-1657|-6815
+Presidente Médici|BR||-1118|-6190
+Ascención de Guarayos|BO||-1589|-6319
+Epitaciolândia|BR||-1103|-6874
+Cotoca|BO||-1782|-6305
+Xapuri|BR||-1065|-6850
+Villa Yapacaní|BO||-1740|-6383
+Laja|BO||-1653|-6838
+Plácido de Castro|BR||-1034|-6719
+São Francisco do Guaporé|BR||-1205|-6357
+Monte Negro|BR||-1029|-6333
+Cerejeiras|BR||-1319|-6081
+Colorado do Oeste|BR||-1312|-6054
+El Torno|BO||-1800|-6339
+Huanuni|BO||-1829|-6684
+Punata|BO||-1754|-6583

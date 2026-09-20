@@ -250,6 +250,11 @@ function metaEl(post, birthDate, { withAuthor = true } = {}) {
 
   const right = el('div', 'card-meta-right');
   right.append(el('span', 'card-date', { textContent: dateLabel(post.memoryDate) }));
+  // Beside the date, because it answers the same kind of question about a memory — and
+  // only when there is one, since most posts will not have a place for a long time.
+  if (post.location) {
+    right.append(el('span', 'card-place', { textContent: post.location }));
+  }
   if (withAuthor && post.author && post.author.name) {
     right.append(el('span', 'card-author', { textContent: post.author.name }));
   }

@@ -1,0 +1,74 @@
+Lima|PE|LMA|-1204|-7703
+Callao|PE||-1205|-7713
+Arequipa|PE||-1640|-7154
+Huancayo|PE||-1207|-7521
+Cusco|PE||-1353|-7197
+Tacna|PE||-1801|-7025
+Ica|PE||-1408|-7573
+Santiago de Surco|PE||-1214|-7701
+Juliaca|PE||-1550|-7013
+Arica|CL||-1848|-7030
+Miraflores|PE||-1211|-7703
+Santa Anita - Los Ficus|PE||-1205|-7697
+Chincha Alta|PE||-1341|-7613
+Ayacucho|PE||-1316|-7422
+Puno|PE||-1584|-7002
+San Francisco De Borja|PE||-1209|-7700
+Chosica|PE||-1194|-7671
+Breña|PE||-1206|-7705
+Ciudad Satelite|PE||-1643|-7153
+Chilca|PE||-1209|-7521
+Selva Alegre|PE||-1637|-7153
+Abancay|PE||-1363|-7288
+Moquegua|PE||-1720|-7094
+San Isidro|PE||-1210|-7704
+Jesus Maria|PE||-1207|-7704
+Santiago|PE||-1353|-7198
+Huaral|PE||-1150|-7721
+Pisco|PE||-1371|-7621
+Villa Poeta José Gálvez Barrenechea|PE||-1221|-7691
+San Miguel|PE||-1548|-7012
+Wanchaq|PE||-1352|-7197
+Cerro de Pasco|PE||-1067|-7625
+Huacho|PE||-1112|-7761
+Ilo|PE||-1763|-7134
+Tarma|PE||-1142|-7569
+Huancavelica|PE||-1279|-7497
+Cono Norte|PE||-1632|-7158
+Barranca|PE||-1075|-7777
+Jacobo Hunter|PE||-1644|-7155
+Carmen De La Legua Reynoso|PE||-1205|-7710
+Barranco|PE||-1214|-7702
+Sicuani|PE||-1427|-7123
+La Oroya|PE||-1152|-7590
+Nuevo Imperial|PE||-1308|-7632
+Imperial|PE||-1306|-7635
+Mollendo|PE||-1702|-7201
+Chaupimarca|PE||-1041|-7646
+Paramonga|PE||-1067|-7783
+Chancay|PE||-1157|-7727
+Hualmay|PE||-1110|-7761
+San Vicente de Cañete|PE||-1308|-7639
+Quillabamba|PE||-1286|-7269
+Santa Ana|PE||-1287|-7272
+Yanacancha|PE||-1067|-7626
+Yauri|PE||-1479|-7141
+Nazca|PE||-1483|-7494
+Yanacancha|PE||-1024|-7665
+Ayaviri|PE||-1489|-7059
+Jauja|PE||-1178|-7550
+Huaura|PE||-1107|-7760
+El Pedregal|PE||-1636|-7219
+Huanta|PE||-1293|-7425
+Santa Rosa|PE||-1092|-7488
+Andahuaylas|PE||-1366|-7339
+Mala|PE||-1266|-7663
+Atalaya|PE||-1073|-7376
+Camaná|PE||-1662|-7271
+San Martín de Pangoa|PE||-1143|-7449
+Huarmey|PE||-1007|-7815
+San Clemente|PE||-1367|-7615
+San Antonio|PE||-1722|-7093
+Satipo|PE||-1125|-7464
+Minas de Marcona|PE||-1521|-7511
+Junín|PE||-1116|-7599

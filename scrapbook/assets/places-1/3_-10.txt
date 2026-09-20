@@ -1,0 +1,282 @@
+Dallas|US|TX|3278|-9681
+Fort Worth|US|TX|3273|-9732
+Austin|US|TX|3027|-9774
+Oklahoma City|US|OK|3547|-9752
+New South Memphis|US|TN|3509|-9006
+Memphis|US|TN|3515|-9005
+Kansas City|US|MO|3910|-9458
+Tulsa|US|OK|3615|-9599
+Wichita|US|KS|3769|-9734
+Arlington|US|TX|3274|-9711
+Plano|US|TX|3302|-9670
+St. Louis|US|MO|3863|-9020
+Garland|US|TX|3291|-9664
+Irving|US|TX|3281|-9695
+Baton Rouge|US|LA|3044|-9119
+Little Rock|US|AR|3475|-9229
+Grand Prairie|US|TX|3275|-9700
+Shreveport|US|LA|3253|-9375
+Overland Park|US|KS|3898|-9467
+Springfield|US|MO|3722|-9330
+McKinney|US|TX|3320|-9662
+Frisco|US|TX|3315|-9682
+Jackson|US|MS|3230|-9018
+Kansas City|US|KS|3911|-9463
+Mesquite|US|TX|3277|-9660
+Killeen|US|TX|3112|-9773
+Olathe|US|KS|3888|-9482
+Carrollton|US|TX|3295|-9689
+Waco|US|TX|3155|-9715
+Denton|US|TX|3321|-9713
+Columbia|US|MO|3895|-9233
+Norman|US|OK|3522|-9744
+Topeka|US|KS|3905|-9568
+Abilene|US|TX|3245|-9973
+Lafayette|US|LA|3022|-9202
+Independence|US|MO|3909|-9442
+Round Rock|US|TX|3051|-9768
+Beaumont|US|TX|3009|-9410
+Richardson|US|TX|3295|-9673
+East Independence|US|MO|3910|-9436
+College Station|US|TX|3063|-9633
+Broken Arrow|US|OK|3605|-9579
+Wichita Falls|US|TX|3391|-9849
+Lewisville|US|TX|3305|-9699
+Tyler|US|TX|3235|-9530
+Allen|US|TX|3310|-9667
+Lawton|US|OK|3461|-9839
+Lee's Summit|US|MO|3891|-9438
+Lawrence|US|KS|3897|-9524
+The Woodlands|US|TX|3016|-9549
+Edmond|US|OK|3565|-9748
+Fort Smith|US|AR|3539|-9440
+O'Fallon|US|MO|3881|-9070
+Fayetteville|US|AR|3606|-9416
+Longview|US|TX|3250|-9474
+Bryan|US|TX|3067|-9637
+Springdale|US|AR|3619|-9413
+Saint Joseph|US|MO|3977|-9485
+Lake Charles|US|LA|3021|-9320
+Jonesboro|US|AR|3584|-9070
+Temple|US|TX|3110|-9734
+Flower Mound|US|TX|3301|-9710
+North Richland Hills|US|TX|3283|-9723
+Conroe|US|TX|3031|-9546
+Bossier City|US|LA|3252|-9373
+North Little Rock|US|AR|3477|-9227
+Cedar Park|US|TX|3051|-9782
+Saint Charles|US|MO|3878|-9048
+Shawnee|US|KS|3904|-9472
+Conway|US|AR|3509|-9244
+Celina|US|TX|3332|-9678
+Mansfield|US|TX|3256|-9714
+Georgetown|US|TX|3063|-9768
+Rogers|US|AR|3633|-9412
+Moore|US|OK|3534|-9749
+Rowlett|US|TX|3290|-9656
+Leander|US|TX|3058|-9785
+Midwest City|US|OK|3545|-9740
+Pflugerville|US|TX|3044|-9762
+Manhattan|US|KS|3918|-9657
+Spring|US|TX|3008|-9542
+Euless|US|TX|3284|-9708
+Blue Springs|US|MO|3902|-9428
+University of Texas|US|TX|3029|-9774
+Southaven|US|MS|3499|-9001
+Saint Peters|US|MO|3880|-9063
+Lenexa|US|KS|3895|-9473
+DeSoto|US|TX|3259|-9686
+Florissant|US|MO|3879|-9032
+Joplin|US|MO|3708|-9451
+Enid|US|OK|3640|-9788
+Grapevine|US|TX|3293|-9708
+The Trails of Frisco|US|TX|3316|-9687
+Monroe|US|LA|3251|-9212
+Bedford|US|TX|3284|-9714
+Stillwater|US|OK|3612|-9706
+Cedar Hill|US|TX|3259|-9696
+Alexandria|US|LA|3131|-9245
+Chesterfield|US|MO|3866|-9058
+Salina|US|KS|3884|-9761
+Wylie|US|TX|3302|-9654
+Keller|US|TX|3293|-9725
+Pine Bluff|US|AR|3423|-9200
+Bentonville|US|AR|3637|-9421
+Haltom City|US|TX|3280|-9727
+Burleson|US|TX|3254|-9732
+Jefferson City|US|MO|3858|-9217
+Rockwall|US|TX|3293|-9646
+The Colony|US|TX|3309|-9689
+Hutchinson|US|KS|3806|-9793
+Coppell|US|TX|3295|-9702
+Huntsville|US|TX|3072|-9555
+Quincy|US|IL|3994|-9141
+Sherman|US|TX|3364|-9661
+Duncanville|US|TX|3265|-9691
+Hurst|US|TX|3282|-9717
+Lancaster|US|TX|3259|-9676
+Muskogee|US|OK|3575|-9537
+Little Elm|US|TX|3316|-9694
+Texarkana|US|TX|3343|-9405
+Bartlesville|US|OK|3675|-9598
+Lufkin|US|TX|3134|-9473
+Oakville|US|MO|3847|-9030
+Leavenworth|US|KS|3931|-9492
+Wildwood|US|MO|3858|-9066
+Hot Springs|US|AR|3450|-9306
+Wentzville|US|MO|3881|-9085
+University City|US|MO|3866|-9031
+Leawood|US|KS|3897|-9462
+Owasso|US|OK|3627|-9585
+Benton|US|AR|3456|-9259
+Nacogdoches|US|TX|3160|-9466
+Waxahachie|US|TX|3239|-9685
+Copperas Cove|US|TX|3112|-9790
+Farmers Branch|US|TX|3293|-9690
+Greenville|US|MS|3341|-9106
+Shawnee|US|OK|3533|-9693
+New Iberia|US|LA|3000|-9182
+Ballwin|US|MO|3860|-9055
+Sherwood|US|AR|3482|-9222
+Liberty|US|MO|3925|-9442
+Texarkana|US|AR|3344|-9404
+Cleburne|US|TX|3235|-9739
+Southlake|US|TX|3294|-9713
+Laplace|US|LA|3007|-9048
+Fort Cavazos|US|TX|3113|-9778
+Raytown|US|MO|3901|-9446
+Upper Alton|US|IL|3891|-9015
+Russellville|US|AR|3528|-9313
+Harker Heights|US|TX|3108|-9766
+Granite City|US|IL|3870|-9015
+Weatherford|US|TX|3276|-9780
+Jacksonville|US|AR|3487|-9211
+Mehlville|US|MO|3851|-9032
+Central|US|LA|3055|-9104
+Bella Vista|US|AR|3648|-9427
+Paragould|US|AR|3606|-9050
+Kirkwood|US|MO|3858|-9041
+Maryland Heights|US|MO|3871|-9043
+East Saint Louis|US|IL|3862|-9015
+Alton|US|IL|3889|-9018
+Horn Lake|US|MS|3496|-9003
+Prairieville|US|LA|3030|-9097
+Gladstone|US|MO|3920|-9455
+Greenville|US|TX|3314|-9611
+Pearl|US|MS|3227|-9013
+Yukon|US|OK|3551|-9776
+Madison|US|MS|3246|-9012
+Hazelwood|US|MO|3877|-9037
+Cabot|US|AR|3497|-9202
+Colleyville|US|TX|3288|-9716
+Grandview|US|MO|3889|-9453
+Clinton|US|MS|3234|-9032
+Balch Springs|US|TX|3273|-9662
+Ardmore|US|OK|3417|-9714
+West Memphis|US|AR|3515|-9018
+Paris|US|TX|3366|-9556
+University Park|US|TX|3285|-9680
+Ponca City|US|OK|3671|-9709
+Bixby|US|OK|3594|-9588
+Emporia|US|KS|3840|-9618
+Junction City|US|KS|3903|-9683
+Sachse|US|TX|3298|-9660
+Watauga|US|TX|3286|-9725
+Ridgeland|US|MS|3243|-9013
+Searcy|US|AR|3525|-9174
+Corsicana|US|TX|3210|-9647
+Marshall|US|TX|3254|-9437
+Derby|US|KS|3755|-9727
+Duncan|US|OK|3450|-9796
+Webster Groves|US|MO|3859|-9036
+Belton|US|MO|3881|-9453
+Denison|US|TX|3376|-9654
+Kerrville|US|TX|3005|-9914
+Vicksburg|US|MS|3235|-9088
+Van Buren|US|AR|3544|-9435
+Hutto|US|TX|3054|-9755
+Benbrook|US|TX|3267|-9746
+Ruston|US|LA|3252|-9264
+Midlothian|US|TX|3248|-9699
+Saginaw|US|TX|3286|-9736
+Del City|US|OK|3544|-9744
+Prairie Village|US|KS|3899|-9463
+Brushy Creek|US|TX|3051|-9774
+Sedalia|US|MO|3870|-9323
+Arnold|US|MO|3843|-9038
+Hays|US|KS|3888|-9933
+Ferguson|US|MO|3874|-9031
+Corinth|US|TX|3315|-9706
+Nixa|US|MO|3704|-9329
+Gardner|US|KS|3881|-9493
+Jenks|US|OK|3602|-9597
+Murphy|US|TX|3302|-9661
+Sapulpa|US|OK|3600|-9611
+Belton|US|TX|3106|-9746
+Hammond|US|LA|3050|-9046
+Pittsburg|US|KS|3741|-9470
+Raymore|US|MO|3880|-9445
+Affton|US|MO|3855|-9033
+Mustang|US|OK|3538|-9772
+Sulphur|US|LA|3024|-9338
+Stephenville|US|TX|3222|-9820
+Rolla|US|MO|3795|-9177
+New Caney|US|TX|3016|-9521
+Bryant|US|AR|3460|-9249
+Warrensburg|US|MO|3876|-9374
+Sand Springs|US|OK|3614|-9611
+Spanish Lake|US|MO|3879|-9022
+Bethany|US|OK|3552|-9763
+Orange|US|TX|3009|-9374
+Newton|US|KS|3805|-9735
+Altus|US|OK|3464|-9933
+Old Jamestown|US|MO|3883|-9029
+Ozark|US|MO|3702|-9321
+Jacksonville|US|IL|3973|-9023
+Brownwood|US|TX|3171|-9899
+Ennis|US|TX|3233|-9663
+Claremore|US|OK|3631|-9562
+El Reno|US|OK|3553|-9796
+Forney|US|TX|3275|-9647
+Shenandoah|US|LA|3040|-9100
+El Dorado|US|AR|3321|-9267
+Natchitoches|US|LA|3176|-9309
+McAlester|US|OK|3493|-9577
+Palestine|US|TX|3176|-9563
+Creve Coeur|US|MO|3866|-9042
+Manchester|US|MO|3860|-9051
+Farmington|US|MO|3778|-9042
+Maumelle|US|AR|3487|-9240
+Hannibal|US|MO|3971|-9136
+Godfrey|US|IL|3896|-9019
+Ada|US|OK|3477|-9668
+Durant|US|OK|3399|-9637
+Poplar Bluff|US|MO|3676|-9039
+White Settlement|US|TX|3276|-9746
+Terrell|US|TX|3274|-9628
+Clarksdale|US|MS|3420|-9057
+Taylor|US|TX|3057|-9741
+Lemay|US|MO|3853|-9028
+Tahlequah|US|OK|3592|-9497
+Opelousas|US|LA|3053|-9208
+Brenham|US|TX|3017|-9640
+Chickasha|US|OK|3505|-9794
+Zachary|US|LA|3065|-9116
+Concord|US|MO|3852|-9036
+Gainesville|US|TX|3363|-9713
+Jollyville|US|TX|3044|-9778
+Highland Village|US|TX|3309|-9705
+Sulphur Springs|US|TX|3314|-9560
+Siloam Springs|US|AR|3619|-9454
+Mount Pleasant|US|TX|3316|-9497
+Republic|US|MO|3712|-9348
+Prosper|US|TX|3324|-9680
+Overland|US|MO|3870|-9036
+Seagoville|US|TX|3264|-9654
+Clayton|US|MO|3864|-9032
+Gatesville|US|TX|3144|-9774
+Great Bend|US|KS|3836|-9876
+Addison|US|TX|3296|-9683
+Greenwood|US|MS|3352|-9018
+Natchez|US|MS|3156|-9140
+Fort Leonard Wood|US|MO|3771|-9216

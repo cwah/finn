@@ -1,0 +1,929 @@
+New York City|US|NY|4071|-7401
+Toronto|CA||4371|-7940
+Brooklyn|US|NY|4065|-7395
+Queens|US|NY|4068|-7384
+Montréal|CA||4551|-7359
+Manhattan|US|NY|4078|-7397
+The Bronx|US|NY|4085|-7387
+Ottawa|CA||4541|-7570
+Mississauga|CA||4358|-7966
+Brampton|CA||4368|-7977
+Boston|US|MA|4236|-7106
+South Boston|US|MA|4233|-7105
+Hamilton|CA||4325|-7985
+Québec|CA||4681|-7121
+Staten Island|US|NY|4056|-7414
+Laval|CA||4557|-7369
+Etobicoke|CA||4364|-7957
+Markham|CA||4387|-7927
+Vaughan|CA||4384|-7950
+Pittsburgh|US|PA|4044|-8000
+Gatineau|CA||4548|-7570
+Newark|US|NJ|4074|-7417
+Jersey City|US|NJ|4073|-7408
+Buffalo|US|NY|4289|-7888
+Longueuil|CA||4552|-7347
+Upper West Side|US|NY|4079|-7398
+Jamaica|US|NY|4069|-7381
+Oakville|CA||4345|-7968
+Rochester|US|NY|4315|-7762
+Worcester|US|MA|4226|-7180
+Richmond Hill|CA||4387|-7944
+Yonkers|US|NY|4093|-7390
+Providence|US|RI|4182|-7141
+Burlington|CA||4339|-7984
+Nepean|CA||4534|-7572
+East Flatbush|US|NY|4065|-7393
+Oshawa|CA||4390|-7885
+East New York|US|NY|4067|-7388
+Springfield|US|MA|4210|-7259
+Washington Heights|US|NY|4085|-7394
+Astoria|US|NY|4077|-7393
+Gloucester|CA||4535|-7563
+Borough Park|US|NY|4063|-7400
+Saguenay|CA||4842|-7107
+Barrie|CA||4440|-7967
+Paterson|US|NJ|4092|-7417
+Bridgeport|US|CT|4118|-7319
+Rosemont–La Petite-Patrie|CA||4554|-7361
+Villeray–Saint-Michel–Parc-Extension|CA||4556|-7361
+Trois-Rivières|CA||4635|-7255
+Syracuse|US|NY|4305|-7615
+Lévis|CA||4680|-7118
+Mercier–Hochelaga-Maisonneuve|CA||4557|-7355
+Whitby|CA||4388|-7893
+St. Catharines|CA||4317|-7924
+Ahuntsic-Cartierville|CA||4557|-7367
+Le Vieux-Longueuil|CA||4554|-7351
+Milton|CA||4352|-7988
+Kingston|CA||4423|-7648
+New Haven|US|CT|4131|-7293
+Sherbrooke|CA||4540|-7190
+Elizabeth|US|NJ|4066|-7421
+Stamford|US|CT|4105|-7354
+Sunset Park|US|NY|4065|-7401
+Orléans|CA||4546|-7550
+Ottawa South|CA||4539|-7569
+Sheepshead Bay|US|NY|4059|-7394
+Amherst|US|NY|4298|-7880
+North Stamford|US|CT|4114|-7354
+Hartford|US|CT|4176|-7269
+Allentown|US|PA|4061|-7549
+Saint-Louis-de-Terrebonne|CA||4570|-7379
+Ajax|CA||4385|-7903
+Harlem|US|NY|4081|-7395
+East Harlem|US|NY|4079|-7394
+Thornhill|CA||4382|-7942
+Rivière-des-Prairies–Pointe-aux-Trembles|CA||4564|-7358
+Elmhurst|US|NY|4074|-7388
+Bushwick|US|NY|4069|-7392
+Gravesend|US|NY|4060|-7397
+Terrebonne|CA||4570|-7365
+Sainte-Foy|CA||4678|-7129
+Lowell|US|MA|4263|-7132
+Cambridge|US|MA|4238|-7111
+Manchester|US|NH|4300|-7145
+Corona|US|NY|4075|-7386
+Waterbury|US|CT|4156|-7305
+La Cité-Limoilou|CA||4683|-7123
+Le Plateau-Mont-Royal|CA||4553|-7358
+Ville-Marie|CA||4550|-7357
+Edison|US|NJ|4052|-7441
+Albany|US|NY|4265|-7376
+New Bedford|US|MA|4164|-7093
+Niagara Falls|CA||4310|-7907
+Richmond Hill|US|NY|4070|-7383
+Saint-Laurent|CA||4550|-7367
+Saint-Jean-sur-Richelieu|CA||4531|-7326
+Dorchester|US|MA|4230|-7107
+Brockton|US|MA|4208|-7102
+Fordham|US|NY|4086|-7390
+Chomedey|CA||4553|-7375
+Fall River|US|MA|4170|-7116
+West Albany|US|NY|4268|-7378
+Quincy|US|MA|4225|-7100
+Flatbush|US|NY|4065|-7396
+Lynn|US|MA|4247|-7095
+Pickering|CA||4390|-7913
+Newmarket|CA||4405|-7947
+Kanata|CA||4530|-7592
+Chinatown|US|NY|4072|-7400
+Trenton|US|NJ|4022|-7474
+Newton|US|MA|4234|-7121
+Norwalk|US|CT|4112|-7341
+La Haute-Saint-Charles|CA||4689|-7137
+Nashua|US|NH|4277|-7147
+Reading|US|PA|4034|-7593
+Canarsie|US|NY|4064|-7390
+Montréal-Nord|CA||4560|-7363
+Greenburgh|US|NY|4103|-7384
+Le Sud-Ouest|CA||4547|-7359
+Clifton|US|NJ|4086|-7416
+Peterborough|CA||4430|-7832
+Repentigny|CA||4574|-7345
+Danbury|US|CT|4139|-7345
+East Norwalk|US|CT|4111|-7340
+Charlesbourg|CA||4690|-7131
+Saint-Hubert|CA||4550|-7342
+Warwick|US|RI|4170|-7142
+Beauport|CA||4686|-7119
+Cranston|US|RI|4178|-7144
+Somerville|US|MA|4239|-7110
+Lawrence|US|MA|4271|-7116
+New Rochelle|US|NY|4091|-7378
+Saint-Léonard|CA||4559|-7360
+Willowdale|CA||4377|-7940
+Scranton|US|PA|4141|-7566
+Les Rivières|CA||4682|-7127
+Caledon|CA||4387|-7999
+Stoney Creek|CA||4322|-7977
+Brick|US|NJ|4006|-7414
+South Ozone Park|US|NY|4067|-7382
+Cheektowaga|US|NY|4290|-7875
+Kings Bridge|US|NY|4088|-7391
+Bethlehem|US|PA|4063|-7537
+Brownsville|US|NY|4066|-7392
+Pierrefonds-Roxboro|CA||4550|-7384
+New Britain|US|CT|4166|-7278
+Pawtucket|US|RI|4188|-7138
+Passaic|US|NJ|4086|-7413
+Brossard|CA||4545|-7347
+Ridgewood|US|NY|4070|-7391
+Verdun|CA||4546|-7357
+Union City|US|NJ|4078|-7402
+Chicoutimi|CA||4842|-7106
+Mount Vernon|US|NY|4091|-7384
+Framingham|US|MA|4228|-7142
+Notre-Dame-de-Grâce|CA||4548|-7361
+Forest Hills|US|NY|4072|-7385
+Jackson Heights|US|NY|4076|-7389
+Portland|US|ME|4366|-7026
+Bayside|US|NY|4077|-7378
+Bayonne|US|NJ|4067|-7411
+Granby|CA||4540|-7273
+Waterfront Communities-The Island|CA||4363|-7938
+Parkchester|US|NY|4084|-7386
+Middletown|US|NJ|4039|-7412
+Framingham Center|US|MA|4230|-7144
+Schenectady|US|NY|4281|-7394
+Park Slope|US|NY|4067|-7399
+East Orange|US|NJ|4077|-7420
+Hull|CA||4543|-7571
+Flatlands|US|NY|4062|-7393
+North Bergen|US|NJ|4080|-7401
+Waltham|US|MA|4238|-7124
+West Hartford|US|CT|4176|-7274
+Halton Hills|CA||4364|-7993
+East Village|US|NY|4073|-7399
+Haverhill|US|MA|4278|-7108
+Irvington|US|NJ|4073|-7423
+Utica|US|NY|4310|-7523
+Malden|US|MA|4243|-7107
+Financial District|US|NY|4071|-7401
+Brentwood|US|NY|4078|-7325
+Bristol|US|CT|4167|-7295
+Bensalem|US|PA|4010|-7495
+Bensonhurst|US|NY|4060|-7399
+Coney Island|US|NY|4058|-7399
+Meriden|US|CT|4154|-7281
+Hamden|US|CT|4140|-7290
+Drummondville|CA||4588|-7248
+Lancaster|US|PA|4004|-7631
+Pierrefonds|CA||4546|-7389
+Fairfield|US|CT|4114|-7326
+Brookline|US|MA|4233|-7112
+White Plains|US|NY|4103|-7376
+Clay|US|NY|4319|-7617
+Wayne|US|NJ|4093|-7428
+Medford|US|MA|4242|-7111
+New Brunswick|US|NJ|4049|-7445
+Taunton|US|MA|4190|-7109
+Union|US|NJ|4070|-7426
+Chicopee|US|MA|4215|-7261
+Aylmer|CA||4540|-7581
+Saint-Michel|CA||4557|-7362
+Piscataway|US|NJ|4050|-7440
+Morningside Heights|US|NY|4081|-7396
+Hempstead|US|NY|4071|-7362
+Aurora|CA||4400|-7947
+Abington|US|PA|4012|-7512
+North Chicopee|US|MA|4218|-7260
+Saint-Jérôme|CA||4578|-7400
+Cypress Hills|US|NY|4068|-7389
+West Haven|US|CT|4127|-7295
+Jonquière|CA||4842|-7125
+Weymouth|US|MA|4222|-7094
+Ozone Park|US|NY|4068|-7384
+Briarwood|US|NY|4071|-7382
+Lakewood|US|NJ|4010|-7422
+Hoboken|US|NJ|4074|-7403
+Woburn|CA||4377|-7923
+Revere|US|MA|4241|-7101
+West New York|US|NJ|4079|-7401
+Levittown|US|PA|4016|-7483
+Milford|US|CT|4122|-7306
+Perth Amboy|US|NJ|4051|-7427
+Peabody|US|MA|4253|-7093
+Welland|CA||4298|-7925
+Wakefield|US|NY|4090|-7385
+Methuen|US|MA|4273|-7119
+Queens Village|US|NY|4073|-7374
+Levittown|US|NY|4073|-7351
+Irondequoit|US|NY|4321|-7758
+Mott Haven|US|NY|4081|-7392
+Stratford|US|CT|4118|-7313
+City of Milford (balance)|US|CT|4122|-7306
+East Hartford|US|CT|4178|-7261
+Plainfield|US|NJ|4063|-7441
+Parsippany|US|NJ|4086|-7443
+Belleville|CA||4417|-7738
+Willowdale East|CA||4377|-7940
+North Bay|CA||4632|-7947
+Saint-Hyacinthe|CA||4563|-7296
+South Peabody|US|MA|4251|-7095
+Harrisburg|US|PA|4027|-7688
+Troy|US|NY|4273|-7369
+Whitchurch-Stouffville|CA||4400|-7932
+Sunnyside|US|NY|4074|-7394
+Bloomfield|US|NJ|4081|-7419
+Dollard-Des Ormeaux|CA||4549|-7382
+Niagara Falls|US|NY|4309|-7906
+Oxford Circle|US|PA|4005|-7507
+Cornwall|CA||4502|-7473
+East Brunswick|US|NJ|4043|-7442
+Maspeth|US|NY|4072|-7391
+West Orange|US|NJ|4080|-7424
+Barnstable|US|MA|4170|-7030
+East Providence|US|RI|4181|-7137
+Middletown|US|CT|4156|-7265
+Rouge|CA||4380|-7917
+Blainville|CA||4567|-7388
+Everett|US|MA|4241|-7105
+Binghamton|US|NY|4210|-7592
+Brighton|US|MA|4235|-7116
+Hell's Kitchen|US|NY|4076|-7399
+Altoona|US|PA|4052|-7839
+Enfield|US|CT|4198|-7259
+Sayreville|US|NJ|4046|-7436
+Hackensack|US|NJ|4089|-7404
+West Seneca|US|NY|4285|-7880
+Penn Hills|US|PA|4050|-7984
+Bridgewater|US|NJ|4060|-7465
+Attleboro|US|MA|4194|-7129
+Georgetown|CA||4365|-7992
+L'Amoreaux|CA||4380|-7931
+Concord|US|NH|4321|-7154
+Islington-City Centre West|CA||4363|-7954
+Rego Park|US|NY|4073|-7385
+North Brunswick|US|NJ|4045|-7448
+Malvern|CA||4381|-7922
+Quinte West|CA||4411|-7757
+Southington|US|CT|4160|-7288
+Freeport|US|NY|4066|-7358
+Innisfil|CA||4430|-7965
+Pittsfield|US|MA|4245|-7325
+West Babylon|US|NY|4072|-7335
+East Boston|US|MA|4238|-7104
+Sayreville Junction|US|NJ|4047|-7433
+Salem|US|MA|4252|-7090
+Arlington|US|MA|4242|-7116
+Salaberry-de-Valleyfield|CA||4525|-7413
+Châteauguay|CA||4538|-7375
+East Concord|US|NH|4324|-7154
+Henrietta|US|NY|4306|-7761
+Burlington|US|VT|4448|-7321
+State College|US|PA|4079|-7786
+Kearny|US|NJ|4077|-7415
+Saint-Eustache|CA||4556|-7391
+Linden|US|NJ|4062|-7424
+Woodside|US|NY|4075|-7391
+Westfield|US|MA|4213|-7275
+Sorel-Tracy|CA||4604|-7311
+Leominster|US|MA|4253|-7176
+Hicksville|US|NY|4077|-7353
+Woonsocket|US|RI|4200|-7151
+Shelton|US|CT|4132|-7309
+Beverly|US|MA|4256|-7088
+Morris Heights|US|NY|4085|-7392
+Val-des-Arbres|CA||4560|-7368
+Stittsville|CA||4525|-7592
+Wilkes-Barre|US|PA|4125|-7588
+Holyoke|US|MA|4220|-7262
+Ancaster|CA||4322|-7999
+Fitchburg|US|MA|4258|-7180
+Beverly Cove|US|MA|4255|-7085
+Marlboro|US|NJ|4032|-7425
+Teaneck|US|NJ|4090|-7402
+Billerica|US|MA|4256|-7127
+Norwich|US|CT|4152|-7208
+Amherst|US|MA|4237|-7252
+Marlborough|US|MA|4235|-7155
+Montclair|US|NJ|4083|-7421
+Woburn|US|MA|4248|-7115
+Chelsea|US|MA|4239|-7103
+Bowmanville|CA||4392|-7868
+Far Rockaway|US|NY|4061|-7376
+Olney|US|PA|4004|-7512
+Kensington|US|NY|4065|-7397
+Coram|US|NY|4087|-7300
+Boucherville|CA||4559|-7344
+West Oak Lane|US|PA|4007|-7517
+Manhattan Valley|US|NY|4079|-7396
+Hillsborough|US|NJ|4048|-7463
+Shawinigan|CA||4657|-7275
+East Meadow|US|NY|4071|-7356
+Valley Stream|US|NY|4066|-7371
+Fenway/Kenmore|US|MA|4234|-7110
+Neufchâtel-Est–Lebourgneuf|CA||4685|-7134
+Kew Gardens Hills|US|NY|4073|-7382
+Jamaica Plain|US|MA|4231|-7112
+Duvernay|CA||4558|-7367
+Braintree|US|MA|4220|-7100
+Whitestone|US|NY|4079|-7382
+Laval-des-Rapides|CA||4556|-7370
+Belleville|US|NJ|4079|-7415
+Stouffville|CA||4397|-7925
+Clifton Park|US|NY|4287|-7377
+Fort Lee|US|NJ|4085|-7397
+Dovercourt-Wallace Emerson-Junction|CA||4367|-7944
+Brighton|US|NY|4315|-7755
+Ewing|US|NJ|4027|-7480
+Woodhaven|US|NY|4069|-7386
+Mattapan|US|MA|4227|-7109
+Lewiston|US|ME|4410|-7021
+Commack|US|NY|4084|-7329
+Trumbull|US|CT|4124|-7320
+West Torrington|US|CT|4182|-7314
+Coventry|US|RI|4170|-7168
+Rock Forest|CA||4536|-7200
+Downsview-Roding-CFB|CA||4373|-7949
+Torrington|US|CT|4180|-7312
+Cumberland|US|RI|4197|-7143
+Parkwoods-Donalda|CA||4376|-7933
+Joliette|CA||4602|-7342
+Greenpoint|US|NY|4072|-7395
+Cartierville|CA||4553|-7370
+Mascouche|CA||4575|-7360
+Mirabel|CA||4565|-7408
+Derry Village|US|NH|4289|-7131
+Orange|US|NJ|4077|-7423
+Central Islip|US|NY|4079|-7320
+Victoriaville|CA||4605|-7197
+Norristown|US|PA|4012|-7534
+Dyker Heights|US|NY|4062|-7401
+Glendale|US|NY|4070|-7389
+Mimico|CA||4362|-7951
+Chelmsford|US|MA|4260|-7137
+Shrewsbury|US|MA|4230|-7171
+North Providence|US|RI|4185|-7147
+Parc-Extension|CA||4553|-7363
+Throgs Neck|US|NY|4082|-7382
+Fair Lawn|US|NJ|4094|-7413
+New City|US|NY|4115|-7399
+Long Beach|US|NY|4059|-7366
+West Humber-Clairville|CA||4372|-7960
+Somerton|US|PA|4012|-7501
+Elmont|US|NY|4070|-7371
+Bath Beach|US|NY|4060|-7400
+Huntington Station|US|NY|4085|-7341
+Williamsburg|US|NY|4071|-7395
+Mount Olive-Silverstone-Jamestown|CA||4375|-7959
+Kiryas Joel|US|NY|4134|-7417
+Bustleton|US|PA|4008|-7503
+Spring Valley|US|NY|4111|-7404
+Rome|US|NY|4321|-7546
+West Village|US|NY|4073|-7401
+Natick|US|MA|4228|-7135
+Snowdon|CA||4549|-7363
+Randolph|US|MA|4216|-7104
+Oceanside|US|NY|4064|-7364
+Watertown|US|MA|4237|-7118
+Glastonbury|US|CT|4171|-7261
+Hyde Park|US|MA|4226|-7112
+Garfield|US|NJ|4088|-7411
+Willingboro|US|NJ|4003|-7487
+Cicero|US|NY|4318|-7612
+Centereach|US|NY|4086|-7310
+Naugatuck|US|CT|4149|-7305
+Brighton Beach|US|NY|4058|-7396
+Côte-Saint-Luc|CA||4547|-7367
+Lexington|US|MA|4245|-7122
+Church-Yonge Corridor|CA||4366|-7938
+Niagara|CA||4364|-7941
+Saint-Georges|CA||4611|-7067
+Orillia|CA||4461|-7942
+Long Branch|US|NJ|4030|-7399
+Wayne|US|PA|4004|-7539
+Dover|US|NH|4320|-7087
+Radnor|US|PA|4005|-7536
+South Kingstown|US|RI|4145|-7152
+Ithaca|US|NY|4244|-7650
+North Tonawanda|US|NY|4304|-7886
+Fort Erie|CA||4290|-7893
+Franklin|US|MA|4208|-7140
+Manchester|US|CT|4178|-7252
+Newington|US|CT|4170|-7272
+Westfield|US|NJ|4066|-7435
+Annex|CA||4367|-7940
+Springfield Gardens|US|NY|4066|-7376
+Glenfield-Jane Heights|CA||4375|-7951
+West Roxbury|US|MA|4228|-7115
+Ville-Émard|CA||4545|-7360
+Poughkeepsie|US|NY|4170|-7392
+Pointe-Claire|CA||4545|-7382
+West Warwick|US|RI|4170|-7152
+Jamestown|US|NY|4210|-7924
+Rochester|US|NH|4330|-7098
+Ashmont|US|MA|4228|-7107
+Bendale|CA||4377|-7925
+Gloucester|US|MA|4261|-7066
+Desmarchais-Crawford|CA||4545|-7358
+Mount Pleasant West|CA||4370|-7939
+Port Chester|US|NY|4100|-7367
+Princeton|US|NJ|4035|-7466
+Salem|US|NH|4279|-7120
+Alma|CA||4855|-7165
+Rahway|US|NJ|4061|-7428
+Middle Village|US|NY|4072|-7388
+Cheshire|US|CT|4150|-7290
+Branford|US|CT|4128|-7282
+Tewksbury|US|MA|4261|-7123
+Glenville|US|NY|4293|-7405
+Franklin Square|US|NY|4071|-7368
+East Haven|US|CT|4128|-7287
+Johnston|US|RI|4182|-7151
+Williamsport|US|PA|4124|-7700
+Agincourt North|CA||4380|-7928
+Sainte-Julie|CA||4558|-7333
+Fort Hamilton|US|NY|4062|-7403
+Needham|US|MA|4228|-7123
+Dracut|US|MA|4267|-7130
+Allston|US|MA|4236|-7113
+Windsor|US|CT|4185|-7264
+Agawam|US|MA|4207|-7261
+Norwood|US|MA|4219|-7120
+Northampton|US|MA|4233|-7264
+Englewood|US|NJ|4089|-7397
+Fresh Meadows|US|NY|4073|-7379
+Harrison|US|NY|4097|-7371
+West Islip|US|NY|4071|-7331
+Newburgh|US|NY|4150|-7401
+North Andover|US|MA|4270|-7114
+Elmira|US|NY|4209|-7681
+Monroeville|US|PA|4042|-7979
+Holmesburg|US|PA|4004|-7503
+Vestal|US|NY|4209|-7605
+North Kingstown|US|RI|4155|-7147
+Melrose|US|MA|4246|-7107
+Gramercy Park|US|NY|4074|-7399
+Wellesley|US|MA|4230|-7129
+University Heights|US|NY|4086|-7391
+Wexford/Maryvale|CA||4375|-7930
+West Springfield|US|MA|4211|-7262
+South Riverdale|CA||4365|-7934
+Shirley|US|NY|4080|-7287
+Livingston|US|NJ|4080|-7431
+Middletown|US|NY|4145|-7442
+Saratoga Springs|US|NY|4308|-7378
+Deer Park|US|NY|4076|-7333
+West Scarborough|US|ME|4357|-7039
+Queensbury|US|NY|4338|-7361
+Banbury-Don Mills|CA||4374|-7935
+Roslindale|US|MA|4229|-7112
+Bergenfield|US|NJ|4093|-7400
+York University Heights|CA||4377|-7949
+Nutley|US|NJ|4082|-7416
+Plum|US|PA|4050|-7975
+Tam O'Shanter-Sullivan|CA||4378|-7930
+Glen Cove|US|NY|4086|-7363
+West Hill|CA||4377|-7918
+Saint-Constant|CA||4537|-7357
+Grimsby|CA||4320|-7957
+College Point|US|NY|4079|-7385
+Lindenhurst|US|NY|4069|-7337
+Hunts Point|US|NY|4081|-7388
+Holbrook|US|NY|4081|-7308
+New London|US|CT|4136|-7210
+Don Valley Village|CA||4378|-7935
+Milton|US|MA|4225|-7107
+Auburn|US|NY|4293|-7657
+Clairlea-Birchmount|CA||4371|-7928
+Paramus|US|NJ|4094|-7408
+Back Mountain|US|PA|4134|-7600
+West Milford|US|NJ|4113|-7437
+Stoughton|US|MA|4213|-7110
+Easton|US|PA|4069|-7522
+Dix Hills|US|NY|4080|-7334
+Bolton|CA||4388|-7974
+Watertown|US|NY|4397|-7591
+Merrimack|US|NH|4287|-7149
+Wethersfield|US|CT|4171|-7265
+Saugus|US|MA|4246|-7101
+Milliken|CA||4382|-7930
+Danvers|US|MA|4258|-7093
+Boisbriand|CA||4562|-7383
+Smithtown|US|NY|4086|-7320
+Mansfield City|US|CT|4177|-7223
+Mercerville-Hamilton Square|US|NJ|4023|-7467
+Westport|US|CT|4114|-7336
+Bay Shore|US|NY|4073|-7325
+Westminster-Branson|CA||4378|-7945
+Plainview|US|NY|4078|-7347
+Howard Beach|US|NY|4066|-7384
+Rosedale|US|NY|4066|-7374
+Bay Street Corridor|CA||4366|-7939
+Vaudreuil-Dorion|CA||4540|-7403
+Randolph|US|NJ|4085|-7458
+Thetford-Mines|CA||4609|-7131
+Centretown|CA||4542|-7570
+Ridgewood|US|NJ|4098|-7412
+Long Island City|US|NY|4074|-7395
+Rhawnhurst|US|PA|4006|-7506
+South Portland|US|ME|4364|-7024
+Val-d'Or|CA||4810|-7780
+Lebanon|US|PA|4034|-7641
+Prince Edward|CA||4400|-7725
+Ossining|US|NY|4116|-7386
+Yarmouth|US|MA|4171|-7023
+Sainte-Thérèse|CA||4564|-7383
+Milford|US|MA|4214|-7152
+Stonegate-Queensway|CA||4364|-7950
+Maplewood|US|NJ|4073|-7427
+Dorset Park|CA||4375|-7928
+Brooklin|CA||4396|-7896
+Fallingbrook|CA||4548|-7548
+Farmington|US|CT|4172|-7283
+Wakefield|US|MA|4251|-7107
+East Amherst|US|NY|4302|-7870
+Whitehall Township|US|PA|4067|-7550
+Cliffside Park|US|NJ|4082|-7399
+Lodi|US|NJ|4088|-7408
+Hazleton|US|PA|4096|-7597
+Hillside|US|NY|4071|-7379
+Uniondale|US|NY|4070|-7359
+Reading|US|MA|4253|-7110
+Belmont|US|MA|4240|-7118
+Dedham|US|MA|4224|-7117
+Alta Vista|CA||4539|-7566
+Steeles|CA||4381|-7933
+Burlington|US|MA|4250|-7120
+South Windsor|US|CT|4182|-7262
+Bridlewood|CA||4529|-7586
+Waterdown|CA||4333|-7988
+Saint-Bruno-de-Montarville|CA||4553|-7335
+Midland|CA||4475|-7988
+South Plainfield|US|NJ|4058|-7441
+Newport|US|RI|4149|-7131
+Rockville Centre|US|NY|4066|-7364
+Carteret|US|NJ|4058|-7423
+Medford|US|NY|4082|-7300
+Lawndale|US|PA|4005|-7509
+North Haven|US|CT|4139|-7286
+Mahwah|US|NJ|4109|-7414
+Peekskill|US|NY|4129|-7392
+Baldwin|US|NY|4066|-7361
+East Gwillimbury|CA||4410|-7944
+Mile End|CA||4552|-7360
+Outremont|CA||4552|-7361
+High Park-Swansea|CA||4365|-7947
+Unionport|US|NY|4083|-7385
+South Portland Gardens|US|ME|4364|-7032
+Brockville|CA||4459|-7569
+Newtonbrook West|CA||4379|-7943
+Agincourt South-Malvern West|CA||4379|-7927
+Old Bridge|US|NJ|4041|-7437
+Van Nest|US|NY|4085|-7386
+Chestnut Hill|US|MA|4233|-7117
+Scotch Plains|US|NJ|4066|-7439
+Rouyn-Noranda|CA||4824|-7902
+Frankford|US|PA|4001|-7508
+Easton|US|MA|4202|-7113
+Kingston|US|NY|4193|-7400
+Mansfield|US|MA|4203|-7122
+La Prairie|CA||4542|-7350
+Keene|US|NH|4293|-7228
+Bedford Park-Nortown|CA||4373|-7942
+South Old Bridge|US|NJ|4041|-7435
+East Elmhurst|US|NY|4076|-7387
+Morrisania|US|NY|4083|-7391
+Middleborough|US|MA|4189|-7091
+Windham|US|CT|4170|-7216
+Copiague|US|NY|4068|-7340
+East Tremont|US|NY|4085|-7389
+Auburn|US|ME|4410|-7023
+Tremont|US|NY|4085|-7391
+Bristol|US|RI|4168|-7127
+Eglinton East|CA||4374|-7925
+Pottstown|US|PA|4025|-7565
+Cranford|US|NJ|4066|-7430
+Garden City|US|NY|4073|-7363
+Chambly|CA||4545|-7328
+Guilford|US|CT|4129|-7268
+Melrose|US|NY|4082|-7391
+East Patchogue|US|NY|4077|-7300
+Englemount-Lawrence|CA||4372|-7944
+Wilmington|US|MA|4255|-7117
+Birchcliffe-Cliffside|CA||4369|-7927
+Rockcliffe-Smythe|CA||4367|-7949
+Ludlow|US|MA|4216|-7248
+High Park North|CA||4366|-7947
+Willowridge-Martingrove-Richview|CA||4368|-7955
+Hillside|US|NJ|4070|-7423
+North Plainfield|US|NJ|4063|-7443
+Merrick|US|NY|4066|-7355
+Somerset|US|NJ|4050|-7449
+Summit|US|NJ|4072|-7436
+Derry|US|NH|4288|-7133
+Kingsview Village-The Westway|CA||4370|-7955
+Great Kills|US|NY|4055|-7415
+Flemingdon Park|CA||4372|-7933
+Logan|US|PA|4003|-7515
+Smithfield|US|RI|4192|-7155
+South Parkdale|CA||4364|-7944
+Black Creek|CA||4376|-7952
+Massapequa|US|NY|4068|-7347
+Canton|US|MA|4216|-7114
+Roselle|US|NJ|4065|-7426
+Lincoln|US|RI|4192|-7144
+Westford|US|MA|4258|-7144
+The Beaches|CA||4367|-7930
+Allison Park|US|PA|4056|-7996
+Bloomfield|US|CT|4183|-7273
+Portsmouth|US|NH|4308|-7076
+Wissinoming|US|PA|4002|-7506
+Stoneham|US|MA|4248|-7110
+Basking Ridge|US|NJ|4071|-7455
+Bayview Village|CA||4378|-7938
+East End-Danforth|CA||4368|-7930
+Winchester|US|MA|4245|-7114
+Biddeford|US|ME|4349|-7045
+Oakwood Village|CA||4368|-7944
+Bedford|US|NH|4295|-7152
+Uxbridge|CA||4410|-7912
+Thorncliffe Park|CA||4371|-7935
+Laurelton|US|NY|4067|-7375
+Woodrow|US|NY|4054|-7419
+Keswick|CA||4425|-7947
+Varennes|CA||4568|-7343
+Rosedale-Moore Park|CA||4368|-7938
+Acton|US|MA|4249|-7143
+Sanford|US|ME|4344|-7077
+Hauppauge|US|NY|4083|-7320
+Grand Island|US|NY|4303|-7896
+Clarence-Rockland|CA||4555|-7529
+New Springville|US|NY|4059|-7416
+Palisades Park|US|NJ|4085|-7400
+Latham|US|NY|4275|-7376
+Darien|US|CT|4108|-7347
+Rotterdam|US|NY|4279|-7397
+Lockport|US|NY|4317|-7869
+Moss Park|CA||4365|-7937
+Westmount|CA||4548|-7360
+Kirkland|CA||4545|-7387
+Ile-des-Soeurs|CA||4546|-7355
+Charlestown|US|MA|4238|-7106
+Lindsay|CA||4435|-7873
+Gardner|US|MA|4258|-7200
+Cambria Heights|US|NY|4069|-7374
+Elmwood Park|US|NJ|4090|-7412
+Hollis|US|NY|4071|-7377
+Brooklyn Heights|US|NY|4070|-7399
+East Northport|US|NY|4088|-7332
+Montville Center|US|CT|4148|-7215
+Lake Ronkonkoma|US|NY|4084|-7313
+Millburn|US|NJ|4072|-7430
+Murrysville|US|PA|4043|-7970
+West Mifflin|US|PA|4036|-7987
+Templeton-Est|CA||4549|-7559
+Lyndhurst|US|NJ|4081|-7412
+Johnstown|US|PA|4033|-7892
+North Bellmore|US|NY|4069|-7353
+King of Prussia|US|PA|4009|-7540
+Cortlandt Manor|US|NY|4128|-7387
+Mariners Harbor|US|NY|4064|-7416
+Saint-Lazare|CA||4540|-7413
+L'Île-Bizard–Sainte-Geneviève|CA||4549|-7390
+Selden|US|NY|4087|-7304
+Southbury|US|CT|4148|-7321
+Baldwin|US|PA|4034|-7998
+Huntsville|CA||4533|-7922
+Marblehead|US|MA|4250|-7086
+Norton|US|MA|4197|-7119
+Plattsburgh|US|NY|4470|-7345
+Greenfield|US|MA|4259|-7260
+New Canaan|US|CT|4115|-7349
+Fox Chase|US|PA|4008|-7508
+Sparta|US|NJ|4103|-7464
+Holtsville|US|NY|4082|-7305
+Lynbrook|US|NY|4065|-7367
+Eastchester|US|NY|4096|-7381
+McKeesport|US|PA|4035|-7986
+Mamaroneck|US|NY|4095|-7373
+Central Falls|US|RI|4189|-7139
+Waterford|US|CT|4134|-7214
+Woodbridge|US|NJ|4056|-7428
+Beaconsfield|CA||4543|-7387
+Carlisle|US|PA|4020|-7719
+Mineola|US|NY|4075|-7364
+Secaucus|US|NJ|4079|-7406
+Madison|US|CT|4128|-7260
+Ronkonkoma|US|NY|4082|-7314
+Saco|US|ME|4350|-7044
+Hawthorne|US|NJ|4095|-7415
+East Massapequa|US|NY|4067|-7344
+Amherst Center|US|MA|4238|-7252
+Southbridge|US|MA|4208|-7203
+Melville|US|NY|4079|-7342
+Kew Gardens|US|NY|4071|-7383
+Dorval|CA||4545|-7375
+North Bay Shore|US|NY|4075|-7326
+Mont-Royal|CA||4552|-7365
+Avon|US|CT|4181|-7283
+Beloeil|CA||4557|-7321
+Cortland|US|NY|4260|-7618
+Wantagh|US|NY|4068|-7351
+West Hempstead|US|NY|4070|-7365
+Ansonia|US|CT|4135|-7308
+Syosset|US|NY|4083|-7350
+Alliston|CA||4415|-7987
+Thorold|CA||4312|-7920
+Rossville|US|NY|4055|-7421
+South Burlington|US|VT|4447|-7317
+Mission Hill|US|MA|4233|-7111
+Iselin|US|NJ|4058|-7432
+Rutherford|US|NJ|4083|-7411
+Islip|US|NY|4073|-7321
+O'Connor-Parkview|CA||4371|-7931
+North St.James Town|CA||4367|-7938
+Morristown|US|NJ|4080|-7448
+Eringate-Centennial-West Deane|CA||4366|-7958
+Point Pleasant|US|NJ|4008|-7407
+East Mount Airy|US|PA|4006|-7519
+Monsey|US|NY|4111|-7407
+Dover|US|NJ|4088|-7456
+Amesbury|US|MA|4286|-7093
+Port Colborne|CA||4290|-7923
+Palmer|US|MA|4216|-7233
+Wallingford Center|US|CT|4145|-7282
+Somerset|US|MA|4177|-7113
+Cobourg|CA||4396|-7817
+Limerick|US|PA|4023|-7552
+Wilton|US|CT|4120|-7344
+Huntington|US|NY|4087|-7343
+La Baie|CA||4834|-7089
+Amsterdam|US|NY|4294|-7419
+Dumont|US|NJ|4094|-7400
+Weston|CA||4370|-7952
+Newburyport|US|MA|4281|-7088
+Rockland|US|MA|4213|-7092
+Westbrook|US|ME|4368|-7037
+Lackawanna|US|NY|4283|-7882
+Kensington-Chinatown|CA||4365|-7940
+Westerly|US|RI|4138|-7183
+Amos|CA||4857|-7812
+North Massapequa|US|NY|4070|-7346
+Scarsdale|US|NY|4101|-7378
+Nanuet|US|NY|4109|-7401
+North Amityville|US|NY|4070|-7343
+Tacony|US|PA|4003|-7504
+St. Andrew-Windfields|CA||4376|-7938
+Colonia|US|NJ|4057|-7430
+Oswego|US|NY|4346|-7651
+Tinton Falls|US|NJ|4030|-7410
+Brookhaven-Amesbury|CA||4370|-7949
+Portsmouth|US|RI|4160|-7125
+Times Square|US|NY|4076|-7399
+Willimantic|US|CT|4171|-7221
+Wallingford|US|CT|4146|-7282
+Hunting Park|US|PA|4002|-7514
+South Hadley|US|MA|4226|-7257
+Juniata Park|US|PA|4001|-7511
+Winthrop|US|MA|4238|-7098
+Back Bay|US|MA|4235|-7109
+Niagara-on-the-Lake|CA||4326|-7909
+Victoria Village|CA||4373|-7931
+North Babylon|US|NY|4072|-7332
+Laflèche|CA||4550|-7347
+Saint-Lin-Laurentides|CA||4585|-7377
+Morningside|CA||4379|-7921
+Deux-Montagnes|CA||4553|-7390
+Les Coteaux|CA||4528|-7423
+Nicetown-Tioga|US|PA|4001|-7516
+Wilton|US|NY|4318|-7374
+Sudbury|US|MA|4238|-7142
+Plainville|US|CT|4167|-7286
+Middletown|US|RI|4155|-7129
+South Orange|US|NJ|4075|-7426
+Killingly Center|US|CT|4184|-7187
+Kings Park|US|NY|4089|-7326
+Saint-Augustin-de-Desmaures|CA||4674|-7145
+Massapequa Park|US|NY|4068|-7346
+Petawawa|CA||4589|-7728
+Danforth East York|CA||4369|-7933
+Wyckoff|US|NJ|4101|-7417
+Kennedy Park|CA||4372|-7926
+Woodmere|US|NY|4063|-7371
+Holden|US|MA|4235|-7186
+Avenel|US|NJ|4058|-7429
+East Setauket|US|NY|4094|-7311
+Vanier|CA||4544|-7566
+Colchester|US|VT|4454|-7315
+Willowdale West|CA||4377|-7943
+Hillcrest Village|CA||4380|-7935
+Hanover|US|MA|4211|-7081
+Sayville|US|NY|4074|-7308
+Leaside-Bennington|CA||4370|-7937
+Concord|US|MA|4246|-7135
+New Milford|US|NJ|4094|-7402
+North Attleborough Center|US|MA|4197|-7132
+Parkwood Manor|US|PA|4009|-7497
+Mount Pleasant East|CA||4370|-7938
+Sainte-Catherine|CA||4540|-7358
+Greenfield Park|CA||4549|-7346
+Scarborough Village|CA||4374|-7922
+Auburn|US|MA|4219|-7184
+Buckingham|CA||4559|-7542
+Denville|US|NJ|4089|-7448
+Barrington|US|RI|4174|-7131
+Phoenixville|US|PA|4013|-7551
+Wolcott|US|CT|4160|-7299
+North Valley Stream|US|NY|4069|-7370
+Easthampton|US|MA|4227|-7267
+Grafton|US|MA|4221|-7169
+Seymour|US|CT|4140|-7308
+Trinity-Bellwoods|CA||4365|-7941
+Cohoes|US|NY|4277|-7370
+Swansea|US|MA|4175|-7119
+L'Ancienne-Lorette|CA||4679|-7135
+Lansdale|US|PA|4024|-7528
+Clanton Park|CA||4374|-7945
+Fairhaven|US|MA|4164|-7090
+Bethpage|US|NY|4074|-7348
+South River|US|NJ|4045|-7439
+Baychester|US|NY|4087|-7384
+Hopatcong Hills|US|NJ|4094|-7467
+Roosevelt|US|NY|4068|-7359
+Laconia|US|NH|4353|-7147
+Bellmore|US|NY|4067|-7353
+Sainte-Catherine|CA||4632|-7257
+Lansing-Westgate|CA||4375|-7942
+Madison|US|NJ|4076|-7442
+Newtonbrook East|CA||4379|-7941
+Rye|US|NY|4098|-7368
+Bracebridge|CA||4503|-7932
+Abington|US|MA|4210|-7095
+Floral Park|US|NY|4072|-7370
+Candiac|CA||4538|-7352
+Cliffcrest|CA||4372|-7923
+L'Assomption|CA||4582|-7343
+North Arlington|US|NJ|4079|-7413
+Greater Napanee|CA||4425|-7695
+Pearl River|US|NY|4106|-7402
+Bathurst Manor|CA||4376|-7946
+Narragansett|US|RI|4145|-7145
+Port Washington|US|NY|4083|-7370
+Rutland|US|VT|4361|-7297
+Pleasant View|CA||4379|-7934
+Asbury Park|US|NJ|4022|-7401
+Ashland|US|MA|4226|-7146
+Saint-Henri|CA||4547|-7360
+Longmeadow|US|MA|4205|-7258
+Orient Heights|US|MA|4239|-7100
+Wilkinsburg|US|PA|4044|-7988
+Willow Grove|US|PA|4014|-7512
+Henry Farm|CA||4377|-7935
+Mont-Saint-Hilaire|CA||4557|-7319
+Taylor-Massey|CA||4370|-7930
+Saint-Basile-le-Grand|CA||4553|-7328
+Little Portugal|CA||4365|-7943
+Magog|CA||4527|-7215
+Humbermede|CA||4375|-7954
+Edenbridge-Humber Valley|CA||4367|-7952
+Plainfield|US|CT|4168|-7192
+Farmingville|US|NY|4083|-7303
+Mastic|US|NY|4080|-7284
+Setauket-East Setauket|US|NY|4093|-7310
+Harrison|US|NJ|4075|-7416
+Port Richmond|US|NY|4063|-7414
+Terrace Heights|US|NY|4072|-7377
+Emerson Hill|US|NY|4061|-7410
+Westbury|US|NY|4076|-7359
+Storrs|US|CT|4181|-7225
+Warren Township|US|NJ|4061|-7452
+Seaford|US|NY|4067|-7349
+Saint-Charles-Borromée|CA||4605|-7347
+Graniteville|US|NY|4062|-7415
+Roxbury Crossing|US|MA|4233|-7109
+Ledyard|US|CT|4144|-7201
+Saint-Vincent-de-Paul|CA||4562|-7365
+Fords|US|NJ|4053|-7432
+Lawrence Park South|CA||4372|-7941
+Kenmore|US|NY|4297|-7887
+Depew|US|NY|4290|-7869
+Gates-North Gates|US|NY|4317|-7770
+East Longmeadow|US|MA|4206|-7251
+Ramsey|US|NJ|4106|-7414
+Duxbury|US|MA|4204|-7067
+Gloversville|US|NY|4305|-7434
+Eggertsville|US|NY|4296|-7880
+Batavia|US|NY|4300|-7819

@@ -1,0 +1,53 @@
+Gqeberha|ZA||-3396|2561
+East London|ZA||-3302|2791
+Kariega|ZA||-3376|2540
+Mdantsane|ZA||-3293|2778
+George|ZA||-3396|2246
+Mthatha|ZA||-3159|2878
+Bhisho|ZA||-3285|2744
+Queenstown|ZA||-3190|2688
+Qonce|ZA||-3288|2739
+Grahamstown|ZA||-3330|2653
+Mossel Bay|ZA||-3418|2215
+Oudtshoorn|ZA||-3360|2220
+Knysna|ZA||-3404|2305
+Graaff Reinet|ZA||-3225|2453
+Kokstad|ZA||-3055|2942
+Fort Beaufort|ZA||-3277|2663
+Butterworth|ZA||-3233|2815
+Mohale's Hoek|LS||-3015|2748
+Beaufort West|ZA||-3236|2258
+Aliwal North|ZA||-3069|2671
+Cradock|ZA||-3216|2562
+Plettenberg Bay|ZA||-3405|2337
+Stutterheim|ZA||-3257|2742
+Humansdorp|ZA||-3403|2477
+Quthing|LS||-3040|2770
+Whittlesea|ZA||-3218|2682
+Jeffreys Bay|ZA||-3405|2492
+De Aar|ZA||-3065|2401
+Port Alfred|ZA||-3359|2688
+Dimbaza|ZA||-3283|2722
+Qacha’s Nek|LS||-3012|2869
+Lady Frere|ZA||-3170|2723
+Gonubie|ZA||-3294|2801
+Somerset East|ZA||-3272|2559
+Middelburg|ZA||-3149|2501
+Swellendam|ZA||-3402|2044
+Queensdale|ZA||-3187|2698
+Riversdale|ZA||-3409|2126
+Burgersdorp|ZA||-3100|2633
+Kruisfontein|ZA||-3400|2473
+Zastron|ZA||-3030|2708
+Bredasdorp|ZA||-3453|2004
+Clydesdale|ZA||-3030|2994
+Montagu|ZA||-3379|2012
+Ndevana|ZA||-3291|2751
+Alice|ZA||-3279|2683
+Groot-Brakrivier|ZA||-3404|2223
+Khowa|ZA||-3133|2785
+Ugie|ZA||-3120|2823
+Ashton|ZA||-3383|2006
+Tlokoeng|ZA||-3069|2851
+Cala|ZA||-3152|2770
+Dysselsdorp|ZA||-3358|2244

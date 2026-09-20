@@ -1,0 +1,46 @@
+Brisbane|AU||-2747|15303
+Gold Coast|AU||-2800|15343
+Sunshine Coast|AU||-2666|15308
+Logan City|AU||-2764|15311
+Toowoomba|AU||-2756|15195
+Caloundra|AU||-2680|15312
+Rockhampton|AU||-2338|15051
+Bundaberg|AU||-2487|15235
+Hervey Bay|AU||-2529|15277
+Gladstone|AU||-2385|15126
+Southport|AU||-2797|15340
+Surfers Paradise|AU||-2800|15343
+Buderim|AU||-2668|15306
+Maryborough|AU||-2554|15270
+Caboolture|AU||-2708|15295
+Upper Coomera|AU||-2788|15329
+Robina|AU||-2807|15339
+Forest Lake|AU||-2763|15297
+Gympie|AU||-2619|15266
+North Lakes|AU||-2722|15302
+Morayfield|AU||-2711|15295
+Narangba|AU||-2720|15296
+Kallangur|AU||-2725|15299
+Deception Bay|AU||-2719|15303
+Grafton|AU||-2968|15293
+Redbank Plains|AU||-2765|15286
+Maroochydore|AU||-2666|15310
+Labrador|AU||-2794|15340
+Capalaba|AU||-2754|15320
+Sunnybank Hills|AU||-2761|15305
+Calamvale|AU||-2762|15305
+Helensvale|AU||-2792|15333
+Nerang|AU||-2799|15334
+Bracken Ridge|AU||-2732|15303
+Pacific Pines|AU||-2794|15331
+The Gap|AU||-2744|15294
+Alexandra Hills|AU||-2753|15323
+Coorparoo|AU||-2749|15306
+Banora Point|AU||-2821|15354
+Albany Creek|AU||-2735|15297
+Carindale|AU||-2751|15310
+Warwick|AU||-2822|15203
+Eight Mile Plains|AU||-2758|15310
+Palm Beach|AU||-2812|15347
+Springfield Lakes|AU||-2767|15292
+Rochedale South|AU||-2760|15312

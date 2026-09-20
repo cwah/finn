@@ -1,0 +1,4 @@
+Anchorage|US|AK|6122|-14990
+Fairbanks|US|AK|6484|-14772
+Eagle River|US|AK|6132|-14957
+Badger|US|AK|6480|-14753

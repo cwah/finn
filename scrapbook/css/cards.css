@@ -557,3 +557,17 @@
 
 /* A motion photo has no sound control, so its badge keeps the corner to itself. */
 .video-badge--motion ~ .video-badge--sound { display: none; }
+
+/* Where a memory happened, beside the date it happened on. Quieter than the date: the day
+   is what orders a scrapbook, the place is context. */
+.card-place {
+  color: var(--ink-soft, #6b7280);
+  font-size: 0.82rem;
+}
+
+/* A dot between them, but only when both are there. */
+.card-place::before {
+  content: '·';
+  margin: 0 0.4em;
+  opacity: 0.6;
+}

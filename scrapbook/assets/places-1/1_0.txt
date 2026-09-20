@@ -1,0 +1,109 @@
+Kano|NG||1200|852
+Kaduna|NG||1053|744
+Niamey|NE||1351|211
+Sokoto|NG||1306|524
+Zaria|NG||1111|772
+Bauchi|NG||1031|984
+Katsina|NG||1299|760
+Saminaka|NG||1041|869
+Maradi|NE||1350|710
+Zinder|NE||1381|899
+Gusau|NG||1217|666
+Chakwama|NG||1156|966
+Tahoua|NE||1489|527
+Agadez|NE||1697|799
+Funtua|NG||1152|731
+Birnin Kebbi|NG||1245|420
+Arlit|NE||1874|739
+Kontagora|NG||1040|547
+Lere|NG||1039|857
+Alaghsas|NE||1702|802
+Birni N Konni|NE||1380|525
+Dosso|NE||1305|319
+Jega|NG||1222|438
+Fada N'gourma|BF||1206|36
+Malumfashi|NG||1179|762
+Kaura Namoda|NG||1259|659
+Malanville|BJ||1187|338
+Gaya|NE||1188|345
+Tessaoua|NE||1376|799
+Dapaong|TG||1086|21
+Kandi|BJ||1113|294
+Kérou|BJ||1083|210
+Natitingou|BJ||1030|138
+Dogondoutchi|NE||1364|403
+Argungu|NG||1274|453
+Gumel|NG||1263|939
+Méhana|NE||1439|113
+Kidal|ML||1844|141
+Dakoro|NE||1451|676
+Téra|NE||1401|75
+Talata Mafara|NG||1257|606
+Gummi|NG||1214|512
+Mirriah|NE||1371|915
+Madaoua|NE||1407|596
+Mango|TG||1036|47
+Banikoara|BJ||1130|244
+Matamey|NE||1342|847
+Péhonko|BJ||1023|200
+Kalalé|BJ||1029|338
+Sinendé|BJ||1035|238
+Magaria|NE||1300|891
+Tibiri|NE||1356|705
+Youri Kourtéré|NE||1333|225
+Bembèrèkè|BJ||1023|266
+Tillabéri|NE||1421|145
+Illéla|NE||1446|524
+Abalak|NE||1545|628
+Moriki|NG||1287|649
+Tanout|NE||1497|889
+Tanguiéta|BJ||1062|127
+Sinkassé|TG||1110|1
+Birnin Kudu|NG||1145|948
+Ségbana|BJ||1093|369
+Ayorou|NE||1473|92
+Kamba|NG||1185|365
+Daura|NG||1303|832
+Cobly|BJ||1049|100
+Matéri|BJ||1070|106
+Zuru|NG||1144|523
+Tegina|NG||1007|619
+Guidan Roumdji|NE||1366|670
+Aguié|NE||1351|778
+Wudil|NG||1181|884
+Boukoumbé|BJ||1018|111
+Sofo-Birnin-Gwari|NG||1102|678
+Mayahi|NE||1396|767
+Dutsen Wai|NG||1085|820
+Baléyara|NE||1378|295
+Gaya|NG||1186|900
+Tambuwal|NG||1241|465
+Tchin Tabaradèn|NE||1590|580
+Kollo|NE||1330|234
+Gazaoua|NE||1353|791
+Cinkansé|BF||1112|1
+Birnin Gaouré|NE||1308|291
+Andéranboukan|ML||1543|302
+Say|NE||1310|237
+Rano|NG||1156|858
+Kiyawa|NG||1178|961
+Babana|NG||1043|381
+Gwadabawa|NG||1336|524
+Illela|NG||1373|530
+Dutse|NG||1176|934
+Tobré|BJ||1019|213
+Natiaboani|BF||1170|51
+Rijau|NG||1110|526
+Filingué|NE||1435|332
+Madarounfa|NE||1331|716
+Namponkoré|BF||1174|178
+Toukountouna|BJ||1050|137
+Gwarzo|NG||1192|793
+Torodi|NE||1312|180
+Gwaram|NG||1128|988
+Soba|NG||1098|806
+Ibeto|NG||1049|515
+Anchau|NG||1096|839
+Diapaga|BF||1207|179
+Gayéri|BF||1265|49
+Kompienga|BF||1108|72

@@ -1,0 +1,48 @@
+Morelia|MX||1970|-10118
+Uruapan|MX||1942|-10206
+Ciudad Lázaro Cárdenas|MX||1796|-10220
+Zamora de Hidalgo|MX||1998|-10229
+Manzanillo|MX||1912|-10434
+Colima|MX||1924|-10371
+Ciudad de Villa de Álvarez|MX||1927|-10374
+Ciudad Guzmán|MX||1970|-10346
+Apatzingán|MX||1909|-10236
+Tecomán|MX||1892|-10388
+Heróica Zitácuaro|MX||1944|-10036
+Ixtapa-Zihuatanejo|MX||1764|-10155
+Ciudad Hidalgo|MX||1969|-10056
+Pátzcuaro|MX||1951|-10161
+Jacona de Plancarte|MX||1996|-10231
+Zacapu|MX||1982|-10179
+Autlán de Navarro|MX||1977|-10437
+Cihuatlán|MX||1924|-10457
+Los Reyes de Salgado|MX||1959|-10247
+Las Guacamayas|MX||1802|-10221
+Paracho de Verduzco|MX||1965|-10205
+Maravatío de Ocampo|MX||1989|-10044
+Nueva Italia de Ruiz|MX||1902|-10209
+Tuxpan|MX||1956|-10338
+Sayula|MX||1988|-10360
+Tacámbaro de Codallos|MX||1924|-10146
+Tejupilco de Hidalgo|MX||1890|-10015
+Valle de Bravo|MX||1920|-10013
+Ciudad Altamirano|MX||1836|-10067
+Jiquilpan de Juárez|MX||1999|-10272
+Purépero de Echáiz|MX||1991|-10201
+Zapotiltic|MX||1963|-10342
+Huetamo de Núñez|MX||1863|-10090
+Petatlán|MX||1754|-10127
+Atoyac de Álvarez|MX||1721|-10043
+El Grullo|MX||1981|-10422
+La Orilla|MX||1800|-10223
+Tamazula de Gordiano|MX||1968|-10325
+Arcelia|MX||1832|-10028
+Coalcomán de Vázquez Pallares|MX||1878|-10316
+Ario de Rosales|MX||1921|-10171
+Ciudad de Armería|MX||1894|-10396
+Zinapécuaro de Figueroa|MX||1986|-10083
+Peribán de Ramos|MX||1952|-10242
+Tuzantla|MX||1920|-10057
+Tepalcatepec|MX||1919|-10285
+Técpan de Galeana|MX||1722|-10063
+Tangancícuaro de Arista|MX||1989|-10221

@@ -1,0 +1,9 @@
+Antofagasta|CL||-2365|-7040
+Iquique|CL||-2021|-7015
+Coquimbo|CL||-2995|-7134
+La Serena|CL||-2991|-7125
+Alto Hospicio|CL||-2027|-7010
+Copiapó|CL||-2737|-7033
+Vallenar|CL||-2858|-7076
+Tocopilla|CL||-2209|-7020
+Caldera|CL||-2707|-7082

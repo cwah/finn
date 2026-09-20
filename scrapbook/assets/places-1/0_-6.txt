@@ -1,0 +1,25 @@
+Macapá|BR||4|-5107
+Georgetown|GY||680|-5816
+Paramaribo|SR||587|-5517
+Cayenne|GF|GF|494|-5233
+Linden|GY||601|-5831
+New Amsterdam|GY||625|-5752
+Blauwgrond|SR||584|-5512
+Latour|SR||580|-5521
+Oiapoque|BR||384|-5184
+Matoury|GF|GF|485|-5232
+Saint-Laurent-du-Maroni|GF|GF|550|-5403
+Kourou|GF|GF|516|-5264
+Pontbuiten|SR||579|-5521
+Rainville|SR||583|-5514
+Porto Grande|BR||71|-5141
+Flora|SR||580|-5520
+Welgelegen|SR||584|-5522
+Rémire-Montjoly|GF|GF|492|-5227
+Lelydorp|SR||570|-5523
+Tartarugalzinho|BR||151|-5091
+Munder Buiten|SR||584|-5518
+Beekhuizen|SR||581|-5517
+Pedra Branca do Amapari|BR||78|-5194
+Weg naar Zee|SR||587|-5521
+Tammenga|SR||583|-5520

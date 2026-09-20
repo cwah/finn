@@ -1,0 +1,538 @@
+Istanbul|TR||4101|2895
+Bursa|TR||4020|2906
+Bucharest|RO||4443|2611
+Belgrade|RS|SE|4480|2047
+Sofia|BG||4270|2332
+Esenyurt|TR||4103|2868
+Küçükçekmece|TR||4099|2877
+Bağcılar|TR||4104|2886
+Lviv|UA||4984|2402
+Chisinau|MD||4701|2886
+Bahçelievler|TR||4100|2886
+Umraniye|TR||4102|2912
+Pristina|XK||4267|2117
+Nilüfer|TR||4021|2892
+Üsküdar|TR||4102|2901
+Esenler|TR||4104|2888
+Sancaktepe|TR||4100|2923
+Skopje|MK||4200|2143
+Sultangazi|TR||4111|2887
+Vinnytsya|UA||4923|2847
+Maltepe|TR||4094|2916
+Beylikdüzü|TR||4098|2864
+Sector 3|RO||4442|2617
+Iaşi|RO||4717|2760
+Sector 6|RO||4444|2602
+Ataşehir|TR||4098|2912
+Sultanbeyli|TR||4096|2927
+Fatih|TR||4102|2894
+Plovdiv|BG||4215|2475
+Varna|BG||4322|2791
+Constanţa|RO||4418|2863
+Thessaloníki|GR||4064|2293
+Şişli|TR||4106|2899
+Sector 2|RO||4445|2613
+Sector 4|RO||4438|2612
+Cluj-Napoca|RO||4677|2360
+Gebze|TR||4080|2943
+Zeytinburnu|TR||4099|2890
+Khmelnytskyi|UA||4942|2698
+Sector 5|RO||4439|2607
+Chernivtsi|UA||4829|2593
+Braşov|RO||4565|2561
+Timişoara|RO||4575|2123
+Niš|RS|SE|4332|2190
+Ivano-Frankivsk|UA||4892|2471
+Craiova|RO||4432|2380
+Sector 1|RO||4449|2605
+Ternopil|UA||4955|2559
+Košice|SK||4871|2126
+Galaţi|RO||4544|2805
+Târgu Mureş|RO||4654|2456
+Burgas|BG||4251|2747
+Novi Beograd|RS|SE|4481|2042
+Çorlu|TR||4116|2780
+Debrecen|HU||4753|2162
+Arnavutköy|TR||4118|2874
+İzmit|TR||4076|2993
+Başakşehir|TR||4111|2879
+Oradea|RO||4705|2192
+Ploieşti|RO||4495|2602
+Edirne|TR||4168|2656
+Prizren|XK||4221|2074
+Arad|RO||4618|2132
+Büyükçekmece|TR||4102|2859
+Szeged|HU||4625|2015
+Tiraspol|MD||4684|2963
+Zemun|RS|SE|4485|2040
+Brăila|RO||4527|2797
+Miskolc|HU||4810|2078
+Sykhiv|UA||4979|2406
+Kragujevac|RS|SE|4402|2092
+Çanakkale|TR||4016|2641
+Piteşti|RO||4485|2487
+Bacău|RO||4657|2691
+Sibiu|RO||4580|2415
+İnegol|TR||4008|2951
+Derince|TR||4076|2981
+Bălţi|MD||4776|2793
+Tekirdağ|TR||4098|2751
+Stara Zagora|BG||4243|2564
+Ruse|BG||4385|2595
+Nyíregyháza|HU||4796|2172
+Čačak|RS|SE|4389|2035
+Uzhhorod|UA||4862|2229
+Satu Mare|RO||4780|2286
+Bender|MD||4683|2948
+Baia Mare|RO||4766|2357
+Bandırma|TR||4035|2798
+Mitrovicë|XK||4288|2087
+Buzău|RO||4515|2683
+Piatra Neamţ|RO||4692|2633
+Mustafakemalpaşa|TR||4004|2841
+Elbasan|AL||4111|2008
+Kamyanets-Podilskyi|UA||4868|2659
+Leskovac|RS|SE|4300|2195
+Gjakovë|XK||4238|2043
+Râmnicu Vâlcea|RO||4510|2437
+Kalamariá|GR||4058|2295
+Lüleburgaz|TR||4140|2736
+Körfez|TR||4077|2978
+Pleven|BG||4342|2462
+Botoşani|RO||4775|2667
+Novi Pazar|RS|SE|4314|2051
+Mukachevo|UA||4844|2272
+Nowy Sącz|PL||4962|2070
+Suceava|RO||4763|2625
+Çerkezköy|TR||4129|2800
+Sliven|BG||4269|2633
+Prešov|SK||4900|2124
+Kraljevo|RS|SE|4373|2069
+Pernik|BG||4260|2303
+Reşiţa|RO||4530|2189
+Drobeta-Turnu Severin|RO||4463|2265
+Zrenjanin|RS|VO|4538|2038
+Bistriţa|RO||4713|2450
+Pančevo|RS|VO|4487|2064
+Kruševac|RS|SE|4358|2133
+Kumanovo|MK||4213|2172
+Évosmos|GR||4067|2291
+Bilecik|TR||4014|2998
+Prilep|MK||4135|2155
+Drohobych|UA||4935|2351
+Târgu Jiu|RO||4505|2328
+Berdychiv|UA||4989|2858
+Shumen|BG||4327|2692
+Suva Reka|XK||4236|2082
+Yalova|TR||4066|2928
+Szolnok|HU||4718|2020
+Gemlik|TR||4043|2916
+Izmayil|UA||4535|2884
+Dobrich|BG||4356|2783
+Bitola|MK||4103|2134
+Hunedoara|RO||4575|2290
+Roman|RO||4692|2693
+Bârlad|RO||4623|2767
+Blagoevgrad|BG||4201|2310
+Deva|RO||4588|2290
+Przemyśl|PL||4978|2277
+Târgovişte|RO||4493|2546
+Focșani|RO||4570|2718
+Tulcea|RO||4518|2881
+Kalush|UA||4902|2437
+Čair|MK||4202|2144
+Haskovo|BG||4193|2556
+Alba Iulia|RO||4607|2358
+Yambol|BG||4248|2650
+Slatina|RO||4443|2437
+Tetovo|MK||4201|2097
+Vaslui|RO||4663|2773
+Smederevo|RS|SE|4466|2093
+Stryi|UA||4926|2385
+Biga|TR||4023|2724
+Kolomyia|UA||4852|2504
+Békéscsaba|HU||4668|2110
+Ferizaj|XK||4237|2116
+Veliko Tŭrnovo|BG||4308|2563
+Glogovac|XK||4263|2089
+Sérres|GR||4108|2355
+Korçë|AL||4062|2078
+Kırklareli|TR||4174|2723
+Kisela Voda|MK||4195|2150
+Veles|MK||4172|2177
+Vranje|RS|SE|4255|2190
+Gölcük|TR||4072|2982
+Eminönü|TR||4102|2897
+Rîbniţa|MD||4777|2901
+Pazardzhik|BG||4220|2433
+Asenovgrad|BG||4202|2487
+Giurgiu|RO||4389|2596
+Kavála|GR||4094|2441
+Eger|HU||4790|2037
+Kateríni|GR||4027|2251
+Silivri|TR||4107|2825
+Mediaş|RO||4617|2435
+Alexandroupoli|GR||4085|2588
+Zalău|RO||4720|2305
+Gjilan|XK||4246|2147
+Orhangazi|TR||4049|2931
+Gostivar|MK||4180|2091
+Kavaklı|TR||4109|2833
+Deçan|XK||4254|2029
+Sfântu Gheorghe|RO||4587|2578
+Merter Keresteciler|TR||4101|2889
+Güngören Merter|TR||4101|2889
+Zaječar|RS|SE|4390|2226
+Vratsa|BG||4321|2356
+Poprad|SK||4906|2030
+Trstenik|RS|SE|4362|2100
+Pejë|XK||4266|2029
+Shtip|MK||4175|2220
+Xánthi|GR||4113|2489
+Gabrovo|BG||4287|2532
+Kazanlak|BG||4262|2540
+Krosno|PL||4969|2177
+Montana|BG||4341|2322
+Vitina|XK||4232|2136
+Kyustendil|BG||4228|2269
+Pogradec|AL||4090|2065
+Stavroúpoli|GR||4067|2294
+Komotiní|GR||4112|2541
+Centar Župa|MK||4148|2056
+Paşcani|RO||4725|2672
+Sykiés|GR||4065|2295
+Dráma|GR||4115|2415
+Keşan|TR||4086|2663
+Véroia|GR||4052|2220
+Karacabey|TR||4021|2836
+Petroşani|RO||4542|2337
+Kardzhali|BG||4165|2537
+Hódmezővásárhely|HU||4642|2033
+Turda|RO||4657|2378
+Medgidia|RO||4425|2828
+Lugoj|RO||4569|2190
+Ohrid|MK||4112|2080
+Kikinda|RS|VO|4583|2047
+Požarevac|RS|SE|4462|2119
+Câmpina|RO||4513|2573
+Slobozia|RO||4456|2736
+Tecuci|RO||4585|2743
+Gjorče Petro|MK||4201|2135
+Gönen|TR||4010|2765
+Pirot|RS|SE|4315|2259
+Sighetu Marmaţiei|RO||4793|2389
+Alexandria|RO||4398|2533
+Novyi Lviv|UA||4982|2403
+Istok|XK||4278|2049
+Sanok|PL||4956|2221
+Çatalca|TR||4114|2846
+Mangalia|RO||4382|2858
+Bor|RS|SE|4407|2210
+Podilsk|UA||4775|2953
+Políchni|GR||4067|2295
+Kavadarci|MK||4143|2201
+Râmnicu Sărat|RO||4538|2705
+Dej|RO||4715|2387
+Dimitrovgrad|BG||4205|2560
+Jasło|PL||4975|2147
+Struga|MK||4118|2068
+Lagkadás|GR||4075|2307
+Pylaía|GR||4060|2299
+Odorheiu Secuiesc|RO||4630|2530
+Kozáni|GR||4030|2179
+Uzunköprü|TR||4127|2669
+Vršac|RS|VO|4512|2130
+Kestel|TR||4020|2921
+Butel|MK||4203|2145
+Kukës|AL||4208|2042
+Görükle|TR||4023|2884
+Michalovce|SK||4875|2192
+Jagodina|RS|SE|4398|2126
+Reghin-Sat|RO||4678|2472
+Shtime|XK||4243|2104
+Podujeva|XK||4291|2119
+Dragash|XK||4203|2065
+Spišská Nová Ves|SK||4894|2056
+Vidin|BG||4399|2288
+Targovishte|BG||4325|2657
+Dupnitsa|BG||4226|2312
+Sighișoara|RO||4622|2479
+Zhmerynka|UA||4904|2811
+Cahul|MD||4590|2820
+Miercurea-Ciuc|RO||4635|2580
+Ungheni|MD||4721|2780
+Kochani|MK||4192|2241
+Starokostyantyniv|UA||4976|2721
+Sambir|UA||4952|2320
+Strumica|MK||4144|2264
+Nowy Targ|PL||4948|2003
+Caracal|RO||4412|2435
+Năvodari|RO||4432|2860
+Feteşti|RO||4438|2783
+Gorna Oryahovitsa|BG||4313|2570
+Boryslav|UA||4929|2343
+Kazincbarcika|HU||4825|2063
+Gyula|HU||4665|2128
+Curtea de Argeş|RO||4513|2467
+Hajdúböszörmény|HU||4767|2152
+Orosháza|HU||4657|2067
+Novoyavorivs'k|UA||4993|2357
+Kičevo|MK||4151|2096
+Mimarsinan|TR||4101|2856
+Dorohoi|RO||4795|2640
+Petrich|BG||4140|2321
+Făgăraș|RO||4585|2497
+Smolyan|BG||4157|2471
+Vushtrri|XK||4282|2097
+Mohyliv-Podilskyy|UA||4844|2780
+Karamürsel|TR||4069|2962
+Lupeni|RO||4536|2324
+Humenné|SK||4894|2192
+Karlovo|BG||4263|2480
+Voluntari|RO||4449|2617
+Bardejov|SK||4929|2127
+Svishtov|BG||4362|2535
+Ózd|HU||4822|2030
+Ptolemaḯda|GR||4051|2168
+Chalkidóna|GR||4073|2260
+Săcele|RO||4562|2571
+Fălticeni|RO||4745|2630
+Silistra|BG||4412|2726
+Gürpınar|TR||4099|2861
+Bochnia|PL||4997|2043
+Huşi|RO||4667|2806
+Mioveni|RO||4496|2494
+Razgrad|BG||4353|2652
+Yakuplu|TR||4099|2868
+Turnu Măgurele|RO||4375|2487
+Yenişehir|TR||4026|2965
+Târnăveni|RO||4633|2430
+Gorlice|PL||4966|2116
+Sandanski|BG||4157|2328
+Khust|UA||4817|2330
+Chortkiv|UA||4902|2580
+Aiud|RO||4631|2372
+Novyi Rozdil|UA||4947|2413
+Truskavets|UA||4928|2350
+Lipkovo|MK||4216|2159
+Lovech|BG||4313|2472
+Szentes|HU||4666|2026
+Giannitsá|GR||4079|2241
+Khmilnyk|UA||4956|2796
+Prokuplje|RS|SE|4323|2159
+Caransebeş|RO||4542|2222
+Malkara|TR||4089|2690
+Soroca|MD||4816|2828
+Roșiorii de Vede|RO||4412|2498
+Sebeş|RO||4596|2357
+Elefthério - Kordelió|GR||4066|2290
+Asparuhovo|BG||4318|2789
+Smederevska Palanka|RS|SE|4437|2096
+Borşa|RO||4766|2466
+Bulqizë|AL||4149|2022
+Samokov|BG||4234|2356
+Babaeski|TR||4143|2710
+Câmpia Turzii|RO||4655|2388
+Durleşti|MD||4702|2876
+Çan|TR||4003|2705
+Neapoli|GR||4065|2294
+Bečej|RS|VO|4562|2003
+Haysyn|UA||4881|2938
+Zelino|MK||4198|2106
+Saraj|MK||4200|2133
+Vynohradiv|UA||4814|2304
+Újszeged|HU||4625|2017
+Petrila|RO||4545|2342
+Gelibolu|TR||4041|2667
+Makó|HU||4622|2048
+Knjazevac|RS|SE|4357|2226
+Radovis|MK||4164|2246
+Zărnești|RO||4556|2532
+Orhei|MD||4739|2883
+Cugir|RO||4584|2337
+Sevlievo|BG||4302|2510
+Gürsu|TR||4022|2919
+Inđija|RS|VO|4505|2008
+Aranđelovac|RS|SE|4431|2056
+Gornji Milanovac|RS|SE|4403|2046
+Moineşti|RO||4648|2649
+Rădăuți|RO||4785|2592
+Fetești-Gară|RO||4442|2783
+Hajdúszoboszló|HU||4745|2140
+Gherla|RO||4703|2392
+Comăneşti|RO||4642|2644
+Nova Zagora|BG||4248|2602
+Lazarevac|RS|SE|4439|2026
+Gjirokastër|AL||4008|2014
+Berehove|UA||4821|2264
+Librazhd|AL||4118|2032
+Dubăsari|MD||4727|2917
+Kozyatyn|UA||4972|2884
+Mudanya|TR||4038|2888
+Tearce|MK||4208|2105
+Sremčica|RS|SE|4468|2039
+Kilkís|GR||4099|2287
+Comrat|MD||4629|2866
+Edineţ|MD||4817|2730
+Trebišov|SK||4863|2172
+Törökszentmiklós|HU||4718|2042
+Ceadîr-Lunga|MD||4606|2883
+Erdek|TR||4040|2779
+Olteniţa|RO||4408|2663
+Zolochiv|UA||4981|2490
+Zekeriya|TR||4120|2903
+Nadvirna|UA||4864|2457
+Ladyzhyn|UA||4868|2924
+Karcag|HU||4732|2093
+Motru|RO||4480|2297
+İznik|TR||4043|2972
+Snina|SK||4899|2215
+Orahovac|XK||4240|2065
+Tepecik|TR||4103|2855
+Căuşeni|MD||4664|2941
+Rimavská Sobota|SK||4838|2002
+Békés|HU||4677|2113
+Troyan|BG||4289|2472
+Aytos|BG||4270|2725
+Botevgrad|BG||4291|2379
+Oraiókastro|GR||4073|2292
+Kriva Palanka|MK||4220|2233
+Šuto Orizare|MK||4204|2142
+Carei|RO||4768|2247
+Orăştie|RO||4583|2320
+Çubuklu|TR||4110|2908
+Buftea|RO||4456|2595
+Gevgelija|MK||4114|2250
+Drăgăşani|RO||4465|2427
+Balş|RO||4435|2410
+Moreni|RO||4498|2564
+Vranov nad Topľou|SK||4889|2168
+Ćuprija|RS|SE|4393|2137
+Codlea|RO||4570|2545
+Gotse Delchev|BG||4157|2373
+Târgu Neamţ|RO||4720|2637
+Dolyna|UA||4897|2397
+Blaj|RO||4618|2392
+Senta|RS|VO|4593|2008
+Velingrad|BG||4203|2399
+Stebnyk|UA||4930|2355
+Târgu Secuiesc|RO||4600|2613
+Corabia|RO||4378|2450
+Náousa|GR||4063|2207
+Băicoi|RO||4503|2585
+Llazicë|XK||4256|2076
+Hayrabolu|TR||4121|2711
+Şile|TR||4118|2961
+Gheorgheni|RO||4672|2560
+Vulcan|RO||4538|2327
+Câmpulung Moldovenesc|RO||4753|2557
+Karnobat|BG||4265|2698
+Băileşti|RO||4402|2335
+Kiliya|UA||4544|2926
+Negotino|MK||4148|2209
+Panagyurishte|BG||4250|2419
+Strășeni|MD||4714|2861
+Mezőtúr|HU||4700|2063
+Vynnyky|UA||4982|2414
+Leposaviq|XK||4310|2080
+Filiaşi|RO||4455|2352
+Harmanli|BG||4193|2590
+Krasyliv|UA||4965|2697
+Mátészalka|HU||4796|2232
+Wieliczka|PL||4999|2006
+Peshtera|BG||4203|2430
+Édessa|GR||4080|2205
+Calafat|RO||4399|2293
+Lom|BG||4383|2324
+Csongrád|HU||4671|2014
+Reni|UA||4545|2828
+Balta|UA||4794|2962
+Cernavodă|RO||4434|2803
+Kalynivka|UA||4946|2852
+Volochysk|UA||4954|2621
+Buhuşi|RO||4672|2670
+Peraía|GR||4050|2293
+Studeničani|MK||4192|2153
+Vinica|MK||4188|2251
+Kisvárda|HU||4822|2208
+Szarvas|HU||4687|2055
+Debar|MK||4152|2052
+Diósgyőr|HU||4810|2068
+Sátoraljaújhely|HU||4839|2166
+Hajdúnánás|HU||4785|2143
+Balmazújváros|HU||4762|2135
+Breaza|RO||4518|2567
+Chortiátis|GR||4061|2310
+Tarabya|TR||4113|2905
+Mezőkövesd|HU||4782|2058
+Berezhany|UA||4945|2494
+Flórina|GR||4078|2141
+Negotin|RS|SE|4423|2253
+Salonta|RO||4680|2165
+Negotino|MK||4188|2088
+Skvyra|UA||4973|2966
+Panórama|GR||4059|2303
+Delcevo|MK||4197|2277
+Tiszaújváros|HU||4793|2108
+Luduş|RO||4648|2410
+Rožňava|SK||4866|2054
+Svalyava|UA||4855|2299
+Parvomay|BG||4210|2522
+Rakove|UA||4940|2706
+Zvečan|XK||4291|2084
+Svilengrad|BG||4177|2620
+Mostyska|UA||4979|2315
+Hînceşti|MD||4683|2859
+Brzesko|PL||4997|2061
+Obrenovac|RS|SE|4465|2020
+Urziceni|RO||4472|2663
+Floreşti|MD||4789|2829
+Baia Sprie|RO||4766|2369
+Popovo|BG||4335|2623
+Knyahynyn|UA||4894|2471
+Resen|MK||4109|2101
+Ilinden|MK||4199|2158
+Bocşa|RO||4537|2171
+Abony|HU||4719|2000
+Brvenica|MK||4197|2098
+Orestiáda|GR||4150|2653
+Stara Pazova|RS|VO|4498|2016
+Pantelimon|RO||4445|2620
+Kosovo Polje|XK||4266|2110
+Drochia|MD||4804|2781
+Vatra Dornei|RO||4735|2537
+Horodok|UA||4917|2656
+Horodok|UA||4978|2365
+Püspökladány|HU||4732|2112
+Brad|RO||4613|2278
+Codru|MD||4698|2882
+Rakovski|BG||4229|2497
+Gura Humorului|RO||4755|2590
+Şimleu Silvaniei|RO||4723|2280
+İstinye|TR||4111|2905
+Dunayivtsi|UA||4889|2685
+Stará Ľubovňa|SK||4930|2069
+Rakhiv|UA||4805|2420
+Mizil|RO||4502|2645
+Nova Pazova|RS|VO|4494|2022
+Bilicenii Vechi|MD||4766|2805
+Efkarpía|GR||4069|2295
+Kamenjane|MK||4195|2093
+Slobozia|MD||4673|2970
+Vişeu de Sus|RO||4771|2443
+Bar|UA||4907|2767
+Ocna Mureş|RO||4638|2385
+Popeşti-Leordeni|RO||4438|2617
+Kežmarok|SK||4914|2043
+Râşnov|RO||4558|2545
+Zimnicea|RO||4366|2536
+Akhisar|TR||4012|2947
+Gyomaendrőd|HU||4693|2083
+Adjud|RO||4610|2718
+Bogovinje|MK||4192|2092
+Chirpan|BG||4220|2533
+Bolhrad|UA||4568|2862
+Cisnădie|RO||4572|2415
+Găeşti|RO||4472|2532
+Berkovitsa|BG||4324|2313
+Tulchyn|UA||4867|2887

@@ -1,0 +1,68 @@
+Medan|ID||358|9867
+Percut|ID||363|9886
+Binjai|ID||360|9849
+Pematangsiantar|ID||296|9907
+Banda Aceh|ID||554|9533
+Padangsidempuan|ID||138|9927
+Lhokseumawe|ID||518|9715
+Tanjungbalai|ID||297|9980
+Langsa|ID||447|9797
+Sunggal|ID||358|9862
+Perbaungan|ID||357|9896
+Kisaran|ID||298|9962
+Gunungsitoli|ID||129|9761
+Surat Thani|TH||914|9933
+Tebingtinggi|ID||333|9916
+Subulussalam|ID||266|9788
+Rantauprapat|ID||210|9983
+Belawan|ID||378|9868
+Nakhon Si Thammarat|TH||843|9997
+Sibolga|ID||174|9878
+Phuket|TH||789|9840
+Kabanjahe|ID||310|9849
+Ban Ko Sire|TH||789|9843
+Trang|TH||756|9961
+Meulaboh|ID||414|9613
+Kawthoung|MM||998|9855
+Ban Talat Yai|TH||788|9840
+Sidikalang|ID||275|9831
+Ko Samui|TH||954|9994
+Labuhan Deli|ID||388|9863
+Berastagi|ID||319|9851
+Takua Pa|TH||887|9834
+Bireun|ID||520|9670
+Singkil|ID||229|9779
+Sabang|ID||589|9532
+Reuleuet|ID||522|9628
+Pekan Bahapal|ID||311|9917
+Tarutung|ID||201|9897
+Wichit|TH||789|9839
+Kathu|TH||792|9833
+Pangururan|ID||261|9870
+Ban Ratsada|TH||791|9840
+Bandar|ID||205|9975
+Krabi|TH||807|9891
+Kuah|MY||633|9984
+Thung Song|TH||816|9968
+Deli Tua|ID||351|9868
+Stabat|ID||373|9845
+Ron Phibun|TH||818|9985
+Tha Kham|TH||911|9923
+Teluk Dalam|ID||57|9780
+Pangkalan Brandan|ID||402|9828
+Teluk Nibung|ID||300|9982
+Tanjungtiram|ID||406|9837
+Ranong|TH||997|9863
+Lahewa|ID||139|9717
+Blangpidie|ID||374|9684
+Ban Talat Nua|TH||788|9839
+Ban Kamala|TH||796|9828
+Ban Na San|TH||880|9936
+Kampung Baru Ulu Melaka|MY||635|9979
+Barus|ID||201|9840
+Ban Chalong|TH||784|9834
+Sigli|ID||538|9596
+Huai Yot|TH||779|9963
+Lang Suan|TH||995|9908
+Paropo|ID||287|9852
+Tongging|ID||290|9852

@@ -1,0 +1,119 @@
+Kabul|AF||3453|6917
+Quetta|PK||3018|6700
+Dushanbe|TJ||3854|6878
+Samarkand|UZ||3965|6696
+Herāt|AF||3435|6220
+Mazār-e Sharīf|AF||3671|6711
+Kandahār|AF||3161|6571
+Bukhara|UZ||3977|6443
+Qarshi|UZ||3886|6579
+Istaravshan|TJ||3991|6900
+Türkmenabat|TM||3907|6358
+Kŭlob|TJ||3791|6978
+Tirmiz|UZ||3722|6728
+Mary|TM||3759|6183
+Kunduz|AF||3673|6886
+Shahrisabz|UZ||3906|6683
+Ghazni|AF||3355|6842
+Chaman|PK||3092|6645
+Zābol|IR||3103|6149
+Balkh|AF||3676|6690
+Bagrām|AF||3497|6926
+Bokhtar|TJ||3784|6878
+Baghlān|AF||3613|6871
+Gardez|AF||3360|6923
+Khōst|AF||3334|6992
+Kattaqo’rg’on Shahri|UZ||3991|6627
+Denov|UZ||3827|6790
+Maymana|AF||3592|6478
+Khanabad|AF||3668|6911
+Bayramaly|TM||3762|6217
+Kot Malik Barkhurdar|PK||3020|6699
+Koson|UZ||3904|6558
+Tejen|TM||3738|6051
+Urgut Shahri|UZ||3942|6726
+Bāzār-e Yakāwlang|AF||3474|6697
+Bāzārak|AF||3531|6952
+Khulm|AF||3670|6770
+Taloqan|AF||3674|6953
+Kogon Shahri|UZ||3973|6455
+Bāmyān|AF||3482|6783
+Torbat-e Jām|IR||3524|6062
+Pul-e Khumrī|AF||3594|6872
+Shibirghān|AF||3667|6575
+Charikar|AF||3501|6917
+Sar-e Pul|AF||3622|6593
+Zhob|PK||3134|6945
+Zaranj|AF||3096|6186
+Paghmān|AF||3459|6895
+Aībak|AF||3626|6802
+Sarakhs|IR||3654|6116
+Vahdat|TJ|RR|3856|6901
+Magdanly|TM||3781|6605
+Lashkar Gāh|AF||3159|6437
+Gereshk|AF||3182|6457
+Farah|AF||3237|6212
+Istālif|AF||3483|6908
+Kitob|UZ||3912|6689
+Oqtosh|UZ||3992|6593
+Andkhoy|AF||3695|6512
+Loralai|PK||3037|6860
+Yolöten|TM||3730|6236
+Tāybād|IR||3474|6078
+Tursunzoda|TJ|RR|3851|6823
+Panjakent|TJ||3950|6761
+Razzakov|KG||3984|6953
+Kerki|TM||3784|6521
+Khvāf|IR||3457|6014
+Sarahs|TM||3652|6121
+Zarhalol|TJ||3746|6817
+Muborak|UZ||3926|6515
+Nīlī|AF||3372|6613
+Ghormach|AF||3573|6378
+Shīnḏanḏ|AF||3330|6215
+Bulung’ur Shahri|UZ||3976|6727
+Muchun|TJ||3988|6918
+Zomin Shaharchasi|UZ||3996|6840
+Boysun|UZ||3821|6721
+Rustāq|AF||3713|6983
+Khān Neshīn|AF||3055|6379
+Sho‘rchi|UZ||3800|6779
+Qarāwul|AF||3722|6878
+G‘uzor|UZ||3862|6625
+Pishin|PK||3058|6699
+Hisor|TJ|RR|3853|6855
+Boshkengash|TJ||3847|6881
+Dalyoni Bolo|TJ||3975|6900
+Shahriston|TJ||3977|6881
+Danghara|TJ||3810|6934
+Karakul’|UZ||3953|6383
+Nahrīn|AF||3606|6913
+Baraki Barak|AF||3397|6895
+Moskovskiy|TJ||3761|6858
+Hulbuk|TJ||3781|6965
+Farkhor|TJ||3749|6940
+Juma Shahri|UZ||3972|6666
+Halaç|TM||3807|6488
+Chubek|TJ||3761|6971
+Chiroqchi|UZ||3903|6657
+Beshkent|UZ||3882|6565
+Ārt Khwājah|AF||3709|6948
+Kolkhozobod|TJ||3759|6866
+Nehbandān|IR||3154|6004
+Norak|TJ||3839|6932
+Eslam Qaleh|AF||3467|6107
+Seydi|TM||3948|6291
+Saýat|TM||3878|6388
+Karukh|AF||3448|6259
+Yovon|TJ||3831|6904
+Kushk|AF||3330|6195
+Chelak|UZ||3992|6686
+Türkmengala|TM||3742|6234
+Shahrak|AF||3411|6431
+Çaşgyn|TM||3780|6155
+Sang-e Chārak|AF||3585|6644
+Vakhsh|TJ||3771|6883
+Khāsh|AF||3153|6279
+Jabal os Saraj|AF||3512|6924
+Suluktu|KG||3994|6957
+Qarqīn|AF||3742|6604

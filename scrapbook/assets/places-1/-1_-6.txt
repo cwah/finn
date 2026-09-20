@@ -1,0 +1,59 @@
+Santarém|BR||-244|-5471
+Altamira|BR||-320|-5221
+Itaituba|BR||-428|-5598
+São Félix do Xingu|BR||-664|-5200
+Santana|BR||-4|-5117
+Breves|BR||-168|-5048
+Itacoatiara|BR||-314|-5844
+Parintins|BR||-263|-5674
+Redenção|BR||-803|-5003
+Oriximiná|BR||-177|-5587
+Maués|BR||-338|-5772
+Portel|BR||-194|-5082
+Juruti|BR||-215|-5609
+Monte Alegre|BR||-200|-5408
+Alenquer|BR||-194|-5474
+Óbidos|BR||-192|-5552
+Rurópolis|BR||-410|-5491
+Pacajá|BR||-384|-5064
+Uruará|BR||-372|-5374
+Porto de Moz|BR||-175|-5224
+Borba|BR||-439|-5959
+Autazes|BR||-358|-5913
+Tucumã|BR||-675|-5116
+Colniza|BR||-941|-5902
+Afuá|BR||-16|-5039
+Nova Olinda do Norte|BR||-389|-5910
+Laranjal do Jari|BR||-83|-5251
+Rio Preto da Eva|BR||-270|-5970
+Almeirim|BR||-152|-5258
+Gurupá|BR||-140|-5164
+Barreirinha|BR||-279|-5707
+Ourilândia do Norte|BR||-675|-5108
+Santana do Araguaia|BR||-934|-5035
+Medicilândia|BR||-345|-5289
+Placas|BR||-387|-5422
+Guarantã do Norte|BR||-995|-5491
+Bagre|BR||-190|-5021
+Careiro da Várzea|BR||-320|-5983
+Prainha|BR||-180|-5348
+Anapu|BR||-347|-5120
+Melgaço|BR||-180|-5071
+Água Azul do Norte|BR||-679|-5047
+Novo Progresso|BR||-715|-5538
+Urucurituba|BR||-313|-5816
+Brasil Novo|BR||-331|-5254
+Jacareacanga|BR||-622|-5775
+Mojuí dos Campos|BR||-268|-5464
+Apuí|BR||-720|-5989
+Cumaru do Norte|BR||-782|-5077
+Mazagão|BR||-12|-5129
+Nhamundá|BR||-219|-5671
+Terra Santa|BR||-210|-5649
+Rio Maria|BR||-731|-5005
+Belterra|BR||-264|-5494
+Aveiro|BR||-361|-5533
+Urucará|BR||-254|-5776
+Vitória do Xingu|BR||-288|-5201
+Trairão|BR||-457|-5594
+Tucumã|BR||-15|-5006

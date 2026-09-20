@@ -1,0 +1,22 @@
+Trondheim|NO||6343|1040
+Gävle|SE||6067|1714
+Sundsvall|SE||6239|1731
+Östersund|SE||6318|1464
+Borlänge|SE||6049|1544
+Tromsø|NO||6965|1896
+Falun|SE||6060|1563
+Bodø|NO||6728|1438
+Örnsköldsvik|SE||6329|1872
+Hamar|NO||6079|1107
+Lillehammer|NO||6112|1047
+Härnösand|SE||6263|1794
+Sandviken|SE||6062|1677
+Harstad|NO||6880|1654
+Levanger|NO||6375|1130
+Mo i Rana|NO||6631|1414
+Tromsdalen|NO||6965|1902
+Gjøvik|NO||6080|1069
+Hudiksvall|SE||6173|1711
+Stjørdalshalsen|NO||6347|1093
+Ludvika|SE||6015|1519
+Mariehamn|AX||6010|1993

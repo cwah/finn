@@ -1,0 +1,31 @@
+Piura|PE||-518|-8066
+Portoviejo|EC||-106|-8045
+Manta|EC||-95|-8073
+Sullana|PE||-490|-8069
+San Martin|PE||-519|-8067
+Talara|PE||-458|-8127
+Tumbes|PE||-356|-8044
+La Libertad|EC||-223|-8091
+Chulucanas|PE||-509|-8016
+Catacaos|PE||-527|-8068
+Paita|PE||-509|-8111
+Chone|EC||-70|-8009
+Salinas|EC||-221|-8095
+Santa Elena|EC||-223|-8086
+Huaquillas|EC||-348|-8023
+Bahía de Caráquez|EC||-60|-8042
+Jipijapa|EC||-135|-8058
+La Unión|PE||-540|-8074
+Posorja|EC||-271|-8025
+Playas|EC||-263|-8039
+Tambo Grande|PE||-493|-8034
+Arenillas|EC||-355|-8007
+Marcavelica|PE||-488|-8071
+Querecotillo|PE||-484|-8065
+Pedro Carbo|EC||-182|-8023
+Sechura|PE||-556|-8082
+Montecristi|EC||-105|-8066
+La Breita|PE||-426|-8089
+Calceta|EC||-85|-8016
+Zarumilla|PE||-350|-8027
+Sucre|EC||-128|-8042

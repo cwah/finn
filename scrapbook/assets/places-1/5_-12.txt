@@ -1,0 +1,35 @@
+Calgary|CA||5105|-11409
+Edmonton|CA||5355|-11347
+Red Deer|CA||5227|-11380
+Airdrie|CA||5130|-11404
+Sherwood Park|CA||5352|-11332
+Grande Prairie|CA||5517|-11880
+Fort McMurray|CA||5673|-11138
+Medicine Hat|CA||5004|-11068
+St. Albert|CA||5363|-11364
+Centre City|CA||5105|-11407
+Vernon|CA||5027|-11927
+Spruce Grove|CA||5353|-11392
+Chestermere|CA||5103|-11382
+Cochrane|CA||5118|-11447
+Lloydminster|CA||5327|-11002
+Okotoks|CA||5073|-11398
+Beltline|CA||5104|-11407
+Panorama Hills|CA||5115|-11408
+Saddle Ridge|CA||5113|-11395
+Cranston|CA||5089|-11398
+Evergreen|CA||5093|-11410
+Camrose|CA||5302|-11284
+Tuscany|CA||5112|-11424
+Salmon Arm|CA||5070|-11927
+Evanston|CA||5116|-11412
+Wîhkwêntôwin|CA||5354|-11352
+Auburn Bay|CA||5089|-11396
+Stony Plain|CA||5353|-11400
+Taradale|CA||5112|-11394
+McKenzie Towne|CA||5091|-11397
+Sylvan Lake|CA||5231|-11408
+Coventry Hills|CA||5117|-11406
+Lake Country|CA||5001|-11940
+Leduc|CA||5327|-11355
+Edgemont|CA||5113|-11415

@@ -1,0 +1,28 @@
+Cape Town|ZA||-3393|1842
+Athlone|ZA||-3397|1850
+Paarl|ZA||-3373|1898
+Somerset West|ZA||-3408|1882
+Worcester|ZA||-3365|1945
+Stellenbosch|ZA||-3393|1887
+Atlantis|ZA||-3357|1848
+Saldanha|ZA||-3301|1794
+Kraaifontein|ZA||-3385|1872
+Hermanus|ZA||-3442|1923
+Wellington|ZA||-3364|1901
+Durbanville|ZA||-3383|1865
+Kuils River|ZA||-3394|1871
+Vredenburg|ZA||-3291|1799
+Malmesbury|ZA||-3346|1873
+Ceres|ZA||-3337|1931
+Grabouw|ZA||-3415|1902
+Muizenberg|ZA||-3410|1848
+Robertson|ZA||-3380|1989
+Retreat|ZA||-3406|1848
+Vredendal|ZA||-3167|1850
+Franschhoek|ZA||-3391|1912
+Le Roux|ZA||-3389|1910
+Lansdowne|ZA||-3399|1850
+Caledon|ZA||-3423|1943
+Gansbaai|ZA||-3458|1935
+Moorreesburg|ZA||-3315|1866
+Rondebosch|ZA||-3396|1848

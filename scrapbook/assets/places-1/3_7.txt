@@ -1,0 +1,470 @@
+Lahore|PK||3156|7435
+Peshawar|PK||3401|7158
+Faisalabad|PK||3142|7309
+Rawalpindi|PK||3360|7305
+Gujranwala|PK||3216|7419
+Multan|PK||3020|7148
+Ludhiana|IN||3091|7585
+Bannu|PK||3299|7060
+Srinagar|IN||3409|7481
+Amritsar|IN||3162|7488
+Sargodha|PK||3209|7267
+Chandigarh|IN||3074|7679
+Sialkot|PK||3249|7453
+Jalandhar|IN||3133|7558
+Arifwala|PK||3029|7307
+Dera Ismail Khan|PK||3183|7090
+Muzaffarābād|PK||3437|7347
+Battagram|PK||3468|7302
+Chunian|PK||3097|7398
+Jhang Sadr|PK||3127|7232
+Islamabad|PK||3372|7304
+Shekhupura|PK||3171|7399
+Jammu|IN||3274|7486
+Gujrat|PK||3257|7408
+Sahiwal|PK||3197|7233
+Sahiwal|PK||3067|7310
+Okara|PK||3081|7345
+Dehradun|IN||3032|7803
+Kasur|PK||3112|7445
+Kashgar|CN||3947|7599
+Dera Ghazi Khan|PK||3005|7064
+Pindi Bhattian|PK||3190|7327
+Patiāla|IN||3034|7639
+Gujangbagh|CN||3711|7993
+Wah Cantt|PK||3377|7275
+Chak Jhumra|PK||3157|7318
+Bhawana|PK||3157|7265
+Burewala|PK||3017|7265
+Mingora|PK||3478|7236
+Hafizabad|PK||3207|7369
+Chiniot|PK||3172|7298
+Mardan|PK||3420|7205
+Kamoke|PK||3198|7422
+Bathinda|IN||3021|7494
+Artux|CN||3971|7618
+Abbottabad|PK||3415|7321
+Jalālābād|AF||3443|7045
+Skardu|PK||3530|7563
+Muridke|PK||3180|7426
+Shahkot|PK||3157|7349
+Bahawalnagar|PK||3055|7339
+Muzaffargarh|PK||3007|7119
+Yamuna Nagar|IN||3013|7728
+Gilgit|PK||3592|7431
+Gojra|PK||3115|7268
+Panchkula|IN||3069|7685
+Qadirpur Ran|PK||3029|7167
+Ambāla|IN||3036|7680
+Dhirkot|PK||3404|7358
+Jhelum|PK||3293|7373
+Pathānkot|IN||3227|7565
+Shimla|IN||3110|7717
+Hoshiārpur|IN||3154|7591
+Mohali|IN||3068|7672
+Kamalia|PK||3073|7265
+Moga|IN||3081|7517
+Batāla|IN||3181|7520
+Wazirabad|PK||3244|7412
+Kohat|PK||3358|7145
+Layyah|PK||3096|7094
+Eminabad|PK||3204|7426
+Anantnag|IN||3373|7515
+Jaranwala|PK||3133|7342
+Tordher|PK||3399|7229
+Jalalpur Jattan|PK||3264|7421
+Abohar|IN||3014|7420
+Attock City|PK||3377|7236
+Mian Channun|PK||3044|7236
+Tumxuk|CN||3987|7906
+Māler Kotla|IN||3053|7588
+Bhakkar|PK||3163|7106
+Narowal|PK||3210|7487
+Nankana Sahib|PK||3145|7371
+Mandi Bahauddin|PK||3259|7349
+Mianwali|PK||3258|7153
+Shache|CN||3842|7724
+Khanna|IN||3071|7622
+Daska Kalan|PK||3232|7435
+Shakargarh|PK||3226|7516
+Pakpattan|PK||3034|7339
+Jagādhri|IN||3017|7730
+New Mirpur City|PK||3315|7375
+Toba Tek Singh|PK||3097|7248
+Haveli Lakha|PK||3045|7369
+Charsadda|PK||3415|7174
+Sambrial|PK||3248|7435
+Muktsar|IN||3047|7452
+Barnāla|IN||3037|7555
+Taunsa|PK||3070|7065
+Phool Nagar|PK||3120|7395
+Pattoki|PK||3102|7385
+Jauharabad|PK||3229|7228
+Vihari|PK||3004|7236
+Chichawatni|PK||3053|7269
+Firozpur|IN||3093|7461
+Ambala Sadar|IN||3034|7686
+Kot Addu|PK||3047|7097
+Soyībug|IN||3408|7471
+Sangla Hill|PK||3172|7338
+Kharian|PK||3282|7389
+Khushāb|PK||3230|7235
+Pasrur|PK||3226|7466
+Shabqadar|PK||3422|7155
+Kot Radha Kishan|PK||3117|7410
+Chakwal|PK||3293|7285
+Phagwāra|IN||3122|7577
+Renala Khurd|PK||3088|7360
+Raja Jang|PK||3122|7425
+Model Town|PK||3148|7433
+Dipalpur|PK||3067|7365
+Kapurthala Town|IN||3138|7538
+Swabi|PK||3412|7247
+Dijkot|PK||3122|7300
+Khurarianwala|PK||3150|7327
+Zerakpur|IN||3066|7682
+Rajpura|IN||3048|7659
+Kot Kapūra|IN||3058|7483
+Kabirwala|PK||3040|7186
+Kunjah|PK||3253|7397
+Dinga|PK||3264|7372
+Sangrūr|IN||3025|7584
+Nowshera Kalan|PK||3402|7197
+Farīdkot|IN||3067|7476
+Udhampur|IN||3292|7514
+Gobindgarh|IN||3067|7630
+Malout|IN||3021|7448
+Fatehjang|PK||3356|7264
+Kotkapura|IN||3058|7483
+Alahabad|PK||3088|7406
+Khewra|PK||3265|7301
+Talagang|PK||3293|7242
+Kahna Nau|PK||3137|7437
+Gurdaspur|IN||3204|7540
+Bāramūla|IN||3421|7434
+Fazilka|IN||3040|7403
+Hujra Shah Muqim|PK||3074|7382
+Paharpur|PK||3211|7097
+Kageleke|CN||3730|7960
+Topi|PK||3407|7262
+Bhalwal|PK||3227|7290
+Kharar|IN||3075|7665
+Sarai Alamgir|PK||3290|7376
+Bat Khela|PK||3462|7197
+Sopur|IN||3429|7447
+Rabwah|PK||3176|7291
+Gujar Khan|PK||3325|7330
+Chuhar Kana|PK||3175|7380
+Sunām|IN||3013|7580
+Darya Khan|PK||3178|7110
+Nābha|IN||3038|7615
+Shorkot|PK||3191|7088
+Minchinabad|PK||3016|7357
+Tarn Taran|IN||3145|7493
+Qaraqash|CN||3727|7973
+Mansehra|PK||3433|7320
+Rishīkesh|IN||3011|7829
+Basirpur|PK||3058|7384
+Jagraon|IN||3079|7547
+Lala Musa|PK||3270|7396
+Pindi Gheb|PK||3324|7226
+Phalia|PK||3243|7358
+Sirhind|IN||3064|7638
+Faruka|PK||3189|7241
+Kathua|IN||3237|7553
+Chitral|PK||3585|7179
+Bageqi|CN||3714|7984
+Jahangira|PK||3396|7222
+Haripur|PK||3400|7293
+Jamrud|PK||3400|7138
+Ropar|IN||3097|7653
+Dhūri|IN||3037|7587
+Sharifabad|PK||3343|7336
+Dullewala|PK||3183|7144
+Samāna|IN||3015|7620
+Pabbi|PK||3401|7179
+Lalian|PK||3182|7280
+Qabula|PK||3018|7307
+Pir Mahal|PK||3077|7243
+Zhawa|CN||3721|7963
+Zepu|CN||3819|7727
+Rampura Phul|IN||3028|7524
+Kot Mumin|PK||3219|7303
+Naya Gaon|IN||3078|7679
+Jahanian|PK||3004|7182
+Rawalakot|PK||3386|7376
+Buni|PK||3627|7226
+Hadali|PK||3264|7457
+Sillanwali|PK||3183|7254
+Nangal|IN||3139|7638
+Asadābād|AF||3487|7115
+Jalandhar Cantonment|IN||3129|7562
+Kotli|PK||3352|7390
+Nawanshahr|IN||3112|7612
+Mustafabad|PK||3089|7350
+Kamra|PK||3385|7239
+Chak Thirty-one -Eleven Left|PK||3042|7270
+Rāmpura|IN||3026|7524
+Giddarbāha|IN||3020|7467
+Kanganpur|PK||3076|7412
+Fayzabad|AF||3712|7058
+Fatehpur|PK||3118|7120
+Kamra|PK||3375|7351
+Kuiya|CN||3730|7964
+Kundian|PK||3246|7148
+Sukheke Mandi|PK||3187|7351
+Shāhābād|IN||3017|7687
+Amangarh|PK||3401|7193
+Patti|IN||3128|7486
+Ka'ersai|CN||3748|7960
+Naushahra Virkan|PK||3196|7397
+Solan|IN||3091|7711
+Choa Saidan Shah|PK||3272|7299
+Ladhewala Waraich|PK||3216|7412
+Jalālābād|IN||3061|7426
+Baishikante|CN||3846|7748
+Khalabat|PK||3406|7289
+Kamar Mushani|PK||3284|7136
+Chīka|IN||3005|7634
+Tank|PK||3222|7038
+Tandlianwala|PK||3103|7313
+Chak Azam Sahu|PK||3075|7303
+Havelian|PK||3405|7316
+Zira|IN||3097|7499
+Leh|IN||3417|7758
+Jaito|IN||3045|7489
+Bandipura|IN||3442|7464
+Nakodar|IN||3113|7548
+Elixku|CN||3871|7737
+Lakki|PK||3261|7091
+Hangu|PK||3353|7106
+Risalpur Cantonment|PK||3406|7199
+Pinjaur|IN||3080|7692
+Tangi|PK||3430|7165
+Puqiakeqi|CN||3732|7971
+Malakwal City|PK||3255|7321
+Khangah Dogran|PK||3183|7362
+Narang Mandi|PK||3190|7452
+Huangdi|CN||3881|7745
+Malakwal|PK||3255|7321
+Tage'erqi|CN||3855|7726
+Utmanzai|PK||3419|7176
+Zaida|PK||3406|7247
+Kālka|IN||3084|7694
+Yawa|CN||3741|7951
+Bāgh|PK||3398|7378
+Mamun|IN||3228|7570
+Bahārak|AF||3700|7091
+Mixia|CN||3845|7725
+Saybag|CN||3715|7966
+Mamu Kanjan|PK||3083|7280
+Sharqpur Sharif|PK||3146|7410
+Maur|IN||3008|7525
+Bhera|PK||3248|7291
+Dursh Khela|PK||3500|7245
+Raiwind|PK||3125|7422
+Wudalike|CN||3836|7713
+Ahmedgarh|IN||3068|7583
+Yengisar|CN||3893|7617
+Kūrāli|IN||3083|7658
+Dharamsala|IN||3222|7632
+Chak Five Hundred Seventy-five|PK||3155|7383
+Nowshera Cantonment|PK||3400|7200
+Khorugh|TJ||3749|7155
+Qarek|CN||3837|7699
+Pind Dadan Khan|PK||3259|7304
+Yishikuli|CN||3849|7720
+Baddi|IN||3096|7679
+Upper Dir|PK||3521|7188
+Mukeriān|IN||3195|7562
+Akora Khattak|PK||3400|7213
+Tuomuwusitang|CN||3836|7723
+Kalur Kot|PK||3216|7127
+Rajaori|IN||3338|7431
+Thal|PK||3548|7224
+Jandiāla Gurū|IN||3156|7503
+Garh Maharaja|PK||3083|7190
+Jahanian Shah|PK||3181|7228
+Layka|CN||3708|7973
+Manhala|PK||3153|7455
+Hajira|PK||3377|7389
+Nāhan|IN||3056|7729
+Gil|IN||3085|7586
+Rāikot|IN||3065|7560
+Mananwala|PK||3159|7369
+Jammu Cantonment|IN||3270|7486
+Sujānpur|IN||3232|7561
+Ganderbal|IN||3423|7477
+Mandi|IN||3171|7693
+Fazilpur|PK||3218|7507
+Pūnch|IN||3377|7409
+Talamba|PK||3053|7224
+Jhawarian|PK||3236|7262
+Mahna|IN||3023|7499
+Rāipur|IN||3031|7809
+Bhimber|PK||3297|7408
+Tehri|IN||3039|7848
+Akesalayi|CN||3717|7969
+Buzhake|CN||3707|7980
+Yigai'erqi|CN||3834|7747
+Jaglot|PK||3569|7462
+Chawinda|PK||3234|7471
+Sāmba|IN||3256|7512
+Kartārpur|IN||3144|7550
+Pauri|IN||3015|7878
+Bablāi|IN||3036|7688
+Daud Khel|PK||3288|7157
+Mitha Tiwana|PK||3225|7211
+Kuoyiqi|CN||3735|7972
+Hazro City|PK||3391|7249
+Basi|IN||3059|7684
+Ishqoshim|TJ||3672|7161
+Mussoorie|IN||3045|7807
+Karor|PK||3122|7095
+Jandiāla|IN||3116|7562
+Dorāha|IN||3080|7602
+Sundarnagar|IN||3154|7690
+Bagha Purana|IN||3069|7510
+Dasūya|IN||3182|7565
+Murree|PK||3391|7339
+Pāonta Sāhib|IN||3044|7762
+Awati|CN||3861|7740
+Padam|IN||3347|7688
+Māchhīwāra|IN||3092|7620
+Ahmadpur Sial|PK||3068|7174
+Talwāra|IN||3194|7589
+Phillaur|IN||3102|7579
+Tuwaite|CN||3734|7977
+Bijbehara|IN||3379|7511
+Jiahanbage|CN||3720|7971
+Kulachi|PK||3193|7046
+Chak One Hundred Twenty Nine Left|PK||3043|7305
+Morinda|IN||3079|7650
+Dīnānagar|IN||3214|7547
+Longowal|IN||3020|7568
+Qadian|IN||3182|7538
+Ying’awati|CN||3730|7983
+Kulgam|IN||3364|7502
+Alamaiti|CN||3858|7748
+Harappa|PK||3063|7287
+Urmar|IN||3168|7564
+Manglai|CN||3728|7968
+Tapa|IN||3030|7537
+Pallandri|PK||3372|7368
+Zafarwal|PK||3234|7490
+Jurm|AF||3686|7083
+Dooru Verinag|IN||3356|7523
+Naraingarh|IN||3048|7713
+Kahuta|PK||3359|7339
+Sānehwāl|IN||3084|7599
+Sisauli|IN||3014|7726
+Bhawānīgarh|IN||3027|7604
+Gulebage|CN||3841|7723
+Badāmibāgh|IN||3407|7485
+Kuri Dulal|PK||3338|7326
+Laungowāl|IN||3019|7568
+Kopawor|IN||3453|7426
+Bhaun|PK||3286|7276
+Pāmpur|IN||3402|7492
+Bālāchor|IN||3106|7630
+Doda|IN||3315|7555
+Barāra|IN||3021|7704
+Chamba|IN||3256|7613
+Chaksawari|PK||3326|7379
+Kotli Loharan|PK||3259|7449
+Lālru|IN||3049|7680
+Sanaur|IN||3030|7646
+Oghi|PK||3450|7301
+Ajnāla|IN||3184|7476
+Adampur|IN||3143|7571
+Banga|IN||3119|7599
+Kot Ghulam Muhammad|PK||3233|7455
+Clement Town|IN||3026|7801
+Akhnūr|IN||3290|7473
+Lawa|PK||3270|7193
+Dhāriwāl|IN||3196|7532
+Kishtwār|IN||3331|7577
+Bhikkiwind Uttār|IN||3135|7470
+Nangli|IN||3169|7489
+Basi|IN||3069|7640
+Raipur Domana|IN||3280|7478
+Srīnagar|IN||3022|7878
+Pulwama|IN||3387|7490
+Surkhpur|PK||3272|7445
+Sook Kalan|PK||3260|7415
+Dhanaula|IN||3028|7557
+Dhaunkal|PK||3241|7414
+Kulu|IN||3196|7711
+Paikeqi|CN||3855|7721
+Sarai Naurang|PK||3283|7078
+Samrāla|IN||3084|7619
+Pattan|IN||3416|7456
+Baddomalhi|PK||3199|7466
+Dayal|PK||3331|7370
+Hamīrpur|IN||3168|7653
+Khai Gala|PK||3385|7383
+Dharmkot|IN||3095|7523
+Kansāpur|IN||3015|7727
+Tuohula|CN||3724|7969
+Banūr|IN||3055|7672
+Kaqun|CN||3798|7687
+Una|IN||3146|7627
+Kardhān|IN||3032|7687
+Haji Shah|PK||3388|7233
+Bhadaur|IN||3048|7533
+Lachi|PK||3338|7134
+Behat|IN||3017|7761
+Jand|PK||3343|7202
+Fatehgarh Chūriān|IN||3186|7496
+Bhogpur|IN||3155|7564
+Musa Banda/Musa khan kallay|PK||3403|7248
+Trāl|IN||3393|7512
+Bhīkhi|IN||3006|7554
+Dunbage|CN||3886|7750
+Alipur|PK||3365|7318
+Achhībal|IN||3368|7522
+Baffa|PK||3444|7322
+Arele|CN||3838|7731
+Huoshilafu|CN||3787|7670
+Mehtar Lām|AF||3467|7021
+Bhopalwala|PK||3243|7436
+Talwandi Bhai|IN||3086|7493
+Guru Har Sahāi|IN||3071|7440
+Uttarkāshi|IN||3073|7844
+Garhshankar|IN||3122|7614
+Dirba|IN||3007|7600
+Bage'awati|CN||3849|7754
+Sultanpur|IN||3121|7520
+Islamgarh|PK||3319|7384
+Langru|CN||3689|7962
+Gorāya|IN||3112|7577
+Kuoshi'airike|CN||3862|7728
+Wu'erqi|CN||3732|7956
+Kaleke Mandi|PK||3198|7360
+Shopian|IN||3372|7483
+Mūllānpur|IN||3085|7566
+Kargil|IN||3456|7613
+Anandpur|IN||3124|7650
+Mangla|PK||3189|7238
+Mullānwāla|IN||3106|7482
+Karimabad|PK||3633|7466
+Balaungi|IN||3073|7669
+Sodhri|PK||3246|7418
+Kalabagh|PK||3296|7155
+Bunjwah|IN||3315|7595
+Azhatebage|CN||3866|7747
+Kallar Kahar|PK||3278|7270
+Āsmār|AF||3503|7136
+Rāhon|IN||3105|7612
+Harnoli|PK||3228|7155
+Sarai Sidhu|PK||3059|7197
+Gulgam|IN||3455|7422
+Husainpur|IN||3131|7532
+Mani Mājra|IN||3071|7684
+Brāhmanān di Bāri|IN||3264|7491
+Badgām|IN||3402|7472
+Jugiāl|IN||3237|7568
+Goniāna Mandi|IN||3032|7491
+R.S. Pora|IN||3261|7473
+Markaz-e Woluswalī-ye Āchīn|AF||3413|7071
+Sumbal|IN||3423|7465

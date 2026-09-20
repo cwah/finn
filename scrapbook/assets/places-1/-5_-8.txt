@@ -1,0 +1,20 @@
+Puerto Montt|CL||-4147|-7294
+Osorno|CL||-4057|-7313
+San Carlos de Bariloche|AR||-4115|-7131
+Coyhaique|CL||-4558|-7207
+Castro|CL||-4247|-7377
+Ancud|CL||-4187|-7382
+Puerto Varas|CL||-4132|-7299
+Calbuco|CL||-4177|-7313
+Río Bueno|CL||-4033|-7296
+Esquel|AR||-4291|-7132
+La Unión|CL||-4029|-7308
+San Martín de los Andes|AR||-4016|-7135
+Quellón|CL||-4312|-7362
+El Bolsón|AR||-4196|-7153
+Purranque|CL||-4091|-7316
+Paillaco|CL||-4007|-7288
+Puerto Aysén|CL||-4540|-7269
+Llanquihue|CL||-4126|-7301
+Maullín|CL||-4162|-7360
+Frutillar|CL||-4112|-7306

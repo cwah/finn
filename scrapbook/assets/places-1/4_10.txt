@@ -1,0 +1,20 @@
+Baotou|CN||4065|10984
+Bayan Nur|CN||4074|10739
+Ulan Bator|MN||4791|10688
+Hondlon|CN||4065|10979
+Qingshan|CN||4066|10988
+Erdenet|MN||4903|10408
+Darhan|MN||4949|10592
+Nalayh|MN||4777|10728
+Mörön|MN||4963|10016
+Bayanhongor|MN||4619|10072
+Arvayheer|MN||4626|10278
+Bogd|MN||4467|10217
+Dalandzadgad|MN||4357|10442
+Tongyangdao|CN||4177|10997
+Tsetserleg|MN||4748|10145
+Dzüünharaa|MN||4885|10646
+Bulgan|MN||4881|10353
+Dzuunmod|MN||4771|10695
+Zuunmod|MN||4771|10695
+Dalain Hob|CN||4197|10106

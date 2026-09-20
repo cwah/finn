@@ -1,0 +1,342 @@
+Belo Horizonte|BR||-1992|-4394
+Brasília|BR||-1578|-4793
+Goiânia|BR||-1668|-4925
+Uberlândia|BR||-1892|-4828
+Contagem|BR||-1993|-4405
+Aparecida de Goiânia|BR||-1682|-4924
+Montes Claros|BR||-1674|-4386
+Vitória da Conquista|BR||-1487|-4084
+Betim|BR||-1997|-4420
+Uberaba|BR||-1975|-4793
+Ribeirão das Neves|BR||-1977|-4409
+Anápolis|BR||-1633|-4895
+Palmas|BR||-1017|-4833
+Ceilândia|BR||-1581|-4813
+Governador Valadares|BR||-1885|-4195
+Águas Lindas de Goiás|BR||-1576|-4828
+Sete Lagoas|BR||-1947|-4425
+Ipatinga|BR||-1947|-4254
+Luziânia|BR||-1625|-4795
+Santa Luzia|BR||-1977|-4385
+Samambaia|BR||-1588|-4810
+Valparaíso de Goiás|BR||-1607|-4798
+Plano Piloto|BR||-1579|-4788
+Taguatinga|BR||-1583|-4806
+Planaltina|BR||-1562|-4765
+Linhares|BR||-1939|-4007
+Senador Canedo|BR||-1671|-4909
+Barreiras|BR||-1215|-4499
+Patos de Minas|BR||-1858|-4652
+Teófilo Otoni|BR||-1786|-4151
+Trindade|BR||-1665|-4949
+Gama|BR||-1603|-4807
+Vespasiano|BR||-1969|-4392
+Sabará|BR||-1989|-4381
+Colatina|BR||-1954|-4063
+Águas Claras|BR||-1584|-4803
+Jequié|BR||-1386|-4009
+Guará|BR||-1581|-4797
+Nova Lima|BR||-1999|-4385
+Araxá|BR||-1959|-4694
+Itabira|BR||-1962|-4323
+Araguari|BR||-1865|-4819
+Santa Maria|BR||-1603|-4803
+Formosa|BR||-1554|-4733
+Recanto das Emas|BR||-1591|-4806
+Nova Serrana|BR||-1988|-4498
+Catalão|BR||-1817|-4795
+Itumbiara|BR||-1842|-4922
+Planaltina|BR||-1545|-4761
+Coronel Fabriciano|BR||-1952|-4263
+Luis Eduardo Magalhães|BR||-1209|-4579
+Novo Gama|BR||-1606|-4804
+Ituiutaba|BR||-1897|-4946
+Riacho Fundo II|BR||-1590|-4805
+Pôr do Sol|BR||-1586|-4812
+Caldas Novas|BR||-1774|-4863
+São Sebastião|BR||-1590|-4778
+Pará de Minas|BR||-1986|-4461
+Vicente Pires|BR||-1581|-4803
+Aracruz|BR||-1982|-4027
+Paracatu|BR||-1722|-4687
+Cidade Ocidental|BR||-1611|-4793
+Patrocínio|BR||-1894|-4699
+Caratinga|BR||-1979|-4214
+Gurupi|BR||-1173|-4907
+Esmeraldas|BR||-1976|-4431
+Unaí|BR||-1636|-4691
+Guanambi|BR||-1422|-4278
+João Monlevade|BR||-1981|-4317
+Sobradinho II|BR||-1563|-4783
+Jacobina|BR||-1118|-4051
+Timóteo|BR||-1958|-4265
+Lagoa Santa|BR||-1963|-4390
+Curvelo|BR||-1876|-4443
+Senhor do Bonfim|BR||-1046|-4019
+Jardim Botânico|BR||-1587|-4781
+Itapetinga|BR||-1525|-4025
+Santo Antônio do Descoberto|BR||-1594|-4826
+Irecê|BR||-1130|-4186
+Goianésia|BR||-1532|-4912
+Sobradinho|BR||-1565|-4779
+Campo Formoso|BR||-1051|-4032
+Janaúba|BR||-1580|-4331
+Brumado|BR||-1420|-4167
+Bom Jesus da Lapa|BR||-1326|-4342
+Itapoã|BR||-1575|-4777
+Januária|BR||-1548|-4437
+Itaberaba|BR||-1253|-4031
+Paranoá|BR||-1578|-4778
+Pedro Leopoldo|BR||-1962|-4404
+Cristalina|BR||-1677|-4762
+Pirapora|BR||-1734|-4494
+São Francisco|BR||-1595|-4486
+Brazlândia|BR||-1568|-4820
+Bom Despacho|BR||-1974|-4525
+Barra|BR||-1109|-4314
+Porto Nacional|BR||-1071|-4842
+Paraíso do Tocantins|BR||-1018|-4887
+Inhumas|BR||-1636|-4950
+Caetité|BR||-1407|-4248
+Morrinhos|BR||-1773|-4910
+Nova Venécia|BR||-1871|-4040
+Macaúbas|BR||-1302|-4270
+Bocaiúva|BR||-1711|-4382
+Diamantina|BR||-1825|-4360
+Monte Carmelo|BR||-1872|-4750
+Poções|BR||-1453|-4037
+João Pinheiro|BR||-1774|-4617
+Porangatu|BR||-1344|-4915
+Goianira|BR||-1650|-4943
+Jaraguá|BR||-1576|-4933
+Santana do Paraíso|BR||-1936|-4257
+Xique-Xique|BR||-1082|-4273
+Sudoeste/Octagonal|BR||-1580|-4793
+Seabra|BR||-1242|-4177
+Livramento de Nossa Senhora|BR||-1364|-4184
+Itaberaí|BR||-1602|-4981
+Barra de São Francisco|BR||-1876|-4089
+Lago Norte|BR||-1574|-4786
+São Gotardo|BR||-1931|-4605
+Uruaçu|BR||-1452|-4914
+Almenara|BR||-1618|-4069
+Salinas|BR||-1617|-4229
+Santa Maria da Vitória|BR||-1339|-4420
+Capelinha|BR||-1769|-4252
+Riacho Fundo|BR||-1588|-4802
+Caeté|BR||-1988|-4367
+Mateus Leme|BR||-1999|-4443
+Jaíba|BR||-1534|-4367
+Matozinhos|BR||-1956|-4408
+Porteirinha|BR||-1574|-4303
+Posse|BR||-1409|-4637
+Araçuaí|BR||-1685|-4207
+Setor Complementar de Indústria e Abastecimento|BR||-1578|-4799
+Riacho de Santana|BR||-1361|-4294
+Pilão Arcado|BR||-1000|-4248
+Nanuque|BR||-1784|-4035
+Padre Bernardo|BR||-1517|-4828
+Niquelândia|BR||-1447|-4846
+Bela Vista de Goiás|BR||-1697|-4895
+São Desidério|BR||-1236|-4497
+Serra do Ramalho|BR||-1354|-4358
+Goiatuba|BR||-1801|-4935
+Jaguarari|BR||-1026|-4020
+Várzea da Palma|BR||-1760|-4473
+Morro do Chapéu|BR||-1155|-4116
+Capim Grosso|BR||-1138|-4001
+Taiobeiras|BR||-1581|-4223
+Itamarandiba|BR||-1786|-4286
+Correntina|BR||-1334|-4464
+Pires do Rio|BR||-1730|-4828
+São Gabriel da Palha|BR||-1902|-4054
+Guanhães|BR||-1877|-4293
+Brasília de Minas|BR||-1621|-4443
+Palmeiras de Goiás|BR||-1680|-4993
+Barra do Choça|BR||-1488|-4058
+Pompéu|BR||-1922|-4494
+Ruy Barbosa|BR||-1228|-4049
+Barão de Cocais|BR||-1995|-4349
+Juatuba|BR||-1995|-4434
+Baixo Guandu|BR||-1952|-4102
+Vera Cruz|BR||-1263|-4103
+Santa Bárbara|BR||-1996|-4342
+Espinosa|BR||-1493|-4282
+Nerópolis|BR||-1641|-4922
+Paratinga|BR||-1269|-4318
+Carmo do Paranaíba|BR||-1900|-4632
+Jaguaré|BR||-1891|-4008
+Três Marias|BR||-1821|-4524
+Coromandel|BR||-1847|-4720
+Carinhanha|BR||-1430|-4376
+Minaçu|BR||-1353|-4822
+Conceição das Alagoas|BR||-1991|-4839
+Prata|BR||-1931|-4892
+Rio Pardo de Minas|BR||-1561|-4254
+Mantena|BR||-1878|-4098
+Mutum|BR||-1980|-4144
+Santa Rita de Cássia|BR||-1101|-4452
+Corrente|BR||-1044|-4516
+Lapão|BR||-1138|-4183
+Ipameri|BR||-1772|-4816
+Alexânia|BR||-1608|-4851
+Ibotirama|BR||-1219|-4322
+Novo Cruzeiro|BR||-1747|-4188
+Mundo Novo|BR||-1186|-4047
+Iguaí|BR||-1476|-4009
+Pitangui|BR||-1968|-4489
+Sacramento|BR||-1987|-4744
+Sooretama|BR||-1920|-4010
+Planalto|BR||-1467|-4047
+Canarana|BR||-1168|-4177
+Lago Sul|BR||-1585|-4788
+Itapuranga|BR||-1556|-4995
+São José da Lapa|BR||-1970|-4396
+Miguel Calmon|BR||-1143|-4060
+Formosa do Rio Preto|BR||-1105|-4519
+Cruzeiro|BR||-1579|-4794
+Tupaciguara|BR||-1859|-4870
+Coração de Jesus|BR||-1669|-4436
+Aimorés|BR||-1950|-4106
+Cândido Sales|BR||-1550|-4124
+Pirenópolis|BR||-1585|-4896
+Piritiba|BR||-1173|-4056
+Piracanjuba|BR||-1730|-4902
+João Dourado|BR||-1134|-4166
+Santana|BR||-1298|-4405
+Iaçu|BR||-1277|-4021
+Pedra Azul|BR||-1601|-4130
+Minas Novas|BR||-1722|-4259
+Paraopeba|BR||-1927|-4440
+Buritis|BR||-1562|-4642
+Jequitinhonha|BR||-1643|-4100
+Bom Jesus de Goiás|BR||-1822|-4973
+São João da Ponte|BR||-1593|-4401
+Belo Oriente|BR||-1922|-4248
+Pinheiros|BR||-1837|-4021
+São João do Paraíso|BR||-1531|-4201
+Buritizeiro|BR||-1735|-4496
+Iraquara|BR||-1225|-4162
+Corinto|BR||-1838|-4446
+Francisco Sá|BR||-1648|-4349
+Itapaci|BR||-1495|-4955
+Conceição do Mato Dentro|BR||-1904|-4342
+Santa Teresa|BR||-1994|-4060
+Itambé|BR||-1524|-4062
+Medeiros Neto|BR||-1737|-4022
+Inhapim|BR||-1955|-4212
+Abaeté|BR||-1916|-4545
+Caculé|BR||-1450|-4222
+Dianópolis|BR||-1163|-4682
+Riachão das Neves|BR||-1175|-4491
+Park Way|BR||-1591|-4794
+Silvânia|BR||-1667|-4861
+Ibiá|BR||-1948|-4654
+Hidrolândia|BR||-1696|-4923
+Ceres|BR||-1531|-4960
+Ecoporanga|BR||-1837|-4083
+Serro|BR||-1860|-4338
+Oliveira dos Brejinhos|BR||-1232|-4290
+Palmas de Monte Alto|BR||-1427|-4316
+Paramirim|BR||-1344|-4224
+Núcleo Bandeirante|BR||-1587|-4797
+Anagé|BR||-1461|-4114
+Macarani|BR||-1557|-4042
+Pedro Canário|BR||-1803|-4015
+Boquira|BR||-1282|-4273
+Buritirama|BR||-1071|-4363
+Itambacuri|BR||-1803|-4168
+Conselheiro Pena|BR||-1917|-4147
+Cocalzinho de Goiás|BR||-1579|-4878
+Jaboticatubas|BR||-1951|-4374
+Tanhaçu|BR||-1402|-4125
+Maracás|BR||-1344|-4043
+Barra da Estiva|BR||-1363|-4133
+Itororó|BR||-1512|-4007
+Monte Azul|BR||-1516|-4287
+Monte Alegre de Minas|BR||-1887|-4888
+Medina|BR||-1622|-4148
+Pindobaçu|BR||-1074|-4036
+Turmalina|BR||-1729|-4273
+Vazante|BR||-1799|-4691
+Rubiataba|BR||-1516|-4980
+Livramento do Brumado|BR||-1365|-4185
+Itarantim|BR||-1566|-4007
+Ibicoara|BR||-1341|-4129
+Caraí|BR||-1719|-4169
+Ipanema|BR||-1980|-4171
+Umburanas|BR||-1073|-4133
+Rio Bananal|BR||-1926|-4033
+Utinga|BR||-1208|-4109
+Ourolândia|BR||-1097|-4108
+Itaobim|BR||-1656|-4150
+Abadia de Goiás|BR||-1676|-4944
+Encruzilhada|BR||-1553|-4091
+Lagoa Formosa|BR||-1878|-4641
+Montanha|BR||-1813|-4036
+Pancas|BR||-1923|-4085
+Manga|BR||-1476|-4393
+Varzelândia|BR||-1570|-4403
+Cocos|BR||-1418|-4453
+São Gabriel|BR||-1123|-4188
+Presidente Olegário|BR||-1842|-4642
+Carlos Chagas|BR||-1770|-4077
+Mairi|BR||-1171|-4015
+Cafarnaum|BR||-1169|-4147
+Anicuns|BR||-1646|-4996
+Mirangaba|BR||-1095|-4058
+Águas Formosas|BR||-1708|-4094
+Formoso do Araguaia|BR||-1180|-4953
+Ibipeba|BR||-1164|-4201
+Baixa Grande|BR||-1196|-4017
+Barreiro do Jaíba|BR||-1562|-4359
+Campos Belos|BR||-1304|-4677
+Fundão|BR||-1993|-4040
+Campina Verde|BR||-1954|-4949
+Ituaçu|BR||-1381|-4130
+Filadélfia|BR||-1074|-4013
+Luz|BR||-1980|-4569
+Pontalina|BR||-1752|-4945
+Itanhém|BR||-1717|-4033
+Malacacheta|BR||-1784|-4208
+Urucuia|BR||-1613|-4574
+Peçanha|BR||-1855|-4256
+Nova Era|BR||-1975|-4304
+São Domingos do Prata|BR||-1986|-4297
+Padre Paraíso|BR||-1707|-4148
+Arinos|BR||-1592|-4611
+Resplendor|BR||-1933|-4126
+Itacarambi|BR||-1510|-4409
+Condeúba|BR||-1490|-4197
+Tanque Novo|BR||-1355|-4249
+Perdizes|BR||-1935|-4729
+Ipaba|BR||-1941|-4242
+Belo Campo|BR||-1504|-4126
+Ibititá|BR||-1155|-4198
+Serra Dourada|BR||-1276|-4395
+Crixás|BR||-1455|-4997
+Indiara|BR||-1714|-4999
+Souto Soares|BR||-1209|-4164
+Piatã|BR||-1315|-4177
+Tapiramutá|BR||-1185|-4079
+Boa Vista do Tupim|BR||-1266|-4061
+Malhada|BR||-1434|-4377
+Ibitiara|BR||-1265|-4222
+Jussara|BR||-1104|-4197
+Central|BR||-1114|-4211
+Pindaí|BR||-1449|-4269
+Raposos|BR||-1997|-4380
+Tremedal|BR||-1498|-4141
+Itaeté|BR||-1299|-4097
+Bonito|BR||-1197|-4127
+Lagoa Real|BR||-1403|-4214
+Santa Juliana|BR||-1931|-4753
+Orizona|BR||-1703|-4830
+Igaporã|BR||-1377|-4271
+Rio do Antônio|BR||-1441|-4208
+Urandi|BR||-1477|-4266
+São João Evangelista|BR||-1855|-4276
+São Félix do Coribe|BR||-1340|-4419
+América Dourada|BR||-1146|-4144
+Presidente Dutra|BR||-1130|-4199
+Brasilândia de Minas|BR||-1701|-4601
