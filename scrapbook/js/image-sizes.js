@@ -8,8 +8,19 @@
 // any guess here: it knows the pixel ratio, the viewport, and whether the connection is
 // slow enough to prefer a smaller one.
 
-/** The widths the server has thumbnails for. Declared in pb_migrations. */
-export const CARD_WIDTHS = [640, 960, 1280];
+/**
+ * The widths a CARD may be served at. Declared in pb_migrations.
+ *
+ * Capped at 960 on purpose, and 1280 is deliberately absent. A card is at most 560 CSS px
+ * and usually around 390 on a phone; 960 is between 1.7x and 2.5x density depending on the
+ * screen, which is sharp, and 1280 is 465 KB of photograph for a thumbnail on a page that
+ * shows dozens. Capping the CANDIDATES does what understating `sizes` cannot: a static
+ * `sizes` is multiplied by the device's pixel ratio, so shading it down punishes a 2x
+ * screen to restrain a 3x one. This holds the ceiling steady for both.
+ *
+ * The lightbox is where a photograph is meant to be looked at, and it offers 2048.
+ */
+export const CARD_WIDTHS = [640, 960];
 
 /**
  * `srcset` for a card photo, or null when there is nothing to choose between.
@@ -38,9 +49,11 @@ export function cardSrcset(photo) {
  */
 export function cardSizes(share = 1) {
   const across = Number.isInteger(share) && share > 1 ? share : 1;
-  if (across === 1) return '(max-width: 600px) 100vw, 560px';
-  // Integer percentages: a browser only needs an estimate, and an exact fraction invites
-  // a precision nobody has.
-  const part = Math.round(100 / across);
-  return `(max-width: 600px) ${part}vw, ${Math.round(560 / across)}px`;
+  // TRUTHFULLY. An understated width shades the request on every device equally, which
+  // means shading a 2x screen to restrain a 3x one — the ceiling belongs on the candidate
+  // list, not here. Told the truth, a browser picks the smallest candidate that covers the
+  // screen it actually has.
+  const vw = Math.round(100 / across);
+  const wide = Math.round(560 / across);
+  return `(max-width: 600px) ${vw}vw, ${wide}px`;
 }

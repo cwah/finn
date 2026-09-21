@@ -77,6 +77,7 @@ export async function updatePost(id, draft, author) {
       // shape matches data-pb.js — the renderer reads these and must not find them absent.
       cardSet: null,
       viewUrl: p.url,
+      viewSrcset: '',
       thumbUrl: p.url,
       width: p.width,
       height: p.height,
@@ -123,6 +124,7 @@ export async function createPost(draft, author) {
       // shape matches data-pb.js — the renderer reads these and must not find them absent.
       cardSet: null,
       viewUrl: p.url,
+      viewSrcset: '',
       thumbUrl: p.url,
       width: p.width,
       height: p.height,

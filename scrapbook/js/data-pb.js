@@ -164,6 +164,13 @@ function toPhoto(rec) {
     // on anything recent and larger on older uploads. 2048 is beyond what a phone or a
     // laptop can show, at a fraction of the bytes. `url` remains the file itself.
     viewUrl: pb.fileUrl('photos', rec.id, rec.image, '2048x2048f'),
+    // And the same picture at the sizes an expanded view might want, so a phone is not
+    // sent a two-megapixel photograph to show on a 1170px screen. Written as a ready-made
+    // srcset because that is exactly what it becomes — the browser weighs the screen, the
+    // pixel ratio and the connection better than a guess here could.
+    viewSrcset: [960, 1280, 2048]
+      .map((w) => `${pb.fileUrl('photos', rec.id, rec.image, `${w}x${w}f`)} ${w}w`)
+      .join(', '),
     thumbUrl: pb.fileUrl('photos', rec.id, rec.image, '320x320f'),
     width: rec.width,
     height: rec.height,

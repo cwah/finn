@@ -216,6 +216,9 @@ function makeViewable(img, photo, group) {
   // the original, which is up to 2560px on anything recent and larger on older uploads;
   // 2048 is past what a phone or a laptop can show, at a fraction of the bytes.
   img.dataset.full = photo.viewUrl || photo.url;
+  // The candidates, for the lightbox to choose from once it knows how big the picture
+  // will actually be drawn.
+  if (photo.viewSrcset) img.dataset.viewSrcset = photo.viewSrcset;
   // The size the picture PRESENTS, so the lightbox sizes a turned photo correctly.
   img.dataset.fullW = o.width;
   img.dataset.fullH = o.height;

@@ -166,6 +166,19 @@ function fillRotor(rotor, photo, active = true) {
     const img = document.createElement('img');
     img.className = 'lightbox-img rotor-media';
     img.decoding = 'async';
+    // SIZES BEFORE SRCSET. The browser chooses the moment a source list appears, using
+    // whatever `sizes` says at that instant — set it afterwards and the choice has already
+    // been made, from a default of "the whole viewport", which is the largest candidate
+    // every time.
+    //
+    // The stage is the most the picture can ever be drawn at; a photograph fitted inside
+    // it is narrower still, so this errs towards sharp. It is a ceiling, not a promise.
+    if (photo.srcset) {
+      const stage = rotor.closest('.lightbox-stage');
+      const width = Math.round(stage?.clientWidth || window.innerWidth || 1024);
+      img.sizes = `${width}px`;
+      img.srcset = photo.srcset;
+    }
     img.src = photo.url;
     img.alt = photo.alt;
     // The same filter the card used. Expanding a photo must not develop it differently.
@@ -328,6 +341,7 @@ function collect(img) {
       const [start, end] = (n.dataset.trim || '0 0').split(' ').map(Number);
       return {
         url: n.dataset.full,
+        srcset: n.dataset.viewSrcset || '',
         // The size the picture PRESENTS: already turned, so the fit maths needs no
         // special case for a rotated photo.
         width: Number(n.dataset.fullW),
