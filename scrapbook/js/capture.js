@@ -661,22 +661,21 @@ export function initCapture({ author, canPost = true }, handlers) {
 
     if (!placeChosenByHand) location.value = agreed ? placeLabel(agreed) : '';
 
-    // SAID EITHER WAY. A field that stays empty is indistinguishable from a feature that
-    // is broken — and most photographs carry no coordinates at all, because Google Photos
-    // strips them when sharing and Android can be told to leave them out entirely. Saying
-    // so is the difference between "there was nothing to find" and "this does not work".
-    const stills = pending.filter((p) => !p.motion && p.file);
+    // NOTHING IS SAID WHEN NOTHING IS FOUND. It was, briefly — a note explaining that the
+    // photographs carried no coordinates, so an empty field could not be mistaken for a
+    // broken one. But coordinates are stripped on the way in far more often than not:
+    // Google Photos removes them when sharing, and Android can be told to leave them out
+    // of the file entirely. A note that appears on almost every post explains nothing and
+    // is read by nobody — it is just another line between a parent and the caption.
+    //
+    // The field is simply empty and ready to be typed in, which is what it looks like
+    // anyway. The note stays for the case worth remarking on: a place filled in on the
+    // parent's behalf.
     const settled = Boolean(agreed) && !placeChosenByHand;
-    let note = '';
-    if (settled) {
-      note = 'Place taken from the photos you added — change it if it\u2019s wrong.';
-    } else if (!places.length && stills.length && !placeChosenByHand) {
-      note = stills.length === 1
-        ? 'That photo does not say where it was taken — add a place if you like.'
-        : 'These photos do not say where they were taken — add a place if you like.';
-    }
-    locationNote.textContent = note;
-    locationNote.hidden = !note;
+    locationNote.textContent = settled
+      ? 'Place taken from the photos you added — change it if it\u2019s wrong.'
+      : '';
+    locationNote.hidden = !settled;
 
     // Offered only when they disagree; a chip repeating what the field already says would
     // invite a pointless tap.

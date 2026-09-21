@@ -93,6 +93,12 @@ Shipped when it lands. No ceremony beyond that.
       Coordinates are never stored. The post keeps "Brooklyn, NY", which is what a
       scrapbook wants; keeping the exact spot a baby was photographed is more than is
       needed for any of this.
+      In practice the coordinates are usually gone before the photograph arrives: Google
+      Photos strips them when sharing, and Android can be told to leave them out of the
+      file. So the field is most often empty and typed in by hand, and it says nothing
+      about that — a note on almost every post would explain nothing. It still fills
+      itself in when the coordinates survive, which is mainly a file picked from the
+      device rather than shared from another app.
       Place data from GeoNames (geonames.org), CC BY 4.0.
 - [x] **Gesture based swipes**, with the photo following the finger. The viewer is a track
       of three panes now — the photo and the one either side — so there is something to
