@@ -65,9 +65,19 @@ export function oldestDate(posts) {
  * @param {string} memoryDate the post being placed
  * @returns {number} index to insert before; dates.length means "append"
  */
-export function insertionIndex(dates, memoryDate) {
+export function insertionIndex(dates, memoryDate, times = [], happenedAt = '') {
   const list = Array.isArray(dates) ? dates : [];
-  const at = list.findIndex((d) => d && d < memoryDate);
+  const clocks = Array.isArray(times) ? times : [];
+  // Newest first, so the new card goes before the first one that is OLDER than it.
+  // Within the same day that is decided by when each happened — without which a post
+  // added now landed at the end of its day whatever its photographs said.
+  const at = list.findIndex((d, i) => {
+    if (!d) return false;
+    if (d !== memoryDate) return d < memoryDate;
+    // Same day: an entry with no time of its own cannot be reasoned about, so the new
+    // card goes after it rather than guessing its way above.
+    return Boolean(happenedAt) && Boolean(clocks[i]) && clocks[i] < happenedAt;
+  });
   return at === -1 ? list.length : at;
 }
 

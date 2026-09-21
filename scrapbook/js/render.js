@@ -397,12 +397,16 @@ export function renderPost(post, birthDate, opts = {}) {
   if (!isMilestone(post)) {
     card.classList.add('timeline-item');
     card.dataset.memoryDate = post.memoryDate; // lets the timeline order late arrivals
+    // And WITHIN a day, when it happened — or a post inserted live would land at the end
+    // of its day regardless of whether it belongs there.
+    if (post.happenedAt) card.dataset.happenedAt = post.happenedAt;
     card.dataset.postId = post.id; // lets an edit find its card again
     return card;
   }
 
   const scene = el('div', 'milestone-scene timeline-item');
   scene.dataset.memoryDate = post.memoryDate;
+  if (post.happenedAt) scene.dataset.happenedAt = post.happenedAt;
   scene.dataset.postId = post.id;
 
   // The drawing depends on this milestone's NEIGHBOURS, not just its own title — nothing

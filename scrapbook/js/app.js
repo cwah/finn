@@ -131,8 +131,10 @@ function restripeMilestones() {
  * things — paging simply got away with appending for as long as pages arrived in order.
  */
 function placeCard(card) {
-  const dates = [...timeline.children].map((c) => c.dataset.memoryDate || null);
-  const at = insertionIndex(dates, card.dataset.memoryDate);
+  const cards = [...timeline.children];
+  const dates = cards.map((c) => c.dataset.memoryDate || null);
+  const times = cards.map((c) => c.dataset.happenedAt || '');
+  const at = insertionIndex(dates, card.dataset.memoryDate, times, card.dataset.happenedAt || '');
   const before = timeline.children[at];
   if (before) timeline.insertBefore(card, before);
   else timeline.append(card);

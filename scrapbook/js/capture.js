@@ -25,7 +25,7 @@ import { forDisplay, previewUrl } from './downscale.js';
 // prepare-upload.js, once the trim is known.
 import { estimateSeconds } from './video-encode.js';
 import { prepareForUpload } from './prepare-upload.js';
-import { exifDate, filenameDate, agreedDate, distinctDates } from './media-date.js';
+import { exifDate, exifDateTime, filenameDate, agreedDate, distinctDates, happenedAt } from './media-date.js';
 import { exifLocation, distinctPlaces, agreedPlace, placeLabel } from './media-place.js';
 import { openPhotoEditor } from './photo-editor.js';
 import { dateLabel } from './age.js';
@@ -210,6 +210,7 @@ async function readItem(entry) {
       // needs something to play and this is the only thing there is.
       videoFile: entry.video,
       takenOn: await takenOn(entry.video),
+      takenTime: null, // a clip states its day, not a clock this reads
       takenAt: null,   // a clip's coordinates are in a box this does not read
       duration,
       trimStart: 0,
@@ -262,6 +263,10 @@ async function readItem(entry) {
     // has had its clip split off by now, and the halves are new Blobs with no name and no
     // modification time of their own.
     takenOn: await takenOn(entry.still),
+    // The same tag read to the second, for ordering a day. Only EXIF is consulted: a
+    // filename gives a day at best, and `lastModified` is when the file landed on the
+    // device rather than when the shutter went.
+    takenTime: await takenTime(entry.still),
     takenAt: await takenAt(entry.still),
   };
   if (!video) return item;
@@ -322,6 +327,17 @@ function localDay(ms) {
  * should never fetch any of it — this line is the only thing that asks for it, and only
  * when a photograph actually carries coordinates.
  */
+/** The moment a photograph was taken, to the second, or null. */
+async function takenTime(file) {
+  if (!file || (file.type || '').startsWith('video/')) return null;
+  try {
+    const head = new Uint8Array(await file.slice(0, 256 * 1024).arrayBuffer());
+    return exifDateTime(head);
+  } catch {
+    return null;
+  }
+}
+
 async function takenAt(file) {
   if (!file || (file.type || '').startsWith('video/')) return null;
   try {
@@ -1098,6 +1114,9 @@ export function initCapture({ author, canPost = true }, handlers) {
       memoryDate: date.value || todayISO(),
       caption: caption.value.trim() || null,
       location: location.value.trim() || null,
+      // Where this memory sits within its day. The media decide when they agree with the
+      // day it is filed under; otherwise now, which is what the ordering used before.
+      happenedAt: happenedAt(pending, date.value || todayISO(), new Date().toISOString()),
       milestone: isMilestone.checked
         ? { isMilestone: true, title: milestoneName || 'Milestone' }
         : null,

@@ -16,7 +16,10 @@
 
 import * as pb from './pb.js';
 
-const PAGE_ORDER = '-memoryDate,-created'; // newest memory first, stable within a day
+// Newest memory first; within a day, whichever HAPPENED last. `created` is the tiebreak
+// of last resort — two posts made in the same second, which only a test will ever
+// produce. Ordering a day by `created` alone is what put an evening above a morning.
+const PAGE_ORDER = '-memoryDate,-happenedAt,-created';
 
 let _config = null;
 
@@ -202,6 +205,8 @@ function toPost(rec, photos) {
     author: author ? { id: author.id, name: author.name || author.email } : null,
     caption: rec.caption || null,
     location: rec.location || null,
+    // A sort key, not a fact about the memory — the renderer places cards with it.
+    happenedAt: rec.happenedAt || rec.created || null,
     milestone: rec.isMilestone
       ? { isMilestone: true, title: rec.milestoneTitle || 'Milestone' }
       : null,
@@ -324,6 +329,9 @@ function describeFailure(photo, index, err) {
 export async function createPost(draft, author) {
   const rec = await pb.create('posts', {
     memoryDate: draft.memoryDate,
+    // When the memory actually happened, for ordering within its day. Worked out from the
+    // media by the compose sheet, which is the only place that has them.
+    happenedAt: draft.happenedAt || new Date().toISOString(),
     caption: draft.caption || '',
     location: draft.location || '',
     isMilestone: Boolean(draft.milestone),
@@ -387,6 +395,9 @@ export async function createPost(draft, author) {
 function postBody(draft) {
   return {
     memoryDate: draft.memoryDate,
+    // Recomputed on edit: changing the date, or removing the evening photograph, changes
+    // where the memory sits in its day.
+    ...(draft.happenedAt ? { happenedAt: draft.happenedAt } : {}),
     caption: draft.caption || '',
     location: draft.location || '',
     isMilestone: Boolean(draft.milestone),

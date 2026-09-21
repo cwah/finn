@@ -70,6 +70,8 @@ let index = 0;
 // finished. That wait is cancellable, and MUST be: a tap on an arrow or a dot while one is
 // pending would otherwise have the old commit land on top of it a moment later.
 let commitTimer = null;
+/** Roughly the height of a native video control bar, which owns the drags over it. */
+const CONTROL_BAR = 52;
 
 /** Space inside the stage, once its padding is taken off. */
 function available(stage) {
@@ -464,7 +466,20 @@ export function initLightbox(timeline) {
 
   box.addEventListener('pointerdown', (e) => {
     if (stage.classList.contains('is-zoomed')) return;
-    if (e.target.closest('button, video')) return;   // controls own their own taps
+    if (e.target.closest('button')) return;          // a button owns its own taps
+
+    // A VIDEO IS STILL A PICTURE TO SWIPE. Excluding it outright meant a post of clips or
+    // motion photos could not be paged at all by touch — the picture IS the video, so
+    // there was nowhere left to start the gesture.
+    //
+    // What genuinely belongs to the browser is the control bar along the bottom, where a
+    // sideways drag is scrubbing. A motion photo has no controls at all, so all of it is
+    // swipeable.
+    const media = e.target.closest('video');
+    if (media && media.controls) {
+      const box2 = media.getBoundingClientRect();
+      if (e.clientY > box2.bottom - CONTROL_BAR) return;
+    }
     drag = { x: e.clientX, y: e.clientY, at: performance.now(), moving: false };
   });
 

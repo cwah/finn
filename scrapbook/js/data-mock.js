@@ -65,6 +65,7 @@ export async function updatePost(id, draft, author) {
     author,
     caption: draft.caption,
     location: draft.location || null,
+    happenedAt: draft.happenedAt || new Date().toISOString(),
     milestone: draft.milestone,
     photos: draft.photos.map((p, i) => ({
       id: p.id || `local-${Date.now()}-${i}`,
@@ -110,6 +111,7 @@ export async function createPost(draft, author) {
     author,
     caption: draft.caption,
     location: draft.location || null,
+    happenedAt: draft.happenedAt || new Date().toISOString(),
     milestone: draft.milestone,
     photos: draft.photos.map((p, i) => ({
       id: `local-${stamp}-${i}`,

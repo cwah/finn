@@ -66,6 +66,20 @@ export function filenameDate(name) {
  * @returns {string|null} YYYY-MM-DD
  */
 export function exifDate(bytes) {
+  const text = findDateTimeText(bytes);
+  if (!text) return null;
+  const match = text.slice(0, 10).match(/^(\d{4}):(\d{2}):(\d{2})$/);
+  return match ? plausible(Number(match[1]), Number(match[2]), Number(match[3])) : null;
+}
+
+/**
+ * The raw "YYYY:MM:DD HH:MM:SS" out of EXIF, or null.
+ *
+ * Separated from exifDate so the clock can be read without a second copy of the byte
+ * walking — the date and the time are the same nineteen characters, and two parsers
+ * reading them apart is exactly how they would come to disagree.
+ */
+function findDateTimeText(bytes) {
   if (!bytes || bytes.length < 16) return null;
   if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return null; // not a jpeg
 
@@ -140,10 +154,39 @@ export function exifDate(bytes) {
   }
   if (!stamp || stamp.offset + 10 > bytes.length) return null;
 
-  // "YYYY:MM:DD HH:MM:SS"
-  const text = String.fromCharCode(...bytes.subarray(stamp.offset, stamp.offset + 10));
-  const match = text.match(/^(\d{4}):(\d{2}):(\d{2})$/);
-  return match ? plausible(Number(match[1]), Number(match[2]), Number(match[3])) : null;
+  // Nineteen characters when they are there, ten when the tag is short — the date alone is
+  // still useful, and a truncated tag is not a reason to discard it.
+  const end = Math.min(stamp.offset + 19, bytes.length);
+  return String.fromCharCode(...bytes.subarray(stamp.offset, end));
+}
+
+/**
+ * The same tag, read to the second.
+ *
+ * The time was always there — EXIF writes "YYYY:MM:DD HH:MM:SS" and exifDate reads the
+ * first ten characters of it. Only the day was ever wanted, so the rest was dropped.
+ *
+ * It is wanted now, to ORDER a day: two posts made on the same afternoon were shown in
+ * the order they happened to be typed up, so photographs from an evening could sit above
+ * ones from that morning. The time says which came first.
+ *
+ * Returned as a real instant, read in the timezone of the device doing the reading, which
+ * is where the photograph was almost certainly taken. Not for display — nothing shows a
+ * photograph's clock time — only for putting a day in order.
+ *
+ * @returns {string|null} an ISO timestamp
+ */
+export function exifDateTime(bytes) {
+  const day = exifDate(bytes);
+  if (!day) return null;
+
+  const at = findDateTimeText(bytes);
+  const clock = at && at.match(/^\d{4}:\d{2}:\d{2} (\d{2}):(\d{2}):(\d{2})/);
+  if (!clock) return `${day}T00:00:00`;
+
+  const [y, m, d] = day.split('-').map(Number);
+  const when = new Date(y, m - 1, d, Number(clock[1]), Number(clock[2]), Number(clock[3]));
+  return Number.isNaN(when.getTime()) ? `${day}T00:00:00` : when.toISOString();
 }
 
 /**
@@ -198,4 +241,37 @@ export function agreedDate(dates) {
   const [first] = list;
   if (!first) return null;
   return list.every((d) => d === first) ? first : null;
+}
+
+/**
+ * When a memory happened, to the minute — for ordering a day.
+ *
+ * A scrapbook is ordered by the day a memory belongs to, and within a day it was ordered
+ * by when the POST WAS TYPED UP. Those are not the same thing: photographs from an evening
+ * written up the next morning sat above photographs from that morning written up later
+ * still, and the day read backwards.
+ *
+ * So when the media themselves say when they happened, they decide. The MOST RECENT item
+ * is used, for the same reason the date is: a set of photographs is one memory and it
+ * belongs at the moment it finished happening.
+ *
+ * ONLY WHEN THE MEDIA AGREE WITH THE DAY. A parent who backdates a post to a birthday, or
+ * corrects a wrong date, has said something the files have not — and a photograph's clock
+ * from some other day says nothing about where this memory sits among that day's others.
+ * Then the fallback stands, which is when the post was made.
+ *
+ * @param {Array<{takenOn: string|null, takenTime: string|null}>} items the post's media
+ * @param {string} memoryDate the day the post is filed under, YYYY-MM-DD
+ * @param {string} fallback an ISO timestamp for when none of them match
+ * @returns {string} an ISO timestamp
+ */
+export function happenedAt(items, memoryDate, fallback) {
+  let latest = null;
+  for (const item of items || []) {
+    if (!item || item.takenOn !== memoryDate || !item.takenTime) continue;
+    const when = new Date(item.takenTime);
+    if (Number.isNaN(when.getTime())) continue;
+    if (!latest || when > latest) latest = when;
+  }
+  return latest ? latest.toISOString() : fallback;
 }

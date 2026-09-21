@@ -146,6 +146,11 @@
 .lightbox-stage,
 .lightbox-crop { touch-action: pan-y pinch-zoom; }
 
+/* And the media itself. A <video> defaults to letting the browser have the gesture, which
+   is right where there are controls to scrub and wrong for a motion photo, which has
+   none and is simply a picture that moves. */
+.lightbox-crop video:not([controls]) { touch-action: pan-y pinch-zoom; }
+
 /* Zoomed, a drag IS panning the photo, so the browser gets it back. */
 .lightbox-stage.is-zoomed,
 .lightbox-stage.is-zoomed .lightbox-pane[data-pane="0"] .lightbox-crop { touch-action: auto; }

@@ -186,3 +186,25 @@ test('the whole stage accepts the gesture, not only the picture', () => {
   // browser — which is most of the screen on a phone.
   assert.match(css, /\.lightbox-stage,\s*\n\.lightbox-crop \{ touch-action: pan-y pinch-zoom; \}/);
 });
+
+// ── A video is still a picture to swipe ───────────────────────────
+// REPORTED: swiping did nothing on videos or motion photos. The gesture excluded `video`
+// outright, so that controls would own their own taps — but on a post of clips the picture
+// IS the video, leaving nowhere to start the gesture at all.
+
+test('a swipe may start on the media', () => {
+  assert.doesNotMatch(js, /closest\('button, video'\)/);
+  assert.match(js, /if \(e\.target\.closest\('button'\)\) return;/);
+});
+
+test('only the control bar is left to the browser', () => {
+  // Where a sideways drag is scrubbing rather than paging. Everything above it is a
+  // photograph.
+  assert.match(js, /if \(media && media\.controls\)/);
+  assert.match(js, /e\.clientY > box2\.bottom - CONTROL_BAR/);
+});
+
+test('a motion photo is swipeable all over, having no controls', () => {
+  // It is a still that moves; there is nothing to scrub.
+  assert.match(css, /\.lightbox-crop video:not\(\[controls\]\) \{ touch-action: pan-y pinch-zoom; \}/);
+});
