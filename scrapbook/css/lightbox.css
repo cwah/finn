@@ -143,9 +143,11 @@
    browser claims a sideways drag for itself and ends the gesture with `pointercancel` —
    which is why swiping between photos did nothing on a phone. `pan-y` leaves vertical
    scrolling and pinch-zoom alone. */
+.lightbox-stage,
 .lightbox-crop { touch-action: pan-y pinch-zoom; }
 
 /* Zoomed, a drag IS panning the photo, so the browser gets it back. */
+.lightbox-stage.is-zoomed,
 .lightbox-stage.is-zoomed .lightbox-pane[data-pane="0"] .lightbox-crop { touch-action: auto; }
 
 /* ── The sliding track ─────────────────────────────────────────────
@@ -157,7 +159,11 @@
   display: flex;
   width: 100%;
   min-height: 100%;
-  transform: translate3d(calc(var(--slide, 0) * 100%), 0, 0);
+  /* MINUS ONE PANE, always. The photo being looked at is the middle of three, so the
+     track sits one pane-width to the left of its own origin; `--slide` is the drag on top
+     of that. Positioning from zero instead showed whichever pane happened to be first,
+     which is the previous photo as soon as there is one. */
+  transform: translate3d(calc((var(--slide, 0) - 1) * 100%), 0, 0);
 }
 
 /* Only while settling. During the drag there must be no transition at all, or the picture
@@ -176,7 +182,8 @@
   min-width: 100%;
 }
 
-.lightbox-pane[hidden] { display: none; }
+/* An empty end pane keeps its place in the track — see renderPane. Removing it from flow
+   is what made the viewer skip a photo. */
 
 /* A zoomed photo scrolls within the stage, and the track must not fight it. */
 .lightbox-stage.is-zoomed .lightbox-track { transform: none; }

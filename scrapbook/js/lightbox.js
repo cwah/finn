@@ -66,6 +66,10 @@ function ensureBox() {
 
 let group = [];  // the photos of the post that was opened
 let index = 0;
+// A swipe settles before it commits, so the new photo appears once the movement has
+// finished. That wait is cancellable, and MUST be: a tap on an arrow or a dot while one is
+// pending would otherwise have the old commit land on top of it a moment later.
+let commitTimer = null;
 
 /** Space inside the stage, once its padding is taken off. */
 function available(stage) {
@@ -196,9 +200,10 @@ function renderPane(box, offset) {
   const rotor = pane.querySelector('.rotor');
   const photo = group[index + offset];
 
-  // At either end there is no neighbour, and an empty pane is the honest answer: the
-  // picture drags to a dead stop rather than revealing a blank one pretending to be next.
-  pane.hidden = !photo;
+  // An end pane is EMPTIED, never removed from the layout. Taking it out of flow shifts
+  // every pane after it, so the middle one stopped being in the middle — and since the
+  // track is positioned by whole pane-widths, the viewer then showed the PREVIOUS photo
+  // and appeared to skip one. It stays, holding nothing.
   if (!photo) {
     rotor.querySelector('video')?.pause();
     rotor.replaceChildren();
@@ -249,6 +254,10 @@ function paintDots(box) {
 function render() {
   const box = document.getElementById('lightbox');
   if (!group[index]) return;
+
+  // Whatever brought us here — a swipe, an arrow, a dot — is now the truth, and any
+  // settle still waiting to commit is stale.
+  window.clearTimeout(commitTimer);
 
   resetZoom(box);
   settleTrack(box, 0);            // back to centre, with no animation
@@ -440,8 +449,14 @@ export function initLightbox(timeline) {
     if ((far || flick) && canGo) {
       // Carry the movement through, then swap in the new photo once it has arrived. The
       // pane it lands on is already showing it, so the change is invisible.
+      //
+      // The destination is worked out NOW and set absolutely. `index += dir` inside the
+      // wait was a second, later edit to whatever index happened to be by then — so two
+      // quick swipes, or a swipe followed by an arrow, applied both and skipped a photo.
+      const target = index + dir;
       settleTrack(box, -dir, { animate: true });
-      window.setTimeout(() => { index += dir; render(); }, 180);
+      window.clearTimeout(commitTimer);
+      commitTimer = window.setTimeout(() => { index = target; render(); }, 180);
     } else {
       settleTrack(box, 0, { animate: true });   // back where it was
     }

@@ -142,3 +142,47 @@ test('the dots are bigger than they look', () => {
   // 8px is not a touch target; the ring around it is.
   assert.match(css, /\.lightbox-dot::before[\s\S]{0,140}width: 32px/);
 });
+
+// ── Two bugs the first version shipped with ───────────────────────
+// Reported as "no finger following" and "the last image is skipped". They were separate
+// faults that looked like one, and the browser test that passed had checked the DOT index
+// rather than which photograph was actually on screen — so both went out.
+
+test('the track is offset by a whole pane, so the middle one is in the middle', () => {
+  // THE FIRST BUG. Three panes sit side by side; the one being looked at is the second,
+  // so the track has to start one pane-width to the left. Positioned from zero it showed
+  // whichever pane came first — the PREVIOUS photo, as soon as there was one.
+  assert.match(css, /translate3d\(calc\(\(var\(--slide, 0\) - 1\) \* 100%\)/);
+});
+
+test('an end pane keeps its place in the track', () => {
+  // And the reason the bug only appeared after the first photo: hiding the empty pane took
+  // it out of flow, which shifted everything after it and accidentally looked correct at
+  // photo one. It is emptied now, never removed.
+  assert.doesNotMatch(css, /\.lightbox-pane\[hidden\] \{ display: none; \}/);
+  assert.doesNotMatch(js, /pane\.hidden = !photo/);
+});
+
+test('the swipe commit is absolute, and cancellable', () => {
+  // THE SECOND BUG. `index += dir` inside the settle was a second edit applied later to
+  // whatever index had become — so two quick swipes, or a swipe then an arrow, applied
+  // both and skipped a photograph. The destination is decided when the gesture ends.
+  assert.match(js, /const target = index \+ dir;/);
+  assert.match(js, /commitTimer = window\.setTimeout\(\(\) => \{ index = target; render\(\); \}/);
+  // Comments explain the fix and would otherwise match it.
+  const code = js.replace(/^\s*\/\/.*$/gm, '');
+  assert.doesNotMatch(code, /index \+= dir/);
+});
+
+test('anything that changes the photo cancels a pending settle', () => {
+  // An arrow or a dot tapped mid-settle is the new truth; the old commit must not land on
+  // top of it a moment later.
+  assert.match(js, /function render\(\) \{[\s\S]{0,260}window\.clearTimeout\(commitTimer\)/);
+});
+
+test('the whole stage accepts the gesture, not only the picture', () => {
+  // touch-action has to be on the element the finger starts on AND its scrolling ancestor.
+  // On the crop alone, a swipe beginning in the space around a photo was claimed by the
+  // browser — which is most of the screen on a phone.
+  assert.match(css, /\.lightbox-stage,\s*\n\.lightbox-crop \{ touch-action: pan-y pinch-zoom; \}/);
+});

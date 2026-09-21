@@ -645,11 +645,22 @@ export function initCapture({ author, canPost = true }, handlers) {
 
     if (!placeChosenByHand) location.value = agreed ? placeLabel(agreed) : '';
 
+    // SAID EITHER WAY. A field that stays empty is indistinguishable from a feature that
+    // is broken — and most photographs carry no coordinates at all, because Google Photos
+    // strips them when sharing and Android can be told to leave them out entirely. Saying
+    // so is the difference between "there was nothing to find" and "this does not work".
+    const stills = pending.filter((p) => !p.motion && p.file);
     const settled = Boolean(agreed) && !placeChosenByHand;
-    locationNote.textContent = settled
-      ? 'Place taken from the photos you added — change it if it\u2019s wrong.'
-      : '';
-    locationNote.hidden = !settled;
+    let note = '';
+    if (settled) {
+      note = 'Place taken from the photos you added — change it if it\u2019s wrong.';
+    } else if (!places.length && stills.length && !placeChosenByHand) {
+      note = stills.length === 1
+        ? 'That photo does not say where it was taken — add a place if you like.'
+        : 'These photos do not say where they were taken — add a place if you like.';
+    }
+    locationNote.textContent = note;
+    locationNote.hidden = !note;
 
     // Offered only when they disagree; a chip repeating what the field already says would
     // invite a pointless tap.
