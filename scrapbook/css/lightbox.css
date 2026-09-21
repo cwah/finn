@@ -23,13 +23,24 @@
    tall photo overflows the screen. A flex container with a definite height gives the
    item something real to measure against. */
 .lightbox-stage {
+  /* Named, because the track has to know it: a pane is the width of the stage's CONTENT,
+     so its neighbours sit one content-width away — which is short of the screen edge by
+     exactly this padding, and that gap is where their edges showed. */
+  --lb-pad: 16px;
   display: flex;
   width: 100%;
   height: 100%;
-  padding: calc(env(safe-area-inset-top) + 56px) 16px
+  padding: calc(env(safe-area-inset-top) + 56px) var(--lb-pad)
            calc(env(safe-area-inset-bottom) + 56px);
-  overflow: auto;
+  /* CLIPPED, not scrollable. The track is three panes wide, and `auto` let the neighbours
+     be scrolled to sideways as well as seen. Zoomed, the photograph genuinely is larger
+     than the screen and scrolling is the point — see below. */
+  overflow: hidden;
   overscroll-behavior: contain;
+}
+
+.lightbox-stage.is-zoomed {
+  overflow: auto;
 }
 
 /* Shows only the crop rectangle — the picture that was framed, never the file it came
@@ -168,7 +179,12 @@
      track sits one pane-width to the left of its own origin; `--slide` is the drag on top
      of that. Positioning from zero instead showed whichever pane happened to be first,
      which is the previous photo as soon as there is one. */
-  transform: translate3d(calc((var(--slide, 0) - 1) * 100%), 0, 0);
+  /* A pane plus the stage's padding on both sides — which together is the full width of
+     the screen. Moving by 100% alone left each neighbour poking into the padding beside
+     the photograph, and the dots are enough to say there are others. */
+  gap: calc(var(--lb-pad) * 2);
+  transform: translate3d(
+    calc((var(--slide, 0) - 1) * (100% + (var(--lb-pad) * 2))), 0, 0);
 }
 
 /* Only while settling. During the drag there must be no transition at all, or the picture

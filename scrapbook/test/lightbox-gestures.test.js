@@ -152,7 +152,9 @@ test('the track is offset by a whole pane, so the middle one is in the middle', 
   // THE FIRST BUG. Three panes sit side by side; the one being looked at is the second,
   // so the track has to start one pane-width to the left. Positioned from zero it showed
   // whichever pane came first — the PREVIOUS photo, as soon as there was one.
-  assert.match(css, /translate3d\(calc\(\(var\(--slide, 0\) - 1\) \* 100%\)/);
+  // The `- 1` is the part that matters: the step width gained the padding later, and the
+  // offset has to keep pace with it or the two disagree by 32px a photo.
+  assert.match(css, /translate3d\(\s*calc\(\(var\(--slide, 0\) - 1\) \*/);
 });
 
 test('an end pane keeps its place in the track', () => {
@@ -207,4 +209,32 @@ test('only the control bar is left to the browser', () => {
 test('a motion photo is swipeable all over, having no controls', () => {
   // It is a still that moves; there is nothing to scrub.
   assert.match(css, /\.lightbox-crop video:not\(\[controls\]\) \{ touch-action: pan-y pinch-zoom; \}/);
+});
+
+// ── Nothing of the neighbours shows ───────────────────────────────
+// The panes either side sit one PANE-width away, and a pane is the width of the stage's
+// CONTENT — so each neighbour stopped short of the screen edge by exactly the stage's
+// padding, and its edge showed there. The dots say there are others; their edges do not
+// need to.
+
+test('a pane step is a whole screen, padding included', () => {
+  // Measured at 1200px against a 1200px stage. If the step and the screen disagree, the
+  // picture either lags the finger or overshoots it.
+  assert.match(css, /--lb-pad:/);
+  assert.match(css, /gap: calc\(var\(--lb-pad\) \* 2\)/);
+  assert.match(css, /\(var\(--slide, 0\) - 1\) \* \(100% \+ \(var\(--lb-pad\) \* 2\)\)/);
+});
+
+test('the padding is written once and reused', () => {
+  // A literal 16px in the transform and a different one in the padding would put the
+  // neighbours back on screen, silently.
+  assert.match(css, /padding: calc\(env\(safe-area-inset-top\) \+ 56px\) var\(--lb-pad\)/);
+});
+
+test('the stage clips instead of scrolling sideways', () => {
+  // The track is three panes wide; `auto` let the neighbours be scrolled to as well as
+  // seen. Zoomed, the photograph really is bigger than the screen and scrolling is the
+  // point, so it comes back then.
+  assert.match(css, /\.lightbox-stage \{[\s\S]*?overflow: hidden;/);
+  assert.match(css, /\.lightbox-stage\.is-zoomed \{\s*overflow: auto;\s*\}/);
 });
