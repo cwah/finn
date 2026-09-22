@@ -23,10 +23,21 @@
 // FOREGROUND tab, which is a thing a test environment does not have.
 
 /** The long edge a display copy is reduced to. 1080p is more than any view here shows. */
-export const VIDEO_EDGE = 1920;
+export const VIDEO_EDGE = 1280;
 
 /** Below this there is nothing to gain: the file is already smaller than the encode. */
 export const WORTH_ENCODING_BYTES = 3 * 1024 * 1024;
+
+/**
+ * Above this, a clip is paying for quality nobody can see.
+ *
+ * Measured against the real library: phone footage arrives between 14 and 20 megabits a
+ * second, and the display copy is made at under 2 — for a picture shown at most 560 CSS px
+ * on a card and fitted to a phone screen when expanded. Three megabits is well clear of
+ * what this app re-encodes to, so a clip already at or below it is left alone rather than
+ * put through a generation of loss for nothing.
+ */
+export const WORTH_ENCODING_BITRATE = 3_000_000;
 
 /**
  * Encoding dimensions for a source, as EVEN numbers.
@@ -83,11 +94,41 @@ export function bitrateFor(width, height, fps = 30) {
  * posts, to save a couple of megabytes. It is also the one kind of clip that plays
  * unprompted and on a loop, which is a poor thing to have re-encoded.
  */
-export function needsEncoding({ width, height, size, motion }) {
-  if (motion) return false;
-  const big = Number(size) > WORTH_ENCODING_BYTES;
-  const large = Math.max(Number(width) || 0, Number(height) || 0) > VIDEO_EDGE;
-  return Boolean(big || large);
+export function needsEncoding({ width, height, size, motion, duration }) {
+  const bytes = Number(size) || 0;
+  const seconds = Number(duration) || 0;
+  // What the file actually costs to send, which is the thing that matters and is not the
+  // same as how big it is. A two-second clip off a phone is small AND extravagant.
+  const bitrate = seconds > 0 ? (bytes * 8) / seconds : 0;
+
+  const wasteful = bitrate > WORTH_ENCODING_BITRATE;
+  const big = bytes > WORTH_ENCODING_BYTES;
+
+  // DIMENSIONS ARE NOT A REASON ON THEIR OWN, and they used to be. With the display edge
+  // at 720p every portrait phone clip is taller than it, so the rule fired on all of them
+  // — including a 0.6 MB clip already at 2.5 Mbps, which re-encoding would cost a
+  // generation of quality and save nothing. The question is only ever whether encoding
+  // would meaningfully reduce what gets sent, and the bitrate answers it; `encodeSize`
+  // still bounds the dimensions of anything that IS encoded.
+  //
+  // `width` and `height` are kept in the signature because callers have them and the next
+  // rule may want them again.
+
+  // A MOTION PHOTO IS NOW ENCODED TOO, and it was deliberately not before. The reasoning
+  // then: they are short, so a size rule put a four-second wait on the commonest thing
+  // anyone posts to save a couple of megabytes, and they are the one clip that plays
+  // unprompted, which is a poor thing to degrade.
+  //
+  // What changed is which cost is scarce. Measured against the real library, motion
+  // photographs come off a Pixel at around FOURTEEN megabits a second — two to four
+  // megabytes for two seconds — and they autoplay, so every viewer scrolling the timeline
+  // pays for every one of them. The poster waits two seconds once; the family pays those
+  // megabytes forever. With a monthly bandwidth limit reached, that trade is the wrong way
+  // round.
+  //
+  // Still judged on bitrate rather than size, because that is what made the old rule miss
+  // them: a 2.3 MB clip is under any sensible size threshold and still profligate.
+  return Boolean(wasteful || big);
 }
 
 /**
@@ -162,6 +203,7 @@ export async function toDisplayCopy(file, {
     const size = encodeSize(video.videoWidth, video.videoHeight);
     const worth = needsEncoding({
       width: video.videoWidth, height: video.videoHeight, size: file.size, motion,
+      duration: video.duration,
     });
     if (!size.width || !worth) return give(file, video.videoWidth, video.videoHeight);
 

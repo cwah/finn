@@ -16,13 +16,13 @@ import {
 } from '../js/video-encode.js';
 
 // ── Frame size ────────────────────────────────────────────────────
-test('4K comes down to 1080p', () => {
-  assert.deepEqual(encodeSize(3840, 2160), { width: 1920, height: 1080, scaled: true });
+test('4K comes down to 720p', () => {
+  assert.deepEqual(encodeSize(3840, 2160), { width: 1280, height: 720, scaled: true });
 });
 
 test('portrait phone video is bounded by its height', () => {
   const out = encodeSize(2160, 3840);
-  assert.equal(out.height, 1920);
+  assert.equal(out.height, 1280);
   assert.equal(out.scaled, true);
 });
 
@@ -93,17 +93,47 @@ test('a long clip at modest size is re-encoded on bytes alone', () => {
   assert.equal(needsEncoding({ width: 1280, height: 720, size: 40 * MB }), true);
 });
 
-test('a motion photo is NEVER encoded, whatever it weighs', () => {
-  // Measured against the real library: 13 of 17 stored clips are motion photos of 1.4 to
-  // 3.0 seconds, several of them over the byte threshold. A size rule alone put a
-  // four-second wait on the most common thing anyone posts, to save a couple of MB.
-  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 2 * MB, motion: true }), false);
-  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 40 * MB, motion: true }), false);
-  assert.equal(needsEncoding({ width: 3840, height: 2160, size: 40 * MB, motion: true }), false);
+test('a wasteful motion photo IS encoded now', () => {
+  // It deliberately was not, on the grounds that these are short and play unprompted, so a
+  // size rule put a four-second wait on the commonest thing anyone posts to save a couple
+  // of megabytes.
+  //
+  // Measured against the real library, those couple of megabytes are the whole problem: a
+  // Pixel writes them at around fourteen megabits a second — 2.3 MB for 1.4 seconds — and
+  // they AUTOPLAY, so every viewer scrolling the timeline pays for every one. The poster
+  // waits two seconds once. With a monthly bandwidth limit reached, that trade inverted.
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 2.3 * MB, duration: 1.4, motion: true }), true);
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 4.1 * MB, duration: 2.3, motion: true }), true);
+});
+
+test('a motion photo already thrifty is still left alone', () => {
+  // Real examples too: 0.6 MB for 2.0 seconds is 2.5 Mbps, which is below what this app
+  // would re-encode TO. Putting it through a generation of loss would gain nothing.
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 0.6 * MB, duration: 2.0, motion: true }), false);
 });
 
 test('a small clip that is not a motion photo also passes through', () => {
-  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 2 * MB }), false);
+  // 2 MB over 10 seconds is 1.6 Mbps — already modest.
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 2 * MB, duration: 10 }), false);
+});
+
+test('a short clip that is small but extravagant is caught', () => {
+  // THE CASE THE SIZE RULE MISSED. Under any sensible byte threshold, and still costing
+  // several times what it needs to.
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 2.5 * MB, duration: 1.5 }), true);
+});
+
+test('with no duration to judge by, size decides as it always did', () => {
+  // Duration comes from a decode, and a caller may not have one yet.
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 40 * MB }), true);
+  assert.equal(needsEncoding({ width: 1080, height: 1440, size: 1 * MB }), false);
+});
+
+test('big dimensions alone are not a reason to re-encode', () => {
+  // They were, and with a 720p edge that fired on every portrait phone clip — including
+  // ones already cheaper than anything this would produce. Re-encoding those costs a
+  // generation of quality and saves nothing. encodeSize still bounds whatever IS encoded.
+  assert.equal(needsEncoding({ width: 3840, height: 2160, size: 1 * MB, duration: 10 }), false);
 });
 
 test('a motion photo is declined without even decoding it', async () => {
@@ -131,8 +161,11 @@ test('no duration, no estimate', () => {
   assert.equal(estimateSeconds(undefined), 0);
 });
 
-test('the display edge is 1080p, which is more than any view here shows', () => {
-  assert.equal(VIDEO_EDGE, 1920);
+test('the display edge is 720p, which is more than any view here shows', () => {
+  // A card is at most 560 CSS px and the expanded view is fitted to the screen. 1080p was
+  // paying for detail no surface in this app displays — at 1080p the same clip costs
+  // 16 MB for thirty seconds, at 720p about 7.
+  assert.equal(VIDEO_EDGE, 1280);
 });
 
 // ── Failing safe ──────────────────────────────────────────────────

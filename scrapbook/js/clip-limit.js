@@ -89,6 +89,7 @@ export function shrinkNotice(items = []) {
     if (!item || item.motion || !item.videoFile) return false;
     return needsEncoding({
       width: item.width, height: item.height, size: item.videoFile.size, motion: false,
+      duration: item.duration,
     });
   });
   if (!stuck.length) return null;

@@ -310,6 +310,23 @@ still. `photoEl()` in `render.js` is the only place that knows the difference.
   a valid timecode. A half-typed field is simply not a request, and the maximum-length rule
   waits for the same moment, because enforcing a maximum against a half-typed number fights
   the person typing it.
+- **A clip is re-encoded when its BITRATE is wasteful, not when its file is big.** Measured
+  against the real library, that distinction is the whole thing: motion photographs come
+  off a Pixel at around 14 Mbps — 2.3 MB for 1.4 seconds — which no size threshold would
+  ever catch, and they AUTOPLAY, so every viewer scrolling the timeline pays for every one
+  of them. Judged by bitrate, the library comes down 85%.
+  - **Motion photos ARE encoded now**, reversing a deliberate decision. The old reasoning
+    was sound about latency — they are short and common, so a wait to save a couple of
+    megabytes is a poor trade — and wrong about who pays. The poster waits two seconds
+    once; the family pays those megabytes on every view, forever. The trade inverted when
+    a monthly bandwidth limit was reached.
+  - **Dimensions alone are not a reason.** They were, and with the display edge at 720p
+    that fired on every portrait phone clip — including ones already cheaper than anything
+    the encoder would produce, which re-encoding costs a generation of quality and saves
+    nothing from. `encodeSize` still bounds whatever IS encoded.
+  - `VIDEO_EDGE` is 1280, not 1920. A card is at most 560 CSS px and the expanded view is
+    fitted to the screen; 1080p was paying for detail no surface here displays, at 16 MB
+    per thirty seconds against about 7.
 - **Nothing plays for longer than `MAX_CLIP_SECONDS` (30).** The cap is applied in
   `trimRange`, not in the UI, so no stored value can out-argue it. A longer source is
   *accepted* — the editor opens on its first stretch and the parent picks which stretch
