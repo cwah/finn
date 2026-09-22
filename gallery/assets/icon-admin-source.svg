@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- The studio's mark: the gallery's own framed work, with a brush laid across it.
+       Same wall, same brass, same cream mat, so the two icons read as one app — and one
+       added object, so they are never mistaken for each other on a home screen.
+
+       Same constraints as icon-source.svg. It has to survive a 32px favicon and a round
+       mask, so the brush is deliberately chunky and runs corner to corner: a thin brush
+       disappears at 32px, and a brush tucked inside the frame is lost to a circular
+       crop. The frame is nudged up and left to leave the diagonal clear.
+
+       The wall is drawn rather than left transparent for the same reason as the original:
+       qlmanage rasterises onto opaque white, so the source must carry its own background. -->
+
+  <rect width="512" height="512" fill="#cdc5b9"/>
+
+  <!-- The framed work, scaled to about 85% and moved off the diagonal. -->
+  <g>
+    <rect x="58" y="44" width="300" height="336" rx="9" fill="#6d5622"/>
+    <rect x="69" y="55" width="278" height="314" rx="5" fill="#b08d44"/>
+    <rect x="87" y="73" width="242" height="278" rx="3" fill="#f3efe4"/>
+    <rect x="117" y="103" width="182" height="218" rx="2" fill="#fbf9f4"/>
+    <circle cx="253" cy="159" r="30" fill="#e8a33d"/>
+    <path d="M117 321 q47-84 91-84 t91 84 z" fill="#7d9c63"/>
+    <path d="M147 254 q25-39 49-9" stroke="#2c2118" stroke-width="8"
+          stroke-linecap="round" fill="none" opacity=".55"/>
+  </g>
+
+  <!-- The brush, corner to corner, tip pointing back into the picture. Drawn along +x
+       in its own rotated space so the geometry stays readable. -->
+  <g transform="translate(268 268) rotate(45)">
+    <!-- A wall-coloured outline under everything, so the brush separates from both the
+         greige behind it and the brass it crosses. Cheaper and crisper than a shadow. -->
+    <g stroke="#cdc5b9" stroke-width="26" stroke-linejoin="round" fill="none">
+      <path d="M2-12 L66-30 L66 30 L2 12 Z"/>
+      <rect x="64" y="-32" width="48" height="64" rx="5"/>
+      <rect x="110" y="-27" width="150" height="54" rx="27"/>
+    </g>
+
+    <!-- bristles, loaded with the same paint as the sun in the picture -->
+    <path d="M2-12 L66-30 L66 30 L2 12 Z" fill="#3b3128"/>
+    <path d="M2-12 L22-18 L22 18 L2 12 Z" fill="#e8a33d"/>
+    <!-- ferrule -->
+    <rect x="64" y="-32" width="48" height="64" rx="5" fill="#b9c6cf"/>
+    <rect x="64" y="-32" width="48" height="64" rx="5" fill="none"
+          stroke="#7d8891" stroke-width="5"/>
+    <!-- handle -->
+    <rect x="110" y="-27" width="150" height="54" rx="27" fill="#8a5a34"/>
+    <rect x="110" y="-27" width="150" height="54" rx="27" fill="none"
+          stroke="#5e3b20" stroke-width="5"/>
+  </g>
+</svg>

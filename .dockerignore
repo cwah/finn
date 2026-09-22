@@ -46,4 +46,9 @@ scrapbook/assets/sample-clip.*
 # business in the image when every size actually served is derived from it.
 scrapbook/assets/icon-source.png
 
+# Icon sources. The PNGs beside them are what the browser asks for; the SVG they were
+# drawn from is for whoever redraws them next.
+gallery/assets/icon-source.svg
+gallery/assets/icon-admin-source.svg
+
 **/.DS_Store
