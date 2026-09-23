@@ -29,7 +29,7 @@
 // Bumped with the bell. A changed sw.js installs a new worker on its own, but activate
 // only drops caches that are not this one — so without a bump a browser could keep
 // serving its cached copy of the app modules that changed alongside it.
-const VERSION = 'scrapbook-v6';
+const VERSION = 'scrapbook-v7';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because
@@ -47,10 +47,124 @@ const AUTH_KEY = '/__session-token';
 /** Caches that survive a version bump, because they hold the person's state, not the build's. */
 const KEEP = [SHARE_CACHE, AUTH_CACHE, MEDIA_CACHE];
 
-// The wording and the landing rules, shared verbatim with the tests. A worker cannot
-// import an ES module, so this is a classic script loaded the old way — the same
-// arrangement as the notifier's rule module on the server.
-importScripts('/sw-notify.js');
+// ── What a notification says, and where tapping it goes ───────────
+// INLINE, and it was a separate file loaded with importScripts until sharing broke.
+//
+// A share arrives as a navigation POST, and answering it means the browser STARTING this
+// worker from scratch — at which point every top-level statement runs, including an
+// import that has to be fetched and evaluated before the fetch handler exists at all.
+// That file was also missing from the image for ten days, during which no worker could
+// install anywhere; sharing stopped working the day after the first one finally did.
+//
+// Whether the import is slow, fails, or merely has to happen, it is work standing between
+// a shared photograph and the handler meant to catch it. There is nothing here that
+// justifies the risk: it is a hundred lines of text.
+//
+// Kept identical otherwise, and tested by extracting it from this file — see
+// test/sw-notify.test.js.
+
+// --- shared with sw-notify.js: keep identical (test/sw-notify.test.js) ---
+/** How recently a post must have been announced to count as part of this push. */
+const BATCH_MINUTES = 10;
+
+/** PocketBase's "2026-09-01 05:10:30.118Z" -> ms, or NaN. */
+function pbTime(value) {
+  if (!value) return NaN;
+  return new Date(String(value).trim().replace(' ', 'T')).getTime();
+}
+
+/**
+ * Which posts this push is about.
+ *
+ * The worker cannot be told directly — there is no payload — so it asks the server what
+ * was announced recently. `notifiedAt` is the server's own record of having sent
+ * something, which makes it the honest answer to "what is this push for".
+ *
+ * A post with no notifiedAt is not counted: it has not been announced, so it is not what
+ * anyone is being told about. If NOTHING qualifies, the newest post is used rather than
+ * showing nothing — a push arrived, so something happened, and a browser that is shown no
+ * notification eventually invents its own.
+ */
+function batchOf(posts, now) {
+  const cutoff = now - BATCH_MINUTES * 60 * 1000;
+  const announced = (posts || []).filter((p) => {
+    const at = pbTime(p && p.notifiedAt);
+    return Number.isFinite(at) && at >= cutoff && at <= now + 60 * 1000;
+  });
+  if (announced.length) return announced;
+  const newest = (posts || [])[0];
+  return newest ? [newest] : [];
+}
+
+/** The author's display name, if the record carried one. */
+function authorName(post) {
+  const a = post && post.expand && post.expand.author;
+  if (!a) return null;
+  const name = (a.name || '').trim() || (a.email || '').trim();
+  return name || null;
+}
+
+/**
+ * Which post tapping the notification should land on.
+ *
+ * By MEMORY DATE, not creation date, because that is where the card sits in the timeline —
+ * the thing a person is being sent to look at. A post backdated to last month is the most
+ * recent thing that happened and is also a long way down the page, which is exactly the
+ * case where being dropped at the top is useless.
+ */
+function landingPost(batch) {
+  let best = null;
+  for (const post of batch) {
+    if (!best) { best = post; continue; }
+    const a = pbTime(post.memoryDate);
+    const b = pbTime(best.memoryDate);
+    if (Number.isFinite(a) && (!Number.isFinite(b) || a > b)) best = post;
+    // A tie on the day goes to whichever was written last, so two memories from the same
+    // afternoon land on the newer one.
+    else if (a === b && pbTime(post.created) > pbTime(best.created)) best = post;
+  }
+  return best;
+}
+
+/**
+ * The whole notification, from a page of posts.
+ *
+ * @param {object[]} posts newest-created first, with `expand.author`
+ * @param {number} now epoch ms
+ * @returns {{title: string, body: string, postId: string|null, count: number}}
+ */
+function notification(posts, now) {
+  const batch = batchOf(posts, now);
+  const target = landingPost(batch);
+
+  // NOBODY IS NAMED when several arrived. Two people posting in the same evening is not
+  // one person's news, and "Alex and 2 others" is both clumsy and a small privacy leak on
+  // a lock screen anyone can read. One post is different: knowing who it was IS the news.
+  if (batch.length > 1) {
+    return {
+      title: 'Finnbook',
+      body: `${batch.length} new memories were added.`,
+      postId: target ? target.id : null,
+      count: batch.length,
+    };
+  }
+
+  const who = batch.length === 1 ? authorName(batch[0]) : null;
+  return {
+    title: 'Finnbook',
+    // The fallback is not a failure: an author can be missing because the expand was not
+    // returned, and "A new memory was added." is true either way.
+    body: who ? `${who} added a new memory.` : 'A new memory was added.',
+    postId: target ? target.id : null,
+    count: batch.length,
+  };
+}
+
+/** Where tapping it should open. */
+function landingUrl(postId) {
+  return postId ? `/?post=${encodeURIComponent(postId)}` : '/';
+}
+// --- end shared ---
 
 // Only the entry point is precached. Listing every stylesheet and module would be a
 // second copy of the file tree, silently wrong the moment one is added — everything else

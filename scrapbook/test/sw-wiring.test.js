@@ -61,20 +61,15 @@ test('the auth cache survives a version bump', () => {
   assert.match(keep, /SHARE_CACHE/);
 });
 
-test('the worker loads the shared wording module', () => {
-  // A second copy of these rules would drift, and the drift arrives as wrong words on a
-  // lock screen — the one place nobody is looking at the code.
-  assert.match(sw, /importScripts\('\/sw-notify\.js'\)/);
-});
-
-test('everything the worker calls from that module is defined there', () => {
-  // importScripts puts FUNCTION declarations on the global scope — and only those. A
-  // `const` would not be reachable, and the failure is a ReferenceError inside a push
-  // handler, which is exactly where nobody sees it.
-  for (const fn of ['notification', 'landingUrl']) {
-    assert.match(sw, new RegExp(`\\b${fn}\\(`), `sw.js should call ${fn}`);
-    assert.match(notify, new RegExp(`^function ${fn}\\(`, 'm'),
-      `${fn} must be a function declaration, or importScripts will not expose it`);
+test('the worker carries its wording itself, with nothing to import', () => {
+  // This used to assert the OPPOSITE — that sw.js importScripts'd the wording module — and
+  // it was written to catch that file going missing from the image, which it had, for ten
+  // days. Inlining removes the failure instead of guarding it: a share arrives as a
+  // navigation POST, which starts the worker from scratch, and every top-level import is
+  // something that has to be fetched and evaluated before the fetch handler exists at all.
+  assert.doesNotMatch(sw, /^\s*importScripts\(/m);
+  for (const fn of ['notification', 'landingUrl', 'landingPost', 'batchOf']) {
+    assert.match(sw, new RegExp(`^function ${fn}\\(`, 'm'), `${fn} must be defined in sw.js`);
   }
 });
 

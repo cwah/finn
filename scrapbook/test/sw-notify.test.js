@@ -2,10 +2,11 @@
 //
 //   npm test
 //
-// The module under test is the one the service worker actually loads — required here
-// through createRequire, importScripts'd there — so what ships is what was tested. The
-// same arrangement as notify-rule.js, for the same reason: two copies of a rule drift, and
-// this drift would arrive as wrong words on a lock screen.
+// The code under test is read OUT OF sw.js, because that is now where it ships. It used to
+// be its own file loaded with importScripts, until that import was implicated in sharing
+// breaking — a share POST starts the worker from scratch, and an import is one more thing
+// that has to succeed first. sw-notify.js still exists and is still served, for devices
+// running a worker old enough to import it, so a test below holds the two byte-identical.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -17,16 +18,45 @@ import { createContext, runInContext } from 'node:vm';
 // only thing that works: this file lives inside a "type": "module" package, so require()
 // would treat it as ESM and its CommonJS export guard would never run. Testing it the way
 // it is really loaded avoids both problems at once.
+const OPEN = '// --- shared with sw-notify.js: keep identical (test/sw-notify.test.js) ---';
+const CLOSE = '// --- end shared ---';
+
+/** The wording and landing rules as they appear inside the shipped worker. */
+function sharedBlock() {
+  const sw = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
+  const from = sw.indexOf(OPEN);
+  const to = sw.indexOf(CLOSE);
+  assert.ok(from !== -1 && to > from, 'sw.js has lost the shared-block markers');
+  return sw.slice(from + OPEN.length, to).trim();
+}
+
 const ctx = createContext({ Date, Number, String, Math, JSON, encodeURIComponent, console });
 // `function` declarations become properties of the global object; `const` does not. The
 // worker only needs the functions, so the constant is published explicitly — from INSIDE
 // the same script, which is the only scope that can see it.
 runInContext(
-  `${readFileSync(new URL('../sw-notify.js', import.meta.url), 'utf8')}
+  `${sharedBlock()}
    this.BATCH_MINUTES = BATCH_MINUTES;`,
-  ctx, { filename: 'sw-notify.js' },
+  ctx, { filename: 'sw.js (shared block)' },
 );
 const { notification, landingPost, landingUrl, BATCH_MINUTES } = ctx;
+
+test('the worker carries no importScripts: a share POST starts it from scratch', () => {
+  const sw = readFileSync(new URL('../sw.js', import.meta.url), 'utf8');
+  const calls = sw.split('\n').filter((l) => /^\s*importScripts\(/.test(l));
+  assert.deepEqual(calls, [], 'a top-level import must resolve before the fetch handler exists');
+});
+
+test('sw-notify.js still matches the copy inside sw.js', () => {
+  // Devices whose worker predates the inlining still fetch /sw-notify.js at startup. It
+  // stays served and stays identical, so the two cannot drift into different wording.
+  const standalone = readFileSync(new URL('../sw-notify.js', import.meta.url), 'utf8');
+  const body = standalone.slice(
+    standalone.indexOf('/** How recently'),
+    standalone.indexOf('if (typeof module'),
+  ).trim();
+  assert.equal(sharedBlock(), body);
+});
 
 const NOW = Date.parse('2026-09-01T12:00:00Z');
 const MIN = 60 * 1000;
