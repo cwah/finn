@@ -160,11 +160,20 @@ test('the bytes are read whenever the form yields nothing', () => {
   assert.match(src, /threw \? '\.recovered' : '\.rescued-from-bytes'/);
 });
 
-test('the body SIZE is always reported', () => {
-  // The measurement that separates "Chrome sent nothing" from "formData lied about what
-  // Chrome sent". Without it both look identical from the server.
-  assert.match(src, /bodyBytes = raw\.length/);
-  assert.match(src, /sent, empty, why, threw, bodyBytes,/);
+test('a share that threw still says how big the body was', () => {
+  // This used to check a debug beacon that reported the byte count to the server. The
+  // beacon is gone — it did its job, which was proving Chrome built the POST and put
+  // nothing in it — but the measurement it existed for is still worth keeping, because it
+  // is what separates "Chrome sent nothing" from "formData lied about what Chrome sent".
+  // It rides on `why` now, which the redirect already carries.
+  assert.match(src, /why \+= `\.\$\{raw\.length\}b\./);
+});
+
+test('no diagnostic beacon is left phoning home', () => {
+  // It logged a user agent to the container log on every single share. Temporary meant
+  // temporary, and a thing that reports on people is the kind that quietly becomes
+  // permanent if nothing checks.
+  assert.doesNotMatch(src, /share-debug/);
 });
 
 // ── Taking the photo whatever field it came under ─────────────────

@@ -29,7 +29,7 @@
 // Bumped with the bell. A changed sw.js installs a new worker on its own, but activate
 // only drops caches that are not this one — so without a bump a browser could keep
 // serving its cached copy of the app modules that changed alongside it.
-const VERSION = 'scrapbook-v7';
+const VERSION = 'scrapbook-v8';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because
@@ -283,7 +283,6 @@ async function receiveShare(event, redirectTo) {
   let why = '';
   let files = [];
   let threw = false;
-  let bodyBytes = -1;
 
   // Cloned BEFORE anything reads the body: a body can only be read once, and what the
   // bytes contain is the only way to check what formData() claims about them.
@@ -329,13 +328,11 @@ async function receiveShare(event, redirectTo) {
   // An empty form is not proof of an empty body. formData() on Android already misreports
   // a share once: it throws on a body with no parts rather than returning an empty form.
   // So before believing that Chrome sent nothing, the body is parsed directly. If the photo
-  // is in there, this is where it is found — and either way `bodyBytes` finally says which
-  // of the two is happening, which nothing until now could tell apart.
+  // is in there, this is where it is found.
   if (!files.length) {
     try {
       const type = probe.headers.get('content-type') || '';
       const raw = new Uint8Array(await probe.arrayBuffer());
-      bodyBytes = raw.length;
       if (threw) why += `.${raw.length}b.${(type || 'none').split(';')[0]}`;
 
       const all = parseMultipart(raw, type);
@@ -377,24 +374,6 @@ async function receiveShare(event, redirectTo) {
     why = why ? `${why}.unstashable` : 'unstashable';
     files = [];
   }
-
-  // TEMPORARY. Reported to the server as well as the URL, because the URL only helps if
-  // somebody reads it off a phone and types it back. This lands in the container log.
-  // Remove with /share-debug once sharing works.
-  try {
-    await fetch('/share-debug', {
-      method: 'POST',
-      body: JSON.stringify({
-        at: 'worker',
-        sent, empty, why, threw, bodyBytes,
-        stashed: files.length,
-        method: event.request.method,
-        contentType: event.request.headers.get('content-type') || null,
-        ua: (self.navigator && self.navigator.userAgent || '').slice(0, 120),
-      }),
-      headers: { 'content-type': 'application/json' },
-    });
-  } catch { /* a diagnostic must never break the thing it is watching */ }
 
   // Carried on the URL rather than in the cache: it has to survive even when nothing was
   // stashed, which is exactly the case worth reporting.

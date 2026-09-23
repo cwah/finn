@@ -412,24 +412,6 @@ async function init() {
   // sheet, not in a lost photo.
   // Read BEFORE cameFromShare, which clears the markers out of the address bar.
   const report = shareReport();
-
-  // TEMPORARY, and the half the worker cannot tell us. If the worker never ran, the page
-  // still loaded — so a report from here with no matching worker line proves the share
-  // POST never reached the service worker at all, which no amount of guessing has settled.
-  // Remove with /share-debug once sharing works.
-  if (location.search) {
-    fetch('/share-debug', {
-      method: 'POST',
-      body: JSON.stringify({
-        at: 'page',
-        search: location.search.slice(0, 200),
-        report,
-        canPost: config.canPost,
-        controlled: Boolean(navigator.serviceWorker?.controller),
-      }),
-      headers: { 'content-type': 'application/json' },
-    }).catch(() => {});
-  }
   if (cameFromShare()) {
     const shared = await claimSharedFiles();
     // ALWAYS opened, for a parent who can post. Someone who picked photos elsewhere and
