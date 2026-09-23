@@ -148,6 +148,18 @@ export function initNotifications() {
     }
   };
 
+  // COMING BACK FROM SYSTEM SETTINGS IS THE MOMENT THIS CHANGES, and the page is told
+  // nothing about it: there is no event for "notifications were allowed". Without this the
+  // note sits there telling someone to do the thing they have just gone and done, which
+  // reads as the app being broken twice over. Returning to the tab is the closest signal
+  // there is, so the state is re-read then.
+  document.addEventListener?.('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    // Unawaited, so it is guarded: an escaping rejection here would surface as an unhandled
+    // rejection from a listener nobody is watching.
+    refresh().catch((err) => console.error('could not re-read notification state', err));
+  });
+
   btn.addEventListener('click', async () => {
     asked = true;
     btn.disabled = true;

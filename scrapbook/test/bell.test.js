@@ -46,12 +46,23 @@ function dom({ button = true, label = true, note = true } = {}) {
   const nte = note ? element('notifyNote') : null;
   if (nte) nte.hidden = true;
   if (btn) btn.classList = { toggle: () => {} };
+  const docListeners = {};
   globalThis.document = {
+    visibilityState: 'visible',
+    addEventListener(type, fn) { docListeners[type] = fn; },
     getElementById: (id) => (
       id === 'notifyBtn' ? btn : id === 'notifyLabel' ? lab : id === 'notifyNote' ? nte : null
     ),
   };
-  return { btn, label: lab, note: nte };
+  /** Come back to the app, the way returning from system settings does. */
+  const returnToApp = async () => {
+    globalThis.document.visibilityState = 'visible';
+    docListeners.visibilitychange?.();
+    // The handler fires refresh() without awaiting it — deliberately, since nothing in the
+    // page should wait on it — so the assertions need the microtasks it queued to drain.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+  };
+  return { btn, label: lab, note: nte, returnToApp };
 }
 
 /** Put the browser's three push capabilities in a known state. */
@@ -233,4 +244,31 @@ test('a bell blocked at load works again once permission is granted', async () =
 
   assert.notEqual(label.textContent, 'Notifications blocked');
   assert.equal(note.hidden, true);
+});
+
+test('allowing notifications in system settings clears the note on return', async () => {
+  // There is no event for "permission was granted", so a page that only re-reads on load
+  // or on a tap leaves the warning up after someone has done exactly what it asked. Coming
+  // back to the app is the closest signal there is.
+  browser({ notification: 'denied' });
+  const { btn, note, returnToApp } = dom();
+  await initNotifications();
+  await btn.listeners.click();
+  assert.equal(note.hidden, false);
+
+  Notification.permission = 'granted';   // allowed in Android's settings
+  await returnToApp();
+
+  assert.equal(note.hidden, true);
+  assert.equal(note.textContent, '');
+});
+
+test('returning while still blocked keeps the note up', async () => {
+  browser({ notification: 'denied' });
+  const { btn, note, returnToApp } = dom();
+  await initNotifications();
+  await btn.listeners.click();
+
+  await returnToApp();   // came back without changing anything
+  assert.equal(note.hidden, false);
 });
