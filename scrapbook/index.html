@@ -48,6 +48,11 @@
     </div>
   </header>
 
+  <!-- Why the bell would not turn on. The bell's own label is screen-reader only, so a
+       blocked permission had no way to reach a sighted phone user at all: the bell simply
+       did nothing. role="status" so it is announced when it appears. -->
+  <p id="notifyNote" class="app-notify-note" role="status" hidden></p>
+
   <main id="timeline" class="timeline" aria-live="polite"></main>
 
   <!-- Infinite-scroll sentinel observed by IntersectionObserver -->

@@ -80,7 +80,13 @@ export function initSignOut() {
 export function initNotifications() {
   const btn = document.getElementById('notifyBtn');
   const label = document.getElementById('notifyLabel');
+  const note = document.getElementById('notifyNote');
   if (!HAS_ACCOUNTS || !btn) return;
+
+  // Whether someone has actually asked for notifications this visit. The explanation below
+  // is shown only after a tap: someone who declined on purpose should not be told about it
+  // again every time they open the scrapbook.
+  let asked = false;
 
   let state = 'off';
   const words = {
@@ -89,11 +95,21 @@ export function initNotifications() {
     blocked: 'Notifications blocked',
     unsupported: '',
   };
+  // INSTALLED AND IN A TAB ARE DIFFERENT PLACES. Added to a home screen on Android the app
+  // is a WebAPK — an Android app of its own — and the permission that matters is Android's,
+  // not Chrome's. Sending someone to Chrome's site settings in that case sends them where
+  // the setting is not; they find nothing wrong and conclude the app is broken. Which is
+  // exactly what happened after a reinstall dropped the grant.
+  const installed = window.matchMedia?.('(display-mode: standalone)')?.matches;
+  const whereToAllow = installed
+    ? 'Open your phone’s Settings → Apps → Finnbook → Notifications and allow them, '
+      + 'then tap the bell again.'
+    : 'Allow them in your browser’s site settings for this page, then tap the bell again.';
+
   const hints = {
     on: 'You get a notification when a new memory is added. Tap to stop.',
     off: 'Get a notification when a new memory is added.',
-    blocked: 'Your browser is blocking notifications for this site — allow them in its '
-      + 'site settings, then tap again.',
+    blocked: `Notifications are blocked. ${whereToAllow}`,
   };
 
   const paint = () => {
@@ -105,6 +121,14 @@ export function initNotifications() {
     // every state change including the first. A missing span is not worth a dead bell.
     if (label) label.textContent = words[state] || '';
     btn.title = hints[state] || '';
+    // btn.title is a tooltip and a phone has no hover, which is why being blocked was
+    // invisible: the bell simply did nothing. This is the same sentence, somewhere it can
+    // actually be read.
+    if (note) {
+      const show = state === 'blocked' && asked;
+      note.textContent = show ? hints.blocked : '';
+      note.hidden = !show;
+    }
   };
 
   const refresh = async () => {
@@ -125,9 +149,17 @@ export function initNotifications() {
   };
 
   btn.addEventListener('click', async () => {
-    if (state === 'blocked') return; // nothing script can do; the title says where to go
+    asked = true;
     btn.disabled = true;
     try {
+      // A blocked bell used to return here and do nothing — permanently, because the state
+      // is only re-read on load. Someone who followed the instructions and allowed
+      // notifications came back to a bell that still refused. Re-read first: the permission
+      // may well have been granted since, in which case this carries on normally.
+      if (state === 'blocked') {
+        state = await pushState();
+        if (state === 'blocked') return;   // still blocked; the note says where to go
+      }
       state = state === 'on' ? await disablePush() : await enablePush();
     } catch (err) {
       console.error('could not change notifications', err);

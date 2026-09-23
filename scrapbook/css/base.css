@@ -269,3 +269,19 @@ body {
   .card.is-linked,
   .milestone-scene.is-linked { animation: none; box-shadow: 0 0 0 3px var(--accent-ink); }
 }
+
+/* Why the bell would not turn on.
+ *
+ * It exists because .app-notify-label is screen-reader only, which left a blocked
+ * permission with no way to reach anyone looking at the screen — the bell just did
+ * nothing when tapped. Shown only after someone actually asks for notifications, so a
+ * deliberate "no" is not nagged at on every load. */
+.app-notify-note {
+    margin: 0;
+    padding: 0.6rem 1rem;
+    background: #fdf3d8;
+    border-bottom: 1px solid #e8d9ae;
+    color: #5c4a1e;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
