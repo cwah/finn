@@ -160,20 +160,32 @@ test('the bytes are read whenever the form yields nothing', () => {
   assert.match(src, /threw \? '\.recovered' : '\.rescued-from-bytes'/);
 });
 
-test('a share that threw still says how big the body was', () => {
+test('the body size is measured whenever the form yields nothing', () => {
   // This used to check a debug beacon that reported the byte count to the server. The
   // beacon is gone — it did its job, which was proving Chrome built the POST and put
   // nothing in it — but the measurement it existed for is still worth keeping, because it
   // is what separates "Chrome sent nothing" from "formData lied about what Chrome sent".
   // It rides on `why` now, which the redirect already carries.
   assert.match(src, /why \+= `\.\$\{raw\.length\}b\./);
+  assert.match(src, /bodyBytes = raw\.length/);
 });
 
-test('no diagnostic beacon is left phoning home', () => {
-  // It logged a user agent to the container log on every single share. Temporary meant
-  // temporary, and a thing that reports on people is the kind that quietly becomes
-  // permanent if nothing checks.
-  assert.doesNotMatch(src, /share-debug/);
+test('the beacon carries what tells two phones apart', () => {
+  // BACK ON PURPOSE, and this assertion is the inverse of the one that stood here while it
+  // was off. Sharing works on one phone and reports empty-form on another, running the same
+  // worker and the same manifest — so the report has to carry the things that can differ:
+  // the user agent, the content type Chrome chose (its boundary format is in there), and
+  // the body size, which separates "Chrome sent nothing" from "formData could not read it".
+  assert.match(src, /share-debug/);
+  for (const field of ['ua', 'contentType', 'bodyBytes', 'sent', 'empty', 'why']) {
+    assert.match(src, new RegExp(`\\b${field}\\b`), `the report should carry ${field}`);
+  }
+});
+
+test('the beacon can never break the share it is watching', () => {
+  // A diagnostic that can fail the thing it is chasing is worse than the bug. The fetch is
+  // wrapped, and the share carries on regardless of what the report does.
+  assert.match(src, /await fetch\('\/share-debug'[\s\S]*?\} catch \{/);
 });
 
 // ── Taking the photo whatever field it came under ─────────────────

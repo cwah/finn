@@ -412,6 +412,28 @@ async function init() {
   // sheet, not in a lost photo.
   // Read BEFORE cameFromShare, which clears the markers out of the address bar.
   const report = shareReport();
+
+  // TEMPORARY, and the half the worker cannot tell us: if the worker never ran, the page
+  // still loaded, so a page line with no matching worker line proves the share POST never
+  // reached the service worker at all. Restored alongside the worker's, because sharing
+  // works on one phone and not on another and nothing else has been able to say why.
+  if (location.search) {
+    fetch('/share-debug', {
+      method: 'POST',
+      body: JSON.stringify({
+        at: 'page',
+        search: location.search.slice(0, 200),
+        report,
+        canPost: config.canPost,
+        controlled: Boolean(navigator.serviceWorker?.controller),
+        // Whether this is the installed app or a browser tab, and which worker is in
+        // charge — both differ between the two phones and neither is visible server-side.
+        standalone: Boolean(window.matchMedia?.('(display-mode: standalone)')?.matches),
+        ua: (navigator.userAgent || '').slice(0, 160),
+      }),
+      headers: { 'content-type': 'application/json' },
+    }).catch(() => {});
+  }
   if (cameFromShare()) {
     const shared = await claimSharedFiles();
     // ALWAYS opened, for a parent who can post. Someone who picked photos elsewhere and

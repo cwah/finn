@@ -29,7 +29,7 @@
 // Bumped with the bell. A changed sw.js installs a new worker on its own, but activate
 // only drops caches that are not this one — so without a bump a browser could keep
 // serving its cached copy of the app modules that changed alongside it.
-const VERSION = 'scrapbook-v8';
+const VERSION = 'scrapbook-v9';
 
 // Where the share sheet's files wait for the page. NOT versioned, and skipped by the
 // cleanup below: a share can arrive moments before an update, and dropping it because
@@ -283,6 +283,7 @@ async function receiveShare(event, redirectTo) {
   let why = '';
   let files = [];
   let threw = false;
+  let bodyBytes = -1;
 
   // Cloned BEFORE anything reads the body: a body can only be read once, and what the
   // bytes contain is the only way to check what formData() claims about them.
@@ -333,6 +334,7 @@ async function receiveShare(event, redirectTo) {
     try {
       const type = probe.headers.get('content-type') || '';
       const raw = new Uint8Array(await probe.arrayBuffer());
+      bodyBytes = raw.length;
       if (threw) why += `.${raw.length}b.${(type || 'none').split(';')[0]}`;
 
       const all = parseMultipart(raw, type);
@@ -374,6 +376,27 @@ async function receiveShare(event, redirectTo) {
     why = why ? `${why}.unstashable` : 'unstashable';
     files = [];
   }
+
+  // TEMPORARY, AGAIN. Removed once sharing worked; restored because it did not work for
+  // everyone. One phone shares fine and another reports empty-form on the same worker, the
+  // same manifest and the same WebAPK — so the question is no longer "what happens" but
+  // "what do these two devices differ in", and that is what this line carries.
+  try {
+    await fetch('/share-debug', {
+      method: 'POST',
+      body: JSON.stringify({
+        at: 'worker',
+        sent, empty, why, threw, bodyBytes,
+        stashed: files.length,
+        method: event.request.method,
+        // The boundary format is part of this: it is Chrome's own, and it differs between
+        // Chrome versions, which is one of the few things that can differ here.
+        contentType: event.request.headers.get('content-type') || null,
+        ua: (self.navigator && self.navigator.userAgent || '').slice(0, 160),
+      }),
+      headers: { 'content-type': 'application/json' },
+    });
+  } catch { /* a diagnostic must never break the thing it is watching */ }
 
   // Carried on the URL rather than in the cache: it has to survive even when nothing was
   // stashed, which is exactly the case worth reporting.
