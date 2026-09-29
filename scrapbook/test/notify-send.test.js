@@ -148,6 +148,34 @@ test('a 410 drops the dead subscription', () => {
   assert.equal(deleted.length, 1, 'a 410 must remove the subscription');
 });
 
+test('a 404 drops it too, since the endpoint is gone', () => {
+  const { deleted } = stubJsvm({
+    posts: [duePost()],
+    subs: [subscription('someone-else')],
+    send: () => ({ statusCode: 404, body: 'not found' }),
+    env: { VAPID_PRIVATE_KEY: 'pem', VAPID_PUBLIC_KEY: 'pub' },
+  });
+  require_(`${HOOKS}notify-send.js`).run();
+  assert.equal(deleted.length, 1, 'a 404 must remove the subscription');
+});
+
+test('a failure whose BODY mentions 410 does not delete anything', () => {
+  // Deadness used to be decided by looking for '410' or '404' anywhere in the error message,
+  // and the message carries 200 characters of the response body. So a push service having a
+  // bad day, with those three digits anywhere in its error text, silently deleted a working
+  // subscription — and the person simply stopped getting notifications, with nothing in the
+  // log to say it had happened. The status is read as a number now.
+  const { deleted, saved } = stubJsvm({
+    posts: [duePost()],
+    subs: [subscription('someone-else')],
+    send: () => ({ statusCode: 500, body: 'upstream returned 410 for peer 404' }),
+    env: { VAPID_PRIVATE_KEY: 'pem', VAPID_PUBLIC_KEY: 'pub' },
+  });
+  require_(`${HOOKS}notify-send.js`).run();
+  assert.equal(deleted.length, 0, 'a 500 is not a dead subscription, whatever its body says');
+  assert.equal(saved.length, 0, 'and the post stays unmarked so the next tick retries');
+});
+
 test('an ordinary failure leaves the post unmarked, to retry', () => {
   const post = duePost();
   const { saved, deleted } = stubJsvm({

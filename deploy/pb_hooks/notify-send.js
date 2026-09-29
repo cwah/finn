@@ -105,15 +105,22 @@ function deliver(rule, post, recipients, now) {
       pushTo(endpoint);
       sent += 1;
     } catch (err) {
-      const gone = String(err).includes('410') || String(err).includes('404');
+      // Only a status we actually read, never a substring of the message. Anything we
+      // cannot positively identify as gone is kept and retried: a subscription wrongly kept
+      // costs one failed request a minute, and a subscription wrongly deleted costs someone
+      // every notification from here on.
+      const gone = err && (err.status === 404 || err.status === 410);
       if (gone) {
         // The browser has thrown this subscription away — an uninstalled app, cleared site
         // data, a device that is gone. Keeping it means retrying a dead endpoint every
         // minute forever, so it goes.
-        try { $app.delete(sub); console.log('[notify] dropped a dead subscription'); }
+        // The STATUS is logged. Without it, a tick that drops six subscriptions is
+        // indistinguishable from a tick that wrongly drops six, which is exactly the
+        // question worth answering when someone stops getting notifications.
+        try { $app.delete(sub); console.log('[notify] dropped a dead subscription:', err.status); }
         catch (e) { console.log('[notify] could not drop a dead subscription:', e); }
       } else {
-        console.log('[notify] push failed:', err);
+        console.log('[notify] push failed, subscription kept:', err);
       }
     }
   }
@@ -165,7 +172,15 @@ function pushTo(endpoint) {
   });
 
   if (res.statusCode < 200 || res.statusCode >= 300) {
-    throw new Error(`push ${res.statusCode}: ${String(res.body || '').slice(0, 200)}`);
+    const err = new Error(`push ${res.statusCode}: ${String(res.body || '').slice(0, 200)}`);
+    // CARRIED AS A NUMBER, because the caller has to tell "this subscription is gone" from
+    // "this send went wrong", and deciding that by looking for '404' or '410' ANYWHERE in
+    // the message meant deciding it partly on the response body — which is attacker-adjacent
+    // text we neither control nor need. A 500 whose body happened to contain those three
+    // digits would delete a perfectly good subscription, permanently and silently, and the
+    // person would simply stop getting notifications with nothing logged to say why.
+    err.status = res.statusCode;
+    throw err;
   }
 }
 
