@@ -1377,6 +1377,21 @@ the probe returns a `100.x` address that a phone on the same wifi cannot use.
   do not work" had three unrelated causes — a dropped connection, client-side compression,
   and the `live_photo` field. Each was only separable because the failures were reported
   precisely rather than lumped together.
+- **Compare the two people, not the two commits.** Sharing broke for both parents, then
+  worked for one and not the other on identical code, one manifest, one worker version.
+  Weeks went into the share-handling code; the answer was in the user agent. Chrome 153
+  attached no file to a `share_target` POST and Chrome 154 did, and the fix was updating
+  Chrome. When a fault is present for one person and absent for another, the difference is
+  a property of the two clients before it is a property of the code — read their versions
+  first.
+- **Measure the thing, do not infer it.** `bodyBytes: 75` ended this, because 75 is exactly
+  `--boundary--` plus CRLF and nothing else: proof Chrome sent an empty envelope rather than
+  something the parser mishandled. `sent: 0` alone had been consistent with both for weeks.
+  One number that separates two hypotheses beats any amount of reasoning about which is
+  likelier.
+- **A diagnostic beacon is temporary, and removing it is part of the job.** `/share-debug`
+  went out twice and came back twice. It logged a user agent on every share, so the test
+  covering it asserts its ABSENCE: a listening post nothing checks for becomes permanent.
 
 ## Keeping an open scrapbook current
 

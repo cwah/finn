@@ -166,26 +166,20 @@ test('the body size is measured whenever the form yields nothing', () => {
   // nothing in it — but the measurement it existed for is still worth keeping, because it
   // is what separates "Chrome sent nothing" from "formData lied about what Chrome sent".
   // It rides on `why` now, which the redirect already carries.
+  // The byte count rides on `why`, which the redirect carries — so the measurement that
+  // settled this outlives the beacon that introduced it.
   assert.match(src, /why \+= `\.\$\{raw\.length\}b\./);
-  assert.match(src, /bodyBytes = raw\.length/);
 });
 
-test('the beacon carries what tells two phones apart', () => {
-  // BACK ON PURPOSE, and this assertion is the inverse of the one that stood here while it
-  // was off. Sharing works on one phone and reports empty-form on another, running the same
-  // worker and the same manifest — so the report has to carry the things that can differ:
-  // the user agent, the content type Chrome chose (its boundary format is in there), and
-  // the body size, which separates "Chrome sent nothing" from "formData could not read it".
-  assert.match(src, /share-debug/);
-  for (const field of ['ua', 'contentType', 'bodyBytes', 'sent', 'empty', 'why']) {
-    assert.match(src, new RegExp(`\\b${field}\\b`), `the report should carry ${field}`);
-  }
-});
-
-test('the beacon can never break the share it is watching', () => {
-  // A diagnostic that can fail the thing it is chasing is worse than the bug. The fetch is
-  // wrapped, and the share carries on regardless of what the report does.
-  assert.match(src, /await fetch\('\/share-debug'[\s\S]*?\} catch \{/);
+test('no diagnostic beacon is left phoning home', () => {
+  // It went out twice and came back twice, and the second time it earned its keep: it
+  // measured a 75-byte body, which is exactly `--boundary--` and nothing else, proving
+  // Chrome was attaching no file at all and that the fault was never in this parser.
+  //
+  // Gone again now, because it logged a user agent to the container log on every share.
+  // Temporary has to mean temporary, and a thing that reports on people is the kind that
+  // becomes permanent if nothing removes it.
+  assert.doesNotMatch(src, /share-debug/);
 });
 
 // ── Taking the photo whatever field it came under ─────────────────
