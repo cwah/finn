@@ -285,3 +285,8 @@ body {
     font-size: 0.85rem;
     line-height: 1.4;
 }
+
+/* Subscribed, but the scrapbook has no record of it. Distinct from blocked: nobody chose
+ * this and it looks exactly like working, which is why it says so on the screen. */
+.app-notify.is-unconfirmed .bell-body { stroke: #a8791c; }
+.app-notify.is-unconfirmed .bell-slash { display: none; }

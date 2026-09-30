@@ -4,7 +4,7 @@
 // source (no accounts at all) and PocketBase interchangeable without touching this file.
 
 import { requireSession, signIn, signOut, HAS_ACCOUNTS } from './data.js';
-import { pushState, enablePush, disablePush, healPush } from './push.js';
+import { pushState, enablePush, disablePush, healPush, pushConfirmed } from './push.js';
 
 /**
  * Resolve once there is a usable session. Shows the sign-in screen if there isn't, and
@@ -93,6 +93,8 @@ export function initNotifications() {
     on: 'Notifications on',
     off: 'Notifications off',
     blocked: 'Notifications blocked',
+    // Subscribed here, but the scrapbook has no record of it — so nothing would arrive.
+    unconfirmed: 'Notifications may not arrive',
     unsupported: '',
   };
   // INSTALLED AND IN A TAB ARE DIFFERENT PLACES. Added to a home screen on Android the app
@@ -110,12 +112,15 @@ export function initNotifications() {
     on: 'You get a notification when a new memory is added. Tap to stop.',
     off: 'Get a notification when a new memory is added.',
     blocked: `Notifications are blocked. ${whereToAllow}`,
+    unconfirmed: 'This device is set up for notifications, but the scrapbook has no record '
+      + 'of it, so nothing would reach you. Tap the bell to fix it.',
   };
 
   const paint = () => {
     btn.hidden = state === 'unsupported';
     btn.setAttribute('aria-pressed', String(state === 'on'));
     btn.classList.toggle('is-blocked', state === 'blocked');
+    btn.classList.toggle('is-unconfirmed', state === 'unconfirmed');
     // Guarded. The label is decoration — it is visually hidden on narrow screens anyway —
     // and reading .textContent off a null would throw from inside paint(), which runs on
     // every state change including the first. A missing span is not worth a dead bell.
@@ -125,8 +130,10 @@ export function initNotifications() {
     // invisible: the bell simply did nothing. This is the same sentence, somewhere it can
     // actually be read.
     if (note) {
-      const show = state === 'blocked' && asked;
-      note.textContent = show ? hints.blocked : '';
+      // `unconfirmed` shows WITHOUT being asked, unlike `blocked`. Nobody chose it and
+      // nothing else can reveal it: the whole failure is that it looks exactly like working.
+      const show = state === 'unconfirmed' || (state === 'blocked' && asked);
+      note.textContent = show ? hints[state] : '';
       note.hidden = !show;
     }
   };
@@ -144,7 +151,17 @@ export function initNotifications() {
     // is true NOW rather than wait on a round trip — and because a failure here must cost
     // nothing. Someone whose row has vanished gets it back without ever knowing it went.
     if (state === 'on') {
-      try { await healPush(); } catch (err) { console.error('could not reaffirm notifications', err); }
+      try {
+        await healPush();
+        // AND THEN CHECK, rather than assume the upsert above did it. healPush() returning
+        // without throwing was treated as proof the server had the row, which is what let a
+        // bell read "on" when it did not.
+        if (await pushConfirmed() === false) state = 'unconfirmed';
+      } catch (err) {
+        // Unknown, not broken: the bell keeps what it had rather than guessing either way.
+        console.error('could not reaffirm notifications', err);
+      }
+      paint();
     }
   };
 
@@ -171,6 +188,14 @@ export function initNotifications() {
       if (state === 'blocked') {
         state = await pushState();
         if (state === 'blocked') return;   // still blocked; the note says where to go
+      }
+      // Subscribed but unrecorded: the fix is to record it, not to subscribe again. Falling
+      // through to the toggle below would read `unconfirmed` as "not on" and hand someone a
+      // second subscription for the same device.
+      if (state === 'unconfirmed') {
+        state = await healPush();
+        if (await pushConfirmed() === false) state = 'unconfirmed';
+        return;
       }
       state = state === 'on' ? await disablePush() : await enablePush();
     } catch (err) {

@@ -14,7 +14,8 @@
 // script — the browser remembers — so the bell has to say so rather than offering a button
 // that will silently do nothing.
 
-import { savePushSubscription, removePushSubscription, pushPublicKey } from './data.js';
+import { savePushSubscription, removePushSubscription, pushPublicKey,
+         pushSubscriptionExists } from './data.js';
 
 /** Whether this browser can do push at all. */
 export function pushSupported() {
@@ -124,6 +125,29 @@ export async function enablePush() {
 
   await savePushSubscription(sub.toJSON());
   return 'on';
+}
+
+/**
+ * Whether the scrapbook will actually send to this device.
+ *
+ * THREE ANSWERS, NOT TWO. `true` the server holds a row, `false` it does not, and `null`
+ * the question could not be asked. The third is the one that matters: a bell that cried
+ * "notifications are broken" every time a phone was briefly offline would be ignored within
+ * a week, and then it would be useless on the day it was right.
+ *
+ * This exists because the bell was painted from the browser's subscription alone, which
+ * only says this device ASKED to be told. When a row was removed server-side the two came
+ * apart, and the bell said "on" while nothing arrived — for as long as nobody happened to
+ * reopen the app.
+ */
+export async function pushConfirmed() {
+  const sub = await currentSubscription();
+  if (!sub) return false;               // nothing to confirm; the bell is already right
+  try {
+    return await pushSubscriptionExists(sub.endpoint);
+  } catch {
+    return null;                        // could not ask, which is not the same as "no"
+  }
 }
 
 /** Unsubscribe this device, server-side first so a failure cannot leave it silently on. */

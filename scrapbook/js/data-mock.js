@@ -169,3 +169,7 @@ export async function createPost(draft, author) {
 export async function pushPublicKey() { return null; }
 export async function savePushSubscription() { return null; }
 export async function removePushSubscription() { return true; }
+// No server, so there is nothing to confirm against. Throwing rather than returning false:
+// false asserts the row is absent, and the caller treats an unanswerable question
+// differently from a definite no.
+export async function pushSubscriptionExists() { throw new Error('no server to ask'); }

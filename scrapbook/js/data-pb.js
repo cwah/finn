@@ -131,6 +131,32 @@ export async function savePushSubscription(sub) {
   return pb.create('pushSubscriptions', body);
 }
 
+/**
+ * Whether the SERVER still holds a row for this endpoint.
+ *
+ * The bell used to be painted from the browser's subscription alone, which says only that
+ * this device asked to be told — not that anything will actually tell it. The two came
+ * apart in practice: a row deleted server-side left the browser subscribed, the bell
+ * reading "on", and no notification arriving, with nothing anywhere to say so.
+ *
+ * Scoped to this person as well as the endpoint, because `listRule` is
+ * `user = @request.auth.id` and two people can share a device — so a row that exists for
+ * someone else is correctly invisible here, and correctly not a confirmation.
+ *
+ * Throws rather than returning false when the question could not be asked. "No row" and
+ * "no answer" need different treatment, and conflating them is how a moment offline would
+ * become a warning that notifications are broken.
+ */
+export async function pushSubscriptionExists(endpoint) {
+  const me = pb.currentUser();
+  if (!me) throw new Error('not signed in');
+  const found = await pb.list('pushSubscriptions', {
+    perPage: 1,
+    filter: `user=${pb.quote(me.id)} && endpoint=${pb.quote(endpoint)}`,
+  });
+  return found.items.length > 0;
+}
+
 /** Forget it. Missing is success: the aim is that it is gone, not that we removed it. */
 export async function removePushSubscription(endpoint) {
   const found = await pb.list('pushSubscriptions', {
