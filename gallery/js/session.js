@@ -24,13 +24,38 @@ const SHARED_KEY = 'scrapbook.auth';
  * The stored session, or null.
  * @returns {{token: string, record: object}|null}
  */
+/**
+ * Whether a PocketBase auth token has passed its expiry.
+ *
+ * Checked here rather than left to the server, because of how PocketBase answers: a
+ * request that fails a collection's listRule comes back 200 with an EMPTY LIST, not 401.
+ * So an expired session did not look signed out — it looked like a gallery with nothing
+ * in it, and the visitor was told "Nothing is hanging yet" instead of being asked to
+ * sign in again. Tokens last about two weeks, so that was every user, every fortnight.
+ *
+ * Unreadable means expired. A token this cannot parse is not one worth sending.
+ */
+function isExpired(token) {
+  try {
+    const claims = JSON.parse(atob(String(token).split('.')[1]));
+    // Thirty seconds of slack for a clock that is slightly fast; a token about to die
+    // mid-request is better replaced now than halfway through a save.
+    return !claims.exp || (Date.now() / 1000) > (claims.exp - 30);
+  } catch {
+    return true;
+  }
+}
+
 export function readSession() {
   try {
     const raw = localStorage.getItem(SHARED_KEY);
     const parsed = raw ? JSON.parse(raw) : null;
     // Shape-check rather than trust: a session missing its token is the same as none,
     // and finding out here beats finding out as a 401 three requests later.
-    return parsed && typeof parsed.token === 'string' && parsed.token ? parsed : null;
+    if (!parsed || typeof parsed.token !== 'string' || !parsed.token) return null;
+    // An expired token is worse than no token: it looks signed in and behaves signed out.
+    if (isExpired(parsed.token)) return null;
+    return parsed;
   } catch {
     // Corrupt or unavailable storage is the same as being signed out.
     return null;

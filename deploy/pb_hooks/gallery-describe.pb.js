@@ -116,9 +116,15 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
     '',
     'Two or three sentences. Sixty words at most.',
     '',
-    'DO NOT DESCRIBE THE PICTURE. The visitor is standing in front of it. Use what you can',
-    'see as raw material for something else — an anecdote, a note, a small institutional',
-    'fuss. The anecdote need not be true, but it must be dry, specific and plausible.',
+    'DO NOT INVENTORY THE PICTURE. The visitor is standing in front of it and can see it',
+    'perfectly well. Never count what is in it, never name its colours, never work out',
+    'which marks are the artist\'s and which are not, never walk the eye across it. A',
+    'label that catalogues the image has wasted the only thing a label is for.',
+    '',
+    'The picture is a starting point, not a subject. Look at it, then go somewhere it',
+    'does not: a dispute, a journey, an institutional embarrassment, a decision taken',
+    'badly, a thing that happened to it afterwards. The further you get from the surface',
+    'of the image while staying plausibly attached to it, the better the label.',
     '',
     'WHO IS IN THE ARTIST\'S LIFE:',
     '  - Finn is in daycare. If the work needed adult hands, they were most likely an',
@@ -132,6 +138,16 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
     'that particular label genuinely needs them — a work made at home, a reception, a',
     'question of who was holding the brush. The daycare and the institution itself are the',
     'default cast; the family is the exception.',
+    '',
+    'IF A NOTE IS SUPPLIED, IT OUTRANKS THE PICTURE. A parent has written down something',
+    'that actually happened — where it was made, what it was for, who was there, what it',
+    'was like. That is the only true thing you have, and it is worth more than anything',
+    'you can infer from looking. Build the label out of it: take what it says and carry',
+    'it somewhere, elaborate it, give it consequences, invent the institutional',
+    'machinery that grew up around it. Do not merely avoid contradicting it, and do not',
+    'repeat it back. Treat it as the seed and the label as what grew.',
+    '',
+    'Where no note is supplied, invent freely; the latitude is wider, not narrower.',
     '',
     'Anchor at least one detail to what a baby of the stated age can and cannot do, and be',
     'specific to that age rather than reaching for the same few: at six months, sitting',
@@ -168,7 +184,10 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
     body.dimensions ? `Dimensions: ${body.dimensions}` : null,
     body.createdOn ? `Made on: ${body.createdOn}` : null,
     body.age ? `The artist was ${body.age} old.` : null,
-    body.note ? `What the parent wrote, which the label should build on rather than contradict: ${body.note}` : null,
+    // NOT the parent's note — that goes in on its own below, because buried here among
+    // five other fields it read as one more constraint rather than as the thing the
+    // label is supposed to be made of.
+    null,
   ].filter(Boolean).join('\n');
 
   let res;
@@ -206,6 +225,10 @@ routerAdd('POST', '/api/gallery/describe', (e) => {
             { type: 'image', source: { type: 'base64', media_type: mediaType, data: image } },
             { type: 'text', text: [
               facts,
+              '',
+              body.note
+                ? `WHAT THE PARENT WROTE. This actually happened, and it outranks anything you can see in the picture. Build the label out of it — carry it somewhere, give it consequences, invent what grew up around it. Do not repeat it back and do not merely avoid contradicting it:\n\n${body.note}`
+                : 'No note was supplied, so invent freely.',
               '',
               existing ? `Labels already hanging in this museum. Do not reuse their phrasing, their sentence shapes, or their closing moves — a visitor reads these one after another:\n${existing}` : '',
               '',
