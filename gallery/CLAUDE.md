@@ -359,15 +359,62 @@ somebody having looked at them first.
 The key is `ANTHROPIC_API_KEY` in Render's dashboard, deliberately not in `render.yaml`,
 which is committed. `ANTHROPIC_MODEL` overrides the model without a deploy.
 
-**The prompt forbids inventing what the artist said or meant, and that is not a stylistic
-preference.** The artist is a baby. He has said nothing about any of this, so a label
-that quotes him is a fabricated quotation from a real child, hung on a wall and kept.
-The parody only works while every fact on the label is true. The placeholder notes in
-`data/artworks.json` do exactly the wrong thing here — they invent quotations — which is
-one more reason they are not seeded.
+**Inventing is the job.** An earlier version of this prompt forbade it, on the grounds
+that the parody only works while every fact is true. That was wrong, and the labels it
+produced were procedural and dull — hanging heights, corridors, date ranges. The label
+is meant to take what is real and carry it somewhere.
+
+The one thing still forbidden is a **quotation from Finn**. He cannot speak, so putting
+words in his mouth is a fabricated quote from a real child, hung on a wall and kept.
+Describing what he *did* — ignored the question, turned to his crinkly book — is not
+only allowed, it is the good stuff, and a rule meant to stop the first was suppressing
+the second for a while.
+
+**The prompt is taught by example.** Two labels written by Finn's parents, for *The Moon
+Rabbit* and *Flowers or Ladybugs?*, are in the system prompt verbatim with a reading of
+what they do. Three rounds of abstract instruction moved the model very little; one
+concrete exemplar moved it immediately. If the house style ever drifts, change the
+examples before changing the rules.
+
+What those examples set, and what the prompt now enforces:
+
+- **Length is the material's decision**, one sentence to two short paragraphs. An
+  earlier cap of sixty words was forbidding the best label in the collection.
+- **Go outside the museum.** Culture, season, festival, myth, custom. Logistics are the
+  weakest thing a label can be about and are reached for last.
+- **Do not inventory the picture** — no counting, no naming colours, no working out
+  whose marks are whose. The visitor is standing in front of it.
+- **A supplied note outranks the image.** A parent writing down what actually happened
+  is the only true thing in the request; the label is what grows from it, not a
+  restatement of it.
+
+Variety is imposed rather than requested: an angle and a shape are drawn at random per
+call, and the labels already hanging are sent along with instructions not to echo them.
+Asking a model for variety does not produce it — it reaches for the strongest pattern in
+the prompt every time.
+
+The placeholder notes in `data/artworks.json` are still not seeded, but the reason is
+now simply that they are fiction about drawings Finn never made.
 
 `noteSource` records `generated` only when the words are the model's own and untouched;
 edit them at all and it is `human` again.
+
+## Icons
+
+`assets/icon-source.svg` is the gallery's mark; `assets/icon-admin-source.svg` is the
+studio's — the same framed work with a brush laid across it, so the two read as one app
+and are never confused on a home screen. The PNGs beside them are generated from those
+sources with `qlmanage` and `sips`, and both sources are dockerignored: the browser only
+ever asks for the PNGs.
+
+Two constraints, both written into the sources and both worth respecting: an icon has to
+survive a **32px favicon** and a **round mask**, which is why the brush is chunky and
+runs corner to corner rather than sitting inside the frame. And the source must carry
+its own background, because `qlmanage` rasterises onto opaque white and a transparent
+source arrives with nothing left to composite.
+
+The studio's icon is deliberately **not** in `manifest.webmanifest`. That belongs to the
+gallery, which is the thing anyone would install.
 
 ## Later
 
