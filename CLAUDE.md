@@ -107,6 +107,20 @@ conventional-commits tags, and they explain intent rather than listing changes. 
 is where a decision and the failure it prevents get written down; several of the traps
 above were recovered from commit messages rather than from code.
 
-`pb_data/` is gitignored. The real one is `scrapbook/pb_data/`; a smaller one at the root
-is a leftover from running PocketBase from the wrong directory and is not used by
-anything.
+**There is exactly one `pb_data/`, and it is `scrapbook/pb_data/`.** It is gitignored,
+and it is pinned there rather than placed there by habit: every migration opens with
+`/// <reference path="../pb_data/types.d.ts" />`, and those live in
+`scrapbook/pb_migrations/`, so the reference only resolves while the two are siblings.
+PocketBase regenerates that `types.d.ts` on boot and it is what gives the migrations
+their type hints. Moving `pb_data` means rewriting the reference in every migration, so
+if the shared schema ever moves to the root — arguably where it belongs, being the
+*instance's* schema rather than the scrapbook's — both have to move together.
+
+A second `pb_data/` appearing anywhere is PocketBase creating a `--dir` default because
+it was started from the wrong directory. It is empty of anything real; delete it.
+
+Three unrelated paths share the name and are worth keeping straight: `scrapbook/pb_data/`
+is the local dev database, `/pb/pb_data` is the Render persistent disk where the real
+data lives, and the `-v "$PWD/scrapbook/pb_data:/pb/pb_data"` in `deploy/Dockerfile`'s
+run line mounts the first onto the second so the container can be tested against a real
+copy.
